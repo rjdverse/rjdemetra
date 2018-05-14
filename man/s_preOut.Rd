@@ -1,0 +1,30 @@
+\name{s_preOut}
+\alias{s_preOut}
+\title{Access model specification, SA and pre-adjustment in X13 and TRAMO/SEATS}
+\usage{
+s_preOut(object)
+}
+\description{
+\code{s_preOut} access the \emph{pre-specified outliers} of the model.
+}
+\arguments{
+\item{object}{object of class: \code{c("JD_RegArima_Spec","X13")}, \code{c("JD_RegArima","X13")}, \code{c("JD_RegArima_Spec","TRAMO_SEATS")} or \code{c("JD_RegArima","TRAMO_SEATS")}.}
+}
+\value{
+A data.frame with the \emph{pre-specified outliers}. For details see: \emph{Value} of the \code{c("JD_RegArima_Spec","X13")} and \code{c("JD_RegArima_Spec","TRAMO_SEATS")} class objects.
+}
+\references{
+Info on JDemtra+, usage and functions:
+\url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+}
+\examples{
+  myreg <- jd_regarima_defX13(myseries,spec="RG5c")
+  myspec1<-jd_regarima_specX13(myreg,usrdef.outliersEnabled = TRUE,
+                               usrdef.outliersType = c("LS","AO"),
+                               usrdef.outliersDate=c("2009-10-01","2005-02-01"))
+  myreg1 <- jd_regarima(myseries,myspec1)
+
+  s_preOut(myreg1)
+  s_preOut(myspec1)
+
+}
