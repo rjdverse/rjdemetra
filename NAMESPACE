@@ -33,7 +33,7 @@ S3method(logLik,JD_RegArima)
 S3method(print,JD_RegArima_rtest)
 import("rJava")
 importFrom("stats", "frequency", "is.ts", "terms", "ts", "ts.union","acf", "dnorm", "pacf", "plot.ts", "printCoefmat","pt", "qqnorm", "sd","is.mts")
-importFrom("grDevices", "as.graphicsAnnot", "dev.cur", "dev.flush","dev.hold", "dev.interactive", "dev.set", "devAskNewPage","dev.new","windows")
+importFrom("grDevices", "as.graphicsAnnot", "dev.cur", "dev.flush","dev.hold", "dev.interactive", "dev.set", "devAskNewPage","dev.new")
 importFrom("graphics", "abline", "axis", "curve", "hist", "layout","legend", "mtext", "par", "plot", "title")
 importFrom("methods", "as")
 

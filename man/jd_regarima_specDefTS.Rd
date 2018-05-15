@@ -15,7 +15,7 @@ jd_regarima_specDefTS(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")
                           transform.function=c(NA_character_,"Auto","None","Log"),
                           transform.fct=NA_integer_,
                           usrdef.outliersEnabled = NA,
-                          usrdef.outliersType = c("AO","LS","TC","SO"),
+                          usrdef.outliersType = NA,
                           usrdef.outliersDate = NA,
                           usrdef.outliersCoef = NA,
                           usrdef.varEnabled = NA,
@@ -67,7 +67,7 @@ jd_regarima_specDefTS(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")
                           arima.bq = NA_integer_,
                           arima.coefEnabled = NA,
                           arima.coef= NA,
-                          arima.coefType = c("Fixed","Initial","Undefined"),
+                          arima.coefType = NA,
                           fcst.horizon = NA_integer_)
 
 }

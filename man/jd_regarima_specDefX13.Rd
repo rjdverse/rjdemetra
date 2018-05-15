@@ -14,7 +14,7 @@ jd_regarima_specDefX13(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                 transform.adjust = c(NA_character_,"None","LeapYear","LengthOfPeriod"),
                 transform.aicdiff = NA_integer_,
                 usrdef.outliersEnabled = NA,
-                usrdef.outliersType = c("AO","LS","TC","SO"),
+                usrdef.outliersType = NA,
                 usrdef.outliersDate = NA,
                 usrdef.outliersCoef = NA,
                 usrdef.varEnabled = NA,
@@ -64,7 +64,7 @@ jd_regarima_specDefX13(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                 arima.bq = NA_integer_,
                 arima.coefEnabled = NA,
                 arima.coef= NA,
-                arima.coefType = c("Fixed","Initial","Undefined"),
+                arima.coefType = NA,
                 fcst.horizon = NA_integer_)
 
 }
