@@ -1,0 +1,30 @@
+\name{jd_defX13}
+\alias{jd_defX13}
+\title{SA, X13}
+\usage{
+jd_defX13(series, spec)
+}
+\description{
+.
+}
+\arguments{
+\item{series}{a univariate time series}
+\item{spec}{model specification}
+}
+\details{
+.
+}
+\value{.
+}
+\references{
+Info on JDemtra+, usage and functions:
+\url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+
+BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
+
+BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+
+}
+\examples{
+ mysa <- jd_defX13(myseries, "RSA5c")
+}
