@@ -62,8 +62,8 @@ summary.combined_test <- function(object, digits = max(3L, getOption("digits") -
   cat("Non parametric tests for stable seasonality")
   cat("\n")
   cat(paste0(" ",
-             utils::capture.output(
-               stats::printCoefmat(tests_pval, digits = digits,
+             capture.output(
+               printCoefmat(tests_pval, digits = digits,
                             na.print = "NA", ...)
              ),
              sep ="\n"))
@@ -93,16 +93,16 @@ summary.diagnostics = function (object, digits = max(3L, getOption("digits") - 3
   cat(" Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)")
   cat("\n")
   cat(paste0(" ",
-             utils::capture.output(
-               stats::printCoefmat(variance_decomposition, digits = digits, ...)
+             capture.output(
+               printCoefmat(variance_decomposition, digits = digits, ...)
              )),
              sep ="\n")
   cat("\n")
   cat("\033[1mResidual seasonality tests\033[22m")
   cat("\n")
   cat(paste0(" ",
-             utils::capture.output(
-               stats::printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
+             capture.output(
+               printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
                             na.print = "NA", ...)
              )
   ),
@@ -113,7 +113,7 @@ summary.diagnostics = function (object, digits = max(3L, getOption("digits") - 3
   cat("\033[1mCombined test in the entire series\033[22m")
   cat("\n")
   cat(paste0(" ",
-             utils::capture.output(summary.combined_test(combined_test_all, digits = digits,
+             capture.output(summary.combined_test(combined_test_all, digits = digits,
                                                    ...))
   ),
   sep ="\n")
@@ -122,7 +122,7 @@ summary.diagnostics = function (object, digits = max(3L, getOption("digits") - 3
   cat("\033[1mCombined test in the last 3 years\033[22m")
   cat("\n")
   cat(paste0(" ",
-             utils::capture.output(
+             capture.output(
                  summary.combined_test(combined_test_end, digits = digits,
                                        ...)
              )

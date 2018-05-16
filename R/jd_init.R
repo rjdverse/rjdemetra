@@ -1,6 +1,10 @@
-#if(!require(rJava)){
- # install.packages("rJava")
-#}
+#' @import rJava
+#' @importFrom grDevices as.graphicsAnnot  dev.cur  dev.flush dev.hold  dev.interactive  dev.set  devAskNewPage dev.new
+#' @importFrom graphics abline axis curve hist layout legend mtext par plot title
+#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts
+#' @importFrom methods as
+#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts end na.omit start time ts.plot window window<-
+#' @importFrom utils capture.output
 library("rJava")
 .jinit()
 .jaddClassPath("./Java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")

@@ -9,12 +9,13 @@ Authors@R: as.person(c(
 Description: This package provides JDemetra+ functions.
 Depends:
     R (>= 3.1.1),
-    rJava (>= 0.9-8)
 Imports:
+    rJava (>= 0.9-8),
+    graphics,
+    grDevices,
     methods,
     stats,
-    graphics,
-    grDevices
+    utils
 License: EUPL
 LazyData: TRUE
 Collate:
