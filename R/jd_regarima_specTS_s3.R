@@ -1,3 +1,258 @@
+#' Pre-specified  RegARIMA model specification, pre-adjustment in TRAMO/SEATS
+#' @description
+#' \code{jd_regarima_specDefTS} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("JD_RegArima_Spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
+#'
+#' @param spec predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
+#'
+#' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
+#'
+#' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
+#'
+#' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.
+#'
+#' @param estimate.first numeric specifying the number of periods considered at the beginning of the series.
+#'
+#' @param estimate.last numeric specifying the number of periods considered at the end of the series.
+#'
+#' @param estimate.exclFirst numeric specifying the number of periods excluded at the beginning of the series. Can be combined with \code{estimate.exclLast}.
+#'
+#' @param estimate.exclLast numeric specifying the number of periods excluded at the end of the series. Can be combined with \code{estimate.exclFirst}.
+#'
+#' @param estimate.tol numeric, convergence tolerance. The absolute changes in the log-likelihood function are compared to this value to check for the convergence of the estimation iterations.
+#'
+#' @param estimate.eml logicals, exact maximum likelihood estimation. If \code{TRUE} the program performs an exact maximum likelihood estimation. If \code{FASLE} the Unconditional Least Squares method is used.
+#'
+#' @param estimate.urfinal numeric, final unit root limit. The threshold value for the final unit root test for identification of differencing orders. If the magnitude of an AR root for the final model is less than this number, a unit root is assumed, the order of the AR polynomial is reduced by one, and the appropriate order of the differencing (non-seasonal, seasonal) is increased.
+#'
+#' @param transform.function transformation of the input series: \code{"None"} - no transformation of the series; \code{"Log"} - takes the log of the series; \code{"Auto"} - the program tests for the log-level specification.
+#'
+#' @param transform.fct numeric controlling the bias in the log/level pre-test: \code{ transform.fct }> 1 favours levels, \code{transform.fct}< 1 favours logs. Considered only when \code{transform.function} is set to \code{"Auto"}.
+#'
+#' Control variables for the pre-specified outliers. The pre-specified outliers are used in the model only if they are enabled (\code{usrdef.outliersEnabled=TRUE}) and the outliers' type (\code{usrdef.outliersType}) and date (\code{usrdef.outliersDate}) are provided.
+#'
+#' @param usrdef.outliersEnabled logicals. If \code{TRUE} the program uses the pre-specified outliers.
+#'
+#' @param usrdef.outliersType vector defining the outliers' type. Possible types are: \code{("AO"}) - additive, \code{("LS"}) - level shift, \code{("TC"}) - transitory change, \code{("SO"}) -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.
+#'
+#' @param usrdef.outliersDate vector defining the outliers' date. The dates should be characters in format "YYYY-MM-DD". E.g.: \code{usrdef.outliersDate=c("2009-10-01","2005-02-01","2003-04-01")}.
+#'
+#' @param usrdef.outliersCoef vector providing fixed coefficients for the outliers. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined. E.g.: \code{ usrdef.outliersCoef=c(200,170,20)}.
+#'
+#' Control variables for the user-defined variables:
+#'
+#' @param usrdef.varEnabled logicals. If \code{TRUE} the program uses the user-defined variables.
+#'
+#' @param usrdef.var time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.
+#'
+#' @param usrdef.varCoef vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.
+#'
+#' @param tradingdays.mauto defines whether the calendar effects should be added to the model manually (\code{"Unused"}) or automatically. In the automatic selection, the choice of the number of calendar variables can be based on the F-Test (\code{"FTest"}) or the Wald Test (\code{"WaldTest"}); the model with higher F value is chosen, provided that it is higher than \code{tradingdays.pftd}).
+#'
+#' @param tradingdays.pftd numeric. P-value applied in the test specified by the automatic parameter (\code{tradingdays.mauto}) to assess the significance of the pre-tested calendar effects variables and whether they should be included in the RegArima model.
+#'
+#' Control variables for the manual selection of calendar effects variables (\code{tradingdays.mauto} is set to \code{"Unused"}):
+#'
+#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects. \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
+#'
+#' @param tradingdays.leapyear logicals. Specifies if the leap-year correction should be included. If \code{TRUE} the model includes the leap-year effect.
+#'
+#' @param tradingdays.stocktd numeric indicating the day of the month when inventories and other stock are reported (to denote the last day of the month set the variable to 31). Modifications of this variable are taken into account only when \code{tradingdays.option} is set to \code{"None"}.
+#'
+#' @param tradingdays.test defines the pre-tests of the trading day effects: \code{"None"} - calendar variables are used in the model without pre-testing; \code{"Separate_T"} - a t-test is applied to each trading day variable separately and the trading day variables are included in the RegArima model if at least one t-statistic is greater than 2.6 or if two t-statistics are greater than 2.0 (in absolute terms); \code{"Joint_F"} - a joint F-test of significance of all the trading day variables. The trading day effect is significant if the F statistic is greater than 0.95.
+#'
+#' @param easter.type specifies the presence and the length of the Easter effect: \code{"Unused"} - Easter effect is not considered; \code{"Standard"} - influences the period of \code{n} days strictly before Easter Sunday; \code{"IncludeEaster"} - influences the entire period (\code{n}) up to and including Easter Sunday; \code{"IncludeEasterMonday"} - influences the entire period (\code{n}) up to and including Easter Monday.
+#'
+#' @param easter.julian logicals. If \code{TRUE} the program uses the Julian Easter (expressed in Gregorian calendar).
+#'
+#' @param easter.duration numeric indicating the duration of the Easter effect (length in days, between 1 and 15).
+#'
+#' @param easter.test logicals. If \code{TRUE} the program performs a t-test for the significance of the Easter effect. The Easter effect is considered as significant if the modulus of t-statistic is greater than 1.96.
+#'
+#' @param outlier.enabled logicals. If \code{TRUE} the automatic detection of outliers is enabled in the defined time span.
+#'
+#' The time span of the series to be searched for outliers (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{outlier.from, outlier.to, outlier.first, outlier.last, outlier.exclFirst} and \code{outlier.exclLast}; where \code{outlier.from} and \code{outlier.to} have priority over remaining span control variables, \code{outlier.last} and \code{outlier.first} have priority over \code{outlier.exclFirst} and \code{outlier.exclLast}, and \code{outlier.last} has priority over \code{outlier.first}.
+#'
+#' @param outlier.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{outlier.to}.
+#'
+#' @param outlier.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{outlier.from}.
+#'
+#' @param outlier.first numeric specifying the number of periods considered at the beginning of the series.
+#'
+#' @param outlier.last numeric specifying the number of periods considered at the end of the series.
+#'
+#' @param outlier.exclFirst numeric specifying the number of periods excluded at the beginning of the series. Can be combined with \code{outlier.exclLast}.
+#'
+#' @param outlier.exclLast numeric specifying the number of periods excluded at the end of the series. Can be combined with \code{outlier.exclFirst}.
+#'
+#' @param outlier.ao logicals. If \code{TRUE} the automatic detection of additive outliers is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.tc logicals. If \code{TRUE} the automatic detection of transitory changes is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.ls logicals. If \code{TRUE} the automatic detection of level shifts is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.so logicals. If \code{TRUE} the automatic detection of seasonal outliers is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.usedefcv logicals. If \code{TRUE} the critical value for the outliers' detection procedure is automatically determined by the number of observations in the outlier detection time span. If \code{FALSE} the procedure uses the inputted critical value (\code{outlier.cv}).
+#'
+#' @param outlier.cv numeric. Inputted critical value for the outliers' detection procedure. The modification of this variable is taken in to account only when \code{outlier.usedefcv} is set to \code{FALSE}.
+#'
+#' @param outlier.eml logicals, exact likelihood estimation method.Controls the method applied for a parameter estimation in the intermediate steps of the automatic detection and correction of outliers.  If \code{TRUE} an exact likelihood estimation method is used, when \code{FALSE} the fast Hannan-Rissanen method is used.
+#'
+#' @param outlier.tcrate numeric. The rate of decay for the transitory change outlier.
+#'
+#' @param automdl.enabled logicals. If \code{TRUE} the automatic modelling of the ARIMA model is enabled. If \code{FALSE} the parameters of the ARIMA model can be specified.
+#'
+#' Control variables for the automatic modelling of the ARIMA model (\code{automdl.enabled} is set to \code{TRUE}):
+#'
+#' @param automdl.acceptdefault logicals. If \code{TRUE} the default model (ARIMA(0,1,1)(0,1,1)) may be chosen in the first step of the automatic model identification. If the Ljung-Box Q statistics for the residuals is acceptable, the default model is accepted and no further attempt will be made to identify any other.
+#'
+#' @param automdl.cancel  numeric, cancelation limit. If the difference in moduli of an AR and an MA roots (when estimating ARIMA(1,0,1)(1,0,1) models in the second step of the automatic identification of the differencing orders) is smaller than cancelation limit, the two roots are assumed equal and cancel out.
+#'
+#' @param automdl.ub1 numeric, first unit root limit. It is the threshold value for the initial unit root test in the automatic differencing procedure. When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model, performed in the first step of the automatic model identification procedure, is larger than first unit root limit in modulus, it is set equal to unity.
+#'
+#' @param automdl.ub2 numeric, second unit root limit. When one of the roots in the estimation of the ARIMA(1,0,1)(1,0,1) plus mean model, which is performed in the second step of the automatic model identification procedure, is larger than second unit root limit in modulus, it is checked if there is a common factor in the corresponding AR and MA polynomials of the ARMA model that can be cancelled (see \code{automdl.cancel}). If there is no cancellation, the AR root is set equal to unity (i.e. the differencing order changes).
+#'
+#' @param automdl.armalimit numeric, arma limit. It is the threshold value for t-statistics of ARMA coefficients and constant term used for the final test of model parsimony. If the highest order ARMA coefficient has a t-value less than this value in magnitude, the order of the model is reduced. Also if the constant term has a t-value less than arma limit in magnitude, it is removed from the set of regressors.
+#'
+#' @param automdl.reducecv numeric, ReduceCV.  The percentage by which the outlier's critical value will be reduced when an identified model is found to have a Ljung-Box statistic with an unacceptable confidence coefficient. The parameter should be between 0 and 1, and will only be active when automatic outlier identification is enabled. The reduced critical value will be set to (1-ReduceCV)xCV, where CV is the original critical value.
+#'
+#' @param automdl.ljungboxlimit numeric, Ljung Box limit. Acceptance criterion for the confidence intervals of the Ljung-Box Q statistic. If the LjungBox Q statistics for the residuals of a final model is greater than Ljung Box limit, the model is rejected, the outlier critical value is reduced, and model and outlier identification (if specified) is redone with a reduced value.
+#'
+#' @param automdl.compare logicals. If {TRUE} the program compares the model identified by the automatic procedure to the default model (ARIMA(0,1,1)(0,1,1)) and the model with the best fit is selected. Criteria considered are residual diagnostics, the model structure and the number of outliers.
+#'
+#' Control variables for the non-automatic modelling of the ARIMA model (\code{automdl.enabled} is set to \code{FALSE}):
+#'
+#' @param arima.mu logicals. If \code{TRUE}, the mean is considered as part of the ARIMA model.
+#'
+#' @param arima.p numeric. The order of the non-seasonal autoregressive (AR) polynomial.
+#'
+#' @param arima.d numeric. Regular differencing order.
+#'
+#' @param arima.q numeric. The order of the non-seasonal moving average (MA) polynomial.
+#'
+#' @param arima.bp numeric. The order of the seasonal autoregressive (AR) polynomial.
+#'
+#' @param arima.bd numeric. Seasonal differencing order.
+#'
+#' @param arima.bq numeric. The order of the seasonal moving average (MA) polynomial.
+#'
+#' Control variables for the user-defined ARMA coefficients. Coefficients can be defined for the regular and seasonal autoregressive (AR) polynomials and moving average (MA) polynomials. The model considers the coefficients only if the procedure for their estimation (\code{arima.coefType}) is provided, and the number of provided coefficients matches the sum of (regular and seasonal) AR and MA orders (\code{p,q,bp,bq}).
+#'
+#' @param arima.coefEnabled logicals. If \code{TRUE} the program uses the user-defined ARMA coefficients.
+#'
+#' @param arima.coef vector providing the coefficients for the regular and seasonal AR and MA polynominals. The length of the vector must equal the sum of the regular and seasonal AR and MA orders. The coefficients shall be provided in the order: regular AR (\emph{Phi} - \code{p} elements), regular MA  (\emph{Theta} - \code{q} elements), seasonal AR (\emph{BPhi} - \code{bp} elements) and seasonal MA (\emph{BTheta} - \code{bq} elements). E.g.: \code{arima.coef=c(0.6,0.7)} with \code{arima.p=1, arima.q=0,arima.bp=1} and \code{arima.bq=0}.
+#'
+#' @param arima.coefType vector defining ARMA coefficients estimation procedure. Possible procedures are: \code{"Undefined"} - no use of user-defined input (i.e. coefficients are estimated), \code{"Fixed"} - fixes the coefficients at the value provided by the user, \code{"Initial"} - the value defined by the user is used as initial condition. For orders for which the coefficients shall not be defined, the \code{arima.coef} can be set to \code{NA} or \code{0} or the \code{arima.coefType} can be set to \code{"Undefined"}.
+#' E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fixed","Undefined")}.
+#'
+#' @param fcst.horizon numeric, forecasts horizon. Length of the forecasts generated by the RegARIMA model in periods (positive values) or years (negative values). By default the program generates two years forecasts (\code{fcst.horizon} set to \code{-2}).
+#'
+#'
+#' @details
+#' The available predefined \emph{JDemetra+} model specifications are described in the table below.
+#'
+#' \tabular{rrrrrrrr}{
+#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+#' TR0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' TR1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' TR2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+#' TR3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+#' TR4 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+#' TR5 |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
+#' TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
+#' }
+#'
+#' @return
+#' A list of class \code{c("JD_RegArima_Spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, predefined \emph{JDemetra+} model specification as provided within the argument \code{spec}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{jd_regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification - here empty) and \code{Final} values.
+#'
+#' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml},
+#' \code{urfinal} - argument \code{esimate.urfinal}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
+#'
+#' \item{transform}{data frame. Variables referring to: \code{tfunction} - argument \code{transform.function}, \code{fct} - argument \code{transform.fct}. The final values can be also accessed with the function \code{\link{s_transform}}.}
+#'
+#' \item{regression}{list including the information on the user-defined variables (\code{userdef}), \code{trading.days} effect and \code{easter} effect. The user-defined part includes: \code{specification} - data frame with the information if pre-specified outliers (\code{outlier}) and user-defined variables (\code{variables}) are included in the model and if fixed coefficients are used (\code{outlier.coef} and \code{variables.coef}). The final values can be also accessed with the function \code{\link{s_usrdef}}; \code{outliers} - matrixes with the outliers (\code{Predefined} and \code{Final}). The final outliers can be also accessed with the function \code{\link{s_preOut}}; and \code{variables} - list with the \code{Predefined} and \code{Final} user-defined variables (\code{series}) and its description (\code{description}) including the information on the variable type and values of fixed coefficients. The final user-defined variables can be also accessed with the function \code{\link{s_preVar}}.
+#' Within the data frame \code{trading.days} variables refer to:
+#' \code{automatic} - argument \code{tradingdays.mauto},
+#' \code{pftd} - argument \code{tradingdays.pftd},
+#' \code{option} - argument \code{tradingdays.option},
+#' \code{leapyear} - argument \code{tradingdays.leapyear},
+#' \code{stocktd} - argument \code{tradingdays.stocktd},
+#' \code{test} - argument \code{tradingdays.test}. The final \code{trading.days} values can be also accessed with the function \code{\link{s_td}}.
+#' Within the data frame \code{easter} variables refer to:
+#' \code{type} - argument \code{easter.type},
+#' \code{julian} - argument \code{easter.julian},
+#' \code{duration} - argument \code{easter.duration},
+#' \code{test} - argument \code{easter.test}. The final \code{easter} values can be also accessed with the function \code{\link{s_easter}}.}
+#'
+#' \item{outliers}{data frame. Variables referring to:
+#' \code{ao} - argument \code{outlier.ao},
+#' \code{tc} - argument \code{outlier.tc},
+#' \code{ls} - argument \code{outlier.ls},
+#' \code{so} - argument \code{outlier.so},
+#' \code{usedefcv} - argument \code{outlier.usedefcv},
+#' \code{cv} - argument \code{outlier.cv},
+#' \code{eml} - argument \code{outlier.eml},
+#' \code{tcrate} - argument \code{outlier.tcrate}. The final values can be also accessed with the function \code{\link{s_out}}.}
+#'
+#' \item{arima}{list containing a data frame with the ARIMA settings (\code{specification}) and matrixes with the information on the pre-specified ARMA coefficients (\code{coefficients}). The matrix \code{Predefined} refers to the pre-defined model specification and matrix \code{Final} to the final specification. Both matrixes contain the value of the ARMA coefficients and the procedure for its estimation.
+#' Within the data frame \code{specification} the variable \code{enabled} refer to the argument \code{automdl.enabled} and all the remaining variables (\code{automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.armalimit, automdl.reducecv, automdl.ljungboxlimit, automdl.compare, arima.mu, arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq}) to the respective function arguments.
+#' The final values of the \code{specification} can be also accessed with the function \code{\link{s_arima}} and final pre-specified ARMA coefficients with the function \code{\link{s_arimaCoef}}.}
+#'
+#' \item{forecast}{data frame with the forecast horizon (argument \code{fcst.horizon}). The final value can be also accessed with the function \code{\link{s_fcst}}.}
+#'
+#' \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers.The matrix can be also accessed with the function \code{\link{s_span}}.}
+#'
+#' @references
+#' Info on JDemetra+, usage and functions:
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#'
+#' @examples
+#'   myspec1 <-jd_regarima_specDefTS(spec=c("TRfull"))
+#'   myspec2 <-jd_regarima_specDefTS(spec=c("TRfull"),tradingdays.mauto = "Unused",
+#'                                          tradingdays.option = "WorkingDays",
+#'                                          easter.type = "Standard",
+#'                                          automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg1 <-jd_regarima(myseries, spec=myspec1)
+#'   myreg2 <-jd_regarima(myseries, spec=myspec2)
+#'
+#' # Pre-specified outliers
+#'   myspec1 <- jd_regarima_specDefTS(spec=c("TRfull"),
+#'             usrdef.outliersEnabled = TRUE,
+#'             usrdef.outliersType = c("LS","LS"),
+#'             usrdef.outliersDate = c("2008-10-01","2003-01-01"),
+#'             usrdef.outliersCoef = c(37000,-19000), transform.function = "None")
+#'   s_preOut(myspec1)
+#'   myreg1 <- jd_regarima(myseries, myspec1)
+#'   myreg1
+#'   s_preOut(myreg1)
+#'
+#' # User-defined variables
+#'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
+#'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
+#'   var<-ts(matrix(c(var1,var2), ncol=2),start = c(2001, 12), frequency = 12)
+#'
+#'   myspec1 <- jd_regarima_specDefTS(spec=c("TRfull"),
+#'               usrdef.varEnabled = TRUE, usrdef.var = var)
+#'   s_preVar(myspec1)
+#'   myreg1 <- jd_regarima(myseries,myspec1)
+#'
+#'   myspec2 <- jd_regarima_specDefTS(spec=c("TRfull"), usrdef.varEnabled = TRUE,
+#'                                 usrdef.var = var, usrdef.varCoef = c(17,-1),
+#'                                 transform.function = "None")
+#'   myreg2 <- jd_regarima(myseries,myspec2)
+#'
+#' # Pre-specified ARMA coefficients
+#'   myspec1 <- jd_regarima_specDefTS(spec=c("TRfull"),
+#'              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
+#'              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
+#'               arima.coef = c(-0.12,-0.12,-0.3,-0.99),
+#'               arima.coefType = rep("Fixed",4))
+#'   myreg1 <- jd_regarima(myseries,myspec1)
+#'   myreg1
+#'   summary(myreg1)
+#'   s_arimaCoef(myspec1)
+#'   s_arimaCoef(myreg1)
+#' @export
 # The function creates a "JD_RegArima_Spec" S3 class object from a JD+ defined specification for X13 method
 jd_regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
                             estimate.from=NA_character_,
@@ -204,6 +459,266 @@ jd_regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "T
   return(z)
 }
 
+#' RegARIMA model specification, pre-adjustment in TRAMO/SEATS
+#' @description
+#' \code{jd_regarima_specTS} creates (and/or modifies) a \code{c("JD_RegArima_Spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("JD_RegArima","TRAMO_SEATS")} or \code{c("JD_RegArima_Spec","TRAMO_SEATS")} class object.
+#'
+#' @param object object of class \code{c("JD_RegArima_Spec","TRAMO_SEATS")} or of class \code{c("JD_RegArima","TRAMO_SEATS")}.
+#'
+#' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
+#'
+#' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
+#'
+#' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.
+#'
+#' @param estimate.first numeric specifying the number of periods considered at the beginning of the series.
+#'
+#' @param estimate.last numeric specifying the number of periods considered at the end of the series.
+#'
+#' @param estimate.exclFirst numeric specifying the number of periods excluded at the beginning of the series. Can be combined with \code{estimate.exclLast}.
+#'
+#' @param estimate.exclLast numeric specifying the number of periods excluded at the end of the series. Can be combined with \code{estimate.exclFirst}.
+#'
+#' @param estimate.tol numeric, convergence tolerance. The absolute changes in the log-likelihood function are compared to this value to check for the convergence of the estimation iterations.
+#'
+#' @param estimate.eml logicals, exact maximum likelihood estimation. If \code{TRUE} the program performs an exact maximum likelihood estimation. If \code{FASLE} the Unconditional Least Squares method is used.
+#'
+#' @param estimate.urfinal numeric, final unit root limit. The threshold value for the final unit root test for identification of differencing orders. If the magnitude of an AR root for the final model is less than this number, a unit root is assumed, the order of the AR polynomial is reduced by one, and the appropriate order of the differencing (non-seasonal, seasonal) is increased.
+#'
+#' @param transform.function transformation of the input series: \code{"None"} - no transformation of the series; \code{"Log"} - takes the log of the series; \code{"Auto"} - the program tests for the log-level specification.
+#'
+#' @param transform.fct numeric controlling the bias in the log/level pre-test: \code{ transform.fct }> 1 favours levels, \code{transform.fct}< 1 favours logs. Considered only when \code{transform.function} is set to \code{"Auto"}.
+#'
+#' Control variables for the pre-specified outliers. The pre-specified outliers are used in the model only if they are enabled (\code{usrdef.outliersEnabled=TRUE}) and the outliers' type (\code{usrdef.outliersType}) and date (\code{usrdef.outliersDate}) are provided.
+#'
+#' @param usrdef.outliersEnabled logicals. If \code{TRUE} the program uses the pre-specified outliers.
+#'
+#' @param usrdef.outliersType vector defining the outliers' type. Possible types are: \code{("AO"}) - additive, \code{("LS"}) - level shift, \code{("TC"}) - transitory change, \code{("SO"}) -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.
+#'
+#' @param usrdef.outliersDate vector defining the outliers' date. The dates should be characters in format "YYYY-MM-DD". E.g.: \code{usrdef.outliersDate=c("2009-10-01","2005-02-01","2003-04-01")}.
+#'
+#' @param usrdef.outliersCoef vector providing fixed coefficients for the outliers. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined. E.g.: \code{ usrdef.outliersCoef=c(200,170,20)}.
+#'
+#' Control variables for the user-defined variables:
+#'
+#' @param usrdef.varEnabled logicals. If \code{TRUE} the program uses the user-defined variables.
+#'
+#' @param usrdef.var time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.
+#'
+#' @param usrdef.varCoef vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.
+#'
+#' @param tradingdays.mauto defines whether the calendar effects should be added to the model manually (\code{"Unused"}) or automatically. In the automatic selection, the choice of the number of calendar variables can be based on the F-Test (\code{"FTest"}) or the Wald Test (\code{"WaldTest"}); the model with higher F value is chosen, provided that it is higher than \code{tradingdays.pftd}).
+#'
+#' @param tradingdays.pftd numeric. P-value applied in the test specified by the automatic parameter (\code{tradingdays.mauto}) to assess the significance of the pre-tested calendar effects variables and whether they should be included in the RegArima model.
+#'
+#' Control variables for the manual selection of calendar effects variables (\code{tradingdays.mauto} is set to \code{"Unused"}):
+#'
+#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects. \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
+#'
+#' @param tradingdays.leapyear logicals. Specifies if the leap-year correction should be included. If \code{TRUE} the model includes the leap-year effect.
+#'
+#' @param tradingdays.stocktd numeric indicating the day of the month when inventories and other stock are reported (to denote the last day of the month set the variable to 31). Modifications of this variable are taken into account only when \code{tradingdays.option} is set to \code{"None"}.
+#'
+#' @param tradingdays.test defines the pre-tests of the trading day effects: \code{"None"} - calendar variables are used in the model without pre-testing; \code{"Separate_T"} - a t-test is applied to each trading day variable separately and the trading day variables are included in the RegArima model if at least one t-statistic is greater than 2.6 or if two t-statistics are greater than 2.0 (in absolute terms); \code{"Joint_F"} - a joint F-test of significance of all the trading day variables. The trading day effect is significant if the F statistic is greater than 0.95.
+#'
+#' @param easter.type specifies the presence and the length of the Easter effect: \code{"Unused"} - Easter effect is not considered; \code{"Standard"} - influences the period of \code{n} days strictly before Easter Sunday; \code{"IncludeEaster"} - influences the entire period (\code{n}) up to and including Easter Sunday; \code{"IncludeEasterMonday"} - influences the entire period (\code{n}) up to and including Easter Monday.
+#'
+#' @param easter.julian logicals. If \code{TRUE} the program uses the Julian Easter (expressed in Gregorian calendar).
+#'
+#' @param easter.duration numeric indicating the duration of the Easter effect (length in days, between 1 and 15).
+#'
+#' @param easter.test logicals. If \code{TRUE} the program performs a t-test for the significance of the Easter effect. The Easter effect is considered as significant if the modulus of t-statistic is greater than 1.96.
+#'
+#' @param outlier.enabled logicals. If \code{TRUE} the automatic detection of outliers is enabled in the defined time span.
+#'
+#' The time span of the series to be searched for outliers (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{outlier.from, outlier.to, outlier.first, outlier.last, outlier.exclFirst} and \code{outlier.exclLast}; where \code{outlier.from} and \code{outlier.to} have priority over remaining span control variables, \code{outlier.last} and \code{outlier.first} have priority over \code{outlier.exclFirst} and \code{outlier.exclLast}, and \code{outlier.last} has priority over \code{outlier.first}.
+#'
+#' @param outlier.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{outlier.to}.
+#'
+#' @param outlier.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{outlier.from}.
+#'
+#' @param outlier.first numeric specifying the number of periods considered at the beginning of the series.
+#'
+#' @param outlier.last numeric specifying the number of periods considered at the end of the series.
+#'
+#' @param outlier.exclFirst numeric specifying the number of periods excluded at the beginning of the series. Can be combined with \code{outlier.exclLast}.
+#'
+#' @param outlier.exclLast numeric specifying the number of periods excluded at the end of the series. Can be combined with \code{outlier.exclFirst}.
+#'
+#' @param outlier.ao logicals. If \code{TRUE} the automatic detection of additive outliers is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.tc logicals. If \code{TRUE} the automatic detection of transitory changes is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.ls logicals. If \code{TRUE} the automatic detection of level shifts is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.so logicals. If \code{TRUE} the automatic detection of seasonal outliers is enabled (\code{outlier.enabled} must be also set to \code{TRUE}).
+#'
+#' @param outlier.usedefcv logicals. If \code{TRUE} the critical value for the outliers' detection procedure is automatically determined by the number of observations in the outlier detection time span. If \code{FALSE} the procedure uses the inputted critical value (\code{outlier.cv}).
+#'
+#' @param outlier.cv numeric. Inputted critical value for the outliers' detection procedure. The modification of this variable is taken in to account only when \code{outlier.usedefcv} is set to \code{FALSE}.
+#'
+#' @param outlier.eml logicals, exact likelihood estimation method.Controls the method applied for a parameter estimation in the intermediate steps of the automatic detection and correction of outliers.  If \code{TRUE} an exact likelihood estimation method is used, when \code{FALSE} the fast Hannan-Rissanen method is used.
+#'
+#' @param outlier.tcrate numeric. The rate of decay for the transitory change outlier.
+#'
+#' @param automdl.enabled logicals. If \code{TRUE} the automatic modelling of the ARIMA model is enabled. If \code{FALSE} the parameters of the ARIMA model can be specified.
+#'
+#' Control variables for the automatic modelling of the ARIMA model (\code{automdl.enabled} is set to \code{TRUE}):
+#'
+#' @param automdl.acceptdefault logicals. If \code{TRUE} the default model (ARIMA(0,1,1)(0,1,1)) may be chosen in the first step of the automatic model identification. If the Ljung-Box Q statistics for the residuals is acceptable, the default model is accepted and no further attempt will be made to identify any other.
+#'
+#' @param automdl.cancel  numeric, cancelation limit. If the difference in moduli of an AR and an MA roots (when estimating ARIMA(1,0,1)(1,0,1) models in the second step of the automatic identification of the differencing orders) is smaller than cancelation limit, the two roots are assumed equal and cancel out.
+#'
+#' @param automdl.ub1 numeric, first unit root limit. It is the threshold value for the initial unit root test in the automatic differencing procedure. When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model, performed in the first step of the automatic model identification procedure, is larger than first unit root limit in modulus, it is set equal to unity.
+#'
+#' @param automdl.ub2 numeric, second unit root limit. When one of the roots in the estimation of the ARIMA(1,0,1)(1,0,1) plus mean model, which is performed in the second step of the automatic model identification procedure, is larger than second unit root limit in modulus, it is checked if there is a common factor in the corresponding AR and MA polynomials of the ARMA model that can be cancelled (see \code{automdl.cancel}). If there is no cancellation, the AR root is set equal to unity (i.e. the differencing order changes).
+#'
+#' @param automdl.armalimit numeric, arma limit. It is the threshold value for t-statistics of ARMA coefficients and constant term used for the final test of model parsimony. If the highest order ARMA coefficient has a t-value less than this value in magnitude, the order of the model is reduced. Also if the constant term has a t-value less than arma limit in magnitude, it is removed from the set of regressors.
+#'
+#' @param automdl.reducecv numeric, ReduceCV.  The percentage by which the outlier's critical value will be reduced when an identified model is found to have a Ljung-Box statistic with an unacceptable confidence coefficient. The parameter should be between 0 and 1, and will only be active when automatic outlier identification is enabled. The reduced critical value will be set to (1-ReduceCV)xCV, where CV is the original critical value.
+#'
+#' @param automdl.ljungboxlimit numeric, Ljung Box limit. Acceptance criterion for the confidence intervals of the Ljung-Box Q statistic. If the LjungBox Q statistics for the residuals of a final model is greater than Ljung Box limit, the model is rejected, the outlier critical value is reduced, and model and outlier identification (if specified) is redone with a reduced value.
+#'
+#' @param automdl.compare logicals. If {TRUE} the program compares the model identified by the automatic procedure to the default model (ARIMA(0,1,1)(0,1,1)) and the model with the best fit is selected. Criteria considered are residual diagnostics, the model structure and the number of outliers.
+#'
+#' Control variables for the non-automatic modelling of the ARIMA model (\code{automdl.enabled} is set to \code{FALSE}):
+#'
+#' @param arima.mu logicals. If \code{TRUE}, the mean is considered as part of the ARIMA model.
+#'
+#' @param arima.p numeric. The order of the non-seasonal autoregressive (AR) polynomial.
+#'
+#' @param arima.d numeric. Regular differencing order.
+#'
+#' @param arima.q numeric. The order of the non-seasonal moving average (MA) polynomial.
+#'
+#' @param arima.bp numeric. The order of the seasonal autoregressive (AR) polynomial.
+#'
+#' @param arima.bd numeric. Seasonal differencing order.
+#'
+#' @param arima.bq numeric. The order of the seasonal moving average (MA) polynomial.
+#'
+#' Control variables for the user-defined ARMA coefficients. Coefficients can be defined for the regular and seasonal autoregressive (AR) polynomials and moving average (MA) polynomials. The model considers the coefficients only if the procedure for their estimation (\code{arima.coefType}) is provided, and the number of provided coefficients matches the sum of (regular and seasonal) AR and MA orders (\code{p,q,bp,bq}).
+#'
+#' @param arima.coefEnabled logicals. If \code{TRUE} the program uses the user-defined ARMA coefficients.
+#'
+#' @param arima.coef vector providing the coefficients for the regular and seasonal AR and MA polynominals. The length of the vector must equal the sum of the regular and seasonal AR and MA orders. The coefficients shall be provided in the order: regular AR (\emph{Phi} - \code{p} elements), regular MA  (\emph{Theta} - \code{q} elements), seasonal AR (\emph{BPhi} - \code{bp} elements) and seasonal MA (\emph{BTheta} - \code{bq} elements). E.g.: \code{arima.coef=c(0.6,0.7)} with \code{arima.p=1, arima.q=0,arima.bp=1} and \code{arima.bq=0}.
+#'
+#' @param arima.coefType vector defining ARMA coefficients estimation procedure. Possible procedures are: \code{"Undefined"} - no use of user-defined input (i.e. coefficients are estimated), \code{"Fixed"} - fixes the coefficients at the value provided by the user, \code{"Initial"} - the value defined by the user is used as initial condition. For orders for which the coefficients shall not be defined, the \code{arima.coef} can be set to \code{NA} or \code{0} or the \code{arima.coefType} can be set to \code{"Undefined"}.
+#' E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fixed","Undefined")}.
+#'
+#' @param fcst.horizon numeric, forecasts horizon. Length of the forecasts generated by the RegARIMA model in periods (positive values) or years (negative values). By default the program generates two years forecasts (\code{fcst.horizon} set to \code{-2}).
+#'
+#'
+#'
+#' @return
+#' A list of class \code{c("JD_RegArima_Spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, specification of the \code{c("JD_RegArima","TRAMO_SEATS")} or \code{c("JD_RegArima_Spec","TRAMO_SEATS")} object as provided within the argument \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{jd_regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#'
+#'
+#' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml},
+#' \code{urfinal} - argument \code{esimate.urfinal}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
+#'
+#' \item{transform}{data frame. Variables referring to: \code{tfunction} - argument \code{transform.function}, \code{fct} - argument \code{transform.fct}. The final values can be also accessed with the function \code{\link{s_transform}}.}
+#'
+#' \item{regression}{list including the information on the user-defined variables (\code{userdef}), \code{trading.days} effect and \code{easter} effect. The user-defined part includes: \code{specification} - data frame with the information if pre-specified outliers (\code{outlier}) and user-defined variables (\code{variables}) are included in the model and if fixed coefficients are used (\code{outlier.coef} and \code{variables.coef}). The final values can be also accessed with the function \code{\link{s_usrdef}}; \code{outliers} - matrixes with the outliers (\code{Predefined} and \code{Final}). The final outliers can be also accessed with the function \code{\link{s_preOut}}; and \code{variables} - list with the \code{Predefined} and \code{Final} user-defined variables (\code{series}) and its description (\code{description}) including the information on the variable type and values of fixed coefficients. The final user-defined variables can be also accessed with the function \code{\link{s_preVar}}.
+#' Within the data frame \code{trading.days} variables refer to:
+#' \code{automatic} - argument \code{tradingdays.mauto},
+#' \code{pftd} - argument \code{tradingdays.pftd},
+#' \code{option} - argument \code{tradingdays.option},
+#' \code{leapyear} - argument \code{tradingdays.leapyear},
+#' \code{stocktd} - argument \code{tradingdays.stocktd},
+#' \code{test} - argument \code{tradingdays.test}. The final \code{trading.days} values can be also accessed with the function \code{\link{s_td}}.
+#' Within the data frame \code{easter} variables refer to:
+#' \code{type} - argument \code{easter.type},
+#' \code{julian} - argument \code{easter.julian},
+#' \code{duration} - argument \code{easter.duration},
+#' \code{test} - argument \code{easter.test}. The final \code{easter} values can be also accessed with the function \code{\link{s_easter}}.}
+#'
+#' \item{outliers}{data frame. Variables referring to:
+#' \code{ao} - argument \code{outlier.ao},
+#' \code{tc} - argument \code{outlier.tc},
+#' \code{ls} - argument \code{outlier.ls},
+#' \code{so} - argument \code{outlier.so},
+#' \code{usedefcv} - argument \code{outlier.usedefcv},
+#' \code{cv} - argument \code{outlier.cv},
+#' \code{eml} - argument \code{outlier.eml},
+#' \code{tcrate} - argument \code{outlier.tcrate}. The final values can be also accessed with the function \code{\link{s_out}}.}
+#'
+#' \item{arima}{list containing a data frame with the ARIMA settings (\code{specification}) and matrixes with the information on the pre-specified ARMA coefficients (\code{coefficients}). The matrix \code{Predefined} refers to the pre-defined model specification and matrix \code{Final} to the final specification. Both matrixes contain the value of the ARMA coefficients and the procedure for its estimation.
+#' Within the data frame \code{specification} the variable \code{enabled} refer to the argument \code{automdl.enabled} and all the remaining variables (\code{automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.armalimit, automdl.reducecv, automdl.ljungboxlimit, automdl.compare, arima.mu, arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq}) to the respective function arguments.
+#' The final values of the \code{specification} can be also accessed with the function \code{\link{s_arima}} and final pre-specified ARMA coefficients with the function \code{\link{s_arimaCoef}}.}
+#'
+#' \item{forecast}{data frame with the forecast horizon (argument \code{fcst.horizon}). The final value can be also accessed with the function \code{\link{s_fcst}}.}
+#'
+#' \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers.The matrix can be also accessed with the function \code{\link{s_span}}.}
+#'
+#' @references
+#' Info on JDemtra+, usage and functions:
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#'
+#' @examples
+#'   myreg <- jd_regarima_defTS(myseries, spec=c("TRfull"))
+#'   myspec<- jd_regarima_specTS(myreg)
+#'   myreg1<- jd_regarima(myseries,myspec)
+#'
+#' # Modify the model specification from a "JD_RegArima" object
+#'   myspec2 <- jd_regarima_specTS(myreg,tradingdays.mauto = "Unused",
+#' 				tradingdays.option = "WorkingDays",
+#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg2 <- jd_regarima(myseries,myspec2)
+#'
+#' # Modify the model specification from a "JD_RegArima_Spec" object
+#'   myspec3 <- jd_regarima_specTS(myspec,tradingdays.mauto = "Unused",
+#' 				tradingdays.option = "WorkingDays",
+#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg3 <- jd_regarima(myseries,myspec3)
+#'
+#'   myspec1 <-jd_regarima_specDefTS(spec=c("TRfull"))
+#'   myspec2 <-jd_regarima_specDefTS(spec=c("TRfull"),tradingdays.mauto = "Unused",
+#'                                          tradingdays.option = "WorkingDays",
+#'                                          easter.type = "Standard",
+#'                                          automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg1 <-jd_regarima(myseries, spec=myspec1)
+#'   myreg2 <-jd_regarima(myseries, spec=myspec2)
+#'
+#' # Pre-specified outliers
+#'   myspec1 <- jd_regarima_specTS(myreg,
+#'             usrdef.outliersEnabled = TRUE,
+#'             usrdef.outliersType = c("LS","LS"),
+#'             usrdef.outliersDate = c("2008-10-01","2003-01-01"),
+#'             usrdef.outliersCoef = c(37000,-19000), transform.function = "None")
+#'   s_preOut(myspec1)
+#'   myreg1 <- jd_regarima(myseries, myspec1)
+#'   myreg1
+#'   s_preOut(myreg1)
+#'
+#' # User-defined variables
+#'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
+#'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
+#'   var<-ts(matrix(c(var1,var2), ncol=2),start = c(2001, 12), frequency = 12)
+#'
+#'   myspec1 <- jd_regarima_specTS(myspec,
+#'               usrdef.varEnabled = TRUE, usrdef.var = var)
+#'   s_preVar(myspec1)
+#'   myreg1 <- jd_regarima(myseries,myspec1)
+#'
+#'   myspec2 <- jd_regarima_specTS(myspec, usrdef.varEnabled = TRUE,
+#'                                 usrdef.var = var, usrdef.varCoef = c(17,-1),
+#'                                 transform.function = "None")
+#'   myreg2 <- jd_regarima(myseries,myspec2)
+#'
+#' # Pre-specified ARMA coefficients
+#'   myspec1 <- jd_regarima_specTS(myreg,
+#'              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
+#'              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
+#'               arima.coef = c(-0.12,-0.12,-0.3,-0.99),
+#'               arima.coefType = rep("Fixed",4))
+#'   myreg1 <- jd_regarima(myseries,myspec1)
+#'   myreg1
+#'   summary(myreg1)
+#'   s_arimaCoef(myspec1)
+#'   s_arimaCoef(myreg1)
+#'
+#' @export
 # The function creates a ("JD_RegArima_Spec","TRAMO_SEATS") class object from from a JD_RegArima_Spec or JD_RegArima object
 jd_regarima_specTS <-function(object,
                           estimate.from=NA_character_,

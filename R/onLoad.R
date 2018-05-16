@@ -1,4 +1,3 @@
 .onLoad<-function(libname, pkgname){
-  .jpackage(pkgname, lib.loc = libname)
-
+  rJava::.jpackage(pkgname, lib.loc = libname)
 }

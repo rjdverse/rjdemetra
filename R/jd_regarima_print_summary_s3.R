@@ -1,4 +1,5 @@
 # Method: JD_RegArima for the function summary
+#' @export
 summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L), signif.stars = getOption("show.signif.stars"), ...){
 
   arima_coef <- object$arima.coefficients
@@ -71,6 +72,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
 }
 
 # Method: JD_RegArima for the function print
+#' @export
 print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
 
   arima_coef <- x$arima.coefficients

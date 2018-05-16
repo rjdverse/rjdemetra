@@ -1,4 +1,5 @@
 # Method JD_RegArima for the function plot
+#' @export
 plot.JD_RegArima = function(x, which = c(1:6), dec_zoom=FALSE,
      caption = list("Residuals","Histogram of residuals","Normal Q-Q","ACF of residuals",
                     "PACF of residuals","Decomposition"),

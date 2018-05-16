@@ -8,10 +8,13 @@ Authors@R: as.person(c(
     ))
 Description: This package provides JDemetra+ functions.
 Depends:
-    R (>= 3.1.1)
+    R (>= 3.1.1),
+    rJava (>= 0.9-8)
 Imports:
-    rJava (>= 0.9-8),
-    methods
+    methods,
+    stats,
+    graphics,
+    grDevices
 License: EUPL
 LazyData: TRUE
 Collate:
@@ -31,8 +34,10 @@ Collate:
 	'jd_regarima_plot_s3.R'
 	'jd_regarima_residuals_tests_s3.R'
 	'jd_regarima_generic_f_s3.R'
+	'diagnostics.R'
+	'finals.R'
 Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
