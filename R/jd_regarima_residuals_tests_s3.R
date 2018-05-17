@@ -1,3 +1,52 @@
+#' Tests on RegARIMA residuals, pre-adjustment in X13 and TRAMO/SEATS
+#' @description
+#' \code{jd_regarima_rtest} provides tests on the normality, independence and linearity of the RegARIMA model residuals.
+#'
+#' @param x object of class \code{c("JD_RegArima","X13")} or of class \code{c("JD_RegArima","TRAMO_SEATS")}
+#'
+#' @details
+#' \code{jd_regarima_rtest} provides the following tests on the RegARIMA model residuals:
+#' \itemize{
+#' \item Normality - Mean, Skewness, Kurtosis;
+#'
+#' \item Independence - Ljung-Box, Ljung-Box for residuals at seasonal lags;
+#'
+#' \item Linearity - Ljung-Box for squared residuals.
+#' }
+#' In all tests the H0 (normality, independence and linearity of residuals) shall not be rejected.
+#'
+#' @return
+#' A list of class \code{"JD_RegArima_rtest"}  with components:
+#'
+#' \item{statistic}{vector with the values of the test statistics.}
+#'
+#' \item{p.value}{vector with the p-values of the tests.}
+#'
+#' \item{parameter}{vector with the parameters of the test statistics.}
+#'
+#' \item{method}{vector with character strings indicating what type of tests were performed.}
+#'
+#' \item{data.name}{vector with character strings giving the names of the data on which the tests were performed.}
+#'
+#' @references
+#' Info on JDemtra+, usage and functions:
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#'
+#'
+#' @examples
+#'   #Create JD_RegArima object
+#'   myreg1 <- jd_regarima_defX13(myseries, spec=c("RG5c"))
+#'   myreg2 <-jd_regarima_defTS(myseries, spec=c("TRfull"))
+#'
+#'   test1<-jd_regarima_rtest(myreg1)
+#'   test2<-jd_regarima_rtest(myreg2)
+#'   #print the results
+#'   test1
+#'   test2
+#'   # print the results with the information on the statistics' parameters
+#'   print(test1,parameter_dsc=TRUE)
+#'   print(test2,parameter_dsc=TRUE)
+#' @export
 # The function creates a S3 object of class "JD_RegArima_rtest"
 jd_regarima_rtest = function(x){
   if (!inherits(x, "JD_RegArima"))
@@ -15,6 +64,7 @@ jd_regarima_rtest = function(x){
 }
 
 # Method: "JD_RegArima_rtest" for the print
+#' @export
 print.JD_RegArima_rtest=function (x, digits = max(3L, getOption("digits") - 3L), parameter_dsc = FALSE, ...){
 
   doublestar<-paste0("\u002A","\u002A")
