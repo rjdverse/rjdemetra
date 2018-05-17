@@ -1,10 +1,12 @@
 #' @import rJava
 #' @importFrom grDevices as.graphicsAnnot  dev.cur  dev.flush dev.hold  dev.interactive  dev.set  devAskNewPage dev.new
-#' @importFrom graphics abline axis curve hist layout legend mtext par plot title
-#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts
+#' @importFrom graphics abline axis curve hist layout legend mtext par plot title lines points
+#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts end na.omit start time ts.plot window window<- cycle .preformat.ts
 #' @importFrom methods as
-#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts end na.omit start time ts.plot window window<-
 #' @importFrom utils capture.output
+#'
+utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.d.tab", "arima.mu.tab", "", "", "arima.p.tab", "arima.q.tab", "automdl.acceptdefault.tab", "automdl.armalimit.tab", "automdl.balanced.tab", "automdl.cancel.tab", "automdl.compare.tab", "automdl.enabled.tab", "automdl.ljungboxlimit.tab", "automdl.mixed.tab", "automdl.reducecv.tab", "automdl.ub1.tab", "automdl.ub2.tab", "automdl.ubfinal.tab", "easter.duration.tab", "easter.enabled.tab", "easter.julian.tab", "easter.test.tab", "easter.type.tab", "estimate.eml.tab", "estimate.span.tab", "estimate.tol.tab", "estimate.urfinal.tab", "outlier.ao.tab", "outlier.cv.tab", "outlier.eml.tab", "outlier.enabled.tab", "outlier.ls.tab", "outlier.method.tab", "outlier.so.tab", "outlier.span.tab", "outlier.tc.tab", "outlier.tcrate.tab", "outlier.usedefcv.tab", "tradingdays.autoadjust.tab", "tradingdays.leapyear.tab", "tradingdays.mauto.tab", "tradingdays.option.tab", "tradingdays.pftd.tab", "tradingdays.stocktd.tab", "tradingdays.test.tab", "transform.adjust.tab", "transform.aicdiff.tab", "transform.fct.tab", "transform.function.tab"))
+
 library("rJava")
 .jinit()
 .jaddClassPath("./Java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")

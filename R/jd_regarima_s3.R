@@ -125,26 +125,20 @@ jd_regarima_defX13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG
     stop("series must be a time series")
   }
   spec<-match.arg(spec)
-  
+
   # create the java objects
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
-  if (exists("jrobct"))
-    rm(jrobct)
   jd_clobj<-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/regarima/Processor", "Lec/tstoolkit/jdr/regarima/Processor$Results;", "x12", ts_r2jd(series), jspec, jdictionary)
-  
+
   jrobct <- new (Class = "JD2_RegArima_java", internal = jrslt)
-  
+
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
     z <- regarima_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
-    rm(jd_clobj)
-    rm(jrobct)
     return(z)
   }
 }
@@ -266,25 +260,19 @@ jd_regarima_defTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3"
     stop("series must be a time series")
   }
   spec<-match.arg(spec)
-  
+
   # create the java objects
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
-  if (exists("jrobct"))
-    rm(jrobct)
   jd_clobj<-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/tramo/TramoSpecification;", "getCore")
   jdictionary <- .jnull("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/regarima/Processor", "Lec/tstoolkit/jdr/regarima/Processor$Results;", "tramo", ts_r2jd(series), jspec, jdictionary)
   jrobct<- new (Class = "JD2_TRAMO_java", internal = jrslt)
-  
+
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
     z <- regarima_defTS(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
-    rm(jd_clobj)
-    rm(jrobct)
     return(z)
   }
 }
@@ -438,12 +426,8 @@ jd_regarima.X13 <-function(series, spec = NA){
     stop("series must be a time series")
   if (!inherits(spec, "JD_RegArima_Spec") | !inherits(spec, "X13"))
     stop("use only with c(\"JD_RegArima_Spec\",\"X13\") class object")
-  
+
   # create the java objects
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
-  if (exists("jrobct"))
-    rm(jrobct)
   jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec <-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", "RG1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
@@ -451,13 +435,11 @@ jd_regarima.X13 <-function(series, spec = NA){
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jrslt<-.jcall("ec/tstoolkit/jdr/regarima/Processor", "Lec/tstoolkit/jdr/regarima/Processor$Results;", "x12", ts_r2jd(series), jspec, jdictionary)
   jrobct <- new (Class = "JD2_RegArima_java", internal = jrslt)
-  
+
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
     z <- regarima_X13(jdobj = jd_clobj, jrobj = jrobct, spec = spec)
-    rm(jd_clobj)
-    rm(jrobct)
     return(z)
   }
 }
@@ -469,12 +451,8 @@ jd_regarima.TRAMO_SEATS<-function(series, spec = NA){
     stop("series must be a time series")
   if (!inherits(spec, "JD_RegArima_Spec") | !inherits(spec, "TRAMO_SEATS"))
     stop("use only with c(\"JD_RegArima_Spec\",\"TRAMO_SEATS\") class object")
-  
+
   # create the java objects
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
-  if (exists("jrobct"))
-    rm(jrobct)
   jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", "TR1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
@@ -482,13 +460,11 @@ jd_regarima.TRAMO_SEATS<-function(series, spec = NA){
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/tramo/TramoSpecification;", "getCore")
   jrslt<-.jcall("ec/tstoolkit/jdr/regarima/Processor", "Lec/tstoolkit/jdr/regarima/Processor$Results;", "tramo", ts_r2jd(series), jspec, jdictionary)
   jrobct<- new (Class = "JD2_TRAMO_java", internal = jrslt)
-  
+
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
     z <- regarima_TS(jdobj = jd_clobj, jrobj = jrobct, spec = spec)
-    rm(jd_clobj)
-    rm(jrobct)
     return(z)
   }
 }
@@ -496,7 +472,7 @@ jd_regarima.TRAMO_SEATS<-function(series, spec = NA){
 regarima_defX13 <- function(jdobj, jrobj, spec){
   # extract model specification from the java object
   rspec <- specX13_jd2r( spec = spec)
-  
+
   estimate<-data.frame(span = rspec$estimate.span, tolerance = rspec$estimate.tol, row.names="", stringsAsFactors=FALSE)
   transform <- data.frame(tfunction=rspec$transform.function,adjust=rspec$transform.adjust,aicdiff=rspec$transform.aicdiff, row.names="", stringsAsFactors=FALSE)
   trading.days<-data.frame( option = rspec$tradingdays.option, autoadjust=rspec$tradingdays.autoadjust, leapyear = rspec$tradingdays.leapyear,
@@ -521,7 +497,7 @@ regarima_defX13 <- function(jdobj, jrobj, spec){
                         arima=arima, forecast = forecast, span=span)
   # results
   jd_results <- regarima_rslts(jdobj, jrobj,as.numeric(forecast))
-  
+
   # new S3 class "JD_RegArima"
   z<- list( specification = specification,
             arma=jd_results$arma,
@@ -532,7 +508,7 @@ regarima_defX13 <- function(jdobj, jrobj, spec){
             residuals = jd_results$residuals,
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
-  
+
   class(z) <- c("JD_RegArima","X13")
   return(z)
 }
@@ -540,7 +516,7 @@ regarima_defX13 <- function(jdobj, jrobj, spec){
 regarima_defTS <- function(jdobj, jrobj, spec){
   # extract model specification from the java object
   rspec <- specTS_jd2r( spec = spec)
-  
+
   estimate<-data.frame(span = rspec$estimate.span, tolerance = rspec$estimate.tol, exact_ml = rspec$estimate.eml, urfinal = rspec$estimate.urfinal,
                        row.names = "", stringsAsFactors=FALSE)
   transform <- data.frame(tfunction=rspec$transform.function,fct=rspec$transform.fct,row.names = "", stringsAsFactors=FALSE)
@@ -567,10 +543,10 @@ regarima_defTS <- function(jdobj, jrobj, spec){
   # specification
   specification <- list(estimate=estimate, transform=transform, regression=regression, outliers=outliers, arima=arima,
                         forecast = forecast, span=span)
-  
+
   # results
   jd_results <- regarima_rslts(jdobj, jrobj,as.numeric(forecast))
-  
+
   # new S3 class "JD_RegArima"
   z<- list( specification = specification,
             arma=jd_results$arma,
@@ -581,7 +557,7 @@ regarima_defTS <- function(jdobj, jrobj, spec){
             residuals = jd_results$residuals,
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
-  
+
   class(z) <- c("JD_RegArima","TRAMO_SEATS")
   return(z)
 }
@@ -618,7 +594,7 @@ regarima_X13 <- function(jdobj, jrobj, spec){
             residuals = jd_results$residuals,
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
-  
+
   class(z) = c("JD_RegArima","X13")
   return(z)
 }
@@ -655,7 +631,7 @@ regarima_TS <- function(jdobj, jrobj, spec){
             residuals = jd_results$residuals,
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
-  
+
   class(z) = c("JD_RegArima","TRAMO_SEATS")
   return(z)
 }

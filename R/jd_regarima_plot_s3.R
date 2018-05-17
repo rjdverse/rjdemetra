@@ -100,7 +100,7 @@ if (show[5L]) {
 if (show[6L]) {
 
   plot.ts(decomp[,c(1,6)],type="l",pch=1, col=c(1:2), ylab="",plot.type = "single")
-  legend("topleft", legend = c("y linearised","y (= y lin. + cal. + out.)"), col=1:2, pch=1, bty="n")
+  legend("topleft", legend = c("y linearised","y (= y lin. + cal. + out.)"), col=1:2, bty="n",lty = 1)
 
 
   if (one.fig)

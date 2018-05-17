@@ -28,6 +28,10 @@ Collate:
 	'jd_regarima_s3.R'
 	'jd_regarima_specX13_s3.R'
 	'jd_regarima_specTS_s3.R'
+	'decomposition.R'
+	'diagnostics.R'
+	'finals.R'
+	'user_defined.R'
 	'jd_x13.R'
 	'jd_tramoseats.R'
 	'jd_saveSpec_s3.R'
@@ -37,8 +41,7 @@ Collate:
 	'jd_regarima_generic_f_s3.R'
 	'jd_sa_print.R'
 	'jd_sa_plot.R'
-	'diagnostics.R'
-	'finals.R'
+  'myseries.R'
 Suggests:
     knitr,
     rmarkdown
