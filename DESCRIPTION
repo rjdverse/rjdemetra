@@ -32,6 +32,7 @@ Collate:
 	'jd_regarima_residuals_tests_s3.R'
 	'jd_regarima_generic_f_s3.R'
 	'jd_sa_print.R'
+	'jd_sa_plot.R'
 Suggests:
     knitr,
     rmarkdown

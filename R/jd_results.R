@@ -88,12 +88,12 @@ regarima_rslts <- function(jdobj, jrobj, fcsth){
   dtljung.box<-result(jdobj,jrobj,"residuals.lb")
   dtljung.boxSa<-result(jdobj,jrobj,"residuals.seaslb")
   dtljung.box2<-result(jdobj,jrobj,"residuals.lb2")
-  dscmean<-as.character(attributes(result(jdobj,jrobj,"residuals.mean")))
-  dscskewness<-as.character(attributes(result(jdobj,jrobj,"residuals.skewness")))
-  dsckurtosis<-as.character(attributes(result(jdobj,jrobj,"residuals.kurtosis")))
-  dscljung.box<-as.character(attributes(result(jdobj,jrobj,"residuals.lb")))
-  dscljung.boxSa<-as.character(attributes(result(jdobj,jrobj,"residuals.seaslb")))
-  dscljung.box2<-as.character(attributes(result(jdobj,jrobj,"residuals.lb2")))
+  dscmean<-as.character(attributes(dtmean))
+  dscskewness<-as.character(attributes(dtskewness))
+  dsckurtosis<-as.character(attributes(dtkurtosis))
+  dscljung.box<-as.character(attributes(dtljung.box))
+  dscljung.boxSa<-as.character(attributes(dtljung.boxSa))
+  dscljung.box2<-as.character(attributes(dtljung.box2))
   
   dtstat<-rbind(dtmean,dtskewness,dtkurtosis,dtljung.box,dtljung.boxSa,dtljung.box2)
   dscstat<-rbind(dscmean,dscskewness,dsckurtosis,dscljung.box,dscljung.boxSa,dscljung.box2)
@@ -120,49 +120,111 @@ regarima_rslts <- function(jdobj, jrobj, fcsth){
 }
 
 decomp_rsltsX13 <- function(jdobj, jrobj){
-  M1 <- result(jdobj,jrobj,"mstats.M(1)")
-  M2 <- result(jdobj,jrobj,"mstats.M(2)")
-  M3 <- result(jdobj,jrobj,"mstats.M(3)")
-  M4 <- result(jdobj,jrobj,"mstats.M(4)")
-  M5 <- result(jdobj,jrobj,"mstats.M(5)")
-  M6 <- result(jdobj,jrobj,"mstats.M(6)")
-  M7 <- result(jdobj,jrobj,"mstats.M(7)")
-  M8 <- result(jdobj,jrobj,"mstats.M(8)")
-  M9 <- result(jdobj,jrobj,"mstats.M(9)")
-  M10 <- result(jdobj,jrobj,"mstats.M(10)")
-  Q <- result(jdobj,jrobj,"mstats.Q")                                 
-  Q_M2 <- result(jdobj,jrobj,"mstats.Q-M2") 
+  
+  mstats_names <- c(paste0("mstats.M(",as.character(c(1:10)),")"),
+                    paste0("mstats.",c("Q","Q-M2")))
+  mstats <- sapply(mstats_names,
+                   function(diag) {
+                    res <- result(jdobj,jrobj, diag)})
+  mstats <- matrix(mstats, ncol=1)
+  rownames(mstats) <- c(paste0("M",as.character(c(1:10))),
+                       c("Q","Q-M2")) 
+  colnames(mstats) <- c("M stats")
+  
   d8 <- result(jdobj,jrobj,"decomposition.d8")                         
   d10 <- result(jdobj,jrobj,"decomposition.d10")
+  si_ratio <- cbind(d8=d8, d10=d10)
+  
   s_filter <- result(jdobj,jrobj,"decomposition.d9filter")                   
   t_filter <- result(jdobj,jrobj,"decomposition.d12filter") 
 
-  m_stat <- matrix(c(M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,Q,Q_M2),ncol = 1)
-  rownames(m_stat) <- c("M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","Q","Q_M2") 
-  colnames(m_stat) <-c("M-stat")
-
-  si_ratio <-list(d8 = d8, d10 = d10)
-  
-  z <- list(m_stat =  m_stat, si_ratio = si_ratio, s_filter = s_filter, t_filter = t_filter)
+  z <- list(mstats =  mstats, si_ratio = si_ratio, s_filter = s_filter, t_filter = t_filter)
   return(z)
 }
 
 decomp_rsltsTS <- function(jdobj, jrobj){
-  y_lin <- result(jdobj,jrobj,"decomposition.y_lin")
-  sa_lin <- result(jdobj,jrobj,"decomposition.sa_lin")
-  t_lin <- result(jdobj,jrobj,"decomposition.t_lin")
-  s_lin <- result(jdobj,jrobj,"decomposition.s_lin")
-  i_lin <- result(jdobj,jrobj,"decomposition.i_lin")
-  y_cmp <- result(jdobj,jrobj,"decomposition.y_cmp")
-  sa_cmp <- result(jdobj,jrobj,"decomposition.sa_cmp")
-  t_cmp <- result(jdobj,jrobj,"decomposition.t_cmp")
-  s_cmp <- result(jdobj,jrobj,"decomposition.s_cmp")
-  i_cmp <- result(jdobj,jrobj,"decomposition.i_cmp")
   
-  lin <- list(y = y_lin, sa = sa_lin, t = t_lin, s = s_lin, i = i_lin)
-  cmp <- list(y = y_cmp, sa = sa_cmp, t = t_cmp, s = s_cmp, i = i_cmp)
+  lin_names <- paste0("decomposition.", c("y","sa","t","s","i"),"_lin")
+  cmp_names <- paste0("decomposition.", c("y","sa","t","s","i"),"_cmp")
+
+  lin <- lapply(lin_names,
+         function(diag) {
+           res <- result(jdobj,jrobj,diag)})
+  lin <- do.call(cbind,lin)
+  colnames(lin) <- paste0(c("y","sa","t","s","i"),"_lin")
   
-  z <- list(lin = lin, cmp = cmp)
+  cmp <- lapply(cmp_names,
+                function(diag) {
+                  res <- result(jdobj,jrobj,diag)})
+  cmp <- do.call(cbind,cmp)
+  colnames(cmp) <- paste0(c("y","sa","t","s","i"),"_cmp") 
+  
+  fmodel_names <- paste0("decomposition.model.",c("ar","diff","ma","innovationvariance"))
+  samodel_names <- paste0("decomposition.samodel.",c("ar","diff","ma","innovationvariance"))
+  tmodel_names <- paste0("decomposition.tmodel.",c("ar","diff","ma","innovationvariance"))
+  smodel_names <- paste0("decomposition.smodel.",c("ar","diff","ma","innovationvariance"))
+  trans_model_names <- paste0("decomposition.transitorymodel.",c("ar","diff","ma","innovationvariance"))
+  imodel_names <- paste0("decomposition.imodel.",c("ar","diff","ma","innovationvariance"))
+  rdsc <- c("AR","D","MA","Innovation variance")
+  
+  fmodel <- lapply(fmodel_names,
+                function(diag) {
+                  res <- result(jdobj,jrobj,diag)})
+  n <- max(length(fmodel[[1]]),length(fmodel[[2]]), length(fmodel[[3]]), length(fmodel[[4]]))
+  for (i in 1:4) {length(fmodel[[i]]) <- n}
+  fmodel <- do.call(rbind, fmodel)
+  rownames(fmodel) <- rdsc
+  colnames(fmodel) <- as.character(c(0:(dim(fmodel)[2]-1)))
+  
+  samodel <- lapply(samodel_names,
+                  function(diag) {
+                    res <- result(jdobj,jrobj,diag)})
+  n <- max(length(samodel[[1]]),length(samodel[[2]]), length(samodel[[3]]), length(samodel[[4]]))
+  for (i in 1:4) {length(samodel[[i]]) <- n}
+  samodel <- do.call(rbind, samodel)
+  rownames(samodel) <- rdsc
+  colnames(samodel) <- as.character(c(0:(dim(samodel)[2]-1)))
+  
+  tmodel <- lapply(tmodel_names,
+                    function(diag) {
+                      res <- result(jdobj,jrobj,diag)})
+  n <- max(length(tmodel[[1]]),length(tmodel[[2]]), length(tmodel[[3]]), length(tmodel[[4]]))
+  for (i in 1:4) {length(tmodel[[i]]) <- n}
+  tmodel <- do.call(rbind, tmodel)
+  rownames(tmodel) <- rdsc
+  colnames(tmodel) <- as.character(c(0:(dim(tmodel)[2]-1)))
+  
+  smodel <- lapply(smodel_names,
+                    function(diag) {
+                      res <- result(jdobj,jrobj,diag)})
+  n <- max(length(smodel[[1]]),length(smodel[[2]]), length(smodel[[3]]), length(smodel[[4]]))
+  for (i in 1:4) {length(smodel[[i]]) <- n}
+  smodel <- do.call(rbind, smodel)
+  rownames(smodel) <- rdsc
+  colnames(smodel) <- as.character(c(0:(dim(smodel)[2]-1)))
+  
+  trans_model <- lapply(trans_model_names,
+                   function(diag) {
+                     res <- result(jdobj,jrobj,diag)})
+  n <- max(length(trans_model[[1]]),length(trans_model[[2]]), length(trans_model[[3]]), length(trans_model[[4]]))
+  for (i in 1:4) {length(trans_model[[i]]) <- n}
+  trans_model <- do.call(rbind, trans_model)
+  rownames(trans_model) <- rdsc
+  colnames(trans_model) <- as.character(c(0:(dim(trans_model)[2]-1)))
+  
+  imodel <- lapply(imodel_names,
+                   function(diag) {
+                     res <- result(jdobj,jrobj,diag)})
+  n <- max(length(imodel[[1]]),length(imodel[[2]]), length(imodel[[3]]), length(imodel[[4]]))
+  for (i in 1:4) {length(imodel[[i]]) <- n}
+  imodel <- do.call(rbind, imodel)
+  rownames(imodel) <- rdsc
+  colnames(imodel) <- as.character(c(0:(dim(imodel)[2]-1)))
+  
+  model <- list(model = fmodel, sa = samodel, trend = tmodel, seasonal = smodel, 
+                transitory = trans_model, irregular = imodel)
+  
+  z <- list(lin = lin, cmp = cmp, model = model)
   return(z)
 }
 

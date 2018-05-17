@@ -17,12 +17,14 @@ jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "R
   jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+  jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
   jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
-
+  
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    reg <- list #regarima_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
+    reg <- regarima_defX13(jdobj = jd_clobj, jrobj = jrobct_arima, spec = jrspec)
     deco <- decomp_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
     fin <- list #final_X13(jdobj = jd_clobj, jrobj = jrobct)
     q <- list #quality_X13(jdobj = jd_clobj, jrobj = jrobct)
@@ -45,7 +47,7 @@ decomp_defX13 <- function(jdobj,jrobj,spec){
   jd_results <- decomp_rsltsX13(jdobj,jrobj)
   # new S3 class ("Decomp","X13")
   z<- list(specification = specification,
-           m_stat =  jd_results$m_stat,
+           mstats =  jd_results$mstats,
            si_ratio = jd_results$si_ratio,
            s_filter = jd_results$s_filter,
            t_filter = jd_results$t_filter)

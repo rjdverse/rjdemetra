@@ -18,12 +18,14 @@ jd_defTS <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RS
   jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+  jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
 
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    reg <- list #regarima_defTS(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
+    reg <- regarima_defTS(jdobj = jd_clobj, jrobj = jrobct_arima, spec = jrspec)
     deco <- decomp_defTS(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
     fin <- list #final_TS(jdobj = jd_clobj, jrobj = jrobct)
     q <- list #quality_TS(jdobj = jd_clobj, jrobj = jrobct)
@@ -46,6 +48,7 @@ decomp_defTS <- function(jdobj,jrobj,spec){
   jd_results <- decomp_rsltsTS(jdobj, jrobj)
   # new S3 class ("Decomp","TRAMO_SEATS")
   z<- list(specification = specification,
+           model = jd_results$model,
            linearized=jd_results$lin,
            components=jd_results$cmp)
   class(z) <- c("Decomp_TS")
