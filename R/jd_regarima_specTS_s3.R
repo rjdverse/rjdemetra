@@ -390,17 +390,11 @@ jd_regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "T
   variables<-append(variables,list.character)
 
   # Create the java object
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
   jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
 
   # Extract model specification from the java object
   rspec <- specTS_jd2r( spec = jrspec)
-
-  # Remove the java object
-  if (exists("jd_clobj", envir = .GlobalEnv))
-    rm(jd_clobj, envir = .GlobalEnv)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)

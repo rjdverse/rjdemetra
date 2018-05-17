@@ -9,6 +9,7 @@ setClass(
 #'
 #' @param series a univariate time series
 #' @param spec model specification
+#' @param userdefined vector with characters for additional output variables
 #'
 #' @details
 #' .
@@ -26,17 +27,13 @@ setClass(
 #' mysa <- jd_defX13(myseries, "RSA5c")
 #'
 #' @export
-jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c")){
+jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"), userdefined){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
   spec<-match.arg(spec)
   # create the java objects
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
-  if (exists("jrobct"))
-    rm(jrobct)
-  jd_clobj<-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
+  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
@@ -50,32 +47,15 @@ jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "R
   }else{
     reg <- regarima_defX13(jdobj = jd_clobj, jrobj = jrobct_arima, spec = jrspec)
     deco <- decomp_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
-    fin <- list #final_X13(jdobj = jd_clobj, jrobj = jrobct)
-    q <- list #quality_X13(jdobj = jd_clobj, jrobj = jrobct)
+    fin <- final(jdobj = jd_clobj, jrobj = jrobct)
+    diagn <- diagnostics(jdobj = jd_clobj, jrobj = jrobct)
 
-    rm(jd_clobj)
-    rm(jrobct)
+    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = q)
+    if (!missing(userdefined))
+      z[["user_defined"]] <- user_defined(userdefined,jd_clobj,jrobct)
+
     class(z) <- c("SA","X13")
     return(z)
   }
 }
-
-decomp_defX13 <- function(jdobj,jrobj,spec){
-  # extract model specification from the java object
-#  rspec <- specDecompX13_jd2r( spec = spec)
-  # specification
-  specification <- list
-  # results
-  jd_results <- decomp_rsltsX13(jdobj,jrobj)
-  # new S3 class ("Decomp","X13")
-  z<- list(specification = specification,
-           mstats =  jd_results$mstats,
-           si_ratio = jd_results$si_ratio,
-           s_filter = jd_results$s_filter,
-           t_filter = jd_results$t_filter)
-  class(z) <- c("Decomp_X13")
-  return(z)
-}
-

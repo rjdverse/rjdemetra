@@ -363,17 +363,11 @@ jd_regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "
   variables<-append(variables,list.character)
 
   # create the java object
-  if (exists("jd_clobj"))
-    rm(jd_clobj)
   jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
   rspec <- specX13_jd2r( spec = jrspec)
-
-  # remove the java object
-  if (exists("jd_clobj", envir = .GlobalEnv))
-    rm(jd_clobj, envir = .GlobalEnv)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)

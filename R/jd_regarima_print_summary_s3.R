@@ -11,7 +11,6 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
   out <- s_preOut(object)
   var <- s_preVar(object)$description
 
-  cat("\n")
   cat("y = regression model + arima ",gsub("c","",deparse(object$arma)),sep="")
   cat("\n\n")
   cat("Model:",rslt_spec[1],sep=" ")
@@ -83,7 +82,6 @@ print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   out <- s_preOut(x)
   var <- s_preVar(x)$description
 
-  cat("\n")
   cat("y = regression model + arima ",gsub("c","",deparse(x$arma)),sep="")
   cat("\n\n")
   cat("Coefficients:")

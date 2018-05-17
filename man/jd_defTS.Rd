@@ -5,12 +5,14 @@
 \title{SA, TRAMO/SEATS}
 \usage{
 jd_defTS(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4",
-  "RSA5"))
+  "RSA5"), userdefined)
 }
 \arguments{
 \item{series}{a univariate time series}
 
-\item{spec}{model specification}
+\item{spec}{model specification TRAMO/SEATS}
+
+\item{userdefined}{vector with characters for additional output variables}
 }
 \value{
 .

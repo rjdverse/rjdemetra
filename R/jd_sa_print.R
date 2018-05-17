@@ -1,3 +1,4 @@
+#' @export
 print.Decomp_X13=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   m <- x$mstats
   s_flt <- x$s_filter
@@ -13,7 +14,7 @@ print.Decomp_X13=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   cat("Trend filter: ",t_flt)
   cat("\n")
 }
-
+#' @export
 print.Decomp_TS=function (x, digits = max(3L, getOption("digits") - 3L), ...){
 
   model <-x$model$model
@@ -27,7 +28,7 @@ print.Decomp_TS=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   var_names <- c("Model","SA","Trend","Seasonal","Transitory","Irregular")
 
   for (ii in 1:length(var_names)){
-    cat(var_names[ii],"\n")
+    cat("\033[1m",var_names[ii],"\033[22m","\n", sep="")
     print_formula(var[[ii]][1,-1],"AR")
     print_formula(var[[ii]][2,-1],"D")
     print_formula(var[[ii]][3,-1],"MA")
@@ -55,5 +56,125 @@ print_formula <- function(x, var){
   polynome_formula <- paste(polynome_coef, polynome_degre, collapse = " ")
   polynome_formula <- paste("1", polynome_formula)
   cat(var,": ",polynome_formula,"\n")
+}
+
+#' @export
+print.combined_test <- function(x, digits = max(3L, getOption("digits") - 3L),
+                                  ...){
+  tests_pval <- x$tests_for_stable_seasonality[,"P.value", drop = FALSE]
+
+  cat("Non parametric tests for stable seasonality")
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(
+               printCoefmat(tests_pval, digits = digits,
+                            na.print = "NA", ...)
+             ),
+             sep ="\n"))
+
+  cat("\n")
+  combined_test_result <- ngettext(match(x$combined_seasonality_test,
+                                         c("Present","ProbablyNone","None")),
+                                   "Identifiable seasonality present",
+                                   "Identifiable seasonality probably present",
+                                   "Identifiable seasonality not present")
+  cat(combined_test_result)
+  invisible(x)
+}
+
+#' @export
+print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
+                                ...){
+
+
+  residuals_test <- x$residuals_test
+  combined_test_all <- x$combined_test_all
+  combined_test_end <- x$combined_test_end
+  variance_decomposition <- x$variance_decomposition
+
+  cat("\033[1mRelative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend\033[22m")
+  cat("\n")
+  cat(" Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)")
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(
+               printCoefmat(variance_decomposition, digits = digits, ...)
+             )),
+      sep ="\n")
+  cat("\n")
+  cat("\033[1mResidual seasonality tests\033[22m")
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(
+               printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
+                            na.print = "NA", ...)
+             )
+  ),
+  sep ="\n")
+
+  cat("\n")
+
+  cat("\033[1mCombined test in the entire series\033[22m")
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(print.combined_test(combined_test_all, digits = digits,
+                                                  ...))
+  ),
+  sep ="\n")
+  cat("\n")
+
+  cat("\033[1mCombined test in the last 3 years\033[22m")
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(
+               print.combined_test(combined_test_end, digits = digits,
+                                     ...)
+             )
+  ),
+  sep ="\n")
+
+  invisible(x)
+}
+
+#' @export
+print.final <- function(x, calendar, n_last_obs = frequency(x), print_forecasts = TRUE, ...){
+  forecast_names <- grep("_f$", colnames(x), value = TRUE)
+  series_names <- gsub("_f$","", forecast_names)
+
+  cat("Last observed values\n")
+  print(tail(
+    .preformat.ts(na.omit(x[, series_names]), calendar = calendar),
+    n_last_obs
+  ))
+  if(print_forecasts){
+    cat("\nForecasts:\n")
+    print(head(
+      .preformat.ts(na.omit(x[, forecast_names]), calendar = calendar),
+      n_last_obs
+    ))
+  }
+  invisible(x)
+}
+#' @export
+print.user_defined <- function(x,...){
+  cat(ngettext(length(x)!= 1 + 1,
+                 "One additional variable (",
+                   "Names of additional variables ("))
+  cat(length(x),"):","\n", sep="")
+  cat(names(x),sep = ", ")
+  invisible(x)
+}
+#' @export
+print.SA <- function(x,...){
+  cat("\n\n","\033[4m\033[1mRegARIMA\033[22m\033[24m","\n",sep="")
+  print(x$regarima)
+  cat("\n\n","\033[4m\033[1mDecomposition\033[22m\033[24m","\n",sep="")
+  print(x$decomposition)
+  cat("\n\n","\033[4m\033[1mFinal\033[22m\033[24m","\n",sep="")
+  print(x$final)
+  cat("\n\n","\033[4m\033[1mDiagnostics\033[22m\033[24m","\n",sep="")
+  print(x$diagnostics)
+  cat("\n\n","\033[4m\033[1mAdditional output variables\033[22m\033[24m","\n",sep="")
+  print(x$user_defined)
 }
 
