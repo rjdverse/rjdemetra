@@ -1,10 +1,22 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
 RJDemetra is a R interface to JDemetra+ (RegArima modelling and seasonal adjustment).
 
 You can install RJDemetra from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("nbbrd/rjdemetra")
 ```
