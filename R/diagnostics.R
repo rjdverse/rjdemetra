@@ -1,6 +1,6 @@
-diagnostics <- function(jrobj,jdobj){
+diagnostics <- function(jrobj){
   variance_decomposition <- data.frame(Component =
-                                         result(jdobj,jrobj,"diagnostics.variancedecomposition") * 100)
+                                         result(jrobj,"diagnostics.variancedecomposition") * 100)
   rownames(variance_decomposition) <- c("Cycle", "Seasonal",
                                         "Irregular", "TD & Hol.",
                                         "Others", "Total")
@@ -10,7 +10,7 @@ diagnostics <- function(jrobj,jdobj){
                                     "residual.all", "residual.end", "residualtd"))
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
-                             res <- result(jdobj,jrobj, diag)
+                             res <- result(jrobj, diag)
                              data.frame(Statistic = res[1], P.value =  res[2],
                                         Description = attr(res, "description")
                              )
@@ -20,8 +20,8 @@ diagnostics <- function(jrobj,jdobj){
                                 "Residual seasonality (entire series)",
                                 "Residual seasonality (last 3 years)",
                                 "f-test on sa (td)")
-  combined_test_all <- combined_test(jdobj,jrobj, "all")
-  combined_test_end <- combined_test(jdobj,jrobj, "end")
+  combined_test_all <- combined_test(jrobj, "all")
+  combined_test_end <- combined_test(jrobj, "end")
   diag <- list(variance_decomposition = variance_decomposition,
                residuals_test = residuals_test,
                combined_test_all = combined_test_all,
@@ -30,13 +30,13 @@ diagnostics <- function(jrobj,jdobj){
   diag
 }
 
-combined_test <- function(jdobj,jrobj, on = c("all", "end")){
+combined_test <- function(jrobj, on = c("all", "end")){
   on <- match.arg(on)
   tests_names <- paste0("diagnostics.combined.", on, ".",
                         c("summary", "kruskalwallis", "stable", "evolutive"))
   tests <- lapply(tests_names[-1],
                   function(diag) {
-                    res <- result(jdobj,jrobj,diag)
+                    res <- result(jrobj,diag)
                     data.frame(Statistic = res[1], P.value =  res[2],
                                Description = attr(res, "description")
                     )
@@ -46,7 +46,7 @@ combined_test <- function(jdobj,jrobj, on = c("all", "end")){
   rownames(tests) <- c("Kruskall-Wallis test",
                        "Test for the presence of seasonality assuming stability",
                        "Evolutive seasonality test")
-  combined_result <- result(jdobj,jrobj,tests_names[1])
+  combined_result <- result(jrobj,tests_names[1])
 
   cb_test <- list(tests_for_stable_seasonality = tests,
                   combined_seasonality_test = combined_result)

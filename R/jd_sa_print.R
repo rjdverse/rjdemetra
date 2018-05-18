@@ -28,14 +28,16 @@ print.Decomp_TS=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   var_names <- c("Model","SA","Trend","Seasonal","Transitory","Irregular")
 
   for (ii in 1:length(var_names)){
-    cat("\033[1m",var_names[ii],"\033[22m","\n", sep="")
-    print_formula(var[[ii]][1,-1],"AR")
-    print_formula(var[[ii]][2,-1],"D")
-    print_formula(var[[ii]][3,-1],"MA")
-    if (var[[ii]][4,1]==1) {
-      cat("\n\n")
-    }else{
-      cat("Innovation variance: ",var[[ii]][4,1], "\n\n")
+    if (!all(sapply(var[[ii]],is.null))){
+      cat("\033[1m",var_names[ii],"\033[22m","\n", sep="")
+      print_formula(var[[ii]][1,-1],"AR")
+      print_formula(var[[ii]][2,-1],"D")
+      print_formula(var[[ii]][3,-1],"MA")
+      if (var[[ii]][4,1]==1) {
+        cat("\n\n")
+      }else{
+        cat("Innovation variance: ",var[[ii]][4,1], "\n\n")
+      }
     }
   }
 }

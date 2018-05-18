@@ -33,7 +33,6 @@ jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "R
   }
   spec<-match.arg(spec)
   # create the java objects
-  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
@@ -45,15 +44,15 @@ jd_defX13 <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "R
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    reg <- regarima_defX13(jdobj = jd_clobj, jrobj = jrobct_arima, spec = jrspec)
-    deco <- decomp_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
-    fin <- final(jdobj = jd_clobj, jrobj = jrobct)
-    diagn <- diagnostics(jdobj = jd_clobj, jrobj = jrobct)
+    reg <- regarima_defX13(jrobj = jrobct_arima, spec = jrspec)
+    deco <- decomp_defX13(jrobj = jrobct, spec = jrspec)
+    fin <- final(jrobj = jrobct)
+    diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
 
     if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jd_clobj,jrobct)
+      z[["user_defined"]] <- user_defined(userdefined,jrobct)
 
     class(z) <- c("SA","X13")
     return(z)

@@ -42,8 +42,8 @@ plot.Decomp_X13 = function(x, ...){
 plot.Decomp_TS = function(x, ...){
   if (!inherits(x, "Decomp_TS"))
     stop("use only with \"Decomp_TS\" object")
-  sln  <- x$linearized[,4]
-  iln <- x$linearized[,5]
+  sln  <- x$components[,4]
+  iln <- x$components[,5]
   mode <- x$mode
 
   z <- if (mode == "Additive") {sln+iln} else {sln*iln}

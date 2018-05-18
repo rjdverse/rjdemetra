@@ -29,9 +29,10 @@ if (any(show[4L:5L])) {
   lablags<-seq(0, nlags, freq/2)
 }
   if (show[6L]) {
-  y_lin <- x$model$y_lin
-  cal.effect <- x$model$td.effect + x$model$easter.effect + x$model$omh.effect
-  out.effect <- x$model$out
+  model <- x$model$effects
+  y_lin <- model[,1]
+  cal.effect <- model[,2]+model[,3]+model[,4]
+  out.effect <- model[,8]
   y_lin_cal <- y_lin + cal.effect
   y_lin_out <- y_lin + out.effect
   y <- y_lin + cal.effect + out.effect
