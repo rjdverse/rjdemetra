@@ -66,12 +66,6 @@ regarima_rslts <- function(jrobj, fcsth){
   spec_rslt <- c(model,t.span,transformed,mean,ntd,leap.year,easter,nout)
   names(spec_rslt) <- c("Model","T.span", "Log transformation", "Mean","Trading days","Leap year","Easter","Outliers")
 
-  #if (transformed=="true"){y_lin=result(jrobj,"model.l")} else {y_lin=result(jrobj,"model.y_lin")}
-  #td.effect<-result(jrobj,"model.tde")
-  #easter.effect<-result(jrobj,"model.ee")
-  #omh.effect<-result(jrobj,"model.omhe")
-  #out.effect<-result(jrobj,"model.out_t")+result(jrobj,"model.out_s")+result(jrobj,"model.out_i")
-
   decomp_names <-paste0("model.",c("y_lin","tde","ee","omhe","out_t","out_s","out_i"))
   decomp <- do.call(ts.union,
                        lapply(decomp_names,
@@ -79,8 +73,6 @@ regarima_rslts <- function(jrobj, fcsth){
   decomp <- ts.union(decomp,rowSums(decomp[,5:7], na.rm = TRUE))
   colnames(decomp) <- c(gsub("model.","",decomp_names),"out")
 
-  #model <- list(specification_rst = specification_rst, y_lin = y_lin, td.effect = td.effect, easter.effect = easter.effect,
-  #              omh.effect = omh.effect, out.effect = out.effect)
   model <- list(spec_rslt = spec_rslt, effects = decomp)
 
   # Residuals
@@ -89,32 +81,26 @@ regarima_rslts <- function(jrobj, fcsth){
   # Statistics on residuals
   st.error<-result(jrobj,"likelihood.ser-ml")
 
-  dtmean<-result(jrobj,"residuals.mean")
-  dtskewness<-result(jrobj,"residuals.skewness")
-  dtkurtosis<-result(jrobj,"residuals.kurtosis")
-  dtljung.box<-result(jrobj,"residuals.lb")
-  dtljung.boxSa<-result(jrobj,"residuals.seaslb")
-  dtljung.box2<-result(jrobj,"residuals.lb2")
-  dscmean<-as.character(attributes(dtmean))
-  dscskewness<-as.character(attributes(dtskewness))
-  dsckurtosis<-as.character(attributes(dtkurtosis))
-  dscljung.box<-as.character(attributes(dtljung.box))
-  dscljung.boxSa<-as.character(attributes(dtljung.boxSa))
-  dscljung.box2<-as.character(attributes(dtljung.box2))
+  tests_names <- paste0("residuals.",c("mean","skewness","kurtosis","lb","seaslb","lb2"))
+  tests <- lapply(tests_names,
+                           function(diag) {
+                             res <- result(jrobj, diag)
+                             data.frame(Statistic = res[1], P.value =  res[2],
+                                        Description = attr(res, "description")
+                             )
+                           })
+  tests <- do.call(rbind, tests)
+  rownames(tests)<-c("mean","skewness","kurtosis","ljung box",
+    "ljung box (residuals at seasonal lags)","ljung box (squared residuals)")
+  class(tests) <- c("regarima_rtests","data.frame")
 
-  dtstat<-rbind(dtmean,dtskewness,dtkurtosis,dtljung.box,dtljung.boxSa,dtljung.box2)
-  dscstat<-rbind(dscmean,dscskewness,dsckurtosis,dscljung.box,dscljung.boxSa,dscljung.box2)
-  tabstat<-data.frame(dtstat,dscstat)
-  rownames(tabstat)<-c("mean","skewness","kurtosis","ljung.box","ljung.boxSa","ljung.box2")
-  colnames(tabstat)<-c("Statistic","P.value","Description")
-
-  residuals.stat<-list(st.error=st.error, tests=tabstat)
+  residuals.stat<-list(st.error=st.error, tests=tests)
 
   # Forecast
   fcst <- result(jrobj,paste("model.fcasts(",fcsth,")", sep=""))
   fcsterr <- result(jrobj,paste("model.efcasts(",fcsth,")", sep=""))
 
-  forecast <- list(forecast = fcst, st.error= fcsterr)
+  forecast <- ts.union(fcst,fcsterr)
 
   z<- list( arma=arma,
             arima.coefficients =arima.coefficients,

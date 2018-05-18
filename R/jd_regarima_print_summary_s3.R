@@ -136,6 +136,52 @@ print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   cat("\n\n")
   invisible(x)
 }
+# Method: "regarima_rtest" for the print
+#' @export
+print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),...){
+
+  doublestar<-paste0("\u002A","\u002A")
+  triplestar<-paste0("\u002A","\u002A","\u002A")
+
+  stat <- x[,1]
+  pval <- x[,2]
+
+  sigcode=vector(mode = "character", length = 6)
+  sigcode[pval >=0.1] = triplestar
+  sigcode[pval < 0.1  & pval >= 0.05] = doublestar
+  sigcode[pval < 0.05] = " "
+  tabstat=data.frame(stat,pval,sigcode)
+  rownames(tabstat)=rownames(x)
+  colnames(tabstat)=c("Statistic","P.value","")
+  tabstat[,1]=format(tabstat[,1], digits = digits)
+  tabstat[,2]=format(round(tabstat[,2],max(4,digits)))
+
+  cat("\n")
+  cat("\033[1mNormality\033[22m")
+  cat("\n")
+  print (tabstat[1:3,])
+  cat("\n")
+  cat("Signif. codes:  H0 (normality of residuals) is not rejected at","\n")
+  usestring<-paste0("significance levels: 0.1 ",triplestar,"0.05 ", doublestar,"\n")
+  cat(usestring)
+
+  cat("\n")
+  cat("\033[1mIndependence\033[22m")
+  cat("\n")
+  print(tabstat[c(4,5),])
+  cat("\n")
+  cat("Signif. codes: H0 (independence of residuals) is not rejected at","\n")
+  cat(usestring)
+
+  cat("\n")
+  cat("\033[1mLinearity\033[22m")
+  cat("\n")
+  print(tabstat[6,])
+  cat("\n")
+  cat("Signif. codes:  H0 (no conditional heteroscedasticity of residuals) is not rejected at","\n")
+  cat(usestring)
+
+}
 
 
 

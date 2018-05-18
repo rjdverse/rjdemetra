@@ -102,11 +102,13 @@ matrix_jd2r<-function(s){
 }
 
 test_jd2r<-function(s){
-  if (is.null(s))
-    return(NULL)
-  desc<-.jfield(s, "S", "description")
-  val<-.jfield(s, "D", "value")
-  pval<-.jfield(s, "D", "pvalue")
+  if (is.null(s)){
+    desc <- val <- pval <- NA
+  }else{
+    desc<-.jfield(s, "S", "description")
+    val<-.jfield(s, "D", "value")
+    pval<-.jfield(s, "D", "pvalue")
+  }
   all<-c(val, pval)
   attr(all, "description")<-desc
   return (all)

@@ -1,7 +1,36 @@
+#' Plotting decomposition or final results of a seasonal adjustment
+#'
+#' Plotting methods for objects around the seasonal adjustment : "JD_RegArima" for regARIMA,"Decomp_X13" and "Decomp_TS" for the decomposition with X13 and TRAMO-SEATS, "final" for the final results and "SA" for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
+#'
+#' @param x the object to plot.
+#' @param first_date the first date to start the plot. If missing the plot starts at the beginning of the time-series.
+#' @param last_date the last date to end the plot. If missing the plot ends at the end of the time-series (eventually, including forecast).
+#' @param type_chart character vector indicating which type of chart to plot.
+#' @param forecast logical indicating if forecasts should be included in the plot.
+#' @param ask logical value. If TRUE, the user will in future be prompted before a new graphical page is started.
+#' @param ... other parameters.
+#' @param which XXXXXX
+#' @param dec_zoom XXXXXX
+#' @param caption XXXXXX
+#' @param sub.caption XXXXXX
+#' @param main main title.
+#' @param qqline XXXXXX
+#' @param cex.caption XXXXXX
+#' @param cex.oma.main XXXXXX
+#' @name plot
+#' @rdname plot
 #' @export
-plot.Decomp_X13 = function(x, ...){
+plot.Decomp_X13 = function(x, first_date, last_date, ...){
   if (!inherits(x, "Decomp_X13"))
     stop("use only with \"Decomp_X13\" object")
+
+  if(!missing(first_date)){
+    x$si_ratio <- window(x$si_ratio, start = first_date)
+  }
+  if(!missing(last_date)){
+    x$si_ratio <- window(x$si_ratio, end = last_date)
+  }
+
   d8  <- x$si_ratio[,1]
   d10 <- x$si_ratio[,2]
 
@@ -38,10 +67,21 @@ plot.Decomp_X13 = function(x, ...){
   mtext("S-I ratio", side = 1, cex = 0.7, col = "blue")
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
 }
+
+#' @name plot
+#' @rdname plot
 #' @export
-plot.Decomp_TS = function(x, ...){
+plot.Decomp_TS = function(x, first_date, last_date, ...){
   if (!inherits(x, "Decomp_TS"))
     stop("use only with \"Decomp_TS\" object")
+
+  if(!missing(first_date)){
+    x$components <- window(x$components, start = first_date)
+  }
+  if(!missing(last_date)){
+    x$components <- window(x$components, end = last_date)
+  }
+
   sln  <- x$components[,4]
   iln <- x$components[,5]
   mode <- x$mode
@@ -79,25 +119,31 @@ plot.Decomp_TS = function(x, ...){
   }
   mtext("S-I ratio", side = 1, cex = 0.7, col = "blue")
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
+  invisible()
 }
+#' @name plot
+#' @rdname plot
 #' @export
-plot.final <- function(x, first_date = start(x), last_date = end(x), forecast = TRUE,
-                        type_chart = c("sa-trend", "cal-seas-irr"),
-                        ask =  length(type_chart) > 1 && dev.interactive(),
-                        ...){
+plot.final <- function(x, first_date, last_date, forecast = TRUE,
+                       type_chart = c("sa-trend", "cal-seas-irr"),
+                       ask =  length(type_chart) > 1 && dev.interactive(),
+                       ...){
   type_chart <- match.arg(type_chart, several.ok = TRUE)
 
 
-  data_plot <- window(x, start = first_date, end = last_date)
+  data_plot <- x
+  if(!missing(first_date)){
+    data_plot <- window(data_plot, start = first_date)
+  }
+  if(!missing(last_date)){
+    data_plot <- window(data_plot, end = last_date)
+  }
   general_colors <- c(y = "#F0B400", t = "#1E6C0B", sa = "#155692",
                       cal = "#F0B400", s = "#1E6C0B", i = "#155692")
 
   forecast <- forecast & tail(time(data_plot), 1) > time(na.omit(x[,"y_f"]))[1]
 
-  if (ask) {
-    oask <- devAskNewPage(TRUE)
-    on.exit(devAskNewPage(oask))
-  }
+
   if("sa-trend" %in% type_chart){
     # Graph 1 : Sa, trend, and y
     series_graph <- c("y","t","sa")
@@ -111,6 +157,7 @@ plot.final <- function(x, first_date = start(x), last_date = end(x), forecast = 
       series_graph <- c(series_graph,
                         paste0(series_graph,"_f"))
     }
+
     lty <- rep(2, length(series_graph))
     lty[grep("_f$", series_graph, invert = TRUE)] <- 1
     col <- general_colors[gsub("_.*$", "", series_graph)]
@@ -125,6 +172,10 @@ plot.final <- function(x, first_date = start(x), last_date = end(x), forecast = 
     dev.flush()
   }
 
+  if (ask) {
+    oask <- devAskNewPage(TRUE)
+    on.exit(devAskNewPage(oask))
+  }
   if("cal-seas-irr" %in% type_chart){
     # Graph 2 : Calendar, seasonal and irregular
     series_graph <- c("s", "i")
@@ -153,6 +204,14 @@ plot.final <- function(x, first_date = start(x), last_date = end(x), forecast = 
     dev.flush()
   }
 
+  invisible()
+}
+
+#' @name plot
+#' @rdname plot
+#' @export
+plot.SA <- function(x, ...){
+  plot(x$final, ...)
   invisible()
 }
 

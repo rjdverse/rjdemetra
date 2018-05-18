@@ -1,4 +1,6 @@
-# Method JD_RegArima for the function plot
+# Method JD_RegArima for the function plot (documentation in the file jd_sa_plot.R)
+#' @name plot
+#' @rdname plot
 #' @export
 plot.JD_RegArima = function(x, which = c(1:6), dec_zoom=FALSE,
      caption = list("Residuals","Histogram of residuals","Normal Q-Q","ACF of residuals",
