@@ -390,7 +390,6 @@ jd_regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "T
   variables<-append(variables,list.character)
 
   # Create the java object
-  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
 
   # Extract model specification from the java object

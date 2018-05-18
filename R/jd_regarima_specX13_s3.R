@@ -363,7 +363,6 @@ jd_regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "
   variables<-append(variables,list.character)
 
   # create the java object
-  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object

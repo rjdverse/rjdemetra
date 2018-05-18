@@ -30,7 +30,7 @@ An object of class \code{"JD_RegArima"} is a list containing the following compo
 
 \item{residuals}{ the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
 
-\item{residuals.stat}{ List containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals. See also function \code{\link{jd_regarima_rtest}}.}
+\item{residuals.stat}{Data frame containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals.}
 
 \item{forecast}{List containing two time series, the forecast of the original series (\code{forecast}) and it's standard error (\code{st.error}).}
 }

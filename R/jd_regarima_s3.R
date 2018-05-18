@@ -96,7 +96,7 @@ setClass(
 #'
 #' \item{residuals}{ the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
 #'
-#' \item{residuals.stat}{ List containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals. See also function \code{\link{jd_regarima_rtest}}.}
+#' \item{residuals.stat}{Data frame containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals.}
 #'
 #' \item{forecast}{List containing two time series, the forecast of the original series (\code{forecast}) and it's standard error (\code{st.error}).}
 #'
@@ -127,7 +127,6 @@ jd_regarima_defX13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG
   spec<-match.arg(spec)
 
   # create the java objects
-  jd_clobj<-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
@@ -138,7 +137,7 @@ jd_regarima_defX13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    z <- regarima_defX13(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
+    z <- regarima_defX13(jrobj = jrobct, spec = jrspec)
     return(z)
   }
 }
@@ -233,7 +232,7 @@ jd_regarima_defX13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG
 #'
 #' \item{residuals}{ the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
 #'
-#' \item{residuals.stat}{ List containing statistics on the RegArima residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals. See also function \code{\link{jd_regarima_rtest}}.}
+#' \item{residuals.stat}{Data frame containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals.}
 #'
 #' \item{forecast}{List containing two time series, the forecast of the original series (\code{forecast}) and it's standard error (\code{st.error}).}
 #'
@@ -262,7 +261,6 @@ jd_regarima_defTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3"
   spec<-match.arg(spec)
 
   # create the java objects
-  jd_clobj<-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
   jspec<-.jcall(jrspec, "Lec/tstoolkit/modelling/arima/tramo/TramoSpecification;", "getCore")
   jdictionary <- .jnull("jdr/spec/ts/Utility$Dictionary")
@@ -272,7 +270,7 @@ jd_regarima_defTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3"
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    z <- regarima_defTS(jdobj = jd_clobj, jrobj = jrobct, spec = jrspec)
+    z <- regarima_defTS(jrobj = jrobct, spec = jrspec)
     return(z)
   }
 }
@@ -353,7 +351,7 @@ jd_regarima_defTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3"
 #'
 #' \item{residuals}{ the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
 #'
-#' \item{residuals.stat}{ List containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals. See also function \code{\link{jd_regarima_rtest}}.}
+#' \item{residuals.stat}{Data frame containing statistics on the RegARIMA residuals. It provides residuals standard error (st.error) and results for the tests on the normality, independence and linearity of the residuals.}
 #'
 #' \item{forecast}{List containing two time series, the forecast of the original series (\code{forecast}) and it's standard error (\code{st.error}).}
 #'
@@ -428,7 +426,6 @@ jd_regarima.X13 <-function(series, spec = NA){
     stop("use only with c(\"JD_RegArima_Spec\",\"X13\") class object")
 
   # create the java objects
-  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec <-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", "RG1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
   jdictionary <- specX13_r2jd(spec,jrspec)
@@ -439,7 +436,7 @@ jd_regarima.X13 <-function(series, spec = NA){
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    z <- regarima_X13(jdobj = jd_clobj, jrobj = jrobct, spec = spec)
+    z <- regarima_X13(jrobj = jrobct, spec = spec)
     return(z)
   }
 }
@@ -453,7 +450,6 @@ jd_regarima.TRAMO_SEATS<-function(series, spec = NA){
     stop("use only with c(\"JD_RegArima_Spec\",\"TRAMO_SEATS\") class object")
 
   # create the java objects
-  jd_clobj <-.jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", "TR1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
   jdictionary <- specTS_r2jd(spec,jrspec)
@@ -464,14 +460,14 @@ jd_regarima.TRAMO_SEATS<-function(series, spec = NA){
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
-    z <- regarima_TS(jdobj = jd_clobj, jrobj = jrobct, spec = spec)
+    z <- regarima_TS(jrobj = jrobct, spec = spec)
     return(z)
   }
 }
 
-regarima_defX13 <- function(jdobj, jrobj, spec){
+regarima_defX13 <- function(jrobj, spec){
   # extract model specification from the java object
-  rspec <- specX13_jd2r( spec = spec)
+  rspec <- specX13_jd2r(spec = spec)
 
   estimate<-data.frame(span = rspec$estimate.span, tolerance = rspec$estimate.tol, row.names="", stringsAsFactors=FALSE)
   transform <- data.frame(tfunction=rspec$transform.function,adjust=rspec$transform.adjust,aicdiff=rspec$transform.aicdiff, row.names="", stringsAsFactors=FALSE)
@@ -496,7 +492,7 @@ regarima_defX13 <- function(jdobj, jrobj, spec){
   specification <- list(estimate=estimate, transform=transform, regression=regression, outliers=outliers,
                         arima=arima, forecast = forecast, span=span)
   # results
-  jd_results <- regarima_rslts(jdobj, jrobj,as.numeric(forecast))
+  jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
 
   # new S3 class "JD_RegArima"
   z<- list( specification = specification,
@@ -513,7 +509,7 @@ regarima_defX13 <- function(jdobj, jrobj, spec){
   return(z)
 }
 
-regarima_defTS <- function(jdobj, jrobj, spec){
+regarima_defTS <- function(jrobj, spec){
   # extract model specification from the java object
   rspec <- specTS_jd2r( spec = spec)
 
@@ -545,7 +541,7 @@ regarima_defTS <- function(jdobj, jrobj, spec){
                         forecast = forecast, span=span)
 
   # results
-  jd_results <- regarima_rslts(jdobj, jrobj,as.numeric(forecast))
+  jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
 
   # new S3 class "JD_RegArima"
   z<- list( specification = specification,
@@ -562,9 +558,9 @@ regarima_defTS <- function(jdobj, jrobj, spec){
   return(z)
 }
 
-regarima_X13 <- function(jdobj, jrobj, spec){
+regarima_X13 <- function(jrobj, spec){
   # results
-  jd_results <- regarima_rslts(jdobj,jrobj,as.numeric(s_fcst(spec)))
+  jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
   # import the model specification
   estimate <- s_estimate(spec)
   transform <- s_transform(spec)
@@ -599,9 +595,9 @@ regarima_X13 <- function(jdobj, jrobj, spec){
   return(z)
 }
 
-regarima_TS <- function(jdobj, jrobj, spec){
+regarima_TS <- function(jrobj, spec){
   # results
-  jd_results <- regarima_rslts(jdobj,jrobj,as.numeric(s_fcst(spec)))
+  jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
   # import the model specification
   estimate <- s_estimate(spec)
   transform <- s_transform(spec)

@@ -1,12 +1,20 @@
 Package: RJDemetra
 Type: Package
-Title: JDemetra+ toolset for seasonal adjustment
+Title: R Interface to JDemetra+ Seasonal Adjustment Software
 Version: 0.1.1
-Authors@R: as.person(c(
-    "Jean Palate <jean.palate@nbb.be> [aut,cre]",
-    "Anna Michalek <anna.michalek> [aut]"
-    ))
-Description: This package provides JDemetra+ functions.
+Authors@R: c(
+  person("Raf", "Baeyens", role = "aut",
+                email = "raf.baeyens@nbb.be"),
+  person("Anna", "Michalek", role = "aut",
+                email = "anka.michalek@gmail.com"),
+  person("Jean", "Palate", role = c("aut", "cre"),
+                email = "jean.palate@nbb.be"),
+  person("Alain", "Quartier-la-Tente", role = "aut",
+                 email = "alain.quartier@yahoo.fr"))
+Description: R interface around JDemetra+, the seasonal adjustment software officially
+    recommended to the members of the ESS and the European System of Central Banks.
+    It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjusment methods
+    TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
 Depends:
     R (>= 3.1.1),
 Imports:
@@ -17,6 +25,7 @@ Imports:
     stats,
     utils
 License: EUPL
+URL: https://github.com/nbbrd/rjdemetra, https://github.com/jdemetra/jdemetra-app
 LazyData: TRUE
 Collate:
     	'onLoad.R'
@@ -37,7 +46,6 @@ Collate:
 	'jd_saveSpec_s3.R'
 	'jd_regarima_print_summary_s3.R'
 	'jd_regarima_plot_s3.R'
-	'jd_regarima_residuals_tests_s3.R'
 	'jd_regarima_generic_f_s3.R'
 	'jd_sa_print.R'
 	'jd_sa_plot.R'

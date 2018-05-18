@@ -102,11 +102,13 @@ matrix_jd2r<-function(s){
 }
 
 test_jd2r<-function(s){
-  if (is.null(s))
-    return(NULL)
-  desc<-.jfield(s, "S", "description")
-  val<-.jfield(s, "D", "value")
-  pval<-.jfield(s, "D", "pvalue")
+  if (is.null(s)){
+    desc <- val <- pval <- NA
+  }else{
+    desc<-.jfield(s, "S", "description")
+    val<-.jfield(s, "D", "value")
+    pval<-.jfield(s, "D", "pvalue")
+  }
   all<-c(val, pval)
   attr(all, "description")<-desc
   return (all)
@@ -179,7 +181,7 @@ parameters_jd2r<-function(jparams){
 }
 
 ## jd2_proceresults.R
-setGeneric(name="result", def = function( clobject, object, id, ... ){standardGeneric("result")})
+setGeneric(name="result", def = function(object, id, ... ){standardGeneric("result")})
 
 setGeneric(name="dictionary", def = function( object, ... ){standardGeneric("dictionary")})
 
@@ -198,12 +200,13 @@ setMethod("dictionary", "JD2_ProcResults", function(object){
 
 })
 
-setMethod("result", signature = c(object="JD2_ProcResults", id="character"), function(clobject, object, id){
+setMethod("result", signature = c(object="JD2_ProcResults", id="character"), function(object, id){
   if (is.null(object@internal)){
     NULL
   }else{
-    proc_data(object@internal, id, clobject)}
+    proc_data(object@internal, id, rjdemetra_java$clobject)}
 })
 
-
+rjdemetra_java <- new.env(parent = emptyenv())
+rjdemetra_java$clobject <- NULL
 

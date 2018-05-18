@@ -4,7 +4,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
 
   arima_coef <- object$arima.coefficients
   reg_coef <- object$regression.coefficients
-  rslt_spec <- object$model$specification_rst
+  rslt_spec <- object$model$spec_rslt
   loglik<- object$loglik
   res_err <- object$residuals.stat$st.error
   usr_spec <- object$specification$regression$userdef$specification
@@ -29,7 +29,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
   if (!is.null(arima_coef)){
     cat("\n")
     cat("ARIMA:","\n")
-    a_tvalues=matrix(2*(1 - pt(abs(arima_coef[,3]), loglik$eff.obs)),ncol=1)
+    a_tvalues=matrix(2*(1 - pt(abs(arima_coef[,3]), loglik[3])),ncol=1)
     colnames(a_tvalues)=c("Pr(>|t|)")
     printCoefmat(cbind(arima_coef,a_tvalues), digits = digits, signif.stars = signif.stars,
                  na.print = "NA", ...)
@@ -37,7 +37,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
   if (!is.null(reg_coef)){
     cat("\n")
     cat("Regression model:","\n")
-    r_tvalues=matrix(2*(1 - pt(abs(reg_coef[,3]), loglik$eff.obs)),ncol=1)
+    r_tvalues=matrix(2*(1 - pt(abs(reg_coef[,3]), loglik[3])),ncol=1)
     colnames(r_tvalues)=c("Pr(>|t|)")
     printCoefmat(cbind(reg_coef,r_tvalues), digits = digits, signif.stars = signif.stars,
                  na.print = "NA", ...)
@@ -64,10 +64,12 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
     printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   cat("\n\n")
-  cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik$eff.obs,"degrees of freedom", sep = " ")
+  cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik[3],"degrees of freedom", sep = " ")
   cat("\n")
-  cat("Log likelihood = ",formatC(loglik$loglikelihood,digits = digits),", aic = ",formatC(loglik$aic,digits = digits)," aicc = ",formatC(loglik$aicc,digits = digits),", bic(corrected for length) = ",formatC(loglik$bicc,digits = digits), sep = "")
+  cat("Log likelihood = ",formatC(loglik[1],digits = digits),", aic = ",formatC(loglik[4], digits = digits)," aicc = ",
+      formatC(loglik[5],digits = digits),", bic(corrected for length) = ",formatC(loglik[7],digits = digits), sep = "")
   cat("\n\n")
+  invisible(object)
 }
 
 # Method: JD_RegArima for the function print
@@ -127,10 +129,58 @@ print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   cat("\n\n")
-  cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik$eff.obs,"degrees of freedom", sep = " ")
+  cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik[3],"degrees of freedom", sep = " ")
   cat("\n")
-  cat("Log likelihood = ",formatC(loglik$loglikelihood,digits = digits),", aic = ",formatC(loglik$aic,digits = digits)," aicc = ",formatC(loglik$aicc,digits = digits),", bic(corrected for length) = ",formatC(loglik$bicc,digits = digits), sep = "")
+  cat("Log likelihood = ",formatC(loglik[1],digits = digits),", aic = ",formatC(loglik[4],digits = digits)," aicc = ",
+      formatC(loglik[5],digits = digits),", bic(corrected for length) = ",formatC(loglik[7],digits = digits), sep = "")
   cat("\n\n")
+  invisible(x)
+}
+# Method: "regarima_rtest" for the print
+#' @export
+print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),...){
+
+  doublestar<-paste0("\u002A","\u002A")
+  triplestar<-paste0("\u002A","\u002A","\u002A")
+
+  stat <- x[,1]
+  pval <- x[,2]
+
+  sigcode=vector(mode = "character", length = 6)
+  sigcode[pval >=0.1] = triplestar
+  sigcode[pval < 0.1  & pval >= 0.05] = doublestar
+  sigcode[pval < 0.05] = " "
+  tabstat=data.frame(stat,pval,sigcode)
+  rownames(tabstat)=rownames(x)
+  colnames(tabstat)=c("Statistic","P.value","")
+  tabstat[,1]=format(tabstat[,1], digits = digits)
+  tabstat[,2]=format(round(tabstat[,2],max(4,digits)))
+
+  cat("\n")
+  cat("\033[1mNormality\033[22m")
+  cat("\n")
+  print (tabstat[1:3,])
+  cat("\n")
+  cat("Signif. codes:  H0 (normality of residuals) is not rejected at","\n")
+  usestring<-paste0("significance levels: 0.1 ",triplestar,"0.05 ", doublestar,"\n")
+  cat(usestring)
+
+  cat("\n")
+  cat("\033[1mIndependence\033[22m")
+  cat("\n")
+  print(tabstat[c(4,5),])
+  cat("\n")
+  cat("Signif. codes: H0 (independence of residuals) is not rejected at","\n")
+  cat(usestring)
+
+  cat("\n")
+  cat("\033[1mLinearity\033[22m")
+  cat("\n")
+  print(tabstat[6,])
+  cat("\n")
+  cat("Signif. codes:  H0 (no conditional heteroscedasticity of residuals) is not rejected at","\n")
+  cat(usestring)
+
 }
 
 
