@@ -21,13 +21,19 @@
 #' @export
 #Functions to extract different elements of the specification file
 s_estimate <- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$estimate)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$estimate[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$estimate)
+  } else {
+    obj <- object$regarima$estimate[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -54,13 +60,19 @@ s_estimate <- function(object=NA){
 #'   s_transform(myspec1)
 #' @export
 s_transform <- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$transform)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$transform[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$transform)
+  } else {
+    obj <- object$regarima$transform[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -88,13 +100,19 @@ s_transform <- function(object=NA){
 #'
 #' @export
 s_usrdef<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$regression$userdef$specification)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$regression$userdef$specification[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$regression$userdef$specification)
+  } else {
+    obj <- object$regarima$regression$userdef$specification[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -125,13 +143,17 @@ s_usrdef<- function(object=NA){
 #'
 #' @export
 s_preOut<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$regression$userdef$outliers)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")) {
     return(object$regression$userdef$outliers$Final)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$regression$userdef$outliers)
+  } else {
+    return(object$regarima$regression$userdef$outliers$Final)
   }
 }
 
@@ -160,13 +182,17 @@ s_preOut<- function(object=NA){
 #'
 #' @export
 s_preVar<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$regression$userdef$variables)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     return(object$regression$userdef$variables$Final)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$regression$userdef$variables)
+  } else {
+    return(object$regarima$regression$userdef$variables$Final)
   }
 }
 
@@ -192,13 +218,19 @@ s_preVar<- function(object=NA){
 #'
 #' @export
 s_td<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$regression$trading.days)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$regression$trading.days[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$regression$trading.days)
+  } else {
+    obj <- object$regarima$regression$trading.days[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -226,13 +258,19 @@ s_td<- function(object=NA){
 #'
 #' @export
 s_easter<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$regression$easter)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$regression$easter[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$regression$easter)
+  } else {
+    obj <- object$regarima$regression$easter[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -260,13 +298,19 @@ s_easter<- function(object=NA){
 #'
 #' @export
 s_out<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$outliers)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$outliers[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$outliers)
+  } else {
+    obj <- object$regarima$outliers[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -293,13 +337,19 @@ s_out<- function(object=NA){
 #'
 #' @export
 s_arima<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$arima$specification)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     obj <- object$arima$specification[3,]
+    rownames(obj) <- ""
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$arima$specification)
+  } else {
+    obj <- object$regarima$arima$specification[3,]
     rownames(obj) <- ""
     return(obj)
   }
@@ -330,13 +380,17 @@ s_arima<- function(object=NA){
 #'
 #' @export
 s_arimaCoef<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$arima$coefficients)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     return(object$arima$coefficients$Final)
+  } else if (inherits(object, "SA")) {
+    return(object$regarima$specification$arima$coefficients)
+  } else {
+    return(object$regarima$arima$coefficients$Final)
   }
 }
 #' Access model specification, SA and pre-adjustment in X13 and TRAMO/SEATS
@@ -361,13 +415,18 @@ s_arimaCoef<- function(object=NA){
 #'
 #' @export
 s_fcst <- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$forecast)
-  }else{
+  }else if (inherits(object, "JD_RegArima_Spec")){
     obj <- data.frame(horizon = object$forecast[3,],row.names = c(""))
+    return(obj)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$forecast)
+  } else {
+    obj <- data.frame(horizon = object$regarima$forecast[3,],row.names = c(""))
     return(obj)
   }
 }
@@ -394,12 +453,82 @@ s_fcst <- function(object=NA){
 #'
 #' @export
 s_span<- function(object=NA){
-  if (!inherits(object, "JD_RegArima") & !inherits(object, "JD_RegArima_Spec"))
-    stop("use only with \"JD_RegArima\" or \"JD_RegArima_Spec\" objects", call. = FALSE)
+  if (inherits(object, c("JD_RegArima","JD_RegArima_Spec","SA","SA_Spec"))==FALSE)
+    stop("use only with \"JD_RegArima\", \"JD_RegArima_Spec\", \"SA\" and \"SA_Spec\" objects", call. = FALSE)
 
   if (inherits(object, "JD_RegArima")){
     return(object$specification$span)
-  }else{
+  } else if (inherits(object, "JD_RegArima_Spec")){
     return(object$span)
+  } else if (inherits(object, "SA")){
+    return(object$regarima$specification$span)
+  } else {
+    return(object$regarima$span)
   }
 }
+
+#' Access model specification, SA/X13
+#' @description
+#' \code{s_x11} access the \code{x11} part of the model specification.
+#'
+#' @param object object of class: \code{c("SA","X13")} or \code{c("SA_Spec","X13")}.
+#'
+#' @return
+#' A data.frame with the \emph{seats} variables. For details see: \emph{Value} of the \code{c("SA_Spec","X13")} class object.
+#'
+#' @references
+#' Info on JDemtra+, usage and functions:
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#'
+#' @examples
+#'   myspec1 <-jd_x13_specDef(spec=c("RSA5c"),x11.seasonalComp = FALSE)
+#'
+#'   s_x11(myspec1)
+#'
+#' @export
+s_x11<- function(object=NA){
+  if (inherits(object, c("SA","SA_Spec"))==FALSE)
+    stop("use only with \"SA\" and \"SA_Spec\" objects", call. = FALSE)
+
+  if (inherits(object, "SA")){
+    return(object$decomposition$specification)
+  } else {
+    obj <- object$x11[3,]
+    rownames(obj) <- ""
+    return(obj)
+  }
+}
+#' Access model specification, SA/TRAMO-SEATS
+#' @description
+#' \code{s_seats} access the \code{seats} part of the model specification.
+#'
+#' @param object object of class: \code{c("SA","TRAMO_SEATS")} or \code{c("SA_Spec","TRAMO_SEATS")}.
+#'
+#' @return
+#' A data.frame with the \emph{seats} variables. For details see: \emph{Value} of the \code{c("SA_Spec","TRAMO_SEATS")} class object.
+#'
+#' @references
+#' Info on JDemtra+, usage and functions:
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#'
+#' @examples
+#'   myspec1 <-jd_tramoseats_specDef(spec=c("RSAfull"),seats.approx ="Noisy")
+#'
+#'   s_seats(myspec1)
+#'
+#' @export
+s_seats<- function(object=NA){
+  if (inherits(object, c("SA","SA_Spec"))==FALSE)
+    stop("use only with \"SA\" and \"SA_Spec\" objects", call. = FALSE)
+
+  if (inherits(object, "SA")){
+    return(object$decomposition$specification)
+  } else {
+    obj <- object$seats[3,]
+    rownames(obj) <- ""
+    return(obj)
+  }
+}
+
+
+

@@ -1,8 +1,25 @@
 decomp_defTS <- function(jrobj,spec){
   # extract model specification from the java object
-  #  rspec <- specDecompTS_jd2r( spec = spec)
+  rspec <- specSeats_jd2r( spec = spec)
+  specification <- do.call(data.frame, rspec)
+  names(specification) <- paste0("seats.",names(specification))
+  rownames(specification) <- ""
+  # results
+  jd_results <- decomp_rsltsTS(jrobj)
+  # new S3 class ("Decomp","TRAMO_SEATS")
+  z<- list(specification = specification,
+           mode = jd_results$mode,
+           model = jd_results$model,
+           linearized=jd_results$lin,
+           components=jd_results$cmp)
+  class(z) <- c("Decomp_TS")
+  return(z)
+}
+
+decomp_TS <- function(jrobj, spec){
   # specification
-  specification <- list
+  specification <- spec[3,]
+  rownames(specification) <- ""
   # results
   jd_results <- decomp_rsltsTS(jrobj)
   # new S3 class ("Decomp","TRAMO_SEATS")
@@ -16,10 +33,12 @@ decomp_defTS <- function(jrobj,spec){
 }
 
 decomp_defX13 <- function(jrobj,spec){
+
   # extract model specification from the java object
-  #  rspec <- specDecompX13_jd2r( spec = spec)
-  # specification
-  specification <- list
+  rspec <- specX11_jd2r( spec = spec)
+  specification <- do.call(data.frame, rspec)
+  names(specification) <- paste0("x11.",names(specification))
+  rownames(specification) <- ""
   # results
   jd_results <- decomp_rsltsX13(jrobj)
   # new S3 class ("Decomp","X13")
@@ -32,6 +51,25 @@ decomp_defX13 <- function(jrobj,spec){
   class(z) <- c("Decomp_X13")
   return(z)
 }
+decomp_X13 <- function(jrobj,spec,seasma){
+
+  # specification
+  specification <- spec[3,]
+  specification[[7]] <- seasma
+  rownames(specification) <- ""
+  # results
+  jd_results <- decomp_rsltsX13(jrobj)
+  # new S3 class ("Decomp","X13")
+  z<- list(specification = specification,
+           mode = jd_results$mode,
+           mstats =  jd_results$mstats,
+           si_ratio = jd_results$si_ratio,
+           s_filter = jd_results$s_filter,
+           t_filter = jd_results$t_filter)
+  class(z) <- c("Decomp_X13")
+  return(z)
+}
+
 decomp_rsltsX13 <- function(jrobj){
 
   mode <- result(jrobj,"mode")
@@ -42,8 +80,7 @@ decomp_rsltsX13 <- function(jrobj){
                    function(diag) {
                      res <- result(jrobj, diag)})
   mstats <- matrix(mstats, ncol=1)
-  rownames(mstats) <- c(paste0("M",as.character(c(1:10))),
-                        c("Q","Q-M2"))
+  rownames(mstats) <- gsub("mstats.","",mstats_names)
   colnames(mstats) <- c("M stats")
 
   d8 <- result(jrobj,"decomposition.d8")
@@ -68,13 +105,13 @@ decomp_rsltsTS <- function( jrobj){
                 function(diag) {
                   res <- result(jrobj,diag)})
   lin <- do.call(cbind,lin)
-  colnames(lin) <- paste0(c("y","sa","t","s","i"),"_lin")
+  colnames(lin) <- gsub("decomposition.","",lin_names)
 
   cmp <- lapply(cmp_names,
                 function(diag) {
                   res <- result(jrobj,diag)})
   cmp <- do.call(cbind,cmp)
-  colnames(cmp) <- paste0(c("y","sa","t","s","i"),"_cmp")
+  colnames(cmp) <- gsub("decomposition.","",cmp_names)
 
   fmodel_names <- paste0("decomposition.model.",c("ar","diff","ma","innovationvariance"))
   samodel_names <- paste0("decomposition.samodel.",c("ar","diff","ma","innovationvariance"))

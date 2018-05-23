@@ -2,6 +2,7 @@
 #' @export
 summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L), signif.stars = getOption("show.signif.stars"), ...){
 
+  arma <- object$arma
   arima_coef <- object$arima.coefficients
   reg_coef <- object$regression.coefficients
   rslt_spec <- object$model$spec_rslt
@@ -11,7 +12,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
   out <- s_preOut(object)
   var <- s_preVar(object)$description
 
-  cat("y = regression model + arima ",gsub("c","",deparse(object$arma)),sep="")
+  cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n\n")
   cat("Model:",rslt_spec[1],sep=" ")
   cat("\n")
@@ -76,6 +77,7 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
 #' @export
 print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
 
+  arma <- x$arma
   arima_coef <- x$arima.coefficients
   reg_coef <- x$regression.coefficients
   loglik<- x$loglik
@@ -84,7 +86,7 @@ print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   out <- s_preOut(x)
   var <- s_preVar(x)$description
 
-  cat("y = regression model + arima ",gsub("c","",deparse(x$arma)),sep="")
+  cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n\n")
   cat("Coefficients:")
   if (!is.null(arima_coef)){
@@ -180,7 +182,7 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),..
   cat("\n")
   cat("Signif. codes:  H0 (no conditional heteroscedasticity of residuals) is not rejected at","\n")
   cat(usestring)
-
+  invisible(x)
 }
 
 

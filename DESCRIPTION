@@ -41,6 +41,8 @@ Collate:
 	'diagnostics.R'
 	'finals.R'
 	'user_defined.R'
+	'x13_spec.R'
+	'tramoseats_spec.R'
 	'jd_x13.R'
 	'jd_tramoseats.R'
 	'jd_saveSpec_s3.R'
