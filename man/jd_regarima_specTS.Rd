@@ -13,19 +13,19 @@ jd_regarima_specTS(object, estimate.from = NA_character_,
   transform.fct = NA_integer_, usrdef.outliersEnabled = NA,
   usrdef.outliersType = NA, usrdef.outliersDate = NA,
   usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
-  usrdef.varCoef = NA, tradingdays.mauto = c(NA_character_, "Unused",
-  "FTest", "WaldTest"), tradingdays.pftd = NA_integer_,
-  tradingdays.option = c(NA_character_, "TradingDays", "WorkingDays", "None"),
-  tradingdays.leapyear = NA, tradingdays.stocktd = NA_integer_,
-  tradingdays.test = c(NA_character_, "Separate_T", "Joint_F", "None"),
-  easter.type = c(NA_character_, "Unused", "Standard", "IncludeEaster",
-  "IncludeEasterMonday"), easter.julian = NA, easter.duration = NA_integer_,
-  easter.test = NA, outlier.enabled = NA, outlier.from = NA_character_,
-  outlier.to = NA_character_, outlier.first = NA_integer_,
-  outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
-  outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
-  outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
-  outlier.cv = NA_integer_, outlier.eml = NA,
+  usrdef.varType = NA, usrdef.varCoef = NA,
+  tradingdays.mauto = c(NA_character_, "Unused", "FTest", "WaldTest"),
+  tradingdays.pftd = NA_integer_, tradingdays.option = c(NA_character_,
+  "TradingDays", "WorkingDays", "None"), tradingdays.leapyear = NA,
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA_character_,
+  "Separate_T", "Joint_F", "None"), easter.type = c(NA_character_, "Unused",
+  "Standard", "IncludeEaster", "IncludeEasterMonday"), easter.julian = NA,
+  easter.duration = NA_integer_, easter.test = NA, outlier.enabled = NA,
+  outlier.from = NA_character_, outlier.to = NA_character_,
+  outlier.first = NA_integer_, outlier.last = NA_integer_,
+  outlier.exclFirst = NA_integer_, outlier.exclLast = NA_integer_,
+  outlier.ao = NA, outlier.tc = NA, outlier.ls = NA, outlier.so = NA,
+  outlier.usedefcv = NA, outlier.cv = NA_integer_, outlier.eml = NA,
   outlier.tcrate = NA_integer_, automdl.enabled = NA,
   automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
   automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
@@ -37,9 +37,7 @@ jd_regarima_specTS(object, estimate.from = NA_character_,
   arima.coefType = NA, fcst.horizon = NA_integer_)
 }
 \arguments{
-\item{object}{object of class \code{c("JD_RegArima_Spec","TRAMO_SEATS")} or of class \code{c("JD_RegArima","TRAMO_SEATS")}.
-
-The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
+\item{object}{object of class \code{c("JD_RegArima_Spec","TRAMO_SEATS")} or of class \code{c("JD_RegArima","TRAMO_SEATS")}.}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 
@@ -78,6 +76,8 @@ Control variables for the user-defined variables:}
 \item{usrdef.varEnabled}{logicals. If \code{TRUE} the program uses the user-defined variables.}
 
 \item{usrdef.var}{time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.}
+
+\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular"}. If not specified, the program will assign the \code{"Undefined"} type.}
 
 \item{usrdef.varCoef}{vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.}
 

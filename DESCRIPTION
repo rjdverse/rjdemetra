@@ -6,7 +6,7 @@ Authors@R: c(
   person("Raf", "Baeyens", role = "aut",
                 email = "raf.baeyens@nbb.be"),
   person("Anna", "Michalek", role = "aut",
-                email = "anka.michalek@gmail.com"),
+                email = "anna.michalek@ecb.int"),
   person("Jean", "Palate", role = c("aut", "cre"),
                 email = "jean.palate@nbb.be"),
   person("Alain", "Quartier-la-Tente", role = "aut",

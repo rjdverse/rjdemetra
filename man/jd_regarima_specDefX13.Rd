@@ -13,10 +13,11 @@ jd_regarima_specDefX13(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
   "LengthOfPeriod"), transform.aicdiff = NA_integer_,
   usrdef.outliersEnabled = NA, usrdef.outliersType = NA,
   usrdef.outliersDate = NA, usrdef.outliersCoef = NA,
-  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varCoef = NA,
-  tradingdays.option = c(NA_character_, "TradingDays", "WorkingDays", "None"),
-  tradingdays.autoadjust = NA, tradingdays.leapyear = c(NA_character_,
-  "LeapYear", "LengthOfPeriod", "None"), tradingdays.stocktd = NA_integer_,
+  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varType = NA,
+  usrdef.varCoef = NA, tradingdays.option = c(NA_character_, "TradingDays",
+  "WorkingDays", "None"), tradingdays.autoadjust = NA,
+  tradingdays.leapyear = c(NA_character_, "LeapYear", "LengthOfPeriod",
+  "None"), tradingdays.stocktd = NA_integer_,
   tradingdays.test = c(NA_character_, "Remove", "Add", "None"),
   easter.enabled = NA, easter.julian = NA, easter.duration = NA_integer_,
   easter.test = c(NA_character_, "Add", "Remove", "None"),
@@ -66,7 +67,7 @@ Control variables for the pre-specified outliers. The pre-specified outliers are
 
 \item{usrdef.outliersEnabled}{logicals. If \code{TRUE} the program uses the pre-specified outliers.}
 
-\item{usrdef.outliersType}{vector defining the outliers' type. Possible types are: \code{("AO"}) - additive, \code{("LS"}) - level shift, \code{("TC"}) - transitory change, \code{("SO"}) -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.}
+\item{usrdef.outliersType}{vector defining the outliers' type. Possible types are: \code{("AO")} - additive, \code{("LS")} - level shift, \code{("TC")} - transitory change, \code{("SO")} -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.}
 
 \item{usrdef.outliersDate}{vector defining the outliers' date. The dates should be characters in format "YYYY-MM-DD". E.g.: \code{usrdef.outliersDate=c("2009-10-01","2005-02-01","2003-04-01")}.}
 
@@ -77,6 +78,8 @@ Control variables for the user-defined variables:}
 \item{usrdef.varEnabled}{logicals. If \code{TRUE} the program uses the user-defined variables.}
 
 \item{usrdef.var}{time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.}
+
+\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular"}. If not specified, the program will assign the \code{"Undefined"} type.}
 
 \item{usrdef.varCoef}{vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.}
 

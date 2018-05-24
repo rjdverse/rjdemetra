@@ -44,25 +44,34 @@ summary.JD_RegArima=function (object, digits = max(3L, getOption("digits") - 3L)
                  na.print = "NA", ...)
   }
   if (usr_spec[1]==TRUE & usr_spec[2]==TRUE){
-    out_t <- as.character(out[,1])
-    out_y <- substr(out[,2],1,4)
-    out_m <- as.character(as.numeric(substr(out[,2],6,7)))
-    out_dsc <- paste(out_t," (",out_m,"-",out_y,")",sep = "")
-    colnames(out) <- c("","","Coefficients")
-    rownames(out) <- out_dsc
-    fout <- out[3]
-    cat("\n")
-    cat("Fixed outliers:","\n")
-    printCoefmat(fout, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    out <- out[out[,3]!=0,]
+    if (dim(out)[1]!=0){
+      out_t <- as.character(out[,1])
+      out_y <- substr(out[,2],1,4)
+      out_m <- as.character(as.numeric(substr(out[,2],6,7)))
+      out_dsc <- paste(out_t," (",out_m,"-",out_y,")",sep = "")
+      colnames(out) <- c("","","Coefficients")
+      rownames(out) <- out_dsc
+      fout <- out[3]
+      cat("\n")
+      cat("Fixed outliers:","\n")
+      printCoefmat(fout, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    }
   }
   if (usr_spec[3]==TRUE & usr_spec[4]==TRUE){
-    var_dsc <- if (dim(var)[1]==1){c("r.userdef")} else {paste("r.userdef",seq(1,dim(var)[1],1),sep="_")}
-    colnames(var) <- c("","Coefficients")
-    rownames(var) <- var_dsc
-    fvar <- var[2]
-    cat("\n")
-    cat("Fixed other regression effects:","\n")
-    printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    nvar0 <-dim(var)[1]
+    var <- cbind(var,c(1:nvar0))
+    var <- var[var[,2]!=0,]
+    nvar <- dim(var)[1]
+    if (nvar!=0){
+      var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}
+      colnames(var) <- c("","Coefficients")
+      rownames(var) <- var_dsc
+      fvar <- var[2]
+      cat("\n")
+      cat("Fixed other regression effects:","\n")
+      printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    }
   }
   cat("\n\n")
   cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik[3],"degrees of freedom", sep = " ")
@@ -110,25 +119,34 @@ print.JD_RegArima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     printCoefmat(tab.reg, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   if (usr_spec[1]==TRUE & usr_spec[2]==TRUE){
-    out_t <- as.character(out[,1])
-    out_y <- substr(out[,2],1,4)
-    out_m <- as.character(as.numeric(substr(out[,2],6,7)))
-    out_dsc <- paste(out_t," (",out_m,"-",out_y,")",sep = "")
-    fout <- out[3]
-    colnames(fout) <- "Coefficients"
-    rownames(fout) <- out_dsc
-    cat("\n")
-    cat("Fixed outliers:","\n")
-    printCoefmat(fout, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    out <- out[out[,3]!=0,]
+    if (dim(out)[1]!=0){
+      out_t <- as.character(out[,1])
+      out_y <- substr(out[,2],1,4)
+      out_m <- as.character(as.numeric(substr(out[,2],6,7)))
+      out_dsc <- paste(out_t," (",out_m,"-",out_y,")",sep = "")
+      fout <- out[3]
+      colnames(fout) <- "Coefficients"
+      rownames(fout) <- out_dsc
+      cat("\n")
+      cat("Fixed outliers:","\n")
+      printCoefmat(fout, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    }
   }
   if (usr_spec[3]==TRUE & usr_spec[4]==TRUE){
-    var_dsc <- if (dim(var)[1]==1){c("r.userdef")} else {paste("r.userdef",seq(1,dim(var)[1],1),sep="_")}
-    colnames(var) <- c("","Coefficients")
-    rownames(var) <- var_dsc
-    fvar <- var[2]
-    cat("\n")
-    cat("Fixed other regression effects:","\n")
-    printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    nvar0 <-dim(var)[1]
+    var <- cbind(var,c(1:nvar0))
+    var <- var[var[,2]!=0,]
+    nvar <- dim(var)[1]
+    if (nvar!=0){
+      var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}
+      colnames(var) <- c("","Coefficients")
+      rownames(var) <- var_dsc
+      fvar <- var[2]
+      cat("\n")
+      cat("Fixed other regression effects:","\n")
+      printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
+    }
   }
   cat("\n\n")
   cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik[3],"degrees of freedom", sep = " ")

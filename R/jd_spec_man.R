@@ -204,6 +204,9 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA){
   variables.type <- c("Undefined","Series","Trend","Seasonal","SeasonallyAdjusted","Irregular")
   nvar <- if (is.mts(var)) {dim(var)[2]} else if (is.ts(var)) {1} else {0}
 
+  if (all(sapply(vartype,is.na)))
+    vartype <- rep("Undefined", nvar)
+
   if (sum(!is.na(var))!=0){
     if (!is.ts(var) & !is.mts(var)){
       warning("userdef.var must be a time series or a matrix of time series. User-defined variable(s) will be ignored.", call. = FALSE)
