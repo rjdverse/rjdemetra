@@ -296,6 +296,38 @@ spec_arimaCoefF <- function(enabled=NA, armaP=NA, armaF=NA , coefP=NA, coefF=NA)
   return(list(ena, coef))
 }
 
+spec_seasma <- function(seasma=NA){
+
+  len <- length(seasma)
+  seasma.type <- c("Msr","Stable","X11Default","S3X1","S3X3","S3X5","S3X9","S3X15")
+  if (sum(is.na(seasma))!=0){
+    return(NA)
+  } else if (!is.vector(seasma)|is.list(seasma)|length(setdiff(seasma,seasma.type))>0){
+      warning("wrong format of the x11.seasonalma.\nPossisble filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+      return(NA)
+  } else if (!(len %in% c(1,2,4,12))){
+    warning("wrong format of the x11.seasonalma.\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+    return(NA)
+  } else {
+    z <- toString(seasma)
+    return(z)
+  }
+}
+
+spec_trendma <- function(trendma=NA){
+
+  if (sum(!is.na(trendma))==0){
+    return(NA)
+  } else if (!is.numeric(trendma)){
+    return(NA)
+    warning("Variable x11.trendma should be numeric.\nThe variable will be ignored.", call. = FALSE)
+  } else if (trendma <= 1 | trendma > 101 | (floor(trendma/2)==trendma/2)) {
+    warning("Variable x11.trendma should be in the range (1,101] and be an odd number.\nThe variable will be ignored.", call. = FALSE)
+    return(NA)
+    } else {
+    return(trendma)
+  }
+}
 
 # Derive the final values in the "JD_RegArima_Spec" object
 # X-13
@@ -705,3 +737,38 @@ spec_forecast <-function(fcst){
   rownames(fcst) <- c("Predefined","User_modif","Final")
   return(fcst)
 }
+
+# X11/ SEATS
+
+spec_x11 <- function(x11spc){
+
+  x11 <- x11spc
+
+  for (i in c(1:5,8:10)){
+    x11[3,i] <- if(!is.na(x11[2,i])) {x11[2,i]} else {x11[1,i]}
+  }
+  if(x11[3,5]==TRUE | is.na(x11[2,6])){
+    x11[3,6]<- x11[1,6]
+  }else {
+    x11[3,6] <- x11[2,6]
+  }
+  if(x11[3,2]==FALSE | is.na(x11[2,7])){
+    x11[3,7] <- x11[1,7]
+  }else {
+    x11[3,7] <- x11[2,7]
+  }
+
+  rownames(x11) <- c("Predefined","User_modif","Final")
+  return(x11)
+}
+
+spec_seats <- function(seatspc){
+  seats <- seatspc
+
+  for (i in c(1:7)){
+    seats[3,i] <- if(!is.na(seats[2,i])) {seats[2,i]} else {seats[1,i]}
+  }
+  rownames(seats) <- c("Predefined","User_modif","Final")
+  return(seats)
+}
+

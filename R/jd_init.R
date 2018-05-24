@@ -32,6 +32,8 @@ proc_data<-function(rslt, name, clobj){
     p<-.jcastToArray(s)
     len<-length(p)
     all<-array(0, dim=c(len,2))
+    if (len==0)
+      return (NULL)
     for (i in 1:len){
       all[i, 1]<-.jcall(p[[i]], "D", "getValue")
       all[i, 2]<-.jcall(p[[i]], "D", "getStde")

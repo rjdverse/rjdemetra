@@ -2,7 +2,11 @@
 regarima_rslts <- function(jrobj, fcsth){
 
   # ARIMA model
-  arma <- c(result(jrobj,"arima.p"),result(jrobj,"arima.d"),result(jrobj,"arima.q"),result(jrobj,"arima.bp"),result(jrobj,"arima.bd"),result(jrobj,"arima.bq"))
+  arma_names <- paste0("arima.",c("p","d","q","bp","bd","bq"))
+  arma <- sapply(arma_names,
+                function(diag) {
+                res <- result(jrobj, diag)})
+  names(arma) <- gsub("arima.","",arma_names)
 
   # ARIMA coefficients
   if (!is.null(result(jrobj,"arima.parameters"))){

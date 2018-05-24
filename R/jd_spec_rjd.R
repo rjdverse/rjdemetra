@@ -227,6 +227,48 @@ return(list(estimate.type = estimate.type,estimate.d0 = estimate.d0,estimate.d1 
             arima.d = arima.d,arima.q = arima.q,arima.bp = arima.bp,arima.bd = arima.bd,arima.bq = arima.bq, span = span))
 }
 
+specX11_jd2r <- function(spec = NA){
+
+  jx11 <-.jcall(spec,"Ljdr/spec/x13/X11Spec;","getX11")
+
+  mode <-.jcall(jx11,"S","getMode")
+  seasonalComp <-.jcall(jx11,"Z","isSeasonal")
+  lsigma <-.jcall(jx11,"D","getLSigma")
+  usigma <-.jcall(jx11,"D","getUSigma")
+  trendAuto <- .jcall(jx11,"Z","isAutoTrendMA")
+  trendma <- .jcall(jx11,"I","getTrendMA")
+  seasonalma <- .jcall(jx11,"S","getSeasonalMA")
+  fcasts<- .jcall(jx11,"I","getForecastHorizon")
+  bcasts <- .jcall(jx11,"I","getBackcastHorizon")
+  excludeFcasts <- .jcall(jx11,"Z","isExcludefcst")
+
+  var <- list(mode,seasonalComp,lsigma,usigma,trendAuto,trendma,seasonalma,
+              fcasts,bcasts,excludeFcasts)
+  names(var) <- c("mode","seasonalComp","lsigma","usigma","trendAuto","trendma","seasonalma",
+                  "fcasts","bcasts","excludeFcasts")
+  return(var)
+}
+
+specSeats_jd2r <- function(spec = NA){
+
+  jseats <-.jcall(spec,"Ljdr/spec/tramoseats/SeatsSpec;","getSeats")
+
+  approx <- .jcall(jseats,"S","getApproximationMode")
+  maBoundary <- .jcall(jseats,"D","getXl")
+  trendBoundary <- .jcall(jseats,"D","getRMod")
+  seasdBoundary <- .jcall(jseats,"D","getSMod")
+  seasdBoundary1 <- .jcall(jseats,"D","getSMod1")
+  seasTol <- .jcall(jseats,"D","getEpsPhi")
+  method <- .jcall(jseats,"S","getMethod")
+
+  var <- list(approx,maBoundary,trendBoundary,seasdBoundary,seasdBoundary1,seasTol,
+              method)
+  names(var) <- c("approx","maBoundary","trendBoundary","seasdBoundary","seasdBoundary1","seasTol",
+                  "method")
+  return(var)
+
+}
+
 # Functions to introduce modifications in the java object
 span_r2jd <- function(jsobjct = NA, type = NA, d0=NA, d1=NA, n0 = NA, n1=NA){
   if (type =="All") {
@@ -534,3 +576,56 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   return(jdictionary)
 }
 
+specX11_r2jd <-function( rspec = NA, jdspec = NA , freq = NA)
+{
+  x11 <- s_x11(rspec)
+  jx11 <-.jcall(jdspec,"Ljdr/spec/x13/X11Spec;","getX11")
+
+  seasonalma <- unlist(strsplit(as.character(x11[[7]]),split=", "))
+  len <- length(seasonalma)
+
+  .jcall(jx11,"V","setMode",as.character(x11[[1]]))
+  .jcall(jx11,"V","setSeasonal",as.logical(x11[[2]]))
+  .jcall(jx11,"V","setLSigma",as.numeric(x11[[3]]))
+  .jcall(jx11,"V","setUSigma",as.numeric(x11[[4]]))
+  if (x11[[5]]==TRUE){
+    .jcall(jx11,"V","setTrendMA",as.integer(x11[[6]]))
+    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[[5]]))
+  }else{
+    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[[5]]))
+    .jcall(jx11,"V","setTrendMA",as.integer(x11[[6]]))
+  }
+  if (len ==1){
+    .jcall(jx11,"V","setSeasonalMA",seasonalma)
+    seasma <- seasonalma
+  }else if (len != freq) {
+    .jcall(jx11,"V","setSeasonalMA","Msr")
+    warning(paste0("wrong frequency of the x11.seasonalma (",len," instead of ",freq,").",
+            "\nPre-specified seasonal filters will be ignored (x11.seasonalma=\"Msr\")."), call. = FALSE)
+    seasma <- "Msr"
+  } else {
+    .jcall(jx11,"V","setFreq", as.integer(freq))
+    .jcall(jx11,"V","setFullSeasonalMA",seasonalma)
+    seasma <- as.character(x11[[7]])
+  }
+  .jcall(jx11,"V","setForecastHorizon",as.integer(x11[[8]]))
+  .jcall(jx11,"V","setBackcastHorizon",as.integer(x11[[9]]))
+  .jcall(jx11,"V","setExcludefcst",as.logical(x11[[10]]))
+
+  return(seasma)
+}
+
+specSeats_r2jd <- function(rspec = NA, jdspec = NA){
+
+  seats <- s_seats(rspec)
+  jseats <-.jcall(jdspec,"Ljdr/spec/tramoseats/SeatsSpec;","getSeats")
+
+  .jcall(jseats,"V","setApproximationMode", as.character(seats[[1]]))
+  .jcall(jseats,"V","setXl", as.numeric(seats[[2]]))
+  .jcall(jseats,"V","setRMod", as.numeric(seats[[3]]))
+  .jcall(jseats,"V","setSMod", as.numeric(seats[[4]]))
+  .jcall(jseats,"V","setSMod1", as.numeric(seats[[5]]))
+  .jcall(jseats,"V","setEpsPhi",as.numeric(seats[[6]]))
+  .jcall(jseats,"V","setMethod", as.character(seats[[7]]))
+
+}
