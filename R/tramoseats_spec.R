@@ -5,13 +5,13 @@
 #'
 #' @inheritParams jd_regarima_specDefTS
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSAfull".
-#' @param seats.approx .
-#' @param seats.trendBoundary .
-#' @param seats.seasdBoundary .
-#' @param seats.seasdBoundary1 .
-#' @param seats.seasTol .
-#' @param seats.maBoundary .
-#' @param seats.method .
+#' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
+#' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
+#' @param seats.seasdBoundary numeric, seasonal boundary. Boundary from which a negative AR root is integrated in the seasonal component.
+#' @param seats.seasdBoundary1 numeric, seasonal boundary (unique). Boundary from which a negative AR root is integrated in the seasonal component when the root is the unique seasonal root.
+#' @param seats.seasTol numeric, seasonal tolerance. The tolerance (measured in degrees) to allocate the AR non-real roots to the seasonal component (if the modulus of the inverse complex AR root is greater than Trend boundary and the frequency of this root differs from one of the seasonal frequencies by less than Seasonal tolerance) or the transitory component (otherwise).
+#' @param seats.maBoundary numeric, MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1), it is set to xl.
+#' @param seats.method character, estimation method of the unobserved components. The choice can be made from: \code{"Burman"} (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); \code{"KalmanSmoother"} (it is not disturbed by the (quasi-) unit roots in MA); \code{"McElroyMatrix"} (has the same stability issues as the Burman's algorithm).
 #'
 #' @details
 #' .
@@ -48,6 +48,7 @@ jd_tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
                                  usrdef.outliersCoef = NA,
                                  usrdef.varEnabled = NA,
                                  usrdef.var = NA,
+                                 usrdef.varType = NA,
                                  usrdef.varCoef = NA,
                                  tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                                  tradingdays.pftd=NA_integer_,
@@ -107,7 +108,7 @@ jd_tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
   regarima <- jd_regarima_specDefTS(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
-                                    usrdef.varEnabled,usrdef.var,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
+                                    usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
                                     tradingdays.option,tradingdays.leapyear,tradingdays.stocktd,tradingdays.test,
                                     easter.type,easter.julian,easter.duration,easter.test,outlier.enabled,
                                     outlier.from,outlier.to,outlier.first,outlier.last,outlier.exclFirst,
@@ -210,6 +211,7 @@ jd_tramoseats_spec <-function(object,
                                  usrdef.outliersCoef = NA,
                                  usrdef.varEnabled = NA,
                                  usrdef.var = NA,
+                                 usrdef.varType = NA,
                                  usrdef.varCoef = NA,
                                  tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                                  tradingdays.pftd=NA_integer_,
@@ -270,7 +272,7 @@ jd_tramoseats_spec <-function(object,
   regarima <- jd_regarima_specTS(object,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
-                                    usrdef.varEnabled,usrdef.var,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
+                                    usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
                                     tradingdays.option,tradingdays.leapyear,tradingdays.stocktd,tradingdays.test,
                                     easter.type,easter.julian,easter.duration,easter.test,outlier.enabled,
                                     outlier.from,outlier.to,outlier.first,outlier.last,outlier.exclFirst,

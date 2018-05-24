@@ -13,19 +13,20 @@ jd_regarima_specDefTS(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4",
   "Auto", "None", "Log"), transform.fct = NA_integer_,
   usrdef.outliersEnabled = NA, usrdef.outliersType = NA,
   usrdef.outliersDate = NA, usrdef.outliersCoef = NA,
-  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varCoef = NA,
-  tradingdays.mauto = c(NA_character_, "Unused", "FTest", "WaldTest"),
-  tradingdays.pftd = NA_integer_, tradingdays.option = c(NA_character_,
-  "TradingDays", "WorkingDays", "None"), tradingdays.leapyear = NA,
-  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA_character_,
-  "Separate_T", "Joint_F", "None"), easter.type = c(NA_character_, "Unused",
-  "Standard", "IncludeEaster", "IncludeEasterMonday"), easter.julian = NA,
-  easter.duration = NA_integer_, easter.test = NA, outlier.enabled = NA,
-  outlier.from = NA_character_, outlier.to = NA_character_,
-  outlier.first = NA_integer_, outlier.last = NA_integer_,
-  outlier.exclFirst = NA_integer_, outlier.exclLast = NA_integer_,
-  outlier.ao = NA, outlier.tc = NA, outlier.ls = NA, outlier.so = NA,
-  outlier.usedefcv = NA, outlier.cv = NA_integer_, outlier.eml = NA,
+  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varType = NA,
+  usrdef.varCoef = NA, tradingdays.mauto = c(NA_character_, "Unused",
+  "FTest", "WaldTest"), tradingdays.pftd = NA_integer_,
+  tradingdays.option = c(NA_character_, "TradingDays", "WorkingDays", "None"),
+  tradingdays.leapyear = NA, tradingdays.stocktd = NA_integer_,
+  tradingdays.test = c(NA_character_, "Separate_T", "Joint_F", "None"),
+  easter.type = c(NA_character_, "Unused", "Standard", "IncludeEaster",
+  "IncludeEasterMonday"), easter.julian = NA, easter.duration = NA_integer_,
+  easter.test = NA, outlier.enabled = NA, outlier.from = NA_character_,
+  outlier.to = NA_character_, outlier.first = NA_integer_,
+  outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
+  outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
+  outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
+  outlier.cv = NA_integer_, outlier.eml = NA,
   outlier.tcrate = NA_integer_, automdl.enabled = NA,
   automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
   automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
@@ -78,6 +79,8 @@ Control variables for the user-defined variables:}
 \item{usrdef.varEnabled}{logicals. If \code{TRUE} the program uses the user-defined variables.}
 
 \item{usrdef.var}{time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.}
+
+\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular"}. If not specified, the program will assign the \code{"Undefined"} type.}
 
 \item{usrdef.varCoef}{vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.}
 

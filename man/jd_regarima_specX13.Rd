@@ -13,10 +13,10 @@ jd_regarima_specX13(object = object, estimate.from = NA_character_,
   transform.aicdiff = NA_integer_, usrdef.outliersEnabled = NA,
   usrdef.outliersType = NA, usrdef.outliersDate = NA,
   usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
-  usrdef.varCoef = NA, tradingdays.option = c(NA_character_, "TradingDays",
-  "WorkingDays", "None"), tradingdays.autoadjust = NA,
-  tradingdays.leapyear = c(NA_character_, "LeapYear", "LengthOfPeriod",
-  "None"), tradingdays.stocktd = NA_integer_,
+  usrdef.varType = NA, usrdef.varCoef = NA,
+  tradingdays.option = c(NA_character_, "TradingDays", "WorkingDays", "None"),
+  tradingdays.autoadjust = NA, tradingdays.leapyear = c(NA_character_,
+  "LeapYear", "LengthOfPeriod", "None"), tradingdays.stocktd = NA_integer_,
   tradingdays.test = c(NA_character_, "Remove", "Add", "None"),
   easter.enabled = NA, easter.julian = NA, easter.duration = NA_integer_,
   easter.test = c(NA_character_, "Add", "Remove", "None"),
@@ -38,9 +38,7 @@ jd_regarima_specX13(object = object, estimate.from = NA_character_,
   arima.coefType = NA, fcst.horizon = NA_integer_)
 }
 \arguments{
-\item{object}{object of class \code{c("JD_RegArima_Spec","X13")} or of class \code{c("JD_RegArima","X13")}.
-
-The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
+\item{object}{object of class \code{c("JD_RegArima_Spec","X13")} or of class \code{c("JD_RegArima","X13")}.}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 
@@ -66,7 +64,7 @@ Control variables for the pre-specified outliers. The pre-specified outliers are
 
 \item{usrdef.outliersEnabled}{logicals. If \code{TRUE} the program uses the pre-specified outliers.}
 
-\item{usrdef.outliersType}{vector defining the outliers' type. Possible types are: \code{("AO"}) - additive, \code{("LS"}) - level shift, \code{("TC"}) - transitory change, \code{("SO"}) -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.}
+\item{usrdef.outliersType}{vector defining the outliers' type. Possible types are: \code{("AO")} - additive, \code{("LS")} - level shift, \code{("TC")} - transitory change, \code{("SO")} -  seasonal outlier. E.g.: \code{ usrdef.outliersType =c("AO","AO","LS")}.}
 
 \item{usrdef.outliersDate}{vector defining the outliers' date. The dates should be characters in format "YYYY-MM-DD". E.g.: \code{usrdef.outliersDate=c("2009-10-01","2005-02-01","2003-04-01")}.}
 
@@ -77,6 +75,8 @@ Control variables for the user-defined variables:}
 \item{usrdef.varEnabled}{logicals. If \code{TRUE} the program uses the user-defined variables.}
 
 \item{usrdef.var}{time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.}
+
+\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular"}. If not specified, the program will assign the \code{"Undefined"} type.}
 
 \item{usrdef.varCoef}{vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.}
 
