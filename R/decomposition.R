@@ -12,7 +12,7 @@ decomp_defTS <- function(jrobj,spec){
            model = jd_results$model,
            linearized=jd_results$lin,
            components=jd_results$cmp)
-  class(z) <- c("Decomp_TS")
+  class(z) <- c("decomposition_SEATS")
   return(z)
 }
 
@@ -28,7 +28,7 @@ decomp_TS <- function(jrobj, spec){
            model = jd_results$model,
            linearized=jd_results$lin,
            components=jd_results$cmp)
-  class(z) <- c("Decomp_TS")
+  class(z) <- c("decomposition_SEATS")
   return(z)
 }
 
@@ -48,7 +48,7 @@ decomp_defX13 <- function(jrobj,spec){
            si_ratio = jd_results$si_ratio,
            s_filter = jd_results$s_filter,
            t_filter = jd_results$t_filter)
-  class(z) <- c("Decomp_X13")
+  class(z) <- c("decomposition_X11")
   return(z)
 }
 decomp_X13 <- function(jrobj,spec,seasma){
@@ -66,7 +66,7 @@ decomp_X13 <- function(jrobj,spec,seasma){
            si_ratio = jd_results$si_ratio,
            s_filter = jd_results$s_filter,
            t_filter = jd_results$t_filter)
-  class(z) <- c("Decomp_X13")
+  class(z) <- c("decomposition_X11")
   return(z)
 }
 
