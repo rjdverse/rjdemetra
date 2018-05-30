@@ -3,7 +3,7 @@
 #' @description
 #' .
 #'
-#' @inheritParams jd_regarima_specDefTS
+#' @inheritParams regarima_specDefTS
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSAfull".
 #' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
 #' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
@@ -26,11 +26,11 @@
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @examples
-#' myspec <- jd_tramoseats_specDef(spec="RSAfull")
+#' myspec <- tramoseats_specDef(spec="RSAfull")
 #'
 #' @export
 
-jd_tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                                  estimate.from=NA_character_,
                                  estimate.to=NA_character_,
                                  estimate.first=NA_integer_,
@@ -105,7 +105,7 @@ jd_tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
 {
   spec<-match.arg(spec)
   reg_spec=gsub("RSA","TR",spec)
-  regarima <- jd_regarima_specDefTS(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <- regarima_specDefTS(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                     usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
@@ -118,15 +118,15 @@ jd_tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
                                     automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
                                     arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
 
-  seats <- jd_seats_specDef(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
+  seats <- seats_specDef(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
                                  seats.seasTol, seats.maBoundary, seats.method)
 
   z <- list(regarima = regarima, seats = seats)
-  class(z) <- c("SA_Spec","TRAMO_SEATS")
+  class(z) <- c("SA_spec","TRAMO_SEATS")
   return(z)
 }
 
-jd_seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                             seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                             seats.trendBoundary = NA_integer_,
                             seats.seasdBoundary = NA_integer_,
@@ -158,7 +158,7 @@ jd_seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "R
   seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
   z <- spec_seats(seats.mod)
 
-  class(z) <- c("Seats_Spec","data.frame")
+  class(z) <- c("seats_spec","data.frame")
   return(z)
 }
 
@@ -168,8 +168,8 @@ jd_seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "R
 #' @description
 #' .
 #'
-#' @inheritParams jd_tramoseats_specDef
-#' @param object model specification, object of class c("SA_Spec","TRAMO_SEATS") or c("SA","TRAMO_SEATS").
+#' @inheritParams tramoseats_specDef
+#' @param object model specification, object of class c("SA_spec","TRAMO_SEATS") or c("SA","TRAMO_SEATS").
 #'
 #' @details
 #' .
@@ -184,16 +184,16 @@ jd_seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "R
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @examples
-#' myspec <- jd_tramoseats_specDef(spec="RSAfull")
-#' mysa<- jd_tramoseats(myseries,myspec)
-#' myspec1 <- jd_tramoseats_spec(myspec, seats.approx = "Noisy")
-#' mysa1 <-jd_tramoseats(myseries,myspec1)
-#' myspec2 <- jd_tramoseats_spec(mysa, seats.approx = "Noisy")
-#' mysa2 <-jd_tramoseats(myseries,myspec2)
+#' myspec <- tramoseats_specDef(spec="RSAfull")
+#' mysa<- tramoseats(myseries,myspec)
+#' myspec1 <- tramoseats_spec(myspec, seats.approx = "Noisy")
+#' mysa1 <-tramoseats(myseries,myspec1)
+#' myspec2 <- tramoseats_spec(mysa, seats.approx = "Noisy")
+#' mysa2 <-tramoseats(myseries,myspec2)
 #'
 #' @export
 
-jd_tramoseats_spec <-function(object,
+tramoseats_spec <-function(object,
                                  estimate.from=NA_character_,
                                  estimate.to=NA_character_,
                                  estimate.first=NA_integer_,
@@ -266,10 +266,10 @@ jd_tramoseats_spec <-function(object,
                                  seats.maBoundary = NA_integer_,
                                  seats.method = c(NA_character_,"Burman","KalmanSmoother","McElroyMatrix"))
 {
-  if (!inherits(object, "TRAMO_SEATS") & (inherits(object, c("SA","SA_Spec"))==FALSE))
-    stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_Spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
+  if (!inherits(object, "TRAMO_SEATS") & (inherits(object, c("SA","SA_spec"))==FALSE))
+    stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
-  regarima <- jd_regarima_specTS(object,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <- regarima_specTS(object,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                     usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
@@ -282,15 +282,15 @@ jd_tramoseats_spec <-function(object,
                                     automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
                                     arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
 
-  seats <- jd_seats_spec(object,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
+  seats <- seats_spec(object,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
                             seats.seasTol, seats.maBoundary, seats.method)
 
   z <- list(regarima = regarima, seats = seats)
-  class(z) <- c("SA_Spec","TRAMO_SEATS")
+  class(z) <- c("SA_spec","TRAMO_SEATS")
   return(z)
 }
 
-jd_seats_spec<- function(object,
+seats_spec<- function(object,
                             seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                             seats.trendBoundary = NA_integer_,
                             seats.seasdBoundary = NA_integer_,
@@ -317,7 +317,7 @@ jd_seats_spec<- function(object,
   seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
   z <- spec_seats(seats.mod)
 
-  class(z) <- c("Seats_Spec","data.frame")
+  class(z) <- c("seats_spec","data.frame")
   return(z)
 }
 

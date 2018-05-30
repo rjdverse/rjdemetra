@@ -3,7 +3,7 @@
 #' @description
 #' .
 #'
-#' @inheritParams jd_regarima_specDefX13
+#' @inheritParams regarima_specDefX13
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSA5c".
 #' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.
 #' @param x11.seasonalComp logicals. If \code{TRUE} the program computes a seasonal component. Otherwise, the seasonal component is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).
@@ -29,11 +29,11 @@
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @examples
-#' myspec <- jd_x13_specDef(spec="RSA5c")
+#' myspec <- x13_specDef(spec="RSA5c")
 #'
 #' @export
 
-jd_x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
                                    estimate.from=NA_character_,
                                    estimate.to=NA_character_,
                                    estimate.first=NA_integer_,
@@ -111,7 +111,7 @@ jd_x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
 {
   spec<-match.arg(spec)
   reg_spec=gsub("RSA","RG",spec)
-  regarima <- jd_regarima_specDefX13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
+  regarima <- regarima_specDefX13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                      estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                      transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
                                      usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
@@ -125,13 +125,13 @@ jd_x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
                                      arima.p,arima.d,arima.q,arima.bp,arima.bd,arima.bq,arima.coefEnabled,
                                      arima.coef,arima.coefType,fcst.horizon)
 
-  x11 <- jd_x11_specDef(spec,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
+  x11 <- x11_specDef(spec,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
   z <- list(regarima = regarima, x11 = x11)
-  class(z) <- c("SA_Spec","X13")
+  class(z) <- c("SA_spec","X13")
   return(z)
 }
 
-jd_x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
                           x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
@@ -174,7 +174,7 @@ jd_x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
   x11.mod <- rbind(x11.spec,x11,rep(NA,length(x11.spec)))
   z <- spec_x11(x11.mod)
 
-  class(z) <- c("X11_Spec","data.frame")
+  class(z) <- c("X11_spec","data.frame")
   return(z)
 }
 
@@ -183,8 +183,8 @@ jd_x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
 #' @description
 #' .
 #'
-#' @inheritParams jd_x13_specDef
-#' @param object model specification, object of class c("SA_Spec","X13") or c("SA","X13").
+#' @inheritParams x13_specDef
+#' @param object model specification, object of class c("SA_spec","X13") or c("SA","X13").
 #'
 #' @details
 #' .
@@ -199,16 +199,16 @@ jd_x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @examples
-#' myspec <- jd_x13_specDef(spec="RSA5c")
-#' mysa<- jd_x13(myseries,myspec)
-#' myspec1 <- jd_x13_spec(myspec,x11.seasonalma=rep("S3X1",12))
-#' mysa1 <-jd_x13(myseries,myspec1)
-#' myspec2 <- jd_x13_spec(mysa,x11.seasonalma=rep("S3X1",12))
-#' mysa2 <-jd_x13(myseries,myspec2)
+#' myspec <- x13_specDef(spec="RSA5c")
+#' mysa<- x13(myseries,myspec)
+#' myspec1 <- x13_spec(myspec,x11.seasonalma=rep("S3X1",12))
+#' mysa1 <-x13(myseries,myspec1)
+#' myspec2 <- x13_spec(mysa,x11.seasonalma=rep("S3X1",12))
+#' mysa2 <-x13(myseries,myspec2)
 #'
 #' @export
 
-jd_x13_spec <-function(object,
+x13_spec <-function(object,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,
                           estimate.first=NA_integer_,
@@ -284,10 +284,10 @@ jd_x13_spec <-function(object,
                           x11.bcasts = NA_integer_,
                           x11.excludeFcasts = NA)
 {
-  if (!inherits(object, "X13") & (inherits(object, c("SA","SA_Spec"))==FALSE))
-    stop("use only with c(\"SA\",\"X13\") and c(\"SA_Spec\",\"X13\") objects", call. = FALSE)
+  if (!inherits(object, "X13") & (inherits(object, c("SA","SA_spec"))==FALSE))
+    stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)
 
-  regarima <- jd_regarima_specX13(object ,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
+  regarima <- regarima_specX13(object ,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                      estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                      transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
                                      usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
@@ -301,13 +301,13 @@ jd_x13_spec <-function(object,
                                      arima.p,arima.d,arima.q,arima.bp,arima.bd,arima.bq,arima.coefEnabled,
                                      arima.coef,arima.coefType,fcst.horizon)
 
-  x11 <- jd_x11_spec(object,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
+  x11 <- x11_spec(object,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
   z <- list(regarima = regarima, x11 = x11)
-  class(z) <- c("SA_Spec","X13")
+  class(z) <- c("SA_spec","X13")
   return(z)
 }
 
-jd_x11_spec<- function(object,
+x11_spec<- function(object,
                           x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
@@ -345,7 +345,7 @@ jd_x11_spec<- function(object,
   x11.mod <- rbind(x11.spec, x11,rep(NA,length(x11.spec)))
   z <- spec_x11(x11.mod)
 
-  class(z) <- c("X11_Spec","data.frame")
+  class(z) <- c("X11_spec","data.frame")
   return(z)
 }
 
