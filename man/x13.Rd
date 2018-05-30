@@ -2,14 +2,23 @@
 % Please edit documentation in R/x13.R
 \name{x13}
 \alias{x13}
+\alias{x13}
+\alias{x13Def}
 \title{SA, X13}
 \usage{
 x13(series, spec, userdefined)
+
+x13Def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
+  userdefined)
 }
 \arguments{
 \item{series}{a univariate time series}
 
-\item{spec}{user-defined model specification}
+\item{spec}{model specification X13. For the function:
+\itemize{
+\item \code{x13}, object of class \code{c("SA_spec","X13")}
+\item \code{x13Def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
+}}
 
 \item{userdefined}{vector with characters for additional output variables}
 }
@@ -17,18 +26,45 @@ x13(series, spec, userdefined)
 .
 }
 \description{
-.
+\code{x13}/\code{x13Def} estimates the seasonally adjusted series (sa) with the X13 method.
+This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
+The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 }
 \details{
-.
+The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+In the second part the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}), multiplicative (\eqn{y = t * s * i}), log-additive (\eqn{log(y) = log(t)+log(s)+log(i)}) or pseudo-additive (\eqn{y = t*(s+i-1)}).
+The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
+
+In the X13 method, the X11 algorithm decomposes the series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
+
+As regards the available predefined \emph{JDemetra+} X13 model specifications (for the function \code{x13Def}), they are described in the table below.
+\tabular{rrrrrrr}{
+\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA1 |\tab automatic |\tab AO/LS/TC  |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA2c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+RSA4c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
+}
 }
 \examples{
-mysa <- myseries
+myspec <- x13_specDef("RSA5c")
+mysa <- x13(myseries, myspec)
+mysa
+
+mysa1 <- x13Def(myseries,"RSA3")
+mysa1
+
+mysa2 <- x13Def(myseries,"RSA5c",
+userdefined = c("decomposition.d18","decomposition.d19"))
+mysa2
 
 }
 \references{
 Info on JDemtra+, usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.

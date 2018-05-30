@@ -2,14 +2,23 @@
 % Please edit documentation in R/tramoseats.R
 \name{tramoseats}
 \alias{tramoseats}
+\alias{tramoseats}
+\alias{tramoseatsDef}
 \title{SA, TRAMO-SEATS}
 \usage{
 tramoseats(series, spec, userdefined)
+
+tramoseatsDef(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
+  "RSA4", "RSA5"), userdefined)
 }
 \arguments{
 \item{series}{a univariate time series}
 
-\item{spec}{user-defined model specification}
+\item{spec}{model specification TRAMO-SEATS. For the function:
+\itemize{
+\item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
+\item \code{tramoseatsDef}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
+}}
 
 \item{userdefined}{vector with characters for additional output variables}
 }
@@ -17,15 +26,39 @@ tramoseats(series, spec, userdefined)
 .
 }
 \description{
-.
+\code{tramoseats}/\code{tramoseatsDef} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
+This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
+The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 }
 \details{
-.
+The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+In the second part the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
+
+In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
+
+As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseatsDef}), they are described in the table below.
+\tabular{rrrrrrrr}{
+\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+RSA4 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+RSA5 |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
+RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
+}
 }
 \examples{
 myspec <- tramoseats_specDef("RSAfull", seats.approx = "Noisy")
 mysa <- tramoseats(myseries, myspec)
+mysa
 
+mysa1 <- tramoseatsDef(myseries,"RSA2")
+mysa1
+
+mysa2 <- tramoseatsDef(myseries,"RSAfull",
+userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
+mysa2
 }
 \references{
 Info on JDemtra+, usage and functions:

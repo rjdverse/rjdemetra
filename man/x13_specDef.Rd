@@ -2,10 +2,50 @@
 % Please edit documentation in R/x13_spec.R
 \name{x13_specDef}
 \alias{x13_specDef}
-\title{Pre-specified X13 model specification, SA/X13}
+\alias{x13_specDef}
+\alias{x13_spec}
+\title{X13 model specification, SA/X13}
 \usage{
 x13_specDef(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
   "X11"), estimate.from = NA_character_, estimate.to = NA_character_,
+  estimate.first = NA_integer_, estimate.last = NA_integer_,
+  estimate.exclFirst = NA_integer_, estimate.exclLast = NA_integer_,
+  estimate.tol = NA_integer_, transform.function = c(NA_character_, "Auto",
+  "None", "Log"), transform.adjust = c(NA_character_, "None", "LeapYear",
+  "LengthOfPeriod"), transform.aicdiff = NA_integer_,
+  usrdef.outliersEnabled = NA, usrdef.outliersType = NA,
+  usrdef.outliersDate = NA, usrdef.outliersCoef = NA,
+  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varType = NA,
+  usrdef.varCoef = NA, tradingdays.option = c(NA_character_, "TradingDays",
+  "WorkingDays", "None"), tradingdays.autoadjust = NA,
+  tradingdays.leapyear = c(NA_character_, "LeapYear", "LengthOfPeriod",
+  "None"), tradingdays.stocktd = NA_integer_,
+  tradingdays.test = c(NA_character_, "Remove", "Add", "None"),
+  easter.enabled = NA, easter.julian = NA, easter.duration = NA_integer_,
+  easter.test = c(NA_character_, "Add", "Remove", "None"),
+  outlier.enabled = NA, outlier.from = NA_character_,
+  outlier.to = NA_character_, outlier.first = NA_integer_,
+  outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
+  outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
+  outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
+  outlier.cv = NA_integer_, outlier.method = c(NA_character_, "AddOne",
+  "AddAll"), outlier.tcrate = NA_integer_, automdl.enabled = NA,
+  automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
+  automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
+  automdl.mixed = NA, automdl.balanced = NA,
+  automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
+  automdl.ljungboxlimit = NA_integer_, automdl.ubfinal = NA_integer_,
+  arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
+  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
+  arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
+  arima.coefType = NA, fcst.horizon = NA_integer_,
+  x11.mode = c(NA_character_, "Undefined", "Additive", "Multiplicative",
+  "LogAdditive"), x11.seasonalComp = NA, x11.lsigma = NA_integer_,
+  x11.usigma = NA_integer_, x11.trendAuto = NA, x11.trendma = NA_integer_,
+  x11.seasonalma = NA_character_, x11.fcasts = NA_integer_,
+  x11.bcasts = NA_integer_, x11.excludeFcasts = NA)
+
+x13_spec(object, estimate.from = NA_character_, estimate.to = NA_character_,
   estimate.first = NA_integer_, estimate.last = NA_integer_,
   estimate.exclFirst = NA_integer_, estimate.exclLast = NA_integer_,
   estimate.tol = NA_integer_, transform.function = c(NA_character_, "Auto",
@@ -206,18 +246,46 @@ E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fix
 \item{x11.bcasts}{numeric, backcast. Length of the backcasts used in X11. Negative figures are translated in years of backcasts.}
 
 \item{x11.excludeFcasts}{logicals, exclude forecats and backcasts. If \code{TRUE} forecasts and backcasts from the RegARIMA model are not used in the generation of extreme values in the seasonal adjustment routines.}
+
+\item{object}{model specification, object of class c("SA_spec","X13") or c("SA","X13").}
 }
 \value{
-.
+A two-elements list of class \code{c("SA_spec","X13")}: (1) object of class \code{c("regarima_spec","X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec","data.frame")} with the X11 algorithm specification.
+Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
+Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
+The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+
+\item{regarima}{object of class \code{c("regarima_spec","x13")}. See function \code{\link{regarima_specX13}}}
+
+\item{x11}{data.frame of class \code{c("X11_spec","data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
 }
 \description{
-.
+\code{x13_specDef} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method.
+
+\code{x13_spec} creates (and/or modifies) a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA","X13")} or \code{c("SA_spec","X13")} class object.
 }
 \details{
-.
+The available predefined \emph{JDemetra+} model specifications (for the function \code{x13_specDef}) are described in the table below.
+
+\tabular{rrrrrrr}{
+\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA1 |\tab automatic |\tab AO/LS/TC  |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA2c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+RSA4c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
+}
 }
 \examples{
 myspec <- x13_specDef(spec="RSA5c")
+
+myspec <- x13_specDef(spec="RSA5c")
+mysa<- x13(myseries,myspec)
+myspec1 <- x13_spec(myspec,x11.seasonalma=rep("S3X1",12))
+mysa1 <-x13(myseries,myspec1)
+myspec2 <- x13_spec(mysa,x11.seasonalma=rep("S3X1",12))
+mysa2 <-x13(myseries,myspec2)
 
 }
 \references{

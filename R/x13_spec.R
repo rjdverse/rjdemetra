@@ -1,10 +1,15 @@
-#' Pre-specified X13 model specification, SA/X13
+#' X13 model specification, SA/X13
 #'
 #' @description
-#' .
+#'
+#' \code{x13_specDef} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method.
+#'
+#' \code{x13_spec} creates (and/or modifies) a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA","X13")} or \code{c("SA_spec","X13")} class object.
 #'
 #' @inheritParams regarima_specDefX13
+#'
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSA5c".
+#'
 #' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.
 #' @param x11.seasonalComp logicals. If \code{TRUE} the program computes a seasonal component. Otherwise, the seasonal component is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).
 #' @param x11.lsigma numeric, lower sigma boundary for the detection of extreme values.
@@ -17,9 +22,27 @@
 #' @param x11.excludeFcasts logicals, exclude forecats and backcasts. If \code{TRUE} forecasts and backcasts from the RegARIMA model are not used in the generation of extreme values in the seasonal adjustment routines.
 #'
 #' @details
-#' .
+#'
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{x13_specDef}) are described in the table below.
+#'
+#' \tabular{rrrrrrr}{
+#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+#' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' RSA1 |\tab automatic |\tab AO/LS/TC  |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' RSA2c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+#' RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+#' RSA4c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+#' RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
+#' }
 #' @return
-#' .
+#' A two-elements list of class \code{c("SA_spec","X13")}: (1) object of class \code{c("regarima_spec","X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec","data.frame")} with the X11 algorithm specification.
+#' Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
+#' Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
+#' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#'
+#' \item{regarima}{object of class \code{c("regarima_spec","x13")}. See function \code{\link{regarima_specX13}}}
+#'
+#' \item{x11}{data.frame of class \code{c("X11_spec","data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
 #'
 #' @references
 #' Info on JDemtra+, usage and functions:
@@ -32,7 +55,6 @@
 #' myspec <- x13_specDef(spec="RSA5c")
 #'
 #' @export
-
 x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
                                    estimate.from=NA_character_,
                                    estimate.to=NA_character_,
@@ -177,27 +199,9 @@ x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
   class(z) <- c("X11_spec","data.frame")
   return(z)
 }
-
-#' X13 model specification, SA/X13
-#'
-#' @description
-#' .
-#'
-#' @inheritParams x13_specDef
+#' @rdname x13_specDef
+#' @name x13_specDef
 #' @param object model specification, object of class c("SA_spec","X13") or c("SA","X13").
-#'
-#' @details
-#' .
-#' @return
-#' .
-#'
-#' @references
-#' Info on JDemtra+, usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
-#' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
-#'
-#' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
-#'
 #' @examples
 #' myspec <- x13_specDef(spec="RSA5c")
 #' mysa<- x13(myseries,myspec)
@@ -207,7 +211,6 @@ x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
 #' mysa2 <-x13(myseries,myspec2)
 #'
 #' @export
-
 x13_spec <-function(object,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,

@@ -1,9 +1,13 @@
-#' Pre-specified TRAMO-SEATS model specification, SA/TRAMO-SEATS
+#' TRAMO-SEATS model specification, SA/TRAMO-SEATS
 #'
 #' @description
-#' .
+#'
+#' \code{tramoseats_specDef} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec","X13")} class object with the SA model specification for the TRAMO-SEATS method.
+#'
+#' \code{tramoseats_spec} creates (and/or modifies) a \code{c("SA_spec","TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method. The object is created from a \code{c("SA","TRAMO_SEATS")} or \code{c("SA_spec","TRAMO_SEATS")} class object.
 #'
 #' @inheritParams regarima_specDefTS
+#'
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSAfull".
 #' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
 #' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
@@ -14,9 +18,29 @@
 #' @param seats.method character, estimation method of the unobserved components. The choice can be made from: \code{"Burman"} (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); \code{"KalmanSmoother"} (it is not disturbed by the (quasi-) unit roots in MA); \code{"McElroyMatrix"} (has the same stability issues as the Burman's algorithm).
 #'
 #' @details
-#' .
+#'
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{tramoseats_specDef}) are described in the table below.
+#'
+#' \tabular{rrrrrrrr}{
+#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+#' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' RSA1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
+#' RSA2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+#' RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+#' RSA4 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+#' RSA5 |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
+#' RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
+#' }
 #' @return
-#' .
+#'
+#' A two-elements list of class \code{c("SA_spec","TRAMO_SEATS")}: (1) object of class \code{c("regarima_spec","TRAMO_SEATS")} with the RegARIMA model specification, (2) object of class \code{c("seats_spec","data.frame")} with the SEATS algorithm specification.
+#' Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
+#' Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
+#' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#'
+#' \item{regarima}{object of class \code{c("regarima_spec","TRAMO_SEATS")}. See function \code{\link{regarima_specTS}}}
+#'
+#' \item{seats}{data.frame of class \code{c("seats_spec","data.frame")}, containing the \emph{seats} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
 #'
 #' @references
 #' Info on JDemtra+, usage and functions:
@@ -29,7 +53,6 @@
 #' myspec <- tramoseats_specDef(spec="RSAfull")
 #'
 #' @export
-
 tramoseats_specDef <-function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                                  estimate.from=NA_character_,
                                  estimate.to=NA_character_,
@@ -162,27 +185,9 @@ seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4
   return(z)
 }
 
-
-#' TRAMO-SEATS model specification, SA/TRAMO-SEATS
-#'
-#' @description
-#' .
-#'
-#' @inheritParams tramoseats_specDef
+#' @rdname tramoseats_specDef
+#' @name tramoseats_specDef
 #' @param object model specification, object of class c("SA_spec","TRAMO_SEATS") or c("SA","TRAMO_SEATS").
-#'
-#' @details
-#' .
-#' @return
-#' .
-#'
-#' @references
-#' Info on JDemtra+, usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
-#' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
-#'
-#' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
-#'
 #' @examples
 #' myspec <- tramoseats_specDef(spec="RSAfull")
 #' mysa<- tramoseats(myseries,myspec)
@@ -192,7 +197,6 @@ seats_specDef<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4
 #' mysa2 <-tramoseats(myseries,myspec2)
 #'
 #' @export
-
 tramoseats_spec <-function(object,
                                  estimate.from=NA_character_,
                                  estimate.to=NA_character_,

@@ -1,6 +1,9 @@
-#' Pre-specified  RegARIMA model specification, pre-adjustment in TRAMO-SEATS
+#' RegARIMA model specification, pre-adjustment in TRAMO-SEATS
 #' @description
+#'
 #' \code{regarima_specDefTS} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
+#'
+#' \code{regarima_specTS} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
 #'
 #' @param spec predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
 #'
@@ -151,7 +154,7 @@
 #'
 #'
 #' @details
-#' The available predefined \emph{JDemetra+} model specifications are described in the table below.
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_specDefTS}) are described in the table below.
 #'
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -165,7 +168,7 @@
 #' }
 #'
 #' @return
-#' A list of class \code{c("regarima_spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, predefined \emph{JDemetra+} model specification as provided within the argument \code{spec}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification - here empty) and \code{Final} values.
+#' A list of class \code{c("regarima_spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
 #'
 #' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml},
 #' \code{urfinal} - argument \code{esimate.urfinal}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
@@ -210,12 +213,26 @@
 #'
 #' @examples
 #'   myspec1 <-regarima_specDefTS(spec=c("TRfull"))
+#'   myreg1 <-regarima(myseries, spec=myspec1)
+#'
+#' # Modify a pre-specified model specification
 #'   myspec2 <-regarima_specDefTS(spec=c("TRfull"),tradingdays.mauto = "Unused",
 #'                                          tradingdays.option = "WorkingDays",
 #'                                          easter.type = "Standard",
 #'                                          automdl.enabled = FALSE, arima.mu = TRUE)
-#'   myreg1 <-regarima(myseries, spec=myspec1)
 #'   myreg2 <-regarima(myseries, spec=myspec2)
+#'
+#' # Modify the model specification from a "regarima" object
+#'   myspec3 <- regarima_specTS(myreg1,tradingdays.mauto = "Unused",
+#' 				tradingdays.option = "WorkingDays",
+#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg3 <- regarima(myseries,myspec3)
+#'
+#' # Modify the model specification from a "regarima_spec" object
+#'   myspec4 <- regarima_specTS(myspec1,tradingdays.mauto = "Unused",
+#' 				tradingdays.option = "WorkingDays",
+#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg4 <- regarima(myseries,myspec4)
 #'
 #' # Pre-specified outliers
 #'   myspec1 <- regarima_specDefTS(spec=c("TRfull"),
@@ -454,126 +471,11 @@ regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4"
   class(z) = c("regarima_spec","TRAMO_SEATS")
   return(z)
 }
-
-#' RegARIMA model specification, pre-adjustment in TRAMO-SEATS
-#' @description
-#' \code{regarima_specTS} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
-#'
-#' @inheritParams regarima_specDefTS
-#'
-#' @param object object of class \code{c("regarima_spec","TRAMO_SEATS")} or of class \code{c("regarima","TRAMO_SEATS")}.
-#'
-#'
-#' @return
-#' A list of class \code{c("regarima_spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, specification of the \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} object as provided within the argument \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
-#'
-#'
-#' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml},
-#' \code{urfinal} - argument \code{esimate.urfinal}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
-#'
-#' \item{transform}{data frame. Variables referring to: \code{tfunction} - argument \code{transform.function}, \code{fct} - argument \code{transform.fct}. The final values can be also accessed with the function \code{\link{s_transform}}.}
-#'
-#' \item{regression}{list including the information on the user-defined variables (\code{userdef}), \code{trading.days} effect and \code{easter} effect. The user-defined part includes: \code{specification} - data frame with the information if pre-specified outliers (\code{outlier}) and user-defined variables (\code{variables}) are included in the model and if fixed coefficients are used (\code{outlier.coef} and \code{variables.coef}). The final values can be also accessed with the function \code{\link{s_usrdef}}; \code{outliers} - matrixes with the outliers (\code{Predefined} and \code{Final}). The final outliers can be also accessed with the function \code{\link{s_preOut}}; and \code{variables} - list with the \code{Predefined} and \code{Final} user-defined variables (\code{series}) and its description (\code{description}) including the information on the variable type and values of fixed coefficients. The final user-defined variables can be also accessed with the function \code{\link{s_preVar}}.
-#' Within the data frame \code{trading.days} variables refer to:
-#' \code{automatic} - argument \code{tradingdays.mauto},
-#' \code{pftd} - argument \code{tradingdays.pftd},
-#' \code{option} - argument \code{tradingdays.option},
-#' \code{leapyear} - argument \code{tradingdays.leapyear},
-#' \code{stocktd} - argument \code{tradingdays.stocktd},
-#' \code{test} - argument \code{tradingdays.test}. The final \code{trading.days} values can be also accessed with the function \code{\link{s_td}}.
-#' Within the data frame \code{easter} variables refer to:
-#' \code{type} - argument \code{easter.type},
-#' \code{julian} - argument \code{easter.julian},
-#' \code{duration} - argument \code{easter.duration},
-#' \code{test} - argument \code{easter.test}. The final \code{easter} values can be also accessed with the function \code{\link{s_easter}}.}
-#'
-#' \item{outliers}{data frame. Variables referring to:
-#' \code{ao} - argument \code{outlier.ao},
-#' \code{tc} - argument \code{outlier.tc},
-#' \code{ls} - argument \code{outlier.ls},
-#' \code{so} - argument \code{outlier.so},
-#' \code{usedefcv} - argument \code{outlier.usedefcv},
-#' \code{cv} - argument \code{outlier.cv},
-#' \code{eml} - argument \code{outlier.eml},
-#' \code{tcrate} - argument \code{outlier.tcrate}. The final values can be also accessed with the function \code{\link{s_out}}.}
-#'
-#' \item{arima}{list containing a data frame with the ARIMA settings (\code{specification}) and matrixes with the information on the pre-specified ARMA coefficients (\code{coefficients}). The matrix \code{Predefined} refers to the pre-defined model specification and matrix \code{Final} to the final specification. Both matrixes contain the value of the ARMA coefficients and the procedure for its estimation.
-#' Within the data frame \code{specification} the variable \code{enabled} refer to the argument \code{automdl.enabled} and all the remaining variables (\code{automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.armalimit, automdl.reducecv, automdl.ljungboxlimit, automdl.compare, arima.mu, arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq}) to the respective function arguments.
-#' The final values of the \code{specification} can be also accessed with the function \code{\link{s_arima}} and final pre-specified ARMA coefficients with the function \code{\link{s_arimaCoef}}.}
-#'
-#' \item{forecast}{data frame with the forecast horizon (argument \code{fcst.horizon}). The final value can be also accessed with the function \code{\link{s_fcst}}.}
-#'
-#' \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers.The matrix can be also accessed with the function \code{\link{s_span}}.}
-#'
-#' @references
-#' Info on JDemtra+, usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
-#'
-#' @examples
-#'   myreg <- regarimaDefTS(myseries, spec=c("TRfull"))
-#'   myspec<- regarima_specTS(myreg)
-#'   myreg1<- regarima(myseries,myspec)
-#'
-#' # Modify the model specification from a "regarima" object
-#'   myspec2 <- regarima_specTS(myreg,tradingdays.mauto = "Unused",
-#' 				tradingdays.option = "WorkingDays",
-#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
-#'   myreg2 <- regarima(myseries,myspec2)
-#'
-#' # Modify the model specification from a "regarima_spec" object
-#'   myspec3 <- regarima_specTS(myspec,tradingdays.mauto = "Unused",
-#' 				tradingdays.option = "WorkingDays",
-#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
-#'   myreg3 <- regarima(myseries,myspec3)
-#'
-#'   myspec1 <-regarima_specDefTS(spec=c("TRfull"))
-#'   myspec2 <-regarima_specDefTS(spec=c("TRfull"),tradingdays.mauto = "Unused",
-#'                                          tradingdays.option = "WorkingDays",
-#'                                          easter.type = "Standard",
-#'                                          automdl.enabled = FALSE, arima.mu = TRUE)
-#'   myreg1 <-regarima(myseries, spec=myspec1)
-#'   myreg2 <-regarima(myseries, spec=myspec2)
-#'
-#' # Pre-specified outliers
-#'   myspec1 <- regarima_specTS(myreg,
-#'             usrdef.outliersEnabled = TRUE,
-#'             usrdef.outliersType = c("LS","LS"),
-#'             usrdef.outliersDate = c("2008-10-01","2003-01-01"),
-#'             usrdef.outliersCoef = c(37000,-19000), transform.function = "None")
-#'   s_preOut(myspec1)
-#'   myreg1 <- regarima(myseries, myspec1)
-#'   myreg1
-#'   s_preOut(myreg1)
-#'
-#' # User-defined variables
-#'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
-#'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-#'   var<-ts(matrix(c(var1,var2), ncol=2),start = c(2001, 12), frequency = 12)
-#'
-#'   myspec1 <- regarima_specTS(myspec,
-#'               usrdef.varEnabled = TRUE, usrdef.var = var)
-#'   s_preVar(myspec1)
-#'   myreg1 <- regarima(myseries,myspec1)
-#'
-#'   myspec2 <- regarima_specTS(myspec, usrdef.varEnabled = TRUE,
-#'                                 usrdef.var = var, usrdef.varCoef = c(17,-1),
-#'                                 transform.function = "None")
-#'   myreg2 <- regarima(myseries,myspec2)
-#'
-#' # Pre-specified ARMA coefficients
-#'   myspec1 <- regarima_specTS(myreg,
-#'              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
-#'              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
-#'               arima.coef = c(-0.12,-0.12,-0.3,-0.99),
-#'               arima.coefType = rep("Fixed",4))
-#'   myreg1 <- regarima(myseries,myspec1)
-#'   myreg1
-#'   summary(myreg1)
-#'   s_arimaCoef(myspec1)
-#'   s_arimaCoef(myreg1)
-#'
-#' @export
 # The function creates a ("regarima_spec","TRAMO_SEATS") class object from from a regarima_Spec or regarima object
+#' @rdname regarima_specDefTS
+#' @name regarima_specDefTS
+#' @param object object of class \code{c("regarima_spec","TRAMO_SEATS")} or of class \code{c("regarima","TRAMO_SEATS")}.
+#' @export
 regarima_specTS <-function(object,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,
