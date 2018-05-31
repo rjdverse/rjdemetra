@@ -82,7 +82,7 @@ s_seats(object = NA)
 }
 }
 \description{
-The below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
+Below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
 }
 \examples{
   myreg1 <-regarimaDefX13(myseries, spec=c("RG5c"))

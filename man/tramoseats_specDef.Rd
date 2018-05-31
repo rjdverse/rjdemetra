@@ -2,7 +2,9 @@
 % Please edit documentation in R/tramoseats_spec.R
 \name{tramoseats_specDef}
 \alias{tramoseats_specDef}
-\title{Pre-specified TRAMO-SEATS model specification, SA/TRAMO-SEATS}
+\alias{tramoseats_specDef}
+\alias{tramoseats_spec}
+\title{TRAMO-SEATS model specification, SA/TRAMO-SEATS}
 \usage{
 tramoseats_specDef(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4",
   "RSA5"), estimate.from = NA_character_, estimate.to = NA_character_,
@@ -41,9 +43,48 @@ tramoseats_specDef(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4",
   seats.seasdBoundary1 = NA_integer_, seats.seasTol = NA_integer_,
   seats.maBoundary = NA_integer_, seats.method = c(NA_character_, "Burman",
   "KalmanSmoother", "McElroyMatrix"))
+
+tramoseats_spec(object, estimate.from = NA_character_,
+  estimate.to = NA_character_, estimate.first = NA_integer_,
+  estimate.last = NA_integer_, estimate.exclFirst = NA_integer_,
+  estimate.exclLast = NA_integer_, estimate.tol = NA_integer_,
+  estimate.eml = NA, estimate.urfinal = NA_integer_,
+  transform.function = c(NA_character_, "Auto", "None", "Log"),
+  transform.fct = NA_integer_, usrdef.outliersEnabled = NA,
+  usrdef.outliersType = NA, usrdef.outliersDate = NA,
+  usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
+  usrdef.varType = NA, usrdef.varCoef = NA,
+  tradingdays.mauto = c(NA_character_, "Unused", "FTest", "WaldTest"),
+  tradingdays.pftd = NA_integer_, tradingdays.option = c(NA_character_,
+  "TradingDays", "WorkingDays", "None"), tradingdays.leapyear = NA,
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA_character_,
+  "Separate_T", "Joint_F", "None"), easter.type = c(NA_character_, "Unused",
+  "Standard", "IncludeEaster", "IncludeEasterMonday"), easter.julian = NA,
+  easter.duration = NA_integer_, easter.test = NA, outlier.enabled = NA,
+  outlier.from = NA_character_, outlier.to = NA_character_,
+  outlier.first = NA_integer_, outlier.last = NA_integer_,
+  outlier.exclFirst = NA_integer_, outlier.exclLast = NA_integer_,
+  outlier.ao = NA, outlier.tc = NA, outlier.ls = NA, outlier.so = NA,
+  outlier.usedefcv = NA, outlier.cv = NA_integer_, outlier.eml = NA,
+  outlier.tcrate = NA_integer_, automdl.enabled = NA,
+  automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
+  automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
+  automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
+  automdl.ljungboxlimit = NA_integer_, automdl.compare = NA,
+  arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
+  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
+  arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
+  arima.coefType = NA, fcst.horizon = NA_integer_,
+  seats.approx = c(NA_character_, "None", "Legacy", "Noisy"),
+  seats.trendBoundary = NA_integer_, seats.seasdBoundary = NA_integer_,
+  seats.seasdBoundary1 = NA_integer_, seats.seasTol = NA_integer_,
+  seats.maBoundary = NA_integer_, seats.method = c(NA_character_, "Burman",
+  "KalmanSmoother", "McElroyMatrix"))
 }
 \arguments{
-\item{spec}{predefined JDemetra+ model specification (see Details). The default is "RSAfull".}
+\item{spec}{predefined JDemetra+ model specification (see Details). The default is "RSAfull".
+
+The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 
@@ -201,19 +242,98 @@ E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fix
 \item{seats.maBoundary}{numeric, MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1), it is set to xl.}
 
 \item{seats.method}{character, estimation method of the unobserved components. The choice can be made from: \code{"Burman"} (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); \code{"KalmanSmoother"} (it is not disturbed by the (quasi-) unit roots in MA); \code{"McElroyMatrix"} (has the same stability issues as the Burman's algorithm).}
+
+\item{object}{model specification, object of class \code{c("SA_spec","TRAMO_SEATS")} or \code{c("SA","TRAMO_SEATS")}.}
 }
 \value{
-.
+A two-elements list of class \code{c("SA_spec","TRAMO_SEATS")}: (1) object of class \code{c("regarima_spec","TRAMO_SEATS")} with the RegARIMA model specification, (2) object of class \code{c("seats_spec","data.frame")} with the SEATS algorithm specification.
+Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
+Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
+The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+
+\item{regarima}{object of class \code{c("regarima_spec","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima_specTS}}}
+
+\item{seats}{data.frame of class \code{c("seats_spec","data.frame")}, containing the \emph{seats} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
 }
 \description{
-.
+\code{tramoseats_specDef} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec","TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method.
+
+\code{tramoseats_spec} creates (and/or modifies) a \code{c("SA_spec","TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method. The object is created from a \code{c("SA","TRAMO_SEATS")} or \code{c("SA_spec","TRAMO_SEATS")} class object.
 }
 \details{
-.
+The available predefined \emph{JDemetra+} model specifications (for the function \code{tramoseats_specDef}) are described in the table below.
+
+\tabular{rrrrrrrr}{
+\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
+RSA2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
+RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
+RSA4 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
+RSA5 |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
+RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
+}
 }
 \examples{
-myspec <- tramoseats_specDef(spec="RSAfull")
 
+myspec1 <-tramoseats_specDef(spec=c("RSAfull"))
+mysa1 <-tramoseats(myseries, spec=myspec1)
+
+# Modify a pre-specified model specification
+myspec2 <-tramoseats_specDef(spec=c("RSAfull"),tradingdays.mauto = "Unused",
+                             tradingdays.option = "WorkingDays",
+                             easter.type = "Standard",
+                             automdl.enabled = FALSE, arima.mu = TRUE)
+mysa2 <-tramoseats(myseries, spec=myspec2)
+
+# Modify the model specification from a "SA" object
+myspec3 <- tramoseats_spec(mysa1,tradingdays.mauto = "Unused",
+                           tradingdays.option = "WorkingDays",
+                           easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+mysa3 <- tramoseats(myseries,myspec3)
+
+# Modify the model specification from a "SA_spec" object
+myspec4 <- tramoseats_spec(myspec1,tradingdays.mauto = "Unused",
+                           tradingdays.option = "WorkingDays",
+                           easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+mysa4 <- tramoseats(myseries,myspec4)
+
+# Pre-specified outliers
+myspec1 <- tramoseats_specDef(spec=c("RSAfull"),
+                              usrdef.outliersEnabled = TRUE,
+                              usrdef.outliersType = c("LS","LS"),
+                              usrdef.outliersDate = c("2008-10-01","2003-01-01"),
+                              usrdef.outliersCoef = c(37000,-19000), transform.function = "None")
+s_preOut(myspec1)
+mysa1 <- tramoseats(myseries, myspec1)
+mysa1
+s_preOut(mysa1)
+
+# User-defined variables
+var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
+var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
+var<- ts.union(var1,var2)
+
+myspec1 <- tramoseats_specDef(spec=c("RSAfull"),
+                              usrdef.varEnabled = TRUE, usrdef.var = var)
+s_preVar(myspec1)
+mysa1 <- tramoseats(myseries,myspec1)
+
+myspec2 <- tramoseats_specDef(spec=c("RSAfull"), usrdef.varEnabled = TRUE,
+                              usrdef.var = var, usrdef.varCoef = c(17,-1),
+                              transform.function = "None")
+mysa2 <- tramoseats(myseries,myspec2)
+
+# Pre-specified ARMA coefficients
+myspec1 <- tramoseats_specDef(spec=c("RSAfull"),
+                              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
+                              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
+                              arima.coef = c(-0.12,-0.12,-0.3,-0.99),
+                              arima.coefType = rep("Fixed",4))
+mysa1 <- tramoseats(myseries,myspec1)
+mysa1
+s_arimaCoef(myspec1)
+s_arimaCoef(mysa1)
 }
 \references{
 Info on JDemtra+, usage and functions:

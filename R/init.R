@@ -1,7 +1,7 @@
 #' @import rJava
 #' @importFrom grDevices as.graphicsAnnot  dev.cur  dev.flush dev.hold  dev.interactive  dev.set  devAskNewPage dev.new
 #' @importFrom graphics abline axis curve hist layout legend mtext par plot title lines points
-#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  sd is.mts end na.omit start time ts.plot window window<- cycle .preformat.ts
+#' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  qqline sd is.mts end na.omit start time ts.plot window window<- cycle .preformat.ts
 #' @importFrom methods as
 #' @importFrom utils capture.output
 #'
@@ -9,8 +9,8 @@ utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.
 
 library("rJava")
 .jinit()
-.jaddClassPath("./Java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")
-.jaddClassPath("./Java/jdr-2.2.2-SNAPSHOT.jar")
+.jaddClassPath("./inst/java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")
+.jaddClassPath("./inst/java/jdr-2.2.2-SNAPSHOT.jar")
 
 ## jd2_rslts.R
 proc_data<-function(rslt, name, clobj){

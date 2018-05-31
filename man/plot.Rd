@@ -11,14 +11,12 @@
 \alias{plot.final}
 \alias{plot}
 \alias{plot.SA}
-\title{Plotting decomposition or final results of a seasonal adjustment}
+\title{Plotting regarima, decomposition or final results of SA}
 \usage{
 \method{plot}{regarima}(x, which = c(1:6), dec_zoom = FALSE,
   caption = list("Residuals", "Histogram of residuals", "Normal Q-Q",
   "ACF of residuals", "PACF of residuals", "Decomposition"),
-  sub.caption = NULL, main = "", ask = prod(par("mfcol")) < length(which)
-  && dev.interactive(), ..., qqline = TRUE, cex.caption = 1,
-  cex.oma.main = 1.25)
+  ask = prod(par("mfcol")) < length(which) && dev.interactive(), ...)
 
 \method{plot}{decomposition_X11}(x, first_date, last_date, ...)
 
@@ -33,34 +31,24 @@
 \arguments{
 \item{x}{the object to plot.}
 
-\item{which}{XXXXXX}
+\item{which}{vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition".}
 
-\item{dec_zoom}{XXXXXX}
+\item{dec_zoom}{logicals, decomposition zoom. Option available for the  graph (6) "Decomposition". If \code{TRUE} an additional graphical window with separated graphs of: the linearized series, calendar effects and outliers effects is created. The default is \code{FALSE}.}
 
-\item{caption}{XXXXXX}
+\item{caption}{list with the graphs titles.}
 
-\item{sub.caption}{XXXXXX}
-
-\item{main}{main title.}
-
-\item{ask}{logical value. If TRUE, the user will in future be prompted before a new graphical page is started.}
+\item{ask}{logicals. If \code{TRUE}, the user will in future be prompted before a new graphical page is started.}
 
 \item{...}{other parameters.}
-
-\item{qqline}{XXXXXX}
-
-\item{cex.caption}{XXXXXX}
-
-\item{cex.oma.main}{XXXXXX}
 
 \item{first_date}{the first date to start the plot. If missing the plot starts at the beginning of the time-series.}
 
 \item{last_date}{the last date to end the plot. If missing the plot ends at the end of the time-series (eventually, including forecast).}
 
-\item{forecast}{logical indicating if forecasts should be included in the plot.}
+\item{forecast}{logical indicating if forecasts should be included in the plot. If \code{TRUE} the forecast is plotted.}
 
 \item{type_chart}{character vector indicating which type of chart to plot.}
 }
 \description{
-Plotting methods for objects around the seasonal adjustment : "regarima" for RegARIMA,"decomposition_X11" and "decomposition_SEATS" for the decomposition with X13 and TRAMO-SEATS, "final" for the final results and "SA" for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
+Plotting methods for the S3 class objects around the seasonal adjustment: \code{"regarima"} for RegARIMA,\code{"decomposition_X11"} and \code{"decomposition_SEATS"} for the decomposition with X13 and TRAMO-SEATS, \code{"final"} for the final SA results and \code{"SA"} for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
 }
