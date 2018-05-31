@@ -23,7 +23,34 @@ x13Def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \item{userdefined}{vector with characters for additional output variables}
 }
 \value{
-.
+\code{x13}/\code{x13Def} returns an object of class \code{c("SA","X13")}, a list containing the following components:
+
+\item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
+
+\item{decomposition}{object of class \code{"decomposition_X11"}, six elements list:
+\itemize{
+\item \code{specification} list with the X11 algorithm specification. See also function \code{\link{x13_spec}}
+\item \code{mode} decomposition mode
+\item \code{mstats} matrix with the  M statistics
+\item \code{si_ratio} time series matrix (mts) with the \code{d8} and \code{d10} series
+\item \code{s_filter} seasonal filters
+\item \code{t_filter} trend filter
+}
+}
+
+\item{final}{object of class \code{c("final","mts","ts","matrix")}. Matrix with the final results of the seasonal adjustment.
+It includes time series: original time series (\code{y}), forecast of the original series (\code{y_f}), trend (\code{t}), forecast of the trend (\code{t_f}),
+seasonally adjusted series (\code{sa}), forecast of the seasonally adjusted series (\code{sa_f}),
+seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), irregular component (\code{i}) and the forecast of the irregular component (\code{i_f}).}
+
+\item{diagnostics}{object of class \code{"diagnostics"}, list with four type of diagnostics tests:
+\itemize{
+\item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
+\item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
+\item \code{combined_test_all}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+\item \code{combined_test_end} combined tests for stable seasonality in the last 3 years.  Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+}
+}
 }
 \description{
 \code{x13}/\code{x13Def} estimates the seasonally adjusted series (sa) with the X13 method.
@@ -32,10 +59,10 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
 }
 \details{
 The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-In the second part the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}), multiplicative (\eqn{y = t * s * i}), log-additive (\eqn{log(y) = log(t)+log(s)+log(i)}) or pseudo-additive (\eqn{y = t*(s+i-1)}).
+In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}), multiplicative (\eqn{y = t * s * i}), log-additive (\eqn{log(y) = log(t)+log(s)+log(i)}) or pseudo-additive (\eqn{y = t*(s+i-1)}).
 The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
 
-In the X13 method, the X11 algorithm decomposes the series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
+In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
 
 As regards the available predefined \emph{JDemetra+} X13 model specifications (for the function \code{x13Def}), they are described in the table below.
 \tabular{rrrrrrr}{
@@ -49,16 +76,35 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 }
 }
 \examples{
-myspec <- x13_specDef("RSA5c")
-mysa <- x13(myseries, myspec)
-mysa
+  mysa <- x13Def(myseries, spec=c("RSA5c"))
 
-mysa1 <- x13Def(myseries,"RSA3")
-mysa1
+  myspec1 <- x13_spec(mysa,tradingdays.option = "WorkingDays")
+  mysa1 <- x13(myseries, myspec1)
+  mysa1
+  summary(mysa1$regarima)
 
-mysa2 <- x13Def(myseries,"RSA5c",
-userdefined = c("decomposition.d18","decomposition.d19"))
-mysa2
+  myspec2<-x13_spec(mysa, usrdef.outliersEnabled = TRUE,
+                             usrdef.outliersType = c("LS","AO"),
+                             usrdef.outliersDate=c("2008-10-01","2002-01-01"),
+                             usrdef.outliersCoef = c(36000,14000),
+                             transform.function = "None")
+  mysa2 <- x13(myseries, myspec2)
+  mysa2
+
+  myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
+                               arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
+                               arima.coefEnabled = TRUE,
+                               arima.coef = c(-0.8,-0.6,0),
+                               arima.coefType = c(rep("Fixed",2),"Undefined"))
+  s_arimaCoef(myspec3)
+  mysa3 <- x13(myseries, myspec3)
+  plot(mysa3)
+  plot(mysa3$regarima)
+  plot(mysa3$decomposition)
+
+  mysa4 <- x13Def(myseries,"RSA5c",
+  userdefined = c("decomposition.d18","decomposition.d19"))
+  mysa4
 
 }
 \references{

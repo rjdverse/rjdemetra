@@ -5,11 +5,8 @@
 plot.regarima = function(x, which = c(1:6), dec_zoom=FALSE,
      caption = list("Residuals","Histogram of residuals","Normal Q-Q","ACF of residuals",
                     "PACF of residuals","Decomposition"),
-     sub.caption = NULL, main = "",
      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
-     ...,
-     qqline = TRUE,
-     cex.caption = 1, cex.oma.main = 1.25){
+     ...){
 
 if (!inherits(x, "regarima"))
   stop("use only with \"regarima\" object")
@@ -18,6 +15,9 @@ if (!is.numeric(which) || any(which < 1) || any(which > 6))
 show <- rep(FALSE, 6)
 show[which] <- TRUE
 op <- par()
+sub.caption = NULL
+cex.caption = 1
+cex.oma.main = 1.25
 # Define additional variables for selected graphs:
 if (any(show[2L:3L])) {
   sres <- (x$residuals - mean(x$residuals))/sd(x$residuals)
@@ -73,10 +73,9 @@ if (show[3L]) {
   ylim <- range(sres, na.rm = TRUE)
   ylim[2L] <- ylim[2L] + diff(ylim) * 0.075
   dev.hold()
-  qq <- qqnorm(sres, main = main, ylab = "Standardized residuals", ylim = ylim,
+  qq <- qqnorm(sres, main = "", ylab = "Standardized residuals", ylim = ylim,
                ...)
-  if (qqline)
-    qqline(sres, lty = 3, col = "gray50")
+  qqline(sres, lty = 3, col = "gray50")
   if (one.fig)
     title(sub = sub.caption, ...)
   mtext(getCaption(3), 3, 0.25, cex = cex.caption)

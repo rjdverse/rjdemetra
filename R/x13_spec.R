@@ -6,10 +6,11 @@
 #'
 #' \code{x13_spec} creates (and/or modifies) a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA","X13")} or \code{c("SA_spec","X13")} class object.
 #'
-#' @inheritParams regarima_specDefX13
-#'
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSA5c".
 #'
+#' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
+#'
+#' @inheritParams regarima_specDefX13
 #' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.
 #' @param x11.seasonalComp logicals. If \code{TRUE} the program computes a seasonal component. Otherwise, the seasonal component is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).
 #' @param x11.lsigma numeric, lower sigma boundary for the detection of extreme values.
@@ -40,7 +41,7 @@
 #' Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
 #' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
 #'
-#' \item{regarima}{object of class \code{c("regarima_spec","x13")}. See function \code{\link{regarima_specX13}}}
+#' \item{regarima}{object of class \code{c("regarima_spec","x13")}. See \emph{Value} of the function \code{\link{regarima_specX13}}}
 #'
 #' \item{x11}{data.frame of class \code{c("X11_spec","data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
 #'
@@ -52,7 +53,62 @@
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @examples
-#' myspec <- x13_specDef(spec="RSA5c")
+#'   myspec1 <-x13_specDef(spec=c("RSA5c"))
+#'   myreg1 <-x13(myseries, spec=myspec1)
+#'
+#'   # Modify a pre-specified model specification
+#'   myspec2 <-x13_specDef(spec=c("RSA5c"), tradingdays.option = "WorkingDays")
+#'   myreg2 <-x13(myseries, spec=myspec2)
+#'
+#' # Modify the model specification from a "X13" object
+#'   myspec3 <- x13_spec(myreg1,tradingdays.option = "WorkingDays")
+#'   myreg3 <- x13(myseries,myspec3)
+#'
+#' # Modify the model specification from a "X13_spec" object
+#'   myspec4 <- x13_spec(myspec1,tradingdays.option = "WorkingDays")
+#'   myreg4 <- x13(myseries,myspec4)
+#'
+#' # Pre-specified outliers
+#'   myspec1<-x13_specDef(spec=c("RSA5c"),usrdef.outliersEnabled = TRUE,
+#'                              usrdef.outliersType = c("LS","AO"),
+#'                              usrdef.outliersDate=c("2008-10-01","2002-01-01"),
+#'                              usrdef.outliersCoef = c(36000,14000),
+#'                              transform.function = "None")
+#'
+#'   myreg1 <- x13(myseries, myspec1)
+#'   myreg1
+#'   s_preOut(myreg1)
+#'
+#' # User-defined variables
+#'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
+#'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
+#'   var <-ts.union(var1,var2)
+#
+#'   myspec1 <- x13_specDef(spec="RSA5c", usrdef.varEnabled = TRUE,
+#'                                   usrdef.var = var)
+#'   myreg1 <- x13(myseries,myspec1)
+#'   myreg1
+#'
+#'   myspec2 <- x13_specDef(spec="RSA5c", usrdef.varEnabled = TRUE,
+#'                                   usrdef.var = var1, usrdef.varCoef = c(2),
+#'                                   transform.function = "None")
+#'   myreg2 <- x13(myseries, myspec2)
+#'   s_preVar(myreg2)
+#'
+#' # Pre-specified ARMA coefficients
+#'   myspec1 <- x13_specDef(spec="RSA5c", automdl.enabled =FALSE,
+#'                               arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
+#'                               arima.coefEnabled = TRUE,
+#'                               arima.coef = c(-0.8,-0.6,0),
+#'                               arima.coefType = c(rep("Fixed",2),"Undefined"))
+#'
+#'   s_arimaCoef(myspec1)
+#'   myreg1 <- x13(myseries, myspec1)
+#'   myreg1
+#'
+#' # Defined seasonal filters
+#'   myspec1 <- x13_specDef("RSA5c",x11.seasonalma=rep("S3X1",12))
+#'   mysa1 <-x13(myseries,myspec1)
 #'
 #' @export
 x13_specDef <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
@@ -201,15 +257,8 @@ x11_specDef<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
 }
 #' @rdname x13_specDef
 #' @name x13_specDef
-#' @param object model specification, object of class c("SA_spec","X13") or c("SA","X13").
-#' @examples
-#' myspec <- x13_specDef(spec="RSA5c")
-#' mysa<- x13(myseries,myspec)
-#' myspec1 <- x13_spec(myspec,x11.seasonalma=rep("S3X1",12))
-#' mysa1 <-x13(myseries,myspec1)
-#' myspec2 <- x13_spec(mysa,x11.seasonalma=rep("S3X1",12))
-#' mysa2 <-x13(myseries,myspec2)
 #'
+#' @param object model specification, object of class \code{c("SA_spec","X13")} or \code{c("SA","X13")}.
 #' @export
 x13_spec <-function(object,
                           estimate.from=NA_character_,

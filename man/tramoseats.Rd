@@ -23,7 +23,33 @@ tramoseatsDef(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
 \item{userdefined}{vector with characters for additional output variables}
 }
 \value{
-.
+\code{tramoseats}/\code{tramoseatsDef} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
+
+\item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
+
+\item{decomposition}{object of class \code{"decomposition_SEATS"}, five elements list:
+\itemize{
+\item \code{specification} list with the SEATS algorithm specification. See also function \code{\link{tramoseats_spec}}
+\item \code{mode} decomposition mode
+\item \code{model} list with the SEATS models: \code{model, sa, trend, seasonal, transitory, irregular}. Each of them is a matrix with the estimated coefficients.
+\item \code{linearized} time series matrix (mts) with the stochastic series decomposition (input series \code{y_lin}, seasonally adjusted \code{sa_lin}, trend \code{t_lin}, seasonal \code{s_lin}, irregular \code{i_lin})
+\item \code{components} time series matrix (mts) with the decomposition components (input series \code{y_cmp}, seasonally adjusted \code{sa_cmp}, trend \code{t_cmp}, seasonal \code{s_cmp}, irregular \code{i_cmp})
+}
+}
+
+\item{final}{object of class \code{c("final","mts","ts","matrix")}. Matrix with the final results of the seasonal adjustment.
+It includes time series: original time series (\code{y}), forecast of the original series (\code{y_f}), trend (\code{t}), forecast of the trend (\code{t_f}),
+seasonally adjusted series (\code{sa}), forecast of the seasonally adjusted series (\code{sa_f}),
+seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), irregular component (\code{i}) and the forecast of the irregular component (\code{i_f}).}
+
+\item{diagnostics}{object of class \code{"diagnostics"}, list with four type of diagnostics tests:
+\itemize{
+\item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
+\item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
+\item \code{combined_test_all}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+\item \code{combined_test_end} combined tests for stable seasonality in the last 3 years.  Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+}
+}
 }
 \description{
 \code{tramoseats}/\code{tramoseatsDef} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
@@ -32,7 +58,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
 }
 \details{
 The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-In the second part the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
+In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
 
 In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 
@@ -49,16 +75,32 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
-myspec <- tramoseats_specDef("RSAfull", seats.approx = "Noisy")
-mysa <- tramoseats(myseries, myspec)
-mysa
 
-mysa1 <- tramoseatsDef(myseries,"RSA2")
-mysa1
+  myspec<-tramoseats_specDef("RSAfull")
+  mysa <-tramoseats(myseries,myspec)
+  mysa1 <- tramoseatsDef(myseries, spec = "RSAfull")
+  mysa
+  mysa1
 
-mysa2 <- tramoseatsDef(myseries,"RSAfull",
-userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
-mysa2
+  myspec2 <-tramoseats_spec(myspec,tradingdays.mauto="Unused",tradingdays.option ="WorkingDays",
+                             easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+  mysa2 <- tramoseats(myseries, myspec2)
+
+  var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
+  var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
+  var<-ts.union(var1,var2)
+  myspec3 <- tramoseats_spec(myspec,
+                              usrdef.varEnabled = TRUE, usrdef.var = var)
+  s_preVar(myspec3)
+  mysa3 <- tramoseats(myseries,myspec3)
+  plot(mysa3)
+  plot(mysa3$regarima)
+  plot(mysa3$decomposition)
+
+  mysa2 <- tramoseatsDef(myseries,"RSAfull",
+  userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
+  mysa2
+
 }
 \references{
 Info on JDemtra+, usage and functions:

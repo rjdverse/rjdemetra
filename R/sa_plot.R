@@ -1,22 +1,17 @@
-#' Plotting decomposition or final results of a seasonal adjustment
+#' Plotting regarima, decomposition or final results of SA
 #'
-#' Plotting methods for objects around the seasonal adjustment : "regarima" for RegARIMA,"decomposition_X11" and "decomposition_SEATS" for the decomposition with X13 and TRAMO-SEATS, "final" for the final results and "SA" for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
+#' Plotting methods for the S3 class objects around the seasonal adjustment: \code{"regarima"} for RegARIMA,\code{"decomposition_X11"} and \code{"decomposition_SEATS"} for the decomposition with X13 and TRAMO-SEATS, \code{"final"} for the final SA results and \code{"SA"} for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
 #'
 #' @param x the object to plot.
 #' @param first_date the first date to start the plot. If missing the plot starts at the beginning of the time-series.
 #' @param last_date the last date to end the plot. If missing the plot ends at the end of the time-series (eventually, including forecast).
 #' @param type_chart character vector indicating which type of chart to plot.
-#' @param forecast logical indicating if forecasts should be included in the plot.
-#' @param ask logical value. If TRUE, the user will in future be prompted before a new graphical page is started.
+#' @param forecast logical indicating if forecasts should be included in the plot. If \code{TRUE} the forecast is plotted.
+#' @param ask logicals. If \code{TRUE}, the user will in future be prompted before a new graphical page is started.
 #' @param ... other parameters.
-#' @param which XXXXXX
-#' @param dec_zoom XXXXXX
-#' @param caption XXXXXX
-#' @param sub.caption XXXXXX
-#' @param main main title.
-#' @param qqline XXXXXX
-#' @param cex.caption XXXXXX
-#' @param cex.oma.main XXXXXX
+#' @param which vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition".
+#' @param dec_zoom logicals, decomposition zoom. Option available for the  graph (6) "Decomposition". If \code{TRUE} an additional graphical window with separated graphs of: the linearized series, calendar effects and outliers effects is created. The default is \code{FALSE}.
+#' @param caption list with the graphs titles.
 #' @name plot
 #' @rdname plot
 #' @export

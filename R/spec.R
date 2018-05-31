@@ -1,6 +1,6 @@
 #' Access model specification, SA and pre-adjustment in X13 and TRAMO-SEATS
 #' @description
-#' The below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
+#' Below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
 #' @param object object of one of the classes: \code{c("SA","X13")}, \code{c("SA","TRAMO_SEATS")}, \code{c("SA_spec","X13")}, \code{c("SA_spec","TRAMO_SEATS")}, \code{c("regarima","X13")}, \code{c("regarima","TRAMO_SEATS")}, \code{c("regarima_spec","X13")}, \code{c("regarima_spec","TRAMO_SEATS")}.
 #' @name specification
 NULL

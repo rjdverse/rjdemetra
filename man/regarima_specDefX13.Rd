@@ -289,7 +289,7 @@ RG5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 # User-defined variables
   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-  var <-ts(matrix(c(var1,var2), ncol=2),start = c(2001, 12), frequency = 12)
+  var <-ts.union(var1,var2)
 
   myspec1 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE,
                                   usrdef.var = var)
