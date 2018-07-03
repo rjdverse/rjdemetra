@@ -106,7 +106,7 @@ setClass(
 #'   mysa4
 #'
 #' @export
-x13 <-function(series, spec, userdefined){
+x13 <-function(series, spec, userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -119,6 +119,10 @@ x13 <-function(series, spec, userdefined){
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(series))
   jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+
+  # Or, using the fonction x13JavaResults :
+  # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
   jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
@@ -133,17 +137,18 @@ x13 <-function(series, spec, userdefined){
 
     z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
 
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
+    z[["user_defined"]] <- user_defined(userdefined,jrobct)
 
     class(z) <- c("SA","X13")
     return(z)
   }
 }
+
 #' @rdname x13
 #' @name x13
 #' @export
-x13Def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"), userdefined){
+x13Def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
+                  userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -153,25 +158,46 @@ x13Def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
   jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+
+  return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+#Extract the results of the SA of a X13 object
+x13JavaResults <- function(jrslt, spec, userdefined){
+
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
   jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
 
   if (is.null(jrobct@internal)){
     return (NaN)
+  }
+
+  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec)
+  deco <- decomp_defX13(jrobj = jrobct, spec = spec)
+  fin <-final(jrobj = jrobct)
+  diagn <- diagnostics(jrobj = jrobct)
+
+  z <- list(regarima = reg, decomposition = deco, final = fin,
+            diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
+  z[["user_defined"]] <- user_defined(userdefined,jrobct)
+
+  class(z) <- c("SA","X13")
+  return(z)
+}
+sa_jd2r <- function(jrslt, spec, userdefined = NULL, ...){
+  if(is.null(jresult))
+    return(NULL)
+
+  if(.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")){
+    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined)
   }else{
-    reg <- regarima_defX13(jrobj = jrobct_arima, spec = jrspec)
-    deco <- decomp_defX13(jrobj = jrobct, spec = jrspec)
-    fin <- final(jrobj = jrobct)
-    diagn <- diagnostics(jrobj = jrobct)
+    if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
+      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined)
+    }else{
+      stop("Wrong spec argument")
+    }
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
-
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
-
-    class(z) <- c("SA","X13")
-    return(z)
   }
 }
 

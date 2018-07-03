@@ -101,7 +101,7 @@ setClass(
 #'   mysa2
 #'
 #' @export
-tramoseats <-function(series, spec, userdefined){
+tramoseats <-function(series, spec, userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -113,6 +113,10 @@ tramoseats <-function(series, spec, userdefined){
   specSeats_r2jd(spec,jrspec)
   jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+
+  # Or, using the fonction x13JavaResults :
+  # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
@@ -125,7 +129,8 @@ tramoseats <-function(series, spec, userdefined){
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
+    z <- list(regarima = reg, decomposition = deco, final = fin,
+              diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
 
     if (!missing(userdefined))
       z[["user_defined"]] <- user_defined(userdefined,jrobct)
@@ -137,7 +142,8 @@ tramoseats <-function(series, spec, userdefined){
 #' @rdname tramoseats
 #' @name tramoseats
 #' @export
-tramoseatsDef <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"), userdefined){
+tramoseatsDef <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+                         userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -147,26 +153,27 @@ tramoseatsDef <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA"
   jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+
+  return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)){
+  if (is.null(jrobct@internal))
     return (NaN)
-  }else{
-    reg <- regarima_defTS(jrobj = jrobct_arima, spec = jrspec)
-    deco <- decomp_defTS(jrobj = jrobct, spec = jrspec)
-    fin <- final(jrobj = jrobct)
-    diagn <- diagnostics(jrobj = jrobct)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
+  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec)
+  deco <- decomp_defTS(jrobj = jrobct, spec = spec)
+  fin <- final(jrobj = jrobct)
+  diagn <- diagnostics(jrobj = jrobct)
 
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
+  z <- list(regarima = reg, decomposition = deco, final = fin,
+            diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
 
-    class(z) <- c("SA","TRAMO_SEATS")
-    return(z)
-  }
+  class(z) <- c("SA","TRAMO_SEATS")
+  return(z)
+
 }
-
-

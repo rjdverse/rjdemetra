@@ -159,6 +159,8 @@ print.final <- function(x, calendar, n_last_obs = frequency(x), print_forecasts 
 }
 #' @export
 print.user_defined <- function(x,...){
+  if(is.null(x))
+    return(invisible(x))
   cat(ngettext(length(x)!= 1 + 1,
                  "One additional variable (",
                    "Names of additional variables ("))
