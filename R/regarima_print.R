@@ -94,9 +94,14 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   usr_spec <- x$specification$regression$userdef$specification
   out <- s_preOut(x)
   var <- s_preVar(x)$description
-
+  rslt_spec <- object$model$spec_rslt
+  
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
-  cat("\n\n")
+  cat("\n")
+  if(rslt_spec[3]==TRUE)
+      cat("Series has been log-transformed\n") 
+  
+  cat("\n")
   cat("Coefficients:")
   if (!is.null(arima_coef)){
     if (!is.matrix(arima_coef[,-3])){
