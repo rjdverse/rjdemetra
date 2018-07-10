@@ -1,63 +1,65 @@
 #' Saving and loading a model specification, SA and pre-adjustment in X13 and TRAMO-SEATS
 #' @description
-#' \code{saveSpec} saves a SA or RegARIMA model specification. \code{loadSpec} loads the previously saved model specification.
+#' \code{save_spec} saves a SA or RegARIMA model specification. \code{load_spec} loads the previously saved model specification.
 #'
 #' @param object object of one of the classes: \code{c("SA_spec","X13")}, \code{c("SA_spec","TRAMO_SEATS")}, \code{c("SA","X13")}, \code{c("SA","TRAMO_SEATS")}, \code{c("regarima_spec","X13")}, \code{c("regarima_spec","TRAMO_SEATS")}, \code{c("regarima","X13")}, \code{c("regarima","TRAMO_SEATS")}.
 #' @param file (path and) name of the file where the model specification will be saved (have been saved).
 #'
 #' @details
-#' \code{saveSpec} saves the final model specification of a \code{"SA_spec"}, \code{"SA"}, \code{"regarima_spec"} or \code{"regarima"} class object.
-#' \code{loadSpec} loads the previously saved model specification. It creates a \code{c("SA_spec","X13")}, \code{c("sA_spec","TRAMO_SEATS")}, \code{c("regarima_spec","X13")} or \code{c("regarima_spec","TRAMO_SEATS")} class object, in line with the class of the previously saved model specification.
+#' \code{save_spec} saves the final model specification of a \code{"SA_spec"}, \code{"SA"}, \code{"regarima_spec"} or \code{"regarima"} class object.
+#' \code{load_spec} loads the previously saved model specification. It creates a \code{c("SA_spec","X13")}, \code{c("sA_spec","TRAMO_SEATS")}, \code{c("regarima_spec","X13")} or \code{c("regarima_spec","TRAMO_SEATS")} class object, in line with the class of the previously saved model specification.
 #'
 #' @return
-#' \code{loadSpec}  returns an object of class \code{"SA_spec"} or \code{"regarima_spec"}.
+#' \code{load_spec}  returns an object of class \code{"SA_spec"} or \code{"regarima_spec"}.
 
 #' @references
 #' Info on JDemtra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' @examples
-#'   myreg1 <-regarimaDefX13(myseries, spec=c("RG5c"))
-#'   myspec2 <-regarima_specX13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
+#'   myreg1 <-regarima_def_x13(myseries, spec=c("RG5c"))
+#'   myspec2 <-regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
 #'   myreg2 <-regarima(myseries,myspec2)
 #'
-#'   myreg3 <-regarimaDefTS(myseries, spec=c("TRfull"))
-#'   myspec4 <-regarima_specTS(myreg3,tradingdays.mauto ="Unused",tradingdays.option ="WorkingDays",
-#'                                easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg3 <-regarima_def_tramoseats(myseries, spec=c("TRfull"))
+#'   myspec4 <-regarima_spec_tramoseats(myreg3, tradingdays.mauto = "Unused",
+#'                                      tradingdays.option ="WorkingDays",
+#'                                      easter.type = "Standard",
+#'                                      automdl.enabled = FALSE, arima.mu = TRUE)
 #'   myreg4 <-regarima(myseries,myspec4)
 #'
-#'   myspec6 <- x13_specDef("RSA5c")
+#'   myspec6 <- x13_spec_def("RSA5c")
 #'   mysa6 <- x13(myseries,myspec6)
 #'
-#'   myspec7 <- tramoseats_specDef("RSAfull")
+#'   myspec7 <- tramoseats_spec_def("RSAfull")
 #'   mysa7 <- tramoseats(myseries,myspec7)
 #'
 #'   # Save the model specification from a c("regarima_spec","X13") class object
-#'   saveSpec(myspec2,"specx13.RData")
+#'   save_spec(myspec2,"specx13.RData")
 #'   # Save the model specification from a c("regarima","X13") class object
-#'   saveSpec(myreg2,"regx13.RData")
+#'   save_spec(myreg2,"regx13.RData")
 #'   # Save the model specification from a c("regarima_spec","TRAMO_SEATS") class object
-#'   saveSpec(myspec4,"specTS.RData")
+#'   save_spec(myspec4,"specTS.RData")
 #'   # Save the model specification from a c("regarima","TRAMO_SEATS") class object
-#'   saveSpec(myreg4,"regTS.RData")
+#'   save_spec(myreg4,"regTS.RData")
 #'   # Save model from a c("SA_spec","X13") class object
-#'   saveSpec(myspec6,"specFullx13.RData")
+#'   save_spec(myspec6,"specFullx13.RData")
 #'   # Save model from a c("SA","X13") class object
-#'   saveSpec(mysa6,"sax13.RData")
+#'   save_spec(mysa6,"sax13.RData")
 #'   # Save model from a c("SA_spec","TRAMO_SEATS") class object
-#'   saveSpec(myspec7,"specFullTS.RData")
+#'   save_spec(myspec7,"specFullTS.RData")
 #'   # Save model from a c("SA","TRAMO_SEATS") class object
-#'   saveSpec(mysa7,"saTS.RData")
+#'   save_spec(mysa7,"saTS.RData")
 #'
 #'   # Load the model specification
-#'   myspec2a <- loadSpec("specx13.RData")
-#'   myspec2b <- loadSpec("regx13.RData")
-#'   myspec4a <- loadSpec("specTS.RData")
-#'   myspec4b <- loadSpec("regTS.RData")
-#'   myspec6a <- loadSpec("specFullx13.RData")
-#'   myspec6b <- loadSpec("sax13.RData")
-#'   myspec7a <- loadSpec("specFullTS.RData")
-#'   myspec7b <- loadSpec("saTS.RData")
+#'   myspec2a <- load_spec("specx13.RData")
+#'   myspec2b <- load_spec("regx13.RData")
+#'   myspec4a <- load_spec("specTS.RData")
+#'   myspec4b <- load_spec("regTS.RData")
+#'   myspec6a <- load_spec("specFullx13.RData")
+#'   myspec6b <- load_spec("sax13.RData")
+#'   myspec7a <- load_spec("specFullTS.RData")
+#'   myspec7b <- load_spec("saTS.RData")
 #'
 #'   regarima(myseries,myspec2a)
 #'   regarima(myseries,myspec4a)
@@ -67,7 +69,7 @@
 #'   tramoseats(myseries,myspec7b)
 #'
 #' @export
-saveSpec = function (object, file = "spec.RData") {
+save_spec = function (object, file = "spec.RData") {
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
 
@@ -106,10 +108,10 @@ saveSpec = function (object, file = "spec.RData") {
   save(spec, file = file)
 }
 # Generic function to load previously saved model specification
-#' @rdname saveSpec
-#' @name saveSpec
+#' @rdname save_spec
+#' @name save_spec
 #' @export
-loadSpec <- function (file = "spec.RData") {
+load_spec <- function (file = "spec.RData") {
   object <- get(load(file = file))
   if (inherits(object,c("SA_saveX13","SA_saveTS","regarima_saveX13","regarima_saveTS"))==FALSE)
     stop("no model specification found in the file!\n")

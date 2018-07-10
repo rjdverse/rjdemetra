@@ -9,15 +9,15 @@ setClass(
 )
 #' RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS
 #' @description
-#' \code{regarima/regarimaDefX13/regarimaDefTS} decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
+#' \code{regarima/regarima_def_x13/regarima_def_tramoseats} decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
 #'
 #' @param series a univariate time series
 #' @param spec model specification. For the function:
 #' \itemize{
 #' \item \code{regarima}, object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}).
-#' See functions \code{\link{regarima_specX13}, \link{regarima_specDefX13}, \link{regarima_specTS}}, and \code{\link{regarima_specDefTS}}.
-#' \item \code{regarimaDefX13}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
-#' \item \code{regarimaDefTS}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
+#' See functions \code{\link{regarima_spec_x13}, \link{regarima_spec_def_x13}, \link{regarima_spec_tramoseats}}, and \code{\link{regarima_spec_def_tramoseats}}.
+#' \item \code{regarima_def_x13}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
+#' \item \code{regarima_def_tramoseats}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
 #'}
 #'
 #' @details
@@ -95,12 +95,12 @@ setClass(
 #' }
 #'
 #' @return
-#' \code{regarima/regarimaDefX13/regarimaDefTS} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarimaDefX13} returns an object of class \code{c("regarima","X13")} and \code{regarimaDefTS} an object of class \code{c("regarima","TRAMO_SEATS")}.
+#' \code{regarima/regarima_def_x13/regarima_def_tramoseats} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarima_def_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_def_tramoseats} an object of class \code{c("regarima","TRAMO_SEATS")}.
 #' For the function \code{regarima}, the sub-class of the object depends on the used method that is defined by the class of the \code{spec} object.
 #'
 #' An object of class \code{"regarima"} is a list containing the following components:
 #'
-#' \item{specification}{list with the model specification as defined by the \code{spec} argument. See also Value of the \code{\link{regarima_specX13}} and  \code{\link{regarima_specTS}} functions.}
+#' \item{specification}{list with the model specification as defined by the \code{spec} argument. See also Value of the \code{\link{regarima_spec_x13}} and  \code{\link{regarima_spec_tramoseats}} functions.}
 #'
 #' \item{arma}{vector with the orders of the autoregressive (AR), moving average (MA), seasonal AR and seasonal MA processes, as well as with the regular and seasonal differencing orders (P,D,Q) (BP,BD,BQ).}
 #'
@@ -120,7 +120,7 @@ setClass(
 #'
 #'
 #' @references
-#' Info on JDemtra+, usage and functions:
+#' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
@@ -131,13 +131,13 @@ setClass(
 #' @examples
 #'
 #' # X13 method
-#'   myreg <- regarimaDefX13(myseries, spec=c("RG5c"))
+#'   myreg <- regarima_def_x13(myseries, spec=c("RG5c"))
 #'
-#'   myspec1 <- regarima_specX13(myreg,tradingdays.option = "WorkingDays")
+#'   myspec1 <- regarima_spec_x13(myreg,tradingdays.option = "WorkingDays")
 #'   myreg1 <- regarima(myseries, myspec1)
 #'   summary(myreg1)
 #'
-#'   myspec2<-regarima_specX13(myreg, usrdef.outliersEnabled = TRUE,
+#'   myspec2<-regarima_spec_x13(myreg, usrdef.outliersEnabled = TRUE,
 #'                              usrdef.outliersType = c("LS","AO"),
 #'                              usrdef.outliersDate=c("2008-10-01","2002-01-01"),
 #'                              usrdef.outliersCoef = c(36000,14000),
@@ -145,7 +145,7 @@ setClass(
 #'   myreg2 <- regarima(myseries, myspec2)
 #'   myreg2
 #'
-#'   myspec3 <- regarima_specX13(myreg, automdl.enabled =FALSE,
+#'   myspec3 <- regarima_spec_x13(myreg, automdl.enabled =FALSE,
 #'                                arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
 #'                                arima.coefEnabled = TRUE,
 #'                                arima.coef = c(-0.8,-0.6,0),
@@ -156,20 +156,22 @@ setClass(
 #'   plot(myreg3)
 #'
 #' # TRAMO-SEATS method
-#'   myspec<-regarima_specDefTS("TRfull")
+#'   myspec<-regarima_spec_def_tramoseats("TRfull")
 #'   myreg <-regarima(myseries,myspec)
-#'   myreg1 <- regarimaDefTS(myseries, spec = "TRfull")
+#'   myreg1 <- regarima_def_tramoseats(myseries, spec = "TRfull")
 #'   myreg
 #'   myreg1
 #'
-#'   myspec2 <-regarima_specTS(myspec,tradingdays.mauto="Unused",tradingdays.option ="WorkingDays",
-#'                              easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myspec2 <-regarima_spec_tramoseats(myspec, tradingdays.mauto = "Unused",
+#'                                      tradingdays.option = "WorkingDays",
+#'                                      easter.type = "Standard",
+#'                                      automdl.enabled = FALSE, arima.mu = TRUE)
 #'   myreg2 <- regarima(myseries, myspec2)
 #'
 #'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
 #'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
 #'   var<-ts.union(var1,var2)
-#'   myspec3 <- regarima_specTS(myspec,
+#'   myspec3 <- regarima_spec_tramoseats(myspec,
 #'                               usrdef.varEnabled = TRUE, usrdef.var = var)
 #'   s_preVar(myspec3)
 #'   myreg3 <- regarima(myseries,myspec3)
@@ -235,7 +237,7 @@ regarima.TRAMO_SEATS<-function(series, spec = NA){
 #' @rdname regarima
 #' @name regarima
 #' @export
-regarimaDefTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")){
+regarima_def_tramoseats <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -260,7 +262,7 @@ regarimaDefTS <-function(series, spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "T
 #' @rdname regarima
 #' @name regarima
 #' @export
-regarimaDefX13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
+regarima_def_x13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
   if (!is.ts(series)){
     stop("series must be a time series")
   }

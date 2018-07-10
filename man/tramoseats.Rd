@@ -3,13 +3,13 @@
 \name{tramoseats}
 \alias{tramoseats}
 \alias{tramoseats}
-\alias{tramoseatsDef}
+\alias{tramoseats_def}
 \title{SA, TRAMO-SEATS}
 \usage{
-tramoseats(series, spec, userdefined)
+tramoseats(series, spec, userdefined = NULL)
 
-tramoseatsDef(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
-  "RSA4", "RSA5"), userdefined)
+tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
+  "RSA4", "RSA5"), userdefined = NULL)
 }
 \arguments{
 \item{series}{a univariate time series}
@@ -17,13 +17,13 @@ tramoseatsDef(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
 \item{spec}{model specification TRAMO-SEATS. For the function:
 \itemize{
 \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
-\item \code{tramoseatsDef}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
+\item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 }}
 
 \item{userdefined}{vector with characters for additional output variables}
 }
 \value{
-\code{tramoseats}/\code{tramoseatsDef} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
+\code{tramoseats}/\code{tramoseats_def} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
 
 \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
 
@@ -52,7 +52,7 @@ seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), 
 }
 }
 \description{
-\code{tramoseats}/\code{tramoseatsDef} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
+\code{tramoseats}/\code{tramoseats_def} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 }
@@ -62,7 +62,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 
 In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 
-As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseatsDef}), they are described in the table below.
+As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
 \tabular{rrrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -76,14 +76,16 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 \examples{
 
-  myspec<-tramoseats_specDef("RSAfull")
+  myspec<-tramoseats_spec_def("RSAfull")
   mysa <-tramoseats(myseries,myspec)
-  mysa1 <- tramoseatsDef(myseries, spec = "RSAfull")
+  mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
   mysa
   mysa1
 
-  myspec2 <-tramoseats_spec(myspec,tradingdays.mauto="Unused",tradingdays.option ="WorkingDays",
-                             easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+  myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
+                             tradingdays.option = "WorkingDays",
+                             easter.type = "Standard",
+                             automdl.enabled = FALSE, arima.mu = TRUE)
   mysa2 <- tramoseats(myseries, myspec2)
 
   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
@@ -97,13 +99,13 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
   plot(mysa3$regarima)
   plot(mysa3$decomposition)
 
-  mysa2 <- tramoseatsDef(myseries,"RSAfull",
+  mysa2 <- tramoseats_def(myseries,"RSAfull",
   userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
   mysa2
 
 }
 \references{
-Info on JDemtra+, usage and functions:
+Info on JDemetra+, usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.

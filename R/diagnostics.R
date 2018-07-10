@@ -11,11 +11,13 @@ diagnostics <- function(jrobj){
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
                              res <- result(jrobj, diag)
-                             data.frame(Statistic = res[1], P.value =  res[2],
-                                        Description = attr(res, "description")
-                             )
+                             c(res[1], res[2], attr(res, "description"))
                            })
-  residuals_test <- do.call(rbind, residuals_test)
+  residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
+                      stringsAsFactors=FALSE)
+  residuals_test[,1] <- as.numeric(residuals_test[,1])
+  residuals_test[,2] <- as.numeric(residuals_test[,2])
+  colnames(residuals_test) <- c("Statistic","P.value","Description")
   rownames(residuals_test) <- c("qs test on sa","f-test on sa (seasonal dummies)",
                                 "Residual seasonality (entire series)",
                                 "Residual seasonality (last 3 years)",
@@ -37,12 +39,13 @@ combined_test <- function(jrobj, on = c("all", "end")){
   tests <- lapply(tests_names[-1],
                   function(diag) {
                     res <- result(jrobj,diag)
-                    data.frame(Statistic = res[1], P.value =  res[2],
-                               Description = attr(res, "description")
-                    )
+                    c(res[1], res[2], attr(res, "description"))
                   })
-  tests <- do.call(rbind, tests)
-
+  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=T),
+                               stringsAsFactors=FALSE)
+  tests[,1] <- as.numeric(tests[,1])
+  tests[,2] <- as.numeric(tests[,2])
+  colnames(tests) <- c("Statistic","P.value","Description")
   rownames(tests) <- c("Kruskall-Wallis test",
                        "Test for the presence of seasonality assuming stability",
                        "Evolutive seasonality test")

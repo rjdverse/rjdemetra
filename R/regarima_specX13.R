@@ -1,9 +1,9 @@
 #' RegARIMA model specification, pre-adjustment in X13
 #' @description
 #'
-#' \code{regarima_specDefX13} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
+#' \code{regarima_spec_def_x13} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
 #'
-#' \code{regarima_specX13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
+#' \code{regarima_spec_x13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
 #'
 #' @param spec predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
 #'
@@ -152,7 +152,7 @@
 #'
 #'
 #' @details
-#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_specDefX13}) are described in the table below.
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_spec_def_x13}) are described in the table below.
 #'
 #' \tabular{rrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -185,27 +185,27 @@
 #' \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers. The matrix can be also accessed with the function \code{\link{s_span}}.}
 #'
 #' @references
-#' Info on JDemtra+, usage and functions:
+#' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' @examples
-#'   myspec1 <-regarima_specDefX13(spec=c("RG5c"))
+#'   myspec1 <-regarima_spec_def_x13(spec=c("RG5c"))
 #'   myreg1 <-regarima(myseries, spec=myspec1)
 #'
 #'   # Modify a pre-specified model specification
-#'   myspec2 <-regarima_specDefX13(spec=c("RG5c"), tradingdays.option = "WorkingDays")
+#'   myspec2 <-regarima_spec_def_x13(spec=c("RG5c"), tradingdays.option = "WorkingDays")
 #'   myreg2 <-regarima(myseries, spec=myspec2)
 #'
 #' # Modify the model specification from a "regarima" object
-#'   myspec3 <- regarima_specX13(myreg1,tradingdays.option = "WorkingDays")
+#'   myspec3 <- regarima_spec_x13(myreg1,tradingdays.option = "WorkingDays")
 #'   myreg3 <- regarima(myseries,myspec3)
 #'
 #' # Modify the model specification from a "regarima_spec" object
-#'   myspec4 <- regarima_specX13(myspec1,tradingdays.option = "WorkingDays")
+#'   myspec4 <- regarima_spec_x13(myspec1,tradingdays.option = "WorkingDays")
 #'   myreg4 <- regarima(myseries,myspec4)
 #'
 #' # Pre-specified outliers
-#'   myspec1<-regarima_specDefX13(spec=c("RG5c"),usrdef.outliersEnabled = TRUE,
+#'   myspec1<-regarima_spec_def_x13(spec=c("RG5c"),usrdef.outliersEnabled = TRUE,
 #'                              usrdef.outliersType = c("LS","AO"),
 #'                              usrdef.outliersDate=c("2008-10-01","2002-01-01"),
 #'                              usrdef.outliersCoef = c(36000,14000),
@@ -220,19 +220,19 @@
 #'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
 #'   var <-ts.union(var1,var2)
 #'
-#'   myspec1 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE,
+#'   myspec1 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE,
 #'                                   usrdef.var = var)
 #'   myreg1 <- regarima(myseries,myspec1)
 #'   myreg1
 #'
-#'   myspec2 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE,
+#'   myspec2 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE,
 #'                                   usrdef.var = var1, usrdef.varCoef = c(2),
 #'                                   transform.function = "None")
 #'   myreg2 <- regarima(myseries, myspec2)
 #'   s_preVar(myreg2)
 #'
 #' # Pre-specified ARMA coefficients
-#'   myspec1 <- regarima_specDefX13(spec="RG5c", automdl.enabled =FALSE,
+#'   myspec1 <- regarima_spec_def_x13(spec="RG5c", automdl.enabled =FALSE,
 #'                               arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
 #'                               arima.coefEnabled = TRUE,
 #'                               arima.coef = c(-0.8,-0.6,0),
@@ -243,7 +243,7 @@
 #'   myreg1
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                             estimate.from=NA_character_,
                             estimate.to=NA_character_,
                             estimate.first=NA_integer_,
@@ -438,11 +438,11 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
   return(z)
 }
 # The function creates a ("regarima_spec","X13") class object from from a regarima_spec or regarima object
-#' @rdname regarima_specDefX13
-#' @name regarima_specDefX13
+#' @rdname regarima_spec_def_x13
+#' @name regarima_spec_def_x13
 #' @param object object of class \code{c("regarima_spec","X13")} or of class \code{c("regarima","X13")}.
 #' @export
-regarima_specX13  <-function( object = object,
+regarima_spec_x13  <-function( object = object,
                                 estimate.from=NA_character_,
                                 estimate.to=NA_character_,
                                 estimate.first=NA_integer_,
