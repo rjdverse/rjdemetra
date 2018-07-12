@@ -342,3 +342,6 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 }
+\seealso{
+\code{\link{tramoseats}}
+}

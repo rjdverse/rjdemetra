@@ -102,21 +102,21 @@ decomp_rsltsTS <- function( jrobj){
   mode <- result(jrobj,"mode")
 
   lin_colnames <- sprintf("%s_lin", c("y","sa","t","s","i"))
-  cmp_colnames <- sprintf("decomposition.%s_cmp", c("y","sa","t","s","i"))
+  cmp_colnames <- sprintf("%s_cmp", c("y","sa","t","s","i"))
   lin_names <- sprintf("decomposition.%s", lin_colnames)
   cmp_names <- sprintf("decomposition.%s", cmp_colnames)
 
   lin <- lapply(lin_names,
                 function(diag) {
-                  res <- result(jrobj,diag)})
-  lin <- do.call(cbind,lin)
-  colnames(lin) <- gsub("decomposition.","",lin_names)
+                  result(jrobj,diag)})
+  lin <- do.call(cbind, lin)
+  colnames(lin) <- lin_colnames
 
   cmp <- lapply(cmp_names,
                 function(diag) {
-                  res <- result(jrobj,diag)})
-  cmp <- do.call(cbind,cmp)
-  colnames(cmp) <- gsub("decomposition.","",cmp_names)
+                  result(jrobj,diag)})
+  cmp <- do.call(cbind, cmp)
+  colnames(cmp) <- cmp_colnames
 
   fmodel_names <- paste0("decomposition.model.",c("ar","diff","ma","innovationvariance"))
   samodel_names <- paste0("decomposition.samodel.",c("ar","diff","ma","innovationvariance"))

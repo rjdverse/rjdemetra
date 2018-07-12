@@ -1,7 +1,7 @@
-#' Create a workspace or a multiprocessing
+#' Create a workspace or a multi-processing
 #'
 #' Functions to create a JDemetra+ workspace (\code{new_workspace()})
-#' add a multiprocessing to it (\code{new_multiprocessing})
+#' add a multi-processing to it (\code{new_multiprocessing}).
 #'
 #' @param workspace a workspace object
 #' @param name character name of the new multiprocessing
@@ -9,14 +9,14 @@
 #' @return \code{new_workspace()} returns an object of class \code{workspace} and
 #' \code{new_multiprocessing()} returns an object of class \code{multiprocessing}.
 #'
-#' @example \dontrun{
+#' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}, 
+#' \code{\link{add_sa_item}}
+#' 
+#' @examples \dontrun{
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' save_workspace(wk, "workspace.xml")
 #' }
-#'
-#' @family Functions to manipulate workspace
 #'
 #' @name new_workspace
 #' @rdname new_workspace
@@ -26,7 +26,7 @@ new_workspace <- function() {
   wk <- .jcall("ec/tstoolkit/jdr/ws/Workspace",
                "Lec/tstoolkit/jdr/ws/Workspace;",
                "create", dictionary)
-  wk <- new("workspace", multiproc)
+  wk <- new("workspace", wk)
   return(wk)
 }
 #' @name new_workspace
@@ -41,25 +41,25 @@ new_multiprocessing <- function(workspace, name) {
 
 
 
-#' Create a workspace or a multiprocessing
+#' Save a workspace
 #'
-#' Functions to create a JDemetra+ workspace (\code{new_workspace()})
-#' add a multiprocessing to it (\code{new_multiprocessing})
+#' Functions save a \code{workspace} object into a JDemetra+ workspace.
 #'
 #' @param workspace a workspace object to export
 #' @param file the path to the export JDemetra+ workspace (.xml file).
-#' If no specified a dialog box opens.
+#' By default a dialog box opens.
 #'
-#'
-#' @example \dontrun{
+#' @seealso \code{\link{load_workspace}}
+#' 
+#' @examples \dontrun{
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' save_workspace(wk, "workspace.xml")
 #' }
 #'
-#' @family Functions to manipulate workspace
-#'
+#' 
+#' @return A boolean indicating whether the export has suceed.
 #' @export
 save_workspace <- function(workspace, file) {
   if(missing(file) || is.null(file)){
@@ -75,16 +75,51 @@ save_workspace <- function(workspace, file) {
   }
   if(length(grep("\\.xml$",file))==0)
     stop("The file must be a .xml !")
-
-  .jcall(workspace, "Z", "save", file)
+  
+  actual_wd <- getwd()
+  file_export_wd <- dirname(file)
+  setwd(file_export_wd)
+  tryCatch(result <- .jcall(workspace, "Z", "save", basename(file)),
+           finally = setwd(actual_wd))
+  invisible(result)
 }
 
 
+#' Add a seasonnaly adjust model to a multi-processing
+#'
+#' Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{multiprocessing} object. 
+#'
+#' @param multiprocessing the multiprocessing object to add the seasonnaly adjust model.
+#' @param sa_obj the seasonnaly adjust object to export.
+#' @param name The name of the seasonnaly adjust model in the multiprocessing
+#' By default the name of the \code{sa_obj} is used.
+#'
+#' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
+#' 
+#' @examples \dontrun{
+#' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' sa_x13 <- x13(myseries, spec = spec_x13)
+#' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
+#' sa_ts <- tramoseats(myseries, spec = spec_ts)
+#'
+#' wk <- new_workspace()
+#' mp <- new_multiprocessing(wk, "sa1")
+#' add_sa_item(mp, sa_x13, "X13")
+#' add_sa_item(mp, sa_ts, "TramoSeats")
+#' 
+#' save_workspace(wk, "workspace.xml")
+#' }
+#'
+#'
 #' @export
 # Add a new element in a multiprocessing, jmp == multiprocessing,
-add_saitem <- function(multiprocessing, sa_obj, name){
+add_sa_item <- function(multiprocessing, sa_obj, name){
+
+  if(! is.multiprocessing(multiprocessing))
+      stop("Use multiprocessing object !")
+    
   jspec <- get_jspec(sa_obj)
-  y <- sa_obj$final[,"y"]
+  y <- sa_obj$final$series[, "y"]
 
   if(missing(name))
     name <- deparse(substitute(sa_obj))

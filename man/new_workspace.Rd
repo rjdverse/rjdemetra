@@ -4,9 +4,7 @@
 \alias{new_workspace}
 \alias{new_workspace}
 \alias{new_multiprocessing}
-\title{Create a workspace or a multiprocessing
-Functions to create a JDemetra+ workspace (\code{new_workspace()})
-add a multiprocessing to it (\code{new_multiprocessing})}
+\title{Create a workspace or a multi-processing}
 \usage{
 new_workspace()
 
@@ -22,7 +20,18 @@ new_multiprocessing(workspace, name)
 \code{new_multiprocessing()} returns an object of class \code{multiprocessing}.
 }
 \description{
-Create a workspace or a multiprocessing
 Functions to create a JDemetra+ workspace (\code{new_workspace()})
-add a multiprocessing to it (\code{new_multiprocessing})
+add a multi-processing to it (\code{new_multiprocessing}).
+}
+\examples{
+\dontrun{
+# Create and export a empty JDemetra+ workspace
+wk <- new_workspace()
+mp <- new_multiprocessing(wk, "sa1")
+}
+
+}
+\seealso{
+\code{\link{load_workspace}}, \code{\link{save_workspace}}, 
+\code{\link{add_sa_item}}
 }

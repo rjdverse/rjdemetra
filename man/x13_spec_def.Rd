@@ -4,7 +4,7 @@
 \alias{x13_spec_def}
 \alias{x13_spec_def}
 \alias{x13_spec}
-\title{X13 model specification, SA/X13}
+\title{X-13ARIMA-SEATS model specification, SA/X13}
 \usage{
 x13_spec_def(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
   "X11"), estimate.from = NA_character_, estimate.to = NA_character_,
@@ -343,4 +343,7 @@ Info on JDemetra+, usage and functions:
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+}
+\seealso{
+\code{\link{x13}}
 }

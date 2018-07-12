@@ -6,7 +6,7 @@
 #' @importFrom utils capture.output
 #'
 utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.d.tab", "arima.mu.tab", "", "", "arima.p.tab", "arima.q.tab", "automdl.acceptdefault.tab", "automdl.armalimit.tab", "automdl.balanced.tab", "automdl.cancel.tab", "automdl.compare.tab", "automdl.enabled.tab", "automdl.ljungboxlimit.tab", "automdl.mixed.tab", "automdl.reducecv.tab", "automdl.ub1.tab", "automdl.ub2.tab", "automdl.ubfinal.tab", "easter.duration.tab", "easter.enabled.tab", "easter.julian.tab", "easter.test.tab", "easter.type.tab", "estimate.eml.tab", "estimate.span.tab", "estimate.tol.tab", "estimate.urfinal.tab", "outlier.ao.tab", "outlier.cv.tab", "outlier.eml.tab", "outlier.enabled.tab", "outlier.ls.tab", "outlier.method.tab", "outlier.so.tab", "outlier.span.tab", "outlier.tc.tab", "outlier.tcrate.tab", "outlier.usedefcv.tab", "tradingdays.autoadjust.tab", "tradingdays.leapyear.tab", "tradingdays.mauto.tab", "tradingdays.option.tab", "tradingdays.pftd.tab", "tradingdays.stocktd.tab", "tradingdays.test.tab", "transform.adjust.tab", "transform.aicdiff.tab", "transform.fct.tab", "transform.function.tab",
-                         "jresult", "multiproc"))
+                         "jresult", "multiproc","x"))
 
 library("rJava")
 .jinit()

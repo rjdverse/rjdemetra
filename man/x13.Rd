@@ -4,7 +4,7 @@
 \alias{x13}
 \alias{x13}
 \alias{x13_def}
-\title{SA, X13}
+\title{Seasonal Adjustment with  X-13ARIMA-SEATS}
 \usage{
 x13(series, spec, userdefined = NULL)
 
@@ -20,7 +20,7 @@ x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
 }}
 
-\item{userdefined}{vector with characters for additional output variables}
+\item{userdefined}{vector with characters for additional output variables.}
 }
 \value{
 \code{x13}/\code{x13_def} returns an object of class \code{c("SA","X13")}, a list containing the following components:
@@ -53,7 +53,7 @@ seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), 
 }
 }
 \description{
-\code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X13 method.
+\code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 }
@@ -114,4 +114,9 @@ Info on JDemetra+, usage and functions:
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+}
+\seealso{
+
+
+\code{\link{x13_spec}}, \code{\link{tramoseats}}
 }

@@ -2,10 +2,10 @@ setClass(
   Class="JD2_X13_java",
   contains = "JD2_ProcResults"
 )
-#' SA, X13
+#' Seasonal Adjustment with  X-13ARIMA-SEATS
 #'
 #' @description
-#' \code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X13 method.
+#' \code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 #'
@@ -15,7 +15,7 @@ setClass(
 #' \item \code{x13}, object of class \code{c("SA_spec","X13")}
 #' \item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
 #' }
-#' @param userdefined vector with characters for additional output variables
+#' @param userdefined vector with characters for additional output variables.
 #'
 #' @details
 #' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
@@ -65,7 +65,8 @@ setClass(
 #' }
 #' }
 #'
-#'
+#' @seealso 
+#' 
 #' @references
 #' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
@@ -73,7 +74,9 @@ setClass(
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
-#'
+#' 
+#' @seealso \code{\link{x13_spec}}, \code{\link{tramoseats}}
+#' 
 #' @examples
 #'   mysa <- x13_def(myseries, spec=c("RSA5c"))
 #'
@@ -185,7 +188,7 @@ x13JavaResults <- function(jrslt, spec, userdefined){
   return(z)
 }
 sa_jd2r <- function(jrslt, spec, userdefined = NULL, ...){
-  if(is.null(jresult))
+  if(is.null(jrslt))
     return(NULL)
 
   if(.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")){

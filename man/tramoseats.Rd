@@ -4,7 +4,7 @@
 \alias{tramoseats}
 \alias{tramoseats}
 \alias{tramoseats_def}
-\title{SA, TRAMO-SEATS}
+\title{Seasonal Adjustment with TRAMO-SEATS}
 \usage{
 tramoseats(series, spec, userdefined = NULL)
 
@@ -20,7 +20,7 @@ tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
 \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 }}
 
-\item{userdefined}{vector with characters for additional output variables}
+\item{userdefined}{vector with characters for additional output variables.}
 }
 \value{
 \code{tramoseats}/\code{tramoseats_def} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
@@ -111,4 +111,7 @@ Info on JDemetra+, usage and functions:
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+}
+\seealso{
+\code{\link{tramoseats_spec}}, \code{\link{x13}}
 }

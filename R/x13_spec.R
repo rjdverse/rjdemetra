@@ -1,4 +1,4 @@
-#' X13 model specification, SA/X13
+#' X-13ARIMA-SEATS model specification, SA/X13
 #'
 #' @description
 #'
@@ -51,6 +51,8 @@
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+#' 
+#' @seealso \code{\link{x13}}
 #'
 #' @examples
 #'   myspec1 <-x13_spec_def(spec=c("RSA5c"))

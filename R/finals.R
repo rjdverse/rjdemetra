@@ -14,13 +14,15 @@ final <- function(jrobj){
                        function(series) result(jrobj, series))
   finals_ts1 <- ts(simplify2array(finals_ts1),
                    start = start(finals_ts1[[1]]), frequency = frequency(finals_ts1[[1]]))
+  colnames(finals_ts1) <- c(finals_ts_names1)
+  
   finals_ts2 <- lapply(finals_ts_names2,
                        function(series) result(jrobj, series))
   finals_ts2 <- ts(simplify2array(finals_ts2),
                    start = start(finals_ts2[[1]]), frequency = frequency(finals_ts2[[1]]))
-  finals_ts <- ts.union(finals_ts1, finals_ts2)
-  colnames(finals_ts) <- c(finals_ts_names1, finals_ts_names2)
-
-  class(finals_ts) <- c("final","mts","ts","matrix")
+  colnames(finals_ts2) <- c(finals_ts_names2)
+  
+  finals_ts <- list(series = finals_ts1, forecasts = finals_ts2)
+  class(finals_ts) <- c("final","list")
   finals_ts
 }

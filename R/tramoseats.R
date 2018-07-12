@@ -3,7 +3,7 @@ setClass(
   contains = "JD2_ProcResults"
 )
 
-#' SA, TRAMO-SEATS
+#' Seasonal Adjustment with TRAMO-SEATS
 #'
 #' @description
 #' \code{tramoseats}/\code{tramoseats_def} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
@@ -16,7 +16,7 @@ setClass(
 #' \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
 #' \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 #' }
-#' @param userdefined vector with characters for additional output variables
+#' @param userdefined vector with characters for additional output variables.
 #'
 #' @details
 #' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
@@ -72,6 +72,8 @@ setClass(
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+#'
+#' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
 #'
 #' @examples
 #'

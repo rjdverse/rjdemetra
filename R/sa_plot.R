@@ -123,10 +123,11 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
                        type_chart = c("sa-trend", "cal-seas-irr"),
                        ask =  length(type_chart) > 1 && dev.interactive(),
                        ...){
+    
   type_chart <- match.arg(type_chart, several.ok = TRUE)
 
-
-  data_plot <- x
+  data_plot <- ts.union(x[[1]], x[[2]])
+  colnames(data_plot) <- c(colnames(x[[1]]), colnames(x[[2]]))
   if(!missing(first_date)){
     data_plot <- window(data_plot, start = first_date)
   }
@@ -136,14 +137,15 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   general_colors <- c(y = "#F0B400", t = "#1E6C0B", sa = "#155692",
                       cal = "#F0B400", s = "#1E6C0B", i = "#155692")
 
-  forecast <- forecast & tail(time(data_plot), 1) > time(na.omit(x[,"y_f"]))[1]
+  forecast <- forecast & 
+      tail(time(data_plot), 1) > time(x$forecasts)[1]
 
 
   if("sa-trend" %in% type_chart){
     # Graph 1 : Sa, trend, and y
     series_graph <- c("y","t","sa")
     if(forecast){
-      last_obs_date <- end(na.omit(x[,"y"]))
+      last_obs_date <- end(x$series[,"y"])
       window(data_plot[, paste0(series_graph,"_f")],
              start = last_obs_date,
              end = last_obs_date) <- window(data_plot[, series_graph],
@@ -175,7 +177,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
     # Graph 2 : Calendar, seasonal and irregular
     series_graph <- c("s", "i")
     if(forecast){
-      last_obs_date <- end(na.omit(x[,"y"]))
+      last_obs_date <- end(x$series[,"y"])
       window(data_plot[, paste0(series_graph,"_f")],
              start = last_obs_date,
              end = last_obs_date) <- window(data_plot[, series_graph],

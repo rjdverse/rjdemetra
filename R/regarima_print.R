@@ -94,12 +94,11 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   usr_spec <- x$specification$regression$userdef$specification
   out <- s_preOut(x)
   var <- s_preVar(x)$description
-  rslt_spec <- object$model$spec_rslt
+  rslt_spec <- x$model$spec_rslt
   
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n")
-  if(rslt_spec[3]==TRUE)
-      cat("Series has been log-transformed\n") 
+  cat("Log-transformation:",if(rslt_spec[3]==TRUE) {"yes"} else {"no"},sep=" ")
   
   cat("\n")
   cat("Coefficients:")
