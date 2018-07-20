@@ -76,12 +76,10 @@ save_workspace <- function(workspace, file) {
   if(length(grep("\\.xml$",file))==0)
     stop("The file must be a .xml !")
   
-  actual_wd <- getwd()
-  file_export_wd <- dirname(file)
-  setwd(file_export_wd)
-  tryCatch(result <- .jcall(workspace, "Z", "save", basename(file)),
-           finally = setwd(actual_wd))
-  invisible(result)
+  # actual_wd <- getwd()
+  # file_export_wd <- dirname(file)
+
+  invisible(.jcall(workspace, "Z", "save", file))
 }
 
 
@@ -112,7 +110,6 @@ save_workspace <- function(workspace, file) {
 #'
 #'
 #' @export
-# Add a new element in a multiprocessing, jmp == multiprocessing,
 add_sa_item <- function(multiprocessing, sa_obj, name){
 
   if(! is.multiprocessing(multiprocessing))
@@ -139,7 +136,7 @@ get_jspec.X13 <- function(x, ...){
   spec <- x13_spec(x)
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
   jdictionary <- specX13_r2jd(spec,jrspec)
-  seasma <- specX11_r2jd(spec,jrspec, freq = frequency(x$final))
+  seasma <- specX11_r2jd(spec,jrspec, freq = frequency(x$final$series))
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jspec
 }
@@ -152,7 +149,7 @@ get_jspec.TRAMO_SEATS <- function(x, ...){
   jspec
 }
 get_jspec.sa_item <- function(x, ...){
-  spec <- sa_spec(x, ...)
+  spec <- sa_spec(x)
   if(.jinstanceof(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")){
     spec <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
     spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",spec)

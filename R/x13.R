@@ -138,9 +138,8 @@ x13 <-function(series, spec, userdefined = NULL){
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
-
-    z[["user_defined"]] <- user_defined(userdefined,jrobct)
+    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
+              user_defined = user_defined(userdefined,jrobct))
 
     class(z) <- c("SA","X13")
     return(z)
@@ -166,7 +165,8 @@ x13_def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 }
 
 #Extract the results of the SA of a X13 object
-x13JavaResults <- function(jrslt, spec, userdefined){
+x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
+                           extract_info = FALSE){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
@@ -176,7 +176,9 @@ x13JavaResults <- function(jrslt, spec, userdefined){
     return (NaN)
   }
 
-  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec)
+  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
+                         jdictionary = jdictionary,
+                         extract_info = extract_info)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec)
   fin <-final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
@@ -187,7 +189,8 @@ x13JavaResults <- function(jrslt, spec, userdefined){
   class(z) <- c("SA","X13")
   return(z)
 }
-sa_jd2r <- function(jrslt, spec, userdefined = NULL, ...){
+sa_jd2r <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
+                    extract_info = FALSE){
   if(is.null(jrslt))
     return(NULL)
 
@@ -195,7 +198,9 @@ sa_jd2r <- function(jrslt, spec, userdefined = NULL, ...){
     tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined)
   }else{
     if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
-      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined)
+      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                     jdictionary = jdictionary,
+                     extract_info = extract_info)
     }else{
       stop("Wrong spec argument")
     }

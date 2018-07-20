@@ -297,7 +297,7 @@ regarima_spec_def_tramoseats <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "T
                             usrdef.varCoef = NA,
                             tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                             tradingdays.pftd=NA_integer_,
-                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                             tradingdays.leapyear = NA,
                             tradingdays.stocktd = NA_integer_,
                             tradingdays.test = c(NA_character_,"Separate_T","Joint_F","None"),
@@ -371,7 +371,8 @@ regarima_spec_def_tramoseats <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "T
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
@@ -500,7 +501,7 @@ regarima_spec_tramoseats <-function(object,
                           usrdef.varCoef = NA,
                           tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                           tradingdays.pftd=NA_integer_,
-                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                           tradingdays.leapyear = NA,
                           tradingdays.stocktd = NA_integer_,
                           tradingdays.test = c(NA_character_,"Separate_T","Joint_F","None"),
@@ -577,11 +578,13 @@ regarima_spec_tramoseats <-function(object,
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
 
+  
   # check the mode of remaining variables
   list.logical = list("usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
                       "easter.julian","easter.test","outlier.enabled","outlier.ao",

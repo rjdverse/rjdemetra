@@ -20,5 +20,5 @@ You can install RJDemetra from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("nbbrd/rjdemetra")
+devtools::install_github("nbbrd/rjdemetra", args = "--no-multiarch")
 ```

@@ -11,7 +11,7 @@ load_workspace(file)
 By default a dialog box opens.}
 }
 \value{
-An object of class \code{"workspace"}
+An object of class \code{"workspace"}.
 }
 \description{
 Function to load a JDemetra+ workspace

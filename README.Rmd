@@ -30,7 +30,7 @@ You can install RJDemetra from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("nbbrd/rjdemetra")
+devtools::install_github("nbbrd/rjdemetra", args = "--no-multiarch")
 ```
 
 
