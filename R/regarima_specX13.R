@@ -262,7 +262,7 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
                             usrdef.var = NA,
                             usrdef.varType = NA,
                             usrdef.varCoef = NA,
-                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                             tradingdays.autoadjust = NA,
                             tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                             tradingdays.stocktd = NA_integer_,
@@ -340,7 +340,8 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
@@ -381,35 +382,35 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r( spec = jrspec)
-
+  rspec <- specX13_jd2r(spec = jrspec, reformat_result = FALSE)
+  
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)
   predef.var <- list(Predefined = list(series = NA, description = NA), Final = predef.variables)
   arima.coeff <- list(Predefined = NA , Final = predef.coef)
-
+  
   for (i in 1:length(variables)) {
     eval(parse(text=paste(variables[i],".tab=c(rspec$",variables[i],",",variables[i],",","NA)", sep="")))
   }
-
+  
   v_estimate <-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,adjust=transform.adjust.tab,aicdiff=transform.aicdiff.tab,
-                         stringsAsFactors=FALSE)
+                            stringsAsFactors=FALSE)
   v_trading.days<-data.frame( option = tradingdays.option.tab, autoadjust=tradingdays.autoadjust.tab, leapyear = tradingdays.leapyear.tab,
-                          stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab, stringsAsFactors=FALSE)
+                              stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab, stringsAsFactors=FALSE)
   v_easter<-data.frame(enabled=easter.enabled.tab,julian=easter.julian.tab,duration=easter.duration.tab,test=easter.test.tab, stringsAsFactors=FALSE)
   v_usrdef <- data.frame(outlier= c(FALSE, usrdef.outliersEnabled,NA),outlier.coef= c(FALSE,NA,NA),
-                       variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA),stringsAsFactors=FALSE)
+                         variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA),stringsAsFactors=FALSE)
   v_outliers<-data.frame(enabled=outlier.enabled.tab,span=outlier.span.tab,ao=outlier.ao.tab, tc=outlier.tc.tab, ls = outlier.ls.tab,
-                      so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,method=outlier.method.tab,
-                      tcrate=outlier.tcrate.tab,stringsAsFactors=FALSE)
+                         so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,method=outlier.method.tab,
+                         tcrate=outlier.tcrate.tab,stringsAsFactors=FALSE)
   v_arima <-data.frame(enabled=automdl.enabled.tab,automdl.acceptdefault=automdl.acceptdefault.tab,automdl.cancel=automdl.cancel.tab,
-                      automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.mixed=automdl.mixed.tab,automdl.balanced=automdl.balanced.tab,
-                      automdl.armalimit=automdl.armalimit.tab,automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab,
-                      automdl.ubfinal=automdl.ubfinal.tab,arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
-                      arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA), stringsAsFactors=FALSE)
+                       automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.mixed=automdl.mixed.tab,automdl.balanced=automdl.balanced.tab,
+                       automdl.armalimit=automdl.armalimit.tab,automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab,
+                       automdl.ubfinal=automdl.ubfinal.tab,arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
+                       arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA), stringsAsFactors=FALSE)
   v_forecast <- data.frame(horizon = c(-2,fcst.horizon,NA), stringsAsFactors=FALSE)
-
+  
   span.spec <-rspec$span
 
   # Final values
@@ -437,6 +438,25 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
   class(z) = c("regarima_spec","X13")
   return(z)
 }
+reformat_spec_def <- function(x, parameter){
+  data_names <- names(x[[parameter]])
+  res <- lapply(data_names,function(name){
+    already_formatted <- length(grep("\\.",name)) > 0
+    if(already_formatted){
+      var_name <- already_formatted
+    }else{
+      var_name <- paste(parameter, name, sep = ".")
+    }
+    if(exists(var_name, envir = parent.frame(n = 3))){
+      x[[parameter]][[name]]
+    }else{
+      c(x[[parameter]][[name]], get(var_name, envir = parent.frame(n = 3)), NA)
+    }
+    
+  })
+  names(res) <- data_names
+  res
+}
 # The function creates a ("regarima_spec","X13") class object from from a regarima_spec or regarima object
 #' @rdname regarima_spec_def_x13
 #' @name regarima_spec_def_x13
@@ -461,7 +481,7 @@ regarima_spec_x13  <-function( object = object,
                                 usrdef.var=NA,
                                 usrdef.varType = NA,
                                 usrdef.varCoef = NA,
-                                tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                                tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                                 tradingdays.autoadjust = NA,
                                 tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                                 tradingdays.stocktd = NA_integer_,
@@ -541,7 +561,8 @@ regarima_spec_x13  <-function( object = object,
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)

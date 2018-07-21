@@ -199,9 +199,9 @@ spec_preOut<-function(outliertype=NA,outlierdate=NA,outliercoef=NA){
   outliers
 }
 
-spec_preVar<-function(var = NA, vartype = NA, varcoef = NA){
+spec_preVar<-function(var = NA, vartype = NA, varcoef = NA, tradingdays.option = NA){
 
-  variables.type <- c("Undefined","Series","Trend","Seasonal","SeasonallyAdjusted","Irregular")
+  variables.type <- c("Undefined","Series","Trend","Seasonal","SeasonallyAdjusted","Irregular","Calendar")
   nvar <- if (is.mts(var)) {dim(var)[2]} else if (is.ts(var)) {1} else {0}
 
   if (all(sapply(vartype,is.na)))
@@ -221,6 +221,26 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA){
       vars <- list(series = NA, description = NA)
       return(vars)
     }else{
+      #Pre-defined calendar
+      if (!is.na(tradingdays.option)){
+        var_calendar <- grep("Calendar", vartype)
+        if(tradingdays.option != "UserDefined" && length(var_calendar) > 0){
+          warning("userdef.VarType contains Calendar variables but the tradingdays.options isn't UserDefined.\n",
+                  "Corresponding variables will be ignored.", call. = FALSE)
+          if(length(var_calendar) == nvar){
+            return(list(series = NA, description = NA))
+          }else{
+            var <- var[,-var_calendar]
+            vartype <- vartype[-var_calendar]
+            if(sum(is.na(varcoef))!=0 | !is.vector(varcoef)|!is.numeric(varcoef)|(length(varcoef)!= length(vartype))){
+              varcoef <- NA
+            }else{
+              varcoef <- varcoef[-var_calendar]
+            }
+          }
+            
+        }
+      }
       if (sum(is.na(varcoef))!=0){
         vars <- list(series = var, description = data.frame(type = vartype, coeff = rep(NA,length(vartype))))
       }else if(!is.vector(varcoef)|!is.numeric(varcoef)|(length(varcoef)!= length(vartype))){
@@ -401,7 +421,13 @@ spec_tdX13<-function(td, tf, tadj){
   }
   if (is.na(td[3,5]))
     td[3,5] <- if(!is.na(td[2,5])) {td[2,5]} else {td[1,5]}
-
+  
+  #UserDefined TD regressors
+  if(td[3,1] == "UserDefined"){
+    td[3,3] <- "None"
+    td[3,2] <- FALSE
+    td[3,4] <- 0
+  }
   rownames(td) <- c("Predefined","User_modif","Final")
   return(td)
 }
@@ -568,7 +594,13 @@ spec_tdTS<-function(td){
       td[3,6] <- if(!is.na(td[2,6])) {td[2,6]} else {td[1,6]}
     }
   }
-
+  
+  #UserDefined TD regressors
+  if(td[3,3] == "UserDefined"){
+    td[3,4] <- FALSE
+    td[3,5] <- 0
+  }
+  
   rownames(td) <- c("Predefined","User_modif","Final")
   return(td)
 }

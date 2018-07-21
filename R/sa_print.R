@@ -157,7 +157,7 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
 }
 #' @export
 print.user_defined <- function(x,...){
-  if(is.null(x))
+  if(is.null(x) || length(x) == 0)
     return(invisible(x))
   cat(ngettext(length(x)!= 1 + 1,
                  "One additional variable (",

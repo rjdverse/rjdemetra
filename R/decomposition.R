@@ -35,9 +35,9 @@ decomp_TS <- function(jrobj, spec){
 decomp_defX13 <- function(jrobj,spec){
 
   # extract model specification from the java object
-  rspec <- specX11_jd2r( spec = spec)
-  specification <- do.call(data.frame, rspec)
-  names(specification) <- paste0("x11.",names(specification))
+  specification <- specX11_jd2r( spec = spec)
+  # specification <- do.call(data.frame, rspec)
+  # names(specification) <- sprintf("x11.%s",names(specification))
   rownames(specification) <- ""
   # results
   jd_results <- decomp_rsltsX13(jrobj)

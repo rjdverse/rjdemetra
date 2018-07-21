@@ -20,12 +20,11 @@ is.workspace <- function(x){
 #' @param file the path to the JDemetra+ workspace to load.
 #' By default a dialog box opens.
 #'
-#' @return An object of class \code{"workspace"}
+#' @return An object of class \code{"workspace"}.
 #'
 #' @seealso \code{\link{save_workspace}}, \code{\link{get_model}}
 #'
 #' @export
-# Open a workspace
 load_workspace <- function(file){
   if(missing(file) || is.null(file)){
     if(Sys.info()[['sysname']] == "Windows"){
@@ -74,7 +73,6 @@ load_workspace <- function(file){
 #' @name get_object
 #' @rdname get_object
 #' @export
-# Get the given processing (from 1 to n )
 get_object <- function(x, pos = 1){
   UseMethod("get_object", x)
 }
@@ -306,7 +304,7 @@ compute <- function(workspace, i) {
     nb_mp_objects <- count(workspace)
     mp_names <- sapply(seq_len(nb_mp_objects),
                        function(i) {
-                         get_name(get_object(x, i))
+                         get_name(get_object(workspace, i))
                        })
     if(i < 1 || i > nb_mp_objects)
       stop("The index ",i," is incorrect !\n",

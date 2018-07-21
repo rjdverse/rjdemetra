@@ -123,7 +123,7 @@ regarima_rslts <- function(jrobj, fcsth){
   forecast <- ts.union(fcst,fcsterr)
 
   z<- list( arma=arma,
-            arima.coefficients =arima.coefficients,
+            arima.coefficients = arima.coefficients,
             regression.coefficients = regression.coefficients,
             loglik=loglik,
             model=model,

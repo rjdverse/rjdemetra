@@ -132,7 +132,7 @@ x13_spec_def <-function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"
                                    usrdef.var = NA,
                                    usrdef.varType = NA,
                                    usrdef.varCoef = NA,
-                                   tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                                   tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                                    tradingdays.autoadjust = NA,
                                    tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                                    tradingdays.stocktd = NA_integer_,
@@ -248,9 +248,9 @@ x11_spec_def<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"
   x11 <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
   # create the java object
   jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
-  rspec <- specX11_jd2r(spec = jrspec)
-  x11.spec <- do.call(data.frame, rspec)
-  names(x11.spec) <- paste0("x11.",names(x11.spec))
+  x11.spec <- specX11_jd2r(spec = jrspec)
+  # x11.spec <- do.call(data.frame, rspec)
+  # names(x11.spec) <- paste0("x11.",names(x11.spec))
   x11.mod <- rbind(x11.spec,x11,rep(NA,length(x11.spec)))
   z <- spec_x11(x11.mod)
 
@@ -281,7 +281,7 @@ x13_spec <-function(object,
                           usrdef.var = NA,
                           usrdef.varType = NA,
                           usrdef.varCoef = NA,
-                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                           tradingdays.autoadjust = NA,
                           tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                           tradingdays.stocktd = NA_integer_,

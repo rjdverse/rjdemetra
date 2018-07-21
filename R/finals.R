@@ -8,7 +8,7 @@ final <- function(jrobj){
   #              start = start(finals_ts[[1]]), frequency = frequency(finals_ts[[1]]))
   # finals_ts_names <- c("y", "t", "sa", "s", "i")
 
-  finals_ts_names1 <- c("y", "t", "sa", "s", "i")
+  finals_ts_names1 <- c("y", "sa", "t", "s", "i")
   finals_ts_names2 <- paste0(finals_ts_names1, "_f")
   finals_ts1 <- lapply(finals_ts_names1,
                        function(series) result(jrobj, series))
