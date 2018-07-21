@@ -9,9 +9,9 @@
 #' @return \code{new_workspace()} returns an object of class \code{workspace} and
 #' \code{new_multiprocessing()} returns an object of class \code{multiprocessing}.
 #'
-#' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}, 
+#' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}},
 #' \code{\link{add_sa_item}}
-#' 
+#'
 #' @examples \dontrun{
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
@@ -50,7 +50,7 @@ new_multiprocessing <- function(workspace, name) {
 #' By default a dialog box opens.
 #'
 #' @seealso \code{\link{load_workspace}}
-#' 
+#'
 #' @examples \dontrun{
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
@@ -58,7 +58,7 @@ new_multiprocessing <- function(workspace, name) {
 #' save_workspace(wk, "workspace.xml")
 #' }
 #'
-#' 
+#'
 #' @return A boolean indicating whether the export has suceed.
 #' @export
 save_workspace <- function(workspace, file) {
@@ -68,14 +68,14 @@ save_workspace <- function(workspace, file) {
                                   caption = "Select a workspace for the output",
                                   filters = c("JDemetra+ workspace (.xml)","*.xml"))
     }else{
-      file <- base::file.choose()
+      file <- NULL # base::file.choose()
     }
     if(length(file) == 0)
       stop("You have to choose a file !")
   }
   if(length(grep("\\.xml$",file))==0)
     stop("The file must be a .xml !")
-  
+
   actual_wd <- getwd()
   file_export_wd <- dirname(file)
   setwd(file_export_wd)
@@ -87,7 +87,7 @@ save_workspace <- function(workspace, file) {
 
 #' Add a seasonnaly adjust model to a multi-processing
 #'
-#' Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{multiprocessing} object. 
+#' Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{multiprocessing} object.
 #'
 #' @param multiprocessing the multiprocessing object to add the seasonnaly adjust model.
 #' @param sa_obj the seasonnaly adjust object to export.
@@ -95,7 +95,7 @@ save_workspace <- function(workspace, file) {
 #' By default the name of the \code{sa_obj} is used.
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
-#' 
+#'
 #' @examples \dontrun{
 #' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
@@ -106,7 +106,7 @@ save_workspace <- function(workspace, file) {
 #' mp <- new_multiprocessing(wk, "sa1")
 #' add_sa_item(mp, sa_x13, "X13")
 #' add_sa_item(mp, sa_ts, "TramoSeats")
-#' 
+#'
 #' save_workspace(wk, "workspace.xml")
 #' }
 #'
@@ -117,7 +117,7 @@ add_sa_item <- function(multiprocessing, sa_obj, name){
 
   if(! is.multiprocessing(multiprocessing))
       stop("Use multiprocessing object !")
-    
+
   jspec <- get_jspec(sa_obj)
   y <- sa_obj$final$series[, "y"]
 
@@ -136,7 +136,7 @@ get_jspec <- function(x, ...){
   UseMethod("get_jspec", x)
 }
 get_jspec.X13 <- function(x, ...){
-  spec <- x13_spec(x)
+  spec <- x13_spec(x, ...)
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
   jdictionary <- specX13_r2jd(spec,jrspec)
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(x$final))
@@ -144,7 +144,7 @@ get_jspec.X13 <- function(x, ...){
   jspec
 }
 get_jspec.TRAMO_SEATS <- function(x, ...){
-  spec <- tramoseats_spec(x)
+  spec <- tramoseats_spec(x, ...)
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
   jdictionary <- specTS_r2jd(spec,jrspec)
   spec_seats <- specSeats_r2jd(spec,jrspec)
