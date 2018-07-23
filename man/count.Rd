@@ -10,7 +10,7 @@ count(x)
 \item{x}{the \code{workspace} or the code{multiprocessing}.}
 }
 \description{
-Generics functions to count the number of \code{multiprocessing} (respectively \code{sa_item}) 
+Generics functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
 inside a \code{workspace} (respectively \code{multiprocessing}).
 }
 \examples{

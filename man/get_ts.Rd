@@ -10,7 +10,7 @@ get_ts(x)
 \item{x}{the object where to get the time series.}
 }
 \value{
-\code{get_ts} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects : 
+\code{get_ts} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
  - if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
  - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
  of sa_items, each a \code{ts} object;
@@ -18,7 +18,7 @@ get_ts(x)
  each element containing a list of \code{ts} object.
 }
 \description{
-Generics functions to get the input times series of a \code{workspace}, \code{multiprocessing} or 
+Generics functions to get the input times series of a \code{workspace}, \code{multiprocessing} or
 \code{sa_item} object.
 }
 \examples{
@@ -34,7 +34,7 @@ sa_item <- get_object(mp, 1)
 get_ts(sa_item) # Returns the ts object myseries
 
   # Extracting from a multiprocessing:
-get_ts(mp) 
+get_ts(mp)
 # Returns a list of length 1 named "X13" containing the ts object myseries
 
   # Extracting from a workspace:

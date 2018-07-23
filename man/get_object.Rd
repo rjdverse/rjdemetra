@@ -20,7 +20,7 @@ An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_objec
 of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 }
 \description{
-Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item}) 
+Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
 from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
 }
 \examples{
@@ -31,7 +31,7 @@ wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(mp, sa_x13, "X13")
 
-# Other way to get the multiprocessing : 
+# Other way to get the multiprocessing :
 mp <- get_object(wk, 1)
 # To get the sa_item object :
 sa_item <- get_object(mp, 1)

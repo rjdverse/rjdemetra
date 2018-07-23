@@ -7,7 +7,7 @@
 load_workspace(file)
 }
 \arguments{
-\item{file}{the path to the JDemetra+ workspace to load. 
+\item{file}{the path to the JDemetra+ workspace to load.
 By default a dialog box opens.}
 }
 \value{

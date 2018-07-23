@@ -65,8 +65,8 @@ setClass(
 #' }
 #' }
 #'
-#' @seealso 
-#' 
+#' @seealso
+#'
 #' @references
 #' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
@@ -74,9 +74,9 @@ setClass(
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
-#' 
+#'
 #' @seealso \code{\link{x13_spec}}, \code{\link{tramoseats}}
-#' 
+#'
 #' @examples
 #'   mysa <- x13_def(myseries, spec=c("RSA5c"))
 #'
@@ -166,7 +166,7 @@ x13_def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 
 #Extract the results of the SA of a X13 object
 x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
-                           extract_info = FALSE){
+                           extra_info = FALSE){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
@@ -178,7 +178,7 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
                          jdictionary = jdictionary,
-                         extract_info = extract_info)
+                         extra_info = extra_info)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec)
   fin <-final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
@@ -190,7 +190,7 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
   return(z)
 }
 sa_jd2r <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
-                    extract_info = FALSE){
+                    extra_info = FALSE){
   if(is.null(jrslt))
     return(NULL)
 
@@ -200,7 +200,7 @@ sa_jd2r <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
     if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
       x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
                      jdictionary = jdictionary,
-                     extract_info = extract_info)
+                     extra_info = extra_info)
     }else{
       stop("Wrong spec argument")
     }

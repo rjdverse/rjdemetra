@@ -9,11 +9,11 @@ get_model(x, userdefined = NULL)
 \arguments{
 \item{x}{the object to get the seasonnaly adjusted model.}
 
-\item{userdefined}{vector with characters for additional output variables 
+\item{userdefined}{vector with characters for additional output variables
 (see \code{\link{x13}} or \code{\link{tramoseats}}).}
 }
 \value{
-\code{get_model} returns a seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) object or list of seasonnaly adjust objects : 
+\code{get_model} returns a seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) object or list of seasonnaly adjust objects :
  - if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
  - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
  of sa_items, each element containing \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
@@ -21,7 +21,7 @@ get_model(x, userdefined = NULL)
  each element containing a list of \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object.
 }
 \description{
-Generics functions to get seasonally adjusted model(s) from \code{workspace}, 
+Generics functions to get seasonally adjusted model(s) from \code{workspace},
 \code{multiprocessing} or \code{sa_item} object.
 }
 \examples{

@@ -13,13 +13,13 @@ jd_span <- function(type,d0,d1,n0,n1){
 }
 
 
-specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
-                         extract_info = FALSE){
-  
+specX13_jd2r <- function(spec = NA, jdictionary = NULL,
+                         extra_info = FALSE){
+
   #Estimate
   jestimate <-.jcall(spec,"Ljdr/spec/x13/EstimateSpec;","getEstimate")
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
-  
+
   estimate.type <- .jcall(jest.span,"S","getType")
   estimate.d0 <- .jcall(jest.span,"S","getD0")
   estimate.d1 <- .jcall(jest.span,"S","getD1")
@@ -27,22 +27,22 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
   estimate.n1 <- .jcall(jest.span,"I","getN1")
   estimate.span <- jd_span(type= estimate.type,d0=estimate.d0,d1=estimate.d1,n0=estimate.n0,n1=estimate.n1)
   estimate.tol <-.jcall(jestimate ,"D","getTol")
-  
+
   #Transform
   jtransform <-.jcall(spec,"Ljdr/spec/x13/TransformSpec;","getTransform")
-  
+
   transform.function<-.jcall(jtransform,"S","getFunction")
   transform.adjust<-.jcall(jtransform,"S","getAdjust")
   transform.aicdiff<-.jcall(jtransform,"D","getAic")
-  
+
   #Regression
   jregression<-.jcall(spec,"Ljdr/spec/x13/RegressionSpec;","getRegression")
-  
+
   #Calendar
   jcalendar<-.jcall(jregression,"Ljdr/spec/x13/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/x13/EasterSpec;","getEaster")
-  
+
   tradingdays.option<-.jcall(jtd,"S","getTradingDays")
   tradingdays.autoadjust<-.jcall(jtd,"Z","isAutoAdjust")
   tradingdays.leapyear <-.jcall(jtd,"S","getLengthOfPeriod")
@@ -52,11 +52,11 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
   easter.julian <-.jcall(jeaster,"Z","isJulian")
   easter.duration <-.jcall(jeaster,"I","getDuration")
   easter.test <-.jcall(jeaster,"S","getTest")
-  
+
   #Outlier
   joutlier<-.jcall(spec,"Ljdr/spec/x13/OutlierSpec;","getOutliers")
   joutlier.span <-.jcall(joutlier,"Ljdr/spec/ts/SpanSelector;","getSpan")
-  
+
   outlier.enabled<-.jcall(joutlier,"Z","isEnabled")
   outlier.type <- .jcall(joutlier.span,"S","getType")
   outlier.d0 <- .jcall(joutlier.span,"S","getD0")
@@ -72,10 +72,10 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
   outlier.cv <-.jcall(joutlier,"D","getVa")
   outlier.method <-.jcall(joutlier,"S","getMethod")
   outlier.tcrate <-.jcall(joutlier,"D","getTCRate")
-  
+
   #Arima
   jarima<-.jcall(spec,"Ljdr/spec/x13/ArimaSpec;","getArima")
-  
+
   automdl.enabled <-.jcall(jarima,"Z","isAmiEnabled")
   automdl.acceptdefault <-.jcall(jarima,"Z","isAcceptDefault")
   automdl.cancel <-.jcall(jarima,"D","getCancel")
@@ -94,89 +94,58 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
   arima.bp <-.jcall(jarima,"I","getBP")
   arima.bd <-.jcall(jarima,"I","getBD")
   arima.bq <-.jcall(jarima,"I","getBQ")
-  
+
   #span matrix
   type<-c(estimate.type,outlier.type)
   d0<-c(estimate.d0,outlier.d0)
   d1<-c(estimate.d1,outlier.d1)
   n0<-c(estimate.n0,outlier.n0)
   n1<-c(estimate.n1,outlier.n1)
-  
+
   span<-data.frame(type=type,d0=d0,d1=d1,n0=n0,n1=n1)
   rownames(span)<-c("estimate","outlier")
-  
-  
-  if(!reformat_result)
-    return(list(estimate.type = estimate.type, estimate.d0 = estimate.d0, estimate.d1 = estimate.d1,
-                estimate.n0 = estimate.n0 , estimate.n1 = estimate.n1, estimate.span = estimate.span, estimate.tol = estimate.tol,
-                transform.function = transform.function, transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
-                tradingdays.option = tradingdays.option , tradingdays.autoadjust = tradingdays.autoadjust,
-                tradingdays.leapyear = tradingdays.leapyear , tradingdays.stocktd = tradingdays.stocktd, tradingdays.test = tradingdays.test,
-                easter.enabled = easter.enabled , easter.julian = easter.julian , easter.duration = easter.duration, easter.test = easter.test,
-                outlier.enabled = outlier.enabled, outlier.type = outlier.type, outlier.d0 = outlier.d0, outlier.d1 = outlier.d1,
-                outlier.n0 = outlier.n0, outlier.n1 = outlier.n1, outlier.span = outlier.span, outlier.ao = outlier.ao,
-                outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so, outlier.usedefcv = outlier.usedefcv,
-                outlier.cv = outlier.cv, outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
-                automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault, automdl.cancel = automdl.cancel,
-                automdl.ub1 = automdl.ub1, automdl.ub2 = automdl.ub2, automdl.mixed  = automdl.mixed , automdl.balanced = automdl.balanced ,
-                automdl.armalimit = automdl.armalimit, automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
-                arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq, span=span))
-  
-  
-  estimate<-data.frame(span = estimate.span, tolerance = estimate.tol, 
-                       row.names = "", stringsAsFactors = FALSE)
-  transform <- data.frame(tfunction = transform.function, 
-                          adjust = transform.adjust, 
-                          aicdiff = transform.aicdiff, 
-                          row.names = "", stringsAsFactors = FALSE)
-  trading.days<-data.frame(option = tradingdays.option, 
-                           autoadjust = tradingdays.autoadjust, 
-                           leapyear = tradingdays.leapyear, 
-                           stocktd = tradingdays.stocktd, 
-                           test = tradingdays.test, row.names = "", stringsAsFactors = FALSE)
-  easter<-data.frame(enabled = easter.enabled, julian = easter.julian, 
-                     duration = easter.duration, test = easter.test, 
-                     row.names = "", stringsAsFactors = FALSE)
-  userdef_spec <-list(specification = data.frame(outlier = FALSE, 
-                                                 outlier.coef = FALSE, 
-                                                 variables = FALSE, 
-                                                 variables.coef = FALSE, 
-                                                 stringsAsFactors = FALSE), 
+
+  #Default values:
+
+  arima.coef <- FALSE
+  userdef_spec <-list(specification = data.frame(outlier = FALSE,
+                                                 outlier.coef = FALSE,
+                                                 variables = FALSE,
+                                                 variables.coef = FALSE,
+                                                 stringsAsFactors = FALSE),
                       outliers = NA, variables = list(series = NA, description = NA))
-  regression<-list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
-  outliers<-data.frame(enabled = outlier.enabled, span = outlier.span, ao = outlier.ao, tc = outlier.tc, ls = outlier.ls, 
-                       so = outlier.so, usedefcv = outlier.usedefcv, cv = outlier.cv, method = outlier.method, 
-                       tcrate = outlier.tcrate, row.names = "", stringsAsFactors = FALSE)
-  arima.dsc <-data.frame(enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault, 
-                         automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1, 
-                         automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed, 
-                         automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit, 
-                         automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit, 
-                         automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, 
-                         arima.p = arima.p, arima.d = arima.d, arima.q = arima.q, 
-                         arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq, 
-                         arima.coef = FALSE, row.names = "", stringsAsFactors = FALSE)
-  arima <- list(specification = arima.dsc, coefficients = NA)
-  forecast <- data.frame(horizon = c(-2), row.names = c(""), stringsAsFactors = FALSE)
-  # specification
-  specification <- list(estimate = estimate, transform = transform,
-                        regression = regression, outliers = outliers,
-                        arima = arima, forecast = forecast, span = span)
-  
-  
+  arima.coef.spec <- NA
+  horizon <- -2
+  result <- list(estimate.type = estimate.type, estimate.d0 = estimate.d0, estimate.d1 = estimate.d1,
+       estimate.n0 = estimate.n0 , estimate.n1 = estimate.n1, estimate.span = estimate.span, estimate.tol = estimate.tol,
+       transform.function = transform.function, transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
+       tradingdays.option = tradingdays.option , tradingdays.autoadjust = tradingdays.autoadjust,
+       tradingdays.leapyear = tradingdays.leapyear , tradingdays.stocktd = tradingdays.stocktd, tradingdays.test = tradingdays.test,
+       easter.enabled = easter.enabled , easter.julian = easter.julian , easter.duration = easter.duration, easter.test = easter.test,
+       outlier.enabled = outlier.enabled, outlier.type = outlier.type, outlier.d0 = outlier.d0, outlier.d1 = outlier.d1,
+       outlier.n0 = outlier.n0, outlier.n1 = outlier.n1, outlier.span = outlier.span, outlier.ao = outlier.ao,
+       outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so, outlier.usedefcv = outlier.usedefcv,
+       outlier.cv = outlier.cv, outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
+       automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault, automdl.cancel = automdl.cancel,
+       automdl.ub1 = automdl.ub1, automdl.ub2 = automdl.ub2, automdl.mixed  = automdl.mixed , automdl.balanced = automdl.balanced ,
+       automdl.armalimit = automdl.armalimit, automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+       automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
+       arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq, span = span,
+       arima.coeff = arima.coeff,arima.coef.spec = arima.coef.spec,
+       userdef_spec = userdef_spec, horizon = horizon)
+
   # Extra info importing from a workspace
-  if(!extract_info)
-    return(specification)
-  
+  if(!extra_info)
+    return(result)
+
   n_prespecified_out <- .jcall(jregression,"I","getPrespecifiedOutliersCount")
   if(n_prespecified_out > 0 ){
     # Outlier.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the outlier will be estimated
-    specification$regression$userdef$specification$outlier <- 
-      specification$regression$userdef$specification$outlier.coef <-
+    result$userdef_spec$specification$outlier <-
+      result$userdef_spec$specification$outlier.coef <-
       TRUE
-    
+
     outliers <- lapply(1:n_prespecified_out, function(i){
       .jcall(jregression,
              "Ljdr/spec/ts/Utility$Outlier;",
@@ -187,37 +156,37 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
     date <- sapply(outliers, function(x) x$getPosition())
     coeff <- sapply(outliers, function(x) x$getCoefficient())
     outlier_spec <- data.frame(type = type, date = date, coeff = coeff)
-    
+
     specification$regression$userdef$outliers <- outlier_spec
-    
+
   }
-  
+
   n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
   if(n_userdefined_var > 0 ){
-    
+
     # variables.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the variable will be estimated
-    specification$regression$userdef$specification$variables <- 
-      specification$regression$userdef$specification$variables.coef <-
+    result$userdef_spec$specification$variables <-
+      result$userdef_spec$specification$variables.coef <-
       TRUE
-    
+
     ud_vars <- lapply(1:n_userdefined_var, function(i){
       .jcall(jregression,
              "Ljdr/spec/ts/Utility$UserDefinedVariable;",
              "getUserDefinedVariable",
              as.integer(i-1))
     })
-    
+
     type <- sapply(ud_vars, function(x) x$getComponent())
     coeff <- sapply(ud_vars, function(x) x$getCoefficient())
     var_names <- sapply(ud_vars, function(x) x$getName())
     var_names_split <- strsplit(var_names,"[.]")
-    
-    specification$regression$userdef$variables$description <- data.frame(type = type, coeff = coeff)
+
+    result$userdef_spec$variables$description <- data.frame(type = type, coeff = coeff)
     # To check variables group names
     # t <- context_dictionnary$getTsVariableManagers()
     # t$getNames()
-    # 
+    #
     if(!is.null(jdictionary)){
       context_dictionnary <- jdictionary$toContext()
       var_series <- lapply(var_names_split,function(names){
@@ -227,37 +196,38 @@ specX13_jd2r <- function(spec = NA, jdictionary = NULL, reformat_result = TRUE,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      specification$regression$userdef$variables$series <- var_series
+      result$userdef_spec$variables$series <- var_series
     }
-    
+
   }
-  
+
   #Calendar
   jcalendar<-.jcall(jregression,"Ljdr/spec/x13/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
-  
+
   user_td <- .jcall(jtd,"[S","getUserVariables")
   #TODO: extract user defined variable
-  
-  
+
+
   #Arima
   jarima<-.jcall(spec,"Ljdr/spec/x13/ArimaSpec;","getArima")
-  
+
   Phi <- jarima$getPhi()
   BPhi <- jarima$getBPhi()
   Theta <- jarima$getTheta()
   BTheta <- jarima$getBTheta()
-  arima_coefficients_spec <- 
+  arima_coefficients_spec <-
     rbind(arimaCoef_jd2r(Phi),
           arimaCoef_jd2r(BPhi),
           arimaCoef_jd2r(Theta),
           arimaCoef_jd2r(BTheta))
-  
+
   if(!is.null(arima_coefficients_spec)){
-    specification$arima$specification$arima.coef <- TRUE
-    specification$arima$coefficients <- arima_coefficients_spec
+    result$carima.coef <- TRUE
+    result$arima.coef.spec <- arima_coefficients_spec
   }
-  specification
+
+  result
 }
 specTS_jd2r<- function(spec = NA){
 
@@ -368,7 +338,7 @@ return(list(estimate.type = estimate.type,estimate.d0 = estimate.d0,estimate.d1 
 
 specX11_jd2r <- function(spec = NA,freq = NA){
   jx11 <-.jcall(spec,"Ljdr/spec/x13/X11Spec;","getX11")
-  
+
   if(!is.na(freq)){
     .jcall(jx11,"V","setFreq", as.integer(freq))
     fullseasonalma <- .jcall(jx11,"[S","getFullSeasonalMA")
@@ -380,7 +350,7 @@ specX11_jd2r <- function(spec = NA,freq = NA){
   }else{
     seasonalma <- .jcall(jx11,"S","getSeasonalMA")
   }
-  
+
   mode <-.jcall(jx11,"S","getMode")
   seasonalComp <-.jcall(jx11,"Z","isSeasonal")
   lsigma <-.jcall(jx11,"D","getLSigma")
@@ -390,7 +360,7 @@ specX11_jd2r <- function(spec = NA,freq = NA){
   fcasts<- .jcall(jx11,"I","getForecastHorizon")
   bcasts <- .jcall(jx11,"I","getBackcastHorizon")
   excludeFcasts <- .jcall(jx11,"Z","isExcludefcst")
-  
+
   var <- data.frame(mode,seasonalComp,lsigma,usigma,trendAuto,trendma,seasonalma,
                     fcasts,bcasts,excludeFcasts)
   names(var) <- sprintf("x11.%s",
@@ -451,23 +421,23 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA, series = NA, va
   nvar <- if (is.mts(series)) {dim(series)[2]} else if (is.ts(series)) {1} else {0}
   type <- if (all(is.na(varType))) {rep("Undefined",nvar)} else {as.character(varType)}
   coef <- if (coefEna == TRUE) {varCoef} else {rep(0,nvar)}
-  
+
   if(nvar == 0)
     return(NULL)
-  
+
   calendar_def <- grep("Calendar",type)
   n_calendar_def <- length(calendar_def)
   if (nvar == 1){
     if(n_calendar_def == 1){
       .jcall(jsdict,"V","add","tdreg",ts_r2jd(series))
       # .jcall(jtd,"V","setUserVariables","tdreg")
-      
+
     }else{
       suffixe_name <- "usrdef"
       .jcall(jsdict,"V","add","usrdef",ts_r2jd(series))
       .jcall(jsobjct,"V","addUserDefinedVariable","usrdef",type[1],coef[1])
     }
-    
+
   }else{
     if(n_calendar_def == 0 | n_calendar_def == nvar){
       if(n_calendar_def >0){
@@ -483,7 +453,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA, series = NA, va
           .jcall(jsobjct,"V","addUserDefinedVariable",paste("usrdef",i,sep="_"),type[i],coef[i])
         }
       }
-      
+
     }else{
       i_ud <- 1:nvar[-calendar_def]
       for (i in 1:(nvar - n_calendar_def)){
@@ -492,7 +462,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA, series = NA, va
         .jcall(jsobjct,"V","addUserDefinedVariable",paste("usrdef",i,sep="_"),
                type[i_ud[i]],coef[i_ud[i]])
       }
-      
+
       calendar_var_names <- paste("tdreg",1:n_calendar_def,sep="_")
       for (i in 1:n_calendar_def){
         .jcall(jsdict,"V","add",calendar_var_names[i],
@@ -502,7 +472,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA, series = NA, va
       #        calendar_var_names)
     }
   }
-  
+
 }
 
 arimaCoef_r2jd <- function(jsobjct = NA, acoef = NA, p = NA , q = NA, bp = NA, bq = NA){
@@ -591,12 +561,12 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
   #User-defined variables
   .jcall(jregression,"V","clearUserDefinedVariables")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-  
+
   #Calendar
   jcalendar<-.jcall(jregression,"Ljdr/spec/x13/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/x13/EasterSpec;","getEaster")
-  
+
   if(td[1] == "UserDefined"){
     .jcall(jtd,"V","setOption","UserDefined")
   }else{
@@ -611,12 +581,12 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
     .jcall(jtd,"V","setLengthOfPeriod", as.character(td[3]))
   }
   .jcall(jtd,"V","setTest",as.character(td[5]))
-  
+
   .jcall(jeaster,"V","setJulian",as.logical(easter[2]))
   .jcall(jeaster,"V","setDuration", as.integer(easter[3]))
   .jcall(jeaster,"V","setTest", as.character(easter[4]))
   .jcall(jeaster,"V","setEnabled",as.logical(easter[1]))
-  
+
   #user-defined specification
   if (usrspc[3]==TRUE)
     preVar_r2jd(jsobjct = jregression, jsdict = jdictionary, coefEna = usrspc[4],
@@ -720,10 +690,10 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   jcalendar<-.jcall(jregression,"Ljdr/spec/tramoseats/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/tramoseats/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/tramoseats/EasterSpec;","getEaster")
-  
+
   .jcall(jtd,"V","setAutomatic", as.character(td[1]))
   .jcall(jtd,"V","setPftd", as.numeric(td[2]))
-  
+
   if(td[3] == "UserDefined"){
     .jcall(jtd,"V","setOption","UserDefined")
   }else{
@@ -734,7 +704,7 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
       .jcall(jtd,"V","setTradingDays",as.character(td[3]))
       .jcall(jtd,"V","setW",as.integer(td[5]))
     }
-    
+
     .jcall(jtd,"V","setLeapYear",as.logical(td[4]))
   }
   .jcall(jtd,"V","setRegressionTestType", as.character(td[6]))
@@ -744,7 +714,7 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   .jcall(jeaster,"V","setTest",as.logical(easter[4]))
   .jcall(jeaster,"V","setOption",as.character(easter[1]))
 
-  
+
   if (usrspc[3]==TRUE)
     preVar_r2jd(jsobjct = jregression, jsdict = jdictionary,
                 coefEna = usrspc[4], series = varF$series, varType = NA,

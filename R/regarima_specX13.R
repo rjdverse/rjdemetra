@@ -382,17 +382,17 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r(spec = jrspec, reformat_result = FALSE)
-  
+  rspec <- specX13_jd2r(spec = jrspec)
+
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)
   predef.var <- list(Predefined = list(series = NA, description = NA), Final = predef.variables)
   arima.coeff <- list(Predefined = NA , Final = predef.coef)
-  
+
   for (i in 1:length(variables)) {
     eval(parse(text=paste(variables[i],".tab=c(rspec$",variables[i],",",variables[i],",","NA)", sep="")))
   }
-  
+
   v_estimate <-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,adjust=transform.adjust.tab,aicdiff=transform.aicdiff.tab,
                             stringsAsFactors=FALSE)
@@ -410,7 +410,7 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
                        automdl.ubfinal=automdl.ubfinal.tab,arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
                        arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA), stringsAsFactors=FALSE)
   v_forecast <- data.frame(horizon = c(-2,fcst.horizon,NA), stringsAsFactors=FALSE)
-  
+
   span.spec <-rspec$span
 
   # Final values
@@ -452,7 +452,7 @@ reformat_spec_def <- function(x, parameter){
     }else{
       c(x[[parameter]][[name]], get(var_name, envir = parent.frame(n = 3)), NA)
     }
-    
+
   })
   names(res) <- data_names
   res

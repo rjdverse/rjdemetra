@@ -6,8 +6,9 @@ diagnostics <- function(jrobj){
                                         "Others", "Total")
 
   residuals_tests_names <- paste0("diagnostics.",
-                                  c("qs", "ftest",
-                                    "residual.all", "residual.end", "residualtd"))
+                                  c("qs","qs.on.i", "ftest", "ftest.on.i",
+                                    "residual.all", "residual.end",
+                                    "residualtd","residualtd.on.i"))
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
                              res <- result(jrobj, diag)
@@ -18,10 +19,13 @@ diagnostics <- function(jrobj){
   residuals_test[,1] <- as.numeric(residuals_test[,1])
   residuals_test[,2] <- as.numeric(residuals_test[,2])
   colnames(residuals_test) <- c("Statistic","P.value","Description")
-  rownames(residuals_test) <- c("qs test on sa","f-test on sa (seasonal dummies)",
+  rownames(residuals_test) <- c("qs test on sa", "qs test on i",
+                                "f-test on sa (seasonal dummies)",
+                                "f-test on i (seasonal dummies)",
                                 "Residual seasonality (entire series)",
                                 "Residual seasonality (last 3 years)",
-                                "f-test on sa (td)")
+                                "f-test on sa (td)",
+                                "f-test on i (td)")
   combined_test_all <- combined_test(jrobj, "all")
   combined_test_end <- combined_test(jrobj, "end")
   diag <- list(variance_decomposition = variance_decomposition,

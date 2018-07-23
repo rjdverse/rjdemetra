@@ -9,7 +9,7 @@ compute(workspace, i)
 \arguments{
 \item{workspace}{the workspace to compute.}
 
-\item{i}{a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute. 
+\item{i}{a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute.
 By default all the multi-processings are compute.}
 }
 \description{

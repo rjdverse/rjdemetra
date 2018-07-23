@@ -32,6 +32,6 @@ mp <- new_multiprocessing(wk, "sa1")
 
 }
 \seealso{
-\code{\link{load_workspace}}, \code{\link{save_workspace}}, 
+\code{\link{load_workspace}}, \code{\link{save_workspace}},
 \code{\link{add_sa_item}}
 }
