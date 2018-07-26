@@ -166,7 +166,7 @@ x13_def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 
 #Extract the results of the SA of a X13 object
 x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
-                           extra_info = FALSE){
+                           extra_info = FALSE, freq = NA){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
@@ -179,8 +179,8 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
                          jdictionary = jdictionary,
                          extra_info = extra_info)
-  deco <- decomp_defX13(jrobj = jrobct, spec = spec)
-  fin <-final(jrobj = jrobct)
+  deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
+  fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
 
   z <- list(regarima = reg, decomposition = deco, final = fin,
@@ -190,17 +190,19 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
   return(z)
 }
 sa_jd2r <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
-                    extra_info = FALSE){
+                    extra_info = FALSE, freq = NA){
   if(is.null(jrslt))
     return(NULL)
 
   if(.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")){
-    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined)
+    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                          jdictionary = jdictionary,
+                          extra_info = extra_info)
   }else{
     if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
       x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
                      jdictionary = jdictionary,
-                     extra_info = extra_info)
+                     extra_info = extra_info, freq = freq)
     }else{
       stop("Wrong spec argument")
     }

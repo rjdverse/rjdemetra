@@ -379,8 +379,14 @@ get_model.multiprocessing <- function(x, userdefined = NULL){
 get_model.sa_item <- function(x, userdefined = NULL){
   jspec <- get_jspec(x)
   jresult <- sa_results(x)
+  y_ts <- get_ts(x)
 
-  sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined)
+  #TODO: extract dictionary
+  jdictionary <- NULL
+  
+  sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
+          jdictionary = jdictionary,
+          extra_info = TRUE, freq = frequency(y_ts))
 }
 
 # Get the results of an saitem

@@ -21,8 +21,7 @@
 #' @name new_workspace
 #' @rdname new_workspace
 #' @export
-new_workspace <- function() {
-  dictionary = .jnull("jdr/spec/ts/Utility$Dictionary")
+new_workspace <- function(dictionary = .jnull("jdr/spec/ts/Utility$Dictionary")) {
   wk <- .jcall("ec/tstoolkit/jdr/ws/Workspace",
                "Lec/tstoolkit/jdr/ws/Workspace;",
                "create", dictionary)

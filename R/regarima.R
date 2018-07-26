@@ -286,41 +286,60 @@ regarima_def_x13 <-function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3"
 
 regarima_defX13 <- function(jrobj, spec, jdictionary = NULL,
                             extra_info = FALSE){
+  horizon <- -2
   # extract model specification from the java object
   rspec <- specX13_jd2r(spec = spec, jdictionary = jdictionary,
                         extra_info = extra_info)
-
-  with(rspec,{
-    estimate<-data.frame(span = estimate.span, tolerance = estimate.tol,
-                         row.names = "", stringsAsFactors = FALSE)
-    transform <- data.frame(tfunction = transform.function,
-                            adjust = transform.adjust,
-                            aicdiff = transform.aicdiff,
+  
+  estimate<-with(rspec, 
+                 data.frame(span = estimate.span, tolerance = estimate.tol,
                             row.names = "", stringsAsFactors = FALSE)
-    trading.days<-data.frame(option = tradingdays.option,
-                             autoadjust = tradingdays.autoadjust,
-                             leapyear = tradingdays.leapyear,
-                             stocktd = tradingdays.stocktd,
-                             test = tradingdays.test, row.names = "", stringsAsFactors = FALSE)
-    easter<-data.frame(enabled = easter.enabled, julian = easter.julian,
-                       duration = easter.duration, test = easter.test,
-                       row.names = "", stringsAsFactors = FALSE)
-    regression<-list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
-    outliers<-data.frame(enabled = outlier.enabled, span = outlier.span, ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
-                         so = outlier.so, usedefcv = outlier.usedefcv, cv = outlier.cv, method = outlier.method,
-                         tcrate = outlier.tcrate, row.names = "", stringsAsFactors = FALSE)
-    arima.dsc <-data.frame(enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                           automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                           automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
-                           automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
-                           automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                           automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu,
-                           arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
-                           arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq,
-                           arima.coef = arima.coef, row.names = "", stringsAsFactors = FALSE)
-    arima <- list(specification = arima.dsc, coefficients = arima.coef.spec)
-    forecast <- data.frame(horizon = horizon, row.names = "", stringsAsFactors = FALSE)
-  })
+  )
+  transform <- with(rspec, 
+                    data.frame(tfunction = transform.function,
+                               adjust = transform.adjust,
+                               aicdiff = transform.aicdiff,
+                               row.names = "", stringsAsFactors = FALSE)
+  )
+  trading.days<-with(rspec, 
+                     data.frame(option = tradingdays.option,
+                                autoadjust = tradingdays.autoadjust,
+                                leapyear = tradingdays.leapyear,
+                                stocktd = tradingdays.stocktd,
+                                test = tradingdays.test, row.names = "", stringsAsFactors = FALSE)
+  )
+  easter<-with(rspec, 
+               data.frame(enabled = easter.enabled, julian = easter.julian,
+                          duration = easter.duration, test = easter.test,
+                          row.names = "", stringsAsFactors = FALSE)
+  )
+  regression<-with(rspec, 
+                   list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
+  )
+  outliers<-with(rspec, 
+                 data.frame(enabled = outlier.enabled, span = outlier.span,
+                            ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
+                            so = outlier.so, usedefcv = outlier.usedefcv,
+                            cv = outlier.cv, method = outlier.method,
+                            tcrate = outlier.tcrate,
+                            row.names = "", stringsAsFactors = FALSE)
+  )
+  arima.dsc <-with(rspec, 
+                   data.frame(enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                              automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                              automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
+                              automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
+                              automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                              automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu,
+                              arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
+                              arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq,
+                              arima.coef = arima.coef, row.names = "", stringsAsFactors = FALSE)
+  )
+  arima <- with(rspec, 
+                list(specification = arima.dsc, coefficients = arima.coef.spec)
+  )
+  forecast <- data.frame(horizon = horizon, row.names = "", stringsAsFactors = FALSE)
+  span <- rspec$span
 
   # specification
   specification <- list(estimate = estimate, transform = transform,
@@ -344,36 +363,65 @@ regarima_defX13 <- function(jrobj, spec, jdictionary = NULL,
   return(z)
 }
 
-regarima_defTS <- function(jrobj, spec){
+regarima_defTS <- function(jrobj, spec, jdictionary = NULL,
+                           extra_info = FALSE){
   # extract model specification from the java object
-  rspec <- specTS_jd2r( spec = spec)
+  
+  horizon <- -2
+  rspec <- specTS_jd2r(spec = spec, jdictionary = NULL,
+                        extra_info = FALSE)
 
-  estimate<-data.frame(span = rspec$estimate.span, tolerance = rspec$estimate.tol, exact_ml = rspec$estimate.eml, urfinal = rspec$estimate.urfinal,
-                       row.names = "", stringsAsFactors=FALSE)
-  transform <- data.frame(tfunction=rspec$transform.function,fct=rspec$transform.fct,row.names = "", stringsAsFactors=FALSE)
-  usrdef <- data.frame(outlier=FALSE, outlier.coef= FALSE, variables = FALSE, variables.coef = FALSE, stringsAsFactors=FALSE)
-  userdef <-list(specification = usrdef, outliers = NA, variables = list(series = NA, description = NA))
-  trading.days<-data.frame( automatic = rspec$tradingdays.mauto, pftd = rspec$tradingdays.pftd, option = rspec$tradingdays.option,
-                            leapyear = rspec$tradingdays.leapyear,stocktd = rspec$tradingdays.stocktd, test = rspec$tradingdays.test,
-                            row.names = "", stringsAsFactors=FALSE)
-  easter<-data.frame(type=rspec$easter.type,julian=rspec$easter.julian,duration=rspec$easter.duration,test=rspec$easter.test,
-                     row.names = "", stringsAsFactors=FALSE)
-  regression<-list(userdef = userdef, trading.days = trading.days, easter = easter)
-  outliers<-data.frame(enabled=rspec$outlier.enabled,span=rspec$outlier.span,ao=rspec$outlier.ao, tc=rspec$outlier.tc, ls = rspec$outlier.ls,
-                       so=rspec$outlier.so,usedefcv=rspec$outlier.usedefcv,cv=rspec$outlier.cv,eml=rspec$outlier.eml,
-                       tcrate=rspec$outlier.tcrate, row.names = "", stringsAsFactors=FALSE)
-  arima.dsc <-data.frame(enabled=rspec$automdl.enabled,automdl.acceptdefault=rspec$automdl.acceptdefault,automdl.cancel=rspec$automdl.cancel,
-                         automdl.ub1=rspec$automdl.ub1,automdl.ub2=rspec$automdl.ub2,automdl.armalimit=rspec$automdl.armalimit,
-                         automdl.reducecv=rspec$automdl.reducecv, automdl.ljungboxlimit=rspec$automdl.ljungboxlimit, compare = rspec$automdl.compare,
-                         arima.mu=rspec$arima.mu,arima.p=rspec$arima.p,arima.d =rspec$arima.d,arima.q=rspec$arima.q,
-                         arima.bp=rspec$arima.bp,arima.bd=rspec$arima.bd,arima.bq=rspec$arima.bq, arima.coef = FALSE,
-                         row.names = "", stringsAsFactors=FALSE)
-  arima <- list(specification = arima.dsc, coefficients = NA)
-  forecast <- data.frame(horizon = c(-2),row.names = c(""), stringsAsFactors=FALSE)
-  span <-rspec$span
+  estimate <- with(rspec, 
+                   data.frame(span = estimate.span, tolerance = estimate.tol,
+                         exact_ml = estimate.eml, urfinal = estimate.urfinal,
+                         row.names = "", stringsAsFactors = FALSE)
+  )
+  transform <- with(rspec, 
+                    data.frame(tfunction = transform.function,fct = transform.fct,
+                          row.names = "", stringsAsFactors = FALSE)
+  )
+  trading.days <- with(rspec, 
+                       data.frame(automatic = tradingdays.mauto, pftd = tradingdays.pftd,
+                             option = tradingdays.option, leapyear = tradingdays.leapyear,
+                             stocktd = tradingdays.stocktd, test = tradingdays.test,
+                             row.names = "", stringsAsFactors = FALSE)
+  )
+  easter <- with(rspec, 
+                 data.frame(type = easter.type,julian = easter.julian,
+                       duration = easter.duration,test = easter.test,
+                       row.names = "", stringsAsFactors = FALSE)
+  )
+  regression <- with(rspec, 
+                     list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
+  )
+  outliers <- with(rspec, 
+                   data.frame(enabled = outlier.enabled,span = outlier.span,
+                         ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
+                         so = outlier.so,usedefcv = outlier.usedefcv,cv = outlier.cv,eml = outlier.eml,
+                         tcrate = outlier.tcrate, row.names = "", stringsAsFactors = FALSE)
+  )
+  arima.dsc <- with(rspec, 
+                    data.frame(enabled = automdl.enabled,automdl.acceptdefault = automdl.acceptdefault,
+                          automdl.cancel = automdl.cancel,
+                          automdl.ub1 = automdl.ub1,automdl.ub2 = automdl.ub2,
+                          automdl.armalimit = automdl.armalimit,
+                          automdl.reducecv = automdl.reducecv, 
+                          automdl.ljungboxlimit = automdl.ljungboxlimit, compare = automdl.compare,
+                          arima.mu = arima.mu,arima.p = arima.p,arima.d = arima.d,arima.q = arima.q,
+                          arima.bp = arima.bp,arima.bd = arima.bd,arima.bq = arima.bq, arima.coef = arima.coef,
+                          row.names = "", stringsAsFactors = FALSE)
+  )
+  arima <- with(rspec, 
+                list(specification = arima.dsc, coefficients = arima.coef.spec)
+  )
+  forecast <- with(rspec, 
+                   data.frame(horizon = horizon,row.names = "", stringsAsFactors = FALSE)
+  )
+  span <- rspec$span
+  
   # specification
-  specification <- list(estimate=estimate, transform=transform, regression=regression, outliers=outliers, arima=arima,
-                        forecast = forecast, span=span)
+  specification <- list(estimate = estimate, transform = transform, regression = regression, outliers = outliers, arima = arima,
+                        forecast = forecast, span = span)
 
   # results
   jd_results <- regarima_rslts(jrobj,as.numeric(forecast))

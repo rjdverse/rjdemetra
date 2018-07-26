@@ -32,10 +32,10 @@ decomp_TS <- function(jrobj, spec){
   return(z)
 }
 
-decomp_defX13 <- function(jrobj,spec){
+decomp_defX13 <- function(jrobj, spec, freq = NA){
 
   # extract model specification from the java object
-  specification <- specX11_jd2r( spec = spec)
+  specification <- specX11_jd2r(spec = spec, freq = freq)
   # specification <- do.call(data.frame, rspec)
   # names(specification) <- sprintf("x11.%s",names(specification))
   rownames(specification) <- ""

@@ -161,7 +161,8 @@ tramoseats_def <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
-tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL){
+tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
+                                  extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
@@ -169,7 +170,9 @@ tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL){
   if (is.null(jrobct@internal))
     return (NaN)
 
-  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec)
+  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
+                        jdictionary = jdictionary,
+                        extra_info = extra_info)
   deco <- decomp_defTS(jrobj = jrobct, spec = spec)
   fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
