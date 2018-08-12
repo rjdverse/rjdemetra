@@ -26,15 +26,15 @@ sa_ts <- tramoseats(myseries, spec = spec_ts)
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(mp, sa_x13, "X13")
-add_sa_item(mp, sa_ts, "TramoSeats")
+add_sa_item(wk, "sa1", sa_x13, "X13")
+add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 sa_item1 <- get_object(mp, 1)
 
-get_model(sa_item1) # Returns NULL
+get_model(sa_item1, wk) # Returns NULL
 
 compute(wk)
 
-get_model(sa_item1) # Returns the SA model sa_x13
+get_model(sa_item1, wk) # Returns the SA model sa_x13
 }
 
 

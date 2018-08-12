@@ -15,7 +15,7 @@ setClass(
 #' \item \code{x13}, object of class \code{c("SA_spec","X13")}
 #' \item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
 #' }
-#' @param userdefined vector with characters for additional output variables.
+#' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
 #' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
@@ -165,7 +165,7 @@ x13_def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 }
 
 #Extract the results of the SA of a X13 object
-x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
+x13JavaResults <- function(jrslt, spec, userdefined, context_dictionnary = NULL,
                            extra_info = FALSE, freq = NA){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
@@ -177,7 +177,7 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
-                         jdictionary = jdictionary,
+                         context_dictionnary = context_dictionnary,
                          extra_info = extra_info)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
   fin <- final(jrobj = jrobct)
@@ -189,19 +189,19 @@ x13JavaResults <- function(jrslt, spec, userdefined, jdictionary = NULL,
   class(z) <- c("SA","X13")
   return(z)
 }
-sa_jd2r <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
+sa_jd2r <- function(jrslt, spec, userdefined = NULL, context_dictionnary = NULL,
                     extra_info = FALSE, freq = NA){
   if(is.null(jrslt))
     return(NULL)
 
   if(.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")){
     tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                          jdictionary = jdictionary,
+                          context_dictionnary = context_dictionnary,
                           extra_info = extra_info)
   }else{
     if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
       x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                     jdictionary = jdictionary,
+                     context_dictionnary = context_dictionnary,
                      extra_info = extra_info, freq = freq)
     }else{
       stop("Wrong spec argument")

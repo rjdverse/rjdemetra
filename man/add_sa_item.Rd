@@ -4,10 +4,12 @@
 \alias{add_sa_item}
 \title{Add a seasonnaly adjust model to a multi-processing}
 \usage{
-add_sa_item(multiprocessing, sa_obj, name)
+add_sa_item(workspace, multiprocessing, sa_obj, name)
 }
 \arguments{
-\item{multiprocessing}{the multiprocessing object to add the seasonnaly adjust model.}
+\item{workspace}{the workspace to add the seasonnaly adjust model.}
+
+\item{multiprocessing}{the name or index of the multiprocessing to add the seasonnaly adjust model.}
 
 \item{sa_obj}{the seasonnaly adjust object to export.}
 
@@ -15,7 +17,7 @@ add_sa_item(multiprocessing, sa_obj, name)
 By default the name of the \code{sa_obj} is used.}
 }
 \description{
-Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{multiprocessing} object.
+Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{workspace} object.
 }
 \examples{
 \dontrun{
@@ -25,13 +27,12 @@ spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
 sa_ts <- tramoseats(myseries, spec = spec_ts)
 
 wk <- new_workspace()
-mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(mp, sa_x13, "X13")
-add_sa_item(mp, sa_ts, "TramoSeats")
+new_multiprocessing(wk, "sa1")
+add_sa_item(wk, "sa1", sa_x13, "X13")
+add_sa_item(wk, 2,sa_ts, "TramoSeats")
 
 save_workspace(wk, "workspace.xml")
 }
-
 
 }
 \seealso{

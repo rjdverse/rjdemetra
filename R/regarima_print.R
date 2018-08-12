@@ -66,8 +66,9 @@ summary.regarima = function (object, digits = max(3L, getOption("digits") - 3L),
     if (nvar!=0){
       var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}
       colnames(var) <- c("","Coefficients")
-      rownames(var) <- var_dsc
+      # rownames(var) <- var_dsc
       fvar <- var[2]
+      rownames(fvar) <- sprintf("r.%s", rownames(fvar))
       cat("\n")
       cat("Fixed other regression effects:","\n")
       printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)
@@ -95,11 +96,11 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   out <- s_preOut(x)
   var <- s_preVar(x)$description
   rslt_spec <- x$model$spec_rslt
-  
+
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n")
   cat("Log-transformation:",if(rslt_spec[3]==TRUE) {"yes"} else {"no"},sep=" ")
-  
+
   cat("\n")
   cat("Coefficients:")
   if (!is.null(arima_coef)){
@@ -145,8 +146,9 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     if (nvar!=0){
       var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}
       colnames(var) <- c("","Coefficients")
-      rownames(var) <- var_dsc
+      # rownames(var) <- var_dsc
       fvar <- var[2]
+      rownames(fvar) <- sprintf("r.%s", rownames(fvar))
       cat("\n")
       cat("Fixed other regression effects:","\n")
       printCoefmat(fvar, digits = digits, P.values= FALSE, na.print = "NA", ...)

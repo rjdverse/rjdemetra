@@ -20,7 +20,7 @@ x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
 }}
 
-\item{userdefined}{vector with characters for additional output variables.}
+\item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }
 \value{
 \code{x13}/\code{x13_def} returns an object of class \code{c("SA","X13")}, a list containing the following components:

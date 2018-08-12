@@ -339,7 +339,6 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
   predef.outliers <- spec_preOut(outliertype=usrdef.outliersType,outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
 
   # check the user-defined variables
-  n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
   predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
                                   tradingdays.option = tradingdays.option)
 
@@ -382,7 +381,7 @@ regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "R
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r(spec = jrspec)
+  rspec <- specX13_jd2r(spec = jrspec, extra_info = FALSE)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)
@@ -560,7 +559,6 @@ regarima_spec_x13  <-function( object = object,
   predef.outliers <- spec_preOut(outliertype=usrdef.outliersType, outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
 
   # check the user-defined variables
-  n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
   predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
                                   tradingdays.option = tradingdays.option)
 

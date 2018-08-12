@@ -63,7 +63,7 @@ load_workspace <- function(file){
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' add_sa_item(mp, sa_x13, "X13")
+#' add_sa_item(wk, "sa1", sa_x13, "X13")
 #'
 #' # Other way to get the multiprocessing :
 #' mp <- get_object(wk, 1)
@@ -133,8 +133,8 @@ get_all_objects.workspace <- function(x){
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' add_sa_item(mp, sa_x13, "X13")
-#' add_sa_item(mp, sa_ts, "TramoSeats")
+#' add_sa_item(wk, "sa1", sa_x13, "X13")
+#' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
 #' sa_item1 <- get_object(mp, 1)
 #' sa_item2 <- get_object(mp, 2)
@@ -223,7 +223,7 @@ count.workspace <- function(x){
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' add_sa_item(mp, sa_x13, "X13")
+#' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' sa_item <- get_object(mp, 1)
 #'
 #'   # Extracting from a sa_item:
@@ -282,15 +282,15 @@ get_ts.sa_item <- function(x){
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' add_sa_item(mp, sa_x13, "X13")
-#' add_sa_item(mp, sa_ts, "TramoSeats")
+#' add_sa_item(wk, "sa1", sa_x13, "X13")
+#' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #' sa_item1 <- get_object(mp, 1)
 #'
-#' get_model(sa_item1) # Returns NULL
+#' get_model(sa_item1, wk) # Returns NULL
 #'
 #' compute(wk)
 #'
-#' get_model(sa_item1) # Returns the SA model sa_x13
+#' get_model(sa_item1, wk) # Returns the SA model sa_x13
 #' }
 #'
 #'
@@ -324,6 +324,7 @@ compute <- function(workspace, i) {
 #' \code{multiprocessing} or \code{sa_item} object.
 #'
 #' @param x the object to get the seasonnaly adjusted model.
+#' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.
 #' @param userdefined vector with characters for additional output variables
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
 #'
@@ -338,23 +339,23 @@ compute <- function(workspace, i) {
 #' @seealso \code{\link{compute}}
 #'
 #' @examples \dontrun{
-#' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
 #' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
 #' sa_ts <- tramoseats(myseries, spec = spec_ts)
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' add_sa_item(mp, sa_x13, "X13")
-#' add_sa_item(mp, sa_ts, "TramoSeats")
+#' add_sa_item(wk, "sa1", sa_x13, "X13")
+#' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
 #' compute(wk) # It's important to compute the workspace to get the SA model
 #' sa_item1 <- get_object(mp, 1)
 #'
-#' get_model(sa_item1) # Extract the model of the sa_item1: its the object sa_x13
+#' get_model(sa_item1, wk) # Extract the model of the sa_item1: its the object sa_x13
 #'
 #' # To get all the models of the multiprocessing mp:
-#' get_model(mp)
+#' get_model(mp, wk)
 #'
 #' # To get all the models of the workspace wk:
 #' get_model(wk)
@@ -362,30 +363,32 @@ compute <- function(workspace, i) {
 #' }
 #'
 #' @export
-get_model <- function(x, userdefined = NULL){
+get_model <- function(x, workspace, userdefined = NULL){
   UseMethod("get_model", x)
 }
 #' @export
-get_model.workspace <- function(x, userdefined = NULL){
+get_model.workspace <- function(x, workspace, userdefined = NULL){
   multiprocessings <- get_all_objects(x)
-  lapply(multiprocessings, get_model, userdefined = userdefined)
+  lapply(multiprocessings, get_model, workspace = x, userdefined = userdefined)
 }
 #' @export
-get_model.multiprocessing <- function(x, userdefined = NULL){
+get_model.multiprocessing <- function(x, workspace, userdefined = NULL){
   all_sa_objects <- get_all_objects(x)
-  lapply(all_sa_objects, get_model, userdefined = userdefined)
+  lapply(all_sa_objects, get_model,workspace = workspace, userdefined = userdefined)
 }
 #' @export
-get_model.sa_item <- function(x, userdefined = NULL){
+get_model.sa_item <- function(x, workspace, userdefined = NULL){
   jspec <- get_jspec(x)
   jresult <- sa_results(x)
   y_ts <- get_ts(x)
 
   #TODO: extract dictionary
-  jdictionary <- NULL
-  
+  context_dictionnary <- .jcall(workspace,
+                                "Lec/tstoolkit/algorithm/ProcessingContext;",
+                                "getContext")
+
   sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
-          jdictionary = jdictionary,
+          context_dictionnary = context_dictionnary,
           extra_info = TRUE, freq = frequency(y_ts))
 }
 

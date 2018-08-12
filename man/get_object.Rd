@@ -29,7 +29,7 @@ sa_x13 <- x13_def(myseries, spec = "RSA5c")
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(mp, sa_x13, "X13")
+add_sa_item(wk, "sa1", sa_x13, "X13")
 
 # Other way to get the multiprocessing :
 mp <- get_object(wk, 1)

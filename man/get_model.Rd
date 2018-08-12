@@ -4,10 +4,12 @@
 \alias{get_model}
 \title{Get the seasonally adjusted model from a workspace}
 \usage{
-get_model(x, userdefined = NULL)
+get_model(x, workspace, userdefined = NULL)
 }
 \arguments{
 \item{x}{the object to get the seasonnaly adjusted model.}
+
+\item{workspace}{the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.}
 
 \item{userdefined}{vector with characters for additional output variables
 (see \code{\link{x13}} or \code{\link{tramoseats}}).}
@@ -26,23 +28,23 @@ Generics functions to get seasonally adjusted model(s) from \code{workspace},
 }
 \examples{
 \dontrun{
-spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 sa_x13 <- x13(myseries, spec = spec_x13)
 spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
 sa_ts <- tramoseats(myseries, spec = spec_ts)
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(mp, sa_x13, "X13")
-add_sa_item(mp, sa_ts, "TramoSeats")
+add_sa_item(wk, "sa1", sa_x13, "X13")
+add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 
 compute(wk) # It's important to compute the workspace to get the SA model
 sa_item1 <- get_object(mp, 1)
 
-get_model(sa_item1) # Extract the model of the sa_item1: its the object sa_x13
+get_model(sa_item1, wk) # Extract the model of the sa_item1: its the object sa_x13
 
 # To get all the models of the multiprocessing mp:
-get_model(mp)
+get_model(mp, wk)
 
 # To get all the models of the workspace wk:
 get_model(wk)

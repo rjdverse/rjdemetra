@@ -16,7 +16,7 @@ setClass(
 #' \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
 #' \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 #' }
-#' @param userdefined vector with characters for additional output variables.
+#' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
 #' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
@@ -161,7 +161,7 @@ tramoseats_def <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
-tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, jdictionary = NULL,
+tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, context_dictionnary = NULL,
                                   extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
@@ -171,7 +171,7 @@ tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, jdictionary =
     return (NaN)
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
-                        jdictionary = jdictionary,
+                        context_dictionnary = context_dictionnary,
                         extra_info = extra_info)
   deco <- decomp_defTS(jrobj = jrobct, spec = spec)
   fin <- final(jrobj = jrobct)

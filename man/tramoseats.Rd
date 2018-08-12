@@ -20,7 +20,7 @@ tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
 \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 }}
 
-\item{userdefined}{vector with characters for additional output variables.}
+\item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }
 \value{
 \code{tramoseats}/\code{tramoseats_def} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
