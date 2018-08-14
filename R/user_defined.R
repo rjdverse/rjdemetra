@@ -1,4 +1,3 @@
-
 user_defined <- function(namedvector, jrobct){
   if(is.null(namedvector)){
     result <- list()
@@ -26,6 +25,19 @@ user_defined <- function(namedvector, jrobct){
 user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
   sa_object <- match.arg(sa_object)
   if(sa_object == "X13-ARIMA"){
+    ## To get the variables : 
+    # jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
+    # jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
+    # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
+    # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13",
+    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    # jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
+    # jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
+    # 
+    # dput(RJDemetra:::dictionary(jrobct))
+    
+    
     vars <- c("y", "y_f", "t", "t_f", "sa", "sa_f", "s", "s_f",
               "i", "i_f", "mode", "preprocessing.model.span.start", "preprocessing.model.span.end",
               "preprocessing.model.span.n", "preprocessing.model.espan.start",
@@ -111,6 +123,18 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
               "diagnostics.residual.end", "diagnostics.residualtd", "diagnostics.residualtd.on.i",
               "diagnostics.variancedecomposition")
   }else{
+    # # To get the variables :
+    # jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
+    # jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
+    # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
+    # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats",
+    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    # jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
+    # jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
+    # 
+    # dput(RJDemetra:::dictionary(jrobct))
+    
     vars <- c("y", "y_f", "t", "t_f", "sa", "sa_f", "s", "s_f",
               "i", "i_f", "mode", "preprocessing.model.span.start", "preprocessing.model.span.end",
               "preprocessing.model.span.n", "preprocessing.model.espan.start",

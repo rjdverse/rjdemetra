@@ -159,9 +159,9 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
 print.user_defined <- function(x,...){
   if(is.null(x) || length(x) == 0)
     return(invisible(x))
-  cat(ngettext(length(x)!= 1 + 1,
-                 "One additional variable (",
-                   "Names of additional variables ("))
+  cat(ngettext((length(x)!= 1) + 1,
+               "One additional variable (",
+               "Names of additional variables ("))
   cat(length(x),"):","\n", sep="")
   cat(names(x),sep = ", ")
   invisible(x)

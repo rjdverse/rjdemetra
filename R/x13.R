@@ -139,7 +139,7 @@ x13 <-function(series, spec, userdefined = NULL){
     diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
-              user_defined = user_defined(userdefined,jrobct))
+              user_defined = user_defined(userdefined, jrobct))
 
     class(z) <- c("SA","X13")
     return(z)
@@ -165,7 +165,8 @@ x13_def <-function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 }
 
 #Extract the results of the SA of a X13 object
-x13JavaResults <- function(jrslt, spec, userdefined, context_dictionnary = NULL,
+x13JavaResults <- function(jrslt, spec, userdefined = NULL,
+                           context_dictionnary = NULL,
                            extra_info = FALSE, freq = NA){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
@@ -184,12 +185,15 @@ x13JavaResults <- function(jrslt, spec, userdefined, context_dictionnary = NULL,
   diagn <- diagnostics(jrobj = jrobct)
 
   z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
+            diagnostics = diagn,
+            user_defined = user_defined(userdefined, jrobct))
 
   class(z) <- c("SA","X13")
   return(z)
 }
-sa_jd2r <- function(jrslt, spec, userdefined = NULL, context_dictionnary = NULL,
+sa_jd2r <- function(jrslt, spec,
+                    userdefined = NULL,
+                    context_dictionnary = NULL,
                     extra_info = FALSE, freq = NA){
   if(is.null(jrslt))
     return(NULL)
