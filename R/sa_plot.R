@@ -33,7 +33,7 @@ plot.decomposition_X11 = function(x, first_date, last_date, ...){
   freq <- frequency(d10)
   m <- matrix(c(1:freq), nrow = 1, ncol = freq)
   layout(m,  widths = c(1,rep.int(0.8, ncol(m)-1)))
-  par(cex=0.7, mai=c(0.4,0.3,0.1,0))
+  par(cex=0.7, mai=c(0.1,0.3,0.4,0))
   y_min <- min(d8,d10)
   y_max <- max(d8,d10)
   y_lim <- c(y_min - abs(y_min)*0.2, y_max + abs(y_max)*0.2)
@@ -56,10 +56,10 @@ plot.decomposition_X11 = function(x, first_date, last_date, ...){
     lines(rep(mean(xd10),length(xd10)), col="black", type="l", lty=1)
     legend(x = "bottom", legend=leg[i],inset = 0, bty="n")
     yaxt = "n"
-    par(cex=0.7, mai=c(0.4,0,0.1,0))
+    par(cex=0.7, mai=c(0.1,0,0.4,0))
     ylab=""
   }
-  mtext("S-I ratio", side = 1, cex = 0.7, col = "blue")
+  mtext("S-I ratio", side = 3, col = "blue", outer = TRUE, line = -2)
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
 }
 

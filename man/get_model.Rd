@@ -11,7 +11,7 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 
 \item{workspace}{the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.}
 
-\item{userdefined}{vector with characters for additional output variables
+\item{userdefined}{vector with characters for additional output variables.
 (see \code{\link{x13}} or \code{\link{tramoseats}}).}
 
 \item{progress_bar}{boolean: if \code{TRUE} a progress bar is printed.}

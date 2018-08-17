@@ -126,9 +126,9 @@ get_all_objects.workspace <- function(x){
 #' @family Other functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
-#' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
-#' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
 #' sa_ts <- tramoseats(myseries, spec = spec_ts)
 #'
 #' wk <- new_workspace()

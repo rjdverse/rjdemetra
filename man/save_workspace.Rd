@@ -22,7 +22,7 @@ Functions save a \code{workspace} object into a JDemetra+ workspace.
 \dontrun{
 # Create and export a empty JDemetra+ workspace
 wk <- new_workspace()
-mp <- new_multiprocessing(wk, "sa1")
+new_multiprocessing(wk, "sa1")
 save_workspace(wk, "workspace.xml")
 }
 
