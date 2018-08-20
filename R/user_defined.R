@@ -1,10 +1,223 @@
-
 user_defined <- function(namedvector, jrobct){
-
-  result <- lapply(namedvector, function(x) result(jrobct, x))
-  if (is.null(names(namedvector)))
-    names(result) <- namedvector
-
+  if(is.null(namedvector)){
+    result <- list()
+  }else{
+    result <- lapply(namedvector, function(x) result(jrobct, x))
+    if (is.null(names(namedvector)))
+      names(result) <- namedvector
+  }
   class(result) <- c("user_defined")
   result
+}
+
+#' Get the names of the user-defined variables
+#'
+#' Function to get the names of the additional output variables that can be defined in
+#' \code{\link{x13}}, \code{\link{x13_def}}, \code{\link{tramoseats}} and \code{\link{tramoseats_def}}
+#' with the parameter \code{userdefined}.
+#'
+#' @param sa_object a character : \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
+#'
+#' @examples
+#' user_defined_variables("X13-ARIMA")
+#' user_defined_variables("TRAMO-SEATS")
+#' @export
+user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
+  sa_object <- match.arg(sa_object)
+  if(sa_object == "X13-ARIMA"){
+    ## To get the variables : 
+    # jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
+    # jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
+    # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
+    # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13",
+    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    # jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
+    # jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
+    # 
+    # dput(RJDemetra:::dictionary(jrobct))
+    
+    
+    vars <- c("y", "y_f", "t", "t_f", "sa", "sa_f", "s", "s_f",
+              "i", "i_f", "mode", "preprocessing.model.span.start", "preprocessing.model.span.end",
+              "preprocessing.model.span.n", "preprocessing.model.espan.start",
+              "preprocessing.model.espan.end", "preprocessing.model.espan.n",
+              "preprocessing.model.log", "preprocessing.model.adjust", "preprocessing.model.y",
+              "preprocessing.model.y_f", "preprocessing.model.y_ef", "preprocessing.model.yc",
+              "preprocessing.model.yc_f", "preprocessing.model.yc_ef", "preprocessing.model.l",
+              "preprocessing.model.y_lin", "preprocessing.model.y_lin_f", "preprocessing.model.ycal",
+              "preprocessing.model.ycal_f", "preprocessing.model.det", "preprocessing.model.det_f",
+              "preprocessing.model.l_f", "preprocessing.model.l_b", "preprocessing.model.cal",
+              "preprocessing.model.cal_f", "preprocessing.model.tde", "preprocessing.model.tde_f",
+              "preprocessing.model.mhe", "preprocessing.model.mhe_f", "preprocessing.model.ee",
+              "preprocessing.model.ee_f", "preprocessing.model.omhe", "preprocessing.model.omhe_f",
+              "preprocessing.model.out(*)", "preprocessing.model.out_f", "preprocessing.model.out_i",
+              "preprocessing.model.out_i_f", "preprocessing.model.out_t", "preprocessing.model.out_t_f",
+              "preprocessing.model.out_s", "preprocessing.model.out_s_f", "preprocessing.model.reg",
+              "preprocessing.model.reg_f", "preprocessing.model.reg_t", "preprocessing.model.reg_t_f",
+              "preprocessing.model.reg_s", "preprocessing.model.reg_s_f", "preprocessing.model.reg_i",
+              "preprocessing.model.reg_i_f", "preprocessing.model.reg_sa",
+              "preprocessing.model.reg_sa_f", "preprocessing.model.reg_y",
+              "preprocessing.model.reg_y_f", "preprocessing.model.reg_u", "preprocessing.model.reg_u_f",
+              "preprocessing.model.fullresiduals", "preprocessing.model.lp",
+              "preprocessing.model.ntd", "preprocessing.model.nmh", "preprocessing.model.td(*)",
+              "preprocessing.model.easter", "preprocessing.model.nout", "preprocessing.model.noutao",
+              "preprocessing.model.noutls", "preprocessing.model.nouttc", "preprocessing.model.noutso",
+              "preprocessing.model.coefficients", "preprocessing.model.description",
+              "preprocessing.model.covar", "preprocessing.model.pcovar", "preprocessing.model.fcasts(?)",
+              "preprocessing.model.bcasts(?)", "preprocessing.model.lin_fcasts(?)",
+              "preprocessing.model.lin_bcasts(?)", "preprocessing.model.efcasts(?)",
+              "preprocessing.arima.parameters", "preprocessing.arima.p", "preprocessing.arima.d",
+              "preprocessing.arima.q", "preprocessing.arima.bp", "preprocessing.arima.bd",
+              "preprocessing.arima.bq", "preprocessing.likelihood.neffectiveobs",
+              "preprocessing.likelihood.np", "preprocessing.likelihood.logvalue",
+              "preprocessing.likelihood.adjustedlogvalue", "preprocessing.likelihood.ssqerr",
+              "preprocessing.likelihood.aic", "preprocessing.likelihood.aicc",
+              "preprocessing.likelihood.bic", "preprocessing.likelihood.bicc",
+              "preprocessing.likelihood.ser", "preprocessing.likelihood.ser-ml",
+              "preprocessing.residuals.res", "preprocessing.residuals.mean",
+              "preprocessing.residuals.skewness", "preprocessing.residuals.kurtosis",
+              "preprocessing.residuals.dh", "preprocessing.residuals.lb", "preprocessing.residuals.lb2",
+              "preprocessing.residuals.seaslb", "preprocessing.residuals.bp",
+              "preprocessing.residuals.bp2", "preprocessing.residuals.seasbp",
+              "preprocessing.residuals.nruns", "preprocessing.residuals.lruns",
+              "mstats.M(*)", "mstats.Q", "mstats.Q-M2", "decomposition.a1",
+              "decomposition.a1a", "decomposition.a1b", "decomposition.a6",
+              "decomposition.a7", "decomposition.a8", "decomposition.a8t",
+              "decomposition.a8s", "decomposition.a8i", "decomposition.a9",
+              "decomposition.a9sa", "decomposition.a9u", "decomposition.a9ser",
+              "decomposition.b1", "decomposition.b2", "decomposition.b3", "decomposition.b4",
+              "decomposition.b5", "decomposition.b6", "decomposition.b7", "decomposition.b8",
+              "decomposition.b9", "decomposition.b10", "decomposition.b11",
+              "decomposition.b12", "decomposition.b13", "decomposition.b14",
+              "decomposition.b15", "decomposition.b16", "decomposition.b17",
+              "decomposition.b18", "decomposition.b19", "decomposition.b20",
+              "decomposition.c1", "decomposition.c2", "decomposition.c3", "decomposition.c4",
+              "decomposition.c5", "decomposition.c6", "decomposition.c7", "decomposition.c8",
+              "decomposition.c9", "decomposition.c10", "decomposition.c11",
+              "decomposition.c12", "decomposition.c13", "decomposition.c14",
+              "decomposition.c15", "decomposition.c16", "decomposition.c17",
+              "decomposition.c18", "decomposition.c19", "decomposition.c20",
+              "decomposition.d1", "decomposition.d2", "decomposition.d3", "decomposition.d4",
+              "decomposition.d5", "decomposition.d6", "decomposition.d7", "decomposition.d8",
+              "decomposition.d9", "decomposition.d10", "decomposition.d10a",
+              "decomposition.d10b", "decomposition.d11", "decomposition.d11a",
+              "decomposition.d12", "decomposition.d12a", "decomposition.d13",
+              "decomposition.d14", "decomposition.d15", "decomposition.d16",
+              "decomposition.d16a", "decomposition.d16b", "decomposition.d18",
+              "decomposition.d19", "decomposition.d20", "decomposition.e1",
+              "decomposition.e2", "decomposition.e3", "decomposition.e11",
+              "decomposition.d9filter", "decomposition.slen", "decomposition.d12filter",
+              "decomposition.tlen", "diagnostics.qs", "diagnostics.ftest",
+              "diagnostics.qs.on.i", "diagnostics.ftest.on.i", "diagnostics.combined.all.kruskalwallis",
+              "diagnostics.combined.all.stable", "diagnostics.combined.all.evolutive",
+              "diagnostics.combined.all.summary", "diagnostics.combined.all.stable.ssm",
+              "diagnostics.combined.all.stable.ssr", "diagnostics.combined.all.stable.ssq",
+              "diagnostics.combined.all.evolutive.ssm", "diagnostics.combined.all.evolutive.ssr",
+              "diagnostics.combined.all.evolutive.ssq", "diagnostics.combined.end.kruskalwallis",
+              "diagnostics.combined.end.stable", "diagnostics.combined.end.evolutive",
+              "diagnostics.combined.end.summary", "diagnostics.combined.end.stable.ssm",
+              "diagnostics.combined.end.stable.ssr", "diagnostics.combined.end.stable.ssq",
+              "diagnostics.combined.end.evolutive.ssm", "diagnostics.combined.end.evolutive.ssr",
+              "diagnostics.combined.end.evolutive.ssq", "diagnostics.residual.all",
+              "diagnostics.residual.end", "diagnostics.residualtd", "diagnostics.residualtd.on.i",
+              "diagnostics.variancedecomposition")
+  }else{
+    # # To get the variables :
+    # jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
+    # jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
+    # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
+    # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats",
+    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    # jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
+    # jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
+    # 
+    # dput(RJDemetra:::dictionary(jrobct))
+    
+    vars <- c("y", "y_f", "t", "t_f", "sa", "sa_f", "s", "s_f",
+              "i", "i_f", "mode", "preprocessing.model.span.start", "preprocessing.model.span.end",
+              "preprocessing.model.span.n", "preprocessing.model.espan.start",
+              "preprocessing.model.espan.end", "preprocessing.model.espan.n",
+              "preprocessing.model.log", "preprocessing.model.adjust", "preprocessing.model.y",
+              "preprocessing.model.y_f", "preprocessing.model.y_ef", "preprocessing.model.yc",
+              "preprocessing.model.yc_f", "preprocessing.model.yc_ef", "preprocessing.model.l",
+              "preprocessing.model.y_lin", "preprocessing.model.y_lin_f", "preprocessing.model.ycal",
+              "preprocessing.model.ycal_f", "preprocessing.model.det", "preprocessing.model.det_f",
+              "preprocessing.model.l_f", "preprocessing.model.l_b", "preprocessing.model.cal",
+              "preprocessing.model.cal_f", "preprocessing.model.tde", "preprocessing.model.tde_f",
+              "preprocessing.model.mhe", "preprocessing.model.mhe_f", "preprocessing.model.ee",
+              "preprocessing.model.ee_f", "preprocessing.model.omhe", "preprocessing.model.omhe_f",
+              "preprocessing.model.out(*)", "preprocessing.model.out_f", "preprocessing.model.out_i",
+              "preprocessing.model.out_i_f", "preprocessing.model.out_t", "preprocessing.model.out_t_f",
+              "preprocessing.model.out_s", "preprocessing.model.out_s_f", "preprocessing.model.reg",
+              "preprocessing.model.reg_f", "preprocessing.model.reg_t", "preprocessing.model.reg_t_f",
+              "preprocessing.model.reg_s", "preprocessing.model.reg_s_f", "preprocessing.model.reg_i",
+              "preprocessing.model.reg_i_f", "preprocessing.model.reg_sa",
+              "preprocessing.model.reg_sa_f", "preprocessing.model.reg_y",
+              "preprocessing.model.reg_y_f", "preprocessing.model.reg_u", "preprocessing.model.reg_u_f",
+              "preprocessing.model.fullresiduals", "preprocessing.model.lp",
+              "preprocessing.model.ntd", "preprocessing.model.nmh", "preprocessing.model.td(*)",
+              "preprocessing.model.easter", "preprocessing.model.nout", "preprocessing.model.noutao",
+              "preprocessing.model.noutls", "preprocessing.model.nouttc", "preprocessing.model.noutso",
+              "preprocessing.model.coefficients", "preprocessing.model.description",
+              "preprocessing.model.covar", "preprocessing.model.pcovar", "preprocessing.model.fcasts(?)",
+              "preprocessing.model.bcasts(?)", "preprocessing.model.lin_fcasts(?)",
+              "preprocessing.model.lin_bcasts(?)", "preprocessing.model.efcasts(?)",
+              "preprocessing.arima.parameters", "preprocessing.arima.p", "preprocessing.arima.d",
+              "preprocessing.arima.q", "preprocessing.arima.bp", "preprocessing.arima.bd",
+              "preprocessing.arima.bq", "preprocessing.likelihood.neffectiveobs",
+              "preprocessing.likelihood.np", "preprocessing.likelihood.logvalue",
+              "preprocessing.likelihood.adjustedlogvalue", "preprocessing.likelihood.ssqerr",
+              "preprocessing.likelihood.aic", "preprocessing.likelihood.aicc",
+              "preprocessing.likelihood.bic", "preprocessing.likelihood.bicc",
+              "preprocessing.likelihood.ser", "preprocessing.likelihood.ser-ml",
+              "preprocessing.residuals.res", "preprocessing.residuals.mean",
+              "preprocessing.residuals.skewness", "preprocessing.residuals.kurtosis",
+              "preprocessing.residuals.dh", "preprocessing.residuals.lb", "preprocessing.residuals.lb2",
+              "preprocessing.residuals.seaslb", "preprocessing.residuals.bp",
+              "preprocessing.residuals.bp2", "preprocessing.residuals.seasbp",
+              "preprocessing.residuals.nruns", "preprocessing.residuals.lruns",
+              "decomposition.y_lin", "decomposition.y_lin_f", "decomposition.y_lin_ef",
+              "decomposition.t_lin", "decomposition.t_lin_f", "decomposition.t_lin_e",
+              "decomposition.t_lin_ef", "decomposition.sa_lin", "decomposition.sa_lin_f",
+              "decomposition.sa_lin_e", "decomposition.sa_lin_ef", "decomposition.s_lin",
+              "decomposition.s_lin_f", "decomposition.s_lin_e", "decomposition.s_lin_ef",
+              "decomposition.i_lin", "decomposition.i_lin_f", "decomposition.i_lin_e",
+              "decomposition.i_lin_ef", "decomposition.y_cmp", "decomposition.y_cmp_f",
+              "decomposition.t_cmp", "decomposition.t_cmp_f", "decomposition.sa_cmp",
+              "decomposition.sa_cmp_f", "decomposition.s_cmp", "decomposition.s_cmp_f",
+              "decomposition.i_cmp", "decomposition.i_cmp_f", "decomposition.i_cmp_e",
+              "decomposition.t_cmp_e", "decomposition.s_cmp_e", "decomposition.sa_cmp_e",
+              "decomposition.i_cmp_ef", "decomposition.t_cmp_ef", "decomposition.s_cmp_ef",
+              "decomposition.sa_cmp_ef", "decomposition.parameterscutoff",
+              "decomposition.modelchanged", "decomposition.model.ar", "decomposition.model.diff",
+              "decomposition.model.ma", "decomposition.model.fullar", "decomposition.model.innovationvariance",
+              "decomposition.tmodel.ar", "decomposition.tmodel.diff", "decomposition.tmodel.ma",
+              "decomposition.tmodel.fullar", "decomposition.tmodel.innovationvariance",
+              "decomposition.smodel.ar", "decomposition.smodel.diff", "decomposition.smodel.ma",
+              "decomposition.smodel.fullar", "decomposition.smodel.innovationvariance",
+              "decomposition.samodel.ar", "decomposition.samodel.diff", "decomposition.samodel.ma",
+              "decomposition.samodel.fullar", "decomposition.samodel.innovationvariance",
+              "decomposition.transitorymodel.ar", "decomposition.transitorymodel.diff",
+              "decomposition.transitorymodel.ma", "decomposition.transitorymodel.fullar",
+              "decomposition.transitorymodel.innovationvariance", "decomposition.imodel.ar",
+              "decomposition.imodel.diff", "decomposition.imodel.ma", "decomposition.imodel.fullar",
+              "decomposition.imodel.innovationvariance", "diagnostics.qs",
+              "diagnostics.ftest", "diagnostics.qs.on.i", "diagnostics.ftest.on.i",
+              "diagnostics.combined.all.kruskalwallis", "diagnostics.combined.all.stable",
+              "diagnostics.combined.all.evolutive", "diagnostics.combined.all.summary",
+              "diagnostics.combined.all.stable.ssm", "diagnostics.combined.all.stable.ssr",
+              "diagnostics.combined.all.stable.ssq", "diagnostics.combined.all.evolutive.ssm",
+              "diagnostics.combined.all.evolutive.ssr", "diagnostics.combined.all.evolutive.ssq",
+              "diagnostics.combined.end.kruskalwallis", "diagnostics.combined.end.stable",
+              "diagnostics.combined.end.evolutive", "diagnostics.combined.end.summary",
+              "diagnostics.combined.end.stable.ssm", "diagnostics.combined.end.stable.ssr",
+              "diagnostics.combined.end.stable.ssq", "diagnostics.combined.end.evolutive.ssm",
+              "diagnostics.combined.end.evolutive.ssr", "diagnostics.combined.end.evolutive.ssq",
+              "diagnostics.residual.all", "diagnostics.residual.end", "diagnostics.residualtd",
+              "diagnostics.residualtd.on.i", "diagnostics.variancedecomposition"
+    )
+  }
+  vars
 }

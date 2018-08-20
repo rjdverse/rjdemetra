@@ -3,10 +3,10 @@ setClass(
   contains = "JD2_ProcResults"
 )
 
-#' SA, TRAMO-SEATS
+#' Seasonal Adjustment with TRAMO-SEATS
 #'
 #' @description
-#' \code{tramoseats}/\code{tramoseatsDef} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
+#' \code{tramoseats}/\code{tramoseats_def} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 #'
@@ -14,9 +14,9 @@ setClass(
 #' @param spec model specification TRAMO-SEATS. For the function:
 #' \itemize{
 #' \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
-#' \item \code{tramoseatsDef}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
+#' \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
 #' }
-#' @param userdefined vector with characters for additional output variables
+#' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
 #' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
@@ -24,7 +24,7 @@ setClass(
 #'
 #' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 #'
-#' As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseatsDef}), they are described in the table below.
+#' As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -37,7 +37,7 @@ setClass(
 #' }
 #'
 #' @return
-#' \code{tramoseats}/\code{tramoseatsDef} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
+#' \code{tramoseats}/\code{tramoseats_def} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
 #'
@@ -66,23 +66,27 @@ setClass(
 #' }
 #'
 #' @references
-#' Info on JDemtra+, usage and functions:
+#' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
+#' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
+#'
 #' @examples
 #'
-#'   myspec<-tramoseats_specDef("RSAfull")
+#'   myspec<-tramoseats_spec_def("RSAfull")
 #'   mysa <-tramoseats(myseries,myspec)
-#'   mysa1 <- tramoseatsDef(myseries, spec = "RSAfull")
+#'   mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 #'   mysa
 #'   mysa1
 #'
-#'   myspec2 <-tramoseats_spec(myspec,tradingdays.mauto="Unused",tradingdays.option ="WorkingDays",
-#'                              easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
+#'                              tradingdays.option = "WorkingDays",
+#'                              easter.type = "Standard",
+#'                              automdl.enabled = FALSE, arima.mu = TRUE)
 #'   mysa2 <- tramoseats(myseries, myspec2)
 #'
 #'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
@@ -96,12 +100,13 @@ setClass(
 #'   plot(mysa3$regarima)
 #'   plot(mysa3$decomposition)
 #'
-#'   mysa2 <- tramoseatsDef(myseries,"RSAfull",
+#'   mysa2 <- tramoseats_def(myseries,"RSAfull",
 #'   userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
 #'   mysa2
 #'
 #' @export
-tramoseats <-function(series, spec, userdefined){
+tramoseats <-function(series, spec,
+                      userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -113,6 +118,10 @@ tramoseats <-function(series, spec, userdefined){
   specSeats_r2jd(spec,jrspec)
   jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+
+  # Or, using the fonction x13JavaResults :
+  # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
@@ -125,10 +134,9 @@ tramoseats <-function(series, spec, userdefined){
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
-
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
+    z <- list(regarima = reg, decomposition = deco, final = fin,
+              diagnostics = diagn,
+              user_defined = user_defined(userdefined, jrobct))
 
     class(z) <- c("SA","TRAMO_SEATS")
     return(z)
@@ -137,7 +145,8 @@ tramoseats <-function(series, spec, userdefined){
 #' @rdname tramoseats
 #' @name tramoseats
 #' @export
-tramoseatsDef <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"), userdefined){
+tramoseats_def <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+                         userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -147,26 +156,33 @@ tramoseatsDef <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA"
   jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+
+  return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+tramoseatsJavaResults <- function(jrslt, spec,
+                                  userdefined = NULL,
+                                  context_dictionnary = NULL,
+                                  extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
   jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)){
+  if (is.null(jrobct@internal))
     return (NaN)
-  }else{
-    reg <- regarima_defTS(jrobj = jrobct_arima, spec = jrspec)
-    deco <- decomp_defTS(jrobj = jrobct, spec = jrspec)
-    fin <- final(jrobj = jrobct)
-    diagn <- diagnostics(jrobj = jrobct)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn)
+  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
+                        context_dictionnary = context_dictionnary,
+                        extra_info = extra_info)
+  deco <- decomp_defTS(jrobj = jrobct, spec = spec)
+  fin <- final(jrobj = jrobct)
+  diagn <- diagnostics(jrobj = jrobct)
 
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
+  z <- list(regarima = reg, decomposition = deco, final = fin,
+            diagnostics = diagn,
+            user_defined = user_defined(userdefined, jrobct))
 
-    class(z) <- c("SA","TRAMO_SEATS")
-    return(z)
-  }
+  class(z) <- c("SA","TRAMO_SEATS")
+  return(z)
+
 }
-
-

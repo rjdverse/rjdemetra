@@ -139,19 +139,17 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
 }
 
 #' @export
-print.final <- function(x, calendar, n_last_obs = frequency(x), print_forecasts = TRUE, ...){
-  forecast_names <- grep("_f$", colnames(x), value = TRUE)
-  series_names <- gsub("_f$","", forecast_names)
+print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_forecasts = TRUE, ...){
 
   cat("Last observed values\n")
   print(tail(
-    .preformat.ts(na.omit(x[, series_names]), calendar = calendar),
+    .preformat.ts(x[[1]], calendar = calendar),
     n_last_obs
   ))
   if(print_forecasts){
     cat("\nForecasts:\n")
     print(head(
-      .preformat.ts(na.omit(x[, forecast_names]), calendar = calendar),
+      .preformat.ts(x[[1]], calendar = calendar),
       n_last_obs
     ))
   }
@@ -159,9 +157,11 @@ print.final <- function(x, calendar, n_last_obs = frequency(x), print_forecasts 
 }
 #' @export
 print.user_defined <- function(x,...){
-  cat(ngettext(length(x)!= 1 + 1,
-                 "One additional variable (",
-                   "Names of additional variables ("))
+  if(is.null(x) || length(x) == 0)
+    return(invisible(x))
+  cat(ngettext((length(x)!= 1) + 1,
+               "One additional variable (",
+               "Names of additional variables ("))
   cat(length(x),"):","\n", sep="")
   cat(names(x),sep = ", ")
   invisible(x)

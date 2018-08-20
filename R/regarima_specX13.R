@@ -1,9 +1,9 @@
 #' RegARIMA model specification, pre-adjustment in X13
 #' @description
 #'
-#' \code{regarima_specDefX13} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
+#' \code{regarima_spec_def_x13} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
 #'
-#' \code{regarima_specX13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
+#' \code{regarima_spec_x13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
 #'
 #' @param spec predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
 #'
@@ -49,7 +49,7 @@
 #'
 #' @param usrdef.varCoef vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.
 #'
-#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects. \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
+#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects; \code{"UserDefined"} - user-defined trading days regressors (currently not working). \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
 #'
 #' @param tradingdays.autoadjust  logicals. If \code{TRUE} the program corrects automatically for the leap year effect. Modifications of this variable are taken into account only when \code{transform.function} is set to \code{"Auto"}.
 #'
@@ -152,7 +152,7 @@
 #'
 #'
 #' @details
-#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_specDefX13}) are described in the table below.
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_spec_def_x13}) are described in the table below.
 #'
 #' \tabular{rrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -185,27 +185,27 @@
 #' \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers. The matrix can be also accessed with the function \code{\link{s_span}}.}
 #'
 #' @references
-#' Info on JDemtra+, usage and functions:
+#' Info on JDemetra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' @examples
-#'   myspec1 <-regarima_specDefX13(spec=c("RG5c"))
+#'   myspec1 <-regarima_spec_def_x13(spec=c("RG5c"))
 #'   myreg1 <-regarima(myseries, spec=myspec1)
 #'
 #'   # Modify a pre-specified model specification
-#'   myspec2 <-regarima_specDefX13(spec=c("RG5c"), tradingdays.option = "WorkingDays")
+#'   myspec2 <-regarima_spec_def_x13(spec=c("RG5c"), tradingdays.option = "WorkingDays")
 #'   myreg2 <-regarima(myseries, spec=myspec2)
 #'
 #' # Modify the model specification from a "regarima" object
-#'   myspec3 <- regarima_specX13(myreg1,tradingdays.option = "WorkingDays")
+#'   myspec3 <- regarima_spec_x13(myreg1,tradingdays.option = "WorkingDays")
 #'   myreg3 <- regarima(myseries,myspec3)
 #'
 #' # Modify the model specification from a "regarima_spec" object
-#'   myspec4 <- regarima_specX13(myspec1,tradingdays.option = "WorkingDays")
+#'   myspec4 <- regarima_spec_x13(myspec1,tradingdays.option = "WorkingDays")
 #'   myreg4 <- regarima(myseries,myspec4)
 #'
 #' # Pre-specified outliers
-#'   myspec1<-regarima_specDefX13(spec=c("RG5c"),usrdef.outliersEnabled = TRUE,
+#'   myspec1<-regarima_spec_def_x13(spec=c("RG5c"),usrdef.outliersEnabled = TRUE,
 #'                              usrdef.outliersType = c("LS","AO"),
 #'                              usrdef.outliersDate=c("2008-10-01","2002-01-01"),
 #'                              usrdef.outliersCoef = c(36000,14000),
@@ -220,19 +220,19 @@
 #'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
 #'   var <-ts.union(var1,var2)
 #'
-#'   myspec1 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE,
+#'   myspec1 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE,
 #'                                   usrdef.var = var)
 #'   myreg1 <- regarima(myseries,myspec1)
 #'   myreg1
 #'
-#'   myspec2 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE,
+#'   myspec2 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE,
 #'                                   usrdef.var = var1, usrdef.varCoef = c(2),
 #'                                   transform.function = "None")
 #'   myreg2 <- regarima(myseries, myspec2)
 #'   s_preVar(myreg2)
 #'
 #' # Pre-specified ARMA coefficients
-#'   myspec1 <- regarima_specDefX13(spec="RG5c", automdl.enabled =FALSE,
+#'   myspec1 <- regarima_spec_def_x13(spec="RG5c", automdl.enabled =FALSE,
 #'                               arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
 #'                               arima.coefEnabled = TRUE,
 #'                               arima.coef = c(-0.8,-0.6,0),
@@ -243,7 +243,7 @@
 #'   myreg1
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+regarima_spec_def_x13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                             estimate.from=NA_character_,
                             estimate.to=NA_character_,
                             estimate.first=NA_integer_,
@@ -262,7 +262,7 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
                             usrdef.var = NA,
                             usrdef.varType = NA,
                             usrdef.varCoef = NA,
-                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                             tradingdays.autoadjust = NA,
                             tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                             tradingdays.stocktd = NA_integer_,
@@ -339,8 +339,8 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
   predef.outliers <- spec_preOut(outliertype=usrdef.outliersType,outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
 
   # check the user-defined variables
-  n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
@@ -381,7 +381,7 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r( spec = jrspec)
+  rspec <- specX13_jd2r(spec = jrspec, extra_info = FALSE)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)
@@ -394,20 +394,20 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
 
   v_estimate <-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,adjust=transform.adjust.tab,aicdiff=transform.aicdiff.tab,
-                         stringsAsFactors=FALSE)
+                            stringsAsFactors=FALSE)
   v_trading.days<-data.frame( option = tradingdays.option.tab, autoadjust=tradingdays.autoadjust.tab, leapyear = tradingdays.leapyear.tab,
-                          stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab, stringsAsFactors=FALSE)
+                              stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab, stringsAsFactors=FALSE)
   v_easter<-data.frame(enabled=easter.enabled.tab,julian=easter.julian.tab,duration=easter.duration.tab,test=easter.test.tab, stringsAsFactors=FALSE)
   v_usrdef <- data.frame(outlier= c(FALSE, usrdef.outliersEnabled,NA),outlier.coef= c(FALSE,NA,NA),
-                       variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA),stringsAsFactors=FALSE)
+                         variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA),stringsAsFactors=FALSE)
   v_outliers<-data.frame(enabled=outlier.enabled.tab,span=outlier.span.tab,ao=outlier.ao.tab, tc=outlier.tc.tab, ls = outlier.ls.tab,
-                      so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,method=outlier.method.tab,
-                      tcrate=outlier.tcrate.tab,stringsAsFactors=FALSE)
+                         so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,method=outlier.method.tab,
+                         tcrate=outlier.tcrate.tab,stringsAsFactors=FALSE)
   v_arima <-data.frame(enabled=automdl.enabled.tab,automdl.acceptdefault=automdl.acceptdefault.tab,automdl.cancel=automdl.cancel.tab,
-                      automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.mixed=automdl.mixed.tab,automdl.balanced=automdl.balanced.tab,
-                      automdl.armalimit=automdl.armalimit.tab,automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab,
-                      automdl.ubfinal=automdl.ubfinal.tab,arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
-                      arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA), stringsAsFactors=FALSE)
+                       automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.mixed=automdl.mixed.tab,automdl.balanced=automdl.balanced.tab,
+                       automdl.armalimit=automdl.armalimit.tab,automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab,
+                       automdl.ubfinal=automdl.ubfinal.tab,arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
+                       arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA), stringsAsFactors=FALSE)
   v_forecast <- data.frame(horizon = c(-2,fcst.horizon,NA), stringsAsFactors=FALSE)
 
   span.spec <-rspec$span
@@ -437,12 +437,31 @@ regarima_specDefX13  <-function(spec=c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4
   class(z) = c("regarima_spec","X13")
   return(z)
 }
+reformat_spec_def <- function(x, parameter){
+  data_names <- names(x[[parameter]])
+  res <- lapply(data_names,function(name){
+    already_formatted <- length(grep("\\.",name)) > 0
+    if(already_formatted){
+      var_name <- already_formatted
+    }else{
+      var_name <- paste(parameter, name, sep = ".")
+    }
+    if(exists(var_name, envir = parent.frame(n = 3))){
+      x[[parameter]][[name]]
+    }else{
+      c(x[[parameter]][[name]], get(var_name, envir = parent.frame(n = 3)), NA)
+    }
+
+  })
+  names(res) <- data_names
+  res
+}
 # The function creates a ("regarima_spec","X13") class object from from a regarima_spec or regarima object
-#' @rdname regarima_specDefX13
-#' @name regarima_specDefX13
+#' @rdname regarima_spec_def_x13
+#' @name regarima_spec_def_x13
 #' @param object object of class \code{c("regarima_spec","X13")} or of class \code{c("regarima","X13")}.
 #' @export
-regarima_specX13  <-function( object = object,
+regarima_spec_x13  <-function( object = object,
                                 estimate.from=NA_character_,
                                 estimate.to=NA_character_,
                                 estimate.first=NA_integer_,
@@ -461,7 +480,7 @@ regarima_specX13  <-function( object = object,
                                 usrdef.var=NA,
                                 usrdef.varType = NA,
                                 usrdef.varCoef = NA,
-                                tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                                tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                                 tradingdays.autoadjust = NA,
                                 tradingdays.leapyear = c(NA_character_,"LeapYear","LengthOfPeriod","None"),
                                 tradingdays.stocktd = NA_integer_,
@@ -540,8 +559,8 @@ regarima_specX13  <-function( object = object,
   predef.outliers <- spec_preOut(outliertype=usrdef.outliersType, outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
 
   # check the user-defined variables
-  n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)

@@ -1,9 +1,9 @@
 #' RegARIMA model specification, pre-adjustment in TRAMO-SEATS
 #' @description
 #'
-#' \code{regarima_specDefTS} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
+#' \code{regarima_spec_def_tramoseats} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
 #'
-#' \code{regarima_specTS} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
+#' \code{regarima_spec_tramoseats} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
 #'
 #' @param spec predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
 #'
@@ -57,7 +57,7 @@
 #'
 #' Control variables for the manual selection of calendar effects variables (\code{tradingdays.mauto} is set to \code{"Unused"}):
 #'
-#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects. \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
+#' @param tradingdays.option defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects; \code{"UserDefined"} - user-defined trading days regressors (currently not working). \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).
 #'
 #' @param tradingdays.leapyear logicals. Specifies if the leap-year correction should be included. If \code{TRUE} the model includes the leap-year effect.
 #'
@@ -154,7 +154,7 @@
 #'
 #'
 #' @details
-#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_specDefTS}) are described in the table below.
+#' The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_spec_def_tramoseats}) are described in the table below.
 #'
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -212,30 +212,32 @@
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' @examples
-#'   myspec1 <-regarima_specDefTS(spec=c("TRfull"))
-#'   myreg1 <-regarima(myseries, spec=myspec1)
+#'   myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"))
+#'   myreg1 <- regarima(myseries, spec = myspec1)
 #'
 #' # Modify a pre-specified model specification
-#'   myspec2 <-regarima_specDefTS(spec=c("TRfull"),tradingdays.mauto = "Unused",
-#'                                          tradingdays.option = "WorkingDays",
-#'                                          easter.type = "Standard",
-#'                                          automdl.enabled = FALSE, arima.mu = TRUE)
-#'   myreg2 <-regarima(myseries, spec=myspec2)
+#'   myspec2 <- regarima_spec_def_tramoseats(spec = c("TRfull"), tradingdays.mauto = "Unused",
+#'                                           tradingdays.option = "WorkingDays",
+#'                                           easter.type = "Standard",
+#'                                           automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myreg2 <- regarima(myseries, spec = myspec2)
 #'
 #' # Modify the model specification from a "regarima" object
-#'   myspec3 <- regarima_specTS(myreg1,tradingdays.mauto = "Unused",
-#' 				tradingdays.option = "WorkingDays",
-#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myspec3 <- regarima_spec_tramoseats(myreg1, tradingdays.mauto = "Unused",
+#'                                       tradingdays.option = "WorkingDays",
+#'                                       easter.type = "Standard", automdl.enabled = FALSE,
+#'                                       arima.mu = TRUE)
 #'   myreg3 <- regarima(myseries,myspec3)
 #'
 #' # Modify the model specification from a "regarima_spec" object
-#'   myspec4 <- regarima_specTS(myspec1,tradingdays.mauto = "Unused",
-#' 				tradingdays.option = "WorkingDays",
-#'                            	easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
+#'   myspec4 <- regarima_spec_tramoseats(myspec1, tradingdays.mauto = "Unused",
+#'                                       tradingdays.option = "WorkingDays",
+#'                                       easter.type = "Standard",
+#'                                       automdl.enabled = FALSE, arima.mu = TRUE)
 #'   myreg4 <- regarima(myseries,myspec4)
 #'
 #' # Pre-specified outliers
-#'   myspec1 <- regarima_specDefTS(spec=c("TRfull"),
+#'   myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
 #'             usrdef.outliersEnabled = TRUE,
 #'             usrdef.outliersType = c("LS","LS"),
 #'             usrdef.outliersDate = c("2008-10-01","2003-01-01"),
@@ -250,18 +252,18 @@
 #'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
 #'   var<-ts(matrix(c(var1,var2), ncol=2),start = c(2001, 12), frequency = 12)
 #'
-#'   myspec1 <- regarima_specDefTS(spec=c("TRfull"),
+#'   myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
 #'               usrdef.varEnabled = TRUE, usrdef.var = var)
 #'   s_preVar(myspec1)
 #'   myreg1 <- regarima(myseries,myspec1)
 #'
-#'   myspec2 <- regarima_specDefTS(spec=c("TRfull"), usrdef.varEnabled = TRUE,
+#'   myspec2 <- regarima_spec_def_tramoseats(spec=c("TRfull"), usrdef.varEnabled = TRUE,
 #'                                 usrdef.var = var, usrdef.varCoef = c(17,-1),
 #'                                 transform.function = "None")
 #'   myreg2 <- regarima(myseries,myspec2)
 #'
 #' # Pre-specified ARMA coefficients
-#'   myspec1 <- regarima_specDefTS(spec=c("TRfull"),
+#'   myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
 #'              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
 #'              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
 #'               arima.coef = c(-0.12,-0.12,-0.3,-0.99),
@@ -273,7 +275,7 @@
 #'   s_arimaCoef(myreg1)
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
+regarima_spec_def_tramoseats <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
                             estimate.from=NA_character_,
                             estimate.to=NA_character_,
                             estimate.first=NA_integer_,
@@ -295,7 +297,7 @@ regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4"
                             usrdef.varCoef = NA,
                             tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                             tradingdays.pftd=NA_integer_,
-                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                            tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                             tradingdays.leapyear = NA,
                             tradingdays.stocktd = NA_integer_,
                             tradingdays.test = c(NA_character_,"Separate_T","Joint_F","None"),
@@ -369,7 +371,8 @@ regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4"
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
@@ -472,11 +475,11 @@ regarima_specDefTS <-function(spec=c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4"
   return(z)
 }
 # The function creates a ("regarima_spec","TRAMO_SEATS") class object from from a regarima_Spec or regarima object
-#' @rdname regarima_specDefTS
-#' @name regarima_specDefTS
+#' @rdname regarima_spec_def_tramoseats
+#' @name regarima_spec_def_tramoseats
 #' @param object object of class \code{c("regarima_spec","TRAMO_SEATS")} or of class \code{c("regarima","TRAMO_SEATS")}.
 #' @export
-regarima_specTS <-function(object,
+regarima_spec_tramoseats <-function(object,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,
                           estimate.first=NA_integer_,
@@ -498,7 +501,7 @@ regarima_specTS <-function(object,
                           usrdef.varCoef = NA,
                           tradingdays.mauto=c(NA_character_,"Unused","FTest","WaldTest"),
                           tradingdays.pftd=NA_integer_,
-                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","None"),
+                          tradingdays.option = c(NA_character_,"TradingDays","WorkingDays","UserDefined","None"),
                           tradingdays.leapyear = NA,
                           tradingdays.stocktd = NA_integer_,
                           tradingdays.test = c(NA_character_,"Separate_T","Joint_F","None"),
@@ -575,11 +578,13 @@ regarima_specTS <-function(object,
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
-  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef)
+  predef.variables <- spec_preVar(var = usrdef.var, vartype = usrdef.varType, varcoef = usrdef.varCoef,
+                                  tradingdays.option = tradingdays.option)
 
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
 
+  
   # check the mode of remaining variables
   list.logical = list("usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
                       "easter.julian","easter.test","outlier.enabled","outlier.ao",

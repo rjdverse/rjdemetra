@@ -85,8 +85,8 @@ s_seats(object = NA)
 Below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
 }
 \examples{
-  myreg1 <-regarimaDefX13(myseries, spec=c("RG5c"))
-  myspec1 <-regarima_specX13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
+  myreg1 <- regarima_def_x13(myseries, spec = c("RG5c"))
+  myspec1 <- regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
 
   s_estimate(myreg1)
   s_estimate(myspec1)
@@ -97,10 +97,10 @@ Below functions access different parts of the final model specification as inclu
   s_usrdef(myreg1)
   s_usrdef(myspec1)
 
-  myspec2<-regarima_specX13(myreg1,usrdef.outliersEnabled = TRUE,
-                               usrdef.outliersType = c("LS","AO"),
-                               usrdef.outliersDate=c("2009-10-01","2005-02-01"))
-  myreg2 <- regarima(myseries,myspec2)
+  myspec2<-regarima_spec_x13(myreg1, usrdef.outliersEnabled = TRUE,
+                               usrdef.outliersType = c("LS", "AO"),
+                               usrdef.outliersDate = c("2009-10-01", "2005-02-01"))
+  myreg2 <- regarima(myseries, myspec2)
 
   s_preOut(myreg2)
   s_preOut(myspec2)
@@ -108,7 +108,7 @@ Below functions access different parts of the final model specification as inclu
   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
   var3 <-ts.union(var1,var2)
-  myspec3 <- regarima_specDefX13(spec="RG5c", usrdef.varEnabled = TRUE, usrdef.var = var3)
+  myspec3 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE, usrdef.var = var3)
   myreg3 <- regarima(myseries,myspec3)
 
   s_preVar(myspec3)
@@ -126,7 +126,7 @@ Below functions access different parts of the final model specification as inclu
   s_arima(myreg1)
   s_arima(myspec1)
 
-  myspec4 <-regarima_specX13(myreg1, automdl.enabled =FALSE,
+  myspec4 <-regarima_spec_x13(myreg1, automdl.enabled =FALSE,
            arima.coefEnabled = TRUE, arima.p=1,arima.q=1, arima.bp=1, arima.bq=1,
            arima.coef = rep(0.2,4), arima.coefType = rep("Initial",4))
   myreg4 <- regarima(myseries,myspec4)
@@ -140,13 +140,13 @@ Below functions access different parts of the final model specification as inclu
   s_span(myreg1)
   s_span(myspec1)
 
-  myspec5 <-x13_specDef(spec=c("RSA5c"),x11.seasonalComp = FALSE)
+  myspec5 <-x13_spec_def(spec=c("RSA5c"),x11.seasonalComp = FALSE)
   mysa5 <- x13(myseries, myspec5)
 
   s_x11(mysa5)
   s_x11(myspec5)
 
-  myspec6 <- tramoseats_specDef(spec=c("RSAfull"),seats.approx ="Noisy")
+  myspec6 <- tramoseats_spec_def(spec=c("RSAfull"),seats.approx ="Noisy")
   mysa6 <- tramoseats(myseries, myspec6)
 
   s_seats(mysa6)
@@ -154,6 +154,6 @@ Below functions access different parts of the final model specification as inclu
 
 }
 \references{
-Info on JDemtra+, usage and functions:
+Info on JDemetra+, usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 }

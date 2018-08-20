@@ -3,13 +3,13 @@
 \name{x13}
 \alias{x13}
 \alias{x13}
-\alias{x13Def}
-\title{SA, X13}
+\alias{x13_def}
+\title{Seasonal Adjustment with  X-13ARIMA-SEATS}
 \usage{
-x13(series, spec, userdefined)
+x13(series, spec, userdefined = NULL)
 
-x13Def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
-  userdefined)
+x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
+  userdefined = NULL)
 }
 \arguments{
 \item{series}{a univariate time series}
@@ -17,13 +17,13 @@ x13Def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \item{spec}{model specification X13. For the function:
 \itemize{
 \item \code{x13}, object of class \code{c("SA_spec","X13")}
-\item \code{x13Def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
+\item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
 }}
 
-\item{userdefined}{vector with characters for additional output variables}
+\item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }
 \value{
-\code{x13}/\code{x13Def} returns an object of class \code{c("SA","X13")}, a list containing the following components:
+\code{x13}/\code{x13_def} returns an object of class \code{c("SA","X13")}, a list containing the following components:
 
 \item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
 
@@ -53,7 +53,7 @@ seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), 
 }
 }
 \description{
-\code{x13}/\code{x13Def} estimates the seasonally adjusted series (sa) with the X13 method.
+\code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 }
@@ -64,7 +64,7 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
 
 In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
 
-As regards the available predefined \emph{JDemetra+} X13 model specifications (for the function \code{x13Def}), they are described in the table below.
+As regards the available predefined \emph{JDemetra+} X13 model specifications (for the function \code{x13_def}), they are described in the table below.
 \tabular{rrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -76,7 +76,7 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 }
 }
 \examples{
-  mysa <- x13Def(myseries, spec=c("RSA5c"))
+  mysa <- x13_def(myseries, spec=c("RSA5c"))
 
   myspec1 <- x13_spec(mysa,tradingdays.option = "WorkingDays")
   mysa1 <- x13(myseries, myspec1)
@@ -102,16 +102,21 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
   plot(mysa3$regarima)
   plot(mysa3$decomposition)
 
-  mysa4 <- x13Def(myseries,"RSA5c",
+  mysa4 <- x13_def(myseries,"RSA5c",
   userdefined = c("decomposition.d18","decomposition.d19"))
   mysa4
 
 }
 \references{
-Info on JDemtra+, usage and functions:
+Info on JDemetra+, usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+}
+\seealso{
+
+
+\code{\link{x13_spec}}, \code{\link{tramoseats}}
 }

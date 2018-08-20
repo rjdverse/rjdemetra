@@ -32,12 +32,12 @@ decomp_TS <- function(jrobj, spec){
   return(z)
 }
 
-decomp_defX13 <- function(jrobj,spec){
+decomp_defX13 <- function(jrobj, spec, freq = NA){
 
   # extract model specification from the java object
-  rspec <- specX11_jd2r( spec = spec)
-  specification <- do.call(data.frame, rspec)
-  names(specification) <- paste0("x11.",names(specification))
+  specification <- specX11_jd2r(spec = spec, freq = freq)
+  # specification <- do.call(data.frame, rspec)
+  # names(specification) <- sprintf("x11.%s",names(specification))
   rownames(specification) <- ""
   # results
   jd_results <- decomp_rsltsX13(jrobj)
@@ -74,13 +74,15 @@ decomp_rsltsX13 <- function(jrobj){
 
   mode <- result(jrobj,"mode")
 
-  mstats_names <- c(paste0("mstats.M(",as.character(c(1:10)),")"),
-                    paste0("mstats.",c("Q","Q-M2")))
-  mstats <- sapply(mstats_names,
+  mstats_rownames <- c(sprintf("M(%s)", 1:10),
+                       "Q", "Q-M2")
+  mstats_names <- sprintf("mstats.%s", mstats_rownames)
+  mstats <- lapply(mstats_names,
                    function(diag) {
-                     res <- result(jrobj, diag)})
-  mstats <- matrix(mstats, ncol=1)
-  rownames(mstats) <- gsub("mstats.","",mstats_names)
+                     result(jrobj, diag)})
+  mstats <- matrix(unlist(mstats), ncol=1)
+
+  rownames(mstats) <- mstats_rownames
   colnames(mstats) <- c("M stats")
 
   d8 <- result(jrobj,"decomposition.d8")
@@ -90,7 +92,8 @@ decomp_rsltsX13 <- function(jrobj){
   s_filter <- result(jrobj,"decomposition.d9filter")
   t_filter <- result(jrobj,"decomposition.d12filter")
 
-  z <- list(mode = mode, mstats =  mstats, si_ratio = si_ratio, s_filter = s_filter, t_filter = t_filter)
+  z <- list(mode = mode, mstats =  mstats, si_ratio = si_ratio,
+            s_filter = s_filter, t_filter = t_filter)
   return(z)
 }
 
@@ -98,20 +101,22 @@ decomp_rsltsTS <- function( jrobj){
 
   mode <- result(jrobj,"mode")
 
-  lin_names <- paste0("decomposition.", c("y","sa","t","s","i"),"_lin")
-  cmp_names <- paste0("decomposition.", c("y","sa","t","s","i"),"_cmp")
+  lin_colnames <- sprintf("%s_lin", c("y","sa","t","s","i"))
+  cmp_colnames <- sprintf("%s_cmp", c("y","sa","t","s","i"))
+  lin_names <- sprintf("decomposition.%s", lin_colnames)
+  cmp_names <- sprintf("decomposition.%s", cmp_colnames)
 
   lin <- lapply(lin_names,
                 function(diag) {
-                  res <- result(jrobj,diag)})
-  lin <- do.call(cbind,lin)
-  colnames(lin) <- gsub("decomposition.","",lin_names)
+                  result(jrobj,diag)})
+  lin <- do.call(cbind, lin)
+  colnames(lin) <- lin_colnames
 
   cmp <- lapply(cmp_names,
                 function(diag) {
-                  res <- result(jrobj,diag)})
-  cmp <- do.call(cbind,cmp)
-  colnames(cmp) <- gsub("decomposition.","",cmp_names)
+                  result(jrobj,diag)})
+  cmp <- do.call(cbind, cmp)
+  colnames(cmp) <- cmp_colnames
 
   fmodel_names <- paste0("decomposition.model.",c("ar","diff","ma","innovationvariance"))
   samodel_names <- paste0("decomposition.samodel.",c("ar","diff","ma","innovationvariance"))

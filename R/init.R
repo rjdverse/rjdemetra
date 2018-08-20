@@ -3,18 +3,19 @@
 #' @importFrom graphics abline axis curve hist layout legend mtext par plot title lines points
 #' @importFrom stats frequency  is.ts  terms  ts  ts.union acf  dnorm  pacf  plot.ts  printCoefmat pt  qqnorm  qqline sd is.mts end na.omit start time ts.plot window window<- cycle .preformat.ts
 #' @importFrom methods as
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output setTxtProgressBar txtProgressBar
 #'
-utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.d.tab", "arima.mu.tab", "", "", "arima.p.tab", "arima.q.tab", "automdl.acceptdefault.tab", "automdl.armalimit.tab", "automdl.balanced.tab", "automdl.cancel.tab", "automdl.compare.tab", "automdl.enabled.tab", "automdl.ljungboxlimit.tab", "automdl.mixed.tab", "automdl.reducecv.tab", "automdl.ub1.tab", "automdl.ub2.tab", "automdl.ubfinal.tab", "easter.duration.tab", "easter.enabled.tab", "easter.julian.tab", "easter.test.tab", "easter.type.tab", "estimate.eml.tab", "estimate.span.tab", "estimate.tol.tab", "estimate.urfinal.tab", "outlier.ao.tab", "outlier.cv.tab", "outlier.eml.tab", "outlier.enabled.tab", "outlier.ls.tab", "outlier.method.tab", "outlier.so.tab", "outlier.span.tab", "outlier.tc.tab", "outlier.tcrate.tab", "outlier.usedefcv.tab", "tradingdays.autoadjust.tab", "tradingdays.leapyear.tab", "tradingdays.mauto.tab", "tradingdays.option.tab", "tradingdays.pftd.tab", "tradingdays.stocktd.tab", "tradingdays.test.tab", "transform.adjust.tab", "transform.aicdiff.tab", "transform.fct.tab", "transform.function.tab"))
+utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.d.tab", "arima.mu.tab", "", "", "arima.p.tab", "arima.q.tab", "automdl.acceptdefault.tab", "automdl.armalimit.tab", "automdl.balanced.tab", "automdl.cancel.tab", "automdl.compare.tab", "automdl.enabled.tab", "automdl.ljungboxlimit.tab", "automdl.mixed.tab", "automdl.reducecv.tab", "automdl.ub1.tab", "automdl.ub2.tab", "automdl.ubfinal.tab", "easter.duration.tab", "easter.enabled.tab", "easter.julian.tab", "easter.test.tab", "easter.type.tab", "estimate.eml.tab", "estimate.span.tab", "estimate.tol.tab", "estimate.urfinal.tab", "outlier.ao.tab", "outlier.cv.tab", "outlier.eml.tab", "outlier.enabled.tab", "outlier.ls.tab", "outlier.method.tab", "outlier.so.tab", "outlier.span.tab", "outlier.tc.tab", "outlier.tcrate.tab", "outlier.usedefcv.tab", "tradingdays.autoadjust.tab", "tradingdays.leapyear.tab", "tradingdays.mauto.tab", "tradingdays.option.tab", "tradingdays.pftd.tab", "tradingdays.stocktd.tab", "tradingdays.test.tab", "transform.adjust.tab", "transform.aicdiff.tab", "transform.fct.tab", "transform.function.tab",
+                         "jresult", "multiproc","x"))
 
-library("rJava")
-.jinit()
-.jaddClassPath("./inst/java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")
-.jaddClassPath("./inst/java/jdr-2.2.2-SNAPSHOT.jar")
+# library("rJava")
+# .jinit()
+# .jaddClassPath("./inst/java/demetra-tstoolkit-2.2.2-SNAPSHOT.jar")
+# .jaddClassPath("./inst/java/jdr-2.2.2-SNAPSHOT.jar")
 
 ## jd2_rslts.R
-proc_data<-function(rslt, name, clobj){
-  s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name, clobj)
+proc_data<-function(rslt, name){
+  s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name, rjdemetra_java$clobject)
   if (is.null(s))
     return (NULL)
   if (.jinstanceof(s, "ec.tstoolkit.timeseries.simplets.TsData"))
@@ -31,9 +32,9 @@ proc_data<-function(rslt, name, clobj){
   else if (.jinstanceof(s, "[Lec.tstoolkit.Parameter;")){
     p<-.jcastToArray(s)
     len<-length(p)
-    all<-array(0, dim=c(len,2))
     if (len==0)
       return (NULL)
+    all<-array(0, dim=c(len,2))
     for (i in 1:len){
       all[i, 1]<-.jcall(p[[i]], "D", "getValue")
       all[i, 2]<-.jcall(p[[i]], "D", "getStde")
@@ -206,7 +207,7 @@ setMethod("result", signature = c(object="JD2_ProcResults", id="character"), fun
   if (is.null(object@internal)){
     NULL
   }else{
-    proc_data(object@internal, id, rjdemetra_java$clobject)}
+    proc_data(object@internal, id)}
 })
 
 rjdemetra_java <- new.env(parent = emptyenv())

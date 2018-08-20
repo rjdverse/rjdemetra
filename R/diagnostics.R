@@ -5,21 +5,32 @@ diagnostics <- function(jrobj){
                                         "Irregular", "TD & Hol.",
                                         "Others", "Total")
 
-  residuals_tests_names <- paste0("diagnostics.",
-                                  c("qs", "ftest",
-                                    "residual.all", "residual.end", "residualtd"))
+  residuals_tests_names <- sprintf("diagnostics.%s",
+                                  c("qs","qs.on.i", "ftest", "ftest.on.i",
+                                    "residual.all", "residual.end",
+                                    "residualtd","residualtd.on.i"))
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
                              res <- result(jrobj, diag)
-                             data.frame(Statistic = res[1], P.value =  res[2],
-                                        Description = attr(res, "description")
-                             )
+                             if(is.null(res)){
+                               c(NA, NA, NA)
+                             }else{
+                               c(res[1], res[2], attr(res, "description"))
+                             }
+                             
                            })
-  residuals_test <- do.call(rbind, residuals_test)
-  rownames(residuals_test) <- c("qs test on sa","f-test on sa (seasonal dummies)",
+  residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
+                      stringsAsFactors=FALSE)
+  residuals_test[,1] <- as.numeric(residuals_test[,1])
+  residuals_test[,2] <- as.numeric(residuals_test[,2])
+  colnames(residuals_test) <- c("Statistic","P.value","Description")
+  rownames(residuals_test) <- c("qs test on sa", "qs test on i",
+                                "f-test on sa (seasonal dummies)",
+                                "f-test on i (seasonal dummies)",
                                 "Residual seasonality (entire series)",
                                 "Residual seasonality (last 3 years)",
-                                "f-test on sa (td)")
+                                "f-test on sa (td)",
+                                "f-test on i (td)")
   combined_test_all <- combined_test(jrobj, "all")
   combined_test_end <- combined_test(jrobj, "end")
   diag <- list(variance_decomposition = variance_decomposition,
@@ -32,17 +43,18 @@ diagnostics <- function(jrobj){
 
 combined_test <- function(jrobj, on = c("all", "end")){
   on <- match.arg(on)
-  tests_names <- paste0("diagnostics.combined.", on, ".",
+  tests_names <- sprintf("diagnostics.combined.%s.%s", on,
                         c("summary", "kruskalwallis", "stable", "evolutive"))
   tests <- lapply(tests_names[-1],
                   function(diag) {
                     res <- result(jrobj,diag)
-                    data.frame(Statistic = res[1], P.value =  res[2],
-                               Description = attr(res, "description")
-                    )
+                    c(res[1], res[2], attr(res, "description"))
                   })
-  tests <- do.call(rbind, tests)
-
+  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=T),
+                               stringsAsFactors=FALSE)
+  tests[,1] <- as.numeric(tests[,1])
+  tests[,2] <- as.numeric(tests[,2])
+  colnames(tests) <- c("Statistic","P.value","Description")
   rownames(tests) <- c("Kruskall-Wallis test",
                        "Test for the presence of seasonality assuming stability",
                        "Evolutive seasonality test")

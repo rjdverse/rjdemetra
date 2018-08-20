@@ -24,6 +24,7 @@ Imports:
     methods,
     stats,
     utils
+SystemRequirements: Java SE 8 or higher
 License: EUPL
 URL: https://github.com/nbbrd/rjdemetra, https://github.com/jdemetra/jdemetra-app
 LazyData: TRUE
@@ -51,7 +52,9 @@ Collate:
 	'regarima_generic.R'
 	'sa_print.R'
 	'sa_plot.R'
-  'myseries.R'
+	'export_workspace.R'
+	'import_workspace.R'
+    'myseries.R'
 Suggests:
     knitr,
     rmarkdown
