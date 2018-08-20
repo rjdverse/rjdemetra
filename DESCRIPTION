@@ -24,6 +24,7 @@ Imports:
     methods,
     stats,
     utils
+SystemRequirements: Java SE 8 or higher
 License: EUPL
 URL: https://github.com/nbbrd/rjdemetra, https://github.com/jdemetra/jdemetra-app
 LazyData: TRUE

@@ -125,7 +125,7 @@ Control variables for the user-defined variables:}
 
 Control variables for the manual selection of calendar effects variables (\code{tradingdays.mauto} is set to \code{"Unused"}):}
 
-\item{tradingdays.option}{defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects. \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).}
+\item{tradingdays.option}{defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects; \code{"UserDefined"} - user-defined trading days regressors (currently not working). \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).}
 
 \item{tradingdays.leapyear}{logicals. Specifies if the leap-year correction should be included. If \code{TRUE} the model includes the leap-year effect.}
 

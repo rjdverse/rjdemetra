@@ -5,14 +5,19 @@ diagnostics <- function(jrobj){
                                         "Irregular", "TD & Hol.",
                                         "Others", "Total")
 
-  residuals_tests_names <- paste0("diagnostics.",
+  residuals_tests_names <- sprintf("diagnostics.%s",
                                   c("qs","qs.on.i", "ftest", "ftest.on.i",
                                     "residual.all", "residual.end",
                                     "residualtd","residualtd.on.i"))
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
                              res <- result(jrobj, diag)
-                             c(res[1], res[2], attr(res, "description"))
+                             if(is.null(res)){
+                               c(NA, NA, NA)
+                             }else{
+                               c(res[1], res[2], attr(res, "description"))
+                             }
+                             
                            })
   residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
                       stringsAsFactors=FALSE)
@@ -38,7 +43,7 @@ diagnostics <- function(jrobj){
 
 combined_test <- function(jrobj, on = c("all", "end")){
   on <- match.arg(on)
-  tests_names <- paste0("diagnostics.combined.", on, ".",
+  tests_names <- sprintf("diagnostics.combined.%s.%s", on,
                         c("summary", "kruskalwallis", "stable", "evolutive"))
   tests <- lapply(tests_names[-1],
                   function(diag) {

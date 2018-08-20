@@ -126,9 +126,9 @@ get_all_objects.workspace <- function(x){
 #' @family Other functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
-#' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
-#' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
 #' sa_ts <- tramoseats(myseries, spec = spec_ts)
 #'
 #' wk <- new_workspace()
@@ -325,8 +325,9 @@ compute <- function(workspace, i) {
 #'
 #' @param x the object to get the seasonnaly adjusted model.
 #' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.
-#' @param userdefined vector with characters for additional output variables
+#' @param userdefined vector with characters for additional output variables.
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
+#' @param progress_bar boolean: if \code{TRUE} a progress bar is printed.
 #'
 #' @return \code{get_model} returns a seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) object or list of seasonnaly adjust objects :
 #'  - if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
@@ -363,21 +364,53 @@ compute <- function(workspace, i) {
 #' }
 #'
 #' @export
-get_model <- function(x, workspace, userdefined = NULL){
+get_model <- function(x, workspace,
+                      userdefined = NULL,
+                      progress_bar = TRUE){
   UseMethod("get_model", x)
 }
 #' @export
-get_model.workspace <- function(x, workspace, userdefined = NULL){
+get_model.workspace <- function(x, workspace,
+                                userdefined = NULL,
+                                progress_bar = TRUE){
   multiprocessings <- get_all_objects(x)
-  lapply(multiprocessings, get_model, workspace = x, userdefined = userdefined)
+  nb_mp <- length(multiprocessings)
+  
+  result <- lapply(1:nb_mp, function(i){
+    if(progress_bar)
+      cat(sprintf("Multiprocessing %i on %i:\n",i, nb_mp))
+    get_model(multiprocessings[[i]],
+                     workspace = x, userdefined = userdefined,
+                     progress_bar = progress_bar)
+  })
+  result
+  
 }
 #' @export
-get_model.multiprocessing <- function(x, workspace, userdefined = NULL){
+get_model.multiprocessing <- function(x, workspace,
+                                      userdefined = NULL,
+                                      progress_bar = TRUE){
   all_sa_objects <- get_all_objects(x)
-  lapply(all_sa_objects, get_model,workspace = workspace, userdefined = userdefined)
+  nb_sa_objs <- length(all_sa_objects)
+  
+  if(progress_bar)
+    pb <- txtProgressBar(min = 0, max = nb_sa_objs, style = 3)
+  
+  result <- lapply(1:nb_sa_objs, function(i){
+    res <- get_model(all_sa_objects[[i]],
+              workspace = workspace, userdefined = userdefined)
+    if(progress_bar)
+      setTxtProgressBar(pb, i)
+    res
+  })
+  if(progress_bar)
+    close(pb)
+  result
 }
 #' @export
-get_model.sa_item <- function(x, workspace, userdefined = NULL){
+get_model.sa_item <- function(x, workspace,
+                              userdefined = NULL,
+                              progress_bar = TRUE){
   jspec <- get_jspec(x)
   jresult <- sa_results(x)
   y_ts <- get_ts(x)

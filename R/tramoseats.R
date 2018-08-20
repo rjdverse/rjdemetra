@@ -105,7 +105,8 @@ setClass(
 #'   mysa2
 #'
 #' @export
-tramoseats <-function(series, spec, userdefined = NULL){
+tramoseats <-function(series, spec,
+                      userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
@@ -134,10 +135,8 @@ tramoseats <-function(series, spec, userdefined = NULL){
     diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin,
-              diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
-
-    if (!missing(userdefined))
-      z[["user_defined"]] <- user_defined(userdefined,jrobct)
+              diagnostics = diagn,
+              user_defined = user_defined(userdefined, jrobct))
 
     class(z) <- c("SA","TRAMO_SEATS")
     return(z)
@@ -161,7 +160,9 @@ tramoseats_def <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
-tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, context_dictionnary = NULL,
+tramoseatsJavaResults <- function(jrslt, spec,
+                                  userdefined = NULL,
+                                  context_dictionnary = NULL,
                                   extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
@@ -178,7 +179,8 @@ tramoseatsJavaResults <- function(jrslt, spec, userdefined = NULL, context_dicti
   diagn <- diagnostics(jrobj = jrobct)
 
   z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn, user_defined = user_defined(userdefined,jrobct))
+            diagnostics = diagn,
+            user_defined = user_defined(userdefined, jrobct))
 
   class(z) <- c("SA","TRAMO_SEATS")
   return(z)
