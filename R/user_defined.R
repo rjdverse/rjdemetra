@@ -26,6 +26,7 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
   sa_object <- match.arg(sa_object)
   if(sa_object == "X13-ARIMA"){
     ## To get the variables : 
+    # library(rJava)
     # jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
     # jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
     # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
@@ -36,7 +37,7 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
     # jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
     # 
     # dput(RJDemetra:::dictionary(jrobct))
-    
+    # 
     
     vars <- c("y", "y_f", "t", "t_f", "sa", "sa_f", "s", "s_f",
               "i", "i_f", "mode", "preprocessing.model.span.start", "preprocessing.model.span.end",
@@ -124,6 +125,7 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
               "diagnostics.variancedecomposition")
   }else{
     # # To get the variables :
+    # library(rJava)
     # jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
     # jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
     # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")

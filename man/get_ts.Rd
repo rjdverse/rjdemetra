@@ -10,12 +10,14 @@ get_ts(x)
 \item{x}{the object where to get the time series.}
 }
 \value{
-\code{get_ts} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
- - if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
- - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
+\code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
+\itemize{
+ \item if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
+ \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
  of sa_items, each a \code{ts} object;
- - if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
+ \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
  each element containing a list of \code{ts} object.
+}
 }
 \description{
 Generics functions to get the input times series of a \code{workspace}, \code{multiprocessing} or
@@ -45,7 +47,7 @@ get_ts(wk)
 
 }
 \seealso{
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
   \code{\link{get_model}}, \code{\link{get_name}},
   \code{\link{get_object}}
 }

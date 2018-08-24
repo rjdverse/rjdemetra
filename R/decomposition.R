@@ -36,8 +36,6 @@ decomp_defX13 <- function(jrobj, spec, freq = NA){
 
   # extract model specification from the java object
   specification <- specX11_jd2r(spec = spec, freq = freq)
-  # specification <- do.call(data.frame, rspec)
-  # names(specification) <- sprintf("x11.%s",names(specification))
   rownames(specification) <- ""
   # results
   jd_results <- decomp_rsltsX13(jrobj)
@@ -74,6 +72,8 @@ decomp_rsltsX13 <- function(jrobj){
 
   mode <- result(jrobj,"mode")
 
+  mstats_rownames <- c(sprintf("M(%s)", 1:11),
+                       "Q", "Q-M2")
   mstats_rownames <- c(sprintf("M(%s)", 1:10),
                        "Q", "Q-M2")
   mstats_names <- sprintf("mstats.%s", mstats_rownames)

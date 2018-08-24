@@ -14,8 +14,7 @@ By default a dialog box opens.}
 An object of class \code{"workspace"}.
 }
 \description{
-Function to load a JDemetra+ workspace
-add a multiprocessing to it (\code{new_multiprocessing}).
+Function to load a JDemetra+ workspace.
 }
 \seealso{
 \code{\link{save_workspace}}, \code{\link{get_model}}

@@ -14,8 +14,7 @@ is.workspace <- function(x){
 
 #' Load a JDemetra+ workpace
 #'
-#' Function to load a JDemetra+ workspace
-#' add a multiprocessing to it (\code{new_multiprocessing}).
+#' Function to load a JDemetra+ workspace.
 #'
 #' @param file the path to the JDemetra+ workspace to load.
 #' By default a dialog box opens.
@@ -29,7 +28,7 @@ load_workspace <- function(file){
   if(missing(file) || is.null(file)){
     if(Sys.info()[['sysname']] == "Windows"){
       file <- utils::choose.files(caption = "Select a workspace",
-                                  filters = c("JDemetra+ workspace (.xml)","*.xml"))
+                                  filters = c("JDemetra+ workspace (.xml)", "*.xml"))
     }else{
       file <- base::file.choose()
     }
@@ -47,8 +46,8 @@ load_workspace <- function(file){
 
 #' Get objects inside a workspace or multiprocessing
 #'
-#' Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-#' from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
+#' Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item()})
+#' from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object}) .
 #'
 #' @param x the object where to extract the \code{multiprocessing} or the \code{sa_item}.
 #' @param pos the index of the object to extract.
@@ -56,7 +55,7 @@ load_workspace <- function(file){
 #' @return An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_object()}) or a list
 #' of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 #'
-#' @family Other functions to get informations from a workspace, multiprocessing or sa_item
+#' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
 #' sa_x13 <- x13_def(myseries, spec = "RSA5c")
@@ -123,7 +122,7 @@ get_all_objects.workspace <- function(x){
 #'
 #' @return A \code{character}.
 #'
-#' @family Other functions to get informations from a workspace, multiprocessing or sa_item
+#' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
 #' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
@@ -180,7 +179,7 @@ get_name.sa_item <- function(x){
 #'
 #' @param x the \code{workspace} or the code{multiprocessing}.
 #'
-#' @family Other functions to get informations from a workspace, multiprocessing or sa_item
+#' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
 #' wk <- new_workspace()
@@ -209,14 +208,15 @@ count.workspace <- function(x){
 #'
 #' @param x the object where to get the time series.
 #'
-#' @return \code{get_ts} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
-#'  - if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
-#'  - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
+#' @return \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
+#' \itemize{
+#'  \item if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
+#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
 #'  of sa_items, each a \code{ts} object;
-#'  - if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
+#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
 #'  each element containing a list of \code{ts} object.
-#'
-#' @family Other functions to get informations from a workspace, multiprocessing or sa_item
+#'}
+#' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
 #' sa_x13 <- x13_def(myseries, spec = "RSA5c")
@@ -329,14 +329,15 @@ compute <- function(workspace, i) {
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
 #' @param progress_bar boolean: if \code{TRUE} a progress bar is printed.
 #'
-#' @return \code{get_model} returns a seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) object or list of seasonnaly adjust objects :
-#'  - if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
-#'  - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
-#'  of sa_items, each element containing \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
-#'  - if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
-#'  each element containing a list of \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object.
-#'
-#' @family Other functions to get informations from a workspace, multiprocessing or sa_item
+#' @return \code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects :
+#' \itemize{
+#'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object;
+#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
+#'  of sa_items, each element containing a \code{"SA"} object;
+#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
+#'  each element containing a list of a \code{"SA"} object.
+#'}
+#' @family functions to get informations from a workspace, multiprocessing or sa_item
 #' @seealso \code{\link{compute}}
 #'
 #' @examples \dontrun{
@@ -360,7 +361,6 @@ compute <- function(workspace, i) {
 #'
 #' # To get all the models of the workspace wk:
 #' get_model(wk)
-#'
 #' }
 #'
 #' @export
@@ -383,6 +383,7 @@ get_model.workspace <- function(x, workspace,
                      workspace = x, userdefined = userdefined,
                      progress_bar = progress_bar)
   })
+  names(result) <- names(multiprocessings)
   result
   
 }
@@ -403,6 +404,7 @@ get_model.multiprocessing <- function(x, workspace,
       setTxtProgressBar(pb, i)
     res
   })
+  names(result) <- names(all_sa_objects)
   if(progress_bar)
     close(pb)
   result

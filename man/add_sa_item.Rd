@@ -13,11 +13,11 @@ add_sa_item(workspace, multiprocessing, sa_obj, name)
 
 \item{sa_obj}{the seasonnaly adjust object to export.}
 
-\item{name}{The name of the seasonnaly adjust model in the multiprocessing
+\item{name}{The name of the seasonnaly adjust model in the multiprocessing. 
 By default the name of the \code{sa_obj} is used.}
 }
 \description{
-Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{workspace} object.
+Function to add a new seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) in a \code{workspace} object.
 }
 \examples{
 \dontrun{

@@ -20,8 +20,8 @@ An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_objec
 of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 }
 \description{
-Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
+Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item()})
+from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object}) .
 }
 \examples{
 \dontrun{
@@ -38,7 +38,7 @@ sa_item <- get_object(mp, 1)
 }
 }
 \seealso{
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
   \code{\link{get_model}}, \code{\link{get_name}},
   \code{\link{get_ts}}
 }

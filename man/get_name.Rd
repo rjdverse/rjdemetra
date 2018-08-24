@@ -48,7 +48,7 @@ lapply(get_all_objects(wk),function(mp){
 }
 }
 \seealso{
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
   \code{\link{get_model}}, \code{\link{get_object}},
   \code{\link{get_ts}}
 }

@@ -17,12 +17,14 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 \item{progress_bar}{boolean: if \code{TRUE} a progress bar is printed.}
 }
 \value{
-\code{get_model} returns a seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) object or list of seasonnaly adjust objects :
- - if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
- - if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
- of sa_items, each element containing \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object;
- - if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
- each element containing a list of \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"} object.
+\code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects :
+\itemize{
+ \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object;
+ \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
+ of sa_items, each element containing a \code{"SA"} object;
+ \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
+ each element containing a list of a \code{"SA"} object.
+}
 }
 \description{
 Generics functions to get seasonally adjusted model(s) from \code{workspace},
@@ -50,14 +52,13 @@ get_model(mp, wk)
 
 # To get all the models of the workspace wk:
 get_model(wk)
-
 }
 
 }
 \seealso{
 \code{\link{compute}}
 
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
   \code{\link{get_name}}, \code{\link{get_object}},
   \code{\link{get_ts}}
 }

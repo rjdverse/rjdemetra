@@ -23,7 +23,7 @@ count(mp) # 0 multiprocessing inside the multiprocessing mp
 
 }
 \seealso{
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}},
   \code{\link{get_name}}, \code{\link{get_object}},
   \code{\link{get_ts}}
 }
