@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_workspace.R
 \name{get_ts}
 \alias{get_ts}
-\title{Get the input time series}
+\title{Get the input raw time series}
 \usage{
 get_ts(x)
 }
@@ -12,7 +12,7 @@ get_ts(x)
 \value{
 \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
 \itemize{
- \item if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
+ \item if \code{x} is a \code{sa_item} or a \code{SA} object, \code{get_ts(x)} returns a single \code{ts} object;
  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
  of sa_items, each a \code{ts} object;
  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
@@ -20,17 +20,19 @@ get_ts(x)
 }
 }
 \description{
-Generics functions to get the input times series of a \code{workspace}, \code{multiprocessing} or
-\code{sa_item} object.
+Generics functions to get the input raw times series of a \code{workspace}, \code{multiprocessing},
+\code{sa_item} or \code{SA} object.
 }
 \examples{
-\dontrun{
 sa_x13 <- x13_def(myseries, spec = "RSA5c")
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
 sa_item <- get_object(mp, 1)
+
+  # Extracting from a SA:
+get_ts(sa_x13) # Returns the ts object myseries
 
   # Extracting from a sa_item:
 get_ts(sa_item) # Returns the ts object myseries
@@ -43,8 +45,6 @@ get_ts(mp)
 get_ts(wk)
 # Returns a list of length 1 named "sa1" containing a list
 # of length 1 named "X13" containing the ts object myseries
-}
-
 }
 \seealso{
 Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},

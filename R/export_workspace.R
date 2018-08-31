@@ -12,11 +12,11 @@
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}},
 #' \code{\link{add_sa_item}}
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' }
+#' 
 #'
 #' @name new_workspace
 #' @rdname new_workspace

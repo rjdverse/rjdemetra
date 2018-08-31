@@ -57,7 +57,7 @@ load_workspace <- function(file){
 #'
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples
 #' sa_x13 <- x13_def(myseries, spec = "RSA5c")
 #'
 #' wk <- new_workspace()
@@ -68,7 +68,7 @@ load_workspace <- function(file){
 #' mp <- get_object(wk, 1)
 #' # To get the sa_item object :
 #' sa_item <- get_object(mp, 1)
-#' }
+#' 
 #' @name get_object
 #' @rdname get_object
 #' @export
@@ -124,7 +124,7 @@ get_all_objects.workspace <- function(x){
 #'
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples
 #' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
 #' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
@@ -153,7 +153,7 @@ get_all_objects.workspace <- function(x){
 #' lapply(get_all_objects(wk),function(mp){
 #'   sapply(get_all_objects(mp), get_name)
 #' })
-#' }
+#' 
 #' @export
 get_name <- function(x){
   UseMethod("get_name", x)
@@ -181,12 +181,12 @@ get_name.sa_item <- function(x){
 #'
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' count(wk) # 1 multiprocessing inside the workspace wk
 #' count(mp) # 0 multiprocessing inside the multiprocessing mp
-#' }
+#' 
 #'
 #' @export
 count <- function(x){
@@ -201,16 +201,16 @@ count.workspace <- function(x){
   return(.jcall(x, "I", "getMultiProcessingCount"))
 }
 
-#' Get the input time series
+#' Get the input raw time series
 #'
-#' Generics functions to get the input times series of a \code{workspace}, \code{multiprocessing} or
-#' \code{sa_item} object.
+#' Generics functions to get the input raw times series of a \code{workspace}, \code{multiprocessing},
+#' \code{sa_item} or \code{SA} object.
 #'
 #' @param x the object where to get the time series.
 #'
 #' @return \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
 #' \itemize{
-#'  \item if \code{x} is a \code{sa_item} object, \code{get_ts(x)} returns a single \code{ts} object;
+#'  \item if \code{x} is a \code{sa_item} or a \code{SA} object, \code{get_ts(x)} returns a single \code{ts} object;
 #'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
 #'  of sa_items, each a \code{ts} object;
 #'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
@@ -218,14 +218,17 @@ count.workspace <- function(x){
 #'}
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples
 #' sa_x13 <- x13_def(myseries, spec = "RSA5c")
 #'
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' sa_item <- get_object(mp, 1)
-#'
+#' 
+#'   # Extracting from a SA:
+#' get_ts(sa_x13) # Returns the ts object myseries
+#' 
 #'   # Extracting from a sa_item:
 #' get_ts(sa_item) # Returns the ts object myseries
 #'
@@ -237,8 +240,6 @@ count.workspace <- function(x){
 #' get_ts(wk)
 #' # Returns a list of length 1 named "sa1" containing a list
 #' # of length 1 named "X13" containing the ts object myseries
-#' }
-#'
 #' @export
 get_ts <- function(x){
   UseMethod("get_ts", x)
@@ -260,7 +261,10 @@ get_ts.sa_item <- function(x){
   j_ts_series <- .jcall(jts, "Lec/tstoolkit/timeseries/simplets/TsData;", "getData")
   return(ts_jd2r(j_ts_series))
 }
-
+#' @export
+get_ts.SA <- function(x){
+  return(x$final$series[,"y"])
+}
 
 #' Compute the multi-processing from a workspace
 #'
@@ -274,7 +278,7 @@ get_ts.sa_item <- function(x){
 #'
 #' @seealso \code{\link{get_model}}
 #'
-#' @examples \dontrun{
+#' @examples 
 #' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
 #' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
@@ -291,7 +295,7 @@ get_ts.sa_item <- function(x){
 #' compute(wk)
 #'
 #' get_model(sa_item1, wk) # Returns the SA model sa_x13
-#' }
+#' 
 #'
 #'
 #' @export
@@ -340,7 +344,7 @@ compute <- function(workspace, i) {
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #' @seealso \code{\link{compute}}
 #'
-#' @examples \dontrun{
+#' @examples
 #' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(myseries, spec = spec_x13)
 #' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
@@ -361,7 +365,7 @@ compute <- function(workspace, i) {
 #'
 #' # To get all the models of the workspace wk:
 #' get_model(wk)
-#' }
+#' 
 #'
 #' @export
 get_model <- function(x, workspace,

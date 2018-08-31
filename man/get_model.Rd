@@ -31,7 +31,6 @@ Generics functions to get seasonally adjusted model(s) from \code{workspace},
 \code{multiprocessing} or \code{sa_item} object.
 }
 \examples{
-\dontrun{
 spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 sa_x13 <- x13(myseries, spec = spec_x13)
 spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
@@ -52,7 +51,7 @@ get_model(mp, wk)
 
 # To get all the models of the workspace wk:
 get_model(wk)
-}
+
 
 }
 \seealso{
