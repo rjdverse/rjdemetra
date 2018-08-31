@@ -1,7 +1,7 @@
 #' Create a workspace or a multi-processing
 #'
 #' Functions to create a JDemetra+ workspace (\code{new_workspace()})
-#' add a multi-processing to it (\code{new_multiprocessing}).
+#' add a multi-processing to it (\code{new_multiprocessing()}).
 #'
 #' @param workspace a workspace object
 #' @param name character name of the new multiprocessing
@@ -12,11 +12,11 @@
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}},
 #' \code{\link{add_sa_item}}
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
-#' }
+#' 
 #'
 #' @name new_workspace
 #' @rdname new_workspace
@@ -65,7 +65,7 @@ save_workspace <- function(workspace, file) {
     if(Sys.info()[['sysname']] == "Windows"){
       file <- utils::choose.files(default = "demetra_m.xml",
                                   caption = "Select a workspace for the output",
-                                  filters = c("JDemetra+ workspace (.xml)","*.xml"))
+                                  filters = c("JDemetra+ workspace (.xml)", "*.xml"))
     }else{
       file <- NULL # base::file.choose()
     }
@@ -84,12 +84,12 @@ save_workspace <- function(workspace, file) {
 
 #' Add a seasonnaly adjust model to a multi-processing
 #'
-#' Function to add a new seasonnaly adjust object (class \code{c("SA","X13")} or \code{c("SA","TRAMO_SEATS"}) in a \code{workspace} object.
+#' Function to add a new seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) in a \code{workspace} object.
 #'
 #' @param workspace the workspace to add the seasonnaly adjust model.
 #' @param multiprocessing the name or index of the multiprocessing to add the seasonnaly adjust model.
 #' @param sa_obj the seasonnaly adjust object to export.
-#' @param name The name of the seasonnaly adjust model in the multiprocessing
+#' @param name The name of the seasonnaly adjust model in the multiprocessing. 
 #' By default the name of the \code{sa_obj} is used.
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
@@ -180,7 +180,7 @@ complete_dictionnary <- function(workspace, sa_obj){
   if(!userdef$specification["variables"] || is.na(ud_var$series))
     return(sa_obj)
 
-  context_dictionnary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;","getContext")
+  context_dictionnary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
   ts_variable_managers <- context_dictionnary$getTsVariableManagers()
   ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
   jd_r_variables <- ts_variable_managers$get("r")

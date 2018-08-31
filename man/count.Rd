@@ -14,16 +14,15 @@ Generics functions to count the number of \code{multiprocessing} (respectively \
 inside a \code{workspace} (respectively \code{multiprocessing}).
 }
 \examples{
-\dontrun{
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 count(wk) # 1 multiprocessing inside the workspace wk
 count(mp) # 0 multiprocessing inside the multiprocessing mp
-}
+
 
 }
 \seealso{
-Other Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}},
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}},
   \code{\link{get_name}}, \code{\link{get_object}},
   \code{\link{get_ts}}
 }

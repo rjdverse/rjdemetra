@@ -21,14 +21,13 @@ new_multiprocessing(workspace, name)
 }
 \description{
 Functions to create a JDemetra+ workspace (\code{new_workspace()})
-add a multi-processing to it (\code{new_multiprocessing}).
+add a multi-processing to it (\code{new_multiprocessing()}).
 }
 \examples{
-\dontrun{
 # Create and export a empty JDemetra+ workspace
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
-}
+
 
 }
 \seealso{

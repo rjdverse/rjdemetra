@@ -18,7 +18,6 @@ By default the workspace only contains definitions : computation is needed to ge
 (with \code{\link{get_model}}).
 }
 \examples{
-\dontrun{
 spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 sa_x13 <- x13(myseries, spec = spec_x13)
 spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
@@ -35,7 +34,7 @@ get_model(sa_item1, wk) # Returns NULL
 compute(wk)
 
 get_model(sa_item1, wk) # Returns the SA model sa_x13
-}
+
 
 
 }
