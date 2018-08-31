@@ -46,8 +46,8 @@ load_workspace <- function(file){
 
 #' Get objects inside a workspace or multiprocessing
 #'
-#' Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item()})
-#' from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object}) .
+#' Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+#' from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
 #'
 #' @param x the object where to extract the \code{multiprocessing} or the \code{sa_item}.
 #' @param pos the index of the object to extract.

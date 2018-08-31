@@ -20,8 +20,8 @@ An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_objec
 of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 }
 \description{
-Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item()})
-from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object}) .
+Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
 }
 \examples{
 sa_x13 <- x13_def(myseries, spec = "RSA5c")
