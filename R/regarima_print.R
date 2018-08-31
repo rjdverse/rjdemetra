@@ -35,7 +35,6 @@ summary.regarima <- function (object, ...){
       colnames(out) <- c("","","Coefficients")
       rownames(out) <- out_dsc
       fout <- out[3]
-      fout <- out[3]
       fout <- cbind(fout, NA)
       colnames(fout)[ncol(fout)] <- "Pr(>|t|)"
     }
@@ -46,9 +45,7 @@ summary.regarima <- function (object, ...){
     var <- var[var[,2]!=0,]
     nvar <- dim(var)[1]
     if (nvar!=0){
-      var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}
       colnames(var) <- c("","Coefficients")
-      # rownames(var) <- var_dsc
       fvar <- var[2]
       rownames(fvar) <- sprintf("r.%s", rownames(fvar))
       fvar <- cbind(fout, NA)
