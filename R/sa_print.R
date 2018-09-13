@@ -15,8 +15,14 @@ print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
   cat("\n")
 }
 #' @export
-print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L), ...){
-
+print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L),
+                                    enable_print_style = TRUE,...){
+  if(enable_print_style){
+    bold_pre_code <- "\033[1m"
+    bold_post_code <- "\033[22m"
+  }else{
+    bold_pre_code <-  bold_post_code <- ""
+  }
   model <-x$model$model
   sa <- x$model$sa
   t <- x$model$trend
@@ -29,7 +35,12 @@ print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L
 
   for (ii in 1:length(var_names)){
     if (!all(sapply(var[[ii]],is.null))){
-      cat("\033[1m",var_names[ii],"\033[22m","\n", sep="")
+      if(enable_print_style){
+        cat(bold_pre_code,var_names[ii],bold_post_code,"\n", sep="")
+      }else{
+        cat(var_names[ii],"\n", sep="")
+      }
+
       print_formula(var[[ii]][1,-1],"AR")
       print_formula(var[[ii]][2,-1],"D")
       print_formula(var[[ii]][3,-1],"MA")
@@ -86,15 +97,23 @@ print.combined_test <- function(x, digits = max(3L, getOption("digits") - 3L),
 
 #' @export
 print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
+                              enable_print_style = TRUE,
                                 ...){
 
-
+  if(enable_print_style){
+    bold_pre_code <- "\033[1m"
+    bold_post_code <- "\033[22m"
+  }else{
+    bold_pre_code <-  bold_post_code <- ""
+  }
   residuals_test <- x$residuals_test
   combined_test_all <- x$combined_test_all
   combined_test_end <- x$combined_test_end
   variance_decomposition <- x$variance_decomposition
 
-  cat("\033[1mRelative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend\033[22m")
+  cat(bold_pre_code,
+      "Relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend",
+      bold_post_code)
   cat("\n")
   cat(" Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)")
   cat("\n")
@@ -104,7 +123,9 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
              )),
       sep ="\n")
   cat("\n")
-  cat("\033[1mResidual seasonality tests\033[22m")
+  cat(bold_pre_code,
+      "Residual seasonality tests",
+      bold_post_code)
   cat("\n")
   cat(paste0(" ",
              capture.output(
@@ -116,7 +137,9 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
 
   cat("\n")
 
-  cat("\033[1mCombined test in the entire series\033[22m")
+  cat(bold_pre_code,
+      "Combined test in the entire series",
+      bold_post_code)
   cat("\n")
   cat(paste0(" ",
              capture.output(print.combined_test(combined_test_all, digits = digits,
@@ -125,7 +148,9 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
   sep ="\n")
   cat("\n")
 
-  cat("\033[1mCombined test in the last 3 years\033[22m")
+  cat(bold_pre_code,
+      "Combined test in the last 3 years",
+      bold_post_code)
   cat("\n")
   cat(paste0(" ",
              capture.output(
@@ -156,7 +181,7 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
   invisible(x)
 }
 #' @export
-print.user_defined <- function(x,...){
+print.user_defined <- function(x, ...){
   if(is.null(x) || length(x) == 0)
     return(invisible(x))
   cat(ngettext((length(x)!= 1) + 1,
@@ -167,16 +192,22 @@ print.user_defined <- function(x,...){
   invisible(x)
 }
 #' @export
-print.SA <- function(x,...){
-  cat("\n\n","\033[4m\033[1mRegARIMA\033[22m\033[24m","\n",sep="")
-  print(x$regarima)
-  cat("\n\n","\033[4m\033[1mDecomposition\033[22m\033[24m","\n",sep="")
-  print(x$decomposition)
-  cat("\n\n","\033[4m\033[1mFinal\033[22m\033[24m","\n",sep="")
-  print(x$final)
-  cat("\n\n","\033[4m\033[1mDiagnostics\033[22m\033[24m","\n",sep="")
-  print(x$diagnostics)
-  cat("\n\n","\033[4m\033[1mAdditional output variables\033[22m\033[24m","\n",sep="")
+print.SA <- function(x, enable_print_style = TRUE,  ...){
+  if(enable_print_style){
+    style_pre_code <- "\033[4m\033[1m"
+    style_post_code <- "\033[22m\033[24m"
+  }else{
+    style_pre_code <-  style_post_code <- ""
+  }
+  cat("\n\n", style_pre_code, "RegARIMA", style_post_code,"\n",sep="")
+  print(x$regarima, enable_print_style = enable_print_style)
+  cat("\n\n", style_pre_code, "Decomposition", style_post_code,"\n",sep="")
+  print(x$decomposition, enable_print_style = enable_print_style)
+  cat("\n\n", style_pre_code, "Final", style_post_code,"\n",sep="")
+  print(x$final, enable_print_style = enable_print_style)
+  cat("\n\n", style_pre_code, "Diagnostics", style_post_code,"\n",sep="")
+  print(x$diagnostics, enable_print_style = enable_print_style)
+  cat("\n\n", style_pre_code, "Additional output variables", style_post_code,"\n",sep="")
   print(x$user_defined)
 }
 

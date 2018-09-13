@@ -35,7 +35,7 @@ new_workspace <- function() {
 new_multiprocessing <- function(workspace, name) {
   mp <- .jcall(workspace, "Lec/tstoolkit/jdr/ws/MultiProcessing;", "newMultiProcessing", name)
   mp <- new("multiprocessing", mp)
-  return(mp)
+  return(invisible(mp))
 }
 
 
@@ -124,12 +124,13 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
   if (! is.numeric(multiprocessing))
     stop("The parameter multiprocessing must be a character or a numeric")
 
+  if(missing(name))
+    name <- deparse(substitute(sa_obj))
+  
   sa_obj <- complete_dictionnary(workspace, sa_obj)
   jspec <- get_jspec(sa_obj)
   y <- sa_obj$final$series[, "y"]
 
-  if(missing(name))
-    name <- deparse(substitute(sa_obj))
 
   if(!is.character(name) || length(name) != 1)
     stop("The name of the SA element to add is mispecified")
