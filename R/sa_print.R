@@ -35,11 +35,7 @@ print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L
 
   for (ii in 1:length(var_names)){
     if (!all(sapply(var[[ii]],is.null))){
-      if(enable_print_style){
-        cat(bold_pre_code,var_names[ii],bold_post_code,"\n", sep="")
-      }else{
-        cat(var_names[ii],"\n", sep="")
-      }
+      cat(bold_pre_code,var_names[ii],bold_post_code,"\n", sep="")
 
       print_formula(var[[ii]][1,-1],"AR")
       print_formula(var[[ii]][2,-1],"D")
