@@ -170,7 +170,7 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
   if(print_forecasts){
     cat("\nForecasts:\n")
     print(head(
-      .preformat.ts(x[[1]], calendar = calendar),
+      .preformat.ts(x[[2]], calendar = calendar),
       n_last_obs
     ))
   }
