@@ -76,33 +76,34 @@ setClass(
 #' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
 #'
 #' @examples
+#' myseries <- ipi_c_eu[, "FR"]
+#' myspec <- tramoseats_spec_def("RSAfull")
+#' mysa <- tramoseats(myseries, myspec)
+#' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
+#' mysa
+#' mysa1
 #'
-#'   myspec<-tramoseats_spec_def("RSAfull")
-#'   mysa <-tramoseats(myseries,myspec)
-#'   mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
-#'   mysa
-#'   mysa1
+#' myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
+#'                            tradingdays.option = "WorkingDays",
+#'                            easter.type = "Standard",
+#'                            automdl.enabled = FALSE, arima.mu = TRUE)
+#' mysa2 <- tramoseats(myseries, myspec2)
 #'
-#'   myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
-#'                              tradingdays.option = "WorkingDays",
-#'                              easter.type = "Standard",
-#'                              automdl.enabled = FALSE, arima.mu = TRUE)
-#'   mysa2 <- tramoseats(myseries, myspec2)
+#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
+#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+#' var <- ts.union(var1, var2)
+#' myspec3 <- tramoseats_spec(myspec,
+#'                             usrdef.varEnabled = TRUE, usrdef.var = var)
+#' s_preVar(myspec3)
+#' mysa3 <- tramoseats(myseries, myspec3)
+#' plot(mysa3)
+#' plot(mysa3$regarima)
+#' plot(mysa3$decomposition)
 #'
-#'   var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
-#'   var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-#'   var<-ts.union(var1,var2)
-#'   myspec3 <- tramoseats_spec(myspec,
-#'                               usrdef.varEnabled = TRUE, usrdef.var = var)
-#'   s_preVar(myspec3)
-#'   mysa3 <- tramoseats(myseries,myspec3)
-#'   plot(mysa3)
-#'   plot(mysa3$regarima)
-#'   plot(mysa3$decomposition)
-#'
-#'   mysa2 <- tramoseats_def(myseries,"RSAfull",
-#'   userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
-#'   mysa2
+#' mysa2 <- tramoseats_def(myseries, "RSAfull",
+#'                         userdefined = c("decomposition.sa_lin_f",
+#'                                         "decomposition.sa_lin_e"))
+#' mysa2
 #'
 #' @export
 tramoseats <-function(series, spec,
@@ -145,7 +146,7 @@ tramoseats <-function(series, spec,
 #' @rdname tramoseats
 #' @name tramoseats
 #' @export
-tramoseats_def <-function(series, spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+tramoseats_def <-function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
                          userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")

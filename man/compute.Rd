@@ -19,14 +19,11 @@ By default the workspace only contains definitions : computation is needed to ge
 }
 \examples{
 spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
-sa_x13 <- x13(myseries, spec = spec_x13)
-spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
-sa_ts <- tramoseats(myseries, spec = spec_ts)
+sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
-add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 sa_item1 <- get_object(mp, 1)
 
 get_model(sa_item1, wk) # Returns NULL

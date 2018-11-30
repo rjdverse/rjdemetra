@@ -24,7 +24,7 @@ Generics functions to get the input raw times series of a \code{workspace}, \cod
 \code{sa_item} or \code{SA} object.
 }
 \examples{
-sa_x13 <- x13_def(myseries, spec = "RSA5c")
+sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
@@ -32,22 +32,23 @@ add_sa_item(wk, "sa1", sa_x13, "X13")
 sa_item <- get_object(mp, 1)
 
   # Extracting from a SA:
-get_ts(sa_x13) # Returns the ts object myseries
+get_ts(sa_x13) # Returns the ts object ipi_c_eu[, "FR"]
 
   # Extracting from a sa_item:
-get_ts(sa_item) # Returns the ts object myseries
+get_ts(sa_item) # Returns the ts object ipi_c_eu[, "FR"]
 
   # Extracting from a multiprocessing:
 get_ts(mp)
-# Returns a list of length 1 named "X13" containing the ts object myseries
+# Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
 
   # Extracting from a workspace:
 get_ts(wk)
 # Returns a list of length 1 named "sa1" containing a list
-# of length 1 named "X13" containing the ts object myseries
+# of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
 }
 \seealso{
 Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
   \code{\link{get_model}}, \code{\link{get_name}},
   \code{\link{get_object}}
 }
+\concept{functions to get informations from a workspace, multiprocessing or sa_item}

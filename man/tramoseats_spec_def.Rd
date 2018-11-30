@@ -2,7 +2,6 @@
 % Please edit documentation in R/tramoseats_spec.R
 \name{tramoseats_spec_def}
 \alias{tramoseats_spec_def}
-\alias{tramoseats_spec_def}
 \alias{tramoseats_spec}
 \title{TRAMO-SEATS model specification, SA/TRAMO-SEATS}
 \usage{
@@ -12,37 +11,38 @@ tramoseats_spec_def(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
   estimate.last = NA_integer_, estimate.exclFirst = NA_integer_,
   estimate.exclLast = NA_integer_, estimate.tol = NA_integer_,
   estimate.eml = NA, estimate.urfinal = NA_integer_,
-  transform.function = c(NA_character_, "Auto", "None", "Log"),
+  transform.function = c(NA, "Auto", "None", "Log"),
   transform.fct = NA_integer_, usrdef.outliersEnabled = NA,
   usrdef.outliersType = NA, usrdef.outliersDate = NA,
   usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
-  usrdef.varType = NA, usrdef.varCoef = NA,
-  tradingdays.mauto = c(NA_character_, "Unused", "FTest", "WaldTest"),
-  tradingdays.pftd = NA_integer_, tradingdays.option = c(NA_character_,
-  "TradingDays", "WorkingDays", "UserDefined", "None"),
-  tradingdays.leapyear = NA, tradingdays.stocktd = NA_integer_,
-  tradingdays.test = c(NA_character_, "Separate_T", "Joint_F", "None"),
-  easter.type = c(NA_character_, "Unused", "Standard", "IncludeEaster",
-  "IncludeEasterMonday"), easter.julian = NA, easter.duration = NA_integer_,
-  easter.test = NA, outlier.enabled = NA, outlier.from = NA_character_,
-  outlier.to = NA_character_, outlier.first = NA_integer_,
-  outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
-  outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
-  outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
-  outlier.cv = NA_integer_, outlier.eml = NA,
-  outlier.tcrate = NA_integer_, automdl.enabled = NA,
-  automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
-  automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
-  automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
-  automdl.ljungboxlimit = NA_integer_, automdl.compare = NA,
-  arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
-  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
+  usrdef.varType = NA, usrdef.varCoef = NA, tradingdays.mauto = c(NA,
+  "Unused", "FTest", "WaldTest"), tradingdays.pftd = NA_integer_,
+  tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined",
+  "None"), tradingdays.leapyear = NA,
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA,
+  "Separate_T", "Joint_F", "None"), easter.type = c(NA, "Unused",
+  "Standard", "IncludeEaster", "IncludeEasterMonday"),
+  easter.julian = NA, easter.duration = NA_integer_,
+  easter.test = NA, outlier.enabled = NA,
+  outlier.from = NA_character_, outlier.to = NA_character_,
+  outlier.first = NA_integer_, outlier.last = NA_integer_,
+  outlier.exclFirst = NA_integer_, outlier.exclLast = NA_integer_,
+  outlier.ao = NA, outlier.tc = NA, outlier.ls = NA,
+  outlier.so = NA, outlier.usedefcv = NA, outlier.cv = NA_integer_,
+  outlier.eml = NA, outlier.tcrate = NA_integer_,
+  automdl.enabled = NA, automdl.acceptdefault = NA,
+  automdl.cancel = NA_integer_, automdl.ub1 = NA_integer_,
+  automdl.ub2 = NA_integer_, automdl.armalimit = NA_integer_,
+  automdl.reducecv = NA_integer_, automdl.ljungboxlimit = NA_integer_,
+  automdl.compare = NA, arima.mu = NA, arima.p = NA_integer_,
+  arima.d = NA_integer_, arima.q = NA_integer_,
+  arima.bp = NA_integer_, arima.bd = NA_integer_,
   arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
   arima.coefType = NA, fcst.horizon = NA_integer_,
-  seats.approx = c(NA_character_, "None", "Legacy", "Noisy"),
+  seats.approx = c(NA, "None", "Legacy", "Noisy"),
   seats.trendBoundary = NA_integer_, seats.seasdBoundary = NA_integer_,
   seats.seasdBoundary1 = NA_integer_, seats.seasTol = NA_integer_,
-  seats.maBoundary = NA_integer_, seats.method = c(NA_character_, "Burman",
+  seats.maBoundary = NA_integer_, seats.method = c(NA, "Burman",
   "KalmanSmoother", "McElroyMatrix"))
 
 tramoseats_spec(object, estimate.from = NA_character_,
@@ -50,37 +50,38 @@ tramoseats_spec(object, estimate.from = NA_character_,
   estimate.last = NA_integer_, estimate.exclFirst = NA_integer_,
   estimate.exclLast = NA_integer_, estimate.tol = NA_integer_,
   estimate.eml = NA, estimate.urfinal = NA_integer_,
-  transform.function = c(NA_character_, "Auto", "None", "Log"),
+  transform.function = c(NA, "Auto", "None", "Log"),
   transform.fct = NA_integer_, usrdef.outliersEnabled = NA,
   usrdef.outliersType = NA, usrdef.outliersDate = NA,
   usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
-  usrdef.varType = NA, usrdef.varCoef = NA,
-  tradingdays.mauto = c(NA_character_, "Unused", "FTest", "WaldTest"),
-  tradingdays.pftd = NA_integer_, tradingdays.option = c(NA_character_,
-  "TradingDays", "WorkingDays", "UserDefined", "None"),
-  tradingdays.leapyear = NA, tradingdays.stocktd = NA_integer_,
-  tradingdays.test = c(NA_character_, "Separate_T", "Joint_F", "None"),
-  easter.type = c(NA_character_, "Unused", "Standard", "IncludeEaster",
-  "IncludeEasterMonday"), easter.julian = NA, easter.duration = NA_integer_,
-  easter.test = NA, outlier.enabled = NA, outlier.from = NA_character_,
-  outlier.to = NA_character_, outlier.first = NA_integer_,
-  outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
-  outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
-  outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
-  outlier.cv = NA_integer_, outlier.eml = NA,
-  outlier.tcrate = NA_integer_, automdl.enabled = NA,
-  automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
-  automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
-  automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
-  automdl.ljungboxlimit = NA_integer_, automdl.compare = NA,
-  arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
-  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
+  usrdef.varType = NA, usrdef.varCoef = NA, tradingdays.mauto = c(NA,
+  "Unused", "FTest", "WaldTest"), tradingdays.pftd = NA_integer_,
+  tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined",
+  "None"), tradingdays.leapyear = NA,
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA,
+  "Separate_T", "Joint_F", "None"), easter.type = c(NA, "Unused",
+  "Standard", "IncludeEaster", "IncludeEasterMonday"),
+  easter.julian = NA, easter.duration = NA_integer_,
+  easter.test = NA, outlier.enabled = NA,
+  outlier.from = NA_character_, outlier.to = NA_character_,
+  outlier.first = NA_integer_, outlier.last = NA_integer_,
+  outlier.exclFirst = NA_integer_, outlier.exclLast = NA_integer_,
+  outlier.ao = NA, outlier.tc = NA, outlier.ls = NA,
+  outlier.so = NA, outlier.usedefcv = NA, outlier.cv = NA_integer_,
+  outlier.eml = NA, outlier.tcrate = NA_integer_,
+  automdl.enabled = NA, automdl.acceptdefault = NA,
+  automdl.cancel = NA_integer_, automdl.ub1 = NA_integer_,
+  automdl.ub2 = NA_integer_, automdl.armalimit = NA_integer_,
+  automdl.reducecv = NA_integer_, automdl.ljungboxlimit = NA_integer_,
+  automdl.compare = NA, arima.mu = NA, arima.p = NA_integer_,
+  arima.d = NA_integer_, arima.q = NA_integer_,
+  arima.bp = NA_integer_, arima.bd = NA_integer_,
   arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
   arima.coefType = NA, fcst.horizon = NA_integer_,
-  seats.approx = c(NA_character_, "None", "Legacy", "Noisy"),
+  seats.approx = c(NA, "None", "Legacy", "Noisy"),
   seats.trendBoundary = NA_integer_, seats.seasdBoundary = NA_integer_,
   seats.seasdBoundary1 = NA_integer_, seats.seasTol = NA_integer_,
-  seats.maBoundary = NA_integer_, seats.method = c(NA_character_, "Burman",
+  seats.maBoundary = NA_integer_, seats.method = c(NA, "Burman",
   "KalmanSmoother", "McElroyMatrix"))
 }
 \arguments{
@@ -277,62 +278,63 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
-
-myspec1 <-tramoseats_spec_def(spec=c("RSAfull"))
-mysa1 <-tramoseats(myseries, spec=myspec1)
+myseries <- ipi_c_eu[, "FR"]
+myspec1 <- tramoseats_spec_def(spec = c("RSAfull"))
+mysa1 <- tramoseats(myseries, spec=myspec1)
 
 # Modify a pre-specified model specification
-myspec2 <-tramoseats_spec_def(spec=c("RSAfull"),tradingdays.mauto = "Unused",
-                             tradingdays.option = "WorkingDays",
-                             easter.type = "Standard",
-                             automdl.enabled = FALSE, arima.mu = TRUE)
-mysa2 <-tramoseats(myseries, spec=myspec2)
+myspec2 <- tramoseats_spec_def(spec = c("RSAfull"), tradingdays.mauto = "Unused",
+                              tradingdays.option = "WorkingDays",
+                              easter.type = "Standard",
+                              automdl.enabled = FALSE, arima.mu = TRUE)
+mysa2 <- tramoseats(myseries, spec = myspec2)
 
 # Modify the model specification from a "SA" object
-myspec3 <- tramoseats_spec(mysa1,tradingdays.mauto = "Unused",
+myspec3 <- tramoseats_spec(mysa1, tradingdays.mauto = "Unused",
                            tradingdays.option = "WorkingDays",
                            easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
-mysa3 <- tramoseats(myseries,myspec3)
+mysa3 <- tramoseats(myseries, myspec3)
 
 # Modify the model specification from a "SA_spec" object
 myspec4 <- tramoseats_spec(myspec1,tradingdays.mauto = "Unused",
                            tradingdays.option = "WorkingDays",
                            easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
-mysa4 <- tramoseats(myseries,myspec4)
+mysa4 <- tramoseats(myseries, myspec4)
 
 # Pre-specified outliers
 myspec1 <- tramoseats_spec_def(spec=c("RSAfull"),
                               usrdef.outliersEnabled = TRUE,
                               usrdef.outliersType = c("LS","LS"),
                               usrdef.outliersDate = c("2008-10-01","2003-01-01"),
-                              usrdef.outliersCoef = c(37000,-19000), transform.function = "None")
+                              usrdef.outliersCoef = c(10,-8), transform.function = "None")
 s_preOut(myspec1)
 mysa1 <- tramoseats(myseries, myspec1)
 mysa1
 s_preOut(mysa1)
 
 # User-defined variables
-var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
-var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-var<- ts.union(var1,var2)
+var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
+var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+var<- ts.union(var1, var2)
 
 myspec1 <- tramoseats_spec_def(spec=c("RSAfull"),
                               usrdef.varEnabled = TRUE, usrdef.var = var)
 s_preVar(myspec1)
-mysa1 <- tramoseats(myseries,myspec1)
+mysa1 <- tramoseats(myseries, myspec1)
 
 myspec2 <- tramoseats_spec_def(spec=c("RSAfull"), usrdef.varEnabled = TRUE,
                               usrdef.var = var, usrdef.varCoef = c(17,-1),
                               transform.function = "None")
-mysa2 <- tramoseats(myseries,myspec2)
+mysa2 <- tramoseats(myseries, myspec2)
 
 # Pre-specified ARMA coefficients
-myspec1 <- tramoseats_spec_def(spec=c("RSAfull"),
+myspec1 <- tramoseats_spec_def(spec = c("RSAfull"),
                               arima.coefEnabled = TRUE, automdl.enabled = FALSE,
-                              arima.p=2,arima.q=0,arima.bp=1, arima.bq=1,
-                              arima.coef = c(-0.12,-0.12,-0.3,-0.99),
-                              arima.coefType = rep("Fixed",4))
-mysa1 <- tramoseats(myseries,myspec1)
+                              arima.p = 2, arima.q = 0,
+                              arima.bp = 1, arima.bq = 1,
+                              arima.coef = c(-0.12, -0.12, -0.3, -0.99),
+                              arima.coefType = rep("Fixed", 4))
+mysa1 <- tramoseats(myseries, myspec1)
 mysa1
 s_arimaCoef(myspec1)
 s_arimaCoef(mysa1)

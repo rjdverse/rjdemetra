@@ -22,7 +22,7 @@ user_defined <- function(namedvector, jrobct){
 #' user_defined_variables("X13-ARIMA")
 #' user_defined_variables("TRAMO-SEATS")
 #' @export
-user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
+user_defined_variables <- function(sa_object = c("X13-ARIMA", "TRAMO-SEATS")){
   sa_object <- match.arg(sa_object)
   if(sa_object == "X13-ARIMA"){
     ## To get the variables : 
@@ -31,7 +31,7 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
     # jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
     # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
     # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13",
-    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    #               RJDemetra:::ts_r2jd(ipi_c_eu[, "FR"]), jspec, jdictionary)
     # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
     # jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
     # jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
@@ -130,7 +130,7 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA","TRAMO-SEATS")){
     # jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
     # jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
     # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats",
-    #               RJDemetra:::ts_r2jd(myseries), jspec, jdictionary)
+    #               RJDemetra:::ts_r2jd(ipi_c_eu[, "FR"]), jspec, jdictionary)
     # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
     # jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
     # jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)

@@ -97,7 +97,7 @@ decomp_rsltsX13 <- function(jrobj){
   return(z)
 }
 
-decomp_rsltsTS <- function( jrobj){
+decomp_rsltsTS <- function(jrobj){
 
   mode <- result(jrobj,"mode")
 
@@ -108,13 +108,25 @@ decomp_rsltsTS <- function( jrobj){
 
   lin <- lapply(lin_names,
                 function(diag) {
-                  result(jrobj,diag)})
+                  res <- result(jrobj,diag)
+                  if(is.null(res)){
+                    NA
+                  }else{
+                    res
+                  }
+                })
   lin <- do.call(cbind, lin)
   colnames(lin) <- lin_colnames
 
   cmp <- lapply(cmp_names,
                 function(diag) {
-                  result(jrobj,diag)})
+                  res <- result(jrobj,diag)
+                  if(is.null(res)){
+                    NA
+                  }else{
+                    res
+                  }
+                })
   cmp <- do.call(cbind, cmp)
   colnames(cmp) <- cmp_colnames
 

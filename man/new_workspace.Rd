@@ -2,7 +2,6 @@
 % Please edit documentation in R/export_workspace.R
 \name{new_workspace}
 \alias{new_workspace}
-\alias{new_workspace}
 \alias{new_multiprocessing}
 \title{Create a workspace or a multi-processing}
 \usage{

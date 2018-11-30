@@ -2,14 +2,13 @@
 % Please edit documentation in R/x13.R
 \name{x13}
 \alias{x13}
-\alias{x13}
 \alias{x13_def}
 \title{Seasonal Adjustment with  X-13ARIMA-SEATS}
 \usage{
 x13(series, spec, userdefined = NULL)
 
-x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
-  userdefined = NULL)
+x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3",
+  "RSA4c"), userdefined = NULL)
 }
 \arguments{
 \item{series}{a univariate time series}
@@ -76,35 +75,35 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 }
 }
 \examples{
-  mysa <- x13_def(myseries, spec=c("RSA5c"))
+myseries <- ipi_c_eu[, "FR"]
+mysa <- x13_def(myseries, spec=c("RSA5c"))
 
-  myspec1 <- x13_spec(mysa,tradingdays.option = "WorkingDays")
-  mysa1 <- x13(myseries, myspec1)
-  mysa1
-  summary(mysa1$regarima)
+myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays")
+mysa1 <- x13(myseries, myspec1)
+mysa1
+summary(mysa1$regarima)
 
-  myspec2<-x13_spec(mysa, usrdef.outliersEnabled = TRUE,
-                             usrdef.outliersType = c("LS","AO"),
-                             usrdef.outliersDate=c("2008-10-01","2002-01-01"),
-                             usrdef.outliersCoef = c(36000,14000),
-                             transform.function = "None")
-  mysa2 <- x13(myseries, myspec2)
-  mysa2
+myspec2 <- x13_spec(mysa, usrdef.outliersEnabled = TRUE,
+            usrdef.outliersType = c("LS","AO"),
+            usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
+            usrdef.outliersCoef = c(36, 14),
+            transform.function = "None")
+mysa2 <- x13(myseries, myspec2)
+mysa2
 
-  myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
-                               arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
-                               arima.coefEnabled = TRUE,
-                               arima.coef = c(-0.8,-0.6,0),
-                               arima.coefType = c(rep("Fixed",2),"Undefined"))
-  s_arimaCoef(myspec3)
-  mysa3 <- x13(myseries, myspec3)
-  plot(mysa3)
-  plot(mysa3$regarima)
-  plot(mysa3$decomposition)
+myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
+            arima.coefEnabled = TRUE,
+            arima.coef = c(-0.8, -0.6, 0),
+            arima.coefType = c(rep("Fixed", 2), "Undefined"))
+s_arimaCoef(myspec3)
+mysa3 <- x13(myseries, myspec3)
+plot(mysa3)
+plot(mysa3$regarima)
+plot(mysa3$decomposition)
 
-  mysa4 <- x13_def(myseries,"RSA5c",
-  userdefined = c("decomposition.d18","decomposition.d19"))
-  mysa4
+mysa4 <- x13_def(myseries,"RSA5c",
+           userdefined = c("decomposition.d18", "decomposition.d19"))
+mysa4
 
 }
 \references{

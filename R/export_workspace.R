@@ -96,9 +96,9 @@ save_workspace <- function(workspace, file) {
 #'
 #' @examples \dontrun{
 #' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
-#' sa_x13 <- x13(myseries, spec = spec_x13)
+#' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
-#' sa_ts <- tramoseats(myseries, spec = spec_ts)
+#' sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
 #' wk <- new_workspace()
 #' new_multiprocessing(wk, "sa1")

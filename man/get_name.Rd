@@ -17,9 +17,9 @@ Generics functions to get the Java name of a \code{multiprocessing} or a \code{s
 }
 \examples{
 spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
-sa_x13 <- x13(myseries, spec = spec_x13)
+sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
-sa_ts <- tramoseats(myseries, spec = spec_ts)
+sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
@@ -51,3 +51,4 @@ Other functions to get informations from a workspace, multiprocessing or sa_item
   \code{\link{get_model}}, \code{\link{get_object}},
   \code{\link{get_ts}}
 }
+\concept{functions to get informations from a workspace, multiprocessing or sa_item}

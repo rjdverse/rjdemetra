@@ -2,7 +2,6 @@
 % Please edit documentation in R/x13_spec.R
 \name{x13_spec_def}
 \alias{x13_spec_def}
-\alias{x13_spec_def}
 \alias{x13_spec}
 \title{X-13ARIMA-SEATS model specification, SA/X13}
 \usage{
@@ -10,76 +9,77 @@ x13_spec_def(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
   "X11"), estimate.from = NA_character_, estimate.to = NA_character_,
   estimate.first = NA_integer_, estimate.last = NA_integer_,
   estimate.exclFirst = NA_integer_, estimate.exclLast = NA_integer_,
-  estimate.tol = NA_integer_, transform.function = c(NA_character_, "Auto",
-  "None", "Log"), transform.adjust = c(NA_character_, "None", "LeapYear",
+  estimate.tol = NA_integer_, transform.function = c(NA, "Auto",
+  "None", "Log"), transform.adjust = c(NA, "None", "LeapYear",
   "LengthOfPeriod"), transform.aicdiff = NA_integer_,
   usrdef.outliersEnabled = NA, usrdef.outliersType = NA,
   usrdef.outliersDate = NA, usrdef.outliersCoef = NA,
   usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varType = NA,
-  usrdef.varCoef = NA, tradingdays.option = c(NA_character_, "TradingDays",
+  usrdef.varCoef = NA, tradingdays.option = c(NA, "TradingDays",
   "WorkingDays", "UserDefined", "None"), tradingdays.autoadjust = NA,
-  tradingdays.leapyear = c(NA_character_, "LeapYear", "LengthOfPeriod",
-  "None"), tradingdays.stocktd = NA_integer_,
-  tradingdays.test = c(NA_character_, "Remove", "Add", "None"),
-  easter.enabled = NA, easter.julian = NA, easter.duration = NA_integer_,
-  easter.test = c(NA_character_, "Add", "Remove", "None"),
-  outlier.enabled = NA, outlier.from = NA_character_,
+  tradingdays.leapyear = c(NA, "LeapYear", "LengthOfPeriod", "None"),
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA, "Remove",
+  "Add", "None"), easter.enabled = NA, easter.julian = NA,
+  easter.duration = NA_integer_, easter.test = c(NA, "Add", "Remove",
+  "None"), outlier.enabled = NA, outlier.from = NA_character_,
   outlier.to = NA_character_, outlier.first = NA_integer_,
   outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
   outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
   outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
-  outlier.cv = NA_integer_, outlier.method = c(NA_character_, "AddOne",
-  "AddAll"), outlier.tcrate = NA_integer_, automdl.enabled = NA,
+  outlier.cv = NA_integer_, outlier.method = c(NA, "AddOne", "AddAll"),
+  outlier.tcrate = NA_integer_, automdl.enabled = NA,
   automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
   automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
   automdl.mixed = NA, automdl.balanced = NA,
   automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
   automdl.ljungboxlimit = NA_integer_, automdl.ubfinal = NA_integer_,
   arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
-  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
-  arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
-  arima.coefType = NA, fcst.horizon = NA_integer_,
-  x11.mode = c(NA_character_, "Undefined", "Additive", "Multiplicative",
-  "LogAdditive"), x11.seasonalComp = NA, x11.lsigma = NA_integer_,
-  x11.usigma = NA_integer_, x11.trendAuto = NA, x11.trendma = NA_integer_,
+  arima.q = NA_integer_, arima.bp = NA_integer_,
+  arima.bd = NA_integer_, arima.bq = NA_integer_,
+  arima.coefEnabled = NA, arima.coef = NA, arima.coefType = NA,
+  fcst.horizon = NA_integer_, x11.mode = c(NA, "Undefined", "Additive",
+  "Multiplicative", "LogAdditive"), x11.seasonalComp = NA,
+  x11.lsigma = NA_integer_, x11.usigma = NA_integer_,
+  x11.trendAuto = NA, x11.trendma = NA_integer_,
   x11.seasonalma = NA_character_, x11.fcasts = NA_integer_,
   x11.bcasts = NA_integer_, x11.excludeFcasts = NA)
 
-x13_spec(object, estimate.from = NA_character_, estimate.to = NA_character_,
-  estimate.first = NA_integer_, estimate.last = NA_integer_,
-  estimate.exclFirst = NA_integer_, estimate.exclLast = NA_integer_,
-  estimate.tol = NA_integer_, transform.function = c(NA_character_, "Auto",
-  "None", "Log"), transform.adjust = c(NA_character_, "None", "LeapYear",
-  "LengthOfPeriod"), transform.aicdiff = NA_integer_,
-  usrdef.outliersEnabled = NA, usrdef.outliersType = NA,
-  usrdef.outliersDate = NA, usrdef.outliersCoef = NA,
-  usrdef.varEnabled = NA, usrdef.var = NA, usrdef.varType = NA,
-  usrdef.varCoef = NA, tradingdays.option = c(NA_character_, "TradingDays",
-  "WorkingDays", "UserDefined", "None"), tradingdays.autoadjust = NA,
-  tradingdays.leapyear = c(NA_character_, "LeapYear", "LengthOfPeriod",
-  "None"), tradingdays.stocktd = NA_integer_,
-  tradingdays.test = c(NA_character_, "Remove", "Add", "None"),
-  easter.enabled = NA, easter.julian = NA, easter.duration = NA_integer_,
-  easter.test = c(NA_character_, "Add", "Remove", "None"),
-  outlier.enabled = NA, outlier.from = NA_character_,
+x13_spec(object, estimate.from = NA_character_,
+  estimate.to = NA_character_, estimate.first = NA_integer_,
+  estimate.last = NA_integer_, estimate.exclFirst = NA_integer_,
+  estimate.exclLast = NA_integer_, estimate.tol = NA_integer_,
+  transform.function = c(NA, "Auto", "None", "Log"),
+  transform.adjust = c(NA, "None", "LeapYear", "LengthOfPeriod"),
+  transform.aicdiff = NA_integer_, usrdef.outliersEnabled = NA,
+  usrdef.outliersType = NA, usrdef.outliersDate = NA,
+  usrdef.outliersCoef = NA, usrdef.varEnabled = NA, usrdef.var = NA,
+  usrdef.varType = NA, usrdef.varCoef = NA,
+  tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined",
+  "None"), tradingdays.autoadjust = NA, tradingdays.leapyear = c(NA,
+  "LeapYear", "LengthOfPeriod", "None"),
+  tradingdays.stocktd = NA_integer_, tradingdays.test = c(NA, "Remove",
+  "Add", "None"), easter.enabled = NA, easter.julian = NA,
+  easter.duration = NA_integer_, easter.test = c(NA, "Add", "Remove",
+  "None"), outlier.enabled = NA, outlier.from = NA_character_,
   outlier.to = NA_character_, outlier.first = NA_integer_,
   outlier.last = NA_integer_, outlier.exclFirst = NA_integer_,
   outlier.exclLast = NA_integer_, outlier.ao = NA, outlier.tc = NA,
   outlier.ls = NA, outlier.so = NA, outlier.usedefcv = NA,
-  outlier.cv = NA_integer_, outlier.method = c(NA_character_, "AddOne",
-  "AddAll"), outlier.tcrate = NA_integer_, automdl.enabled = NA,
+  outlier.cv = NA_integer_, outlier.method = c(NA, "AddOne", "AddAll"),
+  outlier.tcrate = NA_integer_, automdl.enabled = NA,
   automdl.acceptdefault = NA, automdl.cancel = NA_integer_,
   automdl.ub1 = NA_integer_, automdl.ub2 = NA_integer_,
   automdl.mixed = NA, automdl.balanced = NA,
   automdl.armalimit = NA_integer_, automdl.reducecv = NA_integer_,
   automdl.ljungboxlimit = NA_integer_, automdl.ubfinal = NA_integer_,
   arima.mu = NA, arima.p = NA_integer_, arima.d = NA_integer_,
-  arima.q = NA_integer_, arima.bp = NA_integer_, arima.bd = NA_integer_,
-  arima.bq = NA_integer_, arima.coefEnabled = NA, arima.coef = NA,
-  arima.coefType = NA, fcst.horizon = NA_integer_,
-  x11.mode = c(NA_character_, "Undefined", "Additive", "Multiplicative",
-  "LogAdditive"), x11.seasonalComp = NA, x11.lsigma = NA_integer_,
-  x11.usigma = NA_integer_, x11.trendAuto = NA, x11.trendma = NA_integer_,
+  arima.q = NA_integer_, arima.bp = NA_integer_,
+  arima.bd = NA_integer_, arima.bq = NA_integer_,
+  arima.coefEnabled = NA, arima.coef = NA, arima.coefType = NA,
+  fcst.horizon = NA_integer_, x11.mode = c(NA, "Undefined", "Additive",
+  "Multiplicative", "LogAdditive"), x11.seasonalComp = NA,
+  x11.lsigma = NA_integer_, x11.usigma = NA_integer_,
+  x11.trendAuto = NA, x11.trendma = NA_integer_,
   x11.seasonalma = NA_character_, x11.fcasts = NA_integer_,
   x11.bcasts = NA_integer_, x11.excludeFcasts = NA)
 }
@@ -280,61 +280,62 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 }
 }
 \examples{
-  myspec1 <-x13_spec_def(spec=c("RSA5c"))
-  myreg1 <-x13(myseries, spec=myspec1)
+myseries <- ipi_c_eu[, "FR"]
+myspec1 <- x13_spec_def(spec = c("RSA5c"))
+myreg1 <- x13(myseries, spec = myspec1)
 
-  # Modify a pre-specified model specification
-  myspec2 <-x13_spec_def(spec=c("RSA5c"), tradingdays.option = "WorkingDays")
-  myreg2 <-x13(myseries, spec=myspec2)
+# Modify a pre-specified model specification
+myspec2 <- x13_spec_def(spec = c("RSA5c"), tradingdays.option = "WorkingDays")
+myreg2 <- x13(myseries, spec = myspec2)
 
 # Modify the model specification from a "X13" object
-  myspec3 <- x13_spec(myreg1,tradingdays.option = "WorkingDays")
-  myreg3 <- x13(myseries,myspec3)
+ myspec3 <- x13_spec(myreg1, tradingdays.option = "WorkingDays")
+ myreg3 <- x13(myseries, myspec3)
 
 # Modify the model specification from a "X13_spec" object
-  myspec4 <- x13_spec(myspec1,tradingdays.option = "WorkingDays")
-  myreg4 <- x13(myseries,myspec4)
+ myspec4 <- x13_spec(myspec1, tradingdays.option = "WorkingDays")
+ myreg4 <- x13(myseries, myspec4)
 
 # Pre-specified outliers
-  myspec1<-x13_spec_def(spec=c("RSA5c"),usrdef.outliersEnabled = TRUE,
-                             usrdef.outliersType = c("LS","AO"),
-                             usrdef.outliersDate=c("2008-10-01","2002-01-01"),
-                             usrdef.outliersCoef = c(36000,14000),
-                             transform.function = "None")
+ myspec1 <- x13_spec_def(spec = c("RSA5c"), usrdef.outliersEnabled = TRUE,
+             usrdef.outliersType = c("LS", "AO"),
+             usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
+             usrdef.outliersCoef = c(36, 14),
+             transform.function = "None")
 
-  myreg1 <- x13(myseries, myspec1)
-  myreg1
-  s_preOut(myreg1)
+ myreg1 <- x13(myseries, myspec1)
+ myreg1
+ s_preOut(myreg1)
 
 # User-defined variables
-  var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
-  var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-  var <-ts.union(var1,var2)
-  myspec1 <- x13_spec_def(spec="RSA5c", usrdef.varEnabled = TRUE,
-                                  usrdef.var = var)
-  myreg1 <- x13(myseries,myspec1)
-  myreg1
+ var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
+ var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+ var <- ts.union(var1, var2)
+ myspec1 <- x13_spec_def(spec = "RSA5c", usrdef.varEnabled = TRUE,
+             usrdef.var = var)
+ myreg1 <- x13(myseries, myspec1)
+ myreg1
 
-  myspec2 <- x13_spec_def(spec="RSA5c", usrdef.varEnabled = TRUE,
-                                  usrdef.var = var1, usrdef.varCoef = c(2),
-                                  transform.function = "None")
-  myreg2 <- x13(myseries, myspec2)
-  s_preVar(myreg2)
+ myspec2 <- x13_spec_def(spec="RSA5c", usrdef.varEnabled = TRUE,
+             usrdef.var = var1, usrdef.varCoef = c(2),
+             transform.function = "None")
+ myreg2 <- x13(myseries, myspec2)
+ s_preVar(myreg2)
 
 # Pre-specified ARMA coefficients
-  myspec1 <- x13_spec_def(spec="RSA5c", automdl.enabled =FALSE,
-                              arima.p=1,arima.q=1, arima.bp=0, arima.bq=1,
-                              arima.coefEnabled = TRUE,
-                              arima.coef = c(-0.8,-0.6,0),
-                              arima.coefType = c(rep("Fixed",2),"Undefined"))
+ myspec1 <- x13_spec_def(spec = "RSA5c", automdl.enabled = FALSE,
+             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
+             arima.coefEnabled = TRUE,
+             arima.coef = c(-0.8, -0.6, 0),
+             arima.coefType = c(rep("Fixed", 2), "Undefined"))
 
-  s_arimaCoef(myspec1)
-  myreg1 <- x13(myseries, myspec1)
-  myreg1
+ s_arimaCoef(myspec1)
+ myreg1 <- x13(myseries, myspec1)
+ myreg1
 
 # Defined seasonal filters
-  myspec1 <- x13_spec_def("RSA5c",x11.seasonalma=rep("S3X1",12))
-  mysa1 <-x13(myseries,myspec1)
+ myspec1 <- x13_spec_def("RSA5c", x11.seasonalma = rep("S3X1", 12))
+ mysa1 <- x13(myseries, myspec1)
 
 }
 \references{

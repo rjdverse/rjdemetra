@@ -3,13 +3,9 @@
 \name{plot}
 \alias{plot}
 \alias{plot.regarima}
-\alias{plot}
 \alias{plot.decomposition_X11}
-\alias{plot}
 \alias{plot.decomposition_SEATS}
-\alias{plot}
 \alias{plot.final}
-\alias{plot}
 \alias{plot.SA}
 \title{Plotting regarima, decomposition or final results of SA}
 \usage{
@@ -23,8 +19,8 @@
 \method{plot}{decomposition_SEATS}(x, first_date, last_date, ...)
 
 \method{plot}{final}(x, first_date, last_date, forecast = TRUE,
-  type_chart = c("sa-trend", "cal-seas-irr"), ask = length(type_chart) > 1
-  && dev.interactive(), ...)
+  type_chart = c("sa-trend", "cal-seas-irr"), ask = length(type_chart)
+  > 1 && dev.interactive(), ...)
 
 \method{plot}{SA}(x, ...)
 }
