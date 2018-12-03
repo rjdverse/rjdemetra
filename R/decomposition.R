@@ -74,8 +74,6 @@ decomp_rsltsX13 <- function(jrobj){
 
   mstats_rownames <- c(sprintf("M(%s)", 1:11),
                        "Q", "Q-M2")
-  mstats_rownames <- c(sprintf("M(%s)", 1:10),
-                       "Q", "Q-M2")
   mstats_names <- sprintf("mstats.%s", mstats_rownames)
   mstats <- lapply(mstats_names,
                    function(diag) {
