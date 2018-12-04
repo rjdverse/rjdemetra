@@ -55,7 +55,7 @@ Collate:
 	'export_workspace.R'
 	'import_workspace.R'
 	'regarima_tests.R'
-    'myseries.R'
+  'myseries.R'
 Suggests:
     knitr,
     rmarkdown
