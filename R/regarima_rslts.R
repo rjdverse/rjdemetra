@@ -85,6 +85,9 @@ regarima_rslts <- function(jrobj, fcsth){
                         function(series) result(jrobj, series))
   decomp <- ts(simplify2array(decomp),
                start = start(decomp[[1]]), frequency = frequency(decomp[[1]]))
+  if (transformed){
+    decomp[,2:7]<-log(decomp[,2:7])
+  }
   decomp <- ts.union(decomp,rowSums(decomp[,5:7], na.rm = TRUE))
   colnames(decomp) <- c(decomp_names, "out")
 
