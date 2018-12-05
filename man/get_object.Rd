@@ -2,7 +2,6 @@
 % Please edit documentation in R/import_workspace.R
 \name{get_object}
 \alias{get_object}
-\alias{get_object}
 \alias{get_all_objects}
 \title{Get objects inside a workspace or multiprocessing}
 \usage{
@@ -24,7 +23,7 @@ Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} 
 from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
 }
 \examples{
-sa_x13 <- x13_def(myseries, spec = "RSA5c")
+sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
@@ -41,3 +40,4 @@ Other functions to get informations from a workspace, multiprocessing or sa_item
   \code{\link{get_model}}, \code{\link{get_name}},
   \code{\link{get_ts}}
 }
+\concept{functions to get informations from a workspace, multiprocessing or sa_item}

@@ -55,9 +55,8 @@ Collate:
 	'export_workspace.R'
 	'import_workspace.R'
 	'regarima_tests.R'
-  'myseries.R'
+	'ipi_c_eu.R'
 Suggests:
     knitr,
     rmarkdown
-VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

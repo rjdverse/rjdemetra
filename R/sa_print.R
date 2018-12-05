@@ -16,7 +16,7 @@ print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
 }
 #' @export
 print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L),
-                                    enable_print_style = TRUE,...){
+                                    enable_print_style = getOption("enable_print_style"),...){
   if(enable_print_style){
     bold_pre_code <- "\033[1m"
     bold_post_code <- "\033[22m"
@@ -188,7 +188,7 @@ print.user_defined <- function(x, ...){
   invisible(x)
 }
 #' @export
-print.SA <- function(x, enable_print_style = TRUE,  ...){
+print.SA <- function(x, enable_print_style = getOption("enable_print_style"),  ...){
   if(enable_print_style){
     style_pre_code <- "\033[4m\033[1m"
     style_post_code <- "\033[22m\033[24m"

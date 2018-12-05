@@ -2,9 +2,9 @@
 #' @name plot
 #' @rdname plot
 #' @export
-plot.regarima = function(x, which = c(1:6), dec_zoom=FALSE,
-     caption = list("Residuals","Histogram of residuals","Normal Q-Q","ACF of residuals",
-                    "PACF of residuals","Decomposition"),
+plot.regarima = function(x, which = c(1:6), dec_zoom = FALSE,
+     caption = list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
+                    "PACF of residuals", "Decomposition"),
      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
      ...){
 

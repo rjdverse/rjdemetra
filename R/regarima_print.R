@@ -209,7 +209,7 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
 }
 # Method: "regarima_rtest" for the print
 #' @export
-print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),...){
+print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L), ...){
 
   doublestar<-paste0("\u002A","\u002A")
   triplestar<-paste0("\u002A","\u002A","\u002A")

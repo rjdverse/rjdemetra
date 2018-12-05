@@ -13,7 +13,7 @@ doornik_hansen_test(x)
 Function compute the Doornik-Hansen normality test  on RegARIMA residuals
 }
 \examples{
-mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
+mysa1 <- tramoseats_def(ipi_c_eu[, "FR"], spec = "RSAfull")
 
 # Actual tests :
 mysa1$regarima$residuals.stat$tests

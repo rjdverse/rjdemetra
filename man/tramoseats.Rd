@@ -2,7 +2,6 @@
 % Please edit documentation in R/tramoseats.R
 \name{tramoseats}
 \alias{tramoseats}
-\alias{tramoseats}
 \alias{tramoseats_def}
 \title{Seasonal Adjustment with TRAMO-SEATS}
 \usage{
@@ -75,33 +74,34 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
+myseries <- ipi_c_eu[, "FR"]
+myspec <- tramoseats_spec_def("RSAfull")
+mysa <- tramoseats(myseries, myspec)
+mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
+mysa
+mysa1
 
-  myspec<-tramoseats_spec_def("RSAfull")
-  mysa <-tramoseats(myseries,myspec)
-  mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
-  mysa
-  mysa1
+myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
+                           tradingdays.option = "WorkingDays",
+                           easter.type = "Standard",
+                           automdl.enabled = FALSE, arima.mu = TRUE)
+mysa2 <- tramoseats(myseries, myspec2)
 
-  myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
-                             tradingdays.option = "WorkingDays",
-                             easter.type = "Standard",
-                             automdl.enabled = FALSE, arima.mu = TRUE)
-  mysa2 <- tramoseats(myseries, myspec2)
+var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
+var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+var <- ts.union(var1, var2)
+myspec3 <- tramoseats_spec(myspec,
+                            usrdef.varEnabled = TRUE, usrdef.var = var)
+s_preVar(myspec3)
+mysa3 <- tramoseats(myseries, myspec3)
+plot(mysa3)
+plot(mysa3$regarima)
+plot(mysa3$decomposition)
 
-  var1 <- ts(rnorm(length(myseries))*10,start = c(2001, 12), frequency = 12)
-  var2 <- ts(rnorm(length(myseries))*100,start = c(2001, 12), frequency = 12)
-  var<-ts.union(var1,var2)
-  myspec3 <- tramoseats_spec(myspec,
-                              usrdef.varEnabled = TRUE, usrdef.var = var)
-  s_preVar(myspec3)
-  mysa3 <- tramoseats(myseries,myspec3)
-  plot(mysa3)
-  plot(mysa3$regarima)
-  plot(mysa3$decomposition)
-
-  mysa2 <- tramoseats_def(myseries,"RSAfull",
-  userdefined = c("decomposition.sa_lin_f","decomposition.sa_lin_e"))
-  mysa2
+mysa2 <- tramoseats_def(myseries, "RSAfull",
+                        userdefined = c("decomposition.sa_lin_f",
+                                        "decomposition.sa_lin_e"))
+mysa2
 
 }
 \references{

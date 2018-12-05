@@ -5,7 +5,7 @@
 #' @param x  object of class \code{"regarima"} or \code{"SA"}.
 #'
 #' @examples
-#' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
+#' mysa1 <- tramoseats_def(ipi_c_eu[, "FR"], spec = "RSAfull")
 #' 
 #' # Actual tests :
 #' mysa1$regarima$residuals.stat$tests
