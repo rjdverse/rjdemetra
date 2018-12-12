@@ -41,12 +41,11 @@ It includes time series: original time series (\code{y}), forecast of the origin
 seasonally adjusted series (\code{sa}), forecast of the seasonally adjusted series (\code{sa_f}),
 seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), irregular component (\code{i}) and the forecast of the irregular component (\code{i_f}).}
 
-\item{diagnostics}{object of class \code{"diagnostics"}, list with four type of diagnostics tests:
+\item{diagnostics}{object of class \code{"diagnostics"}, list with three type of diagnostics tests:
 \itemize{
 \item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
 \item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
-\item \code{combined_test_all}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
-\item \code{combined_test_end} combined tests for stable seasonality in the last 3 years.  Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+\item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
 }
 }
 }

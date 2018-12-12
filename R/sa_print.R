@@ -1,10 +1,19 @@
 #' @export
-print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L), ...){
+print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
+                                  enable_print_style = getOption("enable_print_style"), ...){
+  if(enable_print_style){
+    bold_pre_code <- "\033[1m"
+    bold_post_code <- "\033[22m"
+  }else{
+    bold_pre_code <-  bold_post_code <- ""
+  }
   m <- x$mstats
   s_flt <- x$s_filter
   t_flt <- x$t_filter
   if (!is.null(m)){
-    cat("Monitoring and Quality Assessment Statistics:","\n")
+    cat(bold_pre_code,
+        "Monitoring and Quality Assessment Statistics:",
+        bold_post_code,"\n")
     printCoefmat(m, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   cat("\n")
@@ -93,7 +102,7 @@ print.combined_test <- function(x, digits = max(3L, getOption("digits") - 3L),
 
 #' @export
 print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
-                              enable_print_style = TRUE,
+                              enable_print_style = getOption("enable_print_style"),
                                 ...){
 
   if(enable_print_style){
@@ -103,12 +112,13 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
     bold_pre_code <-  bold_post_code <- ""
   }
   residuals_test <- x$residuals_test
-  combined_test_all <- x$combined_test_all
-  combined_test_end <- x$combined_test_end
+  combined_test <- x$combined_test
   variance_decomposition <- x$variance_decomposition
 
   cat(bold_pre_code,
-      "Relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend",
+      "Relative contribution of the components to the stationary\n",
+      "portion of the variance in the original series,\n",
+      "after the removal of the long term trend",
       bold_post_code)
   cat("\n")
   cat(" Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)")
@@ -138,21 +148,8 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
       bold_post_code)
   cat("\n")
   cat(paste0(" ",
-             capture.output(print.combined_test(combined_test_all, digits = digits,
+             capture.output(print.combined_test(combined_test, digits = digits,
                                                   ...))
-  ),
-  sep ="\n")
-  cat("\n")
-
-  cat(bold_pre_code,
-      "Combined test in the last 3 years",
-      bold_post_code)
-  cat("\n")
-  cat(paste0(" ",
-             capture.output(
-               print.combined_test(combined_test_end, digits = digits,
-                                     ...)
-             )
   ),
   sep ="\n")
 
@@ -195,7 +192,7 @@ print.SA <- function(x, enable_print_style = getOption("enable_print_style"),  .
   }else{
     style_pre_code <-  style_post_code <- ""
   }
-  cat("\n\n", style_pre_code, "RegARIMA", style_post_code,"\n",sep="")
+  cat(style_pre_code, "RegARIMA", style_post_code,"\n",sep="")
   print(x$regarima, enable_print_style = enable_print_style)
   cat("\n\n", style_pre_code, "Decomposition", style_post_code,"\n",sep="")
   print(x$decomposition, enable_print_style = enable_print_style)

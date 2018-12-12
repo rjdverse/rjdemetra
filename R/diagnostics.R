@@ -32,11 +32,9 @@ diagnostics <- function(jrobj){
                                 "f-test on sa (td)",
                                 "f-test on i (td)")
   combined_test_all <- combined_test(jrobj, "all")
-  combined_test_end <- combined_test(jrobj, "end")
   diag <- list(variance_decomposition = variance_decomposition,
                residuals_test = residuals_test,
-               combined_test_all = combined_test_all,
-               combined_test_end = combined_test_end)
+               combined_test = combined_test_all)
   class(diag) <- "diagnostics"
   diag
 }
