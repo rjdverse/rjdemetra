@@ -250,7 +250,8 @@
 #' myreg1 <- regarima(myseries, myspec1)
 #' myreg1
 #' s_preOut(myreg1)
-#'
+#' 
+#'\dontrun{
 #'  # User-defined variables
 #' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12),
 #'            frequency = 12)
@@ -280,6 +281,7 @@
 #' summary(myreg1)
 #' s_arimaCoef(myspec1)
 #' s_arimaCoef(myreg1)
+#' }
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
 regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),

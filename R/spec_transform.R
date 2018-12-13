@@ -421,7 +421,7 @@ spec_tdX13<-function(td, tf, tadj){
   if (is.na(td[3,2])){
     td[3,2] <- if(!is.na(td[2,2])) {td[2,2]} else {td[1,2]}
 
-    if (td[3,2]==TRUE & as.character(tf)=="Auto") {
+    if (td[3,2] & as.character(tf)=="Auto") {
       td[3,3]<- td[1,3]
     }else{
       td[3,2]<-FALSE
@@ -494,7 +494,7 @@ spec_outliersX13<-function(out, spanP, spanM){
     out[3,9]<- if (!is.na(out[2,9])) {out[2,9]} else {out[1,9]}
     out[3,10]<- if (!is.na(out[2,10])) {out[2,10]} else {out[1,10]}
 
-    if (out[3,7]==TRUE) {out[3,8]<-4}
+    if (out[3,7]) {out[3,8]<-4}
   }
   if (is.na(out[2,2])) {
    span <- rbind(spanM[1,],spanP[2,])
@@ -659,7 +659,7 @@ spec_outliersTS<-function(out, spanP, spanM){
     out[3,9]<- if (!is.na(out[2,9])) {out[2,9]} else {out[1,9]}
     out[3,10]<- if (!is.na(out[2,10])) {out[2,10]} else {out[1,10]}
 
-    if (out[3,7]==TRUE) {out[3,8]<-3.5}
+    if (out[3,7]) {out[3,8]<-3.5}
   }
   if (is.na(out[2,2])) {
     span <- rbind(spanM[1,],spanP[2,])
@@ -725,10 +725,10 @@ spec_userdef <-function(usrspc, out, var, tf) {
 
   if(is.na(usrspc [2,1])){
     usrspc[3,1] <- usrspc[1,1]
-    if (usrspc[1,1]==TRUE & (sum(!is.na(outF))==0)){
+    if (usrspc[1,1] & (sum(!is.na(outF))==0)){
       outF<- outP
     }
-  }else if (usrspc[2,1]==TRUE & usrspc[1,1]==TRUE & sum(!is.na(outF))==0){
+  }else if (usrspc[2,1] & usrspc[1,1] & sum(!is.na(outF))==0){
     usrspc[3,1] <- TRUE
     outF<- outP
   }else if(sum(!is.na(outF))==0){
@@ -736,7 +736,7 @@ spec_userdef <-function(usrspc, out, var, tf) {
   }else{
     usrspc[3,1] <- usrspc[2,1]
   }
-  if (usrspc[3,1]==TRUE){
+  if (usrspc[3,1]){
     if (sum(!is.na(outF[,3]))==0){
       usrspc[2:3,2]<- FALSE
     }else if (tf=="Auto"){
@@ -751,10 +751,10 @@ spec_userdef <-function(usrspc, out, var, tf) {
 
   if(is.na(usrspc[2,3])){
     usrspc[3,3] <- usrspc[1,3]
-    if (usrspc[1,3]==TRUE & (sum(!is.na(varF$series))==0)){
+    if (usrspc[1,3] & (sum(!is.na(varF$series))==0)){
       varF<- varP
     }
-  }else if (usrspc[2,3]==TRUE & usrspc[1,3]==TRUE & sum(!is.na(varF$series))==0){
+  }else if (usrspc[2,3] & usrspc[1,3]==TRUE & sum(!is.na(varF$series))==0){
     usrspc[3,3] <- TRUE
     varF<- varP
   }else if(sum(!is.na(varF$series))==0){
@@ -762,7 +762,7 @@ spec_userdef <-function(usrspc, out, var, tf) {
   }else{
     usrspc[3,3] <- usrspc[2,3]
   }
-  if (usrspc[3,3]==TRUE){
+  if (usrspc[3,3]){
     if (sum(!is.na(varF$description[,2]))==0){
       usrspc[2:3,4]<- FALSE
     }else if (tf=="Auto"){
@@ -797,7 +797,7 @@ spec_x11 <- function(x11spc){
   for (i in c(1:5,8:10)){
     x11[3,i] <- if(!is.na(x11[2,i])) {x11[2,i]} else {x11[1,i]}
   }
-  if(x11[3,5]==TRUE | is.na(x11[2,6])){
+  if(x11[3,5] | is.na(x11[2,6])){
     x11[3,6]<- x11[1,6]
   }else {
     x11[3,6] <- x11[2,6]

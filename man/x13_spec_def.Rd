@@ -307,6 +307,7 @@ myreg2 <- x13(myseries, spec = myspec2)
  myreg1
  s_preOut(myreg1)
 
+\dontrun{
 # User-defined variables
  var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
  var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
@@ -336,7 +337,7 @@ myreg2 <- x13(myseries, spec = myspec2)
 # Defined seasonal filters
  myspec1 <- x13_spec_def("RSA5c", x11.seasonalma = rep("S3X1", 12))
  mysa1 <- x13(myseries, myspec1)
-
+}
 }
 \references{
 Info on JDemetra+, usage and functions:

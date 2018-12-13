@@ -82,6 +82,7 @@
 #'  myreg1
 #'  s_preOut(myreg1)
 #'
+#'\dontrun{
 #' # User-defined variables
 #'  var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
 #'  var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
@@ -112,7 +113,7 @@
 #' # Defined seasonal filters
 #'  myspec1 <- x13_spec_def("RSA5c", x11.seasonalma = rep("S3X1", 12))
 #'  mysa1 <- x13(myseries, myspec1)
-#'
+#'}
 #' @export
 x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
                          estimate.from = NA_character_,

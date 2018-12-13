@@ -25,7 +25,7 @@ summary.regarima <- function (object, ...){
     colnames(r_tvalues)=c("Pr(>|t|)")
     reg_coef <- cbind(reg_coef, r_tvalues)
   }
-  if (usr_spec[1]==TRUE & usr_spec[2]==TRUE){
+  if (usr_spec[1] & usr_spec[2]){
     out <- out[out[,3]!=0,]
     if (dim(out)[1]!=0){
       out_t <- as.character(out[,1])
@@ -39,7 +39,7 @@ summary.regarima <- function (object, ...){
       colnames(fout)[ncol(fout)] <- "Pr(>|t|)"
     }
   }
-  if (usr_spec[3]==TRUE & usr_spec[4]==TRUE){
+  if (usr_spec[3] & usr_spec[4]){
     nvar0 <-dim(var)[1]
     var <- cbind(var,c(1:nvar0))
     var <- var[var[,2]!=0,]
@@ -69,17 +69,17 @@ print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L
   
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(x$arma_orders))),sep="")
   cat("\n\n")
-  cat("Model:",x$results_spec["Model"],sep=" ")
+  cat("Model:",x$results_spec[,"Model"],sep=" ")
   cat("\n")
-  cat("Estimation span:",x$results_spec["T.span"],sep=" ")
+  cat("Estimation span:",x$results_spec[,"T.span"],sep=" ")
   cat("\n")
-  cat("Log-transformation:",if(x$results_spec["Log transformation"]==TRUE) {"yes"} else {"no"},sep=" ")
+  cat("Log-transformation:",if(x$results_spec[,"Log transformation"]) {"yes"} else {"no"},sep=" ")
   cat("\n")
-  cat("Regression model:",if(x$results_spec["Mean"]==TRUE) {"mean"} else {"no mean"},sep=" ")
-  if(x$results_spec["Trading days"]==0) {cat(", no trading days effect")} else {cat(", trading days effect(",x$results_spec["Trading days"],")",sep="")}
-  cat(if(x$results_spec["Leap year"]==TRUE) {", leap year effect"} else {", no leap year effect"},sep="")
-  cat(if(x$results_spec["Easter"]==TRUE) {", Easter effect"} else {", no Easter effect"},sep="")
-  if(x$results_spec["Outliers"]==0) {cat(", no outliers")} else {cat(", outliers(",x$results_spec["Outliers"],")",sep="")}
+  cat("Regression model:",if(x$results_spec[,"Mean"]) {"mean"} else {"no mean"},sep=" ")
+  if(x$results_spec[,"Trading days"]==0) {cat(", no trading days effect")} else {cat(", trading days effect(",x$results_spec[,"Trading days"],")",sep="")}
+  cat(if(x$results_spec[,"Leap year"]) {", leap year effect"} else {", no leap year effect"},sep="")
+  cat(if(x$results_spec[,"Easter"]) {", Easter effect"} else {", no Easter effect"},sep="")
+  if(x$results_spec[,"Outliers"]==0) {cat(", no outliers")} else {cat(", outliers(",x$results_spec[,"Outliers"],")",sep="")}
   cat("\n\n")
   cat("Coefficients:")
   
@@ -144,7 +144,7 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
   
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n")
-  cat("Log-transformation:",if(rslt_spec[3]==TRUE) {"yes"} else {"no"},sep=" ")
+  cat("Log-transformation:",if(rslt_spec[,3]) {"yes"} else {"no"},sep=" ")
   
   cat("\n")
   cat("Coefficients:")
@@ -168,7 +168,7 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     cat("\n")
     printCoefmat(tab.reg, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
-  if (usr_spec[1]==TRUE & usr_spec[2]==TRUE){
+  if (usr_spec[1] & usr_spec[2]){
     out <- out[out[,3]!=0,]
     if (dim(out)[1]!=0){
       out_t <- as.character(out[,1])
@@ -183,7 +183,7 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
       printCoefmat(fout, digits = digits, P.values= FALSE, na.print = "NA", ...)
     }
   }
-  if (usr_spec[3]==TRUE & usr_spec[4]==TRUE){
+  if (usr_spec[3] & usr_spec[4]){
     nvar0 <-dim(var)[1]
     var <- cbind(var,c(1:nvar0))
     var <- var[var[,2]!=0,]

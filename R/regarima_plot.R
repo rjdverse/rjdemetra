@@ -49,7 +49,7 @@ getCaption <- function(k) {if (length(caption) < k)
 one.fig <- prod(par("mfcol")) == 1
 if (ask) {
   oask <- devAskNewPage(TRUE)
-  on.exit(devAskNewPage(oask))
+  on.exit(devAskNewPage(NULL))
 }
 if (show[1L]) {
   plot.ts(x$residuals, type="h", ylab="Residuals")

@@ -135,7 +135,9 @@ myreg <- regarima_def_x13(myseries, spec=c("RG5c"))
 myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 myreg1 <- regarima(myseries, myspec1)
 summary(myreg1)
+plot(myreg1)
 
+\dontrun{
 myspec2 <- regarima_spec_x13(myreg, usrdef.outliersEnabled = TRUE,
              usrdef.outliersType = c("LS", "AO"),
              usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
@@ -154,6 +156,7 @@ s_arimaCoef(myspec3)
 myreg3 <- regarima(myseries, myspec3)
 summary(myreg3)
 plot(myreg3)
+}
 
  # TRAMO-SEATS method
 myspec <- regarima_spec_def_tramoseats("TRfull")
@@ -162,6 +165,7 @@ myreg1 <- regarima_def_tramoseats(myseries, spec = "TRfull")
 myreg
 myreg1
 
+\dontrun{
 myspec2 <- regarima_spec_tramoseats(myspec, tradingdays.mauto = "Unused",
              tradingdays.option = "WorkingDays",
              easter.type = "Standard",
@@ -176,6 +180,7 @@ myspec3 <- regarima_spec_tramoseats(myspec,
 s_preVar(myspec3)
 myreg3 <- regarima(myseries, myspec3)
 myreg3
+}
 }
 \references{
 Info on JDemetra+, usage and functions:
