@@ -171,7 +171,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
 
   if (ask) {
     oask <- devAskNewPage(TRUE)
-    on.exit(devAskNewPage(oask))
+    on.exit(devAskNewPage(NULL))
   }
   if("cal-seas-irr" %in% type_chart){
     # Graph 2 : Calendar, seasonal and irregular
