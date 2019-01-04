@@ -9,10 +9,10 @@
 \alias{plot.SA}
 \title{Plotting regarima, decomposition or final results of SA}
 \usage{
-\method{plot}{regarima}(x, which = c(1:6), dec_zoom = FALSE,
-  caption = list("Residuals", "Histogram of residuals", "Normal Q-Q",
-  "ACF of residuals", "PACF of residuals", "Decomposition"),
-  ask = prod(par("mfcol")) < length(which) && dev.interactive(), ...)
+\method{plot}{regarima}(x, which = c(1:6), caption = list("Residuals",
+  "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
+  "PACF of residuals", "Decomposition"), ask = prod(par("mfcol")) <
+  length(which) && dev.interactive(), ...)
 
 \method{plot}{decomposition_X11}(x, first_date, last_date, ...)
 
@@ -27,9 +27,7 @@
 \arguments{
 \item{x}{the object to plot.}
 
-\item{which}{vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition".}
-
-\item{dec_zoom}{logicals, decomposition zoom. Option available for the  graph (6) "Decomposition". If \code{TRUE} an additional graphical window with separated graphs of: the linearized series, calendar effects and outliers effects is created. The default is \code{FALSE}.}
+\item{which}{vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition", (7) "Decomposition - zoom".}
 
 \item{caption}{list with the graphs titles.}
 

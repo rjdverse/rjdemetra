@@ -4,7 +4,6 @@ diagnostics <- function(jrobj){
   rownames(variance_decomposition) <- c("Cycle", "Seasonal",
                                         "Irregular", "TD & Hol.",
                                         "Others", "Total")
-
   residuals_tests_names <- sprintf("diagnostics.%s",
                                   c("qs","qs.on.i", "ftest", "ftest.on.i",
                                     "residual.all", "residual.end",
@@ -17,7 +16,7 @@ diagnostics <- function(jrobj){
                              }else{
                                c(res[1], res[2], attr(res, "description"))
                              }
-                             
+
                            })
   residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
                       stringsAsFactors=FALSE)
@@ -31,10 +30,11 @@ diagnostics <- function(jrobj){
                                 "Residual seasonality (last 3 years)",
                                 "f-test on sa (td)",
                                 "f-test on i (td)")
+  
   combined_test_all <- combined_test(jrobj, "all")
   diag <- list(variance_decomposition = variance_decomposition,
-               residuals_test = residuals_test,
-               combined_test = combined_test_all)
+               combined_test = combined_test_all,
+               residuals_test = residuals_test)
   class(diag) <- "diagnostics"
   diag
 }

@@ -77,9 +77,9 @@ regarima_rslts <- function(jrobj, fcsth){
   if (is.null(result(jrobj,"model.easter"))){easter=FALSE} else {easter=TRUE}
   nout <- result(jrobj,"model.nout")
 
-  spec_rslt <- data.frame(model,t.span,transformed,mean,ntd,leap.year,easter,nout,
+  spec_rslt <- data.frame(model, t.span, transformed, mean, ntd, leap.year, easter, nout,
                           stringsAsFactors = FALSE)
-  names(spec_rslt) <- c("Model","T.span", "Log transformation", "Mean","Trading days","Leap year","Easter","Outliers")
+  names(spec_rslt) <- c("Model", "T.span", "Log transformation", "Mean", "Trading days", "Leap year", "Easter", "Outliers")
   rownames(spec_rslt) <- NULL
 
   decomp_names <- c("y_lin","tde","ee","omhe","out_t","out_s","out_i")
