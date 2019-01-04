@@ -139,6 +139,11 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   forecast <- forecast &
       tail(time(data_plot), 1) > time(x$forecasts)[1]
 
+  if (ask) {
+    current_setting <- devAskNewPage()
+    oask <- devAskNewPage(TRUE)
+    on.exit(devAskNewPage(current_setting))
+  }
 
   if("sa-trend" %in% type_chart){
     # Graph 1 : Sa, trend, and y
@@ -168,10 +173,6 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
     dev.flush()
   }
 
-  if (ask) {
-    oask <- devAskNewPage(TRUE)
-    on.exit(devAskNewPage(NULL))
-  }
   if("cal-seas-irr" %in% type_chart){
     # Graph 2 : Calendar, seasonal and irregular
     series_graph <- c("s", "i")
