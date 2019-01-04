@@ -119,19 +119,18 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
              )),
       sep ="\n")
   cat("\n")
-  cat(bold_pre_code,
-      "Residual seasonality tests",
-      bold_post_code)
-  cat("\n")
-  cat(paste0(" ",
-             capture.output(
-               printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
-                            na.print = "NA", ...)
-             )
-  ),
-  sep ="\n")
-
-  cat("\n")
+#  cat(bold_pre_code,
+#      "Residual seasonality tests",
+#      bold_post_code)
+#  cat("\n")
+#  cat(paste0(" ",
+#             capture.output(
+#               printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
+#                            na.print = "NA", ...)
+#             )
+#  ),
+#  sep ="\n")
+#  cat("\n")
 
   cat(bold_pre_code,
       "Combined test in the entire series",
@@ -152,6 +151,19 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
              capture.output(
                print.combined_test(combined_test_end, digits = digits,
                                      ...)
+             )
+  ),
+  sep ="\n")
+  cat("\n")
+
+  cat(bold_pre_code,
+      "Residual seasonality tests",
+      bold_post_code)
+  cat("\n")
+  cat(paste0(" ",
+             capture.output(
+               printCoefmat(residuals_test[,"P.value", drop = FALSE], digits = digits,
+                            na.print = "NA", ...)
              )
   ),
   sep ="\n")

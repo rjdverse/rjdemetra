@@ -2,7 +2,7 @@
 #' @name plot
 #' @rdname plot
 #' @export
-plot.regarima = function(x, which = c(1:6), dec_zoom = FALSE,
+plot.regarima = function(x, which = c(1:6),
      caption = list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
                     "PACF of residuals", "Decomposition"),
      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
@@ -10,9 +10,9 @@ plot.regarima = function(x, which = c(1:6), dec_zoom = FALSE,
 
 if (!inherits(x, "regarima"))
   stop("use only with \"regarima\" object")
-if (!is.numeric(which) || any(which < 1) || any(which > 6))
-  stop("'which' must be in 1:6")
-show <- rep(FALSE, 6)
+if (!is.numeric(which) || any(which < 1) || any(which > 7))
+  stop("'which' must be in 1:7")
+show <- rep(FALSE, 7)
 show[which] <- TRUE
 op <- par()
 sub.caption = NULL
@@ -30,7 +30,7 @@ if (any(show[4L:5L])) {
   nlags<-min(c(length(res_acf$lag),maxlag))
   lablags<-seq(0, nlags, freq/2)
 }
-  if (show[6L]) {
+  if (any(show[6L:7L]))  {
   model <- x$model$effects
   y_lin <- model[,1]
   cal.effect <- model[,2]+model[,3]+model[,4]
@@ -109,15 +109,16 @@ if (show[6L]) {
     title(sub = sub.caption, ...)
   mtext(getCaption(6), 3, 0.25, cex = cex.caption)
   dev.flush()
-  # Decomposition - zoom
-  if (dec_zoom == TRUE){
-    owind<-dev.cur()
-    #x11()
-    dev.new()
+}
+
+if (show[7L]) {
     layout((1:3))
-    plot.ts(decomp[,1], type="l", ylab="y linearised", col=c(1), main ="Decomposition - zoom")
-    plot.ts(decomp[,2], type="l", ylab="calendar effects", col=c(2),main="")
-    plot.ts(decomp[,3], type="l", ylab="outliers effects", col=c(3),main="")
+    plot.ts(decomp[,1], type="l", ylab="", col=c(1), main ="")
+    mtext("Y linearised", 3, 0.25, cex = cex.caption)
+    plot.ts(decomp[,2], type="l", ylab="", col=c(2),main="")
+    mtext("Calendar effects", 3, 0.25, cex = cex.caption)
+    plot.ts(decomp[,3], type="l", ylab="", col=c(3),main="")
+    mtext("Outliers effects", 3, 0.25, cex = cex.caption)
     rcoef <- x$regression.coefficients
 
     desc_i<-grep("(",rownames(rcoef), fixed=TRUE)
@@ -127,9 +128,11 @@ if (show[6L]) {
         desc<-c(desc,paste(rownames(rcoef)[desc_i[i]],as.character(round(rcoef[desc_i[i]],2),sep=": ")))
       legend("bottomright", legend = desc, col=1, pch=NA_integer_, ncol=if (length(desc_i)<6) {1} else {2},bty="n")
     }
-    dev.set(owind)
-  }
+    dev.flush()
+    par(mfcol=op$mfcol)
 }
+
+
 if (!one.fig && par("oma")[3L] >= 1)
   mtext(sub.caption, outer = TRUE, cex = cex.oma.main)
 par(ask = op$ask)

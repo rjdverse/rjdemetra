@@ -5,6 +5,9 @@ diagnostics <- function(jrobj){
                                         "Irregular", "TD & Hol.",
                                         "Others", "Total")
 
+  combined_test_all <- combined_test(jrobj, "all")
+  combined_test_end <- combined_test(jrobj, "end")
+
   residuals_tests_names <- sprintf("diagnostics.%s",
                                   c("qs","qs.on.i", "ftest", "ftest.on.i",
                                     "residual.all", "residual.end",
@@ -17,7 +20,7 @@ diagnostics <- function(jrobj){
                              }else{
                                c(res[1], res[2], attr(res, "description"))
                              }
-                             
+
                            })
   residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
                       stringsAsFactors=FALSE)
@@ -31,12 +34,10 @@ diagnostics <- function(jrobj){
                                 "Residual seasonality (last 3 years)",
                                 "f-test on sa (td)",
                                 "f-test on i (td)")
-  combined_test_all <- combined_test(jrobj, "all")
-  combined_test_end <- combined_test(jrobj, "end")
   diag <- list(variance_decomposition = variance_decomposition,
-               residuals_test = residuals_test,
                combined_test_all = combined_test_all,
-               combined_test_end = combined_test_end)
+               combined_test_end = combined_test_end,
+               residuals_test = residuals_test)
   class(diag) <- "diagnostics"
   diag
 }
