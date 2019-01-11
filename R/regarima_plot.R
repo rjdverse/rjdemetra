@@ -20,7 +20,7 @@ cex.caption = 1
 cex.oma.main = 1.25
 # Define additional variables for selected graphs:
 if (any(show[2L:3L])) {
-  sres <- (x$residuals - mean(x$residuals))/sd(x$residuals)
+  sres <- x$residuals/x$residuals.stat$st.error
 }
 if (any(show[4L:5L])) {
   freq<- attributes(x$residuals)$tsp[3]
