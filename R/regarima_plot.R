@@ -20,7 +20,7 @@ plot.regarima = function(x, which = c(1:6),
   cex.oma.main = 1.25
   # Define additional variables for selected graphs:
   if (any(show[2L:3L])) {
-    sres <- (x$residuals - mean(x$residuals))/sd(x$residuals)
+      sres <- x$residuals / x$residuals.stat$st.error
   }
   if (any(show[4L:5L])) {
     freq<- attributes(x$residuals)$tsp[3]
@@ -99,7 +99,6 @@ plot.regarima = function(x, which = c(1:6),
     mtext(getCaption(5), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
-  
   if (show[6L]) {
     
     plot.ts(decomp[,c(1,6)],type="l",pch=1, col=c(1:2), ylab="",plot.type = "single")
