@@ -9,8 +9,7 @@
 #' @param forecast logical indicating if forecasts should be included in the plot. If \code{TRUE} the forecast is plotted.
 #' @param ask logicals. If \code{TRUE}, the user will in future be prompted before a new graphical page is started.
 #' @param ... other parameters.
-#' @param which vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition".
-#' @param dec_zoom logicals, decomposition zoom. Option available for the  graph (6) "Decomposition". If \code{TRUE} an additional graphical window with separated graphs of: the linearized series, calendar effects and outliers effects is created. The default is \code{FALSE}.
+#' @param which vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition", (7) "Decomposition - zoom".
 #' @param caption list with the graphs titles.
 #' @name plot
 #' @rdname plot
@@ -123,7 +122,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
                        type_chart = c("sa-trend", "cal-seas-irr"),
                        ask =  length(type_chart) > 1 && dev.interactive(),
                        ...){
-    
+
   type_chart <- match.arg(type_chart, several.ok = TRUE)
 
   data_plot <- ts.union(x[[1]], x[[2]])
@@ -137,9 +136,14 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   general_colors <- c(y = "#F0B400", t = "#1E6C0B", sa = "#155692",
                       cal = "#F0B400", s = "#1E6C0B", i = "#155692")
 
-  forecast <- forecast & 
+  forecast <- forecast &
       tail(time(data_plot), 1) > time(x$forecasts)[1]
 
+  if (ask) {
+    current_setting <- devAskNewPage()
+    oask <- devAskNewPage(TRUE)
+    on.exit(devAskNewPage(current_setting))
+  }
 
   if("sa-trend" %in% type_chart){
     # Graph 1 : Sa, trend, and y
@@ -169,10 +173,6 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
     dev.flush()
   }
 
-  if (ask) {
-    oask <- devAskNewPage(TRUE)
-    on.exit(devAskNewPage(oask))
-  }
   if("cal-seas-irr" %in% type_chart){
     # Graph 2 : Calendar, seasonal and irregular
     series_graph <- c("s", "i")

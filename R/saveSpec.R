@@ -61,14 +61,16 @@
 #' myspec6b <- load_spec("sax13.RData")
 #' myspec7a <- load_spec("specFullTS.RData")
 #' myspec7b <- load_spec("saTS.RData")
-#'
+#' 
+#' 
 #' regarima(myseries, myspec2a)
-#' regarima(myseries, myspec4a)
 #' x13(myseries, myspec6a)
-#' x13(myseries, myspec6b)
 #' tramoseats(myseries, myspec7a)
+#' \dontrun{
+#' regarima(myseries, myspec4a)
+#' x13(myseries, myspec6b)
 #' tramoseats(myseries, myspec7b)
-#'
+#' }
 #' @export
 save_spec = function (object, file = "spec.RData") {
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)

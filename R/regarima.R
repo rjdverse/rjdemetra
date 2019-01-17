@@ -137,7 +137,9 @@ setClass(
 #' myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 #' myreg1 <- regarima(myseries, myspec1)
 #' summary(myreg1)
-#'
+#' plot(myreg1)
+#' 
+#' \dontrun{
 #' myspec2 <- regarima_spec_x13(myreg, usrdef.outliersEnabled = TRUE,
 #'              usrdef.outliersType = c("LS", "AO"),
 #'              usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
@@ -145,7 +147,7 @@ setClass(
 #'              transform.function = "None")
 #' myreg2 <- regarima(myseries, myspec2)
 #' myreg2
-#'
+#' 
 #' myspec3 <- regarima_spec_x13(myreg, automdl.enabled = FALSE,
 #'              arima.p = 1, arima.q = 1,
 #'              arima.bp = 0, arima.bq = 1,
@@ -156,20 +158,22 @@ setClass(
 #' myreg3 <- regarima(myseries, myspec3)
 #' summary(myreg3)
 #' plot(myreg3)
-#'
+#' }
+#' 
 #'  # TRAMO-SEATS method
 #' myspec <- regarima_spec_def_tramoseats("TRfull")
 #' myreg <- regarima(myseries, myspec)
 #' myreg1 <- regarima_def_tramoseats(myseries, spec = "TRfull")
 #' myreg
 #' myreg1
-#'
+#' 
+#' \dontrun{
 #' myspec2 <- regarima_spec_tramoseats(myspec, tradingdays.mauto = "Unused",
 #'              tradingdays.option = "WorkingDays",
 #'              easter.type = "Standard",
 #'              automdl.enabled = FALSE, arima.mu = TRUE)
 #' myreg2 <- regarima(myseries, myspec2)
-#'
+#' 
 #' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
 #' var <- ts.union(var1, var2)
@@ -178,6 +182,7 @@ setClass(
 #' s_preVar(myspec3)
 #' myreg3 <- regarima(myseries, myspec3)
 #' myreg3
+#' }
 #' @export
 # Generic function to create a "regarima" S3 class object from a user-defined specification (for X13 or TRAMO-SEATS method)
 regarima<-function(series, spec = NA){

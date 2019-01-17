@@ -289,6 +289,7 @@ myreg1 <- regarima(myseries, myspec1)
 myreg1
 s_preOut(myreg1)
 
+\dontrun{
  # User-defined variables
 var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12),
            frequency = 12)
@@ -316,6 +317,7 @@ myspec1 <- regarima_spec_def_x13(spec="RG5c", automdl.enabled =FALSE,
 s_arimaCoef(myspec1)
 myreg1 <- regarima(myseries, myspec1)
 myreg1
+}
 }
 \references{
 Info on JDemetra+, usage and functions:

@@ -15,6 +15,9 @@ utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.
 
 ## jd2_rslts.R
 proc_data<-function(rslt, name){
+  if(is.null(rjdemetra_java$clobject)){
+      rjdemetra_java$clobject <- .jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
+  }
   s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name, rjdemetra_java$clobject)
   if (is.null(s))
     return (NULL)
