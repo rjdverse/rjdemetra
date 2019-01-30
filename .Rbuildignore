@@ -1,5 +1,9 @@
+^docs$
+^_pkgdown\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
 .travis.yml
+^pkgdown$
+^doc$
