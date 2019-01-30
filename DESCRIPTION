@@ -54,9 +54,9 @@ Collate:
 	'sa_plot.R'
 	'export_workspace.R'
 	'import_workspace.R'
-	'regarima_tests.R'
 	'ipi_c_eu.R'
 Suggests:
     knitr,
     rmarkdown
 RoxygenNote: 6.1.1
+BugReports: https://github.com/nbbrd/rjdemetra/issues
