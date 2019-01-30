@@ -16,7 +16,7 @@
    id="svg5831"
    version="1.1"
    inkscape:version="0.92.0 r15299"
-   sodipodi:docname="rjdemetra.svg"
+   sodipodi:docname="logo.svg"
    inkscape:export-filename="/Users/alainquartierlatente/Desktop/Logiciels/Logos_packages/rjdemetra/rjdemetra.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -305,13 +305,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="176.63257"
-     inkscape:cy="571.58133"
+     inkscape:cx="19.83257"
+     inkscape:cy="468.58133"
      inkscape:document-units="px"
      inkscape:current-layer="layer6"
      showgrid="true"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -448,7 +448,7 @@
        style="display:inline">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00488c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
          x="-189.08746"
          y="1065.2921"
          id="text6838"
@@ -457,7 +457,7 @@
            id="tspan3395"
            x="-189.08746"
            y="1065.2921"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">https://github.com/nbbrd/rjdemetra</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;">https://github.com/nbbrd/rjdemetra</tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
