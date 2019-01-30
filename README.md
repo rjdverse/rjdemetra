@@ -1,7 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RJDemetra [![Build Status](https://api.travis-ci.com/nbbrd/rjdemetra.svg?branch=master)](https://travis-ci.com/nbbrd/rjdemetra) <img src="man/figures/logo.png" align="right" alt="" />
+# RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
+
+[![Build
+Status](https://api.travis-ci.com/nbbrd/rjdemetra.svg?branch=master)](https://travis-ci.com/nbbrd/rjdemetra)
 
 RJDemetra is a R interface to JDemetra+, the seasonal adjustment
 software [officially
