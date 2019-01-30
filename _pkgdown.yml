@@ -1,0 +1,35 @@
+reference:
+- title: Seasonal adjustment functions
+  desc: Functions to perform seasonal adjustment with X-13ARIMA or TRAMO-SEATS
+  contents:
+  - '`x13`'
+  - '`x13_spec_def`'
+  - '`tramoseats`'
+  - '`tramoseats_spec_def`'
+  - '`user_defined_variables`'
+  - '`plot`'
+  - '`save_spec`'
+  - '`specification`'
+- title: RegARIMA functions
+  desc: Functions to only peform regARIMA estimation
+  contents:
+  - '`regarima`'
+  - '`regarima_spec_def_tramoseats`'
+  - '`regarima_spec_def_x13`'
+- title: Manipulate JDemetra+ workspaces
+  desc: Functions to import and export models JDemetra+ workspaces
+  contents:
+  - '`load_workspace`'
+  - '`new_workspace`'
+  - '`save_workspace`'
+  - '`add_sa_item`'
+  - '`get_model`'
+  - '`compute`'
+  - '`count`'
+  - '`get_name`'
+  - '`get_object`'
+  - '`get_ts`'
+- title: Database
+  desc: ~
+  contents:
+  - '`ipi_c_eu`'
