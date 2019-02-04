@@ -40,7 +40,7 @@
 <meta property="og:title" content="Compute the multi-processing from a workspace — compute" />
 
 <meta property="og:description" content="Function to compute all the multi-processings or a given one from a workspace.
-By default the workspace only contains definitions : computation is needed to get the seasonal adjustment model
+By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 (with get_model)." />
 
 <meta property="og:image" content="/logo.png" />
@@ -89,6 +89,18 @@ By default the workspace only contains definitions : computation is needed to ge
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    JDemetra+
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -118,7 +130,7 @@ By default the workspace only contains definitions : computation is needed to ge
     <div class="ref-description">
     
     <p>Function to compute all the multi-processings or a given one from a workspace.
-By default the workspace only contains definitions : computation is needed to get the seasonal adjustment model
+By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 (with <code><a href='get_model.html'>get_model</a></code>).</p>
     
     </div>
@@ -153,7 +165,7 @@ By default all the multi-processings are compute.</p></td>
 <span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
 <span class='no'>sa_item1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>1</span>)
 
-<span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Returns NULL</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The result of the object is NULL : have you compute the workspace importing?</span>
+<span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Returns NULL</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The result of the object is NULL: have you compute the workspace importing?</span>
 #&gt; <span class='warning'>See ?compute for more information</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='fu'>compute</span>(<span class='no'>wk</span>)
 
