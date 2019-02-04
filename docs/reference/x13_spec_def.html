@@ -166,11 +166,12 @@ x13_spec creates (and/or modifies) a c(&quot;SA_spec&quot;,&quot;X13&quot;) clas
   <span class='kw'>arima.bd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
   <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>fcst.horizon</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.mode</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Undefined"</span>, <span class='st'>"Additive"</span>,
-  <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>), <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.lsigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.usigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.trendAuto</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>x11.trendma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>, <span class='kw'>x11.fcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.bcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.excludeFcasts</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+  <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>, <span class='st'>"PseudoAdditive"</span>),
+  <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>x11.lsigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
+  <span class='kw'>x11.usigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.trendAuto</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>x11.trendma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>x11.fcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.bcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
+  <span class='kw'>x11.excludeFcasts</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='fu'>x13_spec</span>(<span class='no'>object</span>, <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
   <span class='kw'>estimate.to</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>, <span class='kw'>estimate.first</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
@@ -205,11 +206,12 @@ x13_spec creates (and/or modifies) a c(&quot;SA_spec&quot;,&quot;X13&quot;) clas
   <span class='kw'>arima.bd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
   <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>fcst.horizon</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.mode</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Undefined"</span>, <span class='st'>"Additive"</span>,
-  <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>), <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.lsigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.usigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.trendAuto</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>x11.trendma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>, <span class='kw'>x11.fcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.bcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.excludeFcasts</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+  <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>, <span class='st'>"PseudoAdditive"</span>),
+  <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>x11.lsigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
+  <span class='kw'>x11.usigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.trendAuto</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>x11.trendma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>x11.fcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>x11.bcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
+  <span class='kw'>x11.excludeFcasts</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -484,7 +486,7 @@ E.g.: <code>arima.coef = c(-0.8,-0.6,NA)</code>, <code>arima.coefType = c("Fixed
     </tr>
     <tr>
       <th>x11.mode</th>
-      <td><p>character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: <code>"Undefined"</code> - no assumption concerning the relationship between the time series components is made; <code>"Additive"</code> - assumes an additive relationship; <code>"Multiplicative"</code> - assumes a multiplicative relationship; <code>"LogAdditive"</code> - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.</p></td>
+      <td><p>character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: <code>"Undefined"</code> - no assumption concerning the relationship between the time series components is made; <code>"Additive"</code> - assumes an additive relationship; <code>"Multiplicative"</code> - assumes a multiplicative relationship; <code>"LogAdditive"</code> - performs an additive decomposition of the logarithms of the series being adjusted; <code>"PseudoAdditive"</code> - assumes an pseudo-additive relationship. Could be changed by the program, if needed.</p></td>
     </tr>
     <tr>
       <th>x11.seasonalComp</th>

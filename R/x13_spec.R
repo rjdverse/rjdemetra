@@ -11,7 +11,7 @@
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
 #' @inheritParams regarima_spec_def_x13
-#' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.
+#' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted; \code{"PseudoAdditive"} - assumes an pseudo-additive relationship. Could be changed by the program, if needed.
 #' @param x11.seasonalComp logicals. If \code{TRUE} the program computes a seasonal component. Otherwise, the seasonal component is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).
 #' @param x11.lsigma numeric, lower sigma boundary for the detection of extreme values.
 #' @param x11.usigma numeric, upper sigma boundary for the detection of extreme values.
@@ -180,7 +180,7 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
                          arima.coef = NA,
                          arima.coefType = NA,
                          fcst.horizon = NA_integer_,
-                         x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive"),
+                         x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive", "PseudoAdditive"),
                          x11.seasonalComp = NA,
                          x11.lsigma = NA_integer_,
                          x11.usigma = NA_integer_,
@@ -214,7 +214,7 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 }
 
 x11_spec_def<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
-                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
+                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive", "PseudoAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
                           x11.usigma = NA_integer_,
@@ -329,7 +329,7 @@ x13_spec <-function(object,
                     arima.coef = NA,
                     arima.coefType = NA,
                     fcst.horizon = NA_integer_,
-                    x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive"),
+                    x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive", "PseudoAdditive"),
                     x11.seasonalComp = NA,
                     x11.lsigma = NA_integer_,
                     x11.usigma = NA_integer_,
@@ -364,7 +364,7 @@ x13_spec <-function(object,
 }
 
 x11_spec<- function(object,
-                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
+                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive", "PseudoAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
                           x11.usigma = NA_integer_,
