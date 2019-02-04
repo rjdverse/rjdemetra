@@ -417,15 +417,21 @@ get_model.sa_item <- function(x, workspace,
   jspec <- get_jspec(x)
   jresult <- sa_results(x)
   y_ts <- get_ts(x)
-
-  #TODO: extract dictionary
+  
   context_dictionnary <- .jcall(workspace,
                                 "Lec/tstoolkit/algorithm/ProcessingContext;",
                                 "getContext")
-
-  sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
-          context_dictionnary = context_dictionnary,
-          extra_info = TRUE, freq = frequency(y_ts))
+  
+  result <- tryCatch({
+    sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
+            context_dictionnary = context_dictionnary,
+            extra_info = TRUE, freq = frequency(y_ts))
+  },error = function(e){
+    warning("Error while importing a model: NULL object will be returned")
+    NULL
+  })
+  
+  result
 }
 
 # Get the results of an saitem
