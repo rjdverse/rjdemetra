@@ -183,6 +183,8 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
     var_names <- sapply(ud_vars, function(x) x$getName())
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
+    var_names <- base::make.names(var_names, unique = TRUE)
+    var_names <- gsub(".","_", var_names, fixed = TRUE)
 
     result$userdef_spec$variables$description <- data.frame(type = type,
                                                             coeff = coeff,
@@ -215,6 +217,8 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
   if(length(user_td) > 0 ){
     var_names_split <- strsplit(user_td,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
+    var_names <- base::make.names(var_names, unique = TRUE)
+    var_names <- gsub(".","_", var_names, fixed = TRUE)
     
     result$userdef_spec$specification$variables <-
       TRUE
