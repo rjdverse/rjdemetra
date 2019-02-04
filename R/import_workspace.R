@@ -203,7 +203,7 @@ count.workspace <- function(x){
 
 #' Get the input raw time series
 #'
-#' Generics functions to get the input raw times series of a \code{workspace}, \code{multiprocessing},
+#' Generics functions to get the input raw time series of a \code{workspace}, \code{multiprocessing},
 #' \code{sa_item} or \code{SA} object.
 #'
 #' @param x the object where to get the time series.
@@ -269,7 +269,7 @@ get_ts.SA <- function(x){
 #' Compute the multi-processing from a workspace
 #'
 #' Function to compute all the multi-processings or a given one from a workspace.
-#' By default the workspace only contains definitions : computation is needed to get the seasonal adjustment model
+#' By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 #' (with \code{\link{get_model}}).
 #'
 #' @param workspace the workspace to compute.
@@ -432,7 +432,7 @@ get_model.sa_item <- function(x, workspace,
 sa_results <- function(jsa) {
   jresult <- .jcall(jsa, "Ldemetra/algorithm/IProcResults;", "getResults")
   if(is.null(jresult))
-    warning("The result of the object is NULL : have you compute the workspace importing?\n",
+    warning("The result of the object is NULL: have you compute the workspace importing?\n",
             "See ?compute for more information")
   return(jresult)
 }

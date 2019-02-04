@@ -20,7 +20,7 @@ get_ts(x)
 }
 }
 \description{
-Generics functions to get the input raw times series of a \code{workspace}, \code{multiprocessing},
+Generics functions to get the input raw time series of a \code{workspace}, \code{multiprocessing},
 \code{sa_item} or \code{SA} object.
 }
 \examples{

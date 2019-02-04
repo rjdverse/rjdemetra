@@ -16,7 +16,7 @@ user_defined <- function(namedvector, jrobct){
 #' \code{\link{x13}}, \code{\link{x13_def}}, \code{\link{tramoseats}} and \code{\link{tramoseats_def}}
 #' with the parameter \code{userdefined}.
 #'
-#' @param sa_object a character : \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
+#' @param sa_object a character: \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
 #'
 #' @examples
 #' user_defined_variables("X13-ARIMA")
@@ -25,7 +25,7 @@ user_defined <- function(namedvector, jrobct){
 user_defined_variables <- function(sa_object = c("X13-ARIMA", "TRAMO-SEATS")){
   sa_object <- match.arg(sa_object)
   if(sa_object == "X13-ARIMA"){
-    ## To get the variables : 
+    ## To get the variables: 
     # library(rJava)
     # jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
     # jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")

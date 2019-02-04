@@ -146,7 +146,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   }
 
   if("sa-trend" %in% type_chart){
-    # Graph 1 : Sa, trend, and y
+    # Graph 1: Sa, trend, and y
     series_graph <- c("y","t","sa")
     if(forecast){
       last_obs_date <- end(x$series[,"y"])
@@ -174,7 +174,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   }
 
   if("cal-seas-irr" %in% type_chart){
-    # Graph 2 : Calendar, seasonal and irregular
+    # Graph 2: Calendar, seasonal and irregular
     series_graph <- c("s", "i")
     if(forecast){
       last_obs_date <- end(x$series[,"y"])

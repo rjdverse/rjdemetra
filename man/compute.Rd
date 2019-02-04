@@ -14,7 +14,7 @@ By default all the multi-processings are compute.}
 }
 \description{
 Function to compute all the multi-processings or a given one from a workspace.
-By default the workspace only contains definitions : computation is needed to get the seasonal adjustment model
+By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 (with \code{\link{get_model}}).
 }
 \examples{
