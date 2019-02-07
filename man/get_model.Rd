@@ -17,7 +17,7 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 \item{progress_bar}{boolean: if \code{TRUE} a progress bar is printed.}
 }
 \value{
-\code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects :
+\code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects:
 \itemize{
  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object;
  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
@@ -34,7 +34,7 @@ Generics functions to get seasonally adjusted model(s) from \code{workspace},
 \dontrun{
 spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
+spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
 sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()

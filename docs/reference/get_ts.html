@@ -146,7 +146,7 @@ sa_item or SA object." />
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_ts()</code> returns a <code><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></code> object or list of <code><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></code> objects :</p><ul>
+    <p><code>get_ts()</code> returns a <code><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></code> object or list of <code><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></code> objects:</p><ul>
 <li><p>if <code>x</code> is a <code>sa_item</code> or a <code>SA</code> object, <code>get_ts(x)</code> returns a single <code>ts</code> object;</p></li>
 <li><p>if <code>x</code> is a <code>multiprocessing</code> object, <code>get_ts(x)</code> returns list of length the number
  of sa_items, each a <code>ts</code> object;</p></li>
@@ -231,6 +231,7 @@ sa_item or SA object." />
 #&gt; 2016  98.5  97.9 107.4 103.4  96.9 107.8  99.6  77.5 106.2 106.5 104.2  97.1
 #&gt; 2017  97.4  97.5 112.0 103.0 100.4 111.2 103.4  79.3 109.7 114.0 107.7 101.4</div><div class='input'>
   <span class='co'># Extracting from a multiprocessing:</span>
+<span class='co'># Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]:</span>
 <span class='fu'>get_ts</span>(<span class='no'>mp</span>)</div><div class='output co'>#&gt; $X13
 #&gt;        Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec
 #&gt; 1990  90.5  92.6 101.9  95.2  92.1 103.3  91.8  65.5  99.0 102.8  94.3  93.1
@@ -261,9 +262,11 @@ sa_item or SA object." />
 #&gt; 2015  95.3  96.6 108.8 101.9  96.5 110.0  99.9  76.9 107.1 108.0 101.8  97.3
 #&gt; 2016  98.5  97.9 107.4 103.4  96.9 107.8  99.6  77.5 106.2 106.5 104.2  97.1
 #&gt; 2017  97.4  97.5 112.0 103.0 100.4 111.2 103.4  79.3 109.7 114.0 107.7 101.4
-#&gt; </div><div class='input'><span class='co'># Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]</span>
+#&gt; </div><div class='input'>
 
   <span class='co'># Extracting from a workspace:</span>
+<span class='co'># Returns a list of length 1 named "sa1" containing a list</span>
+<span class='co'># of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]</span>
 <span class='fu'>get_ts</span>(<span class='no'>wk</span>)</div><div class='output co'>#&gt; $sa1
 #&gt; $sa1$X13
 #&gt;        Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec
@@ -296,9 +299,7 @@ sa_item or SA object." />
 #&gt; 2016  98.5  97.9 107.4 103.4  96.9 107.8  99.6  77.5 106.2 106.5 104.2  97.1
 #&gt; 2017  97.4  97.5 112.0 103.0 100.4 111.2 103.4  79.3 109.7 114.0 107.7 101.4
 #&gt; 
-#&gt; </div><div class='input'># Returns a list of length 1 named "sa1" containing a list
-# of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
-</div></pre>
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

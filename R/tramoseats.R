@@ -88,8 +88,8 @@ setClass(
 #'                            automdl.enabled = FALSE, arima.mu = TRUE)
 #' mysa2 <- tramoseats(myseries, myspec2)
 #'
-#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
-#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+#' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
+#' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var <- ts.union(var1, var2)
 #' myspec3 <- tramoseats_spec(myspec,
 #'                             usrdef.varEnabled = TRUE, usrdef.var = var)
@@ -105,7 +105,7 @@ setClass(
 #' mysa2
 #'
 #' @export
-tramoseats <-function(series, spec,
+tramoseats <- function(series, spec,
                       userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
@@ -113,13 +113,13 @@ tramoseats <-function(series, spec,
   if (!inherits(spec, "SA_spec") | !inherits(spec, "TRAMO_SEATS"))
     stop("use only with c(\"SA_spec\",\"TRAMO_SEATS\") class object")
   # create the java objects
-  jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
+  jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
   jdictionary <- specTS_r2jd(spec,jrspec)
   specSeats_r2jd(spec,jrspec)
-  jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
-  jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
+  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
 
-  # Or, using the fonction x13JavaResults :
+  # Or, using the fonction x13JavaResults:
   # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
@@ -145,17 +145,17 @@ tramoseats <-function(series, spec,
 #' @rdname tramoseats
 #' @name tramoseats
 #' @export
-tramoseats_def <-function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+tramoseats_def <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
                          userdefined = NULL){
   if (!is.ts(series)){
     stop("series must be a time series")
   }
-  spec<-match.arg(spec)
+  spec <- match.arg(spec)
   # create the java objects
-  jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
-  jspec<-.jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
+  jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
+  jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-  jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
 
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
@@ -165,11 +165,11 @@ tramoseatsJavaResults <- function(jrslt, spec,
                                   context_dictionnary = NULL,
                                   extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
-  jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
+  jrobct_arima <- new(Class = "JD2_TRAMO_java",internal = jrarima)
+  jrobct <- new(Class = "JD2_TramoSeats_java", internal = jrslt)
 
   if (is.null(jrobct@internal))
-    return (NaN)
+    return(NaN)
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
                         context_dictionnary = context_dictionnary,

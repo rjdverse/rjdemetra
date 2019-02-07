@@ -65,7 +65,7 @@
 #'
 #' @param easter.duration numeric indicating the duration of the Easter effect (length in days, between 1 and 20).
 #'
-#' @param easter.test defines the pre-tests for the significance of the Easter effect based on the t-statistic (Easter effect is considered as significant if the t-statistic is greater than 1.96) : \code{"Add"} - the Easter effect variable is not included in the initial regression model but can be added to the RegARIMA model after the test; \code{"Remove"} - the Easter effect variable belong to the initial regression model but can be removed from the RegARIMA model after the test; \code{"None"} - the Easter effect variable is not pre-tested and is included in the model.
+#' @param easter.test defines the pre-tests for the significance of the Easter effect based on the t-statistic (Easter effect is considered as significant if the t-statistic is greater than 1.96): \code{"Add"} - the Easter effect variable is not included in the initial regression model but can be added to the RegARIMA model after the test; \code{"Remove"} - the Easter effect variable belong to the initial regression model but can be removed from the RegARIMA model after the test; \code{"None"} - the Easter effect variable is not pre-tested and is included in the model.
 #'
 #' @param outlier.enabled logicals. If \code{TRUE} the automatic detection of outliers is enabled in the defined time span.
 #'
@@ -219,9 +219,9 @@
 #'
 #'\dontrun{
 #'  # User-defined variables
-#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12),
+#' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries),
 #'            frequency = 12)
-#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12),
+#' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries),
 #'            frequency = 12)
 #' var <- ts.union(var1, var2)
 #'

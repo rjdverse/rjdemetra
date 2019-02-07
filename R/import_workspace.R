@@ -25,17 +25,17 @@ is.workspace <- function(x){
 #'
 #' @export
 load_workspace <- function(file){
-  if(missing(file) || is.null(file)){
-    if(Sys.info()[['sysname']] == "Windows"){
+  if (missing(file) || is.null(file)) {
+    if (Sys.info()[['sysname']] == "Windows") {
       file <- utils::choose.files(caption = "Select a workspace",
                                   filters = c("JDemetra+ workspace (.xml)", "*.xml"))
     }else{
       file <- base::file.choose()
     }
-    if(length(file) == 0)
+    if (length(file) == 0)
       stop("You have to choose a file !")
   }
-  if(!file.exists(file)|length(grep("\\.xml$",file))==0)
+  if (!file.exists(file) | length(grep("\\.xml$",file)) == 0)
     stop("The file doesn't exist or isn't a .xml file !")
 
   workspace <- .jcall("ec/tstoolkit/jdr/ws/Workspace", "Lec/tstoolkit/jdr/ws/Workspace;", "open", file)
@@ -64,9 +64,9 @@ load_workspace <- function(file){
 #' mp <- new_multiprocessing(wk, "sa1")
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #'
-#' # Other way to get the multiprocessing :
+#' # Other way to get the multiprocessing:
 #' mp <- get_object(wk, 1)
-#' # To get the sa_item object :
+#' # To get the sa_item object:
 #' sa_item <- get_object(mp, 1)
 #' 
 #' @name get_object
@@ -138,18 +138,18 @@ get_all_objects.workspace <- function(x){
 #' sa_item1 <- get_object(mp, 1)
 #' sa_item2 <- get_object(mp, 2)
 #'
-#' get_name(sa_item1) #returns "X13"
-#' get_name(sa_item2) #returns "TramoSeats"
+#' get_name(sa_item1) # returns "X13"
+#' get_name(sa_item2) # returns "TramoSeats"
 #'
-#' get_name(mp) #returns "sa1"
+#' get_name(mp) # returns "sa1"
 #'
-#' #To get all the name of the sa_items inside a multiprocessing :
+#' # To get all the name of the sa_items inside a multiprocessing:
 #' sapply(get_all_objects(mp), get_name)
 #'
-#' #To get all the name of the multiprocessings inside a workspace :
+#' # To get all the name of the multiprocessings inside a workspace:
 #' sapply(get_all_objects(wk), get_name)
 #'
-#' #To get all the name of the sa_items inside a workspace :
+#' # To get all the name of the sa_items inside a workspace:
 #' lapply(get_all_objects(wk),function(mp){
 #'   sapply(get_all_objects(mp), get_name)
 #' })
@@ -185,7 +185,7 @@ get_name.sa_item <- function(x){
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' count(wk) # 1 multiprocessing inside the workspace wk
-#' count(mp) # 0 multiprocessing inside the multiprocessing mp
+#' count(mp) # 0 sa_item inside the multiprocessing mp
 #' 
 #'
 #' @export
@@ -208,7 +208,7 @@ count.workspace <- function(x){
 #'
 #' @param x the object where to get the time series.
 #'
-#' @return \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects :
+#' @return \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects:
 #' \itemize{
 #'  \item if \code{x} is a \code{sa_item} or a \code{SA} object, \code{get_ts(x)} returns a single \code{ts} object;
 #'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
@@ -233,13 +233,14 @@ count.workspace <- function(x){
 #' get_ts(sa_item) # Returns the ts object ipi_c_eu[, "FR"]
 #'
 #'   # Extracting from a multiprocessing:
+#' # Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]:
 #' get_ts(mp)
-#' # Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
+#'
 #'
 #'   # Extracting from a workspace:
-#' get_ts(wk)
 #' # Returns a list of length 1 named "sa1" containing a list
 #' # of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
+#' get_ts(wk)
 #' @export
 get_ts <- function(x){
   UseMethod("get_ts", x)
@@ -279,7 +280,7 @@ get_ts.SA <- function(x){
 #' @seealso \code{\link{get_model}}
 #'
 #' @examples 
-#' spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #'
 #' wk <- new_workspace()
@@ -301,18 +302,18 @@ compute <- function(workspace, i) {
   if (missing(i)) {
     return(.jcall(workspace, "V", "computeAll"))
   }
-  if(is.numeric(i)){
+  if (is.numeric(i)) {
     nb_mp_objects <- count(workspace)
     mp_names <- sapply(seq_len(nb_mp_objects),
                        function(i) {
                          get_name(get_object(workspace, i))
                        })
-    if(i < 1 || i > nb_mp_objects)
+    if (i < 1 || i > nb_mp_objects)
       stop("The index ",i," is incorrect !\n",
            "It must be beetween 1 and ", nb_mp_objects)
     i <- mp_names[i]
   }
-  if (! is.character(i))
+  if (!is.character(i))
     stop("The parameter i must be a character or a numeric")
 
   .jcall(workspace, "V", "compute", i)
@@ -330,7 +331,7 @@ compute <- function(workspace, i) {
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
 #' @param progress_bar boolean: if \code{TRUE} a progress bar is printed.
 #'
-#' @return \code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects :
+#' @return \code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects:
 #' \itemize{
 #'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object;
 #'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
@@ -344,7 +345,7 @@ compute <- function(workspace, i) {
 #' @examples\dontrun{
 #' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-#' spec_ts <-tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
 #' sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
 #' wk <- new_workspace()
@@ -378,8 +379,8 @@ get_model.workspace <- function(x, workspace,
   nb_mp <- length(multiprocessings)
   
   result <- lapply(1:nb_mp, function(i){
-    if(progress_bar)
-      cat(sprintf("Multiprocessing %i on %i:\n",i, nb_mp))
+    if (progress_bar)
+      cat(sprintf("Multiprocessing %i on %i:\n", i, nb_mp))
     get_model(multiprocessings[[i]],
                      workspace = x, userdefined = userdefined,
                      progress_bar = progress_bar)
@@ -395,18 +396,18 @@ get_model.multiprocessing <- function(x, workspace,
   all_sa_objects <- get_all_objects(x)
   nb_sa_objs <- length(all_sa_objects)
   
-  if(progress_bar)
+  if (progress_bar)
     pb <- txtProgressBar(min = 0, max = nb_sa_objs, style = 3)
   
   result <- lapply(1:nb_sa_objs, function(i){
     res <- get_model(all_sa_objects[[i]],
               workspace = workspace, userdefined = userdefined)
-    if(progress_bar)
+    if (progress_bar)
       setTxtProgressBar(pb, i)
     res
   })
   names(result) <- names(all_sa_objects)
-  if(progress_bar)
+  if (progress_bar)
     close(pb)
   result
 }
@@ -437,7 +438,7 @@ get_model.sa_item <- function(x, workspace,
 # Get the results of an saitem
 sa_results <- function(jsa) {
   jresult <- .jcall(jsa, "Ldemetra/algorithm/IProcResults;", "getResults")
-  if(is.null(jresult))
+  if (is.null(jresult))
     warning("The result of the object is NULL: have you compute the workspace importing?\n",
             "See ?compute for more information")
   return(jresult)

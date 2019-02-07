@@ -89,8 +89,8 @@
 #' s_preOut(mysa1)
 #'
 #' # User-defined variables
-#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
-#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+#' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
+#' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var<- ts.union(var1, var2)
 #'
 #' myspec1 <- tramoseats_spec_def(spec=c("RSAfull"),

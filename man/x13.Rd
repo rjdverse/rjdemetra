@@ -92,6 +92,7 @@ mysa2
 
 myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
             arima.coefEnabled = TRUE,
+            arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
             arima.coef = c(-0.8, -0.6, 0),
             arima.coefType = c(rep("Fixed", 2), "Undefined"))
 s_arimaCoef(myspec3)

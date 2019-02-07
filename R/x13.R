@@ -1,5 +1,5 @@
 setClass(
-  Class="JD2_X13_java",
+  Class = "JD2_X13_java",
   contains = "JD2_ProcResults"
 )
 #' Seasonal Adjustment with  X-13ARIMA-SEATS
@@ -95,6 +95,7 @@ setClass(
 #'
 #' myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
 #'             arima.coefEnabled = TRUE,
+#'             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
 #'             arima.coef = c(-0.8, -0.6, 0),
 #'             arima.coefType = c(rep("Fixed", 2), "Undefined"))
 #' s_arimaCoef(myspec3)
@@ -109,38 +110,38 @@ setClass(
 #'
 #' @export
 x13 <- function(series, spec, userdefined = NULL){
-  if (!is.ts(series)){
+  if (!is.ts(series)) {
     stop("series must be a time series")
   }
   if (!inherits(spec, "SA_spec") | !inherits(spec, "X13"))
     stop("use only with c(\"SA_spec\",\"X13\") class object")
 
   # create the java objects
-  jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
+  jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
   jdictionary <- specX13_r2jd(spec,jrspec)
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(series))
-  jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
-  jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+  jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
+  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
-  # Or, using the fonction x13JavaResults :
+  # Or, using the fonction x13JavaResults:
   # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
-  jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
+  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
+  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)){
-    return (NaN)
+  if (is.null(jrobct@internal)) {
+    return(NaN)
   }else{
     reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
-    deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma=seasma)
+    deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
               user_defined = user_defined(userdefined, jrobct))
 
-    class(z) <- c("SA","X13")
+    class(z) <- c("SA", "X13")
     return(z)
   }
 }
@@ -150,15 +151,15 @@ x13 <- function(series, spec, userdefined = NULL){
 #' @export
 x13_def <- function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
                   userdefined = NULL){
-  if (!is.ts(series)){
+  if (!is.ts(series)) {
     stop("series must be a time series")
   }
-  spec<-match.arg(spec)
+  spec <- match.arg(spec)
   # create the java objects
-  jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
-  jspec<-.jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
+  jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
+  jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-  jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
   return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
@@ -169,11 +170,11 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
                            extra_info = FALSE, freq = NA){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
-  jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
+  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
+  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)){
-    return (NaN)
+  if (is.null(jrobct@internal)) {
+    return(NaN)
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
@@ -194,15 +195,15 @@ sa_jd2r <- function(jrslt, spec,
                     userdefined = NULL,
                     context_dictionnary = NULL,
                     extra_info = FALSE, freq = NA){
-  if(is.null(jrslt))
+  if (is.null(jrslt))
     return(NULL)
 
-  if(.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")){
+  if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
     tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
                           context_dictionnary = context_dictionnary,
                           extra_info = extra_info)
   }else{
-    if(.jinstanceof(spec, "jdr/spec/x13/X13Spec")){
+    if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
       x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
                      context_dictionnary = context_dictionnary,
                      extra_info = extra_info, freq = freq)

@@ -253,9 +253,9 @@
 #' 
 #'\dontrun{
 #'  # User-defined variables
-#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12),
+#' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries),
 #'            frequency = 12)
-#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12),
+#' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries),
 #'            frequency = 12)
 #' var <- ts.union(var1, var2)
 #'
@@ -350,12 +350,12 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
                             arima.coefType = NA,
                             fcst.horizon = NA_integer_)
 {
-  spec<-match.arg(spec)
-  transform.function <-match.arg(transform.function)
-  tradingdays.mauto <-match.arg(tradingdays.mauto)
-  tradingdays.option <-match.arg(tradingdays.option)
-  tradingdays.test <-match.arg(tradingdays.test)
-  easter.type <-match.arg(easter.type)
+  spec <- match.arg(spec)
+  transform.function <- match.arg(transform.function)
+  tradingdays.mauto <- match.arg(tradingdays.mauto)
+  tradingdays.option <- match.arg(tradingdays.option)
+  tradingdays.test <- match.arg(tradingdays.test)
+  easter.type <- match.arg(easter.type)
   estimate.fromD <- as.Date(estimate.from)
   estimate.toD <- as.Date(estimate.to)
   outlier.fromD <- as.Date(outlier.from)

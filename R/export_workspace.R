@@ -61,18 +61,18 @@ new_multiprocessing <- function(workspace, name) {
 #' @return A boolean indicating whether the export has suceed.
 #' @export
 save_workspace <- function(workspace, file) {
-  if(missing(file) || is.null(file)){
-    if(Sys.info()[['sysname']] == "Windows"){
+  if (missing(file) || is.null(file)) {
+    if (Sys.info()[['sysname']] == "Windows") {
       file <- utils::choose.files(default = "demetra_m.xml",
                                   caption = "Select a workspace for the output",
                                   filters = c("JDemetra+ workspace (.xml)", "*.xml"))
     }else{
       file <- NULL # base::file.choose()
     }
-    if(length(file) == 0)
+    if (length(file) == 0)
       stop("You have to choose a file !")
   }
-  if(length(grep("\\.xml$",file))==0)
+  if (length(grep("\\.xml$",file)) == 0)
     stop("The file must be a .xml !")
 
   full_file_name <- normalizePath(file, winslash = "/", mustWork = FALSE)
@@ -118,7 +118,7 @@ save_workspace <- function(workspace, file) {
 #'
 #' @export
 add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
-  if(is.character(multiprocessing)){
+  if (is.character(multiprocessing)) {
     nb_mp_objects <- count(workspace)
     mp_objects <- lapply(seq_len(nb_mp_objects),
                          function(i) {
@@ -126,13 +126,13 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
                          })
     mp_names <- sapply(mp_objects, get_name)
     multiprocessing <- match(multiprocessing, mp_names)
-    if(is.na(multiprocessing))
+    if (is.na(multiprocessing))
       stop("The multiprocessing ",multiprocessing," doesn't exist !")
   }
-  if (! is.numeric(multiprocessing))
+  if (!is.numeric(multiprocessing))
     stop("The parameter multiprocessing must be a character or a numeric")
 
-  if(missing(name))
+  if (missing(name))
     name <- deparse(substitute(sa_obj))
   
   sa_obj <- complete_dictionnary(workspace, sa_obj)
@@ -140,7 +140,7 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
   y <- sa_obj$final$series[, "y"]
 
 
-  if(!is.character(name) || length(name) != 1)
+  if (!is.character(name) || length(name) != 1)
     stop("The name of the SA element to add is mispecified")
 
   mp_obj <- get_object(workspace, multiprocessing)
@@ -169,11 +169,11 @@ get_jspec.TRAMO_SEATS <- function(x, ...){
 }
 get_jspec.sa_item <- function(x, ...){
   spec <- sa_spec(x)
-  if(.jinstanceof(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")){
+  if (.jinstanceof(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
     spec <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
     spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",spec)
   }else{
-    if(.jinstanceof(spec, "ec/satoolkit/x13/X13Specification")){
+    if (.jinstanceof(spec, "ec/satoolkit/x13/X13Specification")) {
       spec <- .jcast(spec, "ec/satoolkit/x13/X13Specification")
       spec <- .jnew("jdr/spec/x13/X13Spec", spec)
     }else{
@@ -186,14 +186,14 @@ get_jspec.sa_item <- function(x, ...){
 complete_dictionnary <- function(workspace, sa_obj){
   userdef <- sa_obj$regarima$specification$regression$userdef
   ud_var <- userdef$variables
-  if(!userdef$specification["variables"] || is.na(ud_var$series))
+  if (!userdef$specification["variables"] || is.na(ud_var$series))
     return(sa_obj)
 
   context_dictionnary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
   ts_variable_managers <- context_dictionnary$getTsVariableManagers()
   ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
   jd_r_variables <- ts_variable_managers$get("r")
-  if(is.null(jd_r_variables)){
+  if (is.null(jd_r_variables)) {
     ts_variable_managers$set("r",
                              .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
     jd_r_variables <- ts_variable_managers$get("r")
@@ -210,7 +210,7 @@ complete_dictionnary <- function(workspace, sa_obj){
     model_var_names
 
 
-  if(is.mts(ud_var$series)){
+  if (is.mts(ud_var$series)) {
     new_vars <- lapply(1:length(model_var_names), function(i){
       .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
             model_var_names[i], ts_r2jd(ud_var$series[,i]))
@@ -223,7 +223,7 @@ complete_dictionnary <- function(workspace, sa_obj){
   }
   names(new_vars) <- model_var_names
 
-  for (name in names(new_vars)){
+  for (name in names(new_vars)) {
     jd_r_variables$set(name, new_vars[[name]])
   }
 

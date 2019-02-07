@@ -7,11 +7,11 @@ decomp_defTS <- function(jrobj,spec){
   # results
   jd_results <- decomp_rsltsTS(jrobj)
   # new S3 class ("Decomp","TRAMO_SEATS")
-  z<- list(specification = specification,
+  z <- list(specification = specification,
            mode = jd_results$mode,
            model = jd_results$model,
-           linearized=jd_results$lin,
-           components=jd_results$cmp)
+           linearized = jd_results$lin,
+           components = jd_results$cmp)
   class(z) <- c("decomposition_SEATS")
   return(z)
 }
@@ -23,11 +23,11 @@ decomp_TS <- function(jrobj, spec){
   # results
   jd_results <- decomp_rsltsTS(jrobj)
   # new S3 class ("Decomp","TRAMO_SEATS")
-  z<- list(specification = specification,
+  z <- list(specification = specification,
            mode = jd_results$mode,
            model = jd_results$model,
-           linearized=jd_results$lin,
-           components=jd_results$cmp)
+           linearized = jd_results$lin,
+           components = jd_results$cmp)
   class(z) <- c("decomposition_SEATS")
   return(z)
 }
@@ -40,7 +40,7 @@ decomp_defX13 <- function(jrobj, spec, freq = NA){
   # results
   jd_results <- decomp_rsltsX13(jrobj)
   # new S3 class ("Decomp","X13")
-  z<- list(specification = specification,
+  z <- list(specification = specification,
            mode = jd_results$mode,
            mstats =  jd_results$mstats,
            si_ratio = jd_results$si_ratio,
@@ -58,7 +58,7 @@ decomp_X13 <- function(jrobj,spec,seasma){
   # results
   jd_results <- decomp_rsltsX13(jrobj)
   # new S3 class ("Decomp","X13")
-  z<- list(specification = specification,
+  z <- list(specification = specification,
            mode = jd_results$mode,
            mstats =  jd_results$mstats,
            si_ratio = jd_results$si_ratio,
@@ -78,14 +78,14 @@ decomp_rsltsX13 <- function(jrobj){
   mstats <- lapply(mstats_names,
                    function(diag) {
                      result(jrobj, diag)})
-  mstats <- matrix(unlist(mstats), ncol=1)
+  mstats <- matrix(unlist(mstats), ncol = 1)
 
   rownames(mstats) <- mstats_rownames
   colnames(mstats) <- c("M stats")
 
   d8 <- result(jrobj,"decomposition.d8")
   d10 <- result(jrobj,"decomposition.d10")
-  si_ratio <- cbind(d8=d8, d10=d10)
+  si_ratio <- cbind(d8 = d8, d10 = d10)
 
   s_filter <- result(jrobj,"decomposition.d9filter")
   t_filter <- result(jrobj,"decomposition.d12filter")
@@ -107,7 +107,7 @@ decomp_rsltsTS <- function(jrobj){
   lin <- lapply(lin_names,
                 function(diag) {
                   res <- result(jrobj,diag)
-                  if(is.null(res)){
+                  if (is.null(res)) {
                     NA
                   }else{
                     res
@@ -119,7 +119,7 @@ decomp_rsltsTS <- function(jrobj){
   cmp <- lapply(cmp_names,
                 function(diag) {
                   res <- result(jrobj,diag)
-                  if(is.null(res)){
+                  if (is.null(res)) {
                     NA
                   }else{
                     res
@@ -139,67 +139,67 @@ decomp_rsltsTS <- function(jrobj){
   fmodel <- lapply(fmodel_names,
                    function(diag) {
                      res <- result(jrobj,diag)})
-  if (!all(sapply(fmodel, is.null))){
+  if (!all(sapply(fmodel, is.null))) {
     n <- max(length(fmodel[[1]]),length(fmodel[[2]]), length(fmodel[[3]]), length(fmodel[[4]]))
     for (i in 1:4) {length(fmodel[[i]]) <- n}
     fmodel <- do.call(rbind, fmodel)
     rownames(fmodel) <- rdsc
-    colnames(fmodel) <- as.character(c(0:(dim(fmodel)[2]-1)))
+    colnames(fmodel) <- as.character(c(0:(dim(fmodel)[2] - 1)))
   }
 
   samodel <- lapply(samodel_names,
                     function(diag) {
                       res <- result(jrobj,diag)})
-  if (!all(sapply(samodel, is.null))){
+  if (!all(sapply(samodel, is.null))) {
     n <- max(length(samodel[[1]]),length(samodel[[2]]), length(samodel[[3]]), length(samodel[[4]]))
     for (i in 1:4) {length(samodel[[i]]) <- n}
     samodel <- do.call(rbind, samodel)
     rownames(samodel) <- rdsc
-    colnames(samodel) <- as.character(c(0:(dim(samodel)[2]-1)))
+    colnames(samodel) <- as.character(c(0:(dim(samodel)[2] - 1)))
   }
 
   tmodel <- lapply(tmodel_names,
                    function(diag) {
                      res <- result(jrobj,diag)})
-  if (!all(sapply(tmodel, is.null))){
+  if (!all(sapply(tmodel, is.null))) {
     n <- max(length(tmodel[[1]]),length(tmodel[[2]]), length(tmodel[[3]]), length(tmodel[[4]]))
     for (i in 1:4) {length(tmodel[[i]]) <- n}
     tmodel <- do.call(rbind, tmodel)
     rownames(tmodel) <- rdsc
-    colnames(tmodel) <- as.character(c(0:(dim(tmodel)[2]-1)))
+    colnames(tmodel) <- as.character(c(0:(dim(tmodel)[2] - 1)))
   }
 
   smodel <- lapply(smodel_names,
                    function(diag) {
                      res <- result(jrobj,diag)})
-  if (!all(sapply(smodel, is.null))){
+  if (!all(sapply(smodel, is.null))) {
     n <- max(length(smodel[[1]]),length(smodel[[2]]), length(smodel[[3]]), length(smodel[[4]]))
     for (i in 1:4) {length(smodel[[i]]) <- n}
     smodel <- do.call(rbind, smodel)
     rownames(smodel) <- rdsc
-    colnames(smodel) <- as.character(c(0:(dim(smodel)[2]-1)))
+    colnames(smodel) <- as.character(c(0:(dim(smodel)[2] - 1)))
   }
 
   trans_model <- lapply(trans_model_names,
                         function(diag) {
                           res <- result(jrobj,diag)})
-  if (!all(sapply(trans_model, is.null))){
+  if (!all(sapply(trans_model, is.null))) {
     n <- max(length(trans_model[[1]]),length(trans_model[[2]]), length(trans_model[[3]]), length(trans_model[[4]]))
     for (i in 1:4) {length(trans_model[[i]]) <- n}
     trans_model <- do.call(rbind, trans_model)
     rownames(trans_model) <- rdsc
-    colnames(trans_model) <- as.character(c(0:(dim(trans_model)[2]-1)))
+    colnames(trans_model) <- as.character(c(0:(dim(trans_model)[2] - 1)))
   }
 
   imodel <- lapply(imodel_names,
                    function(diag) {
                      res <- result(jrobj,diag)})
-  if (!all(sapply(imodel, is.null))){
+  if (!all(sapply(imodel, is.null))) {
     n <- max(length(imodel[[1]]),length(imodel[[2]]), length(imodel[[3]]), length(imodel[[4]]))
     for (i in 1:4) {length(imodel[[i]]) <- n}
     imodel <- do.call(rbind, imodel)
     rownames(imodel) <- rdsc
-    colnames(imodel) <- as.character(c(0:(dim(imodel)[2]-1)))
+    colnames(imodel) <- as.character(c(0:(dim(imodel)[2] - 1)))
   }
   model <- list(model = fmodel, sa = samodel, trend = tmodel, seasonal = smodel,
                 transitory = trans_model, irregular = imodel)
