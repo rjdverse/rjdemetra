@@ -58,7 +58,7 @@ plot(x13_model, type_chart = "sa-trend")
 ``` r
 
 # SI-ratio
-plot(x13_model$decomposition, type_chart = "sa-trend")
+plot(x13_model$decomposition)
 ```
 
 <img src="man/figures/README-plot-example-2.png" style="display: block; margin: auto;" />

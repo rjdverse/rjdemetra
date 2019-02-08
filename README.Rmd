@@ -52,5 +52,5 @@ ts_model <- tramoseats_def(myseries) # TRAMO-SEATS method
 plot(x13_model, type_chart = "sa-trend")
 
 # SI-ratio
-plot(x13_model$decomposition, type_chart = "sa-trend")
+plot(x13_model$decomposition)
 ```
