@@ -29,9 +29,9 @@ wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
 
-# Other way to get the multiprocessing :
+# Other way to get the multiprocessing:
 mp <- get_object(wk, 1)
-# To get the sa_item object :
+# To get the sa_item object:
 sa_item <- get_object(mp, 1)
 
 }

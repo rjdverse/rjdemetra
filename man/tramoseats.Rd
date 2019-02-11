@@ -86,8 +86,8 @@ myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
                            automdl.enabled = FALSE, arima.mu = TRUE)
 mysa2 <- tramoseats(myseries, myspec2)
 
-var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
-var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
+var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 var <- ts.union(var1, var2)
 myspec3 <- tramoseats_spec(myspec,
                             usrdef.varEnabled = TRUE, usrdef.var = var)

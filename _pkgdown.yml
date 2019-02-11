@@ -1,3 +1,30 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    - jdemetra
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: JDemetra+
+      menu:
+      - text: Download JDemetra+
+        href: https://github.com/jdemetra/jdemetra-app/releases
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/nbbrd/rjdemetra
+
 reference:
 - title: Seasonal adjustment functions
   desc: Functions to perform seasonal adjustment with X-13ARIMA or TRAMO-SEATS

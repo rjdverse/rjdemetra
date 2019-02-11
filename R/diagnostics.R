@@ -11,15 +11,15 @@ diagnostics <- function(jrobj){
   residuals_test <- lapply(residuals_tests_names,
                            function(diag) {
                              res <- result(jrobj, diag)
-                             if(is.null(res)){
+                             if (is.null(res)) {
                                c(NA, NA, NA)
                              }else{
                                c(res[1], res[2], attr(res, "description"))
                              }
 
                            })
-  residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow=T),
-                      stringsAsFactors=FALSE)
+  residuals_test <- data.frame(matrix(unlist(residuals_test), ncol = 3, byrow = TRUE),
+                      stringsAsFactors = FALSE)
   residuals_test[,1] <- as.numeric(residuals_test[,1])
   residuals_test[,2] <- as.numeric(residuals_test[,2])
   colnames(residuals_test) <- c("Statistic","P.value","Description")
@@ -48,15 +48,15 @@ combined_test <- function(jrobj, on = c("all", "end")){
                     res <- result(jrobj,diag)
                     c(res[1], res[2], attr(res, "description"))
                   })
-  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=T),
-                               stringsAsFactors=FALSE)
+  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow = TRUE),
+                               stringsAsFactors = FALSE)
   tests[,1] <- as.numeric(tests[,1])
   tests[,2] <- as.numeric(tests[,2])
   colnames(tests) <- c("Statistic","P.value","Description")
   rownames(tests) <- c("Kruskall-Wallis test",
                        "Test for the presence of seasonality assuming stability",
                        "Evolutive seasonality test")
-  combined_result <- result(jrobj,tests_names[1])
+  combined_result <- result(jrobj, tests_names[1])
 
   cb_test <- list(tests_for_stable_seasonality = tests,
                   combined_seasonality_test = combined_result)

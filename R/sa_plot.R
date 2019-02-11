@@ -10,11 +10,31 @@
 #' @param ask logicals. If \code{TRUE}, the user will in future be prompted before a new graphical page is started.
 #' @param ... other parameters.
 #' @param which vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition", (7) "Decomposition - zoom".
-#' @param caption list with the graphs titles.
+#' @param caption list or character with the graphs titles.
+#' @examples 
+#' myseries <- ipi_c_eu[, "FR"]
+#' mysa <- x13_def(myseries, spec = c("RSA5c"))
+#'  # RegArima
+#' plot(mysa$regarima) # 6 graphics are plotted by default
+#' # To only plot one graphic (here the residuals) changing the title:
+#' plot(mysa$regarima, which = 1, caption = "Plot of residuals")
+# # Extra plot decomposing the linearised series, calendar and outliers effects:
+#' plot(mysa$regarima, which = 7) 
+#' 
+#'   # Decomposition
+#' plot(mysa$decomposition) # To plot the SI-Ratio
+#' plot(mysa$decomposition, first_date = c(2010, 1)) # To start the plot in January 2010
+#' 
+#'   # Final
+#' plot(mysa$final) # 2 graphics are plotted by default
+#' # To only plot one graphic (here raw data, seasonal adjusted data and trend),
+#' # changing the last date and the title
+#' plot(mysa$final, last_date = c(2000, 1),
+#'      caption = "Results", type_chart = "sa-trend")
 #' @name plot
 #' @rdname plot
 #' @export
-plot.decomposition_X11 = function(x, first_date, last_date, ...){
+plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio", ...){
   if (!inherits(x, "decomposition_X11"))
     stop("use only with \"decomposition_X11\" object")
 
@@ -58,14 +78,14 @@ plot.decomposition_X11 = function(x, first_date, last_date, ...){
     par(cex=0.7, mai=c(0.1,0,0.4,0))
     ylab=""
   }
-  mtext("S-I ratio", side = 3, col = "blue", outer = TRUE, line = -2)
+  mtext(caption[1], side = 3, col = "blue", outer = TRUE, line = -2)
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
 }
 
 #' @name plot
 #' @rdname plot
 #' @export
-plot.decomposition_SEATS = function(x, first_date, last_date, ...){
+plot.decomposition_SEATS = function(x, first_date, last_date, caption = "S-I ratio", ...){
   if (!inherits(x, "decomposition_SEATS"))
     stop("use only with \"decomposition_SEATS\" object")
 
@@ -111,7 +131,7 @@ plot.decomposition_SEATS = function(x, first_date, last_date, ...){
     par(cex=0.7, mai=c(0.1,0,0.4,0))
     ylab=""
   }
-  mtext("S-I ratio", side = 3, col = "blue", outer = TRUE, line = -2)
+  mtext(caption[1], side = 3, col = "blue", outer = TRUE, line = -2)
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
   invisible()
 }
@@ -120,11 +140,16 @@ plot.decomposition_SEATS = function(x, first_date, last_date, ...){
 #' @export
 plot.final <- function(x, first_date, last_date, forecast = TRUE,
                        type_chart = c("sa-trend", "cal-seas-irr"),
+                       caption = c("sa-trend" = "Y, Sa, trend",
+                                   "cal-seas-irr" = "Cal., sea., irr.")[type_chart],
                        ask =  length(type_chart) > 1 && dev.interactive(),
                        ...){
 
   type_chart <- match.arg(type_chart, several.ok = TRUE)
-
+  
+  all_caption <- c("sa-trend" = "Y, Sa, trend",
+                   "cal-seas-irr" = "Cal., sea., irr.")
+  all_caption[type_chart] <- caption
   data_plot <- ts.union(x[[1]], x[[2]])
   colnames(data_plot) <- c(colnames(x[[1]]), colnames(x[[2]]))
   if(!missing(first_date)){
@@ -146,8 +171,8 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   }
 
   if("sa-trend" %in% type_chart){
-    # Graph 1 : Sa, trend, and y
-    series_graph <- c("y","t","sa")
+    # Graph 1: Sa, trend, and y
+    series_graph <- c("y", "t", "sa")
     if(forecast){
       last_obs_date <- end(x$series[,"y"])
       window(data_plot[, paste0(series_graph,"_f")],
@@ -165,7 +190,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
     par(mar = c(5, 4, 4, 2) + 0.1)
     ts.plot(data_plot[, series_graph],
             col = col,
-            main = "Sa, trend",lty = lty)
+            main = all_caption[1], lty = lty)
     legend("bottomleft", legend = c("Series", "Trend","Seasonally adjusted"),
            col = general_colors[c("y", "t", "sa")], lty = 1,
            pch = NA_integer_,
@@ -174,7 +199,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
   }
 
   if("cal-seas-irr" %in% type_chart){
-    # Graph 2 : Calendar, seasonal and irregular
+    # Graph 2: Calendar, seasonal and irregular
     series_graph <- c("s", "i")
     if(forecast){
       last_obs_date <- end(x$series[,"y"])
@@ -191,7 +216,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
     col <- general_colors[gsub("_.*$", "", series_graph)]
     ts.plot(data_plot[, series_graph],
             col = col,
-            main = "Cal., sea., irr.",lty = lty)
+            main = all_caption[2],lty = lty)
     legend("bottomleft", legend = c("Calendar effects",
                                     "Seas (component)",
                                     "Irregular"),

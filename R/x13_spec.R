@@ -11,7 +11,7 @@
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
 #' @inheritParams regarima_spec_def_x13
-#' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted). Could be changed by the program, if needed.
+#' @param x11.mode character, decomposition mode. Determines the mode of the seasonal adjustment decomposition to be performed: \code{"Undefined"} - no assumption concerning the relationship between the time series components is made; \code{"Additive"} - assumes an additive relationship; \code{"Multiplicative"} - assumes a multiplicative relationship; \code{"LogAdditive"} - performs an additive decomposition of the logarithms of the series being adjusted; \code{"PseudoAdditive"} - assumes an pseudo-additive relationship. Could be changed by the program, if needed.
 #' @param x11.seasonalComp logicals. If \code{TRUE} the program computes a seasonal component. Otherwise, the seasonal component is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).
 #' @param x11.lsigma numeric, lower sigma boundary for the detection of extreme values.
 #' @param x11.usigma numeric, upper sigma boundary for the detection of extreme values.
@@ -84,8 +84,8 @@
 #'
 #'\dontrun{
 #' # User-defined variables
-#'  var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
-#'  var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+#'  var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
+#'  var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #'  var <- ts.union(var1, var2)
 #
 #'  myspec1 <- x13_spec_def(spec = "RSA5c", usrdef.varEnabled = TRUE,
@@ -180,7 +180,7 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
                          arima.coef = NA,
                          arima.coefType = NA,
                          fcst.horizon = NA_integer_,
-                         x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive"),
+                         x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive", "PseudoAdditive"),
                          x11.seasonalComp = NA,
                          x11.lsigma = NA_integer_,
                          x11.usigma = NA_integer_,
@@ -191,8 +191,8 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
                          x11.bcasts = NA_integer_,
                          x11.excludeFcasts = NA)
 {
-  spec<-match.arg(spec)
-  reg_spec=gsub("RSA","RG",spec)
+  spec <- match.arg(spec)
+  reg_spec <- gsub("RSA", "RG", spec)
   regarima <- regarima_spec_def_x13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                      estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                      transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
@@ -209,12 +209,12 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 
   x11 <- x11_spec_def(spec,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
   z <- list(regarima = regarima, x11 = x11)
-  class(z) <- c("SA_spec","X13")
+  class(z) <- c("SA_spec", "X13")
   return(z)
 }
 
-x11_spec_def<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
-                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
+x11_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive", "PseudoAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
                           x11.usigma = NA_integer_,
@@ -225,38 +225,60 @@ x11_spec_def<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"
                           x11.bcasts = NA_integer_,
                           x11.excludeFcasts = NA)
 {
-  spec<-match.arg(spec)
+  spec <- match.arg(spec)
   x11.mode <- match.arg(x11.mode)
-
+  
   x11.seasonalma <- spec_seasma(x11.seasonalma)
   x11.trendma <- spec_trendma(x11.trendma)
-
-  list.logical <- list("x11.seasonalComp","x11.trendAuto","x11.excludeFcasts")
-  list.numeric <- list("x11.lsigma","x11.usigma","x11.fcasts","x11.bcasts")
-
-  var.list<-list()
+  
+  list.logical <- list("x11.seasonalComp", "x11.trendAuto", "x11.excludeFcasts")
+  list.numeric <- list("x11.lsigma", "x11.usigma", "x11.fcasts", "x11.bcasts")
+  
+  var.list <- list()
   for (i in 1:length(list.logical)) {
-    eval(parse(text=paste("if( !is.logical(",list.logical[i],")) {",list.logical[i]," = NA; var.list=append(var.list,'",list.logical[i],"')}",sep="")))
+    eval(parse(text = paste("if( !is.logical(",list.logical[i],")) {",
+                            list.logical[i],
+                            " = NA; var.list=append(var.list,'",
+                            list.logical[i],
+                            "')}",
+                            sep = "")))
   }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be logical. They are ignored."), call. = FALSE)}
-
-  var.list<-list()
+  if (length(var.list) > 0) {
+    warning(paste("Variable(s)",
+                  deparse(as.character(var.list)),
+                  " should be logical. They are ignored."),
+            call. = FALSE)
+  }
+  
+  var.list <- list()
   for (i in 1:length(list.numeric)) {
-    eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
+    eval(parse(text = paste("if( !is.numeric(",
+                            list.numeric[i],
+                            ")) {",
+                            list.numeric[i],
+                            " = NA; var.list=append(var.list,'",
+                            list.numeric[i],
+                            "')}",
+                            sep = "")))
   }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
+  if (length(var.list) > 0) {
+    warning(paste("Variable(s)",
+                  deparse(as.character(var.list)),
+                  " should be numeric. They are ignored."),
+            call. = FALSE)
+  }
 
   # modifed values
-  x11 <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
+  x11 <- do.call(data.frame, as.list(match.call()[c(-1, -2)]))
   # create the java object
-  jrspec<-.jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
+  jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
   x11.spec <- specX11_jd2r(spec = jrspec)
   # x11.spec <- do.call(data.frame, rspec)
   # names(x11.spec) <- paste0("x11.",names(x11.spec))
-  x11.mod <- rbind(x11.spec,x11,rep(NA,length(x11.spec)))
+  x11.mod <- rbind(x11.spec, x11, rep(NA, length(x11.spec)))
   z <- spec_x11(x11.mod)
 
-  class(z) <- c("X11_spec","data.frame")
+  class(z) <- c("X11_spec", "data.frame")
   return(z)
 }
 #' @rdname x13_spec_def
@@ -264,7 +286,7 @@ x11_spec_def<- function(spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"
 #'
 #' @param object model specification, object of class \code{c("SA_spec","X13")} or \code{c("SA","X13")}.
 #' @export
-x13_spec <-function(object,
+x13_spec <- function(object,
                     estimate.from = NA_character_,
                     estimate.to = NA_character_,
                     estimate.first = NA_integer_,
@@ -329,7 +351,7 @@ x13_spec <-function(object,
                     arima.coef = NA,
                     arima.coefType = NA,
                     fcst.horizon = NA_integer_,
-                    x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive"),
+                    x11.mode = c(NA, "Undefined", "Additive", "Multiplicative", "LogAdditive", "PseudoAdditive"),
                     x11.seasonalComp = NA,
                     x11.lsigma = NA_integer_,
                     x11.usigma = NA_integer_,
@@ -340,31 +362,32 @@ x13_spec <-function(object,
                     x11.bcasts = NA_integer_,
                     x11.excludeFcasts = NA)
 {
-  if (!inherits(object, "X13") & (inherits(object, c("SA","SA_spec"))==FALSE))
+  if (!inherits(object, "X13") & (inherits(object, c("SA","SA_spec")) == FALSE))
     stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_x13(object ,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
-                                     estimate.exclLast,estimate.tol,transform.function,transform.adjust,
-                                     transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
-                                     usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
-                                     usrdef.varCoef,tradingdays.option,tradingdays.autoadjust,tradingdays.leapyear,
-                                     tradingdays.stocktd,tradingdays.test,easter.enabled,easter.julian,
-                                     easter.duration,easter.test,outlier.enabled,outlier.from,outlier.to,outlier.first,
-                                     outlier.last,outlier.exclFirst,outlier.exclLast,outlier.ao,outlier.tc,outlier.ls,outlier.so,
-                                     outlier.usedefcv,outlier.cv,outlier.method,outlier.tcrate,automdl.enabled,
-                                     automdl.acceptdefault,automdl.cancel,automdl.ub1,automdl.ub2,automdl.mixed,automdl.balanced,
-                                     automdl.armalimit,automdl.reducecv,automdl.ljungboxlimit,automdl.ubfinal,arima.mu,
-                                     arima.p,arima.d,arima.q,arima.bp,arima.bd,arima.bq,arima.coefEnabled,
-                                     arima.coef,arima.coefType,fcst.horizon)
-
-  x11 <- x11_spec(object,x11.mode,x11.seasonalComp,x11.lsigma,x11.usigma,x11.trendAuto,x11.trendma,x11.seasonalma,x11.fcasts,x11.bcasts,x11.excludeFcasts)
+  regarima <- regarima_spec_x13(object, estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst, 
+                                estimate.exclLast, estimate.tol, transform.function, transform.adjust, 
+                                transform.aicdiff, usrdef.outliersEnabled, usrdef.outliersType, 
+                                usrdef.outliersDate, usrdef.outliersCoef, usrdef.varEnabled, usrdef.var, usrdef.varType, 
+                                usrdef.varCoef, tradingdays.option, tradingdays.autoadjust, tradingdays.leapyear, 
+                                tradingdays.stocktd, tradingdays.test, easter.enabled, easter.julian, 
+                                easter.duration, easter.test, outlier.enabled, outlier.from, outlier.to, outlier.first, 
+                                outlier.last, outlier.exclFirst, outlier.exclLast, outlier.ao, outlier.tc, outlier.ls, outlier.so, 
+                                outlier.usedefcv, outlier.cv, outlier.method, outlier.tcrate, automdl.enabled, 
+                                automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.mixed, automdl.balanced, 
+                                automdl.armalimit, automdl.reducecv, automdl.ljungboxlimit, automdl.ubfinal, arima.mu, 
+                                arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq, arima.coefEnabled, 
+                                arima.coef, arima.coefType, fcst.horizon)
+  
+  x11 <- x11_spec(object, x11.mode, x11.seasonalComp, x11.lsigma, x11.usigma, x11.trendAuto,
+                  x11.trendma, x11.seasonalma, x11.fcasts, x11.bcasts, x11.excludeFcasts)
   z <- list(regarima = regarima, x11 = x11)
-  class(z) <- c("SA_spec","X13")
+  class(z) <- c("SA_spec", "X13")
   return(z)
 }
 
-x11_spec<- function(object,
-                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive"),
+x11_spec <- function(object,
+                          x11.mode = c(NA_character_,"Undefined","Additive","Multiplicative","LogAdditive", "PseudoAdditive"),
                           x11.seasonalComp = NA,
                           x11.lsigma = NA_integer_,
                           x11.usigma = NA_integer_,
@@ -380,25 +403,48 @@ x11_spec<- function(object,
   x11.seasonalma <- spec_seasma(x11.seasonalma)
   x11.trendma <- spec_trendma(x11.trendma)
 
-  list.logical <- list("x11.seasonalComp","x11.trendAuto","x11.excludeFcasts")
-  list.numeric <- list("x11.lsigma","x11.usigma","x11.fcasts","x11.bcasts")
+  list.logical <- list("x11.seasonalComp", "x11.trendAuto", "x11.excludeFcasts")
+  list.numeric <- list("x11.lsigma", "x11.usigma", "x11.fcasts", "x11.bcasts")
 
-  var.list<-list()
+  var.list <- list()
   for (i in 1:length(list.logical)) {
-    eval(parse(text=paste("if( !is.logical(",list.logical[i],")) {",list.logical[i]," = NA; var.list=append(var.list,'",list.logical[i],"')}",sep="")))
+    eval(parse(text = paste("if( !is.logical(",
+                            list.logical[i],
+                            ")) {",
+                            list.logical[i],
+                            " = NA; var.list=append(var.list,'",
+                            list.logical[i],
+                            "')}",
+                            sep = "")))
   }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be logical. They are ignored."), call. = FALSE)}
+  if (length(var.list) > 0) {
+    warning(paste("Variable(s)",
+                  deparse(as.character(var.list)),
+                  " should be logical. They are ignored."),
+            call. = FALSE)
+    }
 
-  var.list<-list()
+  var.list <- list()
   for (i in 1:length(list.numeric)) {
-    eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
+    eval(parse(text = paste("if( !is.numeric(",
+                            list.numeric[i],
+                            ")) {",
+                            list.numeric[i],
+                            " = NA; var.list=append(var.list,'",
+                            list.numeric[i],"')}",
+                            sep = "")))
   }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
+  if (length(var.list) > 0) {
+    warning(paste("Variable(s)",
+                  deparse(as.character(var.list)),
+                  " should be numeric. They are ignored."),
+            call. = FALSE)
+  }
 
   # modifed values
-  x11 <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
+  x11 <- do.call(data.frame, as.list(match.call()[c(-1, -2)]))
   x11.spec <- s_x11(object)
-  x11.mod <- rbind(x11.spec, x11,rep(NA,length(x11.spec)))
+  x11.mod <- rbind(x11.spec, x11, rep(NA, length(x11.spec)))
   z <- spec_x11(x11.mod)
 
   class(z) <- c("X11_spec","data.frame")

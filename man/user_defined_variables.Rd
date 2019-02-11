@@ -7,7 +7,7 @@
 user_defined_variables(sa_object = c("X13-ARIMA", "TRAMO-SEATS"))
 }
 \arguments{
-\item{sa_object}{a character : \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.}
+\item{sa_object}{a character: \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.}
 }
 \description{
 Function to get the names of the additional output variables that can be defined in

@@ -141,8 +141,8 @@ s_preOut<- function(object = NA){
 #' @name specification
 #' @examples
 #' 
-#' var1 <- ts(rnorm(length(myseries))*10, start = c(2001, 12), frequency = 12)
-#' var2 <- ts(rnorm(length(myseries))*100, start = c(2001, 12), frequency = 12)
+#' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
+#' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var3 <- ts.union(var1, var2)
 #' myspec3 <- regarima_spec_def_x13(spec = "RG5c",
 #'                                  usrdef.varEnabled = TRUE,
@@ -274,7 +274,7 @@ s_arima<- function(object = NA){
 #' @name specification
 #' @examples
 #' 
-#' myspec4 <- regarima_spec_x13(myreg1, automdl.enabled =FALSE,
+#' myspec4 <- regarima_spec_x13(myreg1, automdl.enabled = FALSE,
 #'              arima.coefEnabled = TRUE,
 #'              arima.p = 1,arima.q = 1, arima.bp = 1, arima.bq = 1,
 #'              arima.coef = rep(0.2, 4),

@@ -87,6 +87,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    JDemetra+
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -120,21 +132,25 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for regarima</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>6</span>), <span class='kw'>caption</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"Residuals"</span>,
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"Residuals"</span>,
   <span class='st'>"Histogram of residuals"</span>, <span class='st'>"Normal Q-Q"</span>, <span class='st'>"ACF of residuals"</span>,
-  <span class='st'>"PACF of residuals"</span>, <span class='st'>"Decomposition"</span>), <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/prod'>prod</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='st'>"mfcol"</span>)) <span class='kw'>&lt;</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>which</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev.interactive'>dev.interactive</a></span>(), <span class='no'>...</span>)
+  <span class='st'>"PACF of residuals"</span>, <span class='st'>"Decomposition"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"Y linearised"</span>,
+  <span class='st'>"Calendar effects"</span>, <span class='st'>"Outliers effects"</span>))[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='no'>which</span>)],
+  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/prod'>prod</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='st'>"mfcol"</span>)) <span class='kw'>&lt;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>which</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev.interactive'>dev.interactive</a></span>(), <span class='no'>...</span>)
 
 <span class='co'># S3 method for decomposition_X11</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>first_date</span>, <span class='no'>last_date</span>, <span class='no'>...</span>)
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>first_date</span>, <span class='no'>last_date</span>,
+  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"S-I ratio"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for decomposition_SEATS</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>first_date</span>, <span class='no'>last_date</span>, <span class='no'>...</span>)
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>first_date</span>, <span class='no'>last_date</span>,
+  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"S-I ratio"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for final</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>first_date</span>, <span class='no'>last_date</span>, <span class='kw'>forecast</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>type_chart</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"sa-trend"</span>, <span class='st'>"cal-seas-irr"</span>), <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>type_chart</span>)
-  <span class='kw'>&gt;</span> <span class='fl'>1</span> <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev.interactive'>dev.interactive</a></span>(), <span class='no'>...</span>)
+  <span class='kw'>type_chart</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"sa-trend"</span>, <span class='st'>"cal-seas-irr"</span>), <span class='kw'>caption</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>`sa-trend`</span> <span class='kw'>=</span>
+  <span class='st'>"Y, Sa, trend"</span>, <span class='kw'>`cal-seas-irr`</span> <span class='kw'>=</span> <span class='st'>"Cal., sea., irr."</span>)[<span class='no'>type_chart</span>],
+  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>type_chart</span>) <span class='kw'>&gt;</span> <span class='fl'>1</span> <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev.interactive'>dev.interactive</a></span>(), <span class='no'>...</span>)
 
 <span class='co'># S3 method for SA</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -152,7 +168,7 @@
     </tr>
     <tr>
       <th>caption</th>
-      <td><p>list with the graphs titles.</p></td>
+      <td><p>list or character with the graphs titles.</p></td>
     </tr>
     <tr>
       <th>ask</th>
@@ -181,12 +197,27 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13_def</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>))
+ <span class='co'># RegArima</span>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>) <span class='co'># 6 graphics are plotted by default</span></div><div class='img'><img src='plot-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To only plot one graphic (here the residuals) changing the title:</span>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Plot of residuals"</span>)</div><div class='img'><img src='plot-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='img'><img src='plot-8.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># Decomposition</span>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>) <span class='co'># To plot the SI-Ratio</span></div><div class='img'><img src='plot-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>, <span class='kw'>first_date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2010</span>, <span class='fl'>1</span>)) <span class='co'># To start the plot in January 2010</span></div><div class='img'><img src='plot-10.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># Final</span>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>final</span>) <span class='co'># 2 graphics are plotted by default</span></div><div class='img'><img src='plot-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To only plot one graphic (here raw data, seasonal adjusted data and trend),</span>
+<span class='co'># changing the last date and the title</span>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>final</span>, <span class='kw'>last_date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2000</span>, <span class='fl'>1</span>),
+     <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Results"</span>, <span class='kw'>type_chart</span> <span class='kw'>=</span> <span class='st'>"sa-trend"</span>)</div><div class='img'><img src='plot-13.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -197,7 +228,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

@@ -2,9 +2,10 @@
 #' @name plot
 #' @rdname plot
 #' @export
-plot.regarima = function(x, which = c(1:6),
+plot.regarima = function(x, which = 1:6,
      caption = list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
-                    "PACF of residuals", "Decomposition"),
+                 "PACF of residuals", "Decomposition",
+                 list("Y linearised", "Calendar effects", "Outliers effects"))[sort(which)],
      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
      ...){
 
@@ -15,6 +16,12 @@ plot.regarima = function(x, which = c(1:6),
   show <- rep(FALSE, 7)
   show[which] <- TRUE
   op <- par()
+  if(is.character(caption))
+    caption <- list(caption)
+  all_caption <- list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
+                      "PACF of residuals", "Decomposition",
+                      list("Y linearised", "Calendar effects", "Outliers effects"))
+  all_caption[which] <- caption
   sub.caption = NULL
   cex.caption = 1
   cex.oma.main = 1.25
@@ -41,10 +48,7 @@ plot.regarima = function(x, which = c(1:6),
     decomp<-cbind(y_lin,cal.effect,out.effect,y_lin_cal,y_lin_out,y)
     colnames(decomp)<-c("y_linearized","calendar","outliers","y_linearized_cal","y_linearized_out","y")
   }
-  getCaption <- function(k) {if (length(caption) < k)
-  {NA_character_}
-    else
-      as.graphicsAnnot(caption[[k]])}
+  
   
   one.fig <- prod(par("mfcol")) == 1
   if (ask) {
@@ -57,7 +61,7 @@ plot.regarima = function(x, which = c(1:6),
     abline(h=rep(0,length(x$residuals)))
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(1), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(1, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[2L]) {
@@ -67,7 +71,7 @@ plot.regarima = function(x, which = c(1:6),
     curve(dnorm(x, mean=0, sd=1), add=TRUE, col=3)
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(2), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(2, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[3L]) {
@@ -79,7 +83,7 @@ plot.regarima = function(x, which = c(1:6),
     qqline(sres, lty = 3, col = "gray50")
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(3), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(3, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[4L]) {
@@ -87,7 +91,7 @@ plot.regarima = function(x, which = c(1:6),
     axis(1,lablags,labels=lablags)
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(4), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(4, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[5L]) {
@@ -96,7 +100,7 @@ plot.regarima = function(x, which = c(1:6),
     
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(5), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(5, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[6L]) {
@@ -107,7 +111,7 @@ plot.regarima = function(x, which = c(1:6),
     
     if (one.fig)
       title(sub = sub.caption, ...)
-    mtext(getCaption(6), 3, 0.25, cex = cex.caption)
+    mtext(getCaption(6, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   
@@ -115,11 +119,11 @@ plot.regarima = function(x, which = c(1:6),
     layout((1:3))
     on.exit(par(mfcol=op$mfcol))
     plot.ts(decomp[,1], type="l", ylab="", col=c(1), main ="")
-    mtext("Y linearised", 3, 0.25, cex = cex.caption)
+    mtext(getCaption(1, all_caption[[7]]), 3, 0.25, cex = cex.caption)
     plot.ts(decomp[,2], type="l", ylab="", col=c(2),main="")
-    mtext("Calendar effects", 3, 0.25, cex = cex.caption)
+    mtext(getCaption(2, all_caption[[7]]), 3, 0.25, cex = cex.caption)
     plot.ts(decomp[,3], type="l", ylab="", col=c(3),main="")
-    mtext("Outliers effects", 3, 0.25, cex = cex.caption)
+    mtext(getCaption(3, all_caption[[7]]), 3, 0.25, cex = cex.caption)
     rcoef <- x$regression.coefficients
     
     desc_i<-grep("(",rownames(rcoef), fixed=TRUE)
@@ -139,4 +143,11 @@ plot.regarima = function(x, which = c(1:6),
   invisible()
 }
 
-
+getCaption <- function(k, caption) {
+  if (length(caption) < k){
+    NA_character_
+  }
+  else{
+    as.graphicsAnnot(caption[[k]][1])
+  }
+}

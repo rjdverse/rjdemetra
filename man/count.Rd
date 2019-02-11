@@ -17,7 +17,7 @@ inside a \code{workspace} (respectively \code{multiprocessing}).
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 count(wk) # 1 multiprocessing inside the workspace wk
-count(mp) # 0 multiprocessing inside the multiprocessing mp
+count(mp) # 0 sa_item inside the multiprocessing mp
 
 
 }

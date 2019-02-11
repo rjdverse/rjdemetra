@@ -29,18 +29,18 @@ add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 sa_item1 <- get_object(mp, 1)
 sa_item2 <- get_object(mp, 2)
 
-get_name(sa_item1) #returns "X13"
-get_name(sa_item2) #returns "TramoSeats"
+get_name(sa_item1) # returns "X13"
+get_name(sa_item2) # returns "TramoSeats"
 
-get_name(mp) #returns "sa1"
+get_name(mp) # returns "sa1"
 
-#To get all the name of the sa_items inside a multiprocessing :
+# To get all the name of the sa_items inside a multiprocessing:
 sapply(get_all_objects(mp), get_name)
 
-#To get all the name of the multiprocessings inside a workspace :
+# To get all the name of the multiprocessings inside a workspace:
 sapply(get_all_objects(wk), get_name)
 
-#To get all the name of the sa_items inside a workspace :
+# To get all the name of the sa_items inside a workspace:
 lapply(get_all_objects(wk),function(mp){
   sapply(get_all_objects(mp), get_name)
 })

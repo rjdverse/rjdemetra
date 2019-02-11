@@ -14,11 +14,11 @@ By default all the multi-processings are compute.}
 }
 \description{
 Function to compute all the multi-processings or a given one from a workspace.
-By default the workspace only contains definitions : computation is needed to get the seasonal adjustment model
+By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 (with \code{\link{get_model}}).
 }
 \examples{
-spec_x13 <-x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 
 wk <- new_workspace()
