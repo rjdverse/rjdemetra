@@ -23,7 +23,7 @@ navbar:
         href: https://github.com/jdemetra/jdemetra-app/releases
     github:
       icon: fa-github fa-lg
-      href: https://github.com/nbbrd/rjdemetra
+      href: https://github.com/jdemetra/rjdemetra
 
 reference:
 - title: Seasonal adjustment functions

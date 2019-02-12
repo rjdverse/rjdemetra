@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Plotting regarima, decomposition or final results of SA — plot" />
 
-<meta property="og:description" content="Plotting methods for the S3 class objects around the seasonal adjustment: &quot;regarima&quot; for RegARIMA,&quot;decomposition_X11&quot; and &quot;decomposition_SEATS&quot; for the decomposition with X13 and TRAMO-SEATS, &quot;final&quot; for the final SA results and &quot;SA&quot; for the entire seasonal adjusment object. The function plot.SA just calls the function plot.final." />
+<meta property="og:description" content="Plotting methods for the S3 class objects around the seasonal adjustment: &quot;regarima&quot; for RegARIMA,&quot;decomposition_X11&quot; and &quot;decomposition_SEATS&quot; for the decomposition with X13 and TRAMO-SEATS, &quot;final&quot; for the final SA results and &quot;SA&quot; for the entire seasonal adjustment object. The function plot.SA just calls the function plot.final." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,7 +103,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/nbbrd/rjdemetra">
+  <a href="https://github.com/jdemetra/rjdemetra">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -121,13 +121,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plotting regarima, decomposition or final results of SA</h1>
-    <small class="dont-index">Source: <a href='https://github.com/nbbrd/rjdemetra/blob/master/R/regarima_plot.R'><code>R/regarima_plot.R</code></a>, <a href='https://github.com/nbbrd/rjdemetra/blob/master/R/sa_plot.R'><code>R/sa_plot.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/regarima_plot.R'><code>R/regarima_plot.R</code></a>, <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/sa_plot.R'><code>R/sa_plot.R</code></a></small>
     <div class="hidden name"><code>plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Plotting methods for the S3 class objects around the seasonal adjustment: <code>"regarima"</code> for RegARIMA,<code>"decomposition_X11"</code> and <code>"decomposition_SEATS"</code> for the decomposition with X13 and TRAMO-SEATS, <code>"final"</code> for the final SA results and <code>"SA"</code> for the entire seasonal adjusment object. The function <code>plot.SA</code> just calls the function <code>plot.final</code>.</p>
+    <p>Plotting methods for the S3 class objects around the seasonal adjustment: <code>"regarima"</code> for RegARIMA,<code>"decomposition_X11"</code> and <code>"decomposition_SEATS"</code> for the decomposition with X13 and TRAMO-SEATS, <code>"final"</code> for the final SA results and <code>"SA"</code> for the entire seasonal adjustment object. The function <code>plot.SA</code> just calls the function <code>plot.final</code>.</p>
     
     </div>
 
@@ -204,7 +204,7 @@
 <span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>) <span class='co'># 6 graphics are plotted by default</span></div><div class='img'><img src='plot-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To only plot one graphic (here the residuals) changing the title:</span>
 <span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Plot of residuals"</span>)</div><div class='img'><img src='plot-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='img'><img src='plot-8.png' alt='' width='700' height='433' /></div><div class='input'>
   <span class='co'># Decomposition</span>
-<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>) <span class='co'># To plot the SI-Ratio</span></div><div class='img'><img src='plot-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>, <span class='kw'>first_date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2010</span>, <span class='fl'>1</span>)) <span class='co'># To start the plot in January 2010</span></div><div class='img'><img src='plot-10.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>) <span class='co'># To plot the S-I ratio</span></div><div class='img'><img src='plot-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>decomposition</span>, <span class='kw'>first_date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2010</span>, <span class='fl'>1</span>)) <span class='co'># To start the plot in January 2010</span></div><div class='img'><img src='plot-10.png' alt='' width='700' height='433' /></div><div class='input'>
   <span class='co'># Final</span>
 <span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>final</span>) <span class='co'># 2 graphics are plotted by default</span></div><div class='img'><img src='plot-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To only plot one graphic (here raw data, seasonal adjusted data and trend),</span>
 <span class='co'># changing the last date and the title</span>
@@ -224,7 +224,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Raf Baeyens, Anna Michalek, Jean Palate, Alain Quartier-la-Tente.</p>
+  <p>Developed by Alain Quartier-la-Tente, Anna Michalek, Jean Palate, Raf Baeyens.</p>
 </div>
 
 <div class="pkgdown">

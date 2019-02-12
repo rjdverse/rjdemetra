@@ -17,7 +17,7 @@
    version="1.1"
    inkscape:version="0.92.0 r15299"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="/Users/alainquartierlatente/Desktop/Logiciels/Logos_packages/rjdemetra/rjdemetra.png"
+   inkscape:export-filename="D:\ZW20hj\Mes Documents\rjdemetra_perso\man\figures\rjdemetra.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -93,10 +93,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient6143"
        id="linearGradient6761"
-       x1="37.227051"
-       y1="1051.0205"
-       x2="13.582085"
-       y2="1008.5609"
+       x1="37.490242"
+       y1="1050.6252"
+       x2="13.036324"
+       y2="1008.9293"
        gradientUnits="userSpaceOnUse" />
     <style
        id="style6931"
@@ -305,17 +305,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="19.83257"
-     inkscape:cy="468.58133"
+     inkscape:cx="-385.20932"
+     inkscape:cy="284.27195"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer7"
      showgrid="true"
-     inkscape:window-width="1366"
-     inkscape:window-height="706"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     units="px">
+     units="px"
+     showguides="false">
     <inkscape:grid
        type="xygrid"
        id="grid6729"
@@ -360,7 +361,7 @@
        sodipodi:insensitive="true">
       <path
          sodipodi:type="star"
-         style="fill:url(#linearGradient6761);fill-opacity:1;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:0"
+         style="fill:url(#linearGradient6761);fill-opacity:1;stroke:#00488c;stroke-width:1.71589959;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path6753"
          sodipodi:sides="6"
          sodipodi:cx="25.577351"
@@ -373,7 +374,7 @@
          inkscape:rounded="0"
          inkscape:randomized="0"
          d="m 50.577351,1030.2115 -12.5,21.6507 h -25 L 0.57735062,1030.2115 13.077351,1008.5609 h 25 z"
-         transform="matrix(0,-16.91692,16.957285,0,-17102.455,1062.1292)" />
+         transform="matrix(0,-16.357298,16.30855,0,-16434.174,1045.6012)" />
     </g>
     <g
        inkscape:groupmode="layer"
@@ -428,12 +429,21 @@
        style="display:inline"
        sodipodi:insensitive="true">
       <path
-         inkscape:connector-curvature="0"
-         id="path4219"
-         d="M 182.89713,946.63783 0,840.9791 V 629.53937 418.09958 L 183.25573,312.30622 c 100.79062,-58.18635 183.8993,-105.79199 184.68588,-105.79033 0.78657,0.002 83.53255,47.40177 183.88001,105.33356 L 734.27158,417.17998 V 629.53176 841.88347 L 551.90053,947.15574 c -100.3041,57.89966 -183.21151,105.24246 -184.2387,105.20636 -1.0272,-0.036 -84.17123,-47.6121 -184.7647,-105.72427 z m 210.89898,60.36007 c 3.5954,-2.0632 75.43504,-43.55259 159.64371,-92.199 l 153.10661,-88.4479 -0.016,-195.90827 -0.016,-195.90834 -11.16301,-6.38767 c -6.13975,-3.51322 -81.97924,-47.30676 -168.5324,-97.31899 -86.55307,-50.01223 -158.19153,-90.89247 -159.1965,-90.845 -1.00497,0.0475 -66.22128,37.3417 -144.92521,82.87604 -78.7039,45.53433 -154.366966,89.29524 -168.140142,97.24646 L 29.515014,434.562 29.109311,630.37846 28.70361,826.19482 l 169.44021,97.76089 169.44025,97.76079 9.83799,-5.4838 c 5.41087,-3.0161 12.77971,-7.1718 16.3751,-9.2348 z"
-         style="fill:#00488c;fill-opacity:1;stroke:none;stroke-width:1.00127375;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
+         sodipodi:type="star"
+         style="display:inline;fill:none;fill-opacity:1;stroke:#00488c;stroke-width:1.71589959;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path6753-0"
+         sodipodi:sides="6"
+         sodipodi:cx="25.577351"
+         sodipodi:cy="1030.2115"
+         sodipodi:r1="25"
+         sodipodi:r2="21.650635"
+         sodipodi:arg1="0"
+         sodipodi:arg2="0.52359878"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 50.577351,1030.2115 -12.5,21.6507 h -25 L 0.57735062,1030.2115 13.077351,1008.5609 h 25 z"
+         transform="matrix(0,-16.357298,16.30855,0,-16434.174,1045.6013)" />
     </g>
   </g>
   <g
@@ -449,15 +459,15 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-         x="-189.08746"
-         y="1065.2921"
+         x="-191.39755"
+         y="1061.7933"
          id="text6838"
          transform="rotate(-30)"><tspan
            sodipodi:role="line"
            id="tspan3395"
-           x="-189.08746"
-           y="1065.2921"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;">https://github.com/nbbrd/rjdemetra</tspan></text>
+           x="-191.39755"
+           y="1061.7933"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;">https://github.com/jdemetra/rjdemetra</tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
@@ -474,7 +484,7 @@
            x="62.59436"
            y="523.50031"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#809fff;fill-opacity:1"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00488c;fill-opacity:1"
    id="tspan6846">R</tspan>JDemetra</tspan></text>
     </g>
   </g>
