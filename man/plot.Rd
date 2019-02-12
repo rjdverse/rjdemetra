@@ -48,7 +48,7 @@
 \item{type_chart}{character vector indicating which type of chart to plot.}
 }
 \description{
-Plotting methods for the S3 class objects around the seasonal adjustment: \code{"regarima"} for RegARIMA,\code{"decomposition_X11"} and \code{"decomposition_SEATS"} for the decomposition with X13 and TRAMO-SEATS, \code{"final"} for the final SA results and \code{"SA"} for the entire seasonal adjusment object. The function \code{plot.SA} just calls the function \code{plot.final}.
+Plotting methods for the S3 class objects around the seasonal adjustment: \code{"regarima"} for RegARIMA,\code{"decomposition_X11"} and \code{"decomposition_SEATS"} for the decomposition with X13 and TRAMO-SEATS, \code{"final"} for the final SA results and \code{"SA"} for the entire seasonal adjustment object. The function \code{plot.SA} just calls the function \code{plot.final}.
 }
 \examples{
 myseries <- ipi_c_eu[, "FR"]
@@ -60,7 +60,7 @@ plot(mysa$regarima, which = 1, caption = "Plot of residuals")
 plot(mysa$regarima, which = 7) 
 
   # Decomposition
-plot(mysa$decomposition) # To plot the SI-Ratio
+plot(mysa$decomposition) # To plot the S-I ratio
 plot(mysa$decomposition, first_date = c(2010, 1)) # To start the plot in January 2010
 
   # Final

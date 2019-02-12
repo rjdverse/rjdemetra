@@ -18,7 +18,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="R Interface to JDemetra+ Seasonal Adjustment Software">
 <meta property="og:description" content="R interface around JDemetra+, the seasonal adjustment software officially
     recommended to the members of the ESS and the European System of Central Banks.
-    It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjusment methods
+    It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/nbbrd/rjdemetra">
+  <a href="https://github.com/jdemetra/rjdemetra">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -96,7 +96,7 @@
 <a href="#rjdemetra" class="anchor"></a>RJDemetra <img src="reference/figures/logo.png" align="right" alt="">
 </h1></div>
 
-<p>RJDemetra is a R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the ESS and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjusment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
+<p>RJDemetra is a R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the ESS and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
 <p>Besides seasonal adjustment, JDemetra+ bundles other time series models that are useful in the production or analysis of economic statistics, including for instance outlier detection, nowcasting, temporal disaggregation or benchmarking.</p>
 <p>For more details on the JDemetra+ software see <a href="https://github.com/jdemetra/jdemetra-app" class="uri">https://github.com/jdemetra/jdemetra-app</a>.</p>
 <p>RJDemetra offers full access to all options and outputs of JDemetra+.</p>
@@ -106,7 +106,7 @@
 <p>RJDemetra relies on the <a href="https://CRAN.R-project.org/package=rJava">rJava</a> package and Java SE 8 or later version is required.</p>
 <p>You can install RJDemetra from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"nbbrd/rjdemetra"</span>, <span class="dt">args =</span> <span class="st">"--no-multiarch"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jdemetra/rjdemetra"</span>, <span class="dt">args =</span> <span class="st">"--no-multiarch"</span>)</a></code></pre></div>
 </div>
 <div id="basic-example" class="section level2">
 <h2 class="hasAnchor">
@@ -121,7 +121,7 @@
 <a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model, <span class="dt">type_chart =</span> <span class="st">"sa-trend"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-plot-example-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># SI-ratio</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># S-I ratio</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model<span class="op">$</span>decomposition)</a></code></pre></div>
 <p><img src="reference/figures/README-plot-example-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
@@ -132,9 +132,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/nbbrd/rjdemetra">https://​github.com/​nbbrd/​rjdemetra</a>
+<li>Browse source code at <br><a href="https://github.com/jdemetra/rjdemetra">https://​github.com/​jdemetra/​rjdemetra</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/nbbrd/rjdemetra/issues">https://​github.com/​nbbrd/​rjdemetra/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/jdemetra/rjdemetra/issues">https://​github.com/​jdemetra/​rjdemetra/​issues</a>
 </li>
 </ul>
 </div>
@@ -147,17 +147,17 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Raf Baeyens <br><small class="roles"> Author </small>  </li>
+<li>Alain Quartier-la-Tente <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Anna Michalek <br><small class="roles"> Author </small>  </li>
-<li>Jean Palate <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Alain Quartier-la-Tente <br><small class="roles"> Author </small>  </li>
+<li>Jean Palate <br><small class="roles"> Author </small>  </li>
+<li>Raf Baeyens <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/nbbrd/rjdemetra"><img src="https://api.travis-ci.com/nbbrd/rjdemetra.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://travis-ci.com/jdemetra/rjdemetra"><img src="https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master" alt="Build Status"></a></li>
 </ul>
 </div>
 </div>
@@ -166,7 +166,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Raf Baeyens, Anna Michalek, Jean Palate, Alain Quartier-la-Tente.</p>
+  <p>Developed by Alain Quartier-la-Tente, Anna Michalek, Jean Palate, Raf Baeyens.</p>
 </div>
 
 <div class="pkgdown">

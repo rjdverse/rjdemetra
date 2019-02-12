@@ -7,3 +7,4 @@
 .travis.yml
 ^pkgdown$
 ^doc$
+cran-comments.md
