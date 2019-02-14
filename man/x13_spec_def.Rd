@@ -290,6 +290,7 @@ myreg1 <- x13(myseries, spec = myspec1)
 myspec2 <- x13_spec_def(spec = c("RSA5c"), tradingdays.option = "WorkingDays")
 myreg2 <- x13(myseries, spec = myspec2)
 
+\dontrun{
 # Modify the model specification from a "X13" object
  myspec3 <- x13_spec(myreg1, tradingdays.option = "WorkingDays")
  myreg3 <- x13(myseries, myspec3)
@@ -309,7 +310,7 @@ myreg2 <- x13(myseries, spec = myspec2)
  myreg1
  s_preOut(myreg1)
 
-\dontrun{
+
 # User-defined variables
  var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
  var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)

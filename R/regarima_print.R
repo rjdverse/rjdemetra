@@ -98,16 +98,13 @@ print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L
                  na.print = "NA", ...)
   }
   if (!is.null(x$coefficients$fixed_out)){
-    out <- out[out[,3]!=0,]
-    if (dim(out)[1]!=0){
-      printCoefmat(x$coefficients$fixed_out[, -ncol(x$coefficients$fixed_out)],
-                   digits = digits, P.values= FALSE, na.print = "NA", ...)
-    }
+    printCoefmat(x$coefficients$fixed_out[, -ncol(x$coefficients$fixed_out), drop = FALSE],
+                 digits = digits, P.values= FALSE, na.print = "NA")
   }
   if (!is.null(x$coefficients$fixed_var)){
     cat("\n")
     cat("Fixed other regression effects:","\n")
-    printCoefmat(x$coefficients$fixed_var[,-ncol(x$coefficients$fixed_var)],
+    printCoefmat(x$coefficients$fixed_var[,-ncol(x$coefficients$fixed_var), drop = FALSE],
                  digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
 

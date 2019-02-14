@@ -65,6 +65,7 @@
 #'                               automdl.enabled = FALSE, arima.mu = TRUE)
 #' mysa2 <- tramoseats(myseries, spec = myspec2)
 #'
+#' \dontrun{
 #' # Modify the model specification from a "SA" object
 #' myspec3 <- tramoseats_spec(mysa1, tradingdays.mauto = "Unused",
 #'                            tradingdays.option = "WorkingDays",
@@ -76,7 +77,7 @@
 #'                            tradingdays.option = "WorkingDays",
 #'                            easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
 #' mysa4 <- tramoseats(myseries, myspec4)
-#'
+#' 
 #' # Pre-specified outliers
 #' myspec1 <- tramoseats_spec_def(spec=c("RSAfull"),
 #'                               usrdef.outliersEnabled = TRUE,
@@ -114,6 +115,7 @@
 #' mysa1
 #' s_arimaCoef(myspec1)
 #' s_arimaCoef(mysa1)
+#' }
 #' @export
 tramoseats_spec_def <-function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                                estimate.from = NA_character_,

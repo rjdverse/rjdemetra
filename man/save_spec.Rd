@@ -25,6 +25,7 @@ load_spec(file = "spec.RData")
 \code{load_spec} loads the previously saved model specification. It creates a \code{c("SA_spec","X13")}, \code{c("sA_spec","TRAMO_SEATS")}, \code{c("regarima_spec","X13")} or \code{c("regarima_spec","TRAMO_SEATS")} class object, in line with the class of the previously saved model specification.
 }
 \examples{
+\dontrun{
 myseries <- ipi_c_eu[, "FR"]
 myreg1 <- regarima_def_x13(myseries, spec = c("RG5c"))
 myspec2 <- regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
@@ -74,7 +75,7 @@ myspec7b <- load_spec("saTS.RData")
 regarima(myseries, myspec2a)
 x13(myseries, myspec6a)
 tramoseats(myseries, myspec7a)
-\dontrun{
+
 regarima(myseries, myspec4a)
 x13(myseries, myspec6b)
 tramoseats(myseries, myspec7b)

@@ -246,44 +246,16 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
  <span class='co'># X13 method</span>
 <span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myreg</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_def_x13</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
 
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; 
-#&gt; Model: RegARIMA - X13
-#&gt; Estimation span: from 1-1990 to 12-2017
-#&gt; Log-transformation: no
-#&gt; Regression model: no mean, no trading days effect, no leap year effect, Easter effect, outliers(3)
-#&gt; 
-#&gt; Coefficients:
-#&gt; ARIMA: 
-#&gt;           Estimate Std. Error  T-stat Pr(&gt;|t|)    
-#&gt; Phi(1)     0.33579    0.17106   1.963   0.0505 .  
-#&gt; Phi(2)     0.20600    0.09643   2.136   0.0334 *  
-#&gt; Theta(1)  -0.24498    0.17272  -1.418   0.1571    
-#&gt; BTheta(1) -0.51123    0.05004 -10.216   &lt;2e-16 ***
-#&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#&gt; 
-#&gt; Regression model: 
-#&gt;              Estimate Std. Error T-stat Pr(&gt;|t|)    
-#&gt; Easter [1]    -1.1332     0.3373 -3.359 0.000875 ***
-#&gt; LS (11-2008)  -7.9997     1.2831 -6.235 1.42e-09 ***
-#&gt; LS (1-2009)   -7.5508     1.2833 -5.884 1.00e-08 ***
-#&gt; LS (5-2008)   -5.0692     1.2341 -4.108 5.07e-05 ***
-#&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 1.696 on 9 degrees of freedom
-#&gt; Log likelihood =  -631, aic =  1280, aicc =  1281, bic(corrected for length) =   1.2
-#&gt; </div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>myreg1</span>)</div><div class='img'><img src='regarima-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-6.png' alt='' width='700' height='433' /></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>myreg1</span>)
+<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>myreg1</span>)
+
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
@@ -302,61 +274,15 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 <span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>myreg3</span>)
 <span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>myreg3</span>)
-<span class='co'># }</span><div class='input'>
+
  <span class='co'># TRAMO-SEATS method</span>
 <span class='no'>myspec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_tramoseats.html'>regarima_spec_def_tramoseats</a></span>(<span class='st'>"TRfull"</span>)
 <span class='no'>myreg</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec</span>)
+<span class='co'># This is equivalent to:</span>
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_def_tramoseats</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>)
-<span class='no'>myreg</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
-#&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
-#&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
-#&gt; </div><div class='input'><span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
-#&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
-#&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
-#&gt; </div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='no'>myreg</span>
+<span class='no'>myreg1</span>
+
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_tramoseats.html'>regarima_spec_tramoseats</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
              <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
              <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,

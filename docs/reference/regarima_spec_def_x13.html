@@ -524,8 +524,7 @@ The final values of the <code>specification</code> can be also accessed with the
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
-
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)</div><span class='co'># NOT RUN {</span>
  <span class='co'># Modify a pre-specified model specification</span>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>),
                                  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
@@ -547,35 +546,10 @@ The final values of the <code>specification</code> can be also accessed with the
               <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
-#&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5367      0.048
-#&gt; BTheta(1)  -0.5083      0.050
-#&gt; 
-#&gt;              Estimate Std. Error
-#&gt; Easter [1]     -1.169      0.338
-#&gt; AO (9-2008)    31.410      2.181
-#&gt; LS (9-2008)   -56.648      2.256
-#&gt; TC (9-2008)    24.181      3.256
-#&gt; LS (2-2002)    14.708      1.526
-#&gt; LS (12-2001)  -14.648      1.681
-#&gt; AO (12-2001)   13.030      1.731
-#&gt; LS (5-2008)    -5.485      1.296
-#&gt; 
-#&gt; Fixed outliers: 
-#&gt;              Coefficients
-#&gt; LS (10-2008)           36
-#&gt; AO (1-2002)            14
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 1.729 on 323 degrees of freedom
-#&gt; Log likelihood = -637.1, aic =  1296 aicc =  1297, bic(corrected for length) = 1.274
-#&gt; </div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   type       date coeff
-#&gt; 1   LS 2008-10-01    36
-#&gt; 2   AO 2002-01-01    14</div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='no'>myreg1</span>
+<span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)
+
+
  <span class='co'># User-defined variables</span>
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>),
            <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)

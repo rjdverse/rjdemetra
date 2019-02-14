@@ -17,7 +17,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R Interface to JDemetra+ Seasonal Adjustment Software">
 <meta property="og:description" content="R interface around JDemetra+, the seasonal adjustment software officially
-    recommended to the members of the ESS and the European System of Central Banks.
+    recommended to the members of the European Statistical System (ESS) and the European System of Central Banks.
     It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.">
 <meta property="og:image" content="/logo.png">
@@ -96,7 +96,7 @@
 <a href="#rjdemetra" class="anchor"></a>RJDemetra <img src="reference/figures/logo.png" align="right" alt="">
 </h1></div>
 
-<p>RJDemetra is a R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the ESS and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
+<p>RJDemetra is a R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
 <p>Besides seasonal adjustment, JDemetra+ bundles other time series models that are useful in the production or analysis of economic statistics, including for instance outlier detection, nowcasting, temporal disaggregation or benchmarking.</p>
 <p>For more details on the JDemetra+ software see <a href="https://github.com/jdemetra/jdemetra-app" class="uri">https://github.com/jdemetra/jdemetra-app</a>.</p>
 <p>RJDemetra offers full access to all options and outputs of JDemetra+.</p>
@@ -106,7 +106,7 @@
 <p>RJDemetra relies on the <a href="https://CRAN.R-project.org/package=rJava">rJava</a> package and Java SE 8 or later version is required.</p>
 <p>You can install RJDemetra from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jdemetra/rjdemetra"</span>, <span class="dt">args =</span> <span class="st">"--no-multiarch"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"jdemetra/rjdemetra"</span>, <span class="dt">args =</span> <span class="st">"--no-multiarch"</span>)</a></code></pre></div>
 </div>
 <div id="basic-example" class="section level2">
 <h2 class="hasAnchor">

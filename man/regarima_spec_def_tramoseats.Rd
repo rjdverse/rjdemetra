@@ -288,7 +288,7 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 myseries <- ipi_c_eu[, "FR"]
 myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"))
 myreg1 <- regarima(myseries, spec = myspec1)
-
+\dontrun{
  # Modify a pre-specified model specification
 myspec2 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
              tradingdays.mauto = "Unused",
@@ -324,7 +324,7 @@ myreg1 <- regarima(myseries, myspec1)
 myreg1
 s_preOut(myreg1)
 
-\dontrun{
+
  # User-defined variables
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries),
            frequency = 12)

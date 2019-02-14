@@ -24,6 +24,7 @@ Generics functions to get the input raw time series of a \code{workspace}, \code
 \code{sa_item} or \code{SA} object.
 }
 \examples{
+\dontrun{
 sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
@@ -46,6 +47,7 @@ get_ts(mp)
 # Returns a list of length 1 named "sa1" containing a list
 # of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
 get_ts(wk)
+}
 }
 \seealso{
 Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},

@@ -16,7 +16,7 @@
 #' Info on JDemtra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
-#' @examples
+#' @examples \dontrun{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myreg1 <- regarima_def_x13(myseries, spec = c("RG5c"))
 #' myspec2 <- regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
@@ -66,7 +66,7 @@
 #' regarima(myseries, myspec2a)
 #' x13(myseries, myspec6a)
 #' tramoseats(myseries, myspec7a)
-#' \dontrun{
+#' 
 #' regarima(myseries, myspec4a)
 #' x13(myseries, myspec6b)
 #' tramoseats(myseries, myspec7b)

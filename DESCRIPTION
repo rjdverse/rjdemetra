@@ -12,7 +12,7 @@ Authors@R: c(
   person("Raf", "Baeyens", role = "aut",
                 email = "raf.baeyens@nbb.be"))
 Description: R interface around JDemetra+, the seasonal adjustment software officially
-    recommended to the members of the ESS and the European System of Central Banks.
+    recommended to the members of the European Statistical System (ESS) and the European System of Central Banks.
     It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
 Depends:
@@ -60,3 +60,4 @@ Suggests:
     rmarkdown
 RoxygenNote: 6.1.1
 BugReports: https://github.com/jdemetra/rjdemetra/issues
+Encoding: UTF-8

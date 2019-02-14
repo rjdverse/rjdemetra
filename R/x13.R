@@ -80,33 +80,29 @@ setClass(
 #' myseries <- ipi_c_eu[, "FR"]
 #' mysa <- x13_def(myseries, spec=c("RSA5c"))
 #'
-#' myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays")
-#' mysa1 <- x13(myseries, myspec1)
-#' mysa1
-#' summary(mysa1$regarima)
 #'
-#' myspec2 <- x13_spec(mysa, usrdef.outliersEnabled = TRUE,
+#' myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays",
+#'             usrdef.outliersEnabled = TRUE,
 #'             usrdef.outliersType = c("LS","AO"),
 #'             usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
 #'             usrdef.outliersCoef = c(36, 14),
 #'             transform.function = "None")
-#' mysa2 <- x13(myseries, myspec2)
-#' mysa2
+#' mysa1 <- x13(myseries, myspec1)
+#' mysa1
+#' summary(mysa1$regarima)
 #'
-#' myspec3 <- x13_spec(mysa, automdl.enabled =FALSE,
+#' myspec2 <- x13_spec(mysa, automdl.enabled =FALSE,
 #'             arima.coefEnabled = TRUE,
 #'             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
 #'             arima.coef = c(-0.8, -0.6, 0),
 #'             arima.coefType = c(rep("Fixed", 2), "Undefined"))
-#' s_arimaCoef(myspec3)
-#' mysa3 <- x13(myseries, myspec3)
-#' plot(mysa3)
-#' plot(mysa3$regarima)
-#' plot(mysa3$decomposition)
-#'
-#' mysa4 <- x13_def(myseries,"RSA5c",
-#'            userdefined = c("decomposition.d18", "decomposition.d19"))
-#' mysa4
+#' s_arimaCoef(myspec2)
+#' mysa2 <- x13(myseries, myspec2,
+#'              userdefined = c("decomposition.d18", "decomposition.d19"))
+#' mysa2
+#' plot(mysa2)
+#' plot(mysa2$regarima)
+#' plot(mysa2$decomposition)
 #'
 #' @export
 x13 <- function(series, spec, userdefined = NULL){
