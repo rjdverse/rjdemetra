@@ -346,137 +346,25 @@ In the second part, the pre-adjusted series is decomposed into the following com
 <span class='co'># Equivalent to:</span>
 <span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>)
 <span class='no'>mysa1</span>
-<span class='co'># }</span><div class='input'>
+
+
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-
+<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
                            <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
                            <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
                            <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                           <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: is.na() appliqué à un objet de type 'closure' qui n'est ni une liste, ni un vecteur</span></div><div class='output co'>#&gt; <span class='warning'>Warning: userdef.var must be a time series or a matrix of time series. User-defined variable(s) will be ignored.</span></div><div class='input'><span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec2</span>)</div><div class='output co'>#&gt; $series
-#&gt; [1] NA
-#&gt; 
-#&gt; $description
-#&gt; [1] NA
-#&gt; </div><div class='input'><span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
+                           <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
+<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec2</span>)
+<span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
                     <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"decomposition.sa_lin_f"</span>,
                                     <span class='st'>"decomposition.sa_lin_e"</span>))
-<span class='no'>mysa2</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
-#&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5141      0.048
-#&gt; BTheta(1)  -0.6358      0.045
-#&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Mean          9.513e-05      0.000
-#&gt; Easter [6]   -1.159e-02      0.003
-#&gt; LS (11-2008) -8.192e-02      0.014
-#&gt; LS (1-2009)  -7.349e-02      0.014
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.01678 on 323 degrees of freedom
-#&gt; Log likelihood = 858.6, aic =  1279 aicc =  1280, bic(corrected for length) = -8.067
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.514100 B - 0.635801 B^12 + 0.326865 B^13 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
-#&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.483207 B + 0.500975 B^2 
-#&gt; Innovation variance:  0.6888779 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
-#&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.036970 B - 0.963030 B^2 
-#&gt; Innovation variance:  0.03977844 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.249687 B + 1.208176 B^2 + 1.062458 B^3 + 0.833018 B^4 + 0.583590 B^5 + 0.337166 B^6 + 0.111426 B^7 - 0.067133 B^8 - 0.224863 B^9 - 0.324075 B^10 - 0.556526 B^11 
-#&gt; Innovation variance:  0.03278416 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.3834183 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
-#&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.7474 101.0189 0.9667745 0.9973126
-#&gt; Feb 2017  97.5 100.5362 101.3340 0.9698000 0.9921270
-#&gt; Mar 2017 112.0 102.5761 101.7593 1.0918728 1.0080262
-#&gt; Apr 2017 103.0 101.4441 102.1797 1.0153375 0.9928007
-#&gt; May 2017 100.4 103.4710 102.5813 0.9703204 1.0086733
-#&gt; Jun 2017 111.2 102.4963 102.9254 1.0849169 0.9958314
-#&gt; Jul 2017 103.4 103.0846 103.2894 1.0030593 0.9980178
-#&gt; Aug 2017  79.3 103.8660 103.7259 0.7634838 1.0013503
-#&gt; Sep 2017 109.7 103.4888 104.2319 1.0600178 0.9928712
-#&gt; Oct 2017 114.0 106.0491 104.7466 1.0749742 1.0124341
-#&gt; Nov 2017 107.7 105.3389 105.0501 1.0224146 1.0027487
-#&gt; Dec 2017 101.4 104.9496 105.1903 0.9661778 0.9977124
-#&gt; 
-#&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 101.83627 105.3463 105.3497 0.9666813 0.9999676
-#&gt; Feb 2018 102.29634 105.5306 105.5340 0.9693527 0.9999676
-#&gt; Mar 2018 114.12889 105.7160 105.7194 1.0795799 0.9999676
-#&gt; Apr 2018 108.72466 105.9026 105.9061 1.0266473 0.9999676
-#&gt; May 2018 102.96796 106.0904 106.0939 0.9705678 0.9999676
-#&gt; Jun 2018 115.25933 106.2794 106.2828 1.0844936 0.9999676
-#&gt; Jul 2018 106.76627 106.4695 106.4730 1.0027870 0.9999676
-#&gt; Aug 2018  81.42821 106.6609 106.6643 0.7634309 0.9999676
-#&gt; Sep 2018 113.21762 106.8534 106.8569 1.0595602 0.9999676
-#&gt; Oct 2018 115.14222 107.0471 107.0506 1.0756218 0.9999676
-#&gt; Nov 2018 109.66231 107.2420 107.2455 1.0225682 0.9999676
-#&gt; Dec 2018 103.79322 107.4382 107.4417 0.9660740 0.9999676
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
-#&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
-#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
-#&gt;            Component
-#&gt;  Cycle         2.038
-#&gt;  Seasonal     65.027
-#&gt;  Irregular     0.391
-#&gt;  TD &amp; Hol.     0.029
-#&gt;  Others       31.818
-#&gt;  Total        99.304
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
-#&gt;  Non parametric tests for stable seasonality
-#&gt;                                                           P.value
-#&gt;    Kruskall-Wallis test                                      0.000
-#&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.238
-#&gt;  
-#&gt;  Identifiable seasonality present
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
-#&gt;                                       P.value
-#&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        1.000
-#&gt;  f-test on i (seasonal dummies)         1.000
-#&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.954
-#&gt;  f-test on sa (td)                      0.000
-#&gt;  f-test on i (td)                       0.001
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
-#&gt; Names of additional variables (2):
-#&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)</div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='no'>mysa2</span>
+<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)
+<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)
+<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

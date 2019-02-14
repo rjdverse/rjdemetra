@@ -83,11 +83,11 @@ setClass(
 #' # Equivalent to:
 #' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 #' mysa1
-#' }
+#' 
 #' 
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
-#' 
+#' var <- ts.union(var1, var2)
 #' myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
 #'                            tradingdays.option = "WorkingDays",
 #'                            easter.type = "Standard",
@@ -101,6 +101,7 @@ setClass(
 #' plot(mysa2)
 #' plot(mysa2$regarima)
 #' plot(mysa2$decomposition)
+#' }
 #' @export
 tramoseats <- function(series, spec,
                       userdefined = NULL){
