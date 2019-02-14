@@ -305,8 +305,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="352.87667"
-     inkscape:cy="265.91869"
+     inkscape:cx="344.21653"
+     inkscape:cy="332.212"
      inkscape:document-units="px"
      inkscape:current-layer="layer6"
      showgrid="true"
@@ -382,7 +382,7 @@
        inkscape:label="Image de fond">
       <g
          id="g9932"
-         transform="matrix(0.48644325,0,0,0.4069936,27.697806,545.43494)">
+         transform="matrix(0.48644325,0,0,0.4069936,27.697806,536.05994)">
         <rect
            id="rect9903"
            style="fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
@@ -458,16 +458,16 @@
        style="display:inline">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="-191.39755"
-         y="1061.7933"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:25px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="-197.70296"
+         y="1060.3856"
          id="text6838"
          transform="rotate(-30)"><tspan
            sodipodi:role="line"
            id="tspan3395"
-           x="-191.39755"
-           y="1061.7933"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1">https://github.com/jdemetra</tspan></text>
+           x="-197.70296"
+           y="1060.3856"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.75px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;line-height:25px;">https://github.com/jdemetra/rjdemetra</tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
