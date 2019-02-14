@@ -304,11 +304,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="344.21653"
-     inkscape:cy="332.212"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="740.56961"
+     inkscape:cy="520.24406"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer7"
      showgrid="true"
      inkscape:window-width="1680"
      inkscape:window-height="988"
@@ -316,7 +316,8 @@
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      units="px"
-     showguides="false">
+     showguides="false"
+     inkscape:lockguides="true">
     <inkscape:grid
        type="xygrid"
        id="grid6729"
@@ -458,16 +459,16 @@
        style="display:inline">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:25px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-         x="-197.70296"
-         y="1060.3856"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:25px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="-195.61041"
+         y="1060.5112"
          id="text6838"
          transform="rotate(-30)"><tspan
            sodipodi:role="line"
            id="tspan3395"
-           x="-197.70296"
-           y="1060.3856"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.75px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1;line-height:25px;">https://github.com/jdemetra/rjdemetra</tspan></text>
+           x="-195.61041"
+           y="1060.5112"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25px;line-height:25px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00006d;fill-opacity:1">github.com/jdemetra/rjdemetra</tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
@@ -476,12 +477,12 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f0ae4b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="62.59436"
+         x="58.245781"
          y="523.50031"
          id="text6834"><tspan
            sodipodi:role="line"
            id="tspan6836"
-           x="62.59436"
+           x="58.245781"
            y="523.50031"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"><tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:'Trebuchet MS';-inkscape-font-specification:'Trebuchet MS, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#00488c;fill-opacity:1"
