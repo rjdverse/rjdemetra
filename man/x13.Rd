@@ -74,8 +74,9 @@ RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 }
 }
 \examples{
+\dontrun{
 myseries <- ipi_c_eu[, "FR"]
-mysa <- x13_def(myseries, spec=c("RSA5c"))
+mysa <- x13_def(myseries, spec = "RSA5c")
 
 
 myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays",
@@ -100,7 +101,7 @@ mysa2
 plot(mysa2)
 plot(mysa2$regarima)
 plot(mysa2$decomposition)
-
+}
 }
 \references{
 Info on JDemetra+, usage and functions:

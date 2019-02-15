@@ -75,15 +75,15 @@ setClass(
 #' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
 #'
 #' @examples
+#' \dontrun{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec <- tramoseats_spec_def("RSAfull")
 #' mysa <- tramoseats(myseries, myspec)
 #' mysa
-#' \dontrun{
+#' 
 #' # Equivalent to:
 #' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 #' mysa1
-#' 
 #' 
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)

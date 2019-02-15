@@ -249,7 +249,7 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
     <pre class="examples"><span class='co'># NOT RUN {</span>
  <span class='co'># X13 method</span>
 <span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myreg</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_def_x13</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
+<span class='no'>myreg</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_def_x13</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span><span class='st'>"RG5c"</span>)
 
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)

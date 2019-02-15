@@ -16,13 +16,14 @@
 #' Info on JDemtra+, usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' myseries <- ipi_c_eu[, "FR"]
-#' myreg1 <- regarima_def_x13(myseries, spec = c("RG5c"))
+#' myreg1 <- regarima_def_x13(myseries, spec = "RG5c")
 #' myspec2 <- regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from = "2010-03-01")
 #' myreg2 <- regarima(myseries, myspec2)
 #'
-#' myreg3 <-regarima_def_tramoseats(myseries, spec=c("TRfull"))
+#' myreg3 <-regarima_def_tramoseats(myseries, spec = "TRfull")
 #' myspec4 <-regarima_spec_tramoseats(myreg3, tradingdays.mauto = "Unused",
 #'                                   tradingdays.option ="WorkingDays",
 #'                                   easter.type = "Standard",

@@ -126,9 +126,9 @@ get_all_objects.workspace <- function(x){
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples \dontrun{
-#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = "RSA5")
 #' sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
 #' wk <- new_workspace()
@@ -281,8 +281,9 @@ get_ts.SA <- function(x){
 #'
 #' @seealso \code{\link{get_model}}
 #'
-#' @examples \dontrun{
-#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' @examples 
+#' \dontrun{
+#' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #'
 #' wk <- new_workspace()
@@ -345,9 +346,9 @@ compute <- function(workspace, i) {
 #' @seealso \code{\link{compute}}
 #'
 #' @examples\dontrun{
-#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = "RSA5")
 #' sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
 #' wk <- new_workspace()

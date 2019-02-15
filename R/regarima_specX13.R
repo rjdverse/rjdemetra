@@ -189,12 +189,13 @@
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' @examples
-#' myseries <- ipi_c_eu[, "FR"]
-#' myspec1 <- regarima_spec_def_x13(spec = c("RG5c"))
-#' myreg1 <- regarima(myseries, spec = myspec1)
 #' \dontrun{
+#' myseries <- ipi_c_eu[, "FR"]
+#' myspec1 <- regarima_spec_def_x13(spec = "RG5c")
+#' myreg1 <- regarima(myseries, spec = myspec1)
+#' 
 #'  # Modify a pre-specified model specification
-#' myspec2 <- regarima_spec_def_x13(spec = c("RG5c"),
+#' myspec2 <- regarima_spec_def_x13(spec = "RG5c",
 #'                                  tradingdays.option = "WorkingDays")
 #' myreg2 <- regarima(myseries, spec = myspec2)
 #'
@@ -207,7 +208,7 @@
 #' myreg4 <- regarima(myseries, myspec4)
 #'
 #'  # Pre-specified outliers
-#' myspec1 <- regarima_spec_def_x13(spec = c("RG5c"), usrdef.outliersEnabled = TRUE,
+#' myspec1 <- regarima_spec_def_x13(spec = "RG5c", usrdef.outliersEnabled = TRUE,
 #'               usrdef.outliersType = c("LS", "AO"),
 #'               usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
 #'               usrdef.outliersCoef = c(36, 14),

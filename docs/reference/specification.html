@@ -196,21 +196,22 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_def_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_def_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>,
              <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='st'>"2005-10-01"</span>,
              <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='st'>"2010-03-01"</span>)
 
-<span class='fu'>s_estimate</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  span tolerance
-#&gt;   All     1e-07</div><div class='input'><span class='fu'>s_estimate</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;             span tolerance
-#&gt;  From 2005-10-01     1e-07</div><div class='input'>
-<span class='fu'>s_transform</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  tfunction adjust aicdiff
-#&gt;       Auto   None      -2</div><div class='input'><span class='fu'>s_transform</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  tfunction adjust aicdiff
-#&gt;       Auto   None      -2</div><div class='input'>
-<span class='fu'>s_usrdef</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   outlier outlier.coef variables variables.coef
-#&gt; 1   FALSE        FALSE     FALSE          FALSE</div><div class='input'><span class='fu'>s_usrdef</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  outlier outlier.coef variables variables.coef
-#&gt;    FALSE        FALSE     FALSE          FALSE</div><span class='co'># NOT RUN {</span>
+<span class='fu'>s_estimate</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_estimate</span>(<span class='no'>myspec1</span>)
+
+<span class='fu'>s_transform</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_transform</span>(<span class='no'>myspec1</span>)
+
+<span class='fu'>s_usrdef</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_usrdef</span>(<span class='no'>myspec1</span>)
+
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2009-10-01"</span>, <span class='st'>"2005-02-01"</span>))
@@ -218,7 +219,7 @@
 
 <span class='fu'>s_preOut</span>(<span class='no'>myreg2</span>)
 <span class='fu'>s_preOut</span>(<span class='no'>myspec2</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
@@ -229,19 +230,19 @@
 
 <span class='fu'>s_preVar</span>(<span class='no'>myspec3</span>)
 <span class='fu'>s_preVar</span>(<span class='no'>myreg3</span>)
-<span class='co'># }</span><div class='input'>
-<span class='fu'>s_td</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;       option autoadjust leapyear stocktd   test
-#&gt;  TradingDays       TRUE LeapYear       0 Remove</div><div class='input'><span class='fu'>s_td</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;       option autoadjust leapyear stocktd   test
-#&gt;  TradingDays       TRUE LeapYear       0 Remove</div><div class='input'>
-<span class='fu'>s_easter</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  enabled julian duration test
-#&gt;     TRUE  FALSE        8  Add</div><div class='input'><span class='fu'>s_easter</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  enabled julian duration test
-#&gt;     TRUE  FALSE        8  Add</div><div class='input'>
-<span class='fu'>s_out</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  enabled span   ao   tc   ls    so usedefcv cv method tcrate
-#&gt;     TRUE  All TRUE TRUE TRUE FALSE     TRUE  4 AddOne    0.7</div><div class='input'><span class='fu'>s_out</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  enabled            span   ao   tc   ls    so usedefcv cv method tcrate
-#&gt;     TRUE From 2010-03-01 TRUE TRUE TRUE FALSE     TRUE  4 AddOne    0.7</div><span class='co'># NOT RUN {</span>
+
+<span class='fu'>s_td</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_td</span>(<span class='no'>myspec1</span>)
+
+<span class='fu'>s_easter</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_easter</span>(<span class='no'>myspec1</span>)
+
+<span class='fu'>s_out</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_out</span>(<span class='no'>myspec1</span>)
+
 <span class='fu'>s_arima</span>(<span class='no'>myreg1</span>)
 <span class='fu'>s_arima</span>(<span class='no'>myspec1</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+
 <span class='no'>myspec4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
              <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>,<span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -251,19 +252,19 @@
 
 <span class='fu'>s_arimaCoef</span>(<span class='no'>myreg4</span>)
 <span class='fu'>s_arimaCoef</span>(<span class='no'>myspec4</span>)
-<span class='co'># }</span><div class='input'>
-<span class='fu'>s_fcst</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  horizon
-#&gt;       -2</div><div class='input'><span class='fu'>s_fcst</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  horizon
-#&gt;       -2</div><span class='co'># NOT RUN {</span>
+
+<span class='fu'>s_fcst</span>(<span class='no'>myreg1</span>)
+<span class='fu'>s_fcst</span>(<span class='no'>myspec1</span>)
+
 <span class='fu'>s_span</span>(<span class='no'>myreg1</span>)
 <span class='fu'>s_span</span>(<span class='no'>myspec1</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
-<span class='no'>myspec5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>), <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='no'>myspec5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>mysa5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec5</span>)
 
 <span class='fu'>s_x11</span>(<span class='no'>mysa5</span>)
 <span class='fu'>s_x11</span>(<span class='no'>myspec5</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+
 <span class='no'>myspec6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSAfull"</span>), <span class='kw'>seats.approx</span> <span class='kw'>=</span> <span class='st'>"Noisy"</span>)
 <span class='no'>mysa6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6</span>)
 

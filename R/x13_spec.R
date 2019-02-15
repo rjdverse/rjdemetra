@@ -2,9 +2,9 @@
 #'
 #' @description
 #'
-#' \code{x13_spec_def} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method.
+#' \code{x13_spec_def} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec", "X13")} class object with the SA model specification for the X13 method.
 #'
-#' \code{x13_spec} creates (and/or modifies) a \code{c("SA_spec","X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA","X13")} or \code{c("SA_spec","X13")} class object.
+#' \code{x13_spec} creates (and/or modifies) a \code{c("SA_spec", "X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA", "X13")} or \code{c("SA_spec", "X13")} class object.
 #'
 #' @param spec predefined JDemetra+ model specification (see Details). The default is "RSA5c".
 #'
@@ -36,14 +36,14 @@
 #' RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
 #' }
 #' @return
-#' A two-elements list of class \code{c("SA_spec","X13")}: (1) object of class \code{c("regarima_spec","X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec","data.frame")} with the X11 algorithm specification.
+#' A two-elements list of class \code{c("SA_spec", "X13")}: (1) object of class \code{c("regarima_spec", "X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec", "data.frame")} with the X11 algorithm specification.
 #' Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
 #' Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
 #' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
 #'
-#' \item{regarima}{object of class \code{c("regarima_spec","x13")}. See \emph{Value} of the function \code{\link{regarima_spec_x13}}}
+#' \item{regarima}{object of class \code{c("regarima_spec", "x13")}. See \emph{Value} of the function \code{\link{regarima_spec_x13}}}
 #'
-#' \item{x11}{data.frame of class \code{c("X11_spec","data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
+#' \item{x11}{data.frame of class \code{c("X11_spec", "data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
 #'
 #' @references
 #' Info on JDemetra+, usage and functions:
@@ -55,15 +55,15 @@
 #' @seealso \code{\link{x13}}
 #'
 #' @examples
+#' \dontrun{
 #' myseries <- ipi_c_eu[, "FR"]
-#' myspec1 <- x13_spec_def(spec = c("RSA5c"))
+#' myspec1 <- x13_spec_def(spec = "RSA5c")
 #' myreg1 <- x13(myseries, spec = myspec1)
 #'
 #' # Modify a pre-specified model specification
-#' myspec2 <- x13_spec_def(spec = c("RSA5c"), tradingdays.option = "WorkingDays")
+#' myspec2 <- x13_spec_def(spec = "RSA5c", tradingdays.option = "WorkingDays")
 #' myreg2 <- x13(myseries, spec = myspec2)
 #'
-#' \dontrun{
 #' # Modify the model specification from a "X13" object
 #'  myspec3 <- x13_spec(myreg1, tradingdays.option = "WorkingDays")
 #'  myreg3 <- x13(myseries, myspec3)
@@ -73,7 +73,7 @@
 #'  myreg4 <- x13(myseries, myspec4)
 #'
 #' # Pre-specified outliers
-#'  myspec1 <- x13_spec_def(spec = c("RSA5c"), usrdef.outliersEnabled = TRUE,
+#'  myspec1 <- x13_spec_def(spec = "RSA5c", usrdef.outliersEnabled = TRUE,
 #'              usrdef.outliersType = c("LS", "AO"),
 #'              usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
 #'              usrdef.outliersCoef = c(36, 14),
@@ -90,11 +90,11 @@
 #'  var <- ts.union(var1, var2)
 #
 #'  myspec1 <- x13_spec_def(spec = "RSA5c", usrdef.varEnabled = TRUE,
-#'              usrdef.var = var)
+#'                          usrdef.var = var)
 #'  myreg1 <- x13(myseries, myspec1)
 #'  myreg1
 #'
-#'  myspec2 <- x13_spec_def(spec="RSA5c", usrdef.varEnabled = TRUE,
+#'  myspec2 <- x13_spec_def(spec = "RSA5c", usrdef.varEnabled = TRUE,
 #'              usrdef.var = var1, usrdef.varCoef = c(2),
 #'              transform.function = "None")
 #'  myreg2 <- x13(myseries, myspec2)

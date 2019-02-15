@@ -166,11 +166,11 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_def_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_def_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='st'>"2005-10-01"</span>, <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='st'>"2010-03-01"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
 
-<span class='no'>myreg3</span> <span class='kw'>&lt;-</span><span class='fu'><a href='regarima.html'>regarima_def_tramoseats</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>))
+<span class='no'>myreg3</span> <span class='kw'>&lt;-</span><span class='fu'><a href='regarima.html'>regarima_def_tramoseats</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>)
 <span class='no'>myspec4</span> <span class='kw'>&lt;-</span><span class='fu'><a href='regarima_spec_def_tramoseats.html'>regarima_spec_tramoseats</a></span>(<span class='no'>myreg3</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
                                   <span class='kw'>tradingdays.option</span> <span class='kw'>=</span><span class='st'>"WorkingDays"</span>,
                                   <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,

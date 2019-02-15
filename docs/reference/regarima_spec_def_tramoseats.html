@@ -544,11 +544,13 @@ The final values of the <code>specification</code> can be also accessed with the
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>))
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)</div><span class='co'># NOT RUN {</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>)
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
+
  <span class='co'># Modify a pre-specified model specification</span>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>),
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>,
              <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
              <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
              <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
@@ -572,7 +574,7 @@ The final values of the <code>specification</code> can be also accessed with the
 <span class='no'>myreg4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
 
  <span class='co'># Pre-specified outliers</span>
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>),
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>,
              <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"LS"</span>),
              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span> ,<span class='st'>"2003-01-01"</span>),
@@ -590,19 +592,19 @@ The final values of the <code>specification</code> can be also accessed with the
            <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
 
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>),
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>,
             <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
 <span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec1</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>,<span class='no'>myspec1</span>)
 
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>),
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>,
              <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>17</span>,-<span class='fl'>1</span>),
              <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
 
  <span class='co'># Pre-specified ARMA coefficients</span>
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>),
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_tramoseats</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>,
              <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
              <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
              <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.12</span>, -<span class='fl'>0.12</span>, -<span class='fl'>0.3</span>, -<span class='fl'>0.99</span>),

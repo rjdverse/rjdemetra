@@ -285,12 +285,13 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
-myseries <- ipi_c_eu[, "FR"]
-myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"))
-myreg1 <- regarima(myseries, spec = myspec1)
 \dontrun{
+myseries <- ipi_c_eu[, "FR"]
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull")
+myreg1 <- regarima(myseries, spec = myspec1)
+
  # Modify a pre-specified model specification
-myspec2 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
+myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
              tradingdays.mauto = "Unused",
              tradingdays.option = "WorkingDays",
              easter.type = "Standard",
@@ -314,7 +315,7 @@ myspec4 <- regarima_spec_tramoseats(myspec1,
 myreg4 <- regarima(myseries, myspec4)
 
  # Pre-specified outliers
-myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
              usrdef.outliersEnabled = TRUE,
              usrdef.outliersType = c("LS", "LS"),
              usrdef.outliersDate = c("2008-10-01" ,"2003-01-01"),
@@ -332,19 +333,19 @@ var2 <- ts(rnorm(length(myseries))*100, start = start(myseries),
            frequency = 12)
 var <- ts.union(var1, var2)
 
-myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
             usrdef.varEnabled = TRUE, usrdef.var = var)
 s_preVar(myspec1)
 myreg1 <- regarima(myseries,myspec1)
 
-myspec2 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
              usrdef.varEnabled = TRUE,
              usrdef.var = var, usrdef.varCoef = c(17,-1),
              transform.function = "None")
 myreg2 <- regarima(myseries, myspec2)
 
  # Pre-specified ARMA coefficients
-myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
              arima.p = 2, arima.q = 0, arima.bp = 1, arima.bq = 1,
              arima.coef = c(-0.12, -0.12, -0.3, -0.99),

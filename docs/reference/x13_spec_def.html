@@ -39,8 +39,8 @@
 
 <meta property="og:title" content="X-13ARIMA-SEATS model specification, SA/X13 — x13_spec_def" />
 
-<meta property="og:description" content="x13_spec_def creates (and modifies), from a predefined JDemetra+ model specification, a c(&quot;SA_spec&quot;,&quot;X13&quot;) class object with the SA model specification for the X13 method.
-x13_spec creates (and/or modifies) a c(&quot;SA_spec&quot;,&quot;X13&quot;) class object with the SA model specification for the X13 method. The object is created from a c(&quot;SA&quot;,&quot;X13&quot;) or c(&quot;SA_spec&quot;,&quot;X13&quot;) class object." />
+<meta property="og:description" content="x13_spec_def creates (and modifies), from a predefined JDemetra+ model specification, a c(&quot;SA_spec&quot;, &quot;X13&quot;) class object with the SA model specification for the X13 method.
+x13_spec creates (and/or modifies) a c(&quot;SA_spec&quot;, &quot;X13&quot;) class object with the SA model specification for the X13 method. The object is created from a c(&quot;SA&quot;, &quot;X13&quot;) or c(&quot;SA_spec&quot;, &quot;X13&quot;) class object." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -128,8 +128,8 @@ x13_spec creates (and/or modifies) a c(&quot;SA_spec&quot;,&quot;X13&quot;) clas
 
     <div class="ref-description">
     
-    <p><code>x13_spec_def</code> creates (and modifies), from a predefined <em>JDemetra+</em> model specification, a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code> class object with the SA model specification for the X13 method.</p>
-<p><code>x13_spec</code> creates (and/or modifies) a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code> class object with the SA model specification for the X13 method. The object is created from a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA","X13")</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code> class object.</p>
+    <p><code>x13_spec_def</code> creates (and modifies), from a predefined <em>JDemetra+</em> model specification, a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec", "X13")</a></code> class object with the SA model specification for the X13 method.</p>
+<p><code>x13_spec</code> creates (and/or modifies) a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec", "X13")</a></code> class object with the SA model specification for the X13 method. The object is created from a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA", "X13")</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec", "X13")</a></code> class object.</p>
     
     </div>
 
@@ -532,13 +532,13 @@ E.g.: <code>arima.coef = c(-0.8,-0.6,NA)</code>, <code>arima.coefType = c("Fixed
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A two-elements list of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code>: (1) object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","X13")</a></code> with the RegARIMA model specification, (2) object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("X11_spec","data.frame")</a></code> with the X11 algorithm specification.
+    <p>A two-elements list of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec", "X13")</a></code>: (1) object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec", "X13")</a></code> with the RegARIMA model specification, (2) object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("X11_spec", "data.frame")</a></code> with the X11 algorithm specification.
 Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
 Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument <code>spec</code> or <code>object</code>; second row - user modifications as specified by the remaining arguments of the function (e.g.: <code>arima.d</code>); and third row - final model specification.
 The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the <code>Predefined</code> (base model specification) and <code>Final</code> values.</p>
-<dt>regarima</dt><dd><p>object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","x13")</a></code>. See <em>Value</em> of the function <code><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></code></p></dd>
+<dt>regarima</dt><dd><p>object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec", "x13")</a></code>. See <em>Value</em> of the function <code><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></code></p></dd>
 
-<dt>x11</dt><dd><p>data.frame of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("X11_spec","data.frame")</a></code>, containing the <em>x11</em> variables in line with the names of the arguments variables. The final values can be also accessed with the function <code><a href='specification.html'>s_x11</a></code>.</p></dd>
+<dt>x11</dt><dd><p>data.frame of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("X11_spec", "data.frame")</a></code>, containing the <em>x11</em> variables in line with the names of the arguments variables. The final values can be also accessed with the function <code><a href='specification.html'>s_x11</a></code>.</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -569,13 +569,15 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>))
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
 
 <span class='co'># Modify a pre-specified model specification</span>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>), <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
-<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)</div><span class='co'># NOT RUN {</span>
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
+<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)
+
 <span class='co'># Modify the model specification from a "X13" object</span>
  <span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='no'>myreg1</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
  <span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
@@ -585,7 +587,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
  <span class='no'>myreg4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
 
 <span class='co'># Pre-specified outliers</span>
- <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>), <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+ <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
              <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
@@ -601,11 +603,11 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
  <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
  <span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
  <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
+                         <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
  <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
  <span class='no'>myreg1</span>
 
- <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+ <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var1</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>),
              <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
  <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)

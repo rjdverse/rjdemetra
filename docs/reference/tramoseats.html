@@ -217,136 +217,15 @@ In the second part, the pre-adjusted series is decomposed into the following com
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='st'>"RSAfull"</span>)
 <span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec</span>)
-<span class='no'>mysa</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
-#&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
-#&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
-#&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.186819 B - 0.610856 B^12 + 0.114119 B^13 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
-#&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.314459 B + 0.340427 B^2 
-#&gt; Innovation variance:  0.4669153 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
-#&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.040206 B - 0.959794 B^2 
-#&gt; Innovation variance:  0.04869563 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
-#&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 0.717848 B + 0.460721 B^2 + 0.310085 B^3 + 0.132447 B^4 - 0.049053 B^5 - 0.216655 B^6 - 0.354556 B^7 - 0.445030 B^8 - 0.469587 B^9 - 0.376625 B^10 - 0.166397 B^11 - 0.410618 B^12 - 0.132580 B^13 
-#&gt; Innovation variance:  0.1601924 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2056884 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
-#&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.9393 100.9657 0.9649365 0.9997384
-#&gt; Feb 2017  97.5 100.7654 101.2610 0.9675939 0.9951058
-#&gt; Mar 2017 112.0 102.0879 101.7064 1.0970937 1.0037513
-#&gt; Apr 2017 103.0 101.8416 102.1713 1.0113745 0.9967732
-#&gt; May 2017 100.4 103.0277 102.6087 0.9744949 1.0040835
-#&gt; Jun 2017 111.2 102.7958 102.9753 1.0817564 0.9982567
-#&gt; Jul 2017 103.4 103.3099 103.3367 1.0008726 0.9997398
-#&gt; Aug 2017  79.3 103.7805 103.7458 0.7641131 1.0003339
-#&gt; Sep 2017 109.7 103.7154 104.2747 1.0577017 0.9946372
-#&gt; Oct 2017 114.0 105.6674 104.8749 1.0788572 1.0075559
-#&gt; Nov 2017 107.7 105.4730 105.1795 1.0211146 1.0027905
-#&gt; Dec 2017 101.4 104.9614 105.2317 0.9660690 0.9974316
-#&gt; 
-#&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 102.19076 105.3388 105.3397 0.9701155 0.9999914
-#&gt; Feb 2018 102.32758 105.5082 105.5091 0.9698541 0.9999914
-#&gt; Mar 2018 114.29051 105.6780 105.6789 1.0814979 0.9999914
-#&gt; Apr 2018 107.91102 105.8480 105.8489 1.0194904 0.9999914
-#&gt; May 2018 102.68809 106.0183 106.0192 0.9685884 0.9999914
-#&gt; Jun 2018 115.89624 106.1889 106.1898 1.0914161 0.9999914
-#&gt; Jul 2018 106.23593 106.3597 106.3606 0.9988362 0.9999914
-#&gt; Aug 2018  81.47084 106.5308 106.5317 0.7647630 0.9999914
-#&gt; Sep 2018 112.88837 106.7022 106.7031 1.0579757 0.9999914
-#&gt; Oct 2018 115.34277 106.8739 106.8748 1.0792417 0.9999914
-#&gt; Nov 2018 109.29540 107.0458 107.0468 1.0210148 0.9999914
-#&gt; Dec 2018 103.27711 107.2181 107.2190 0.9632435 0.9999914
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
-#&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
-#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
-#&gt;            Component
-#&gt;  Cycle         2.181
-#&gt;  Seasonal     66.768
-#&gt;  Irregular     0.106
-#&gt;  TD &amp; Hol.     0.069
-#&gt;  Others       30.507
-#&gt;  Total        99.630
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
-#&gt;  Non parametric tests for stable seasonality
-#&gt;                                                           P.value
-#&gt;    Kruskall-Wallis test                                      0.000
-#&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.185
-#&gt;  
-#&gt;  Identifiable seasonality present
-#&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
-#&gt;                                       P.value
-#&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        1.000
-#&gt;  f-test on i (seasonal dummies)         1.000
-#&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.977
-#&gt;  f-test on sa (td)                      0.927
-#&gt;  f-test on i (td)                       1.000
-#&gt; 
-#&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div></span><span class='co'># NOT RUN {</span>
+<span class='no'>mysa</span>
+
 <span class='co'># Equivalent to:</span>
 <span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>)
 <span class='no'>mysa1</span>
-
 
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)

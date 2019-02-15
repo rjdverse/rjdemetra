@@ -128,10 +128,9 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 \examples{
 \dontrun{
-
  # X13 method
 myseries <- ipi_c_eu[, "FR"]
-myreg <- regarima_def_x13(myseries, spec=c("RG5c"))
+myreg <- regarima_def_x13(myseries, spec ="RG5c")
 
 myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 myreg1 <- regarima(myseries, myspec1)
