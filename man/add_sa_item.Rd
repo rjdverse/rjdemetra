@@ -20,6 +20,7 @@ By default the name of the \code{sa_obj} is used.}
 Function to add a new seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) in a \code{workspace} object.
 }
 \examples{
+\donttest{
 dir <- tempdir()
 spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
@@ -32,7 +33,7 @@ add_sa_item(wk, "sa1", sa_x13, "X13")
 add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 
 save_workspace(wk, file.path(dir, "workspace.xml"))
-
+}
 
 }
 \seealso{

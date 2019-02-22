@@ -102,7 +102,7 @@ save_workspace <- function(workspace, file) {
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
 #'
-#' @examples
+#' @examples\donttest{
 #' dir <- tempdir()
 #' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
@@ -115,7 +115,7 @@ save_workspace <- function(workspace, file) {
 #' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
 #' save_workspace(wk, file.path(dir, "workspace.xml"))
-#' 
+#' }
 #'
 #' @export
 add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
