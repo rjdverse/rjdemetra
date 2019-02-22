@@ -219,7 +219,7 @@ count.workspace <- function(x){
 #'}
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples
+#' @examples\donttest{
 #' sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 #'
 #' wk <- new_workspace()
@@ -242,7 +242,7 @@ count.workspace <- function(x){
 #' # Returns a list of length 1 named "sa1" containing a list
 #' # of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
 #' get_ts(wk)
-#' 
+#' }
 #' @export
 get_ts <- function(x){
   UseMethod("get_ts", x)
