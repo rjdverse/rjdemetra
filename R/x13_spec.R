@@ -59,11 +59,11 @@
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec1 <- x13_spec_def(spec = "RSA5c")
 #' myreg1 <- x13(myseries, spec = myspec1)
-#'
+#' \donttest{
 #' # Modify a pre-specified model specification
 #' myspec2 <- x13_spec_def(spec = "RSA5c", tradingdays.option = "WorkingDays")
 #' myreg2 <- x13(myseries, spec = myspec2)
-#' \donttest{
+#'
 #' # Modify the model specification from a "X13" object
 #'  myspec3 <- x13_spec(myreg1, tradingdays.option = "WorkingDays")
 #'  myreg3 <- x13(myseries, myspec3)

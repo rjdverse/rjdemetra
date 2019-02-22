@@ -220,34 +220,294 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'>
 <span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
-
-
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)</div><div class='input'><span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
             <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>,<span class='st'>"AO"</span>),
             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
             <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
             <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 <span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13</span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>mysa1</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mysa1</span>$<span class='no'>regarima</span>)
-
+<span class='no'>mysa1</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5367      0.048
+#&gt; BTheta(1)  -0.5083      0.050
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Easter [1]     -1.169      0.338
+#&gt; AO (9-2008)    31.410      2.181
+#&gt; LS (9-2008)   -56.648      2.256
+#&gt; TC (9-2008)    24.181      3.256
+#&gt; LS (2-2002)    14.708      1.526
+#&gt; LS (12-2001)  -14.648      1.681
+#&gt; AO (12-2001)   13.030      1.731
+#&gt; LS (5-2008)    -5.485      1.296
+#&gt; 
+#&gt; Fixed outliers: 
+#&gt;              Coefficients
+#&gt; LS (10-2008)           36
+#&gt; AO (1-2002)            14
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.729 on 323 degrees of freedom
+#&gt; Log likelihood = -637.1, aic =  1296 aicc =  1297, bic(corrected for length) = 1.274
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.055
+#&gt; M(2)    0.041
+#&gt; M(3)    0.926
+#&gt; M(4)    0.621
+#&gt; M(5)    0.724
+#&gt; M(6)    0.215
+#&gt; M(7)    0.074
+#&gt; M(8)    0.208
+#&gt; M(9)    0.056
+#&gt; M(10)   0.158
+#&gt; M(11)   0.146
+#&gt; Q       0.297
+#&gt; Q-M2    0.329
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t           s             i
+#&gt; Jan 2017  97.4 100.6172 100.6174  -3.2172329 -0.0001992082
+#&gt; Feb 2017  97.5 100.3127 101.0283  -2.8126932 -0.7155966863
+#&gt; Mar 2017 112.0 102.5469 101.4894   9.4530696  1.0575376567
+#&gt; Apr 2017 103.0 101.0897 101.9282   1.9103111 -0.8385432983
+#&gt; May 2017 100.4 103.0319 102.3136  -2.6318733  0.7182480125
+#&gt; Jun 2017 111.2 102.4926 102.6921   8.7074293 -0.1994894034
+#&gt; Jul 2017 103.4 103.1596 103.0816   0.2404277  0.0779236963
+#&gt; Aug 2017  79.3 103.2483 103.5055 -23.9483256 -0.2572170473
+#&gt; Sep 2017 109.7 103.5536 103.9555   6.1464361 -0.4019376040
+#&gt; Oct 2017 114.0 106.6886 104.3955   7.3113786  2.2931579296
+#&gt; Nov 2017 107.7 105.4631 104.7505   2.2369236  0.7125546908
+#&gt; Dec 2017 101.4 104.7490 105.0214  -3.3490189 -0.2723590878
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f          i_f
+#&gt; Jan 2018 101.96630 105.0963 105.1795  -3.1299775 -0.083200162
+#&gt; Feb 2018 102.23632 105.1464 105.2838  -2.9100563 -0.137428535
+#&gt; Mar 2018 113.85794 105.5026 105.3966   8.3553336  0.105971540
+#&gt; Apr 2018 108.47477 105.4896 105.5573   2.9851827 -0.067754048
+#&gt; May 2018 103.22164 105.7963 105.7844  -2.5746309  0.011859024
+#&gt; Jun 2018 114.64042 106.0073 106.0629   8.6331483 -0.055612674
+#&gt; Jul 2018 106.53519 106.3942 106.3666   0.1410119  0.027594337
+#&gt; Aug 2018  82.77073 106.6890 106.6849 -23.9182264  0.004061745
+#&gt; Sep 2018 112.79551 106.7018 106.9859   6.0936895 -0.284129714
+#&gt; Oct 2018 115.13202 107.7516 107.2471   7.3803800  0.504589345
+#&gt; Nov 2018 109.87965 107.5136 107.4572   2.3660966  0.056314698
+#&gt; Dec 2018 103.97193 107.3744 107.6093  -3.4024325 -0.234923742
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         1.557
+#&gt;  Seasonal     39.219
+#&gt;  Irregular     0.362
+#&gt;  TD &amp; Hol.     0.018
+#&gt;  Others       61.971
+#&gt;  Total       103.128
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.032
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.997
+#&gt;  f-test on i (seasonal dummies)         0.965
+#&gt;  Residual seasonality (entire series)   0.993
+#&gt;  Residual seasonality (last 3 years)    0.922
+#&gt;  f-test on sa (td)                      0.001
+#&gt;  f-test on i (td)                       0.006
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mysa1</span>$<span class='no'>regarima</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; 
+#&gt; Model: RegARIMA - X13
+#&gt; Estimation span: from 1-1990 to 12-2017
+#&gt; Log-transformation: no
+#&gt; Regression model: no mean, no trading days effect, no leap year effect, Easter effect, outliers(7)
+#&gt; 
+#&gt; Coefficients:
+#&gt; ARIMA: 
+#&gt;           Estimate Std. Error T-stat Pr(&gt;|t|)    
+#&gt; Theta(1)  -0.53675    0.04770 -11.25   &lt;2e-16 ***
+#&gt; BTheta(1) -0.50830    0.04961 -10.25   &lt;2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Regression model: 
+#&gt;              Estimate Std. Error  T-stat Pr(&gt;|t|)    
+#&gt; Easter [1]    -1.1686     0.3385  -3.452 0.000629 ***
+#&gt; AO (9-2008)   31.4099     2.1812  14.400  &lt; 2e-16 ***
+#&gt; LS (9-2008)  -56.6477     2.2561 -25.109  &lt; 2e-16 ***
+#&gt; TC (9-2008)   24.1814     3.2563   7.426 1.00e-12 ***
+#&gt; LS (2-2002)   14.7081     1.5257   9.640  &lt; 2e-16 ***
+#&gt; LS (12-2001) -14.6482     1.6811  -8.714  &lt; 2e-16 ***
+#&gt; AO (12-2001)  13.0297     1.7312   7.527 5.23e-13 ***
+#&gt; LS (5-2008)   -5.4848     1.2957  -4.233 3.01e-05 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt;              Coefficients
+#&gt; LS (10-2008)           36
+#&gt; AO (1-2002)            14
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.729 on 11 degrees of freedom
+#&gt; Log likelihood = -637.1, aic =  1296, aicc =  1297, bic(corrected for length) = 1.274
+#&gt; </div><div class='input'>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span><span class='fl'>FALSE</span>,
             <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
             <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
             <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
             <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
-<span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec2</span>)
-<span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
+<span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec2</span>)</div><div class='output co'>#&gt;                Type Value
+#&gt; Phi(1)        Fixed  -0.8
+#&gt; Theta(1)      Fixed  -0.6
+#&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
              <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"decomposition.d18"</span>, <span class='st'>"decomposition.d19"</span>))
-<span class='no'>mysa2</span>
-<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)
-<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)
-<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)
-<span class='co'># }</span></pre>
+<span class='no'>mysa2</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     -0.8000      0.000
+#&gt; Theta(1)   -0.6000      0.000
+#&gt; BTheta(1)  -0.4542      0.051
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday       -0.05826      0.139
+#&gt; Tuesday      -0.02508      0.139
+#&gt; Wednesday     0.30165      0.137
+#&gt; Thursday     -0.59487      0.138
+#&gt; Friday        0.50268      0.140
+#&gt; Saturday      0.03995      0.138
+#&gt; Leap year    -0.04011      0.451
+#&gt; Easter [1]   -1.20959      0.275
+#&gt; AO (10-2005) -4.95487      1.182
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 2.096 on 323 degrees of freedom
+#&gt; Log likelihood = -698.8, aic =  1420 aicc =  1420, bic(corrected for length) = 1.659
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.062
+#&gt; M(2)    0.028
+#&gt; M(3)    0.543
+#&gt; M(4)    0.621
+#&gt; M(5)    0.536
+#&gt; M(6)    0.260
+#&gt; M(7)    0.078
+#&gt; M(8)    0.214
+#&gt; M(9)    0.055
+#&gt; M(10)   0.187
+#&gt; M(11)   0.171
+#&gt; Q       0.245
+#&gt; Q-M2    0.272
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t            s           i
+#&gt; Jan 2017  97.4 100.8226 100.7235  -3.42255895  0.09907743
+#&gt; Feb 2017  97.5 100.4299 101.1028  -2.92989614 -0.67294637
+#&gt; Mar 2017 112.0 102.3393 101.5687   9.66069455  0.77061113
+#&gt; Apr 2017 103.0 101.4439 102.0275   1.55613149 -0.58358353
+#&gt; May 2017 100.4 102.9996 102.4280  -2.59955487  0.57159360
+#&gt; Jun 2017 111.2 102.5271 102.8002   8.67294536 -0.27318844
+#&gt; Jul 2017 103.4 103.4506 103.1564  -0.05064333  0.29424424
+#&gt; Aug 2017  79.3 103.3331 103.5205 -24.03313502 -0.18739845
+#&gt; Sep 2017 109.7 103.2505 103.8685   6.44950396 -0.61795652
+#&gt; Oct 2017 114.0 106.8134 104.1640   7.18655401  2.64946146
+#&gt; Nov 2017 107.7 105.3810 104.3398   2.31898284  1.04118208
+#&gt; Dec 2017 101.4 104.2789 104.4055  -2.87892623 -0.12656995
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2018 101.22600 104.0842 104.3608  -2.8581864 -0.27664562
+#&gt; Feb 2018 101.01524 104.0618 104.2820  -3.0465104 -0.22026718
+#&gt; Mar 2018 112.55419 104.3222 104.2357   8.2320286  0.08649224
+#&gt; Apr 2018 106.78270 104.2328 104.2647   2.5499347 -0.03188965
+#&gt; May 2018 101.40946 104.4771 104.3970  -3.0676654  0.08012361
+#&gt; Jun 2018 113.75858 104.5342 104.6051   9.2243530 -0.07091744
+#&gt; Jul 2018 104.66981 104.9101 104.8449  -0.2402895  0.06523367
+#&gt; Aug 2018  81.51533 104.9474 105.1025 -23.4320489 -0.15511871
+#&gt; Sep 2018 110.73413 105.0383 105.3493   5.6958578 -0.31102941
+#&gt; Oct 2018 114.06653 106.3250 105.5577   7.7415560  0.76728580
+#&gt; Nov 2018 108.38112 105.6755 105.7158   2.7056474 -0.04027530
+#&gt; Dec 2018 101.97830 105.4990 105.8238  -3.5207475 -0.32478623
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         7.755
+#&gt;  Seasonal     92.477
+#&gt;  Irregular     0.782
+#&gt;  TD &amp; Hol.     0.118
+#&gt;  Others        0.073
+#&gt;  Total       101.204
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.004
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.974
+#&gt;  f-test on i (seasonal dummies)         0.858
+#&gt;  Residual seasonality (entire series)   0.989
+#&gt;  Residual seasonality (last 3 years)    0.893
+#&gt;  f-test on sa (td)                      0.934
+#&gt;  f-test on i (td)                       0.983
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; Names of additional variables (2):
+#&gt; decomposition.d18, decomposition.d19</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)</div><div class='img'><img src='x13-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='x13-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='x13-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='x13-9.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

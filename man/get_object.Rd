@@ -23,6 +23,7 @@ Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} 
 from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
 }
 \examples{
+\donttest{
 
 sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 
@@ -34,7 +35,7 @@ add_sa_item(wk, "sa1", sa_x13, "X13")
 mp <- get_object(wk, 1)
 # To get the sa_item object:
 sa_item <- get_object(mp, 1)
-
+}
 }
 \seealso{
 Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},

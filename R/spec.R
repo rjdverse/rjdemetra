@@ -29,8 +29,7 @@ NULL
 #'
 #' @rdname specification
 #' @name specification
-#' @examples
-#' 
+#' @examples \donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myreg1 <- regarima_def_x13(myseries, spec = "RG5c")
 #' myspec1 <- regarima_spec_x13(myreg1,
@@ -53,7 +52,7 @@ NULL
 #'
 #' s_preOut(myreg2)
 #' s_preOut(myspec2)
-#' \donttest{
+#' 
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var3 <- ts.union(var1, var2)

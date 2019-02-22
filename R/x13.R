@@ -81,7 +81,7 @@ setClass(
 #' myseries <- ipi_c_eu[, "FR"]
 #' mysa <- x13_def(myseries, spec = "RSA5c")
 #'
-#'
+#' \donttest{
 #' myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays",
 #'             usrdef.outliersEnabled = TRUE,
 #'             usrdef.outliersType = c("LS","AO"),
@@ -91,7 +91,7 @@ setClass(
 #' mysa1 <- x13(myseries, myspec1)
 #' mysa1
 #' summary(mysa1$regarima)
-#' \donttest{
+#' 
 #' myspec2 <- x13_spec(mysa, automdl.enabled =FALSE,
 #'             arima.coefEnabled = TRUE,
 #'             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,

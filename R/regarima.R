@@ -129,16 +129,16 @@ setClass(
 #'
 #'
 #' @examples
-#' 
 #'  # X13 method
 #' myseries <- ipi_c_eu[, "FR"]
 #' myreg <- regarima_def_x13(myseries, spec ="RG5c")
-#'
+#' summary(myreg)
+#' plot(myreg)
+#' 
+#' \donttest{
 #' myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 #' myreg1 <- regarima(myseries, myspec1)
-#' summary(myreg1)
-#' plot(myreg1)
-#' \donttest{
+#' 
 #' myspec2 <- regarima_spec_x13(myreg, usrdef.outliersEnabled = TRUE,
 #'              usrdef.outliersType = c("LS", "AO"),
 #'              usrdef.outliersDate = c("2008-10-01", "2002-01-01"),

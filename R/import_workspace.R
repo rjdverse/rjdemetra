@@ -57,7 +57,7 @@ load_workspace <- function(file){
 #'
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples
+#' @examples\donttest{
 #' 
 #' sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 #'
@@ -69,7 +69,7 @@ load_workspace <- function(file){
 #' mp <- get_object(wk, 1)
 #' # To get the sa_item object:
 #' sa_item <- get_object(mp, 1)
-#' 
+#' }
 #' @name get_object
 #' @rdname get_object
 #' @export
