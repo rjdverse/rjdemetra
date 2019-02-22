@@ -73,7 +73,7 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
-\dontrun{
+
 myseries <- ipi_c_eu[, "FR"]
 myspec <- tramoseats_spec_def("RSAfull")
 mysa <- tramoseats(myseries, myspec)
@@ -83,6 +83,7 @@ mysa
 mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 mysa1
 
+\donttest{
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 var <- ts.union(var1, var2)

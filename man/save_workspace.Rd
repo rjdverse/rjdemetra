@@ -19,12 +19,11 @@ A boolean indicating whether the export has suceed.
 Functions save a \code{workspace} object into a JDemetra+ workspace.
 }
 \examples{
-\dontrun{
+dir <- tempdir()
 # Create and export a empty JDemetra+ workspace
 wk <- new_workspace()
 new_multiprocessing(wk, "sa1")
-save_workspace(wk, "workspace.xml")
-}
+save_workspace(wk, file.path(dir, "workspace.xml"))
 
 
 }

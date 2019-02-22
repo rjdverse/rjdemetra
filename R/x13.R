@@ -77,7 +77,7 @@ setClass(
 #' @seealso \code{\link{x13_spec}}, \code{\link{tramoseats}}
 #'
 #' @examples
-#' \dontrun{
+#' 
 #' myseries <- ipi_c_eu[, "FR"]
 #' mysa <- x13_def(myseries, spec = "RSA5c")
 #'
@@ -91,7 +91,7 @@ setClass(
 #' mysa1 <- x13(myseries, myspec1)
 #' mysa1
 #' summary(mysa1$regarima)
-#'
+#' \donttest{
 #' myspec2 <- x13_spec(mysa, automdl.enabled =FALSE,
 #'             arima.coefEnabled = TRUE,
 #'             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,

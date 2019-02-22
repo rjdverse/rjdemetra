@@ -16,7 +16,7 @@ A \code{character}.
 Generics functions to get the Java name of a \code{multiprocessing} or a \code{sa_item}.
 }
 \examples{
-\dontrun{
+\donttest{
 spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 spec_ts <- tramoseats_spec_def(spec = "RSA5")

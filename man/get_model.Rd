@@ -31,7 +31,7 @@ Generics functions to get seasonally adjusted model(s) from \code{workspace},
 \code{multiprocessing} or \code{sa_item} object.
 }
 \examples{
-\dontrun{
+\donttest{
 spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 spec_ts <- tramoseats_spec_def(spec = "RSA5")

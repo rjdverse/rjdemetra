@@ -278,7 +278,7 @@ RSAfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
-\dontrun{
+
 myseries <- ipi_c_eu[, "FR"]
 myspec1 <- tramoseats_spec_def(spec = c("RSAfull"))
 mysa1 <- tramoseats(myseries, spec = myspec1)
@@ -290,6 +290,7 @@ myspec2 <- tramoseats_spec_def(spec = "RSAfull", tradingdays.mauto = "Unused",
                                automdl.enabled = FALSE, arima.mu = TRUE)
 mysa2 <- tramoseats(myseries, spec = myspec2)
 
+\donttest{
 # Modify the model specification from a "SA" object
 myspec3 <- tramoseats_spec(mysa1, tradingdays.mauto = "Unused",
                            tradingdays.option = "WorkingDays",

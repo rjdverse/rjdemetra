@@ -58,7 +58,7 @@ load_workspace <- function(file){
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
 #' @examples
-#' \dontrun{
+#' 
 #' sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 #'
 #' wk <- new_workspace()
@@ -69,7 +69,7 @@ load_workspace <- function(file){
 #' mp <- get_object(wk, 1)
 #' # To get the sa_item object:
 #' sa_item <- get_object(mp, 1)
-#' }
+#' 
 #' @name get_object
 #' @rdname get_object
 #' @export
@@ -125,7 +125,7 @@ get_all_objects.workspace <- function(x){
 #'
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #' spec_ts <- tramoseats_spec_def(spec = "RSA5")
@@ -219,7 +219,7 @@ count.workspace <- function(x){
 #'}
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #'
-#' @examples \dontrun{
+#' @examples
 #' sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
 #'
 #' wk <- new_workspace()
@@ -242,7 +242,7 @@ count.workspace <- function(x){
 #' # Returns a list of length 1 named "sa1" containing a list
 #' # of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
 #' get_ts(wk)
-#' }
+#' 
 #' @export
 get_ts <- function(x){
   UseMethod("get_ts", x)
@@ -282,7 +282,7 @@ get_ts.SA <- function(x){
 #' @seealso \code{\link{get_model}}
 #'
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #'
@@ -345,7 +345,7 @@ compute <- function(workspace, i) {
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #' @seealso \code{\link{compute}}
 #'
-#' @examples\dontrun{
+#' @examples\donttest{
 #' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #' spec_ts <- tramoseats_spec_def(spec = "RSA5")

@@ -1,6 +1,6 @@
 Package: RJDemetra
 Type: Package
-Title: R Interface to JDemetra+ Seasonal Adjustment Software
+Title: Interface to 'JDemetra+' Seasonal Adjustment Software
 Version: 0.1.1
 Authors@R: c(
   person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
@@ -11,7 +11,7 @@ Authors@R: c(
                 email = "jean.palate@nbb.be"),
   person("Raf", "Baeyens", role = "aut",
                 email = "raf.baeyens@nbb.be"))
-Description: R interface around JDemetra+, the seasonal adjustment software officially
+Description: Interface around JDemetra+ (<https://github.com/jdemetra/jdemetra-app>), the seasonal adjustment software officially
     recommended to the members of the European Statistical System (ESS) and the European System of Central Banks.
     It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
@@ -26,7 +26,7 @@ Imports:
     utils
 SystemRequirements: Java SE 8 or higher
 License: EUPL
-URL: https://github.com/jdemetra/rjdemetra, https://github.com/jdemetra/jdemetra-app
+URL: https://github.com/jdemetra/rjdemetra
 LazyData: TRUE
 Collate:
     	'onLoad.R'
