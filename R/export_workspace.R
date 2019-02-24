@@ -50,13 +50,13 @@ new_multiprocessing <- function(workspace, name) {
 #'
 #' @seealso \code{\link{load_workspace}}
 #'
-#' @examples
+#' @examples \donttest{
 #' dir <- tempdir()
 #' # Create and export a empty JDemetra+ workspace
 #' wk <- new_workspace()
 #' new_multiprocessing(wk, "sa1")
 #' save_workspace(wk, file.path(dir, "workspace.xml"))
-#'
+#'}
 #'
 #' @return A boolean indicating whether the export has suceed.
 #' @export
