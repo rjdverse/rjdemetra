@@ -127,13 +127,13 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
+\donttest{
  # X13 method
 myseries <- ipi_c_eu[, "FR"]
 myreg <- regarima_def_x13(myseries, spec ="RG5c")
 summary(myreg)
 plot(myreg)
 
-\donttest{
 myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 myreg1 <- regarima(myseries, myspec1)
 

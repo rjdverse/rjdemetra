@@ -53,12 +53,11 @@
 #' 
 #' @seealso \code{\link{tramoseats}}
 #'
-#' @examples
-#' 
+#' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec1 <- tramoseats_spec_def(spec = c("RSAfull"))
 #' mysa1 <- tramoseats(myseries, spec = myspec1)
-#' \donttest{
+#' 
 #' # Modify a pre-specified model specification
 #' myspec2 <- tramoseats_spec_def(spec = "RSAfull", tradingdays.mauto = "Unused",
 #'                                tradingdays.option = "WorkingDays",

@@ -11,7 +11,7 @@
 #' @param ... other parameters.
 #' @param which vector with numerics specifying which graphs should be plotted: (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals", (5) "PACF of residuals", (6) "Decomposition", (7) "Decomposition - zoom".
 #' @param caption list or character with the graphs titles.
-#' @examples 
+#' @examples \donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' mysa <- x13_def(myseries, spec = c("RSA5c"))
 #'  # RegArima
@@ -31,6 +31,7 @@
 #' # changing the last date and the title
 #' plot(mysa$final, last_date = c(2000, 1),
 #'      caption = "Results", type_chart = "sa-trend")
+#' }
 #' @name plot
 #' @rdname plot
 #' @export

@@ -557,10 +557,11 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSAfull"</span>))
-<span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)</div><div class='input'><span class='co'># Modify a pre-specified model specification</span>
+<span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
+
+<span class='co'># Modify a pre-specified model specification</span>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_spec_def</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
                                <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
                                <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,

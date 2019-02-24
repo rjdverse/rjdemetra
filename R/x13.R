@@ -76,12 +76,10 @@ setClass(
 #'
 #' @seealso \code{\link{x13_spec}}, \code{\link{tramoseats}}
 #'
-#' @examples
-#' 
+#' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' mysa <- x13_def(myseries, spec = "RSA5c")
 #'
-#' \donttest{
 #' myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays",
 #'             usrdef.outliersEnabled = TRUE,
 #'             usrdef.outliersType = c("LS","AO"),

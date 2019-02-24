@@ -220,9 +220,10 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)</div><div class='input'><span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
+    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
+
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
             <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>,<span class='st'>"AO"</span>),
             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),

@@ -522,10 +522,11 @@ The final values of the <code>specification</code> can be also accessed with the
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)</div><div class='input'> <span class='co'># Modify a pre-specified model specification</span>
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
+
+ <span class='co'># Modify a pre-specified model specification</span>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>,
                                  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)

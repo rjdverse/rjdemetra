@@ -128,14 +128,13 @@ setClass(
 #' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #'
-#' @examples
+#' @examples\donttest{
 #'  # X13 method
 #' myseries <- ipi_c_eu[, "FR"]
 #' myreg <- regarima_def_x13(myseries, spec ="RG5c")
 #' summary(myreg)
 #' plot(myreg)
 #' 
-#' \donttest{
 #' myspec1 <- regarima_spec_x13(myreg, tradingdays.option = "WorkingDays")
 #' myreg1 <- regarima(myseries, myspec1)
 #' 

@@ -211,12 +211,11 @@
 #' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
-#' @examples
-#' 
+#' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull")
 #' myreg1 <- regarima(myseries, spec = myspec1)
-#' \donttest{
+#'
 #'  # Modify a pre-specified model specification
 #' myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
 #'              tradingdays.mauto = "Unused",
