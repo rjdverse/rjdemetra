@@ -13,7 +13,7 @@ Authors@R: c(
                 email = "raf.baeyens@nbb.be"))
 Description: Interface around 'JDemetra+' (<https://github.com/jdemetra/jdemetra-app>), the seasonal adjustment software officially
     recommended to the members of the European Statistical System (ESS) and the European System of Central Banks.
-    It offers full access to all options and outputs of JDemetra+, including the two leading seasonal adjustment methods
+    It offers full access to all options and outputs of 'JDemetra+', including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
 Depends:
     R (>= 3.1.1),

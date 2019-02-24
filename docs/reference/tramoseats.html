@@ -151,7 +151,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
       <th>spec</th>
       <td><p>model specification TRAMO-SEATS. For the function:</p><ul>
 <li><p><code>tramoseats</code>, object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","TRAMO_SEATS")</a></code></p></li>
-<li><p><code>tramoseats_def</code>, predefined TRAMO-SEATS <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "RSAfull".</p></li>
+<li><p><code>tramoseats_def</code>, predefined TRAMO-SEATS 'JDemetra+' model specification (see <em>Details</em>). The default is "RSAfull".</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -192,7 +192,7 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
     <p>The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: <code><a href='regarima.html'>regarima</a></code>).
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)) or multiplicative (\(y = t * s * i\)). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
 <p>In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (<a href='www.bde.es'>www.bde.es</a>).</p>
-<p>As regards the available predefined <em>JDemetra+</em> TRAMO-SEATS model specifications (for the function <code>tramoseats_def</code>), they are described in the table below.</p><table class='table'>
+<p>As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications (for the function <code>tramoseats_def</code>), they are described in the table below.</p><table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td><td><strong>Outliers detection</strong></td></tr>
 <tr><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td><td></td><td></td></tr>
 <tr><td>RSA0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
@@ -206,7 +206,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Info on JDemetra+, usage and functions:
+    <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>

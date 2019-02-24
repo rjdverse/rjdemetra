@@ -86,7 +86,7 @@ x13_spec(object, estimate.from = NA_character_,
   x11.excludeFcasts = NA)
 }
 \arguments{
-\item{spec}{predefined JDemetra+ model specification (see Details). The default is "RSA5c".
+\item{spec}{predefined 'JDemetra+' model specification (see Details). The default is "RSA5c".
 
 The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
 
@@ -264,12 +264,12 @@ The final specification (third row) shall include user modifications (row two) u
 \item{x11}{data.frame of class \code{c("X11_spec", "data.frame")}, containing the \emph{x11} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
 }
 \description{
-\code{x13_spec_def} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec", "X13")} class object with the SA model specification for the X13 method.
+\code{x13_spec_def} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("SA_spec", "X13")} class object with the SA model specification for the X13 method.
 
 \code{x13_spec} creates (and/or modifies) a \code{c("SA_spec", "X13")} class object with the SA model specification for the X13 method. The object is created from a \code{c("SA", "X13")} or \code{c("SA_spec", "X13")} class object.
 }
 \details{
-The available predefined \emph{JDemetra+} model specifications (for the function \code{x13_spec_def}) are described in the table below.
+The available predefined 'JDemetra+' model specifications (for the function \code{x13_spec_def}) are described in the table below.
 
 \tabular{rrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -343,7 +343,7 @@ myreg2 <- x13(myseries, spec = myspec2)
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 

@@ -23,7 +23,7 @@ NULL
 #' }
 #'
 #' @references
-#' Info on JDemetra+, usage and functions:
+#' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #'

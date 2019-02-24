@@ -16,7 +16,7 @@ tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
 \item{spec}{model specification TRAMO-SEATS. For the function:
 \itemize{
 \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
-\item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
+\item \code{tramoseats_def}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "RSAfull".
 }}
 
 \item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
@@ -60,7 +60,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 
 In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 
-As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
+As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
 \tabular{rrrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -102,7 +102,7 @@ plot(mysa2$decomposition)
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.

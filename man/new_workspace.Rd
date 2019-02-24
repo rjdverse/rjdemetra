@@ -19,11 +19,11 @@ new_multiprocessing(workspace, name)
 \code{new_multiprocessing()} returns an object of class \code{multiprocessing}.
 }
 \description{
-Functions to create a JDemetra+ workspace (\code{new_workspace()})
+Functions to create a 'JDemetra+' workspace (\code{new_workspace()})
 add a multi-processing to it (\code{new_multiprocessing()}).
 }
 \examples{
-# Create and export a empty JDemetra+ workspace
+# Create and export a empty 'JDemetra+' workspace
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 

@@ -12,11 +12,11 @@ is.workspace <- function(x){
     inherits(x, "workspace")
 }
 
-#' Load a JDemetra+ workpace
+#' Load a 'JDemetra+' workpace
 #'
-#' Function to load a JDemetra+ workspace.
+#' Function to load a 'JDemetra+' workspace.
 #'
-#' @param file the path to the JDemetra+ workspace to load.
+#' @param file the path to the 'JDemetra+' workspace to load.
 #' By default a dialog box opens.
 #'
 #' @return An object of class \code{"workspace"}.

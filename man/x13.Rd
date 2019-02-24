@@ -16,7 +16,7 @@ x13_def(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3",
 \item{spec}{model specification X13. For the function:
 \itemize{
 \item \code{x13}, object of class \code{c("SA_spec","X13")}
-\item \code{x13_def}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSA5c".
+\item \code{x13_def}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RSA5c".
 }}
 
 \item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
@@ -62,7 +62,7 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
 
 In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
 
-As regards the available predefined \emph{JDemetra+} X13 model specifications (for the function \code{x13_def}), they are described in the table below.
+As regards the available predefined 'JDemetra+' X13 model specifications (for the function \code{x13_def}), they are described in the table below.
 \tabular{rrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -104,7 +104,7 @@ plot(mysa2$decomposition)
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.

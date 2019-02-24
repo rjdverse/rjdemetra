@@ -2,11 +2,11 @@
 #'
 #' @description
 #'
-#' \code{tramoseats_spec_def} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("SA_spec", "TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method.
+#' \code{tramoseats_spec_def} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("SA_spec", "TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method.
 #'
 #' \code{tramoseats_spec} creates (and/or modifies) a \code{c("SA_spec", "TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method. The object is created from a \code{c("SA", "TRAMO_SEATS")} or \code{c("SA_spec", "TRAMO_SEATS")} class object.
 #'
-#' @param spec predefined JDemetra+ model specification (see Details). The default is "RSAfull".
+#' @param spec predefined 'JDemetra+' model specification (see Details). The default is "RSAfull".
 #'
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
@@ -21,7 +21,7 @@
 #'
 #' @details
 #'
-#' The available predefined \emph{JDemetra+} model specifications (for the function \code{tramoseats_spec_def}) are described in the table below.
+#' The available predefined 'JDemetra+' model specifications (for the function \code{tramoseats_spec_def}) are described in the table below.
 #'
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -45,7 +45,7 @@
 #' \item{seats}{data.frame of class \code{c("seats_spec", "data.frame")}, containing the \emph{seats} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
 #'
 #' @references
-#' Info on JDemetra+, usage and functions:
+#' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'

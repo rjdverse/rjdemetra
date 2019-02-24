@@ -9,19 +9,19 @@ save_workspace(workspace, file)
 \arguments{
 \item{workspace}{a workspace object to export}
 
-\item{file}{the path to the export JDemetra+ workspace (.xml file).
+\item{file}{the path to the export 'JDemetra+' workspace (.xml file).
 By default a dialog box opens.}
 }
 \value{
 A boolean indicating whether the export has suceed.
 }
 \description{
-Functions save a \code{workspace} object into a JDemetra+ workspace.
+Functions save a \code{workspace} object into a 'JDemetra+'' workspace.
 }
 \examples{
 \donttest{
 dir <- tempdir()
-# Create and export a empty JDemetra+ workspace
+# Create and export a empty 'JDemetra+' workspace
 wk <- new_workspace()
 new_multiprocessing(wk, "sa1")
 save_workspace(wk, file.path(dir, "workspace.xml"))

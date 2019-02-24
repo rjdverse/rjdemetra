@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Save a workspace — save_workspace" />
 
-<meta property="og:description" content="Functions save a workspace object into a JDemetra+ workspace." />
+<meta property="og:description" content="Functions save a workspace object into a 'JDemetra+'' workspace." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,7 +127,7 @@
 
     <div class="ref-description">
     
-    <p>Functions save a <code>workspace</code> object into a JDemetra+ workspace.</p>
+    <p>Functions save a <code>workspace</code> object into a 'JDemetra+'' workspace.</p>
     
     </div>
 
@@ -142,7 +142,7 @@
     </tr>
     <tr>
       <th>file</th>
-      <td><p>the path to the export JDemetra+ workspace (.xml file).
+      <td><p>the path to the export 'JDemetra+' workspace (.xml file).
 By default a dialog box opens.</p></td>
     </tr>
     </table>
@@ -158,7 +158,7 @@ By default a dialog box opens.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>()
-<span class='co'># Create and export a empty JDemetra+ workspace</span>
+<span class='co'># Create and export a empty 'JDemetra+' workspace</span>
 <span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
 <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
 <span class='fu'>save_workspace</span>(<span class='no'>wk</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>dir</span>, <span class='st'>"workspace.xml"</span>))</div><div class='input'>

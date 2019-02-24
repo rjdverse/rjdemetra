@@ -151,7 +151,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
       <th>spec</th>
       <td><p>model specification X13. For the function:</p><ul>
 <li><p><code>x13</code>, object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code></p></li>
-<li><p><code>x13_def</code>, predefined X13 <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "RSA5c".</p></li>
+<li><p><code>x13_def</code>, predefined X13 'JDemetra+' model specification (see <em>Details</em>). The default is "RSA5c".</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -194,7 +194,7 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)), multiplicative (\(y = t * s * i\)), log-additive (\(log(y) = log(t)+log(s)+log(i)\)) or pseudo-additive (\(y = t*(s+i-1)\)).
 The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
 <p>In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.</p>
-<p>As regards the available predefined <em>JDemetra+</em> X13 model specifications (for the function <code>x13_def</code>), they are described in the table below.</p><table class='table'>
+<p>As regards the available predefined 'JDemetra+' X13 model specifications (for the function <code>x13_def</code>), they are described in the table below.</p><table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td></tr>
 <tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
 <tr><td></td><td></td><td>RSA0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
@@ -208,7 +208,7 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Info on JDemetra+, usage and functions:
+    <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>

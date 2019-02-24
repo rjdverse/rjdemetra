@@ -1,6 +1,6 @@
 #' Create a workspace or a multi-processing
 #'
-#' Functions to create a JDemetra+ workspace (\code{new_workspace()})
+#' Functions to create a 'JDemetra+' workspace (\code{new_workspace()})
 #' add a multi-processing to it (\code{new_multiprocessing()}).
 #'
 #' @param workspace a workspace object
@@ -13,7 +13,7 @@
 #' \code{\link{add_sa_item}}
 #'
 #' @examples
-#' # Create and export a empty JDemetra+ workspace
+#' # Create and export a empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' 
@@ -42,17 +42,17 @@ new_multiprocessing <- function(workspace, name) {
 
 #' Save a workspace
 #'
-#' Functions save a \code{workspace} object into a JDemetra+ workspace.
+#' Functions save a \code{workspace} object into a 'JDemetra+'' workspace.
 #'
 #' @param workspace a workspace object to export
-#' @param file the path to the export JDemetra+ workspace (.xml file).
+#' @param file the path to the export 'JDemetra+' workspace (.xml file).
 #' By default a dialog box opens.
 #'
 #' @seealso \code{\link{load_workspace}}
 #'
 #' @examples \donttest{
 #' dir <- tempdir()
-#' # Create and export a empty JDemetra+ workspace
+#' # Create and export a empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' new_multiprocessing(wk, "sa1")
 #' save_workspace(wk, file.path(dir, "workspace.xml"))

@@ -151,8 +151,8 @@
       <td><p>model specification. For the function:</p><ul>
 <li><p><code>regarima</code>, object of class <code>c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")</code>).
 See functions <code><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a>, <a href='regarima_spec_def_x13.html'>regarima_spec_def_x13</a>, <a href='regarima_spec_def_tramoseats.html'>regarima_spec_tramoseats</a></code>, and <code><a href='regarima_spec_def_tramoseats.html'>regarima_spec_def_tramoseats</a></code>.</p></li>
-<li><p><code>regarima_def_x13</code>, predefined X13 <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "RG5c".</p></li>
-<li><p><code>regarima_def_tramoseats</code>, predefined TRAMO-SEATS <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "TRfull".</p></li>
+<li><p><code>regarima_def_x13</code>, predefined X13 'JDemetra+' model specification (see <em>Details</em>). The default is "RG5c".</p></li>
+<li><p><code>regarima_def_tramoseats</code>, predefined TRAMO-SEATS 'JDemetra+' model specification (see <em>Details</em>). The default is "TRfull".</p></li>
 </ul></td>
     </tr>
     </table>
@@ -196,24 +196,24 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
     <p>The polynomial \(\phi(B)\) is a stationary autoregressive (AR) polynomial in \(B\), which is a product of the stationary regular AR polynomial in \(B\) and the stationary seasonal polynomial in \(B^s\):</p>
 <p>$$\phi(B)=\phi_p(B)\Phi_{bp}(B^s)=(1+\phi_1B+...+\phi_pB^p)(1+\Phi_1B^s+...+\Phi_{bp}B^{bps})$$</p>
 <p>where:</p><ul>
-<li><p>\(p\) - number of regular AR terms (here and in <em>JDemetra+</em> \(p \le 3\));</p></li>
-<li><p>\(bp\) - number of seasonal AR terms (here and in <em>JDemetra+</em> \(bp \le 1\));</p></li>
+<li><p>\(p\) - number of regular AR terms (here and in 'JDemetra+' \(p \le 3\));</p></li>
+<li><p>\(bp\) - number of seasonal AR terms (here and in 'JDemetra+' \(bp \le 1\));</p></li>
 <li><p>\(s\) - number of observations per year (frequency of the time series).</p></li>
 </ul>
     <p>The polynomial \(\theta(B)\) is an invertible moving average (MA) polynomial in \(B\), which is a product of the invertible regular MA polynomial in \(B\) and the invertible seasonal MA polynomial in \(B^s\):</p>
 <p>$$\theta(B)=\theta_q(B)\Theta_{bq}(B^s)=(1+\theta_1B+...+\theta_qB^q)(1+\Theta_1B^s+...+\Theta_{bq}B^{bqs})$$</p>
 <p>where:</p><ul>
-<li><p>\(q\) - number of regular MA terms (here and in <em>JDemetra+</em> \(q \le 3\));</p></li>
-<li><p>\(bq\) - number of seasonal MA terms (here and in <em>JDemetra+</em> \(bq \le 1\));</p></li>
+<li><p>\(q\) - number of regular MA terms (here and in 'JDemetra+' \(q \le 3\));</p></li>
+<li><p>\(bq\) - number of seasonal MA terms (here and in 'JDemetra+' \(bq \le 1\));</p></li>
 </ul>
     <p>The polynomial \(\delta(B)\) is the non-stationary AR polynomial in \(B\) (unit roots):</p>
 <p>$$\delta(B)=(1-B)^d(1-B^s)^{d_s}$$</p>
 <p>where:</p><ul>
-<li><p>\(d\) - regular differencing order (here and in <em>JDemetra+</em> \(d \le 1\));</p></li>
-<li><p>\(d_s\) - seasonal differencing order (here and in <em>JDemetra+</em> \(d_s \le 1\));</p></li>
+<li><p>\(d\) - regular differencing order (here and in 'JDemetra+' \(d \le 1\));</p></li>
+<li><p>\(d_s\) - seasonal differencing order (here and in 'JDemetra+' \(d_s \le 1\));</p></li>
 </ul>
-    <p>Notations used for AR and MA processes, model denoted as ARIMA \((P,D,Q)(BP,BD,BQ)\), are consistent with those in <em>JDemetra+</em>.</p>
-<p>As regards the available predefined <em>JDemetra+</em> X13 and TRAMO-SEATS model specifications, they are described in the tables below.</p>
+    <p>Notations used for AR and MA processes, model denoted as ARIMA \((P,D,Q)(BP,BD,BQ)\), are consistent with those in 'JDemetra+'.</p>
+<p>As regards the available predefined 'JDemetra+' X13 and TRAMO-SEATS model specifications, they are described in the tables below.</p>
 <p><strong>X13:</strong></p><table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td></tr>
 <tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
@@ -239,7 +239,7 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Info on JDemetra+, usage and functions:
+    <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>

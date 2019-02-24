@@ -21,8 +21,8 @@ regarima_def_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
 \itemize{
 \item \code{regarima}, object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}).
 See functions \code{\link{regarima_spec_x13}, \link{regarima_spec_def_x13}, \link{regarima_spec_tramoseats}}, and \code{\link{regarima_spec_def_tramoseats}}.
-\item \code{regarima_def_x13}, predefined X13 \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
-\item \code{regarima_def_tramoseats}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
+\item \code{regarima_def_x13}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
+\item \code{regarima_def_tramoseats}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
 }}
 }
 \value{
@@ -74,8 +74,8 @@ The polynomial \eqn{\phi(B)} is a stationary autoregressive (AR) polynomial in \
 
 where:
 \itemize{
-\item \eqn{p} - number of regular AR terms (here and in \emph{JDemetra+} \eqn{p \le 3});
-\item \eqn{bp} - number of seasonal AR terms (here and in \emph{JDemetra+} \eqn{bp \le 1});
+\item \eqn{p} - number of regular AR terms (here and in 'JDemetra+' \eqn{p \le 3});
+\item \eqn{bp} - number of seasonal AR terms (here and in 'JDemetra+' \eqn{bp \le 1});
 \item \eqn{s} - number of observations per year (frequency of the time series).
 }
 
@@ -85,8 +85,8 @@ The polynomial \eqn{\theta(B)} is an invertible moving average (MA) polynomial i
 
 where:
 \itemize{
-\item \eqn{q} - number of regular MA terms (here and in \emph{JDemetra+} \eqn{q \le 3});
-\item \eqn{bq} - number of seasonal MA terms (here and in \emph{JDemetra+} \eqn{bq \le 1});
+\item \eqn{q} - number of regular MA terms (here and in 'JDemetra+' \eqn{q \le 3});
+\item \eqn{bq} - number of seasonal MA terms (here and in 'JDemetra+' \eqn{bq \le 1});
 }
 
 The polynomial \eqn{\delta(B)} is the non-stationary AR polynomial in \eqn{B} (unit roots):
@@ -95,13 +95,13 @@ The polynomial \eqn{\delta(B)} is the non-stationary AR polynomial in \eqn{B} (u
 
 where:
 \itemize{
-\item \eqn{d} - regular differencing order (here and in \emph{JDemetra+} \eqn{d \le 1});
-\item \eqn{d_s} - seasonal differencing order (here and in \emph{JDemetra+} \eqn{d_s \le 1});
+\item \eqn{d} - regular differencing order (here and in 'JDemetra+' \eqn{d \le 1});
+\item \eqn{d_s} - seasonal differencing order (here and in 'JDemetra+' \eqn{d_s \le 1});
 }
 
-Notations used for AR and MA processes, model denoted as ARIMA \eqn{(P,D,Q)(BP,BD,BQ)}, are consistent with those in \emph{JDemetra+}.
+Notations used for AR and MA processes, model denoted as ARIMA \eqn{(P,D,Q)(BP,BD,BQ)}, are consistent with those in 'JDemetra+'.
 
-As regards the available predefined \emph{JDemetra+} X13 and TRAMO-SEATS model specifications, they are described in the tables below.
+As regards the available predefined 'JDemetra+' X13 and TRAMO-SEATS model specifications, they are described in the tables below.
 
 \strong{X13:}
 \tabular{rrrrrrr}{
@@ -181,7 +181,7 @@ myreg3
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.

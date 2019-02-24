@@ -75,7 +75,7 @@ regarima_spec_x13(object = object, estimate.from = NA_character_,
   fcst.horizon = NA_integer_)
 }
 \arguments{
-\item{spec}{predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "RG5c".
+\item{spec}{predefined 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
 
 The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
 
@@ -243,12 +243,12 @@ The final values of the \code{specification} can be also accessed with the funct
 \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers. The matrix can be also accessed with the function \code{\link{s_span}}.}
 }
 \description{
-\code{regarima_spec_def_x13} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
+\code{regarima_spec_def_x13} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
 
 \code{regarima_spec_x13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
 }
 \details{
-The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_spec_def_x13}) are described in the table below.
+The available predefined 'JDemetra+' model specifications (for the function \code{regarima_spec_def_x13}) are described in the table below.
 
 \tabular{rrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -321,6 +321,6 @@ myreg1
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 }
