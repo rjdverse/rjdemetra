@@ -14,7 +14,7 @@ setClass(
 #' @param spec model specification TRAMO-SEATS. For the function:
 #' \itemize{
 #' \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
-#' \item \code{tramoseats_def}, predefined TRAMO-SEATS \emph{JDemetra+} model specification (see \emph{Details}). The default is "RSAfull".
+#' \item \code{tramoseats_def}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "RSAfull".
 #' }
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
@@ -24,7 +24,7 @@ setClass(
 #'
 #' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 #'
-#' As regards the available predefined \emph{JDemetra+} TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
+#' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -65,7 +65,7 @@ setClass(
 #' }
 #'
 #' @references
-#' Info on JDemetra+, usage and functions:
+#' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 #'
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
@@ -74,36 +74,33 @@ setClass(
 #'
 #' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
 #'
-#' @examples
+#' @examples \donttest{
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec <- tramoseats_spec_def("RSAfull")
 #' mysa <- tramoseats(myseries, myspec)
-#' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 #' mysa
+#' 
+#' # Equivalent to:
+#' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
 #' mysa1
-#'
-#' myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
-#'                            tradingdays.option = "WorkingDays",
-#'                            easter.type = "Standard",
-#'                            automdl.enabled = FALSE, arima.mu = TRUE)
-#' mysa2 <- tramoseats(myseries, myspec2)
-#'
+#' 
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var <- ts.union(var1, var2)
-#' myspec3 <- tramoseats_spec(myspec,
-#'                             usrdef.varEnabled = TRUE, usrdef.var = var)
-#' s_preVar(myspec3)
-#' mysa3 <- tramoseats(myseries, myspec3)
-#' plot(mysa3)
-#' plot(mysa3$regarima)
-#' plot(mysa3$decomposition)
-#'
-#' mysa2 <- tramoseats_def(myseries, "RSAfull",
-#'                         userdefined = c("decomposition.sa_lin_f",
-#'                                         "decomposition.sa_lin_e"))
+#' myspec2 <- tramoseats_spec(myspec, tradingdays.mauto = "Unused",
+#'                            tradingdays.option = "WorkingDays",
+#'                            easter.type = "Standard",
+#'                            automdl.enabled = FALSE, arima.mu = TRUE,
+#'                            usrdef.varEnabled = TRUE, usrdef.var = var)
+#' s_preVar(myspec2)
+#' mysa2 <- tramoseats(myseries, myspec2,
+#'                     userdefined = c("decomposition.sa_lin_f",
+#'                                     "decomposition.sa_lin_e"))
 #' mysa2
-#'
+#' plot(mysa2)
+#' plot(mysa2$regarima)
+#' plot(mysa2$decomposition)
+#' }
 #' @export
 tramoseats <- function(series, spec,
                       userdefined = NULL){

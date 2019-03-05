@@ -51,6 +51,7 @@
 Plotting methods for the S3 class objects around the seasonal adjustment: \code{"regarima"} for RegARIMA,\code{"decomposition_X11"} and \code{"decomposition_SEATS"} for the decomposition with X13 and TRAMO-SEATS, \code{"final"} for the final SA results and \code{"SA"} for the entire seasonal adjustment object. The function \code{plot.SA} just calls the function \code{plot.final}.
 }
 \examples{
+\donttest{
 myseries <- ipi_c_eu[, "FR"]
 mysa <- x13_def(myseries, spec = c("RSA5c"))
  # RegArima
@@ -69,4 +70,5 @@ plot(mysa$final) # 2 graphics are plotted by default
 # changing the last date and the title
 plot(mysa$final, last_date = c(2000, 1),
      caption = "Results", type_chart = "sa-trend")
+}
 }

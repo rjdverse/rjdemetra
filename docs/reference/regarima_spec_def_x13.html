@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="RegARIMA model specification, pre-adjustment in X13 — regarima_spec_def_x13" />
 
-<meta property="og:description" content="regarima_spec_def_x13 creates (and modifies), from a predefined JDemetra+ model specification, a c(&quot;regarima_spec&quot;,&quot;X13&quot;) class object with the RegARIMA model specification for the X13 method.
+<meta property="og:description" content="regarima_spec_def_x13 creates (and modifies), from a predefined 'JDemetra+' model specification, a c(&quot;regarima_spec&quot;,&quot;X13&quot;) class object with the RegARIMA model specification for the X13 method.
 regarima_spec_x13 creates (and/or modifies) a c(&quot;regarima_spec&quot;,&quot;X13&quot;) class object with the RegARIMA model specification for the X13 method. The object is created from a c(&quot;regarima&quot;,&quot;X13&quot;) or c(&quot;regarima_spec&quot;,&quot;X13&quot;) class object." />
 
 <meta property="og:image" content="/logo.png" />
@@ -128,7 +128,7 @@ regarima_spec_x13 creates (and/or modifies) a c(&quot;regarima_spec&quot;,&quot;
 
     <div class="ref-description">
     
-    <p><code>regarima_spec_def_x13</code> creates (and modifies), from a predefined <em>JDemetra+</em> model specification, a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","X13")</a></code> class object with the RegARIMA model specification for the X13 method.</p>
+    <p><code>regarima_spec_def_x13</code> creates (and modifies), from a predefined 'JDemetra+' model specification, a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","X13")</a></code> class object with the RegARIMA model specification for the X13 method.</p>
 <p><code>regarima_spec_x13</code> creates (and/or modifies) a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","X13")</a></code> class object with the RegARIMA model specification for the X13 method. The object is created from a <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima","X13")</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_spec","X13")</a></code> class object.</p>
     
     </div>
@@ -207,7 +207,7 @@ regarima_spec_x13 creates (and/or modifies) a c(&quot;regarima_spec&quot;,&quot;
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>spec</th>
-      <td><p>predefined <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "RG5c".</p>
+      <td><p>predefined 'JDemetra+' model specification (see <em>Details</em>). The default is "RG5c".</p>
 <p>The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: <code>estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst</code> and <code>estimate.exclLast</code>; where <code>estimate.from</code> and <code>estimate.to</code> have priority over remaining span control variables, <code>estimate.last</code> and <code>estimate.first</code> have priority over <code>estimate.exclFirst</code> and <code>estimate.exclLast</code>, and <code>estimate.last</code> has priority over <code>estimate.first</code>.</p></td>
     </tr>
     <tr>
@@ -502,7 +502,7 @@ The final values of the <code>specification</code> can be also accessed with the
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The available predefined <em>JDemetra+</em> model specifications (for the function <code>regarima_spec_def_x13</code>) are described in the table below.</p>
+    <p>The available predefined 'JDemetra+' model specifications (for the function <code>regarima_spec_def_x13</code>) are described in the table below.</p>
 <table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td></tr>
 <tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
@@ -517,17 +517,17 @@ The final values of the <code>specification</code> can be also accessed with the
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Info on JDemetra+, usage and functions:
+    <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>))
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
 
  <span class='co'># Modify a pre-specified model specification</span>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>),
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>,
                                  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)
 
@@ -540,7 +540,7 @@ The final values of the <code>specification</code> can be also accessed with the
 <span class='no'>myreg4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
 
  <span class='co'># Pre-specified outliers</span>
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>), <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
               <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
               <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
               <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
@@ -575,7 +575,7 @@ The final values of the <code>specification</code> can be also accessed with the
 #&gt; </div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   type       date coeff
 #&gt; 1   LS 2008-10-01    36
 #&gt; 2   AO 2002-01-01    14</div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+
  <span class='co'># User-defined variables</span>
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>),
            <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
@@ -586,24 +586,162 @@ The final values of the <code>specification</code> can be also accessed with the
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                                  <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span>
-
+<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5274      0.048
+#&gt; BTheta(1)  -0.4863      0.051
+#&gt; 
+#&gt;                Estimate Std. Error
+#&gt; r.var1        1.774e-03      0.008
+#&gt; r.var2       -1.298e-05      0.001
+#&gt; Monday       -1.386e-01      0.166
+#&gt; Tuesday       2.413e-03      0.166
+#&gt; Wednesday     2.401e-01      0.165
+#&gt; Thursday     -5.340e-01      0.165
+#&gt; Friday        4.324e-01      0.164
+#&gt; Saturday      1.547e-01      0.166
+#&gt; Leap year    -4.446e-02      0.504
+#&gt; Easter [1]   -1.084e+00      0.339
+#&gt; LS (11-2008) -8.443e+00      1.317
+#&gt; LS (1-2009)  -7.279e+00      1.321
+#&gt; LS (5-2008)  -5.052e+00      1.268
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.665 on 323 degrees of freedom
+#&gt; Log likelihood = -624.7, aic =  1281 aicc =  1283, bic(corrected for length) = 1.287
+#&gt; </div><div class='input'>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                                  <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var1</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>2</span>,
                                  <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
-<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myreg2</span>)
-
+<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myreg2</span>)</div><div class='output co'>#&gt; $series
+#&gt;               Jan          Feb          Mar          Apr          May
+#&gt; 1990  -4.24674825 -11.43137603   2.33440224  -1.89236577 -16.63411256
+#&gt; 1991  13.22088309  13.65964636  -2.49723710  -4.24721350  10.98439335
+#&gt; 1992   9.34707631  -4.72669846  15.83013221   5.97754220   4.66084586
+#&gt; 1993   5.34635439  -9.87628560  11.87792273  -5.17542212  -2.59560251
+#&gt; 1994 -16.97191918   6.42287683  -9.95239613   9.63813900 -16.56037231
+#&gt; 1995  -7.49165418   5.18199077  -1.92337214   0.28809812   3.58590886
+#&gt; 1996   2.72277021 -10.81659008 -23.29399361  -5.49625959  -0.72579991
+#&gt; 1997  12.22702835  10.77188166  -6.11945460   5.06866968   4.60068373
+#&gt; 1998  11.94158303   9.13057148  -7.86752993  -4.10929700   4.76373682
+#&gt; 1999 -13.02671671   6.34857535   9.99655161  -3.37748953  -0.86033607
+#&gt; 2000  -6.61257061   5.48811286  -5.39367800  -1.71318426  -7.66734605
+#&gt; 2001  -0.47539083   7.86925425  11.66684112  -2.71823871  -3.13704285
+#&gt; 2002 -11.14492926  -8.42058813 -15.04294209  -2.84026455   0.42869041
+#&gt; 2003  -5.78524902  -1.69109048 -19.19232520 -15.34266387 -11.14761221
+#&gt; 2004   9.71396469  -5.79663020  16.04179789   2.25973337  -5.14857122
+#&gt; 2005 -15.55643970   0.93501283  -3.66949421  -1.29408799   4.07795520
+#&gt; 2006 -16.09575292 -10.49710115  20.52033974   1.76436411  11.28307358
+#&gt; 2007  -2.81725199  -7.91679461   0.01653727 -11.87530126   3.62417465
+#&gt; 2008   4.95847824  12.99750970 -16.15985506 -12.50367945  15.82132306
+#&gt; 2009  17.40218394  -3.24455939  -4.47511333   4.16082526 -12.95865368
+#&gt; 2010  -7.00069022  18.60931509  18.03924959 -13.56043492  -3.14751072
+#&gt; 2011 -14.00912333  14.45014910  -4.23481621  -7.33749597  -7.08484753
+#&gt; 2012  17.47150257  -0.81704668   1.24141586   3.92236141   3.78419970
+#&gt; 2013  12.07632181   0.32001384   1.80397550   0.77160580   5.58395338
+#&gt; 2014   8.15566796   1.20032668   8.81789848 -17.98743117  -9.57051078
+#&gt; 2015   2.26820843  -5.91868492  -4.05414494  14.14224665   2.41625825
+#&gt; 2016  -3.44214729   6.45775407 -15.34500551   5.99672514  -5.04358892
+#&gt; 2017  20.20798363 -18.38661562   1.72937164  -7.63245040 -11.18492914
+#&gt;               Jun          Jul          Aug          Sep          Oct
+#&gt; 1990  19.15690770  -8.16894436   3.83650493  -4.58632251  -7.15703978
+#&gt; 1991   6.70923041   0.30954656  23.68511961  25.85788113  12.12280955
+#&gt; 1992  -7.44367537   9.59055258   1.52637081  -7.69368697  13.93080739
+#&gt; 1993  -3.28064671   0.73432395  -2.47863020 -13.73862256  -0.40445818
+#&gt; 1994  10.70861091  -1.09026360  18.99186393 -11.37030733  -2.79719758
+#&gt; 1995  -0.28995035  11.47042072   3.73588935   3.23339211  -8.29819320
+#&gt; 1996  10.32288404   2.15138526  -4.94340125  15.12138281  -5.79463264
+#&gt; 1997  14.84391861   8.81963226  -5.36702239  12.85553707   5.87848533
+#&gt; 1998   1.85915868 -13.24716253  11.72371055   2.31492772   4.83071904
+#&gt; 1999 -17.18817584  -9.29121572   8.13676046   5.26413546  10.11957390
+#&gt; 2000  -6.06574846  16.47312821   8.41069348   3.38175097  -4.04883076
+#&gt; 2001  -2.86300150  -8.03440263  -0.94555455  -0.74046506   7.14490683
+#&gt; 2002  -0.08866413 -29.49083784   0.20358254  -0.98446980   5.89109098
+#&gt; 2003  15.97811635  -6.39805078  15.66690553 -14.49155712  -7.91503959
+#&gt; 2004  -8.23788240   3.34415250  -0.93490765   3.04062078  -4.76507534
+#&gt; 2005  -5.83968954  -1.93449890  -2.69546670   0.73658232   3.57236138
+#&gt; 2006   4.35001744   5.48833492   6.47418304   8.78463454   3.50797869
+#&gt; 2007  -5.49435319   6.92949838  -0.60843916 -11.93540930  -1.19908059
+#&gt; 2008  12.52529118  -2.09395701  -6.39033687   3.98902937  13.41973500
+#&gt; 2009   6.82633090   4.96913333  14.39660656  12.07358558   2.38514694
+#&gt; 2010 -10.19265181  -6.12249656  -2.89068749  15.06983292   3.67722694
+#&gt; 2011  14.75092459   8.45004185  12.93994431   2.98161142  -4.05682490
+#&gt; 2012   1.66175673  11.53387369   0.14748302   0.21440845  -8.26352170
+#&gt; 2013  -1.66854367  -2.27980619   2.42666056  -9.28482969  15.15406678
+#&gt; 2014  -4.74058606 -18.60461283   2.53690073  -2.14401713 -23.70181451
+#&gt; 2015 -14.36087478  -3.14552745  -4.80542811   8.36254248  -0.52349287
+#&gt; 2016  -4.06909625  -4.60935206  22.14908426  14.86967820  -3.55098858
+#&gt; 2017  11.97977461   9.81193912  11.91749205   6.32833568   5.32825947
+#&gt;               Nov          Dec
+#&gt; 1990   4.29548541 -11.69852745
+#&gt; 1991 -12.51196841   4.00266042
+#&gt; 1992   9.18668766  10.16087064
+#&gt; 1993   4.21538239   2.01597506
+#&gt; 1994  -8.94129051   1.36701846
+#&gt; 1995  13.94462582  -1.91543577
+#&gt; 1996  16.74789634 -10.00980259
+#&gt; 1997 -13.08482026   3.16726325
+#&gt; 1998  -5.35319580  13.78135819
+#&gt; 1999   8.31379809   4.15134145
+#&gt; 2000   9.00009039  11.90666655
+#&gt; 2001   1.24718366  12.96594339
+#&gt; 2002  -4.25751629   6.34658985
+#&gt; 2003  -5.04480733   4.01826700
+#&gt; 2004  -2.41311717   8.24155833
+#&gt; 2005   5.50428418   0.38401793
+#&gt; 2006   0.49879720   8.35749446
+#&gt; 2007  -7.08107950 -16.16663973
+#&gt; 2008  -0.37607422   5.43670114
+#&gt; 2009  -2.98837878  13.84621050
+#&gt; 2010  -0.20034941  -9.79921959
+#&gt; 2011  -1.38807578  -2.22592731
+#&gt; 2012   0.47399133  -2.93107372
+#&gt; 2013  -8.11598824  13.11247408
+#&gt; 2014   0.03258078   6.69745568
+#&gt; 2015   9.51957625  14.94512798
+#&gt; 2016   8.76203737  -2.14696646
+#&gt; 2017  -8.20121900  -1.59325676
+#&gt; 
+#&gt; $description
+#&gt;              type coeff
+#&gt; userdef Undefined     2
+#&gt; </div><div class='input'>
  <span class='co'># Pre-specified ARMA coefficients</span>
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_def_x13</span>(<span class='kw'>spec</span><span class='kw'>=</span><span class='st'>"RG5c"</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span><span class='fl'>FALSE</span>,
              <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
              <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
              <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
 
-<span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec1</span>)
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span>
-<span class='co'># }</span></pre>
+<span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;                Type Value
+#&gt; Phi(1)        Fixed  -0.8
+#&gt; Theta(1)      Fixed  -0.6
+#&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
+<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     -0.8000      0.000
+#&gt; Theta(1)   -0.6000      0.000
+#&gt; BTheta(1)  -0.4542      0.051
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday       -0.05826      0.139
+#&gt; Tuesday      -0.02508      0.139
+#&gt; Wednesday     0.30165      0.137
+#&gt; Thursday     -0.59487      0.138
+#&gt; Friday        0.50268      0.140
+#&gt; Saturday      0.03995      0.138
+#&gt; Leap year    -0.04011      0.451
+#&gt; Easter [1]   -1.20959      0.275
+#&gt; AO (10-2005) -4.95487      1.182
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 2.096 on 323 degrees of freedom
+#&gt; Log likelihood = -698.8, aic =  1420 aicc =  1420, bic(corrected for length) = 1.659
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

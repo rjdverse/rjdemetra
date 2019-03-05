@@ -1,6 +1,6 @@
 #' Create a workspace or a multi-processing
 #'
-#' Functions to create a JDemetra+ workspace (\code{new_workspace()})
+#' Functions to create a 'JDemetra+' workspace (\code{new_workspace()})
 #' add a multi-processing to it (\code{new_multiprocessing()}).
 #'
 #' @param workspace a workspace object
@@ -13,7 +13,7 @@
 #' \code{\link{add_sa_item}}
 #'
 #' @examples
-#' # Create and export a empty JDemetra+ workspace
+#' # Create and export a empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #' 
@@ -42,21 +42,21 @@ new_multiprocessing <- function(workspace, name) {
 
 #' Save a workspace
 #'
-#' Functions save a \code{workspace} object into a JDemetra+ workspace.
+#' Functions save a \code{workspace} object into a 'JDemetra+'' workspace.
 #'
 #' @param workspace a workspace object to export
-#' @param file the path to the export JDemetra+ workspace (.xml file).
+#' @param file the path to the export 'JDemetra+' workspace (.xml file).
 #' By default a dialog box opens.
 #'
 #' @seealso \code{\link{load_workspace}}
 #'
-#' @examples \dontrun{
-#' # Create and export a empty JDemetra+ workspace
+#' @examples \donttest{
+#' dir <- tempdir()
+#' # Create and export a empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' new_multiprocessing(wk, "sa1")
-#' save_workspace(wk, "workspace.xml")
-#' }
-#'
+#' save_workspace(wk, file.path(dir, "workspace.xml"))
+#'}
 #'
 #' @return A boolean indicating whether the export has suceed.
 #' @export
@@ -102,10 +102,11 @@ save_workspace <- function(workspace, file) {
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
 #'
-#' @examples \dontrun{
-#' spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+#' @examples\donttest{
+#' dir <- tempdir()
+#' spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-#' spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
+#' spec_ts <- tramoseats_spec_def(spec = "RSA5")
 #' sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
 #' wk <- new_workspace()
@@ -113,7 +114,7 @@ save_workspace <- function(workspace, file) {
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
-#' save_workspace(wk, "workspace.xml")
+#' save_workspace(wk, file.path(dir, "workspace.xml"))
 #' }
 #'
 #' @export

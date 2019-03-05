@@ -5,12 +5,16 @@
 
 [![Build
 Status](https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master)](https://travis-ci.com/jdemetra/rjdemetra)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+[![CRAN last
+release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 
 RJDemetra is a R interface to JDemetra+, the seasonal adjustment
 software [officially
 recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf)
-to the members of the ESS and the European System of Central Banks.
-JDemetra+ implements the two leading seasonal adjustment methods
+to the members of the European Statistical System (ESS) and the European
+System of Central Banks. JDemetra+ implements the two leading seasonal
+adjustment methods
 [TRAMO/SEATS+](http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html)
 and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
 
@@ -30,11 +34,13 @@ RJDemetra relies on the
 [rJava](https://CRAN.R-project.org/package=rJava) package and Java SE 8
 or later version is required.
 
-You can install RJDemetra from github with:
-
 ``` r
+# Install release version from CRAN
+install.packages("RJDemetra")
+
+# Install development version from GitHub
 # install.packages("devtools")
-devtools::install_github("jdemetra/rjdemetra", args = "--no-multiarch")
+devtools::install_github("jdemetra/rjdemetra")
 ```
 
 ## Basic example

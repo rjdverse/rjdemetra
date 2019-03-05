@@ -71,8 +71,9 @@ s_seats(object = NA)
 Below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
 }
 \examples{
+\donttest{
 myseries <- ipi_c_eu[, "FR"]
-myreg1 <- regarima_def_x13(myseries, spec = c("RG5c"))
+myreg1 <- regarima_def_x13(myseries, spec = "RG5c")
 myspec1 <- regarima_spec_x13(myreg1,
              estimate.from = "2005-10-01",
              outlier.from = "2010-03-01")
@@ -133,7 +134,7 @@ s_fcst(myspec1)
 s_span(myreg1)
 s_span(myspec1)
 
-myspec5 <- x13_spec_def(spec = c("RSA5c"), x11.seasonalComp = FALSE)
+myspec5 <- x13_spec_def(spec = "RSA5c", x11.seasonalComp = FALSE)
 mysa5 <- x13(myseries, myspec5)
 
 s_x11(mysa5)
@@ -145,7 +146,8 @@ mysa6 <- tramoseats(myseries, myspec6)
 s_seats(mysa6)
 s_seats(mysa6)
 }
+}
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 }

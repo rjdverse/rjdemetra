@@ -2,19 +2,19 @@
 % Please edit documentation in R/import_workspace.R
 \name{load_workspace}
 \alias{load_workspace}
-\title{Load a JDemetra+ workpace}
+\title{Load a 'JDemetra+' workpace}
 \usage{
 load_workspace(file)
 }
 \arguments{
-\item{file}{the path to the JDemetra+ workspace to load.
+\item{file}{the path to the 'JDemetra+' workspace to load.
 By default a dialog box opens.}
 }
 \value{
 An object of class \code{"workspace"}.
 }
 \description{
-Function to load a JDemetra+ workspace.
+Function to load a 'JDemetra+' workspace.
 }
 \seealso{
 \code{\link{save_workspace}}, \code{\link{get_model}}

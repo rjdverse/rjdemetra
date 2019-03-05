@@ -18,7 +18,8 @@ By default the workspace only contains definitions: computation is needed to get
 (with \code{\link{get_model}}).
 }
 \examples{
-spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+\donttest{
+spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 
 wk <- new_workspace()
@@ -31,7 +32,7 @@ get_model(sa_item1, wk) # Returns NULL
 compute(wk)
 
 get_model(sa_item1, wk) # Returns the SA model sa_x13
-
+}
 
 
 }

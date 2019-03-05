@@ -151,7 +151,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
       <th>spec</th>
       <td><p>model specification TRAMO-SEATS. For the function:</p><ul>
 <li><p><code>tramoseats</code>, object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","TRAMO_SEATS")</a></code></p></li>
-<li><p><code>tramoseats_def</code>, predefined TRAMO-SEATS <em>JDemetra+</em> model specification (see <em>Details</em>). The default is "RSAfull".</p></li>
+<li><p><code>tramoseats_def</code>, predefined TRAMO-SEATS 'JDemetra+' model specification (see <em>Details</em>). The default is "RSAfull".</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -192,7 +192,7 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
     <p>The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: <code><a href='regarima.html'>regarima</a></code>).
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)) or multiplicative (\(y = t * s * i\)). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
 <p>In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (<a href='www.bde.es'>www.bde.es</a>).</p>
-<p>As regards the available predefined <em>JDemetra+</em> TRAMO-SEATS model specifications (for the function <code>tramoseats_def</code>), they are described in the table below.</p><table class='table'>
+<p>As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications (for the function <code>tramoseats_def</code>), they are described in the table below.</p><table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td><td><strong>Outliers detection</strong></td></tr>
 <tr><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td><td></td><td></td></tr>
 <tr><td>RSA0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
@@ -206,7 +206,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Info on JDemetra+, usage and functions:
+    <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>
@@ -220,7 +220,6 @@ In the second part, the pre-adjusted series is decomposed into the following com
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='st'>"RSAfull"</span>)
 <span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec</span>)
-<span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>)
 <span class='no'>mysa</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
@@ -343,7 +342,10 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on i (td)                       1.000
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='no'>mysa1</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+<span class='co'># Equivalent to:</span>
+<span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>)
+<span class='no'>mysa1</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
@@ -466,451 +468,438 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
-                           <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
-                           <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
-                           <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
-
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
-<span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec</a></span>(<span class='no'>myspec</span>,
-                            <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
-<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec3</span>)</div><div class='output co'>#&gt; $series
-#&gt;                  var1        var2
-#&gt; Jan 1990  -3.57528325  149.741394
-#&gt; Feb 1990  -6.46861514  -30.282688
-#&gt; Mar 1990  -0.50141801 -137.683133
-#&gt; Apr 1990   4.16942847   88.317017
-#&gt; May 1990  -6.32587542   67.142028
-#&gt; Jun 1990  11.50146673  123.002238
-#&gt; Jul 1990  -2.35475907  164.546788
-#&gt; Aug 1990 -16.43107386  -18.292604
-#&gt; Sep 1990 -15.03382146 -137.925781
-#&gt; Oct 1990 -20.50584847  125.060060
-#&gt; Nov 1990  -7.53198229 -187.623677
-#&gt; Dec 1990  -1.34141958  -36.878757
-#&gt; Jan 1991  10.05782847 -212.929731
-#&gt; Feb 1991  21.67186798   33.764603
-#&gt; Mar 1991  23.22556540 -157.457485
-#&gt; Apr 1991 -10.20423391  -19.631941
-#&gt; May 1991   0.48814436   91.506011
-#&gt; Jun 1991  -7.71888628  107.863654
-#&gt; Jul 1991  -7.85235068  145.280285
-#&gt; Aug 1991  -7.26603031 -165.328109
-#&gt; Sep 1991   6.81878032 -276.186752
-#&gt; Oct 1991  -2.29843287   26.436916
-#&gt; Nov 1991 -15.10601724  102.457159
-#&gt; Dec 1991  -5.83727687  -65.918555
-#&gt; Jan 1992 -20.22918454  -38.630438
-#&gt; Feb 1992   4.03504676  -24.249895
-#&gt; Mar 1992   5.50015549   22.059324
-#&gt; Apr 1992   0.28357122 -148.109003
-#&gt; May 1992   8.93165020   72.469120
-#&gt; Jun 1992  -3.76555496 -237.751470
-#&gt; Jul 1992   6.05884808   -6.540921
-#&gt; Aug 1992  -0.04874726  -46.970481
-#&gt; Sep 1992  -5.20796373  -28.051629
-#&gt; Oct 1992  -6.39018598   57.483659
-#&gt; Nov 1992  -6.35894137  -20.567685
-#&gt; Dec 1992   1.06586975   23.488051
-#&gt; Jan 1993  11.76914248   11.062832
-#&gt; Feb 1993   4.47391153   27.420223
-#&gt; Mar 1993  22.72954766  157.491963
-#&gt; Apr 1993   1.36058206   56.776783
-#&gt; May 1993 -19.99039133   -5.961225
-#&gt; Jun 1993  -4.20500870  -14.958771
-#&gt; Jul 1993  -3.78407395   26.616879
-#&gt; Aug 1993  12.20774789   52.840324
-#&gt; Sep 1993 -15.41030292  -57.938809
-#&gt; Oct 1993  -3.10310122   94.219937
-#&gt; Nov 1993  -0.20108184  -70.636136
-#&gt; Dec 1993 -23.90200336 -127.540210
-#&gt; Jan 1994   8.89865359   73.325992
-#&gt; Feb 1994 -14.82813325  -42.020709
-#&gt; Mar 1994   4.45750348  -25.537509
-#&gt; Apr 1994  13.69775856  -36.923822
-#&gt; May 1994  -0.20110027  121.244833
-#&gt; Jun 1994  -1.09217587  -44.536301
-#&gt; Jul 1994   2.64661745  113.866752
-#&gt; Aug 1994   3.03848264   19.052348
-#&gt; Sep 1994  -1.83388483 -136.639361
-#&gt; Oct 1994   5.59649672 -129.810260
-#&gt; Nov 1994  -1.86553842 -213.709831
-#&gt; Dec 1994  -8.12275372   -9.620553
-#&gt; Jan 1995 -16.40581672   69.450905
-#&gt; Feb 1995   5.07922478  -47.459123
-#&gt; Mar 1995  17.54336961  176.313061
-#&gt; Apr 1995   5.92400202  202.584606
-#&gt; May 1995  10.16713288   42.761881
-#&gt; Jun 1995   1.21620586  -56.647935
-#&gt; Jul 1995 -10.78067265  -83.383531
-#&gt; Aug 1995 -11.43565720   39.825915
-#&gt; Sep 1995  -5.29643677 -147.453793
-#&gt; Oct 1995  -6.81273156  -39.544120
-#&gt; Nov 1995  -2.02447559  -13.070247
-#&gt; Dec 1995  16.84495721 -199.949395
-#&gt; Jan 1996 -10.33773237  -99.593086
-#&gt; Feb 1996  -1.55976673   42.011400
-#&gt; Mar 1996  -0.46400637   -6.286163
-#&gt; Apr 1996  -9.53628727   -8.013185
-#&gt; May 1996   4.16260798   -3.228341
-#&gt; Jun 1996   1.14029609  -71.898093
-#&gt; Jul 1996   0.63918753 -111.656132
-#&gt; Aug 1996  -9.19332238  -78.026990
-#&gt; Sep 1996   9.01335290 -177.695853
-#&gt; Oct 1996  -7.97728297  -42.783487
-#&gt; Nov 1996   6.68221204 -203.102701
-#&gt; Dec 1996   1.55214296  275.076475
-#&gt; Jan 1997   1.28688092  151.366972
-#&gt; Feb 1997 -15.33065453    3.398894
-#&gt; Mar 1997   2.02360673   74.079278
-#&gt; Apr 1997  -7.17538653 -127.080818
-#&gt; May 1997   3.61694761  -16.356423
-#&gt; Jun 1997  13.99004294  -61.094549
-#&gt; Jul 1997   3.72698962  125.188419
-#&gt; Aug 1997 -15.65644294   25.031947
-#&gt; Sep 1997  -0.51694539 -170.558168
-#&gt; Oct 1997   5.14082103  -85.541313
-#&gt; Nov 1997   5.49899523  -14.490163
-#&gt; Dec 1997   8.67816913  -32.444696
-#&gt; Jan 1998   6.84360081  -17.256490
-#&gt; Feb 1998  -1.62679977 -123.606292
-#&gt; Mar 1998 -17.84364724 -190.230421
-#&gt; Apr 1998 -10.37145566   -9.450402
-#&gt; May 1998   8.30147723    3.255579
-#&gt; Jun 1998   6.07346945   46.129012
-#&gt; Jul 1998  -1.22186361  138.140030
-#&gt; Aug 1998   9.33125139  -41.647627
-#&gt; Sep 1998  -9.61276680   68.094267
-#&gt; Oct 1998   2.55081707  -41.437304
-#&gt; Nov 1998  -5.45401573  -51.834551
-#&gt; Dec 1998   9.30360736  -68.401973
-#&gt; Jan 1999  -5.37650558  -88.564860
-#&gt; Feb 1999  -4.52426068    4.923707
-#&gt; Mar 1999  -4.39290972   18.556122
-#&gt; Apr 1999  -6.16223111  -60.865779
-#&gt; May 1999   4.41634552  -73.110285
-#&gt; Jun 1999   4.82597453  271.514421
-#&gt; Jul 1999   5.42144383 -133.938704
-#&gt; Aug 1999 -22.90784653  -64.601525
-#&gt; Sep 1999   3.10351853  -93.245461
-#&gt; Oct 1999  14.04078979  -76.908693
-#&gt; Nov 1999  13.77117639   37.157978
-#&gt; Dec 1999  10.60395652   35.543278
-#&gt; Jan 2000   6.32172891  -98.399849
-#&gt; Feb 2000  10.84928035   21.472959
-#&gt; Mar 2000  13.56459439   -8.008508
-#&gt; Apr 2000   3.62424040 -142.236955
-#&gt; May 2000  21.69344465  110.814896
-#&gt; Jun 2000   1.39130512  107.847764
-#&gt; Jul 2000  13.76326526  -44.025034
-#&gt; Aug 2000  -4.91449988  -77.816901
-#&gt; Sep 2000  15.34915763 -181.859001
-#&gt; Oct 2000  -4.16198718 -112.408090
-#&gt; Nov 2000  -5.20543795  106.052384
-#&gt; Dec 2000   8.50583868 -147.870016
-#&gt; Jan 2001   3.34496575 -155.156017
-#&gt; Feb 2001  -8.29351774   77.750668
-#&gt; Mar 2001  -2.18695943  106.844014
-#&gt; Apr 2001 -15.45083718  -18.358770
-#&gt; May 2001   2.33229783  155.824293
-#&gt; Jun 2001   0.31069642  -21.324238
-#&gt; Jul 2001   3.57865645   93.053526
-#&gt; Aug 2001  16.08624223   41.081180
-#&gt; Sep 2001  14.29854263 -127.984430
-#&gt; Oct 2001  -9.48339642  -78.236663
-#&gt; Nov 2001  10.15705545 -227.608345
-#&gt; Dec 2001   0.37734606  -12.639591
-#&gt; Jan 2002 -17.44239400  144.814671
-#&gt; Feb 2002  -9.70073812 -144.275737
-#&gt; Mar 2002  -2.29027360  146.718718
-#&gt; Apr 2002  -9.74845679  -74.329990
-#&gt; May 2002  26.92372420  -30.422384
-#&gt; Jun 2002  13.92393858   33.765806
-#&gt; Jul 2002  13.60076151  -60.750209
-#&gt; Aug 2002  -3.65415875  -29.556027
-#&gt; Sep 2002  -8.68937197  -13.453714
-#&gt; Oct 2002  -5.06556729   81.478437
-#&gt; Nov 2002  12.14707304  -27.292173
-#&gt; Dec 2002   5.06958680  215.948580
-#&gt; Jan 2003 -20.94971309  109.173757
-#&gt; Feb 2003   0.34079240   74.338485
-#&gt; Mar 2003   8.52728701 -120.785935
-#&gt; Apr 2003   7.43228137   32.781805
-#&gt; May 2003   5.57153608  -53.416511
-#&gt; Jun 2003 -12.48583225  128.394672
-#&gt; Jul 2003  -2.07874310    2.893134
-#&gt; Aug 2003   4.23969459  -39.567707
-#&gt; Sep 2003  -5.06697440  -69.486833
-#&gt; Oct 2003  -6.11523314 -149.208070
-#&gt; Nov 2003  24.11659453  144.425724
-#&gt; Dec 2003  -1.64958139  -34.701739
-#&gt; Jan 2004  -4.40406048   -4.025917
-#&gt; Feb 2004   5.21976172  124.663211
-#&gt; Mar 2004 -19.18322250 -134.630152
-#&gt; Apr 2004 -19.82649963  -57.390128
-#&gt; May 2004   5.21200156  -70.595925
-#&gt; Jun 2004   7.77783201 -185.740454
-#&gt; Jul 2004  -8.12118870  -24.697048
-#&gt; Aug 2004   9.10748320  -33.556093
-#&gt; Sep 2004   9.48753954  -24.937687
-#&gt; Oct 2004 -13.48049450   45.952256
-#&gt; Nov 2004   3.54175858  -46.007548
-#&gt; Dec 2004   5.30263933    5.893280
-#&gt; Jan 2005  -3.10974933  -74.259108
-#&gt; Feb 2005  -2.44155532 -216.357400
-#&gt; Mar 2005  -2.91878192  -23.289649
-#&gt; Apr 2005 -11.28086164   87.490683
-#&gt; May 2005 -11.22881586  -97.349403
-#&gt; Jun 2005  20.53938640  -51.274686
-#&gt; Jul 2005  -9.09518426  -92.348799
-#&gt; Aug 2005   4.58379156 -149.442573
-#&gt; Sep 2005  -0.46618452  -16.593036
-#&gt; Oct 2005  -6.80954604  158.223832
-#&gt; Nov 2005 -14.88829402  101.460227
-#&gt; Dec 2005  -3.92513008 -114.647834
-#&gt; Jan 2006 -17.49682017  -90.984911
-#&gt; Feb 2006  -0.38667632  310.918268
-#&gt; Mar 2006  -7.97153244 -106.955277
-#&gt; Apr 2006  -9.15920537  -70.010952
-#&gt; May 2006   0.73267464  -19.844447
-#&gt; Jun 2006  12.38171318   74.362012
-#&gt; Jul 2006   7.18371336   -5.015977
-#&gt; Aug 2006   5.39466495  131.314355
-#&gt; Sep 2006 -10.61233995    8.601352
-#&gt; Oct 2006  -5.40737866  -62.985137
-#&gt; Nov 2006  -7.15204714   65.507033
-#&gt; Dec 2006  -1.78920085    1.939355
-#&gt; Jan 2007   1.64970277   69.626996
-#&gt; Feb 2007  -7.27408166  200.886989
-#&gt; Mar 2007  -5.37837129   -5.697828
-#&gt; Apr 2007  -5.99664904   24.041550
-#&gt; May 2007  11.82087754   -2.189017
-#&gt; Jun 2007   1.89212875  -83.080816
-#&gt; Jul 2007   2.48949114  140.247432
-#&gt; Aug 2007  10.46643411  -72.386911
-#&gt; Sep 2007 -12.89300936  133.058037
-#&gt; Oct 2007   3.75115570  -81.133302
-#&gt; Nov 2007  -5.56918391  179.503611
-#&gt; Dec 2007   3.02426630   68.662633
-#&gt; Jan 2008   2.22266466    8.937800
-#&gt; Feb 2008  -9.62166963   32.454774
-#&gt; Mar 2008   0.52032369    7.131812
-#&gt; Apr 2008   9.00040382   23.304838
-#&gt; May 2008  -3.94900880  198.637658
-#&gt; Jun 2008   9.54145996  -95.167079
-#&gt; Jul 2008  -5.88214348  -55.864232
-#&gt; Aug 2008 -14.76584527   25.581454
-#&gt; Sep 2008 -13.77775770  -19.807617
-#&gt; Oct 2008 -13.45672313   42.878914
-#&gt; Nov 2008  -7.36637962    7.077011
-#&gt; Dec 2008  -4.70111496 -153.665380
-#&gt; Jan 2009  13.80609338   45.398437
-#&gt; Feb 2009  16.75010928   87.439857
-#&gt; Mar 2009  11.76906634 -129.773757
-#&gt; Apr 2009  -1.48898336 -107.896524
-#&gt; May 2009  -1.77823364 -113.484994
-#&gt; Jun 2009   8.03121858    2.261431
-#&gt; Jul 2009  -4.15795349   -2.146122
-#&gt; Aug 2009  12.12489586  -27.877244
-#&gt; Sep 2009  12.40360032   -2.420641
-#&gt; Oct 2009   6.85675880   82.502030
-#&gt; Nov 2009  -0.26798678  -75.018278
-#&gt; Dec 2009   3.09580509   53.621047
-#&gt; Jan 2010   2.49864328 -157.271748
-#&gt; Feb 2010 -13.56460869  -98.642742
-#&gt; Mar 2010   5.99379768  198.351232
-#&gt; Apr 2010   0.08647790 -185.137844
-#&gt; May 2010   0.90716610  -90.978818
-#&gt; Jun 2010  -6.57057410 -195.144002
-#&gt; Jul 2010  -4.81782250  -80.027646
-#&gt; Aug 2010   0.17757879 -186.936160
-#&gt; Sep 2010  -8.59535756  -75.057148
-#&gt; Oct 2010  13.57704977  -59.093839
-#&gt; Nov 2010  12.15061177  -74.209927
-#&gt; Dec 2010  14.53912917   69.351208
-#&gt; Jan 2011  -0.85911982   -5.946397
-#&gt; Feb 2011  -6.17568750 -186.389510
-#&gt; Mar 2011  -2.18260249 -127.450892
-#&gt; Apr 2011 -13.26005211 -178.177081
-#&gt; May 2011 -23.62208897  -50.859339
-#&gt; Jun 2011 -14.09969554 -173.687829
-#&gt; Jul 2011   2.54397136    4.048130
-#&gt; Aug 2011   2.95870299  -12.417946
-#&gt; Sep 2011   0.56789794  -61.275343
-#&gt; Oct 2011  -1.02654857   16.066248
-#&gt; Nov 2011  19.51923032  -66.235963
-#&gt; Dec 2011   8.78565956  -33.485166
-#&gt; Jan 2012 -13.06616928   62.301159
-#&gt; Feb 2012   0.90344272  102.819429
-#&gt; Mar 2012   9.02358040 -113.457824
-#&gt; Apr 2012   5.49421324   91.691105
-#&gt; May 2012  -8.69839200  121.387479
-#&gt; Jun 2012  -0.39214648  -68.593246
-#&gt; Jul 2012  -5.18451682 -109.456819
-#&gt; Aug 2012  -9.11849617   36.487410
-#&gt; Sep 2012   1.50313640 -100.801708
-#&gt; Oct 2012   4.40355449   55.499644
-#&gt; Nov 2012  13.19782059   43.606592
-#&gt; Dec 2012   2.46561126   10.537330
-#&gt; Jan 2013   9.41826599  -25.373785
-#&gt; Feb 2013  -3.42151332  -97.649123
-#&gt; Mar 2013  -2.76146811   39.421777
-#&gt; Apr 2013   3.83656780  101.490303
-#&gt; May 2013  14.46910225   63.144381
-#&gt; Jun 2013  17.33900291  -48.339825
-#&gt; Jul 2013   4.56429376 -152.633394
-#&gt; Aug 2013   7.07503490   61.684228
-#&gt; Sep 2013  20.63789224  122.928684
-#&gt; Oct 2013   0.23910586   15.745303
-#&gt; Nov 2013   2.45949461  140.634206
-#&gt; Dec 2013   2.72059145   39.680092
-#&gt; Jan 2014  -9.92458577   32.642296
-#&gt; Feb 2014  -0.27577951 -145.934331
-#&gt; Mar 2014  22.22845163  -79.929553
-#&gt; Apr 2014   1.55503899   47.001280
-#&gt; May 2014  -8.69116318 -115.018052
-#&gt; Jun 2014 -11.74489450  -27.159672
-#&gt; Jul 2014 -17.59677307   45.742422
-#&gt; Aug 2014   0.58361585   -1.695794
-#&gt; Sep 2014  11.64519864  -54.159436
-#&gt; Oct 2014   3.37627892   87.581342
-#&gt; Nov 2014 -10.54518720   74.083815
-#&gt; Dec 2014   6.60769107  -16.481239
-#&gt; Jan 2015  -8.23409004  -75.096428
-#&gt; Feb 2015   4.37033660 -125.336629
-#&gt; Mar 2015   3.72388112 -103.623626
-#&gt; Apr 2015 -16.46749128   -2.943857
-#&gt; May 2015 -19.23552271  -27.494378
-#&gt; Jun 2015   3.80833026   48.545147
-#&gt; Jul 2015  13.75705349   91.698203
-#&gt; Aug 2015   8.25848727  -98.534392
-#&gt; Sep 2015  -4.16115003 -149.118975
-#&gt; Oct 2015   9.82149586   81.959245
-#&gt; Nov 2015   2.42180727  101.340453
-#&gt; Dec 2015  -9.37926854  105.360525
-#&gt; Jan 2016  15.05858500   -7.142864
-#&gt; Feb 2016 -10.65851174   95.244461
-#&gt; Mar 2016   1.62270527  -38.403752
-#&gt; Apr 2016   2.60470392  -41.775999
-#&gt; May 2016 -14.88201993  -47.026817
-#&gt; Jun 2016  14.15183869 -169.018029
-#&gt; Jul 2016   5.62507513  -94.549766
-#&gt; Aug 2016   6.42055741  -34.301196
-#&gt; Sep 2016  -8.90532644   35.846241
-#&gt; Oct 2016  -1.16537517    4.818886
-#&gt; Nov 2016  -9.41974751  113.017228
-#&gt; Dec 2016  11.15827918  -52.763231
-#&gt; Jan 2017   4.70135134   47.957533
-#&gt; Feb 2017   8.60612712  141.752930
-#&gt; Mar 2017  -0.70396646   -8.009077
-#&gt; Apr 2017  -6.13180214  -39.418700
-#&gt; May 2017  -3.36714960   52.525764
-#&gt; Jun 2017  -2.15840184  -79.593510
-#&gt; Jul 2017   6.21132287   24.509645
-#&gt; Aug 2017 -12.84026517  -77.931984
-#&gt; Sep 2017 -13.00092441   59.492387
-#&gt; Oct 2017  -3.76769462  110.889090
-#&gt; Nov 2017   1.03748646  -94.296903
-#&gt; Dec 2017  -7.03562273   70.034399
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
+                           <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
+                           <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
+                           <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                           <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
+<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec2</span>)</div><div class='output co'>#&gt; $series
+#&gt;                  var1         var2
+#&gt; Jan 1990  -1.41397453  140.3682339
+#&gt; Feb 1990  -4.95379010   -1.5804912
+#&gt; Mar 1990   8.40522626 -102.3289556
+#&gt; Apr 1990   5.60050141 -211.6392160
+#&gt; May 1990  11.37045939   15.0371437
+#&gt; Jun 1990   4.73801310  -52.0871198
+#&gt; Jul 1990  -1.50440355  -90.5454844
+#&gt; Aug 1990  21.38995235  -74.9986903
+#&gt; Sep 1990   2.17996549  -78.6576021
+#&gt; Oct 1990 -18.95969181  -55.9681870
+#&gt; Nov 1990  -1.42738393 -139.0851305
+#&gt; Dec 1990  14.62425734  -28.2630602
+#&gt; Jan 1991  10.74657122  -48.0284997
+#&gt; Feb 1991   6.55056672  -96.7621014
+#&gt; Mar 1991  -1.23133658  177.7940980
+#&gt; Apr 1991  -9.29721805   -6.9089037
+#&gt; May 1991  15.16556529  -42.6188249
+#&gt; Jun 1991  -0.76792959 -225.1403727
+#&gt; Jul 1991  -3.69791935  -91.4170952
+#&gt; Aug 1991   6.06232668  -80.0524582
+#&gt; Sep 1991  15.26737997  -75.3305904
+#&gt; Oct 1991  -0.81510851   66.0649173
+#&gt; Nov 1991  14.28358850  172.7695639
+#&gt; Dec 1991  10.13571835   78.2678579
+#&gt; Jan 1992  -6.76577827  -78.1818406
+#&gt; Feb 1992  -2.36565665  -12.5797549
+#&gt; Mar 1992   5.05599115  101.5236070
+#&gt; Apr 1992 -25.27752928   29.4676272
+#&gt; May 1992  -7.00668673  -29.6458790
+#&gt; Jun 1992   0.91607577  -82.2289822
+#&gt; Jul 1992   8.52173585  169.1546077
+#&gt; Aug 1992  11.23909322 -147.6545705
+#&gt; Sep 1992   8.27869298   92.9693563
+#&gt; Oct 1992 -13.68112810  -61.3832093
+#&gt; Nov 1992   1.89759677   61.7598091
+#&gt; Dec 1992  19.60755931  -83.0615177
+#&gt; Jan 1993  -8.06017715 -113.3375927
+#&gt; Feb 1993   2.47350268  -15.6378319
+#&gt; Mar 1993   5.07828231  -24.3091747
+#&gt; Apr 1993  -4.95801751 -112.9264413
+#&gt; May 1993  -9.02102368   -6.2192485
+#&gt; Jun 1993  10.12532538   48.7082631
+#&gt; Jul 1993  16.36540567   -5.4636953
+#&gt; Aug 1993  -8.25520511  -19.8624209
+#&gt; Sep 1993 -13.01284005 -145.3375000
+#&gt; Oct 1993  -4.84042607   19.8434624
+#&gt; Nov 1993  -1.91561941 -139.1001690
+#&gt; Dec 1993 -12.03991350 -224.4235104
+#&gt; Jan 1994 -15.54565833  -23.1792440
+#&gt; Feb 1994  -1.49289700  -68.6551360
+#&gt; Mar 1994  -9.88248953  -48.2915280
+#&gt; Apr 1994 -13.00530931 -224.3508266
+#&gt; May 1994   7.64001921  -38.1078571
+#&gt; Jun 1994  -7.64220023   11.6047733
+#&gt; Jul 1994  10.59842219   89.2492885
+#&gt; Aug 1994   5.74400444  180.8520401
+#&gt; Sep 1994  14.54354816  107.9663512
+#&gt; Oct 1994  19.26606505  145.2055280
+#&gt; Nov 1994   3.77693133  255.6923589
+#&gt; Dec 1994   4.57817317  107.2728070
+#&gt; Jan 1995  -3.14478166 -117.8914989
+#&gt; Feb 1995  -1.96337224  107.5417132
+#&gt; Mar 1995   5.32207247    5.3855088
+#&gt; Apr 1995 -12.96930815  -23.4343833
+#&gt; May 1995  -1.16459881   95.0759734
+#&gt; Jun 1995 -17.91435814    7.3021934
+#&gt; Jul 1995  10.37638450   66.3527998
+#&gt; Aug 1995  -7.51737315  -81.6198742
+#&gt; Sep 1995  14.43320207   29.5544263
+#&gt; Oct 1995   7.34189087  134.6357662
+#&gt; Nov 1995 -10.54557986  -28.0015436
+#&gt; Dec 1995   0.30424727   -6.3043628
+#&gt; Jan 1996  -6.20591656  -13.2833831
+#&gt; Feb 1996  -1.93502015   62.9361770
+#&gt; Mar 1996   3.93606874  -64.1231532
+#&gt; Apr 1996  -0.33226158  -10.4018599
+#&gt; May 1996  -5.28722573 -138.8668827
+#&gt; Jun 1996  30.71007147   43.7214206
+#&gt; Jul 1996 -14.24723774   31.5862087
+#&gt; Aug 1996   3.30701264   19.4610535
+#&gt; Sep 1996 -17.59479023  -45.5762127
+#&gt; Oct 1996 -10.16384201   81.2534989
+#&gt; Nov 1996  10.36862040   27.5042593
+#&gt; Dec 1996   0.34712279    0.6009411
+#&gt; Jan 1997 -16.93691356  201.0186412
+#&gt; Feb 1997  -3.74082127   31.3808823
+#&gt; Mar 1997 -12.58362453  -84.6162712
+#&gt; Apr 1997  -6.08105630  -13.4641045
+#&gt; May 1997 -13.68707861  147.0832200
+#&gt; Jun 1997  -9.42163446 -147.5125736
+#&gt; Jul 1997   7.39857730   20.4499683
+#&gt; Aug 1997   0.22094341  -34.1768421
+#&gt; Sep 1997   5.48882732  184.2157648
+#&gt; Oct 1997 -13.50698058  -20.5909535
+#&gt; Nov 1997  -6.44467633  150.2231278
+#&gt; Dec 1997  10.47844734   24.2188060
+#&gt; Jan 1998  -3.21393364    5.3455720
+#&gt; Feb 1998   0.34325883  -12.5146310
+#&gt; Mar 1998  10.63948370   24.7787238
+#&gt; Apr 1998 -15.87608154  -62.6612578
+#&gt; May 1998 -15.83462404   68.2877534
+#&gt; Jun 1998   1.10531327   58.9606056
+#&gt; Jul 1998   2.46298837  -81.4967320
+#&gt; Aug 1998   0.57149917  -34.5798987
+#&gt; Sep 1998 -10.83303495    5.6529047
+#&gt; Oct 1998   2.16301111  -56.6766181
+#&gt; Nov 1998  -8.23685525   -4.2837457
+#&gt; Dec 1998 -15.00780397 -128.1559297
+#&gt; Jan 1999  12.26567010   96.7582242
+#&gt; Feb 1999  -2.15867461  102.9048853
+#&gt; Mar 1999  17.33784762 -216.6425254
+#&gt; Apr 1999 -14.32535684  -30.3348223
+#&gt; May 1999  -1.76478952   17.9268039
+#&gt; Jun 1999   7.56314868  142.7395820
+#&gt; Jul 1999  -9.80007712  -61.9946595
+#&gt; Aug 1999  -3.86424379  -13.1842450
+#&gt; Sep 1999   3.81516254   26.7551749
+#&gt; Oct 1999  13.45768539 -145.6778518
+#&gt; Nov 1999   9.83748677   23.4340520
+#&gt; Dec 1999   0.86637298  -95.1528054
+#&gt; Jan 2000   4.69669925  189.8439401
+#&gt; Feb 2000  -8.92900170 -104.2770546
+#&gt; Mar 2000   0.02229617 -133.3746286
+#&gt; Apr 2000   1.50747679  176.4724810
+#&gt; May 2000  -5.74554552   50.6063430
+#&gt; Jun 2000   2.35160435  -65.5292217
+#&gt; Jul 2000  12.65858408   66.7508839
+#&gt; Aug 2000 -13.90298039  137.2876146
+#&gt; Sep 2000   1.15795724   59.4581979
+#&gt; Oct 2000   8.92577296   80.9307437
+#&gt; Nov 2000   0.38752879  -92.9351716
+#&gt; Dec 2000  -0.38372698  -96.8882573
+#&gt; Jan 2001   8.11453346  -56.3483049
+#&gt; Feb 2001   0.33486905  188.8488707
+#&gt; Mar 2001   6.63318866  -11.6769607
+#&gt; Apr 2001  -2.20091795   -4.9778439
+#&gt; May 2001  -0.15736545   41.2530895
+#&gt; Jun 2001  20.87713501   33.9006216
+#&gt; Jul 2001  14.96586647  -21.9463937
+#&gt; Aug 2001  -3.09764025  -27.9921977
+#&gt; Sep 2001  15.84290933  -18.4466622
+#&gt; Oct 2001 -11.47278380 -113.1041190
+#&gt; Nov 2001   9.37994138   59.9068143
+#&gt; Dec 2001 -11.76473378  -34.5024460
+#&gt; Jan 2002  14.02133012   32.8683628
+#&gt; Feb 2002  -1.77175377   -0.2001793
+#&gt; Mar 2002  -6.50604263 -164.3640470
+#&gt; Apr 2002 -12.29364408   83.0144580
+#&gt; May 2002   2.51325895  131.1300782
+#&gt; Jun 2002 -15.63215351  -72.5708977
+#&gt; Jul 2002   8.13079991  -38.8345065
+#&gt; Aug 2002  -1.10848678 -104.2408354
+#&gt; Sep 2002  -7.61172061   73.9965537
+#&gt; Oct 2002   8.29512582  -37.9227989
+#&gt; Nov 2002 -10.55171964   85.5040406
+#&gt; Dec 2002   2.22967963   92.9726811
+#&gt; Jan 2003  24.41195038  -51.1420306
+#&gt; Feb 2003  20.00641700   57.5606727
+#&gt; Mar 2003  -7.54805825 -117.9760738
+#&gt; Apr 2003 -13.03238961   87.3922726
+#&gt; May 2003   2.46026158   75.2654962
+#&gt; Jun 2003   5.48893707   63.1952946
+#&gt; Jul 2003   4.86414289   48.9051671
+#&gt; Aug 2003  -8.57244463   49.3466172
+#&gt; Sep 2003  -2.08889627 -202.4668739
+#&gt; Oct 2003  -0.21828351  -11.5346633
+#&gt; Nov 2003   3.71728862   40.2961199
+#&gt; Dec 2003 -23.00614875 -132.9553215
+#&gt; Jan 2004  -6.86391490   85.0032275
+#&gt; Feb 2004   8.23954712  110.5681923
+#&gt; Mar 2004   6.71560953   40.4141906
+#&gt; Apr 2004  -1.36811085  -12.3141511
+#&gt; May 2004  -3.24855419   44.8847720
+#&gt; Jun 2004  11.65364420  206.8153748
+#&gt; Jul 2004  -9.03741440 -124.9536842
+#&gt; Aug 2004   9.85612115  -21.9531175
+#&gt; Sep 2004  -1.26323527  103.2002706
+#&gt; Oct 2004 -14.43967173 -158.2876585
+#&gt; Nov 2004   0.32154077    8.4967784
+#&gt; Dec 2004 -21.17716447  121.0794619
+#&gt; Jan 2005  16.65816928   -2.3462572
+#&gt; Feb 2005   5.75671055    8.4693918
+#&gt; Mar 2005  -0.02235961  -32.5065508
+#&gt; Apr 2005  -7.22014992   50.5923564
+#&gt; May 2005   4.48672361   41.5272046
+#&gt; Jun 2005   0.51736240 -117.7413897
+#&gt; Jul 2005 -12.53649454    3.3445330
+#&gt; Aug 2005   5.58374959  -67.9873381
+#&gt; Sep 2005   2.98702402   97.7814031
+#&gt; Oct 2005  -4.15528828  177.2477385
+#&gt; Nov 2005 -16.25374469   27.7933293
+#&gt; Dec 2005   2.99647475  -48.1019306
+#&gt; Jan 2006  -1.46007948 -179.1060602
+#&gt; Feb 2006   3.30470436   53.0663702
+#&gt; Mar 2006  -3.44358479 -112.4766175
+#&gt; Apr 2006   8.91762344    4.0226151
+#&gt; May 2006  -1.36294335 -118.7967396
+#&gt; Jun 2006   2.81191185  224.8831114
+#&gt; Jul 2006  -1.10812460  155.3161749
+#&gt; Aug 2006  -0.36247432   32.3021948
+#&gt; Sep 2006   0.24977216    2.2759699
+#&gt; Oct 2006   1.31053564  -24.9427874
+#&gt; Nov 2006  25.95523922 -217.2319120
+#&gt; Dec 2006   4.19283992 -133.9659118
+#&gt; Jan 2007  -2.81698421  -98.0485754
+#&gt; Feb 2007   5.44863114 -179.2780676
+#&gt; Mar 2007   8.68230689   52.2812809
+#&gt; Apr 2007  -2.06675268 -159.1328479
+#&gt; May 2007   0.74947320   80.6263133
+#&gt; Jun 2007 -22.50901330  -68.3813068
+#&gt; Jul 2007  15.00961160   33.4388057
+#&gt; Aug 2007  -4.82768943   94.3006421
+#&gt; Sep 2007   6.05210639  -89.8387674
+#&gt; Oct 2007   8.00685483   76.7335868
+#&gt; Nov 2007   3.18362191    9.2338676
+#&gt; Dec 2007   1.03472107  -35.1696026
+#&gt; Jan 2008  -6.57636600   11.5373005
+#&gt; Feb 2008   0.33874701  -14.3261353
+#&gt; Mar 2008  -6.49756559 -241.9820346
+#&gt; Apr 2008   9.11239650 -116.3794035
+#&gt; May 2008  -0.47272921   10.3426653
+#&gt; Jun 2008 -11.78515013  -12.6143326
+#&gt; Jul 2008  22.42660967  -14.1743410
+#&gt; Aug 2008  14.67485607   91.0437035
+#&gt; Sep 2008   5.52061735  147.7617914
+#&gt; Oct 2008   3.59622515  164.6242603
+#&gt; Nov 2008  18.37521669  -17.9993025
+#&gt; Dec 2008   8.83273304   97.6856385
+#&gt; Jan 2009 -17.13201462  -18.6602735
+#&gt; Feb 2009   2.93728600   -3.4098393
+#&gt; Mar 2009  13.30807535  148.8732203
+#&gt; Apr 2009   0.01025496  -18.9839298
+#&gt; May 2009   9.44012124 -108.9309617
+#&gt; Jun 2009  -1.63110155   37.1089482
+#&gt; Jul 2009   0.20936334 -102.7770114
+#&gt; Aug 2009   5.51059233    1.4915848
+#&gt; Sep 2009   7.54814726  -52.0298562
+#&gt; Oct 2009 -10.17904646   -5.2244428
+#&gt; Nov 2009  -3.20525550 -143.5079571
+#&gt; Dec 2009  -4.57239570  -32.7979065
+#&gt; Jan 2010 -21.68675688 -128.5347619
+#&gt; Feb 2010   0.66409650  -42.5537239
+#&gt; Mar 2010  15.13114967   25.7475661
+#&gt; Apr 2010   2.42563643   20.1319396
+#&gt; May 2010   1.96097401   48.2077401
+#&gt; Jun 2010  -6.56023781   50.6636590
+#&gt; Jul 2010  -4.78355050  -52.6691357
+#&gt; Aug 2010   5.68878744  -56.4773980
+#&gt; Sep 2010 -21.02626810    4.0398035
+#&gt; Oct 2010  -0.03301496  -20.0781380
+#&gt; Nov 2010   4.16918015  -90.4217194
+#&gt; Dec 2010   4.73867599   16.6655524
+#&gt; Jan 2011  -0.62925119  -52.4284783
+#&gt; Feb 2011 -16.36219349    1.7563903
+#&gt; Mar 2011  11.68229652   94.8517187
+#&gt; Apr 2011  -4.08686195   27.0265784
+#&gt; May 2011  -0.94117059  -16.0941404
+#&gt; Jun 2011   4.67589309  196.5199507
+#&gt; Jul 2011  -8.28195377   39.5548042
+#&gt; Aug 2011   3.96813229   87.3719370
+#&gt; Sep 2011   2.44475509   47.2324156
+#&gt; Oct 2011   6.27437586 -148.5226449
+#&gt; Nov 2011  -8.05206472  -83.6162299
+#&gt; Dec 2011 -19.32053070  -64.6269212
+#&gt; Jan 2012   7.17082011   -4.7437037
+#&gt; Feb 2012  17.92486559   16.7759989
+#&gt; Mar 2012  11.23194865   -9.9738669
+#&gt; Apr 2012  16.09947684    8.5996455
+#&gt; May 2012  17.32799496  -37.2574031
+#&gt; Jun 2012  12.75703717   18.1332543
+#&gt; Jul 2012   4.24007988  -90.6806411
+#&gt; Aug 2012  -1.37778131   59.1157152
+#&gt; Sep 2012  -5.97937324   79.2513233
+#&gt; Oct 2012  -7.22073272    7.6872383
+#&gt; Nov 2012   0.72762483   -6.7837199
+#&gt; Dec 2012  14.73362511   43.3288047
+#&gt; Jan 2013  -3.16206077    4.9095403
+#&gt; Feb 2013 -14.14721408   -3.2800048
+#&gt; Mar 2013 -19.86179040  -51.0924776
+#&gt; Apr 2013   7.05734028   35.6430539
+#&gt; May 2013  -7.90427631   41.7946136
+#&gt; Jun 2013   7.58480158   57.9205261
+#&gt; Jul 2013  20.78375621 -147.5158654
+#&gt; Aug 2013  19.19134900  132.3805231
+#&gt; Sep 2013   0.75529822  103.0621466
+#&gt; Oct 2013   2.67751527   31.7373893
+#&gt; Nov 2013   4.36290736 -111.1903788
+#&gt; Dec 2013  12.09748781   62.1211169
+#&gt; Jan 2014 -12.53055561  180.9108552
+#&gt; Feb 2014  17.65028630  111.3986006
+#&gt; Mar 2014  -1.59322027   46.5350534
+#&gt; Apr 2014   8.98874217 -106.8629729
+#&gt; May 2014  -7.04995332   25.5940284
+#&gt; Jun 2014  11.26896570  -77.7218934
+#&gt; Jul 2014 -19.74322214  -95.0318237
+#&gt; Aug 2014 -12.44772830  123.0516332
+#&gt; Sep 2014  10.31250388  -29.0321330
+#&gt; Oct 2014   5.79097050 -124.5249585
+#&gt; Nov 2014 -10.37890010  -92.5110623
+#&gt; Dec 2014  15.61622325  -35.1758271
+#&gt; Jan 2015   1.01959622   -4.1630828
+#&gt; Feb 2015  23.24238302   72.9297422
+#&gt; Mar 2015  23.25851550   29.3403029
+#&gt; Apr 2015 -12.93149956  358.6945476
+#&gt; May 2015  -0.45018855   75.5743006
+#&gt; Jun 2015   1.95694234   40.0127303
+#&gt; Jul 2015   4.80623395   82.9345713
+#&gt; Aug 2015  20.17342464  -30.5136243
+#&gt; Sep 2015  11.95608651   71.0103322
+#&gt; Oct 2015   6.56575520   43.8613817
+#&gt; Nov 2015  10.26297846   35.8223697
+#&gt; Dec 2015   5.20192659  -12.4237651
+#&gt; Jan 2016  11.20615649  -69.3216085
+#&gt; Feb 2016   3.99897655   57.4346528
+#&gt; Mar 2016  -9.84527658  -21.7159515
+#&gt; Apr 2016  -5.02562184  303.7581163
+#&gt; May 2016   9.87148440 -159.1667131
+#&gt; Jun 2016  21.91481010  -67.3689236
+#&gt; Jul 2016  -1.65042212   72.8572805
+#&gt; Aug 2016  -6.86040800 -115.1562235
+#&gt; Sep 2016   9.41399410 -115.0775213
+#&gt; Oct 2016  -1.64042843  -13.2075277
+#&gt; Nov 2016 -13.02339410  -58.1046358
+#&gt; Dec 2016  -7.23484004  166.1350032
+#&gt; Jan 2017  13.90088740  116.7948978
+#&gt; Feb 2017   6.81840626   76.9885462
+#&gt; Mar 2017   4.68260280  -16.3115808
+#&gt; Apr 2017   4.20921089  127.5265346
+#&gt; May 2017  -8.00331265   18.0887984
+#&gt; Jun 2017  -4.88457510  147.4360522
+#&gt; Jul 2017   5.39004516 -151.7434724
+#&gt; Aug 2017  14.35171017   30.4400356
+#&gt; Sep 2017  -2.61838719   10.7467387
+#&gt; Oct 2017 -14.18623721 -122.4792573
+#&gt; Nov 2017  -5.13792720   44.8519979
+#&gt; Dec 2017   7.72301225   50.8070951
 #&gt; 
 #&gt; $description
 #&gt;           type coeff
 #&gt; var1 Undefined    NA
 #&gt; var2 Undefined    NA
-#&gt; </div><div class='input'><span class='no'>mysa3</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
-<span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa3</span>)</div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa3</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa3</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats_def</span>(<span class='no'>myseries</span>, <span class='st'>"RSAfull"</span>,
-                        <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"decomposition.sa_lin_f"</span>,
-                                        <span class='st'>"decomposition.sa_lin_e"</span>))
+#&gt; </div><div class='input'><span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
+                    <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"decomposition.sa_lin_f"</span>,
+                                    <span class='st'>"decomposition.sa_lin_e"</span>))
 <span class='no'>mysa2</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
+#&gt; Theta(1)   -0.5043      0.049
+#&gt; BTheta(1)  -0.6378      0.045
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
+#&gt; Mean          9.613e-05      0.000
+#&gt; r.var1       -4.442e-05      0.000
+#&gt; r.var2       -1.487e-05      0.000
+#&gt; Easter [6]   -1.254e-02      0.003
+#&gt; LS (11-2008) -8.187e-02      0.014
+#&gt; LS (1-2009)  -7.505e-02      0.014
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
+#&gt; Residual standard error: 0.01668 on 323 degrees of freedom
+#&gt; Log likelihood = 860.6, aic =  1280 aicc =  1280, bic(corrected for length) = -8.044
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.186819 B - 0.610856 B^12 + 0.114119 B^13 
+#&gt; MA :  1 - 0.504312 B - 0.637771 B^12 + 0.321636 B^13 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.314459 B + 0.340427 B^2 
-#&gt; Innovation variance:  0.4669153 
+#&gt; MA :  1 - 1.473667 B + 0.491676 B^2 
+#&gt; Innovation variance:  0.6903292 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.040206 B - 0.959794 B^2 
-#&gt; Innovation variance:  0.04869563 
+#&gt; MA :  1 + 0.036726 B - 0.963274 B^2 
+#&gt; Innovation variance:  0.04149603 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 0.717848 B + 0.460721 B^2 + 0.310085 B^3 + 0.132447 B^4 - 0.049053 B^5 - 0.216655 B^6 - 0.354556 B^7 - 0.445030 B^8 - 0.469587 B^9 - 0.376625 B^10 - 0.166397 B^11 - 0.410618 B^12 - 0.132580 B^13 
-#&gt; Innovation variance:  0.1601924 
+#&gt; MA :  1 + 1.266498 B + 1.237236 B^2 + 1.099824 B^3 + 0.874641 B^4 + 0.626180 B^5 + 0.378099 B^6 + 0.148617 B^7 - 0.034666 B^8 - 0.198016 B^9 - 0.301999 B^10 - 0.541576 B^11 
+#&gt; Innovation variance:  0.03283495 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2056884 
+#&gt; Innovation variance:  0.3793902 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
 #&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.9393 100.9657 0.9649365 0.9997384
-#&gt; Feb 2017  97.5 100.7654 101.2610 0.9675939 0.9951058
-#&gt; Mar 2017 112.0 102.0879 101.7064 1.0970937 1.0037513
-#&gt; Apr 2017 103.0 101.8416 102.1713 1.0113745 0.9967732
-#&gt; May 2017 100.4 103.0277 102.6087 0.9744949 1.0040835
-#&gt; Jun 2017 111.2 102.7958 102.9753 1.0817564 0.9982567
-#&gt; Jul 2017 103.4 103.3099 103.3367 1.0008726 0.9997398
-#&gt; Aug 2017  79.3 103.7805 103.7458 0.7641131 1.0003339
-#&gt; Sep 2017 109.7 103.7154 104.2747 1.0577017 0.9946372
-#&gt; Oct 2017 114.0 105.6674 104.8749 1.0788572 1.0075559
-#&gt; Nov 2017 107.7 105.4730 105.1795 1.0211146 1.0027905
-#&gt; Dec 2017 101.4 104.9614 105.2317 0.9660690 0.9974316
+#&gt; Jan 2017  97.4 100.7467 101.0087 0.9667807 0.9974066
+#&gt; Feb 2017  97.5 100.5336 101.3231 0.9698251 0.9922080
+#&gt; Mar 2017 112.0 102.5403 101.7538 1.0922535 1.0077294
+#&gt; Apr 2017 103.0 101.4786 102.1810 1.0149922 0.9931257
+#&gt; May 2017 100.4 103.4710 102.5846 0.9703206 1.0086403
+#&gt; Jun 2017 111.2 102.4926 102.9249 1.0849567 0.9957997
+#&gt; Jul 2017 103.4 103.0804 103.2872 1.0031009 0.9979978
+#&gt; Aug 2017  79.3 103.8723 103.7259 0.7634372 1.0014119
+#&gt; Sep 2017 109.7 103.4867 104.2372 1.0600392 0.9928000
+#&gt; Oct 2017 114.0 106.0521 104.7597 1.0749434 1.0123369
+#&gt; Nov 2017 107.7 105.3437 105.0630 1.0223682 1.0026713
+#&gt; Dec 2017 101.4 104.9499 105.1974 0.9661754 0.9976468
 #&gt; 
 #&gt; Forecasts:
 #&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 102.19076 105.3388 105.3397 0.9701155 0.9999914
-#&gt; Feb 2018 102.32758 105.5082 105.5091 0.9698541 0.9999914
-#&gt; Mar 2018 114.29051 105.6780 105.6789 1.0814979 0.9999914
-#&gt; Apr 2018 107.91102 105.8480 105.8489 1.0194904 0.9999914
-#&gt; May 2018 102.68809 106.0183 106.0192 0.9685884 0.9999914
-#&gt; Jun 2018 115.89624 106.1889 106.1898 1.0914161 0.9999914
-#&gt; Jul 2018 106.23593 106.3597 106.3606 0.9988362 0.9999914
-#&gt; Aug 2018  81.47084 106.5308 106.5317 0.7647630 0.9999914
-#&gt; Sep 2018 112.88837 106.7022 106.7031 1.0579757 0.9999914
-#&gt; Oct 2018 115.34277 106.8739 106.8748 1.0792417 0.9999914
-#&gt; Nov 2018 109.29540 107.0458 107.0468 1.0210148 0.9999914
-#&gt; Dec 2018 103.27711 107.2181 107.2190 0.9632435 0.9999914
+#&gt; Jan 2018 101.93983 105.3511 105.3545 0.9666943 0.9999679
+#&gt; Feb 2018 102.44638 105.5350 105.5384 0.9693877 0.9999679
+#&gt; Mar 2018 114.08415 105.7201 105.7235 1.0789173 0.9999679
+#&gt; Apr 2018 109.07292 105.9063 105.9097 1.0272929 0.9999679
+#&gt; May 2018 102.95448 106.0937 106.0971 0.9705641 0.9999679
+#&gt; Jun 2018 115.39033 106.2823 106.2857 1.0845371 0.9999679
+#&gt; Jul 2018 106.72036 106.4720 106.4754 1.0028303 0.9999679
+#&gt; Aug 2018  81.46585 106.6629 106.6663 0.7633868 0.9999679
+#&gt; Sep 2018 113.24931 106.8550 106.8585 1.0595841 0.9999679
+#&gt; Oct 2018 115.04451 107.0483 107.0518 1.0755787 0.9999679
+#&gt; Nov 2018 109.63370 107.2428 107.2463 1.0225172 0.9999679
+#&gt; Dec 2018 103.91469 107.4385 107.4419 0.9660701 0.9999679
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -919,19 +908,19 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.181
-#&gt;  Seasonal     66.768
-#&gt;  Irregular     0.106
-#&gt;  TD &amp; Hol.     0.069
-#&gt;  Others       30.507
-#&gt;  Total        99.630
+#&gt;  Cycle         2.034
+#&gt;  Seasonal     64.653
+#&gt;  Irregular     0.386
+#&gt;  TD &amp; Hol.     0.034
+#&gt;  Others       32.364
+#&gt;  Total        99.472
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.185
+#&gt;    Evolutive seasonality test                                0.236
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -942,15 +931,14 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.977
-#&gt;  f-test on sa (td)                      0.927
-#&gt;  f-test on i (td)                       1.000
+#&gt;  Residual seasonality (last 3 years)    0.952
+#&gt;  f-test on sa (td)                      0.001
+#&gt;  f-test on i (td)                       0.001
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
 #&gt; Names of additional variables (2):
-#&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'>
-</div></span></pre>
+#&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)</div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -177,10 +177,9 @@ multiprocessing or sa_item object." />
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>), <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
-<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5"</span>))
+<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
 <span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
 
 <span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
@@ -191,14 +190,610 @@ multiprocessing or sa_item object." />
 <span class='fu'><a href='compute.html'>compute</a></span>(<span class='no'>wk</span>) <span class='co'># It's important to compute the workspace to get the SA model</span>
 <span class='no'>sa_item1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>1</span>)
 
-<span class='fu'>get_model</span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Extract the model of the sa_item1: its the object sa_x13</span>
-
+<span class='fu'>get_model</span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Extract the model of the sa_item1: its the object sa_x13</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5393      0.048
+#&gt; BTheta(1)  -0.5076      0.050
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday       -0.07677      0.168
+#&gt; Tuesday       0.06278      0.167
+#&gt; Wednesday     0.20386      0.168
+#&gt; Thursday     -0.56900      0.168
+#&gt; Friday        0.48643      0.168
+#&gt; Saturday      0.16823      0.168
+#&gt; Leap year    -0.04202      0.516
+#&gt; LS (11-2008) -8.47862      1.328
+#&gt; LS (1-2009)  -7.24743      1.328
+#&gt; LS (5-2008)  -5.17890      1.271
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.070
+#&gt; M(2)    0.044
+#&gt; M(3)    0.908
+#&gt; M(4)    0.621
+#&gt; M(5)    0.702
+#&gt; M(6)    0.225
+#&gt; M(7)    0.075
+#&gt; M(8)    0.212
+#&gt; M(9)    0.057
+#&gt; M(10)   0.186
+#&gt; M(11)   0.160
+#&gt; Q       0.298
+#&gt; Q-M2    0.330
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t           s          i
+#&gt; Jan 2017  97.4 100.8343 100.7013  -3.4343306  0.1330766
+#&gt; Feb 2017  97.5 100.3650 101.0249  -2.8649615 -0.6599802
+#&gt; Mar 2017 112.0 102.2535 101.4647   9.7464542  0.7888578
+#&gt; Apr 2017 103.0 101.0035 101.9216   1.9964916 -0.9181391
+#&gt; May 2017 100.4 103.0243 102.3451  -2.6243031  0.6791988
+#&gt; Jun 2017 111.2 102.5088 102.7541   8.6911964 -0.2453078
+#&gt; Jul 2017 103.4 103.6337 103.1399  -0.2336808  0.4937705
+#&gt; Aug 2017  79.3 103.2251 103.5264 -23.9251325 -0.3013005
+#&gt; Sep 2017 109.7 103.2506 103.9215   6.4494326 -0.6709239
+#&gt; Oct 2017 114.0 107.0447 104.3063   6.9552773  2.7383859
+#&gt; Nov 2017 107.7 105.5642 104.6206   2.1358354  0.9435229
+#&gt; Dec 2017 101.4 104.5036 104.8670  -3.1036149 -0.3633398
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f           i_f
+#&gt; Jan 2018 102.12660 104.9825 105.0158  -2.8558846 -0.0333189370
+#&gt; Feb 2018 102.18467 105.1651 105.1322  -2.9804296  0.0328501611
+#&gt; Mar 2018 114.75482 104.9927 105.2650   9.7620667 -0.2722128214
+#&gt; Apr 2018 107.12347 105.4543 105.4551   1.6692056 -0.0008294846
+#&gt; May 2018 102.76596 105.8226 105.7251  -3.0566117  0.0974629726
+#&gt; Jun 2018 115.36179 106.0357 106.0400   9.3261226 -0.0043589056
+#&gt; Jul 2018 106.15595 106.5844 106.3555  -0.4284186  0.2288559841
+#&gt; Aug 2018  82.90307 106.3248 106.6641 -23.4217780 -0.3392719434
+#&gt; Sep 2018 112.28236 106.6926 106.9366   5.5897789 -0.2440563282
+#&gt; Oct 2018 115.41162 107.9129 107.1741   7.4986863  0.7388293101
+#&gt; Nov 2018 109.85751 107.2445 107.3673   2.6130640 -0.1228820216
+#&gt; Dec 2018 103.52884 107.3040 107.5048  -3.7751434 -0.2008278423
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         1.648
+#&gt;  Seasonal     49.383
+#&gt;  Irregular     0.419
+#&gt;  TD &amp; Hol.     0.039
+#&gt;  Others       50.184
+#&gt;  Total       101.672
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.011
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.970
+#&gt;  f-test on i (seasonal dummies)         0.887
+#&gt;  Residual seasonality (entire series)   0.967
+#&gt;  Residual seasonality (last 3 years)    0.931
+#&gt;  f-test on sa (td)                      0.974
+#&gt;  f-test on i (td)                       0.999
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
 <span class='co'># To get all the models of the multiprocessing mp:</span>
-<span class='fu'>get_model</span>(<span class='no'>mp</span>, <span class='no'>wk</span>)
-
+<span class='fu'>get_model</span>(<span class='no'>mp</span>, <span class='no'>wk</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $X13
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5393      0.048
+#&gt; BTheta(1)  -0.5076      0.050
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday       -0.07677      0.168
+#&gt; Tuesday       0.06278      0.167
+#&gt; Wednesday     0.20386      0.168
+#&gt; Thursday     -0.56900      0.168
+#&gt; Friday        0.48643      0.168
+#&gt; Saturday      0.16823      0.168
+#&gt; Leap year    -0.04202      0.516
+#&gt; LS (11-2008) -8.47862      1.328
+#&gt; LS (1-2009)  -7.24743      1.328
+#&gt; LS (5-2008)  -5.17890      1.271
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.070
+#&gt; M(2)    0.044
+#&gt; M(3)    0.908
+#&gt; M(4)    0.621
+#&gt; M(5)    0.702
+#&gt; M(6)    0.225
+#&gt; M(7)    0.075
+#&gt; M(8)    0.212
+#&gt; M(9)    0.057
+#&gt; M(10)   0.186
+#&gt; M(11)   0.160
+#&gt; Q       0.298
+#&gt; Q-M2    0.330
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t           s          i
+#&gt; Jan 2017  97.4 100.8343 100.7013  -3.4343306  0.1330766
+#&gt; Feb 2017  97.5 100.3650 101.0249  -2.8649615 -0.6599802
+#&gt; Mar 2017 112.0 102.2535 101.4647   9.7464542  0.7888578
+#&gt; Apr 2017 103.0 101.0035 101.9216   1.9964916 -0.9181391
+#&gt; May 2017 100.4 103.0243 102.3451  -2.6243031  0.6791988
+#&gt; Jun 2017 111.2 102.5088 102.7541   8.6911964 -0.2453078
+#&gt; Jul 2017 103.4 103.6337 103.1399  -0.2336808  0.4937705
+#&gt; Aug 2017  79.3 103.2251 103.5264 -23.9251325 -0.3013005
+#&gt; Sep 2017 109.7 103.2506 103.9215   6.4494326 -0.6709239
+#&gt; Oct 2017 114.0 107.0447 104.3063   6.9552773  2.7383859
+#&gt; Nov 2017 107.7 105.5642 104.6206   2.1358354  0.9435229
+#&gt; Dec 2017 101.4 104.5036 104.8670  -3.1036149 -0.3633398
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f           i_f
+#&gt; Jan 2018 102.12660 104.9825 105.0158  -2.8558846 -0.0333189370
+#&gt; Feb 2018 102.18467 105.1651 105.1322  -2.9804296  0.0328501611
+#&gt; Mar 2018 114.75482 104.9927 105.2650   9.7620667 -0.2722128214
+#&gt; Apr 2018 107.12347 105.4543 105.4551   1.6692056 -0.0008294846
+#&gt; May 2018 102.76596 105.8226 105.7251  -3.0566117  0.0974629726
+#&gt; Jun 2018 115.36179 106.0357 106.0400   9.3261226 -0.0043589056
+#&gt; Jul 2018 106.15595 106.5844 106.3555  -0.4284186  0.2288559841
+#&gt; Aug 2018  82.90307 106.3248 106.6641 -23.4217780 -0.3392719434
+#&gt; Sep 2018 112.28236 106.6926 106.9366   5.5897789 -0.2440563282
+#&gt; Oct 2018 115.41162 107.9129 107.1741   7.4986863  0.7388293101
+#&gt; Nov 2018 109.85751 107.2445 107.3673   2.6130640 -0.1228820216
+#&gt; Dec 2018 103.52884 107.3040 107.5048  -3.7751434 -0.2008278423
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         1.648
+#&gt;  Seasonal     49.383
+#&gt;  Irregular     0.419
+#&gt;  TD &amp; Hol.     0.039
+#&gt;  Others       50.184
+#&gt;  Total       101.672
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.011
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.970
+#&gt;  f-test on i (seasonal dummies)         0.887
+#&gt;  Residual seasonality (entire series)   0.967
+#&gt;  Residual seasonality (last 3 years)    0.931
+#&gt;  f-test on sa (td)                      0.974
+#&gt;  f-test on i (td)                       0.999
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; 
+#&gt; $TramoSeats
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)      0.3555      0.255
+#&gt; Phi(2)      0.1344      0.130
+#&gt; Theta(1)   -0.1867      0.255
+#&gt; BTheta(1)  -0.6117      0.047
+#&gt; 
+#&gt;                Estimate Std. Error
+#&gt; Monday       -0.0022678      0.002
+#&gt; Tuesday       0.0006417      0.002
+#&gt; Wednesday     0.0032444      0.002
+#&gt; Thursday     -0.0055635      0.002
+#&gt; Friday        0.0033124      0.002
+#&gt; Saturday      0.0019048      0.002
+#&gt; Easter [6]   -0.0106133      0.003
+#&gt; LS (11-2008) -0.0795302      0.013
+#&gt; LS (1-2009)  -0.0711422      0.013
+#&gt; AO (8-2001)   0.0447823      0.013
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 0.01594 on 323 degrees of freedom
+#&gt; Log likelihood = 875.5, aic =  1262 aicc =  1263, bic(corrected for length) = -8.027
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; AR :  1 + 0.355520 B + 0.134366 B^2 
+#&gt; D :  1 - B - B^12 + B^13 
+#&gt; MA :  1 - 0.186667 B - 0.611719 B^12 + 0.114188 B^13 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; D :  1 - 2.000000 B + B^2 
+#&gt; MA :  1 - 1.314513 B + 0.340411 B^2 
+#&gt; Innovation variance:  0.4651916 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; D :  1 - 2.000000 B + B^2 
+#&gt; MA :  1 + 0.040093 B - 0.959907 B^2 
+#&gt; Innovation variance:  0.04852415 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; AR :  1 + 0.355520 B + 0.134366 B^2 
+#&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
+#&gt; MA :  1 + 0.715509 B + 0.458526 B^2 + 0.307968 B^3 + 0.130783 B^4 - 0.050030 B^5 - 0.216796 B^6 - 0.353788 B^7 - 0.443393 B^8 - 0.467164 B^9 - 0.373994 B^10 - 0.163801 B^11 - 0.411499 B^12 - 0.132321 B^13 
+#&gt; Innovation variance:  0.1608041 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; Innovation variance:  0.2049349 
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t         s         i
+#&gt; Jan 2017  97.4 100.9340 100.9645 0.9649872 0.9996976
+#&gt; Feb 2017  97.5 100.7675 101.2596 0.9675741 0.9951403
+#&gt; Mar 2017 112.0 102.0785 101.7061 1.0971949 1.0036614
+#&gt; Apr 2017 103.0 101.8555 102.1727 1.0112369 0.9968946
+#&gt; May 2017 100.4 103.0213 102.6101 0.9745555 1.0040080
+#&gt; Jun 2017 111.2 102.8013 102.9761 1.0816988 0.9983021
+#&gt; Jul 2017 103.4 103.3075 103.3373 1.0008951 0.9997120
+#&gt; Aug 2017  79.3 103.7806 103.7465 0.7641122 1.0003281
+#&gt; Sep 2017 109.7 103.7197 104.2758 1.0576581 0.9946676
+#&gt; Oct 2017 114.0 105.6630 104.8765 1.0789015 1.0074997
+#&gt; Nov 2017 107.7 105.4786 105.1828 1.0210600 1.0028123
+#&gt; Dec 2017 101.4 104.9682 105.2367 0.9660069 0.9974489
+#&gt; 
+#&gt; Forecasts:
+#&gt;               y_f     sa_f      t_f       s_f       i_f
+#&gt; Jan 2018 102.2106 105.3440 105.3449 0.9702559 0.9999915
+#&gt; Feb 2018 102.3328 105.5134 105.5143 0.9698565 0.9999915
+#&gt; Mar 2018 114.1449 105.6830 105.6839 1.0800682 0.9999915
+#&gt; Apr 2018 108.0526 105.8530 105.8539 1.0207800 0.9999915
+#&gt; May 2018 102.6903 106.0232 106.0241 0.9685646 0.9999915
+#&gt; Jun 2018 115.9079 106.1936 106.1945 1.0914767 0.9999915
+#&gt; Jul 2018 106.2462 106.3644 106.3653 0.9988891 0.9999915
+#&gt; Aug 2018  81.4640 106.5354 106.5363 0.7646660 0.9999915
+#&gt; Sep 2018 112.8928 106.7067 106.7076 1.0579730 0.9999915
+#&gt; Oct 2018 115.3561 106.8783 106.8792 1.0793227 0.9999915
+#&gt; Nov 2018 109.2863 107.0501 107.0510 1.0208889 0.9999915
+#&gt; Dec 2018 103.2836 107.2222 107.2231 0.9632669 0.9999915
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         2.179
+#&gt;  Seasonal     66.777
+#&gt;  Irregular     0.105
+#&gt;  TD &amp; Hol.     0.067
+#&gt;  Others       30.524
+#&gt;  Total        99.651
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.187
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        1.000
+#&gt;  f-test on i (seasonal dummies)         1.000
+#&gt;  Residual seasonality (entire series)   1.000
+#&gt;  Residual seasonality (last 3 years)    0.977
+#&gt;  f-test on sa (td)                      0.930
+#&gt;  f-test on i (td)                       1.000
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; </div><div class='input'>
 <span class='co'># To get all the models of the workspace wk:</span>
-<span class='fu'>get_model</span>(<span class='no'>wk</span>)
-<span class='co'># }</span><div class='input'>
+<span class='fu'>get_model</span>(<span class='no'>wk</span>)</div><div class='output co'>#&gt; Multiprocessing 1 on 1:
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $sa1
+#&gt; $sa1$X13
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5393      0.048
+#&gt; BTheta(1)  -0.5076      0.050
+#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday       -0.07677      0.168
+#&gt; Tuesday       0.06278      0.167
+#&gt; Wednesday     0.20386      0.168
+#&gt; Thursday     -0.56900      0.168
+#&gt; Friday        0.48643      0.168
+#&gt; Saturday      0.16823      0.168
+#&gt; Leap year    -0.04202      0.516
+#&gt; LS (11-2008) -8.47862      1.328
+#&gt; LS (1-2009)  -7.24743      1.328
+#&gt; LS (5-2008)  -5.17890      1.271
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.070
+#&gt; M(2)    0.044
+#&gt; M(3)    0.908
+#&gt; M(4)    0.621
+#&gt; M(5)    0.702
+#&gt; M(6)    0.225
+#&gt; M(7)    0.075
+#&gt; M(8)    0.212
+#&gt; M(9)    0.057
+#&gt; M(10)   0.186
+#&gt; M(11)   0.160
+#&gt; Q       0.298
+#&gt; Q-M2    0.330
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t           s          i
+#&gt; Jan 2017  97.4 100.8343 100.7013  -3.4343306  0.1330766
+#&gt; Feb 2017  97.5 100.3650 101.0249  -2.8649615 -0.6599802
+#&gt; Mar 2017 112.0 102.2535 101.4647   9.7464542  0.7888578
+#&gt; Apr 2017 103.0 101.0035 101.9216   1.9964916 -0.9181391
+#&gt; May 2017 100.4 103.0243 102.3451  -2.6243031  0.6791988
+#&gt; Jun 2017 111.2 102.5088 102.7541   8.6911964 -0.2453078
+#&gt; Jul 2017 103.4 103.6337 103.1399  -0.2336808  0.4937705
+#&gt; Aug 2017  79.3 103.2251 103.5264 -23.9251325 -0.3013005
+#&gt; Sep 2017 109.7 103.2506 103.9215   6.4494326 -0.6709239
+#&gt; Oct 2017 114.0 107.0447 104.3063   6.9552773  2.7383859
+#&gt; Nov 2017 107.7 105.5642 104.6206   2.1358354  0.9435229
+#&gt; Dec 2017 101.4 104.5036 104.8670  -3.1036149 -0.3633398
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f           i_f
+#&gt; Jan 2018 102.12660 104.9825 105.0158  -2.8558846 -0.0333189370
+#&gt; Feb 2018 102.18467 105.1651 105.1322  -2.9804296  0.0328501611
+#&gt; Mar 2018 114.75482 104.9927 105.2650   9.7620667 -0.2722128214
+#&gt; Apr 2018 107.12347 105.4543 105.4551   1.6692056 -0.0008294846
+#&gt; May 2018 102.76596 105.8226 105.7251  -3.0566117  0.0974629726
+#&gt; Jun 2018 115.36179 106.0357 106.0400   9.3261226 -0.0043589056
+#&gt; Jul 2018 106.15595 106.5844 106.3555  -0.4284186  0.2288559841
+#&gt; Aug 2018  82.90307 106.3248 106.6641 -23.4217780 -0.3392719434
+#&gt; Sep 2018 112.28236 106.6926 106.9366   5.5897789 -0.2440563282
+#&gt; Oct 2018 115.41162 107.9129 107.1741   7.4986863  0.7388293101
+#&gt; Nov 2018 109.85751 107.2445 107.3673   2.6130640 -0.1228820216
+#&gt; Dec 2018 103.52884 107.3040 107.5048  -3.7751434 -0.2008278423
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         1.648
+#&gt;  Seasonal     49.383
+#&gt;  Irregular     0.419
+#&gt;  TD &amp; Hol.     0.039
+#&gt;  Others       50.184
+#&gt;  Total       101.672
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.011
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.970
+#&gt;  f-test on i (seasonal dummies)         0.887
+#&gt;  Residual seasonality (entire series)   0.967
+#&gt;  Residual seasonality (last 3 years)    0.931
+#&gt;  f-test on sa (td)                      0.974
+#&gt;  f-test on i (td)                       0.999
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; 
+#&gt; $sa1$TramoSeats
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)      0.3555      0.255
+#&gt; Phi(2)      0.1344      0.130
+#&gt; Theta(1)   -0.1867      0.255
+#&gt; BTheta(1)  -0.6117      0.047
+#&gt; 
+#&gt;                Estimate Std. Error
+#&gt; Monday       -0.0022678      0.002
+#&gt; Tuesday       0.0006417      0.002
+#&gt; Wednesday     0.0032444      0.002
+#&gt; Thursday     -0.0055635      0.002
+#&gt; Friday        0.0033124      0.002
+#&gt; Saturday      0.0019048      0.002
+#&gt; Easter [6]   -0.0106133      0.003
+#&gt; LS (11-2008) -0.0795302      0.013
+#&gt; LS (1-2009)  -0.0711422      0.013
+#&gt; AO (8-2001)   0.0447823      0.013
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 0.01594 on 323 degrees of freedom
+#&gt; Log likelihood = 875.5, aic =  1262 aicc =  1263, bic(corrected for length) = -8.027
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; AR :  1 + 0.355520 B + 0.134366 B^2 
+#&gt; D :  1 - B - B^12 + B^13 
+#&gt; MA :  1 - 0.186667 B - 0.611719 B^12 + 0.114188 B^13 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; D :  1 - 2.000000 B + B^2 
+#&gt; MA :  1 - 1.314513 B + 0.340411 B^2 
+#&gt; Innovation variance:  0.4651916 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; D :  1 - 2.000000 B + B^2 
+#&gt; MA :  1 + 0.040093 B - 0.959907 B^2 
+#&gt; Innovation variance:  0.04852415 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; AR :  1 + 0.355520 B + 0.134366 B^2 
+#&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
+#&gt; MA :  1 + 0.715509 B + 0.458526 B^2 + 0.307968 B^3 + 0.130783 B^4 - 0.050030 B^5 - 0.216796 B^6 - 0.353788 B^7 - 0.443393 B^8 - 0.467164 B^9 - 0.373994 B^10 - 0.163801 B^11 - 0.411499 B^12 - 0.132321 B^13 
+#&gt; Innovation variance:  0.1608041 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; Innovation variance:  0.2049349 
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t         s         i
+#&gt; Jan 2017  97.4 100.9340 100.9645 0.9649872 0.9996976
+#&gt; Feb 2017  97.5 100.7675 101.2596 0.9675741 0.9951403
+#&gt; Mar 2017 112.0 102.0785 101.7061 1.0971949 1.0036614
+#&gt; Apr 2017 103.0 101.8555 102.1727 1.0112369 0.9968946
+#&gt; May 2017 100.4 103.0213 102.6101 0.9745555 1.0040080
+#&gt; Jun 2017 111.2 102.8013 102.9761 1.0816988 0.9983021
+#&gt; Jul 2017 103.4 103.3075 103.3373 1.0008951 0.9997120
+#&gt; Aug 2017  79.3 103.7806 103.7465 0.7641122 1.0003281
+#&gt; Sep 2017 109.7 103.7197 104.2758 1.0576581 0.9946676
+#&gt; Oct 2017 114.0 105.6630 104.8765 1.0789015 1.0074997
+#&gt; Nov 2017 107.7 105.4786 105.1828 1.0210600 1.0028123
+#&gt; Dec 2017 101.4 104.9682 105.2367 0.9660069 0.9974489
+#&gt; 
+#&gt; Forecasts:
+#&gt;               y_f     sa_f      t_f       s_f       i_f
+#&gt; Jan 2018 102.2106 105.3440 105.3449 0.9702559 0.9999915
+#&gt; Feb 2018 102.3328 105.5134 105.5143 0.9698565 0.9999915
+#&gt; Mar 2018 114.1449 105.6830 105.6839 1.0800682 0.9999915
+#&gt; Apr 2018 108.0526 105.8530 105.8539 1.0207800 0.9999915
+#&gt; May 2018 102.6903 106.0232 106.0241 0.9685646 0.9999915
+#&gt; Jun 2018 115.9079 106.1936 106.1945 1.0914767 0.9999915
+#&gt; Jul 2018 106.2462 106.3644 106.3653 0.9988891 0.9999915
+#&gt; Aug 2018  81.4640 106.5354 106.5363 0.7646660 0.9999915
+#&gt; Sep 2018 112.8928 106.7067 106.7076 1.0579730 0.9999915
+#&gt; Oct 2018 115.3561 106.8783 106.8792 1.0793227 0.9999915
+#&gt; Nov 2018 109.2863 107.0501 107.0510 1.0208889 0.9999915
+#&gt; Dec 2018 103.2836 107.2222 107.2231 0.9632669 0.9999915
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         2.179
+#&gt;  Seasonal     66.777
+#&gt;  Irregular     0.105
+#&gt;  TD &amp; Hol.     0.067
+#&gt;  Others       30.524
+#&gt;  Total        99.651
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.187
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        1.000
+#&gt;  f-test on i (seasonal dummies)         1.000
+#&gt;  Residual seasonality (entire series)   1.000
+#&gt;  Residual seasonality (last 3 years)    0.977
+#&gt;  f-test on sa (td)                      0.930
+#&gt;  f-test on i (td)                       1.000
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; 
+#&gt; </div></span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

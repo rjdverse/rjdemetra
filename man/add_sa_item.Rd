@@ -20,10 +20,11 @@ By default the name of the \code{sa_obj} is used.}
 Function to add a new seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) in a \code{workspace} object.
 }
 \examples{
-\dontrun{
-spec_x13 <- x13_spec_def(spec = c("RSA5c"), easter.enabled = FALSE)
+\donttest{
+dir <- tempdir()
+spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-spec_ts <- tramoseats_spec_def(spec = c("RSA5"))
+spec_ts <- tramoseats_spec_def(spec = "RSA5")
 sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()
@@ -31,7 +32,7 @@ new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
 add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 
-save_workspace(wk, "workspace.xml")
+save_workspace(wk, file.path(dir, "workspace.xml"))
 }
 
 }

@@ -76,7 +76,7 @@ regarima_spec_tramoseats(object, estimate.from = NA_character_,
   fcst.horizon = NA_integer_)
 }
 \arguments{
-\item{spec}{predefined \emph{JDemetra+} model specification (see \emph{Details}). The default is "TRfull".
+\item{spec}{predefined 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
 
 The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
 
@@ -266,12 +266,12 @@ The final values of the \code{specification} can be also accessed with the funct
 \item{span}{matrix containing the final time span for the model estimation and outliers' detection. Contains the same information as the variable span in the data frames estimate and outliers.The matrix can be also accessed with the function \code{\link{s_span}}.}
 }
 \description{
-\code{regarima_spec_def_tramoseats} creates (and modifies), from a predefined \emph{JDemetra+} model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
+\code{regarima_spec_def_tramoseats} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
 
 \code{regarima_spec_tramoseats} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
 }
 \details{
-The available predefined \emph{JDemetra+} model specifications (for the function \code{regarima_spec_def_tramoseats}) are described in the table below.
+The available predefined 'JDemetra+' model specifications (for the function \code{regarima_spec_def_tramoseats}) are described in the table below.
 
 \tabular{rrrrrrrr}{
 \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -285,12 +285,13 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
 }
 \examples{
+\donttest{
 myseries <- ipi_c_eu[, "FR"]
-myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"))
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull")
 myreg1 <- regarima(myseries, spec = myspec1)
 
  # Modify a pre-specified model specification
-myspec2 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
+myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
              tradingdays.mauto = "Unused",
              tradingdays.option = "WorkingDays",
              easter.type = "Standard",
@@ -314,7 +315,7 @@ myspec4 <- regarima_spec_tramoseats(myspec1,
 myreg4 <- regarima(myseries, myspec4)
 
  # Pre-specified outliers
-myspec1 <- regarima_spec_def_tramoseats(spec = c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
              usrdef.outliersEnabled = TRUE,
              usrdef.outliersType = c("LS", "LS"),
              usrdef.outliersDate = c("2008-10-01" ,"2003-01-01"),
@@ -324,7 +325,7 @@ myreg1 <- regarima(myseries, myspec1)
 myreg1
 s_preOut(myreg1)
 
-\dontrun{
+
  # User-defined variables
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries),
            frequency = 12)
@@ -332,19 +333,19 @@ var2 <- ts(rnorm(length(myseries))*100, start = start(myseries),
            frequency = 12)
 var <- ts.union(var1, var2)
 
-myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
             usrdef.varEnabled = TRUE, usrdef.var = var)
 s_preVar(myspec1)
 myreg1 <- regarima(myseries,myspec1)
 
-myspec2 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
              usrdef.varEnabled = TRUE,
              usrdef.var = var, usrdef.varCoef = c(17,-1),
              transform.function = "None")
 myreg2 <- regarima(myseries, myspec2)
 
  # Pre-specified ARMA coefficients
-myspec1 <- regarima_spec_def_tramoseats(spec=c("TRfull"),
+myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
              arima.p = 2, arima.q = 0, arima.bp = 1, arima.bq = 1,
              arima.coef = c(-0.12, -0.12, -0.3, -0.99),
@@ -357,6 +358,6 @@ s_arimaCoef(myreg1)
 }
 }
 \references{
-Info on JDemetra+, usage and functions:
+Info on 'JDemetra+', usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 }
