@@ -111,7 +111,7 @@ tramoseats <- function(series, spec,
     stop("use only with c(\"SA_spec\",\"TRAMO_SEATS\") class object")
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
-  jdictionary <- specTS_r2jd(spec,jrspec)
+  jdictionary <- RJDemespecTS_r2jd(spec,jrspec)
   specSeats_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
@@ -126,6 +126,11 @@ tramoseats <- function(series, spec,
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
+    
+    #Error with preliminary check
+    if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+      stop(jrslt$getResults()$getProcessingInformation()$toString())
+    }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
     fin <- final(jrobj = jrobct)
@@ -167,6 +172,11 @@ tramoseatsJavaResults <- function(jrslt, spec,
 
   if (is.null(jrobct@internal))
     return(NaN)
+  
+  #Error with preliminary check
+  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+    stop(jrslt$getResults()$getProcessingInformation()$toString())
+  }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
                         context_dictionnary = context_dictionnary,

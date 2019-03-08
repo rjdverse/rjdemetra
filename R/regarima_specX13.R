@@ -9,6 +9,7 @@
 #'
 #' The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
+#' @param preliminary.check boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
 #' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
 #'
 #' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.
@@ -248,7 +249,8 @@
 #' }
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+regarima_spec_def_x13  <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+                                  preliminary.check = NA,
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
                             estimate.first = NA_integer_,
@@ -352,7 +354,7 @@ regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", 
 
   # check the mode of remaining variables
   list.logical.usrdef <-list("usrdef.outliersEnabled","usrdef.varEnabled","arima.coefEnabled")
-  list.logical<-list("tradingdays.autoadjust","easter.enabled","easter.julian",
+  list.logical<-list("preliminary.check","tradingdays.autoadjust","easter.enabled","easter.julian",
                     "outlier.enabled","outlier.ao","outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","automdl.enabled",
                     "automdl.acceptdefault","automdl.mixed","automdl.balanced","arima.mu")
   list.logical.check <- append(list.logical.usrdef,list.logical)
@@ -397,7 +399,8 @@ regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", 
     eval(parse(text=paste(variables[i],".tab=c(rspec$",variables[i],",",variables[i],",","NA)", sep="")))
   }
 
-  v_estimate <-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, stringsAsFactors=FALSE)
+  v_estimate <-data.frame(preliminary.check = preliminary.check.tab,
+                          span = estimate.span.tab, tolerance = estimate.tol.tab, stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,adjust=transform.adjust.tab,aicdiff=transform.aicdiff.tab,
                             stringsAsFactors=FALSE)
   v_trading.days<-data.frame( option = tradingdays.option.tab, autoadjust=tradingdays.autoadjust.tab, leapyear = tradingdays.leapyear.tab,
@@ -467,6 +470,7 @@ reformat_spec_def <- function(x, parameter){
 #' @param object object of class \code{c("regarima_spec","X13")} or of class \code{c("regarima","X13")}.
 #' @export
 regarima_spec_x13  <-function(object = object,
+                              preliminary.check = NA,
                               estimate.from = NA_character_,
                               estimate.to = NA_character_,
                               estimate.first = NA_integer_,
@@ -571,7 +575,7 @@ regarima_spec_x13  <-function(object = object,
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
 
   # check the mode of remaining variables
-  list.logical<-list("usrdef.outliersEnabled","usrdef.varEnabled","tradingdays.autoadjust","easter.enabled","easter.julian",
+  list.logical<-list("preliminary.check", "usrdef.outliersEnabled","usrdef.varEnabled","tradingdays.autoadjust","easter.enabled","easter.julian",
                     "outlier.enabled","outlier.ao","outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","automdl.enabled",
                     "automdl.acceptdefault","automdl.mixed","automdl.balanced","arima.mu","arima.coefEnabled")
 
@@ -614,7 +618,7 @@ regarima_spec_x13  <-function(object = object,
   predef.var <- list(Predefined = predef.variables.spec, Final = predef.variables)
   arima.coeff <- list(Predefined = predef.coef.spec , Final = predef.coef)
 
-  estimate.mod <- data.frame(span = estimate.span, tolerance = estimate.tol, stringsAsFactors=FALSE)
+  estimate.mod <- data.frame(preliminary.check = preliminary.check, span = estimate.span, tolerance = estimate.tol, stringsAsFactors=FALSE)
   transform.mod <- data.frame(tfunction=transform.function,adjust=transform.adjust,aicdiff=transform.aicdiff, stringsAsFactors=FALSE)
   usrdef.mod <- data.frame(outlier=usrdef.outliersEnabled, outlier.coef= NA, variables = usrdef.varEnabled,
                               variables.coef = NA, stringsAsFactors=FALSE)

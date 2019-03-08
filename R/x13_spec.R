@@ -116,6 +116,7 @@
 #'}
 #' @export
 x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+                         preliminary.check = NA,
                          estimate.from = NA_character_,
                          estimate.to = NA_character_,
                          estimate.first = NA_integer_,
@@ -193,7 +194,7 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
-  regarima <- regarima_spec_def_x13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
+  regarima <- regarima_spec_def_x13(reg_spec,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                      estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                      transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
                                      usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
@@ -287,6 +288,7 @@ x11_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
 #' @param object model specification, object of class \code{c("SA_spec","X13")} or \code{c("SA","X13")}.
 #' @export
 x13_spec <- function(object,
+                     preliminary.check = NA,
                     estimate.from = NA_character_,
                     estimate.to = NA_character_,
                     estimate.first = NA_integer_,
@@ -365,7 +367,7 @@ x13_spec <- function(object,
   if (!inherits(object, "X13") & (inherits(object, c("SA","SA_spec")) == FALSE))
     stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_x13(object, estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst, 
+  regarima <- regarima_spec_x13(object, preliminary.check, estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst, 
                                 estimate.exclLast, estimate.tol, transform.function, transform.adjust, 
                                 transform.aicdiff, usrdef.outliersEnabled, usrdef.outliersType, 
                                 usrdef.outliersDate, usrdef.outliersCoef, usrdef.varEnabled, usrdef.var, usrdef.varType, 

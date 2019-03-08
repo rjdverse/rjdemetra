@@ -117,6 +117,7 @@
 #' }
 #' @export
 tramoseats_spec_def <-function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                               preliminary.check = NA,
                                estimate.from = NA_character_,
                                estimate.to = NA_character_,
                                estimate.first = NA_integer_,
@@ -191,7 +192,7 @@ tramoseats_spec_def <-function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
 {
   spec<-match.arg(spec)
   reg_spec=gsub("RSA","TR",spec)
-  regarima <-  regarima_spec_def_tramoseats(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <-  regarima_spec_def_tramoseats(reg_spec,preliminary.check,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                     usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
@@ -253,6 +254,7 @@ seats_spec_def<- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA
 #' @param object model specification, object of class \code{c("SA_spec","TRAMO_SEATS")} or \code{c("SA","TRAMO_SEATS")}.
 #' @export
 tramoseats_spec <- function(object,
+                            preliminary.check = NA,
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
                             estimate.first = NA_integer_,
@@ -328,7 +330,7 @@ tramoseats_spec <- function(object,
   if (!inherits(object, "TRAMO_SEATS") & (inherits(object, c("SA","SA_spec"))==FALSE))
     stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_tramoseats(object,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <- regarima_spec_tramoseats(object,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                     usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,

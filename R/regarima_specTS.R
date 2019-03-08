@@ -8,7 +8,7 @@
 #' @param spec predefined 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
 #'
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
-#'
+#' @param preliminary.check boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
 #' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
 #'
 #' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.
@@ -285,6 +285,7 @@
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
 regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
+                                         preliminary.check = NA,
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
                             estimate.first = NA_integer_,
@@ -388,7 +389,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
 
   # check the mode of remaining variables
   list.logical.usrdef <-list("usrdef.outliersEnabled","usrdef.varEnabled","arima.coefEnabled")
-  list.logical = list("estimate.eml","tradingdays.leapyear","easter.julian","easter.test","outlier.enabled","outlier.ao",
+  list.logical = list("preliminary.check", "estimate.eml","tradingdays.leapyear","easter.julian","easter.test","outlier.enabled","outlier.ao",
                       "outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","outlier.eml","automdl.enabled",
                       "automdl.acceptdefault","automdl.compare","arima.mu")
   list.logical.check <- append(list.logical.usrdef,list.logical)
@@ -436,7 +437,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
     eval(parse(text=paste(variables[i],".tab=c(rspec$",variables[i],",",variables[i],",","NA)", sep="")))
   }
 
-  v_estimate<-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, exact_ml = estimate.eml.tab, urfinal = estimate.urfinal.tab, row.names = c("Predefined","User_modif","Final"), stringsAsFactors=FALSE)
+  v_estimate<-data.frame(preliminary.check = preliminary.check.tab, span = estimate.span.tab, tolerance = estimate.tol.tab, exact_ml = estimate.eml.tab, urfinal = estimate.urfinal.tab, row.names = c("Predefined","User_modif","Final"), stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,fct=transform.fct.tab, stringsAsFactors=FALSE)
   v_usrdef <- data.frame(outlier= c(FALSE, usrdef.outliersEnabled,NA), outlier.coef= c(FALSE,NA,NA),
                        variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA), stringsAsFactors=FALSE)
@@ -489,6 +490,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
 #' @param object object of class \code{c("regarima_spec","TRAMO_SEATS")} or of class \code{c("regarima","TRAMO_SEATS")}.
 #' @export
 regarima_spec_tramoseats <-function(object,
+                                    preliminary.check = NA,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,
                           estimate.first=NA_integer_,
@@ -595,7 +597,7 @@ regarima_spec_tramoseats <-function(object,
 
   
   # check the mode of remaining variables
-  list.logical = list("usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
+  list.logical = list("preliminary.check","usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
                       "easter.julian","easter.test","outlier.enabled","outlier.ao",
                       "outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","outlier.eml","automdl.enabled",
                       "automdl.acceptdefault","automdl.compare","arima.mu","arima.coefEnabled")
@@ -640,7 +642,9 @@ regarima_spec_tramoseats <-function(object,
   predef.var <- list(Predefined = predef.variables.spec, Final = predef.variables)
   arima.coeff <- list(Predefined = predef.coef.spec , Final = predef.coef)
 
-  estimate.mod <-data.frame(span = estimate.span, tolerance = estimate.tol, exact_ml = estimate.eml, urfinal = estimate.urfinal, stringsAsFactors=FALSE)
+  estimate.mod <- data.frame(preliminary.check = preliminary.check, 
+                            span = estimate.span, tolerance = estimate.tol,
+                            exact_ml = estimate.eml, urfinal = estimate.urfinal, stringsAsFactors=FALSE)
   transform.mod <- data.frame(tfunction=transform.function,fct=transform.fct, stringsAsFactors=FALSE)
   usrdef.mod <- data.frame(outlier=usrdef.outliersEnabled, outlier.coef= NA,
                            variables = usrdef.varEnabled, variables.coef = NA, stringsAsFactors=FALSE)

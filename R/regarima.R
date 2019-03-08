@@ -311,7 +311,8 @@ regarima_defX13 <- function(jrobj, spec, context_dictionnary = NULL,
                         extra_info = extra_info)
   
   estimate <- with(rspec,
-                   data.frame(span = estimate.span, tolerance = estimate.tol,
+                   data.frame(preliminary.check = preliminary.check,
+                              span = estimate.span, tolerance = estimate.tol,
                               row.names = "", stringsAsFactors = FALSE)
   )
   transform <- with(rspec,
@@ -391,7 +392,8 @@ regarima_defTS <- function(jrobj, spec, context_dictionnary = NULL,
                         extra_info = extra_info)
 
   estimate <- with(rspec,
-                   data.frame(span = estimate.span, tolerance = estimate.tol,
+                   data.frame(preliminary.check = preliminary.check,
+                              span = estimate.span, tolerance = estimate.tol,
                          exact_ml = estimate.eml, urfinal = estimate.urfinal,
                          row.names = "", stringsAsFactors = FALSE)
   )
