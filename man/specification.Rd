@@ -73,7 +73,7 @@ Below functions access different parts of the final model specification as inclu
 \examples{
 \donttest{
 myseries <- ipi_c_eu[, "FR"]
-myreg1 <- regarima_def_x13(myseries, spec = "RG5c")
+myreg1 <- regarima_x13(myseries, spec = "RG5c")
 myspec1 <- regarima_spec_x13(myreg1,
              estimate.from = "2005-10-01",
              outlier.from = "2010-03-01")
@@ -98,9 +98,9 @@ s_preOut(myspec2)
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 var3 <- ts.union(var1, var2)
-myspec3 <- regarima_spec_def_x13(spec = "RG5c",
-                                 usrdef.varEnabled = TRUE,
-                                 usrdef.var = var3)
+myspec3 <- regarima_spec_x13(spec = "RG5c",
+                             usrdef.varEnabled = TRUE,
+                             usrdef.var = var3)
 myreg3 <- regarima(myseries, myspec3)
 
 s_preVar(myspec3)
@@ -134,13 +134,13 @@ s_fcst(myspec1)
 s_span(myreg1)
 s_span(myspec1)
 
-myspec5 <- x13_spec_def(spec = "RSA5c", x11.seasonalComp = FALSE)
+myspec5 <- x13_spec(spec = "RSA5c", x11.seasonalComp = FALSE)
 mysa5 <- x13(myseries, myspec5)
 
 s_x11(mysa5)
 s_x11(myspec5)
 
-myspec6 <- tramoseats_spec_def(spec = c("RSAfull"), seats.approx = "Noisy")
+myspec6 <- tramoseats_spec(spec = "RSAfull", seats.approx = "Noisy")
 mysa6 <- tramoseats(myseries, myspec6)
 
 s_seats(mysa6)

@@ -19,7 +19,7 @@ By default the workspace only contains definitions: computation is needed to get
 }
 \examples{
 \donttest{
-spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
+spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 
 wk <- new_workspace()

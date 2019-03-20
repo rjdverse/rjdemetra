@@ -11,8 +11,7 @@ user_defined_variables(sa_object = c("X13-ARIMA", "TRAMO-SEATS"))
 }
 \description{
 Function to get the names of the additional output variables that can be defined in
-\code{\link{x13}}, \code{\link{x13_def}}, \code{\link{tramoseats}} and \code{\link{tramoseats_def}}
-with the parameter \code{userdefined}.
+\code{\link{x13}} and \code{\link{tramoseats}} with the parameter \code{userdefined}.
 }
 \examples{
 user_defined_variables("X13-ARIMA")

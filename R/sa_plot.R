@@ -13,18 +13,18 @@
 #' @param caption list or character with the graphs titles.
 #' @examples \donttest{
 #' myseries <- ipi_c_eu[, "FR"]
-#' mysa <- x13_def(myseries, spec = c("RSA5c"))
+#' mysa <- x13(myseries, spec = c("RSA5c"))
 #'  # RegArima
 #' plot(mysa$regarima) # 6 graphics are plotted by default
 #' # To only plot one graphic (here the residuals) changing the title:
 #' plot(mysa$regarima, which = 1, caption = "Plot of residuals")
 # # Extra plot decomposing the linearised series, calendar and outliers effects:
-#' plot(mysa$regarima, which = 7) 
-#' 
+#' plot(mysa$regarima, which = 7)
+#'
 #'   # Decomposition
 #' plot(mysa$decomposition) # To plot the S-I ratio
 #' plot(mysa$decomposition, first_date = c(2010, 1)) # To start the plot in January 2010
-#' 
+#'
 #'   # Final
 #' plot(mysa$final) # 2 graphics are plotted by default
 #' # To only plot one graphic (here raw data, seasonal adjusted data and trend),
@@ -147,7 +147,7 @@ plot.final <- function(x, first_date, last_date, forecast = TRUE,
                        ...){
 
   type_chart <- match.arg(type_chart, several.ok = TRUE)
-  
+
   all_caption <- c("sa-trend" = "Y, Sa, trend",
                    "cal-seas-irr" = "Cal., sea., irr.")
   all_caption[type_chart] <- caption

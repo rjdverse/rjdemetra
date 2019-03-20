@@ -53,12 +53,12 @@ Plotting methods for the S3 class objects around the seasonal adjustment: \code{
 \examples{
 \donttest{
 myseries <- ipi_c_eu[, "FR"]
-mysa <- x13_def(myseries, spec = c("RSA5c"))
+mysa <- x13(myseries, spec = c("RSA5c"))
  # RegArima
 plot(mysa$regarima) # 6 graphics are plotted by default
 # To only plot one graphic (here the residuals) changing the title:
 plot(mysa$regarima, which = 1, caption = "Plot of residuals")
-plot(mysa$regarima, which = 7) 
+plot(mysa$regarima, which = 7)
 
   # Decomposition
 plot(mysa$decomposition) # To plot the S-I ratio

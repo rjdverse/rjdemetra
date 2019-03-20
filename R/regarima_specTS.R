@@ -1,11 +1,9 @@
 #' RegARIMA model specification, pre-adjustment in TRAMO-SEATS
 #' @description
 #'
-#' \code{regarima_spec_def_tramoseats} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method.
+#' Function to create (and/or modify) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object can be created from a predefined 'JDemetra+' model specification  (a \code{character}), a previous specification (\code{c("regarima_spec","TRAMO_SEATS")} object) or a TRAMO-SEATS RegARIMA model (\code{c("regarima","TRAMO_SEATS")}).
 #'
-#' \code{regarima_spec_tramoseats} creates (and/or modifies) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object is created from a \code{c("regarima","TRAMO_SEATS")} or \code{c("regarima_spec","TRAMO_SEATS")} class object.
-#'
-#' @param spec predefined 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
+#' @param spec model specification.  It can be a \code{character} of predefined 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("regarima_spec","TRAMO_SEATS")} or an object of class \code{c("regarima", "TRAMO_SEATS")}. The default is \code{"TRfull"}.
 #'
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
@@ -154,7 +152,7 @@
 #'
 #'
 #' @details
-#' The available predefined 'JDemetra+' model specifications (for the function \code{regarima_spec_def_tramoseats}) are described in the table below.
+#' The available predefined 'JDemetra+' model specifications are described in the table below.
 #'
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -168,7 +166,7 @@
 #' }
 #'
 #' @return
-#' A list of class \code{c("regarima_spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#' A list of class \code{c("regarima_spec","TRAMO_SEATS")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
 #'
 #' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml},
 #' \code{urfinal} - argument \code{esimate.urfinal}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
@@ -213,11 +211,11 @@
 #'
 #' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
-#' myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull")
+#' myspec1 <- regarima_spec_tramoseats(spec = "TRfull")
 #' myreg1 <- regarima(myseries, spec = myspec1)
 #'
 #'  # Modify a pre-specified model specification
-#' myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
+#' myspec2 <- regarima_spec_tramoseats(spec = "TRfull",
 #'              tradingdays.mauto = "Unused",
 #'              tradingdays.option = "WorkingDays",
 #'              easter.type = "Standard",
@@ -241,7 +239,7 @@
 #' myreg4 <- regarima(myseries, myspec4)
 #'
 #'  # Pre-specified outliers
-#' myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
+#' myspec1 <- regarima_spec_tramoseats(spec = "TRfull",
 #'              usrdef.outliersEnabled = TRUE,
 #'              usrdef.outliersType = c("LS", "LS"),
 #'              usrdef.outliersDate = c("2008-10-01" ,"2003-01-01"),
@@ -250,7 +248,7 @@
 #' myreg1 <- regarima(myseries, myspec1)
 #' myreg1
 #' s_preOut(myreg1)
-#' 
+#'
 #'
 #'  # User-defined variables
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries),
@@ -259,19 +257,19 @@
 #'            frequency = 12)
 #' var <- ts.union(var1, var2)
 #'
-#' myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
+#' myspec1 <- regarima_spec_tramoseats(spec = "TRfull",
 #'             usrdef.varEnabled = TRUE, usrdef.var = var)
 #' s_preVar(myspec1)
 #' myreg1 <- regarima(myseries,myspec1)
 #'
-#' myspec2 <- regarima_spec_def_tramoseats(spec = "TRfull",
+#' myspec2 <- regarima_spec_tramoseats(spec = "TRfull",
 #'              usrdef.varEnabled = TRUE,
 #'              usrdef.var = var, usrdef.varCoef = c(17,-1),
 #'              transform.function = "None")
 #' myreg2 <- regarima(myseries, myspec2)
 #'
 #'  # Pre-specified ARMA coefficients
-#' myspec1 <- regarima_spec_def_tramoseats(spec = "TRfull",
+#' myspec1 <- regarima_spec_tramoseats(spec = "TRfull",
 #'              arima.coefEnabled = TRUE, automdl.enabled = FALSE,
 #'              arima.p = 2, arima.q = 0, arima.bp = 1, arima.bq = 1,
 #'              arima.coef = c(-0.12, -0.12, -0.3, -0.99),
@@ -283,72 +281,140 @@
 #' s_arimaCoef(myreg1)
 #' }
 #' @export
-# The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
-                            estimate.from = NA_character_,
-                            estimate.to = NA_character_,
-                            estimate.first = NA_integer_,
-                            estimate.last = NA_integer_,
-                            estimate.exclFirst = NA_integer_,
-                            estimate.exclLast = NA_integer_,
-                            estimate.tol = NA_integer_,
-                            estimate.eml = NA,
-                            estimate.urfinal = NA_integer_,
-                            transform.function = c(NA, "Auto", "None", "Log"),
-                            transform.fct = NA_integer_,
-                            usrdef.outliersEnabled = NA,
-                            usrdef.outliersType = NA,
-                            usrdef.outliersDate = NA,
-                            usrdef.outliersCoef = NA,
-                            usrdef.varEnabled = NA,
-                            usrdef.var = NA,
-                            usrdef.varType = NA,
-                            usrdef.varCoef = NA,
-                            tradingdays.mauto = c(NA, "Unused", "FTest" ,"WaldTest"),
-                            tradingdays.pftd = NA_integer_,
-                            tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
-                            tradingdays.leapyear = NA,
-                            tradingdays.stocktd = NA_integer_,
-                            tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
-                            easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
-                            easter.julian = NA,
-                            easter.duration = NA_integer_,
-                            easter.test = NA,
-                            outlier.enabled = NA,
-                            outlier.from = NA_character_,
-                            outlier.to = NA_character_,
-                            outlier.first = NA_integer_,
-                            outlier.last = NA_integer_,
-                            outlier.exclFirst = NA_integer_,
-                            outlier.exclLast = NA_integer_,
-                            outlier.ao = NA,
-                            outlier.tc = NA,
-                            outlier.ls = NA,
-                            outlier.so = NA,
-                            outlier.usedefcv = NA,
-                            outlier.cv = NA_integer_,
-                            outlier.eml = NA,
-                            outlier.tcrate = NA_integer_,
-                            automdl.enabled = NA,
-                            automdl.acceptdefault = NA,
-                            automdl.cancel = NA_integer_,
-                            automdl.ub1 = NA_integer_,
-                            automdl.ub2 = NA_integer_,
-                            automdl.armalimit = NA_integer_,
-                            automdl.reducecv = NA_integer_,
-                            automdl.ljungboxlimit = NA_integer_,
-                            automdl.compare = NA,
-                            arima.mu = NA,
-                            arima.p = NA_integer_,
-                            arima.d = NA_integer_,
-                            arima.q = NA_integer_,
-                            arima.bp = NA_integer_,
-                            arima.bd = NA_integer_,
-                            arima.bq = NA_integer_,
-                            arima.coefEnabled = NA,
-                            arima.coef= NA,
-                            arima.coefType = NA,
-                            fcst.horizon = NA_integer_)
+regarima_spec_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
+                                         estimate.from = NA_character_,
+                                         estimate.to = NA_character_,
+                                         estimate.first = NA_integer_,
+                                         estimate.last = NA_integer_,
+                                         estimate.exclFirst = NA_integer_,
+                                         estimate.exclLast = NA_integer_,
+                                         estimate.tol = NA_integer_,
+                                         estimate.eml = NA,
+                                         estimate.urfinal = NA_integer_,
+                                         transform.function = c(NA, "Auto", "None", "Log"),
+                                         transform.fct = NA_integer_,
+                                         usrdef.outliersEnabled = NA,
+                                         usrdef.outliersType = NA,
+                                         usrdef.outliersDate = NA,
+                                         usrdef.outliersCoef = NA,
+                                         usrdef.varEnabled = NA,
+                                         usrdef.var = NA,
+                                         usrdef.varType = NA,
+                                         usrdef.varCoef = NA,
+                                         tradingdays.mauto = c(NA, "Unused", "FTest" ,"WaldTest"),
+                                         tradingdays.pftd = NA_integer_,
+                                         tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                         tradingdays.leapyear = NA,
+                                         tradingdays.stocktd = NA_integer_,
+                                         tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
+                                         easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
+                                         easter.julian = NA,
+                                         easter.duration = NA_integer_,
+                                         easter.test = NA,
+                                         outlier.enabled = NA,
+                                         outlier.from = NA_character_,
+                                         outlier.to = NA_character_,
+                                         outlier.first = NA_integer_,
+                                         outlier.last = NA_integer_,
+                                         outlier.exclFirst = NA_integer_,
+                                         outlier.exclLast = NA_integer_,
+                                         outlier.ao = NA,
+                                         outlier.tc = NA,
+                                         outlier.ls = NA,
+                                         outlier.so = NA,
+                                         outlier.usedefcv = NA,
+                                         outlier.cv = NA_integer_,
+                                         outlier.eml = NA,
+                                         outlier.tcrate = NA_integer_,
+                                         automdl.enabled = NA,
+                                         automdl.acceptdefault = NA,
+                                         automdl.cancel = NA_integer_,
+                                         automdl.ub1 = NA_integer_,
+                                         automdl.ub2 = NA_integer_,
+                                         automdl.armalimit = NA_integer_,
+                                         automdl.reducecv = NA_integer_,
+                                         automdl.ljungboxlimit = NA_integer_,
+                                         automdl.compare = NA,
+                                         arima.mu = NA,
+                                         arima.p = NA_integer_,
+                                         arima.d = NA_integer_,
+                                         arima.q = NA_integer_,
+                                         arima.bp = NA_integer_,
+                                         arima.bd = NA_integer_,
+                                         arima.bq = NA_integer_,
+                                         arima.coefEnabled = NA,
+                                         arima.coef= NA,
+                                         arima.coefType = NA,
+                                         fcst.horizon = NA_integer_)
+{
+  UseMethod("regarima_spec_tramoseats", spec)
+}
+#' @export
+regarima_spec_tramoseats.character <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
+                                     estimate.from = NA_character_,
+                                     estimate.to = NA_character_,
+                                     estimate.first = NA_integer_,
+                                     estimate.last = NA_integer_,
+                                     estimate.exclFirst = NA_integer_,
+                                     estimate.exclLast = NA_integer_,
+                                     estimate.tol = NA_integer_,
+                                     estimate.eml = NA,
+                                     estimate.urfinal = NA_integer_,
+                                     transform.function = c(NA, "Auto", "None", "Log"),
+                                     transform.fct = NA_integer_,
+                                     usrdef.outliersEnabled = NA,
+                                     usrdef.outliersType = NA,
+                                     usrdef.outliersDate = NA,
+                                     usrdef.outliersCoef = NA,
+                                     usrdef.varEnabled = NA,
+                                     usrdef.var = NA,
+                                     usrdef.varType = NA,
+                                     usrdef.varCoef = NA,
+                                     tradingdays.mauto = c(NA, "Unused", "FTest" ,"WaldTest"),
+                                     tradingdays.pftd = NA_integer_,
+                                     tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                     tradingdays.leapyear = NA,
+                                     tradingdays.stocktd = NA_integer_,
+                                     tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
+                                     easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
+                                     easter.julian = NA,
+                                     easter.duration = NA_integer_,
+                                     easter.test = NA,
+                                     outlier.enabled = NA,
+                                     outlier.from = NA_character_,
+                                     outlier.to = NA_character_,
+                                     outlier.first = NA_integer_,
+                                     outlier.last = NA_integer_,
+                                     outlier.exclFirst = NA_integer_,
+                                     outlier.exclLast = NA_integer_,
+                                     outlier.ao = NA,
+                                     outlier.tc = NA,
+                                     outlier.ls = NA,
+                                     outlier.so = NA,
+                                     outlier.usedefcv = NA,
+                                     outlier.cv = NA_integer_,
+                                     outlier.eml = NA,
+                                     outlier.tcrate = NA_integer_,
+                                     automdl.enabled = NA,
+                                     automdl.acceptdefault = NA,
+                                     automdl.cancel = NA_integer_,
+                                     automdl.ub1 = NA_integer_,
+                                     automdl.ub2 = NA_integer_,
+                                     automdl.armalimit = NA_integer_,
+                                     automdl.reducecv = NA_integer_,
+                                     automdl.ljungboxlimit = NA_integer_,
+                                     automdl.compare = NA,
+                                     arima.mu = NA,
+                                     arima.p = NA_integer_,
+                                     arima.d = NA_integer_,
+                                     arima.q = NA_integer_,
+                                     arima.bp = NA_integer_,
+                                     arima.bd = NA_integer_,
+                                     arima.bq = NA_integer_,
+                                     arima.coefEnabled = NA,
+                                     arima.coef= NA,
+                                     arima.coefType = NA,
+                                     fcst.horizon = NA_integer_)
 {
   spec <- match.arg(spec)
   transform.function <- match.arg(transform.function)
@@ -376,7 +442,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
 
   # check the predefined-outliers varaiables
   predef.outliers <- spec_preOut(outliertype=usrdef.outliersType,
-                                             outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
+                                 outlierdate=usrdef.outliersDate, outliercoef=usrdef.outliersCoef)
 
   # check the user-defined variables
   n.usrvar <- if (is.mts(usrdef.var)) {dim(usrdef.var)[2]} else if (is.ts(usrdef.var)) {1} else {0}
@@ -394,7 +460,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
   list.logical.check <- append(list.logical.usrdef,list.logical)
 
   list.numeric.span <- list("estimate.first","estimate.last","estimate.exclFirst","estimate.exclLast",
-                           "outlier.first","outlier.last","outlier.exclFirst","outlier.exclLast","fcst.horizon")
+                            "outlier.first","outlier.last","outlier.exclFirst","outlier.exclLast","fcst.horizon")
 
   list.numeric = list("estimate.tol","estimate.urfinal","transform.fct","tradingdays.pftd",
                       "tradingdays.stocktd","easter.duration","outlier.cv","outlier.tcrate",
@@ -439,21 +505,21 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
   v_estimate<-data.frame(span = estimate.span.tab, tolerance = estimate.tol.tab, exact_ml = estimate.eml.tab, urfinal = estimate.urfinal.tab, row.names = c("Predefined","User_modif","Final"), stringsAsFactors=FALSE)
   v_transform <- data.frame(tfunction=transform.function.tab,fct=transform.fct.tab, stringsAsFactors=FALSE)
   v_usrdef <- data.frame(outlier= c(FALSE, usrdef.outliersEnabled,NA), outlier.coef= c(FALSE,NA,NA),
-                       variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA), stringsAsFactors=FALSE)
+                         variables =c(FALSE, usrdef.varEnabled,NA), variables.coef = c(FALSE,NA,NA), stringsAsFactors=FALSE)
   v_trading.days<-data.frame( automatic = tradingdays.mauto.tab, pftd = tradingdays.pftd.tab, option = tradingdays.option.tab,
-                            leapyear = tradingdays.leapyear.tab,stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab,
-                            stringsAsFactors=FALSE)
+                              leapyear = tradingdays.leapyear.tab,stocktd = tradingdays.stocktd.tab, test = tradingdays.test.tab,
+                              stringsAsFactors=FALSE)
   v_easter<-data.frame(type=easter.type.tab,julian=easter.julian.tab,duration=easter.duration.tab,test=easter.test.tab,
-                     stringsAsFactors=FALSE)
+                       stringsAsFactors=FALSE)
   v_outliers<-data.frame(enabled=outlier.enabled.tab,span=outlier.span.tab,ao=outlier.ao.tab, tc=outlier.tc.tab, ls = outlier.ls.tab,
-                       so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,eml=outlier.eml.tab,
-                       tcrate=outlier.tcrate.tab, stringsAsFactors=FALSE)
+                         so=outlier.so.tab,usedefcv=outlier.usedefcv.tab,cv=outlier.cv.tab,eml=outlier.eml.tab,
+                         tcrate=outlier.tcrate.tab, stringsAsFactors=FALSE)
   v_arima <-data.frame(enabled=automdl.enabled.tab,automdl.acceptdefault=automdl.acceptdefault.tab,automdl.cancel=automdl.cancel.tab,
-                    automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.armalimit=automdl.armalimit.tab,
-                    automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab, compare = automdl.compare.tab,
-                    arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
-                    arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA),
-                    stringsAsFactors=FALSE)
+                       automdl.ub1=automdl.ub1.tab,automdl.ub2=automdl.ub2.tab,automdl.armalimit=automdl.armalimit.tab,
+                       automdl.reducecv=automdl.reducecv.tab, automdl.ljungboxlimit=automdl.ljungboxlimit.tab, compare = automdl.compare.tab,
+                       arima.mu=arima.mu.tab,arima.p=arima.p.tab,arima.d =arima.d.tab,arima.q=arima.q.tab,
+                       arima.bp=arima.bp.tab,arima.bd=arima.bd.tab,arima.bq=arima.bq.tab,arima.coef = c(FALSE,arima.coefEnabled,NA),
+                       stringsAsFactors=FALSE)
   v_forecast <- data.frame(horizon = c(-2,fcst.horizon,NA), stringsAsFactors=FALSE)
 
   span.spec <-rspec$span
@@ -484,11 +550,8 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
   return(z)
 }
 # The function creates a ("regarima_spec","TRAMO_SEATS") class object from from a regarima_Spec or regarima object
-#' @rdname regarima_spec_def_tramoseats
-#' @name regarima_spec_def_tramoseats
-#' @param object object of class \code{c("regarima_spec","TRAMO_SEATS")} or of class \code{c("regarima","TRAMO_SEATS")}.
 #' @export
-regarima_spec_tramoseats <-function(object,
+regarima_spec_tramoseats.TRAMO_SEATS <- function(spec,
                           estimate.from=NA_character_,
                           estimate.to=NA_character_,
                           estimate.first=NA_integer_,
@@ -555,7 +618,7 @@ regarima_spec_tramoseats <-function(object,
                           fcst.horizon=NA_integer_)
 {
 
-  if (!inherits(object, "TRAMO_SEATS") & (!inherits(object, "regarima") | !inherits(object, "regarima_spec")))
+  if (!inherits(spec, "TRAMO_SEATS") & (!inherits(spec, "regarima") | !inherits(spec, "regarima_spec")))
     stop("use only with c(\"regarima\",\"TRAMO_SEATS\") or c(\"regarima_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
   transform.function <-match.arg(transform.function)
@@ -593,7 +656,7 @@ regarima_spec_tramoseats <-function(object,
   # check the ARIMA coefficients
   predef.coef <- spec_arimaCoef(coef = arima.coef, coeftype = arima.coefType)
 
-  
+
   # check the mode of remaining variables
   list.logical = list("usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
                       "easter.julian","easter.test","outlier.enabled","outlier.ao",
@@ -621,19 +684,19 @@ regarima_spec_tramoseats <-function(object,
   if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."))}
 
   # Predefined values
-  estimate.spec <- s_estimate(object)
-  transform.spec <- s_transform(object)
-  usrdef.spec <- s_usrdef(object)
-  trading.days.spec <- s_td(object)
-  easter.spec <- s_easter(object)
-  outliers.spec <- s_out(object)
-  arima.spec <- s_arima(object)
-  forecast.spec <- s_fcst(object)
-  span.spec <- s_span(object)
+  estimate.spec <- s_estimate(spec)
+  transform.spec <- s_transform(spec)
+  usrdef.spec <- s_usrdef(spec)
+  trading.days.spec <- s_td(spec)
+  easter.spec <- s_easter(spec)
+  outliers.spec <- s_out(spec)
+  arima.spec <- s_arima(spec)
+  forecast.spec <- s_fcst(spec)
+  span.spec <- s_span(spec)
 
-  predef.outliers.spec <- s_preOut(object)
-  predef.variables.spec <- s_preVar(object)
-  predef.coef.spec <- s_arimaCoef(object)
+  predef.outliers.spec <- s_preOut(spec)
+  predef.variables.spec <- s_preVar(spec)
+  predef.coef.spec <- s_arimaCoef(spec)
 
   # Modified values
   predef.out <- list(Predefined = predef.outliers.spec, Final = predef.outliers)

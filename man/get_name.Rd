@@ -17,9 +17,9 @@ Generics functions to get the Java name of a \code{multiprocessing} or a \code{s
 }
 \examples{
 \donttest{
-spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
+spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-spec_ts <- tramoseats_spec_def(spec = "RSA5")
+spec_ts <- tramoseats_spec(spec = "RSA5")
 sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()

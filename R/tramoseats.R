@@ -6,16 +6,12 @@ setClass(
 #' Seasonal Adjustment with TRAMO-SEATS
 #'
 #' @description
-#' \code{tramoseats}/\code{tramoseats_def} estimates the seasonally adjusted series (sa) with the TRAMO-SEATS method.
+#' Function to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 #'
 #' @param series a univariate time series
-#' @param spec model specification TRAMO-SEATS. For the function:
-#' \itemize{
-#' \item \code{tramoseats}, object of class \code{c("SA_spec","TRAMO_SEATS")}
-#' \item \code{tramoseats_def}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "RSAfull".
-#' }
+#' @param spec model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSAfull"}, or an object of class \code{c("SA_spec","TRAMO_SEATS")}.
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
@@ -24,7 +20,7 @@ setClass(
 #'
 #' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{www.bde.es}).
 #'
-#' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications (for the function \code{tramoseats_def}), they are described in the table below.
+#' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -37,7 +33,7 @@ setClass(
 #' }
 #'
 #' @return
-#' \code{tramoseats}/\code{tramoseats_def} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
+#' \code{tramoseats} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
 #'
@@ -76,14 +72,14 @@ setClass(
 #'
 #' @examples \donttest{
 #' myseries <- ipi_c_eu[, "FR"]
-#' myspec <- tramoseats_spec_def("RSAfull")
+#' myspec <- tramoseats_spec("RSAfull")
 #' mysa <- tramoseats(myseries, myspec)
 #' mysa
-#' 
+#'
 #' # Equivalent to:
-#' mysa1 <- tramoseats_def(myseries, spec = "RSAfull")
+#' mysa1 <- tramoseats(myseries, spec = "RSAfull")
 #' mysa1
-#' 
+#'
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var <- ts.union(var1, var2)
@@ -102,12 +98,18 @@ setClass(
 #' plot(mysa2$decomposition)
 #' }
 #' @export
-tramoseats <- function(series, spec,
-                      userdefined = NULL){
-  if (!is.ts(series)){
+tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+                       userdefined = NULL){
+  if (!is.ts(series)) {
     stop("series must be a time series")
   }
-  if (!inherits(spec, "SA_spec") | !inherits(spec, "TRAMO_SEATS"))
+  UseMethod("tramoseats", spec)
+}
+#' @export
+tramoseats.SA_spec <- function(series, spec,
+                      userdefined = NULL){
+
+  if (!inherits(spec, "TRAMO_SEATS"))
     stop("use only with c(\"SA_spec\",\"TRAMO_SEATS\") class object")
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
@@ -139,14 +141,9 @@ tramoseats <- function(series, spec,
     return(z)
   }
 }
-#' @rdname tramoseats
-#' @name tramoseats
 #' @export
-tramoseats_def <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
-                         userdefined = NULL){
-  if (!is.ts(series)){
-    stop("series must be a time series")
-  }
+tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+                           userdefined = NULL){
   spec <- match.arg(spec)
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
@@ -155,6 +152,33 @@ tramoseats_def <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
 
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+tramoseatsJavaResults <- function(jrslt, spec,
+                                  userdefined = NULL,
+                                  context_dictionnary = NULL,
+                                  extra_info = FALSE){
+  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+  jrobct_arima <- new(Class = "JD2_TRAMO_java",internal = jrarima)
+  jrobct <- new(Class = "JD2_TramoSeats_java", internal = jrslt)
+
+  if (is.null(jrobct@internal))
+    return(NaN)
+
+  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
+                        context_dictionnary = context_dictionnary,
+                        extra_info = extra_info)
+  deco <- decomp_defTS(jrobj = jrobct, spec = spec)
+  fin <- final(jrobj = jrobct)
+  diagn <- diagnostics(jrobj = jrobct)
+
+  z <- list(regarima = reg, decomposition = deco, final = fin,
+            diagnostics = diagn,
+            user_defined = user_defined(userdefined, jrobct))
+
+  class(z) <- c("SA","TRAMO_SEATS")
+  return(z)
+
 }
 
 tramoseatsJavaResults <- function(jrslt, spec,

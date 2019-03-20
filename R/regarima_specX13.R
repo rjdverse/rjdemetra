@@ -1,11 +1,9 @@
 #' RegARIMA model specification, pre-adjustment in X13
 #' @description
 #'
-#' \code{regarima_spec_def_x13} creates (and modifies), from a predefined 'JDemetra+' model specification, a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method.
+#' Function to create (and/or modify) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object can be created from a predefined 'JDemetra+' model specification  (a \code{character}), a previous specification (\code{c("regarima_spec","X13")} object) or a X13 RegARIMA model (\code{c("regarima","X13")}).
 #'
-#' \code{regarima_spec_x13} creates (and/or modifies) a \code{c("regarima_spec","X13")} class object with the RegARIMA model specification for the X13 method. The object is created from a \code{c("regarima","X13")} or \code{c("regarima_spec","X13")} class object.
-#'
-#' @param spec predefined 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
+#' @param spec model specification.  It can be a \code{character} of predefined 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("regarima_spec","X13")} or an object of class \code{c("regarima", "X13")}. The default is \code{"RG5c"}.
 #'
 #' The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
@@ -152,7 +150,7 @@
 #'
 #'
 #' @details
-#' The available predefined 'JDemetra+' model specifications (for the function \code{regarima_spec_def_x13}) are described in the table below.
+#' The available predefined 'JDemetra+' model specifications are described in the table below.
 #'
 #' \tabular{rrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
@@ -165,7 +163,7 @@
 #' }
 #'
 #' @return
-#' A list of class \code{c("regarima_spec","X13")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec} or \code{object}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#' A list of class \code{c("regarima_spec","X13")} with the below components. Each component refers to different part of the RegARIMA model specification, mirroring the arguments of the function (for details see arguments description). Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification, values that will be used in the function \code{\link{regarima}}. The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
 #'
 #' \item{estimate}{data frame. Variables referring to: \code{span} - time span for the model estimation, \code{tolerance} - argument \code{estimate.tol}. The final values can be also accessed with the function \code{\link{s_estimate}}.}
 #'
@@ -190,12 +188,12 @@
 #'
 #' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
-#' myspec1 <- regarima_spec_def_x13(spec = "RG5c")
+#' myspec1 <- regarima_spec_x13(spec = "RG5c")
 #' myreg1 <- regarima(myseries, spec = myspec1)
-#' 
+#'
 #'  # Modify a pre-specified model specification
-#' myspec2 <- regarima_spec_def_x13(spec = "RG5c",
-#'                                  tradingdays.option = "WorkingDays")
+#' myspec2 <- regarima_spec_x13(spec = "RG5c",
+#'                              tradingdays.option = "WorkingDays")
 #' myreg2 <- regarima(myseries, spec = myspec2)
 #'
 #'  # Modify the model specification from a "regarima" object
@@ -207,7 +205,7 @@
 #' myreg4 <- regarima(myseries, myspec4)
 #'
 #'  # Pre-specified outliers
-#' myspec1 <- regarima_spec_def_x13(spec = "RG5c", usrdef.outliersEnabled = TRUE,
+#' myspec1 <- regarima_spec_x13(spec = "RG5c", usrdef.outliersEnabled = TRUE,
 #'               usrdef.outliersType = c("LS", "AO"),
 #'               usrdef.outliersDate = c("2008-10-01", "2002-01-01"),
 #'               usrdef.outliersCoef = c(36, 14),
@@ -225,19 +223,19 @@
 #'            frequency = 12)
 #' var <- ts.union(var1, var2)
 #'
-#' myspec1 <- regarima_spec_def_x13(spec = "RG5c", usrdef.varEnabled = TRUE,
-#'                                  usrdef.var = var)
+#' myspec1 <- regarima_spec_x13(spec = "RG5c", usrdef.varEnabled = TRUE,
+#'                              usrdef.var = var)
 #' myreg1 <- regarima(myseries, myspec1)
 #' myreg1
 #'
-#' myspec2 <- regarima_spec_def_x13(spec="RG5c", usrdef.varEnabled = TRUE,
-#'                                  usrdef.var = var1, usrdef.varCoef = 2,
-#'                                  transform.function = "None")
+#' myspec2 <- regarima_spec_x13(spec = "RG5c", usrdef.varEnabled = TRUE,
+#'                              usrdef.var = var1, usrdef.varCoef = 2,
+#'                              transform.function = "None")
 #' myreg2 <- regarima(myseries, myspec2)
 #' s_preVar(myreg2)
 #'
 #'  # Pre-specified ARMA coefficients
-#' myspec1 <- regarima_spec_def_x13(spec="RG5c", automdl.enabled =FALSE,
+#' myspec1 <- regarima_spec_x13(spec = "RG5c", automdl.enabled =FALSE,
 #'              arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
 #'              arima.coefEnabled = TRUE, arima.coef = c(-0.8, -0.6, 0),
 #'              arima.coefType = c(rep("Fixed", 2), "Undefined"))
@@ -248,7 +246,76 @@
 #' }
 #' @export
 # The function creates a "regarima_spec" S3 class object from a JD+ defined specification for X13 method
-regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+regarima_spec_x13  <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
+                                  estimate.from = NA_character_,
+                                  estimate.to = NA_character_,
+                                  estimate.first = NA_integer_,
+                                  estimate.last = NA_integer_,
+                                  estimate.exclFirst = NA_integer_,
+                                  estimate.exclLast = NA_integer_,
+                                  estimate.tol = NA_integer_,
+                                  transform.function = c(NA, "Auto", "None", "Log"),
+                                  transform.adjust = c(NA, "None", "LeapYear", "LengthOfPeriod"),
+                                  transform.aicdiff = NA_integer_,
+                                  usrdef.outliersEnabled = NA,
+                                  usrdef.outliersType = NA,
+                                  usrdef.outliersDate = NA,
+                                  usrdef.outliersCoef = NA,
+                                  usrdef.varEnabled = NA,
+                                  usrdef.var = NA,
+                                  usrdef.varType = NA,
+                                  usrdef.varCoef = NA,
+                                  tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                  tradingdays.autoadjust = NA,
+                                  tradingdays.leapyear = c(NA, "LeapYear", "LengthOfPeriod","None"),
+                                  tradingdays.stocktd = NA_integer_,
+                                  tradingdays.test = c(NA, "Remove", "Add", "None"),
+                                  easter.enabled = NA,
+                                  easter.julian = NA,
+                                  easter.duration = NA_integer_,
+                                  easter.test = c(NA, "Add", "Remove", "None"),
+                                  outlier.enabled = NA,
+                                  outlier.from = NA_character_,
+                                  outlier.to = NA_character_,
+                                  outlier.first = NA_integer_,
+                                  outlier.last = NA_integer_,
+                                  outlier.exclFirst = NA_integer_,
+                                  outlier.exclLast = NA_integer_,
+                                  outlier.ao = NA,
+                                  outlier.tc = NA,
+                                  outlier.ls = NA,
+                                  outlier.so = NA,
+                                  outlier.usedefcv = NA,
+                                  outlier.cv = NA_integer_,
+                                  outlier.method = c(NA, "AddOne", "AddAll"),
+                                  outlier.tcrate  = NA_integer_,
+                                  automdl.enabled = NA,
+                                  automdl.acceptdefault = NA,
+                                  automdl.cancel = NA_integer_,
+                                  automdl.ub1 = NA_integer_,
+                                  automdl.ub2 = NA_integer_,
+                                  automdl.mixed = NA,
+                                  automdl.balanced = NA,
+                                  automdl.armalimit = NA_integer_,
+                                  automdl.reducecv = NA_integer_,
+                                  automdl.ljungboxlimit = NA_integer_,
+                                  automdl.ubfinal= NA_integer_,
+                                  arima.mu = NA,
+                                  arima.p = NA_integer_,
+                                  arima.d = NA_integer_,
+                                  arima.q = NA_integer_,
+                                  arima.bp = NA_integer_,
+                                  arima.bd = NA_integer_,
+                                  arima.bq = NA_integer_,
+                                  arima.coefEnabled = NA,
+                                  arima.coef = NA,
+                                  arima.coefType = NA,
+                                  fcst.horizon = NA_integer_)
+{
+ UseMethod("regarima_spec_x13", spec)
+}
+#' @export
+regarima_spec_x13.character <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
                             estimate.first = NA_integer_,
@@ -314,7 +381,7 @@ regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", 
                             arima.coefType = NA,
                             fcst.horizon = NA_integer_)
 {
-  spec<-match.arg(spec)
+  spec <- match.arg(spec)
   transform.function <- match.arg(transform.function)
   transform.adjust <- match.arg(transform.adjust)
   tradingdays.option <- match.arg(tradingdays.option)
@@ -462,77 +529,74 @@ reformat_spec_def <- function(x, parameter){
   res
 }
 # The function creates a ("regarima_spec","X13") class object from from a regarima_spec or regarima object
-#' @rdname regarima_spec_def_x13
-#' @name regarima_spec_def_x13
-#' @param object object of class \code{c("regarima_spec","X13")} or of class \code{c("regarima","X13")}.
 #' @export
-regarima_spec_x13  <-function(object = object,
-                              estimate.from = NA_character_,
-                              estimate.to = NA_character_,
-                              estimate.first = NA_integer_,
-                              estimate.last = NA_integer_,
-                              estimate.exclFirst = NA_integer_,
-                              estimate.exclLast = NA_integer_,
-                              estimate.tol = NA_integer_,
-                              transform.function = c(NA, "Auto", "None", "Log"),
-                              transform.adjust = c(NA, "None", "LeapYear", "LengthOfPeriod"),
-                              transform.aicdiff = NA_integer_,
-                              usrdef.outliersEnabled = NA,
-                              usrdef.outliersType = NA,
-                              usrdef.outliersDate = NA,
-                              usrdef.outliersCoef = NA,
-                              usrdef.varEnabled = NA,
-                              usrdef.var = NA,
-                              usrdef.varType = NA,
-                              usrdef.varCoef = NA,
-                              tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
-                              tradingdays.autoadjust = NA,
-                              tradingdays.leapyear = c(NA, "LeapYear", "LengthOfPeriod", "None"),
-                              tradingdays.stocktd = NA_integer_,
-                              tradingdays.test = c(NA, "Remove", "Add", "None"),
-                              easter.enabled = NA,
-                              easter.julian = NA,
-                              easter.duration = NA_integer_,
-                              easter.test = c(NA_character_,"Add","Remove","None"),
-                              outlier.enabled = NA,
-                              outlier.from = NA_character_,
-                              outlier.to = NA_character_,
-                              outlier.first = NA_integer_,
-                              outlier.last = NA_integer_,
-                              outlier.exclFirst = NA_integer_,
-                              outlier.exclLast = NA_integer_,
-                              outlier.ao = NA,
-                              outlier.tc = NA,
-                              outlier.ls = NA,
-                              outlier.so = NA,
-                              outlier.usedefcv = NA,
-                              outlier.cv = NA_integer_,
-                              outlier.method = c(NA_character_,"AddOne","AddAll"),
-                              outlier.tcrate = NA_integer_,
-                              automdl.enabled = NA,
-                              automdl.acceptdefault = NA,
-                              automdl.cancel = NA_integer_,
-                              automdl.ub1 = NA_integer_,
-                              automdl.ub2 = NA_integer_,
-                              automdl.mixed = NA,
-                              automdl.balanced = NA,
-                              automdl.armalimit = NA_integer_,
-                              automdl.reducecv = NA_integer_,
-                              automdl.ljungboxlimit = NA_integer_,
-                              automdl.ubfinal = NA_integer_,
-                              arima.mu = NA,
-                              arima.p = NA_integer_,
-                              arima.d = NA_integer_,
-                              arima.q = NA_integer_,
-                              arima.bp = NA_integer_,
-                              arima.bd = NA_integer_,
-                              arima.bq = NA_integer_,
-                              arima.coefEnabled = NA,
-                              arima.coef = NA,
-                              arima.coefType = NA,
-                              fcst.horizon = NA_integer_)
+regarima_spec_x13.X13 <- function(spec,
+                                  estimate.from = NA_character_,
+                                  estimate.to = NA_character_,
+                                  estimate.first = NA_integer_,
+                                  estimate.last = NA_integer_,
+                                  estimate.exclFirst = NA_integer_,
+                                  estimate.exclLast = NA_integer_,
+                                  estimate.tol = NA_integer_,
+                                  transform.function = c(NA, "Auto", "None", "Log"),
+                                  transform.adjust = c(NA, "None", "LeapYear", "LengthOfPeriod"),
+                                  transform.aicdiff = NA_integer_,
+                                  usrdef.outliersEnabled = NA,
+                                  usrdef.outliersType = NA,
+                                  usrdef.outliersDate = NA,
+                                  usrdef.outliersCoef = NA,
+                                  usrdef.varEnabled = NA,
+                                  usrdef.var = NA,
+                                  usrdef.varType = NA,
+                                  usrdef.varCoef = NA,
+                                  tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                  tradingdays.autoadjust = NA,
+                                  tradingdays.leapyear = c(NA, "LeapYear", "LengthOfPeriod", "None"),
+                                  tradingdays.stocktd = NA_integer_,
+                                  tradingdays.test = c(NA, "Remove", "Add", "None"),
+                                  easter.enabled = NA,
+                                  easter.julian = NA,
+                                  easter.duration = NA_integer_,
+                                  easter.test = c(NA_character_,"Add","Remove","None"),
+                                  outlier.enabled = NA,
+                                  outlier.from = NA_character_,
+                                  outlier.to = NA_character_,
+                                  outlier.first = NA_integer_,
+                                  outlier.last = NA_integer_,
+                                  outlier.exclFirst = NA_integer_,
+                                  outlier.exclLast = NA_integer_,
+                                  outlier.ao = NA,
+                                  outlier.tc = NA,
+                                  outlier.ls = NA,
+                                  outlier.so = NA,
+                                  outlier.usedefcv = NA,
+                                  outlier.cv = NA_integer_,
+                                  outlier.method = c(NA_character_,"AddOne","AddAll"),
+                                  outlier.tcrate = NA_integer_,
+                                  automdl.enabled = NA,
+                                  automdl.acceptdefault = NA,
+                                  automdl.cancel = NA_integer_,
+                                  automdl.ub1 = NA_integer_,
+                                  automdl.ub2 = NA_integer_,
+                                  automdl.mixed = NA,
+                                  automdl.balanced = NA,
+                                  automdl.armalimit = NA_integer_,
+                                  automdl.reducecv = NA_integer_,
+                                  automdl.ljungboxlimit = NA_integer_,
+                                  automdl.ubfinal = NA_integer_,
+                                  arima.mu = NA,
+                                  arima.p = NA_integer_,
+                                  arima.d = NA_integer_,
+                                  arima.q = NA_integer_,
+                                  arima.bp = NA_integer_,
+                                  arima.bd = NA_integer_,
+                                  arima.bq = NA_integer_,
+                                  arima.coefEnabled = NA,
+                                  arima.coef = NA,
+                                  arima.coefType = NA,
+                                  fcst.horizon = NA_integer_)
 {
-  if (!inherits(object, "X13") & (!inherits(object, "regarima") | !inherits(object, "regarima_spec")))
+  if (!inherits(spec, "X13") & (!inherits(spec, "regarima") | !inherits(spec, "regarima_spec")))
     stop("use only with c(\"regarima\",\"X13\") or c(\"regarima_spec\",\"X13\") objects", call. = FALSE)
 
   transform.function <-match.arg(transform.function)
@@ -595,19 +659,19 @@ regarima_spec_x13  <-function(object = object,
   if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."))}
 
   # Predefined values
-  estimate.spec <- s_estimate(object)
-  transform.spec <- s_transform(object)
-  usrdef.spec <- s_usrdef(object)
-  trading.days.spec <- s_td(object)
-  easter.spec <- s_easter(object)
-  outliers.spec <- s_out(object)
-  arima.spec <- s_arima(object)
-  forecast.spec <- s_fcst(object)
-  span.spec <- s_span(object)
+  estimate.spec <- s_estimate(spec)
+  transform.spec <- s_transform(spec)
+  usrdef.spec <- s_usrdef(spec)
+  trading.days.spec <- s_td(spec)
+  easter.spec <- s_easter(spec)
+  outliers.spec <- s_out(spec)
+  arima.spec <- s_arima(spec)
+  forecast.spec <- s_fcst(spec)
+  span.spec <- s_span(spec)
 
-  predef.outliers.spec <- s_preOut(object)
-  predef.variables.spec <- s_preVar(object)
-  predef.coef.spec <- s_arimaCoef(object)
+  predef.outliers.spec <- s_preOut(spec)
+  predef.variables.spec <- s_preVar(spec)
+  predef.coef.spec <- s_arimaCoef(spec)
 
   # Modified values
   predef.out <- list(Predefined = predef.outliers.spec, Final = predef.outliers)
