@@ -5,11 +5,13 @@
 
 [![Build
 Status](https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master)](https://travis-ci.com/jdemetra/rjdemetra)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+[![CRAN last
+release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN monthly
-downloads](http://www.r-pkg.org/badges/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
+downloads](http://cranlogs.r-pkg.org/badges/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN
-downloads](http://www.r-pkg.org/badges/grand-total/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 
 RJDemetra is a R interface to JDemetra+, the seasonal adjustment
 software [officially
@@ -54,8 +56,8 @@ can either use the `x13_def()` function for the X-13ARIMA method or the
 ``` r
 library(RJDemetra)
 myseries <- ipi_c_eu[, "FR"]
-x13_model <- x13_def(myseries) # X-13ARIMA method
-ts_model <- tramoseats_def(myseries) # TRAMO-SEATS method
+x13_model <- x13(myseries) # X-13ARIMA method
+ts_model <- tramoseats(myseries) # TRAMO-SEATS method
 
 # Basic plot with the original series, the trend and the SA series
 plot(x13_model, type_chart = "sa-trend")

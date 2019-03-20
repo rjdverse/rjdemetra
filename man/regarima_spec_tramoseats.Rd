@@ -5,7 +5,7 @@
 \title{RegARIMA model specification, pre-adjustment in TRAMO-SEATS}
 \usage{
 regarima_spec_tramoseats(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3",
-  "TR4", "TR5"), estimate.from = NA_character_,
+  "TR4", "TR5"), preliminary.check = NA, estimate.from = NA_character_,
   estimate.to = NA_character_, estimate.first = NA_integer_,
   estimate.last = NA_integer_, estimate.exclFirst = NA_integer_,
   estimate.exclLast = NA_integer_, estimate.tol = NA_integer_,
@@ -43,6 +43,8 @@ regarima_spec_tramoseats(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3",
 \item{spec}{model specification.  It can be a \code{character} of predefined 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("regarima_spec","TRAMO_SEATS")} or an object of class \code{c("regarima", "TRAMO_SEATS")}. The default is \code{"TRfull"}.
 
 The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
+
+\item{preliminary.check}{boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 

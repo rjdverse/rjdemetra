@@ -128,6 +128,11 @@ tramoseats.SA_spec <- function(series, spec,
   if (is.null(jrobct@internal)){
     return (NaN)
   }else{
+
+    #Error with preliminary check
+    if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+      stop(jrslt$getResults()$getProcessingInformation()$toString())
+    }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
     fin <- final(jrobj = jrobct)
@@ -164,6 +169,11 @@ tramoseatsJavaResults <- function(jrslt, spec,
 
   if (is.null(jrobct@internal))
     return(NaN)
+
+  #Error with preliminary check
+  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+    stop(jrslt$getResults()$getProcessingInformation()$toString())
+  }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
                         context_dictionnary = context_dictionnary,

@@ -129,6 +129,10 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   if (is.null(jrobct@internal)) {
     return(NaN)
   }else{
+    #Error with preliminary check
+    if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+      stop(jrslt$getResults()$getProcessingInformation()$toString())
+    }
     reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
     fin <- final(jrobj = jrobct)
@@ -165,6 +169,11 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
 
   if (is.null(jrobct@internal)) {
     return(NaN)
+  }
+  
+  #Error with preliminary check
+  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+    stop(jrslt$getResults()$getProcessingInformation()$toString())
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,

@@ -84,7 +84,7 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
   .Deprecated("x13_spec")
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
-  regarima <- regarima_spec_def_x13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
+  regarima <- regarima_spec_def_x13(reg_spec, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                     estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                     transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
                                     usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
@@ -206,7 +206,7 @@ tramoseats_spec_def <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA
   .Deprecated("tramoseats_spec")
   spec<-match.arg(spec)
   reg_spec=gsub("RSA","TR",spec)
-  regarima <-  regarima_spec_tramoseats(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <-  regarima_spec_tramoseats(reg_spec,NA,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                         estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                         usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                         usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,

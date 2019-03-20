@@ -114,6 +114,7 @@
 #'}
 #' @export
 x13_spec <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+                     preliminary.check = NA,
                      estimate.from = NA_character_,
                      estimate.to = NA_character_,
                      estimate.first = NA_integer_,
@@ -192,6 +193,7 @@ x13_spec <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
 }
 #' @export
 x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
+                         preliminary.check = NA,
                          estimate.from = NA_character_,
                          estimate.to = NA_character_,
                          estimate.first = NA_integer_,
@@ -269,7 +271,7 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
-  regarima <- regarima_spec_x13(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
+  regarima <- regarima_spec_x13(reg_spec, preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,
                                 estimate.exclLast,estimate.tol,transform.function,transform.adjust,
                                 transform.aicdiff,usrdef.outliersEnabled,usrdef.outliersType,
                                 usrdef.outliersDate,usrdef.outliersCoef,usrdef.varEnabled,usrdef.var,usrdef.varType,
@@ -290,6 +292,7 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
 }
 #' @export
 x13_spec.X13 <- function(spec,
+                     preliminary.check = NA,
                     estimate.from = NA_character_,
                     estimate.to = NA_character_,
                     estimate.first = NA_integer_,
@@ -368,7 +371,7 @@ x13_spec.X13 <- function(spec,
   if (!inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_x13(spec, estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst,
+  regarima <- regarima_spec_x13(spec, preliminary.check, estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst,
                                 estimate.exclLast, estimate.tol, transform.function, transform.adjust,
                                 transform.aicdiff, usrdef.outliersEnabled, usrdef.outliersType,
                                 usrdef.outliersDate, usrdef.outliersCoef, usrdef.varEnabled, usrdef.var, usrdef.varType,
@@ -379,8 +382,7 @@ x13_spec.X13 <- function(spec,
                                 outlier.usedefcv, outlier.cv, outlier.method, outlier.tcrate, automdl.enabled,
                                 automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.mixed, automdl.balanced,
                                 automdl.armalimit, automdl.reducecv, automdl.ljungboxlimit, automdl.ubfinal, arima.mu,
-                                arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq, arima.coefEnabled,
-                                arima.coef, arima.coefType, fcst.horizon)
+                                arima.p, arima.d, arima.q, arima.bp, arima.bd, arima.bq, arima.coefEnabled, arima.coef, arima.coefType, fcst.horizon)
 
   x11 <- x11_spec(spec, x11.mode, x11.seasonalComp, x11.lsigma, x11.usigma, x11.trendAuto,
                   x11.trendma, x11.seasonalma, x11.fcasts, x11.bcasts, x11.excludeFcasts)

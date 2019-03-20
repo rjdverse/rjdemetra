@@ -165,11 +165,16 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
     n_last_obs
   ))
   if(print_forecasts){
-    cat("\nForecasts:\n")
-    print(head(
-      .preformat.ts(x[[2]], calendar = calendar),
-      n_last_obs
-    ))
+    if(!is.null(x[[2]])){
+      cat("\nForecasts:\n")
+      print(head(
+        .preformat.ts(x[[2]], calendar = calendar),
+        n_last_obs
+      ))
+    }else{# No forecast
+      cat("\nNo forecast")
+    }
+    
   }
   invisible(x)
 }

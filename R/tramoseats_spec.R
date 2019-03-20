@@ -115,6 +115,7 @@
 #' }
 #' @export
 tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                            preliminary.check = NA,
                      estimate.from = NA_character_,
                      estimate.to = NA_character_,
                      estimate.first = NA_integer_,
@@ -191,6 +192,7 @@ tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", 
 }
 #' @export
 tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                                      preliminary.check = NA,
                                 estimate.from = NA_character_,
                                 estimate.to = NA_character_,
                                 estimate.first = NA_integer_,
@@ -265,7 +267,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "TR", spec)
-  regarima <-  regarima_spec_tramoseats(reg_spec,estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <-  regarima_spec_tramoseats(reg_spec,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                             estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                             usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                             usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
@@ -323,6 +325,7 @@ seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RS
 }
 #' @export
 tramoseats_spec.TRAMO_SEATS <- function(spec,
+                            preliminary.check = NA,
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
                             estimate.first = NA_integer_,
@@ -398,7 +401,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
   if ( !inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_tramoseats(spec, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
+  regarima <- regarima_spec_tramoseats(spec,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
                                     estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
                                     usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
                                     usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,

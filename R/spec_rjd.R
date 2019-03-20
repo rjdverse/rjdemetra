@@ -17,6 +17,8 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
                          extra_info = FALSE){
 
   #Estimate
+  preliminary.check <- spec$getBasic()$isPreliminaryCheck()
+
   jestimate <-.jcall(spec,"Ljdr/spec/x13/EstimateSpec;","getEstimate")
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
@@ -115,7 +117,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
                                                  stringsAsFactors = FALSE),
                       outliers = NA, variables = list(series = NA, description = NA))
   arima.coef.spec <- NA
-  result <- list(estimate.type = estimate.type, estimate.d0 = estimate.d0, estimate.d1 = estimate.d1,
+  result <- list(preliminary.check = preliminary.check, estimate.type = estimate.type, estimate.d0 = estimate.d0, estimate.d1 = estimate.d1,
        estimate.n0 = estimate.n0 , estimate.n1 = estimate.n1, estimate.span = estimate.span, estimate.tol = estimate.tol,
        transform.function = transform.function, transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
        tradingdays.option = tradingdays.option , tradingdays.autoadjust = tradingdays.autoadjust,
@@ -274,6 +276,7 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
                        extra_info = FALSE){
 
   #Estimate
+  preliminary.check <- spec$getBasic()$isPreliminaryCheck()
   jestimate <-.jcall(spec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
@@ -371,7 +374,8 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
                       outliers = NA, variables = list(series = NA, description = NA))
   arima.coef.spec <- NA
 
-  result <- list(estimate.type = estimate.type,estimate.d0 = estimate.d0,estimate.d1 = estimate.d1,estimate.n0 = estimate.n0,
+  result <- list(preliminary.check = preliminary.check,
+                 estimate.type = estimate.type,estimate.d0 = estimate.d0,estimate.d1 = estimate.d1,estimate.n0 = estimate.n0,
                  estimate.n1 = estimate.n1,estimate.span = estimate.span,estimate.tol = estimate.tol,estimate.eml = estimate.eml,
                  estimate.urfinal = estimate.urfinal,transform.function = transform.function,transform.fct = transform.fct,
                  tradingdays.mauto = tradingdays.mauto,tradingdays.pftd = tradingdays.pftd,tradingdays.option = tradingdays.option,
@@ -730,8 +734,10 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
   span_r2jd(jsobjct = jest.span, type = span[1,1], d0=as.character(span[1,2]), d1=as.character(span[1,3]),
             n0 = as.integer(span[1,4]), n1=as.integer(span[1,5]))
-  .jcall(jestimate ,"V","setTol", as.numeric(est[2]))
-
+  .jcall(jestimate ,"V","setTol", as.numeric(est["tolerance"]))
+  
+  jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
+  
   #Transform
   jtransform <-.jcall(jdspec,"Ljdr/spec/x13/TransformSpec;","getTransform")
 
@@ -846,15 +852,18 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   span <- s_span(rspec)
 
   #Estimate
+  jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
+  
   jestimate <-.jcall(jdspec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
+  
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
   span_r2jd(jsobjct = jest.span, type = span[1,1], d0=as.character(span[1,2]), d1=as.character(span[1,3]),
             n0 = as.integer(span[1,4]), n1=as.integer(span[1,5]))
 
-  .jcall(jestimate ,"V","setTol",as.numeric(est[2]))
-  .jcall(jestimate ,"V","setEml",as.logical(est[3]))
-  .jcall(jestimate ,"V","setUbp",as.numeric(est[4]))
+  .jcall(jestimate ,"V","setTol",as.numeric(est["tolerance"]))
+  .jcall(jestimate ,"V","setEml",as.logical(est["exact_ml"]))
+  .jcall(jestimate ,"V","setUbp",as.numeric(est["urfinal"]))
 
   #Transform
   jtransform <-.jcall(jdspec,"Ljdr/spec/tramoseats/TransformSpec;","getTransform")
