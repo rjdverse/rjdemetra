@@ -131,7 +131,10 @@ tramoseats.SA_spec <- function(series, spec,
 
     #Error with preliminary check
     if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
-      stop(jrslt$getResults()$getProcessingInformation()$toString())
+      proc_info <- jrslt$getResults()$getProcessingInformation()
+      error_msg <- proc_info$get(0L)$getErrorMessages(t)
+      if(!error_msg$isEmpty())
+        stop(error_msg$toString())
     }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
@@ -172,7 +175,10 @@ tramoseatsJavaResults <- function(jrslt, spec,
 
   #Error with preliminary check
   if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
-    stop(jrslt$getResults()$getProcessingInformation()$toString())
+    proc_info <- jrslt$getResults()$getProcessingInformation()
+    error_msg <- proc_info$get(0L)$getErrorMessages(t)
+    if(!error_msg$isEmpty())
+      stop(error_msg$toString())
   }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
