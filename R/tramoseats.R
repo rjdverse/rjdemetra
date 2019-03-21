@@ -132,7 +132,7 @@ tramoseats.SA_spec <- function(series, spec,
     #Error with preliminary check
     if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
       proc_info <- jrslt$getResults()$getProcessingInformation()
-      error_msg <- proc_info$get(0L)$getErrorMessages(t)
+      error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
       if(!error_msg$isEmpty())
         stop(error_msg$toString())
     }
@@ -176,7 +176,7 @@ tramoseatsJavaResults <- function(jrslt, spec,
   #Error with preliminary check
   if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
     proc_info <- jrslt$getResults()$getProcessingInformation()
-    error_msg <- proc_info$get(0L)$getErrorMessages(t)
+    error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
     if(!error_msg$isEmpty())
       stop(error_msg$toString())
   }

@@ -132,7 +132,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
     #Error with preliminary check
     if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
       proc_info <- jrslt$getResults()$getProcessingInformation()
-      error_msg <- proc_info$get(0L)$getErrorMessages(t)
+      error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
       if(!error_msg$isEmpty())
         stop(error_msg$toString())
     }
@@ -177,7 +177,7 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   #Error with preliminary check
   if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
     proc_info <- jrslt$getResults()$getProcessingInformation()
-    error_msg <- proc_info$get(0L)$getErrorMessages(t)
+    error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
     if(!error_msg$isEmpty())
       stop(error_msg$toString())
   }
