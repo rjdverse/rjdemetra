@@ -3,8 +3,11 @@
 #' @description
 #' Use \code{\link{x13_spec}} instead of \code{x13_spec_def}.
 #'
+#' @inheritParams x13_spec
+#' @inheritParams tramoseats_spec
+#' @inheritParams x13
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
                          estimate.from = NA_character_,
                          estimate.to = NA_character_,
@@ -103,12 +106,11 @@ x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA
   class(z) <- c("SA_spec", "X13")
   return(z)
 }
-
 #' @description
 #' Use \code{\link{x13}} instead of \code{x13_def}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 x13_def <- function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
                     userdefined = NULL){
   .Deprecated("x13")
@@ -129,7 +131,7 @@ x13_def <- function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RS
 #' Use \code{\link{tramoseats_spec}} instead of \code{tramoseats_spec_def}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 tramoseats_spec_def <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                                 estimate.from = NA_character_,
                                 estimate.to = NA_character_,
@@ -231,7 +233,7 @@ tramoseats_spec_def <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA
 #' Use \code{\link{tramoseats}} instead of \code{tramoseats_def}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 tramoseats_def <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
                            userdefined = NULL){
   .Deprecated("tramoseats")
@@ -252,7 +254,7 @@ tramoseats_def <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "
 #' Use \code{\link{regarima_spec_tramoseats}} instead of \code{regarima_spec_def_tramoseats}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5"),
                                          estimate.from = NA_character_,
                                          estimate.to = NA_character_,
@@ -458,7 +460,7 @@ regarima_spec_def_tramoseats <- function(spec = c("TRfull", "TR0", "TR1", "TR2",
 #' Use \code{\link{regarima_tramoseats}} instead of \code{regarima_def_tramoseats}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 regarima_def_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")){
   .Deprecated("regarima_tramoseats")
   if (!is.ts(series)) {
@@ -489,7 +491,7 @@ regarima_def_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR
 #' Use \code{\link{regarima_x13}} instead of \code{regarima_def_x13}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 regarima_def_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
   .Deprecated("regarima_x13")
   if (!is.ts(series)) {
@@ -519,7 +521,7 @@ regarima_def_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3
 #' Use \code{\link{regarima_spec_x13}} instead of \code{regarima_spec_def_x13}.
 #'
 #' @export
-#' @name deprecated
+#' @name deprecated-RJDemetra
 regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"),
                                   estimate.from = NA_character_,
                                   estimate.to = NA_character_,
@@ -714,23 +716,4 @@ regarima_spec_def_x13  <-function(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", 
             span=span)
   class(z) = c("regarima_spec","X13")
   return(z)
-}
-reformat_spec_def <- function(x, parameter){
-  data_names <- names(x[[parameter]])
-  res <- lapply(data_names,function(name){
-    already_formatted <- length(grep("\\.",name)) > 0
-    if(already_formatted){
-      var_name <- already_formatted
-    }else{
-      var_name <- paste(parameter, name, sep = ".")
-    }
-    if(exists(var_name, envir = parent.frame(n = 3))){
-      x[[parameter]][[name]]
-    }else{
-      c(x[[parameter]][[name]], get(var_name, envir = parent.frame(n = 3)), NA)
-    }
-
-  })
-  names(res) <- data_names
-  res
 }
