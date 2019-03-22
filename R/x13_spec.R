@@ -81,13 +81,15 @@
 #'  s_preOut(myreg1)
 #'
 #'
-#' # User-defined variables
+#' # User-defined calendar regressors
 #'  var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #'  var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #'  var <- ts.union(var1, var2)
 #
-#'  myspec1 <- x13_spec(spec = "RSA5c", usrdef.varEnabled = TRUE,
-#'                      usrdef.var = var)
+#'  myspec1 <- x13_spec(spec = "RSA5c", tradingdays.option = "UserDefined",
+#'                      usrdef.varEnabled = TRUE,
+#'                      usrdef.var = var,
+#'                      usrdef.varType = c("Calendar", "Calendar"))
 #'  myreg1 <- x13(myseries, myspec1)
 #'  myreg1
 #'
@@ -188,7 +190,12 @@ x13_spec <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
                      x11.seasonalma = NA_character_,
                      x11.fcasts = NA_integer_,
                      x11.bcasts = NA_integer_,
-                     x11.excludeFcasts = NA){
+                     x11.excludeFcasts = NA,
+                     object){
+  if (!missing("object")){
+    warning("'object' argument deprecated: use 'spec' instead")
+    spec <- object
+  }
   UseMethod("x13_spec", spec)
 }
 #' @export
@@ -267,7 +274,8 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
                          x11.seasonalma = NA_character_,
                          x11.fcasts = NA_integer_,
                          x11.bcasts = NA_integer_,
-                         x11.excludeFcasts = NA)
+                         x11.excludeFcasts = NA,
+                         object)
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
@@ -366,7 +374,8 @@ x13_spec.X13 <- function(spec,
                     x11.seasonalma = NA_character_,
                     x11.fcasts = NA_integer_,
                     x11.bcasts = NA_integer_,
-                    x11.excludeFcasts = NA)
+                    x11.excludeFcasts = NA,
+                    object)
 {
   if (!inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)

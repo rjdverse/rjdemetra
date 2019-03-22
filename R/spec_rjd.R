@@ -140,7 +140,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
     return(result)
 
   n_prespecified_out <- .jcall(jregression,"I","getPrespecifiedOutliersCount")
-  
+
   if(n_prespecified_out > 0 ){
     # Outlier.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the outlier will be estimated
@@ -164,7 +164,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
   }
 
   n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
-  
+
   if(n_userdefined_var > 0 ){
 
     # variables.coef is set to TRUE: if the coefficient isn't fixed, the
@@ -221,10 +221,10 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
     var_names <- sapply(var_names_split, function(x) x[2])
     var_names <- base::make.names(var_names, unique = TRUE)
     var_names <- gsub(".","_", var_names, fixed = TRUE)
-    
+
     result$userdef_spec$specification$variables <-
       TRUE
-    
+
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = 0, row.names = var_names)
     if(is.na(result$userdef_spec$variables$description)){
@@ -235,7 +235,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
     }
 
     if(!is.null(context_dictionnary)){
-      
+
       var_series <- lapply(var_names_split,function(names){
         ts_variable <- context_dictionnary$getTsVariable(names[1],
                                                          names[2])
@@ -248,11 +248,11 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
       }
       if(is.mts(var_series))
         colnames(var_series) <- rownames(result$userdef_spec$variables$description)
-      
+
       result$userdef_spec$variables$series <- var_series
     }
   }
-  
+
   Phi <- jarima$getPhi()
   BPhi <- jarima$getBPhi()
   Theta <- jarima$getTheta()
@@ -421,36 +421,36 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
 
   n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
   if(n_userdefined_var > 0 ){
-    
+
     # variables.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the variable will be estimated
     result$userdef_spec$specification$variables <-
       result$userdef_spec$specification$variables.coef <-
       TRUE
-    
+
     ud_vars <- lapply(1:n_userdefined_var, function(i){
       .jcall(jregression,
              "Ljdr/spec/ts/Utility$UserDefinedVariable;",
              "getUserDefinedVariable",
              as.integer(i-1))
     })
-    
+
     type <- sapply(ud_vars, function(x) x$getComponent())
     coeff <- sapply(ud_vars, function(x) x$getCoefficient())
     var_names <- sapply(ud_vars, function(x) x$getName())
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
-    
+
     result$userdef_spec$variables$description <- data.frame(type = type,
                                                             coeff = coeff,
                                                             row.names = var_names)
-    
+
     # To check variables group names
     # t <- context_dictionnary$getTsVariableManagers()
     # t$getNames()
     #
     if(!is.null(context_dictionnary)){
-      
+
       var_series <- lapply(var_names_split,function(names){
         ts_variable <- context_dictionnary$getTsVariable(names[1],
                                                          names[2])
@@ -458,24 +458,24 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      
+
       if(is.mts(var_series))
         colnames(var_series) <- rownames(result$userdef_spec$variables$description)
-      
+
       result$userdef_spec$variables$series <- var_series
     }
-    
+
   }
-  
+
   #Calendar
   user_td <- jtd$getUserVariables()
   if(length(user_td) > 0 ){
     var_names_split <- strsplit(user_td,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
-    
+
     result$userdef_spec$specification$variables <-
       TRUE
-    
+
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = 0, row.names = var_names)
     if(is.na(result$userdef_spec$variables$description)){
@@ -486,7 +486,7 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
     }
 
     if(!is.null(context_dictionnary)){
-      
+
       var_series <- lapply(var_names_split,function(names){
         ts_variable <- context_dictionnary$getTsVariable(names[1],
                                                          names[2])
@@ -499,7 +499,7 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
       }
       if(is.mts(var_series))
         colnames(var_series) <- rownames(result$userdef_spec$variables$description)
-      
+
       result$userdef_spec$variables$series <- var_series
     }
   }
@@ -624,7 +624,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
   if (nvar == 1){
     if(n_calendar_def == 1){
       .jcall(jsdict,"V","add",varNames,ts_r2jd(series))
-      # .jcall(jtd,"V","setUserVariables", varNames)
+      .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",varNames)))
 
     }else{
       .jcall(jsdict,"V","add",varNames,ts_r2jd(series))
@@ -637,9 +637,9 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
         }
-        # .jcall(jtd,"V","setUserVariables",
-        #        varNames[i]
-        #        )
+        .jcall(jtd,"V","setUserVariables",
+               paste0("r.",varNames)
+               )
       }else{
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
@@ -659,10 +659,9 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
       for (i in calendar_def){
         .jcall(jsdict,"V","add",varNames[i],
                ts_r2jd(series[, i]))
-        # .jcall(jtd,"V","setUserVariables",
-        #        calendar_var_names)
       }
-
+      .jcall(jtd,"V","setUserVariables",
+             .jarray(paste0("r.",varNames[calendar_def])))
     }
   }
 
@@ -735,9 +734,9 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
   span_r2jd(jsobjct = jest.span, type = span[1,1], d0=as.character(span[1,2]), d1=as.character(span[1,3]),
             n0 = as.integer(span[1,4]), n1=as.integer(span[1,5]))
   .jcall(jestimate ,"V","setTol", as.numeric(est["tolerance"]))
-  
+
   jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
-  
+
   #Transform
   jtransform <-.jcall(jdspec,"Ljdr/spec/x13/TransformSpec;","getTransform")
 
@@ -757,11 +756,19 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
   .jcall(jregression,"V","clearUserDefinedVariables")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
 
+
+
   #Calendar
   jcalendar<-.jcall(jregression,"Ljdr/spec/x13/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/x13/EasterSpec;","getEaster")
 
+  .jcall(jeaster,"V","setJulian",as.logical(easter[2]))
+  .jcall(jeaster,"V","setDuration", as.integer(easter[3]))
+  .jcall(jeaster,"V","setTest", as.character(easter[4]))
+  .jcall(jeaster,"V","setEnabled",as.logical(easter[1]))
+
+  #Calendar options:
   if(td[1] == "UserDefined"){
     .jcall(jtd,"V","setOption","UserDefined")
   }else{
@@ -776,11 +783,6 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
     .jcall(jtd,"V","setLengthOfPeriod", as.character(td[3]))
   }
   .jcall(jtd,"V","setTest",as.character(td[5]))
-
-  .jcall(jeaster,"V","setJulian",as.logical(easter[2]))
-  .jcall(jeaster,"V","setDuration", as.integer(easter[3]))
-  .jcall(jeaster,"V","setTest", as.character(easter[4]))
-  .jcall(jeaster,"V","setEnabled",as.logical(easter[1]))
 
   #user-defined specification
   if (usrspc[3]==TRUE)
@@ -853,9 +855,9 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
 
   #Estimate
   jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
-  
+
   jestimate <-.jcall(jdspec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
-  
+
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
   span_r2jd(jsobjct = jest.span, type = span[1,1], d0=as.character(span[1,2]), d1=as.character(span[1,3]),
@@ -882,6 +884,7 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   #User-defined variables
   .jcall(jregression,"V","clearUserDefinedVariables")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
+
 
   #Calendar
   jcalendar<-.jcall(jregression,"Ljdr/spec/tramoseats/CalendarSpec;","getCalendar")
@@ -911,10 +914,11 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   .jcall(jeaster,"V","setTest",as.logical(easter[4]))
   .jcall(jeaster,"V","setOption",as.character(easter[1]))
 
-
+  #user-defined specification
   if (usrspc[3]==TRUE)
     preVar_r2jd(jsobjct = jregression, jsdict = jdictionary, coefEna = usrspc[4],
                 prevar_spec = varF, jtd = jtd)
+
   #Outlier
   joutlier<-.jcall(jdspec,"Ljdr/spec/tramoseats/OutlierSpec;","getOutlier")
   joutlier.span <-.jcall(joutlier,"Ljdr/spec/ts/SpanSelector;","getSpan")

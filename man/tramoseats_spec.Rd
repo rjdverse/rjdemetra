@@ -43,7 +43,7 @@ tramoseats_spec(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
   seats.trendBoundary = NA_integer_, seats.seasdBoundary = NA_integer_,
   seats.seasdBoundary1 = NA_integer_, seats.seasTol = NA_integer_,
   seats.maBoundary = NA_integer_, seats.method = c(NA, "Burman",
-  "KalmanSmoother", "McElroyMatrix"))
+  "KalmanSmoother", "McElroyMatrix"), object)
 }
 \arguments{
 \item{spec}{model specification X13.  It can be a \code{character} of predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}. The default is \code{"RSAfull"}.
@@ -90,7 +90,7 @@ Control variables for the user-defined variables:}
 
 \item{usrdef.var}{time series (\code{ts}) or matrix of time series (\code{mts}) with the user-defined variables.}
 
-\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular"}. If not specified, the program will assign the \code{"Undefined"} type.}
+\item{usrdef.varType}{vector of character(s) defining the user-defined variables component type. Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular", "Calendar"}. The type \code{"Calendar"} has to be used with \code{tradingdays.option = "UserDefined"} to use user-defined calendar regressors. If not specified, the program will assign the \code{"Undefined"} type.}
 
 \item{usrdef.varCoef}{vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if  \code{ transform.function} is set to \code{"Auto"} - the series transformation need to be pre-defined.}
 
@@ -100,7 +100,7 @@ Control variables for the user-defined variables:}
 
 Control variables for the manual selection of calendar effects variables (\code{tradingdays.mauto} is set to \code{"Unused"}):}
 
-\item{tradingdays.option}{defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects; \code{"UserDefined"} - user-defined trading days regressors (currently not working). \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).}
+\item{tradingdays.option}{defines the type of the trading days regression variables: \code{"TradingDays"} -  six day-of-the-week regression variables; \code{"WorkingDays"} - one working/non-working day contrast variable; \code{"None"} - no correction for trading days and working days effects; \code{"UserDefined"} - user-defined trading days regressors (regressors have to be defined by the \code{usrdef.var} argument with \code{usrdef.varType} set to \code{"Calendar"} and \code{usrdef.varEnabled = TRUE}). \code{"None"} has also to be chosen for the "day-of-week effects" correction (\code{tradingdays.stocktd} to be modified accordingly).}
 
 \item{tradingdays.leapyear}{logicals. Specifies if the leap-year correction should be included. If \code{TRUE} the model includes the leap-year effect.}
 
@@ -208,6 +208,8 @@ E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fix
 \item{seats.maBoundary}{numeric, MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1), it is set to xl.}
 
 \item{seats.method}{character, estimation method of the unobserved components. The choice can be made from: \code{"Burman"} (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); \code{"KalmanSmoother"} (it is not disturbed by the (quasi-) unit roots in MA); \code{"McElroyMatrix"} (has the same stability issues as the Burman's algorithm).}
+
+\item{object}{deprecated argument.}
 }
 \value{
 A two-elements list of class \code{c("SA_spec", "TRAMO_SEATS")}: (1) object of class \code{c("regarima_spec", "TRAMO_SEATS")} with the RegARIMA model specification, (2) object of class \code{c("seats_spec", "data.frame")} with the SEATS algorithm specification.
@@ -272,13 +274,14 @@ mysa5 <- tramoseats(myseries, myspec5)
 mysa5
 s_preOut(mysa5)
 
-# User-defined variables
+# User-defined calendar regressors
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 var<- ts.union(var1, var2)
 
-myspec6 <- tramoseats_spec(spec = "RSAfull",
-                           usrdef.varEnabled = TRUE, usrdef.var = var)
+myspec6 <- tramoseats_spec(spec = "RSAfull", tradingdays.option = "UserDefined",
+                           usrdef.varEnabled = TRUE, usrdef.var = var,
+                           usrdef.varType = c("Calendar", "Calendar"))
 s_preVar(myspec6)
 mysa6 <- tramoseats(myseries, myspec6)
 
