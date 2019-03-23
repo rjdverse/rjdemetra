@@ -633,7 +633,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
 
   }else{
     if(n_calendar_def == 0 | n_calendar_def == nvar){
-      if(n_calendar_def >0){
+      if(n_calendar_def > 0){
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
         }
@@ -648,11 +648,11 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
       }
 
     }else{
-      i_ud <- 1:nvar[-calendar_def]
-      for (i in i_ud){
-        .jcall(jsdict,"V","add", varNames[i],
+      i_ud <- (1:nvar)[-calendar_def]
+      for (i in i_ud) {
+        .jcall(jsdict, "V", "add", varNames[i],
                ts_r2jd(series[, i]))
-        .jcall(jsobjct,"V","addUserDefinedVariable", varNames[i],
+        .jcall(jsobjct, "V", "addUserDefinedVariable", varNames[i],
                type[i], coef[i])
       }
 

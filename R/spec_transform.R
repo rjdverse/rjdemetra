@@ -216,11 +216,11 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA, tradingdays.option =
       warning("wrong format of the userdef.varType. User-defined variable(s) will be ignored.", call. = FALSE)
       vars <- list(series = NA, description = NA)
       return(vars)
-    }else if (nvar!=length(vartype)){
-      warning("userdef.varType does not have the same number of elements as userdef.var. User-defined variable(s) will be ignored.", call. = FALSE)
-      vars <- list(series = NA, description = NA)
-      return(vars)
     }else{
+      if (nvar != length(vartype)) {
+        vartype <- rep(vartype, nvar)[1:nvar]
+      }
+
       #Pre-defined calendar
       if (!is.na(tradingdays.option)){
         var_calendar <- grep("Calendar", vartype)
@@ -258,11 +258,11 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA, tradingdays.option =
         warning("userdef.varCoef is wrongly specified. The coefficient(s) will be ignored.", call. = FALSE)
         vars <- list(series = var,
                      description = data.frame(type = vartype, coeff = NA,
-                                                            row.names = description_names))
+                                              row.names = description_names))
       }else{
         vars <- list(series = var,
                      description = data.frame(type = vartype, coeff = varcoef,
-                                                            row.names = description_names))
+                                              row.names = description_names))
       }
     }
 
@@ -376,7 +376,7 @@ spec_estimateX13<-function(est, spanP, spanM){
   } else {
     est[1,"preliminary.check"]
   }
-  
+
   span <-spanM
 
   est[3,"span"] <- if(!is.na(est[2,"span"])) {est[2,"span"]} else {est[1,"span"]}
