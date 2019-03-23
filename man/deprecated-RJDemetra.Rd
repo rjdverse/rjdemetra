@@ -174,9 +174,7 @@ regarima_spec_def_x13(spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
   fcst.horizon = NA_integer_)
 }
 \arguments{
-\item{spec}{model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","X13")} or an object of class \code{c("SA", "X13")}. The default is \code{"RSA5c"}.
-
-The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
+\item{spec}{model specification}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 

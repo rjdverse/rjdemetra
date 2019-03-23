@@ -6,6 +6,7 @@
 #' @inheritParams x13_spec
 #' @inheritParams tramoseats_spec
 #' @inheritParams x13
+#' @param  spec model specification
 #' @export
 #' @name deprecated-RJDemetra
 x13_spec_def <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c","X11"),
