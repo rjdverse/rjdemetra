@@ -5,16 +5,12 @@ setClass(
 #' Seasonal Adjustment with  X-13ARIMA-SEATS
 #'
 #' @description
-#' \code{x13}/\code{x13_def} estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
+#' Function to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 #'
 #' @param series a univariate time series
-#' @param spec model specification X13. For the function:
-#' \itemize{
-#' \item \code{x13}, object of class \code{c("SA_spec","X13")}
-#' \item \code{x13_def}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RSA5c".
-#' }
+#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSA5c"}, or an object of class \code{c("SA_spec","X13")}.
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
@@ -24,7 +20,7 @@ setClass(
 #'
 #' In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
 #'
-#' As regards the available predefined 'JDemetra+' X13 model specifications (for the function \code{x13_def}), they are described in the table below.
+#' As regards the available predefined 'JDemetra+' X13 model specifications, they are described in the table below.
 #' \tabular{rrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -36,7 +32,7 @@ setClass(
 #' }
 #'
 #' @return
-#' \code{x13}/\code{x13_def} returns an object of class \code{c("SA","X13")}, a list containing the following components:
+#' \code{x13} returns an object of class \code{c("SA","X13")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
 #'
@@ -78,7 +74,7 @@ setClass(
 #'
 #' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]
-#' mysa <- x13_def(myseries, spec = "RSA5c")
+#' mysa <- x13(myseries, spec = "RSA5c")
 #'
 #' myspec1 <- x13_spec(mysa, tradingdays.option = "WorkingDays",
 #'             usrdef.outliersEnabled = TRUE,
@@ -89,7 +85,7 @@ setClass(
 #' mysa1 <- x13(myseries, myspec1)
 #' mysa1
 #' summary(mysa1$regarima)
-#' 
+#'
 #' myspec2 <- x13_spec(mysa, automdl.enabled =FALSE,
 #'             arima.coefEnabled = TRUE,
 #'             arima.p = 1, arima.q = 1, arima.bp = 0, arima.bq = 1,
@@ -104,11 +100,16 @@ setClass(
 #' plot(mysa2$decomposition)
 #' }
 #' @export
-x13 <- function(series, spec, userdefined = NULL){
+x13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
+                       userdefined = NULL){
   if (!is.ts(series)) {
     stop("series must be a time series")
   }
-  if (!inherits(spec, "SA_spec") | !inherits(spec, "X13"))
+  UseMethod("x13", spec)
+}
+#' @export
+x13.SA_spec <- function(series, spec, userdefined = NULL){
+  if (!inherits(spec, "X13"))
     stop("use only with c(\"SA_spec\",\"X13\") class object")
 
   # create the java objects
@@ -128,6 +129,13 @@ x13 <- function(series, spec, userdefined = NULL){
   if (is.null(jrobct@internal)) {
     return(NaN)
   }else{
+    #Error with preliminary check
+    if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+      proc_info <- jrslt$getResults()$getProcessingInformation()
+      error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
+      if(!error_msg$isEmpty())
+        stop(error_msg$toString())
+    }
     reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
     fin <- final(jrobj = jrobct)
@@ -140,15 +148,9 @@ x13 <- function(series, spec, userdefined = NULL){
     return(z)
   }
 }
-
-#' @rdname x13
-#' @name x13
 #' @export
-x13_def <- function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
-                  userdefined = NULL){
-  if (!is.ts(series)) {
-    stop("series must be a time series")
-  }
+x13.character <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
+                    userdefined = NULL){
   spec <- match.arg(spec)
   # create the java objects
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
@@ -157,6 +159,64 @@ x13_def <- function(series, spec=c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RS
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
   return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+#Extract the results of the SA of a X13 object
+x13JavaResults <- function(jrslt, spec, userdefined = NULL,
+                           context_dictionnary = NULL,
+                           extra_info = FALSE, freq = NA){
+
+  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
+  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
+
+  if (is.null(jrobct@internal)) {
+    return(NaN)
+  }
+
+  #Error with preliminary check
+  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+    proc_info <- jrslt$getResults()$getProcessingInformation()
+    error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
+    if(!error_msg$isEmpty())
+      stop(error_msg$toString())
+  }
+
+  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
+                         context_dictionnary = context_dictionnary,
+                         extra_info = extra_info)
+  deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
+  fin <- final(jrobj = jrobct)
+  diagn <- diagnostics(jrobj = jrobct)
+
+  z <- list(regarima = reg, decomposition = deco, final = fin,
+            diagnostics = diagn,
+            user_defined = user_defined(userdefined, jrobct))
+
+  class(z) <- c("SA","X13")
+  return(z)
+}
+sa_jd2r <- function(jrslt, spec,
+                    userdefined = NULL,
+                    context_dictionnary = NULL,
+                    extra_info = FALSE, freq = NA){
+  if (is.null(jrslt))
+    return(NULL)
+
+  if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
+    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                          context_dictionnary = context_dictionnary,
+                          extra_info = extra_info)
+  }else{
+    if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
+      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                     context_dictionnary = context_dictionnary,
+                     extra_info = extra_info, freq = freq)
+    }else{
+      stop("Wrong spec argument")
+    }
+
+  }
 }
 
 #Extract the results of the SA of a X13 object

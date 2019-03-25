@@ -1,7 +1,7 @@
 Package: RJDemetra
 Type: Package
 Title: Interface to 'JDemetra+' Seasonal Adjustment Software
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
   person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
                  email = "alain.quartier@yahoo.fr"),
@@ -28,33 +28,6 @@ SystemRequirements: Java SE 8 or higher
 License: EUPL
 URL: https://github.com/jdemetra/rjdemetra
 LazyData: TRUE
-Collate:
-    	'onLoad.R'
-	'init.R'
-	'spec.R'
-	'spec_transform.R'
-	'spec_rjd.R'
-	'regarima_rslts.R'
-	'regarima.R'
-	'regarima_specX13.R'
-	'regarima_specTS.R'
-	'decomposition.R'
-	'diagnostics.R'
-	'finals.R'
-	'user_defined.R'
-	'x13_spec.R'
-	'tramoseats_spec.R'
-	'x13.R'
-	'tramoseats.R'
-	'saveSpec.R'
-	'regarima_print.R'
-	'regarima_plot.R'
-	'regarima_generic.R'
-	'sa_print.R'
-	'sa_plot.R'
-	'export_workspace.R'
-	'import_workspace.R'
-	'ipi_c_eu.R'
 Suggests:
     knitr,
     rmarkdown

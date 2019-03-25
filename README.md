@@ -8,6 +8,10 @@ Status](https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master)](https:/
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last
 release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+[![CRAN monthly
+downloads](http://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
+[![CRAN
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
 
 RJDemetra is a R interface to JDemetra+, the seasonal adjustment
 software [officially

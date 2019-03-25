@@ -2,16 +2,16 @@
 % Please edit documentation in R/regarima.R
 \name{regarima}
 \alias{regarima}
-\alias{regarima_def_tramoseats}
-\alias{regarima_def_x13}
+\alias{regarima_tramoseats}
+\alias{regarima_x13}
 \title{RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS}
 \usage{
 regarima(series, spec = NA)
 
-regarima_def_tramoseats(series, spec = c("TRfull", "TR0", "TR1", "TR2",
+regarima_tramoseats(series, spec = c("TRfull", "TR0", "TR1", "TR2",
   "TR3", "TR4", "TR5"))
 
-regarima_def_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
+regarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
   "RG4c"))
 }
 \arguments{
@@ -20,13 +20,13 @@ regarima_def_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
 \item{spec}{model specification. For the function:
 \itemize{
 \item \code{regarima}, object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}).
-See functions \code{\link{regarima_spec_x13}, \link{regarima_spec_def_x13}, \link{regarima_spec_tramoseats}}, and \code{\link{regarima_spec_def_tramoseats}}.
-\item \code{regarima_def_x13}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
-\item \code{regarima_def_tramoseats}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
+See functions \code{\link{regarima_spec_x13}, \link{regarima_spec_def_x13} and \link{regarima_spec_tramoseats}}.
+\item \code{regarima_x13}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
+\item \code{regarima_tramoseats}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
 }}
 }
 \value{
-\code{regarima/regarima_def_x13/regarima_def_tramoseats} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarima_def_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_def_tramoseats} an object of class \code{c("regarima","TRAMO_SEATS")}.
+\code{regarima/regarima_x13/regarima_tramoseats} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarima_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_tramoseats} an object of class \code{c("regarima","TRAMO_SEATS")}.
 For the function \code{regarima}, the sub-class of the object depends on the used method that is defined by the class of the \code{spec} object.
 
 An object of class \code{"regarima"} is a list containing the following components:
@@ -50,7 +50,7 @@ An object of class \code{"regarima"} is a list containing the following componen
 \item{forecast}{ts matrix containing the forecast of the original series (\code{fcst}) and it's standard error (\code{fcsterr}).}
 }
 \description{
-\code{regarima/regarima_def_x13/regarima_def_tramoseats} decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
+\code{regarima/regarima_x13/regarima_tramoseats} decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
 }
 \details{
 In the X13 and TRAMO-SEATS seasonal adjustment the first step consists of pre-adjusting the original series with a RegARIMA model, where the original series is corrected for any deterministic effects and missing observations. This step is also referred as linearization of the original series.
@@ -130,7 +130,7 @@ TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 \donttest{
  # X13 method
 myseries <- ipi_c_eu[, "FR"]
-myreg <- regarima_def_x13(myseries, spec ="RG5c")
+myreg <- regarima_x13(myseries, spec ="RG5c")
 summary(myreg)
 plot(myreg)
 
@@ -157,12 +157,9 @@ summary(myreg3)
 plot(myreg3)
 
  # TRAMO-SEATS method
-myspec <- regarima_spec_def_tramoseats("TRfull")
+myspec <- regarima_spec_tramoseats("TRfull")
 myreg <- regarima(myseries, myspec)
-# This is equivalent to:
-myreg1 <- regarima_def_tramoseats(myseries, spec = "TRfull")
 myreg
-myreg1
 
 myspec2 <- regarima_spec_tramoseats(myspec, tradingdays.mauto = "Unused",
              tradingdays.option = "WorkingDays",

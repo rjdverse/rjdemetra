@@ -216,11 +216,11 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA, tradingdays.option =
       warning("wrong format of the userdef.varType. User-defined variable(s) will be ignored.", call. = FALSE)
       vars <- list(series = NA, description = NA)
       return(vars)
-    }else if (nvar!=length(vartype)){
-      warning("userdef.varType does not have the same number of elements as userdef.var. User-defined variable(s) will be ignored.", call. = FALSE)
-      vars <- list(series = NA, description = NA)
-      return(vars)
     }else{
+      if (nvar != length(vartype)) {
+        vartype <- rep(vartype, nvar)[1:nvar]
+      }
+
       #Pre-defined calendar
       if (!is.na(tradingdays.option)){
         var_calendar <- grep("Calendar", vartype)
@@ -258,11 +258,11 @@ spec_preVar<-function(var = NA, vartype = NA, varcoef = NA, tradingdays.option =
         warning("userdef.varCoef is wrongly specified. The coefficient(s) will be ignored.", call. = FALSE)
         vars <- list(series = var,
                      description = data.frame(type = vartype, coeff = NA,
-                                                            row.names = description_names))
+                                              row.names = description_names))
       }else{
         vars <- list(series = var,
                      description = data.frame(type = vartype, coeff = varcoef,
-                                                            row.names = description_names))
+                                              row.names = description_names))
       }
     }
 
@@ -371,14 +371,20 @@ spec_trendma <- function(trendma=NA){
 # X-13
 spec_estimateX13<-function(est, spanP, spanM){
 
+  est[3,"preliminary.check"] <- if(!is.na(est[2,"preliminary.check"])) {
+    est[2,"preliminary.check"]
+  } else {
+    est[1,"preliminary.check"]
+  }
+
   span <-spanM
 
-  est[3,1] <- if(!is.na(est[2,1])) {est[2,1]} else {est[1,1]}
-  if (is.na(est[2,1])) {
+  est[3,"span"] <- if(!is.na(est[2,"span"])) {est[2,"span"]} else {est[1,"span"]}
+  if (is.na(est[2,"span"])) {
     span <- rbind(spanP[1,],spanM[2,])
     rownames(span) <- c("estimate","outlier")
   }
-  est[3,2] <- if(!is.na(est[2,2])) {est[2,2]} else {est[1,2]}
+  est[3,"tolerance"] <- if(!is.na(est[2,"tolerance"])) {est[2,"tolerance"]} else {est[1,"tolerance"]}
   rownames(est)  <- c("Predefined","User_modif","Final")
   return(list(est=est,span=span))
 }
@@ -552,20 +558,23 @@ spec_arimaX13 <-function(arimaspc, arimaco){
   return(y)
 }
 
-
 # TRAMO_SEATS
 spec_estimateTS<-function(est, spanP, spanM){
-
+  est[3,"preliminary.check"] <- if(!is.na(est[2,"preliminary.check"])) {
+    est[2,"preliminary.check"]
+  } else {
+    est[1,"preliminary.check"]
+  }
   span <-spanM
 
-  est[3,1] <- if(!is.na(est[2,1])) {est[2,1]} else {est[1,1]}
-  if (is.na(est[2,1])) {
+  est[3,"span"] <- if(!is.na(est[2,"span"])) {est[2,"span"]} else {est[1,"span"]}
+  if (is.na(est[2,"span"])) {
     span <- rbind(spanP[1,],spanM[2,])
     rownames(span) <- c("estimate","outlier")
   }
-  est[3,2] <- if(!is.na(est[2,2])) {est[2,2]} else {est[1,2]}
-  est[3,3] <- if(!is.na(est[2,3])) {est[2,3]} else {est[1,3]}
-  est[3,4] <- if(!is.na(est[2,4])) {est[2,4]} else {est[1,4]}
+  est[3, "tolerance"] <- if(!is.na(est[2, "tolerance"])) {est[2, "tolerance"]} else {est[1, "tolerance"]}
+  est[3, "exact_ml"] <- if(!is.na(est[2, "exact_ml"])) {est[2, "exact_ml"]} else {est[1, "exact_ml"]}
+  est[3, "urfinal"] <- if(!is.na(est[2, "urfinal"])) {est[2, "urfinal"]} else {est[1, "urfinal"]}
 
   rownames(est) <- c("Predefined","User_modif","Final")
   return(list(est=est,span=span))

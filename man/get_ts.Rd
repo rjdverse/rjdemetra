@@ -25,7 +25,7 @@ Generics functions to get the input raw time series of a \code{workspace}, \code
 }
 \examples{
 \donttest{
-sa_x13 <- x13_def(ipi_c_eu[, "FR"], spec = "RSA5c")
+sa_x13 <- x13(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")

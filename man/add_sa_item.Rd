@@ -13,7 +13,7 @@ add_sa_item(workspace, multiprocessing, sa_obj, name)
 
 \item{sa_obj}{the seasonnaly adjust object to export.}
 
-\item{name}{The name of the seasonnaly adjust model in the multiprocessing. 
+\item{name}{The name of the seasonnaly adjust model in the multiprocessing.
 By default the name of the \code{sa_obj} is used.}
 }
 \description{
@@ -22,9 +22,9 @@ Function to add a new seasonnaly adjust object (class \code{c("SA", "X13")} or \
 \examples{
 \donttest{
 dir <- tempdir()
-spec_x13 <- x13_spec_def(spec = "RSA5c", easter.enabled = FALSE)
+spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
-spec_ts <- tramoseats_spec_def(spec = "RSA5")
+spec_ts <- tramoseats_spec(spec = "RSA5")
 sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()
