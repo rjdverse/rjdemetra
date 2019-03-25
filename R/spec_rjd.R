@@ -655,7 +655,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
       }
 
     }else{
-      i_ud <- 1:nvar[-calendar_def]
+      i_ud <- (1:nvar)[-calendar_def]
       for (i in i_ud){
         .jcall(jsdict,"V","add", varNames[i],
                ts_r2jd(series[, i]))
