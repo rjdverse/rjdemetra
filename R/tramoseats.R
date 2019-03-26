@@ -150,7 +150,7 @@ tramoseats.SA_spec <- function(series, spec,
   }
 }
 #' @export
-tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                            userdefined = NULL){
   spec <- match.arg(spec)
   # create the java objects
