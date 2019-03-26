@@ -98,7 +98,7 @@ setClass(
 #' plot(mysa2$decomposition)
 #' }
 #' @export
-tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                        userdefined = NULL){
   if (!is.ts(series)) {
     stop("series must be a time series")

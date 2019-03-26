@@ -4,7 +4,7 @@
 \alias{tramoseats}
 \title{Seasonal Adjustment with TRAMO-SEATS}
 \usage{
-tramoseats(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
+tramoseats(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
   "RSA4", "RSA5"), userdefined = NULL)
 }
 \arguments{
