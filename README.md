@@ -12,6 +12,8 @@ release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-pro
 downloads](http://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
+[![Mentioned in Awesome Official
+Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 
 RJDemetra is a R interface to JDemetra+, the seasonal adjustment
 software [officially

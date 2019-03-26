@@ -44,8 +44,11 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
   jcalendar<-.jcall(jregression,"Ljdr/spec/x13/CalendarSpec;","getCalendar")
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/x13/EasterSpec;","getEaster")
+  tradingdays.option <- .jcall(jtd,"S","getOption")
+  if(tradingdays.option != "UserDefined"){
+    tradingdays.option <- .jcall(jtd,"S","getTradingDays")
+  }
 
-  tradingdays.option<-.jcall(jtd,"S","getTradingDays")
   tradingdays.autoadjust<-.jcall(jtd,"Z","isAutoAdjust")
   tradingdays.leapyear <-.jcall(jtd,"S","getLengthOfPeriod")
   tradingdays.stocktd <-.jcall(jtd,"I","getW")
@@ -227,7 +230,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = 0, row.names = var_names)
-    if(is.na(result$userdef_spec$variables$description)){
+    if(identical(result$userdef_spec$variables$description, NA)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
       result$userdef_spec$variables$description <- rbind(result$userdef_spec$variables$description,
@@ -243,8 +246,8 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      if(!is.na(result$userdef_spec$variables$series)){
-        var_series <- ts.union(result$userdef_spec$variables$series)
+      if(!identical(result$userdef_spec$variables$series, NA)){
+        var_series <- ts.union(result$userdef_spec$variables$series, var_series)
       }
       if(is.mts(var_series))
         colnames(var_series) <- rownames(result$userdef_spec$variables$description)
@@ -306,7 +309,10 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
 
   tradingdays.mauto <-.jcall(jtd,"S","getAutomatic")
   tradingdays.pftd <-.jcall(jtd,"D","getPftd")
-  tradingdays.option <-.jcall(jtd,"S","getTradingDays")
+  tradingdays.option <- .jcall(jtd,"S","getOption")
+  if(tradingdays.option != "UserDefined"){
+    tradingdays.option <- .jcall(jtd,"S","getTradingDays")
+  }
   tradingdays.leapyear <-.jcall(jtd,"Z","getLeapYear")
   tradingdays.stocktd <-.jcall(jtd,"I","getW")
   tradingdays.test <-.jcall(jtd,"S","getRegressionTestType")
@@ -478,7 +484,7 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = 0, row.names = var_names)
-    if(is.na(result$userdef_spec$variables$description)){
+    if(identical(result$userdef_spec$variables$description, NA)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
       result$userdef_spec$variables$description <- rbind(result$userdef_spec$variables$description,
@@ -494,8 +500,8 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      if(!is.na(result$userdef_spec$variables$series)){
-        var_series <- ts.union(result$userdef_spec$variables$series)
+      if(!identical(result$userdef_spec$variables$series, NA)){
+        var_series <- ts.union(result$userdef_spec$variables$series, var_series)
       }
       if(is.mts(var_series))
         colnames(var_series) <- rownames(result$userdef_spec$variables$description)
@@ -550,7 +556,8 @@ specX11_jd2r <- function(spec = NA, freq = NA){
   excludeFcasts <- .jcall(jx11,"Z","isExcludefcst")
 
   var <- data.frame(mode,seasonalComp,lsigma,usigma,trendAuto,trendma,seasonalma,
-                    fcasts,bcasts,excludeFcasts)
+                    fcasts,bcasts,excludeFcasts,
+                    stringsAsFactors = FALSE)
   names(var) <- sprintf("x11.%s",
                         c("mode","seasonalComp","lsigma","usigma",
                           "trendAuto","trendma","seasonalma",
@@ -633,7 +640,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
 
   }else{
     if(n_calendar_def == 0 | n_calendar_def == nvar){
-      if(n_calendar_def > 0){
+      if(n_calendar_def >0){
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
         }
@@ -649,10 +656,10 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
 
     }else{
       i_ud <- (1:nvar)[-calendar_def]
-      for (i in i_ud) {
-        .jcall(jsdict, "V", "add", varNames[i],
+      for (i in i_ud){
+        .jcall(jsdict,"V","add", varNames[i],
                ts_r2jd(series[, i]))
-        .jcall(jsobjct, "V", "addUserDefinedVariable", varNames[i],
+        .jcall(jsobjct,"V","addUserDefinedVariable", varNames[i],
                type[i], coef[i])
       }
 
