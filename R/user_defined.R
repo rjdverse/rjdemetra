@@ -32,8 +32,8 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA", "TRAMO-SEATS")){
     # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13",
     #               RJDemetra:::ts_r2jd(ipi_c_eu[, "FR"]), jspec, jdictionary)
     # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-    # jrobct_arima <- new (Class = "JD2_RegArima_java",internal = jrarima)
-    # jrobct <- new (Class = "JD2_X13_java", internal = jrslt)
+    # jrobct_arima <- new (Class = "RegArima_java",internal = jrarima)
+    # jrobct <- new (Class = "X13_java", internal = jrslt)
     #
     # dput(RJDemetra:::dictionary(jrobct))
     #
@@ -163,8 +163,8 @@ user_defined_variables <- function(sa_object = c("X13-ARIMA", "TRAMO-SEATS")){
     # jrslt<-.jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats",
     #               RJDemetra:::ts_r2jd(ipi_c_eu[, "FR"]), jspec, jdictionary)
     # jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-    # jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
-    # jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
+    # jrobct_arima <- new (Class = "TRAMO_java",internal = jrarima)
+    # jrobct <- new (Class = "TramoSeats_java", internal = jrslt)
     #
     # dput(RJDemetra:::dictionary(jrobct))
 

@@ -517,7 +517,7 @@ regarima_def_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR
                   "tramo",
                   ts_r2jd(series),
                   jspec, jdictionary)
-  jrobct <- new(Class = "JD2_TRAMO_java", internal = jrslt)
+  jrobct <- new(Class = "TRAMO_java", internal = jrslt)
 
   if (is.null(jrobct@internal)) {
     return(NaN)
@@ -548,7 +548,7 @@ regarima_def_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3
                   "x12",
                   ts_r2jd(series), jspec, jdictionary)
 
-  jrobct <- new(Class = "JD2_RegArima_java", internal = jrslt)
+  jrobct <- new(Class = "RegArima_java", internal = jrslt)
 
   if (is.null(jrobct@internal)) {
     return(NaN)

@@ -422,13 +422,13 @@ get_model.sa_item <- function(x, workspace,
   jresult <- sa_results(x)
   y_ts <- get_ts(x)
 
-  context_dictionnary <- .jcall(workspace,
+  context_dictionary <- .jcall(workspace,
                                 "Lec/tstoolkit/algorithm/ProcessingContext;",
                                 "getContext")
 
   result <- tryCatch({
     sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
-            context_dictionnary = context_dictionnary,
+            context_dictionary = context_dictionary,
             extra_info = TRUE, freq = frequency(y_ts))
   },error = function(e){
     warning("Error while importing a model: NULL object will be returned")
