@@ -9,7 +9,9 @@
 - Parameter `preliminary.check` added to the specifications functions (`regarima_spec_tramoseats`, `tramoseats_spec`, `regarima_spec_x13` and `x13_spec`). By default (`preliminary.check = TRUE`), JDemetra+ checks the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values. When `preliminary.check = FALSE`, the thresholds are ignored and process is performed, when possible. (issue #39)  
 - Error message returned when the seasonal adjustment fails due to the preliminary.check.  
 - Possibility to use user-defined calendar regressors. To do it use `tradingdays.option = "UserDefined` and add new regressors variables (`usrdef.varEnabled = TRUE` to enable user-defined regressors and `usrdef.var` to define the regressors) using `usrdef.varType = "Calendar"`.  
-- `usrdef.varType` argument is recycled with the number of variables defined in the `usrdef.var` parameter
+- `usrdef.varType` argument is recycled with the number of variables defined in the `usrdef.var` parameter.  
+- News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: `jx13`, `jtramoseats`, `jregarima`, `jregarima_x13`, `jregarima_tramoseats` and `get_jmodel`. Therefore, there is no formatting and the computation is faster than the non 'j' functions (`x13`, `tramoseats`, `regarima`, `regarima_x13`, `regarima_tramoseats` and `get_model`). To manipulate these objects, there are three functions: `get_dictionary` to get the indicators that can be extracted, `get_indicators` to extract these indicators and `jSA2R` to get the formatted R model.
+
 
 
 ## Bug fixed

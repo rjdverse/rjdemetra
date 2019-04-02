@@ -9,3 +9,5 @@ r:
 - oldrel
 - release
 - devel
+
+r_check_args: --as-cran --run-donttest

@@ -19,6 +19,8 @@ x13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }
 \value{
+\code{jx13} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{x13}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+
 \code{x13} returns an object of class \code{c("SA","X13")}, a list containing the following components:
 
 \item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
@@ -46,8 +48,6 @@ seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), 
 \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
 }}
 \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
-
-\code{jx13} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{x13}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
 }
 \description{
 Functions to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.

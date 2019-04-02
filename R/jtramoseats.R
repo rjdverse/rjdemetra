@@ -20,6 +20,7 @@ jtramoseats.SA_spec <- function(series, spec,
   specSeats_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jrslt <- new (Class = "TramoSeats_java", internal = jrslt)
   jSA(result = jrslt, spec = jrspec, dictionary = jdictionary)
 
 }
@@ -32,6 +33,7 @@ jtramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "R
   jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary)
+  jrslt <- new (Class = "TramoSeats_java", internal = jrslt)
   jSA(result = jrslt, spec = jrspec, dictionary = jdictionary)
 }
 

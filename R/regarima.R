@@ -96,6 +96,9 @@ setClass(
 #' }
 #'
 #' @return
+#'
+#' \code{jregarima/jregarima_x13/jregarima_tramoseats} return a \code{\link{jSA}} object. It contains the Java objects of the result of the preadjustment method without any formatting. Therefore the computation is faster than with \code{regarima/regarima_x13/regarima_tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#'
 #' \code{regarima/regarima_x13/regarima_tramoseats} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarima_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_tramoseats} an object of class \code{c("regarima","TRAMO_SEATS")}.
 #' For the function \code{regarima}, the sub-class of the object depends on the used method that is defined by the class of the \code{spec} object.
 #'

@@ -4,32 +4,38 @@
 \alias{jSA}
 \alias{get_dictionary}
 \alias{get_indicators}
+\alias{jSA2R}
 \title{Functions around 'jSA' objects}
 \usage{
 get_dictionary(x)
 
 get_indicators(x, ...)
+
+jSA2R(x, userdefined = NULL)
 }
 \arguments{
 \item{x}{a \code{"jSA"} object.}
 
 \item{...}{characters containing the names of the indicators to extract.}
+
+\item{userdefined}{userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}). Only used for \code{"SA"} objects.}
 }
 \value{
-\code{get_dictionary} a vector of characters and \code{get_indicators} returns a list containing the indicators that are extracted.
+\code{get_dictionary} a vector of characters, \code{get_indicators} returns a list containing the indicators that are extracted and \code{jSA2R} returns a \code{"SA"} or a \code{"regarima"} object.
 }
 \description{
-\code{get_dictionary} returns the indicators that can be extracted from \code{jSA} and \code{get_indicators} returns a list of indicators.
-\code{jSA} constructs a object of class \code{jSA}.
+\code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and .
 }
 \details{
-A \code{jSA} object is a list with three elements: \itemize{
+A \code{"jSA"} object is a list with three elements: \itemize{
 \item \code{"result"}: the Java object with the results of a seasonal adjustment or a pre-adjustment method.
 \item \code{"spec"}: the Java object with the specification of a seasonal adjustment or a pre-adjustment method.
 \item \code{"dictionary"}: the Java object with dictionnary of a seasonal adjustment or a pre-adjustment method. In particular, it contains all the user-defined regressors.
  }
 
 \code{get_dictionary} returns the list of indicators that can be extracted from a \code{jSA} object by the function \code{get_indicators}.
+
+\code{jSA2R} returns the corresponding formatted seasonal adjustment (\code{"SA"} object) or RegARIMA (\code{"regarima"} object) model.
 }
 \examples{
 myseries <- ipi_c_eu[, "FR"]
@@ -37,4 +43,7 @@ mysa <- jx13(myseries, spec = "RSA5c")
 get_dictionary(mysa)
 
 get_indicators(mysa, "decomposition.b2", "decomposition.d10")
+
+# To convert to the R object
+jSA2R(mysa)
 }

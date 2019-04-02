@@ -34,6 +34,9 @@ setClass(
 #' }
 #'
 #' @return
+#'
+#' \code{jtramoseats} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#'
 #' \code{tramoseats} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
@@ -60,8 +63,6 @@ setClass(
 #' \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
 #' }}
 #' \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
-#'
-#' \code{jtramoseats} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
 #'
 #' @references
 #' Info on 'JDemetra+', usage and functions:
@@ -112,7 +113,7 @@ tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
 tramoseats.SA_spec <- function(series, spec,
                       userdefined = NULL){
   jsa_obj <- jtramoseats.SA_spec(series, spec)
-  jrslt <- jsa_obj[["result"]]
+  jrslt <- jsa_obj[["result"]]@internal
   jrspec <- jsa_obj[["spec"]]
 
   # Or, using the fonction x13JavaResults:
@@ -150,7 +151,7 @@ tramoseats.SA_spec <- function(series, spec,
 tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                            userdefined = NULL){
   jsa_obj <- jtramoseats.character(series, spec)
-  jrslt <- jsa_obj[["result"]]
+  jrslt <- jsa_obj[["result"]]@internal
   jrspec <- jsa_obj[["spec"]]
 
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))

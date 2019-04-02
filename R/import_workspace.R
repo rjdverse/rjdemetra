@@ -326,7 +326,7 @@ compute <- function(workspace, i) {
 #' Get the seasonally adjusted model from a workspace
 #'
 #' Generics functions to get seasonally adjusted model(s) from \code{workspace},
-#' \code{multiprocessing} or \code{sa_item} object.
+#' \code{multiprocessing} or \code{sa_item} object. \code{get_model} returns a \code{"SA"} objects while  \code{get_jmodel} returns the Java objects of the models.
 #'
 #' @param x the object to get the seasonnaly adjusted model.
 #' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.
@@ -336,11 +336,11 @@ compute <- function(workspace, i) {
 #'
 #' @return \code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects:
 #' \itemize{
-#'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object;
+#'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
 #'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
-#'  of sa_items, each element containing a \code{"SA"} object;
+#'  of sa_items, each element containing a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
 #'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
-#'  each element containing a list of a \code{"SA"} object.
+#'  each element containing a list of a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)}).
 #'}
 #' @family functions to get informations from a workspace, multiprocessing or sa_item
 #' @seealso \code{\link{compute}}
@@ -418,8 +418,11 @@ get_model.multiprocessing <- function(x, workspace,
 get_model.sa_item <- function(x, workspace,
                               userdefined = NULL,
                               progress_bar = TRUE){
-  jspec <- get_jspec(x)
-  jresult <- sa_results(x)
+  jsa_result <- get_jmodel.sa_item(x, workspace)
+  if(is.null(jsa_result))
+    return(NULL)
+  jspec <- jsa_result[["spec"]]
+  jresult <- jsa_result[["result"]]@internal
   y_ts <- get_ts(x)
 
   context_dictionary <- .jcall(workspace,

@@ -62,7 +62,7 @@ jregarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2",
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
   jspec <- .jcall(jrspec, "Lec/tstoolkit/modelling/arima/tramo/TramoSpecification;", "getCore")
-  jdictionary <- .jnull("jdr/spec/ts/Utility$Dictionary")
+  jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
   jrslt <- .jcall("ec/tstoolkit/jdr/regarima/Processor",
                   "Lec/tstoolkit/jdr/regarima/Processor$Results;",
                   "tramo",
