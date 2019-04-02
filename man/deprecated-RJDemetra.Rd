@@ -95,8 +95,8 @@ tramoseats_spec_def(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
   seats.maBoundary = NA_integer_, seats.method = c(NA, "Burman",
   "KalmanSmoother", "McElroyMatrix"))
 
-tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA",
-  "RSA4", "RSA5"), userdefined = NULL)
+tramoseats_def(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2",
+  "RSA3", "RSA4", "RSA5"), userdefined = NULL)
 
 regarima_spec_def_tramoseats(spec = c("TRfull", "TR0", "TR1", "TR2",
   "TR3", "TR4", "TR5"), estimate.from = NA_character_,

@@ -60,9 +60,9 @@ regarima_rslts <- function(jrobj, fcsth){
   colnames(loglik) <- ""
 
   # Model specification after estimation & components
-  model <- if(inherits(jrobj,"JD2_RegArima_java")){
+  model <- if(inherits(jrobj,"RegArima_java")){
     "RegARIMA - X13"
-  }else if (inherits(jrobj,"JD2_TRAMO_java")){
+  }else if (inherits(jrobj,"TRAMO_java")){
     "RegARIMA - TRAMO/SEATS"
   }else{
     ""

@@ -13,7 +13,7 @@ jd_span <- function(type,d0,d1,n0,n1){
 }
 
 
-specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
+specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
                          extra_info = FALSE){
 
   #Estimate
@@ -196,13 +196,13 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
                                                             row.names = var_names)
 
     # To check variables group names
-    # t <- context_dictionnary$getTsVariableManagers()
+    # t <- context_dictionary$getTsVariableManagers()
     # t$getNames()
     #
-    if(!is.null(context_dictionnary)){
+    if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionnary$getTsVariable(names[1],
+        ts_variable <- context_dictionary$getTsVariable(names[1],
                                                          names[2])
         ts_jd2r(ts_variable$getTsData())
       })
@@ -237,10 +237,10 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
                                                          td_var_description)
     }
 
-    if(!is.null(context_dictionnary)){
+    if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionnary$getTsVariable(names[1],
+        ts_variable <- context_dictionary$getTsVariable(names[1],
                                                          names[2])
         ts_jd2r(ts_variable$getTsData())
       })
@@ -275,7 +275,7 @@ specX13_jd2r <- function(spec = NA, context_dictionnary = NULL,
   result
 }
 
-specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
+specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
                        extra_info = FALSE){
 
   #Estimate
@@ -452,13 +452,13 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
                                                             row.names = var_names)
 
     # To check variables group names
-    # t <- context_dictionnary$getTsVariableManagers()
+    # t <- context_dictionary$getTsVariableManagers()
     # t$getNames()
     #
-    if(!is.null(context_dictionnary)){
+    if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionnary$getTsVariable(names[1],
+        ts_variable <- context_dictionary$getTsVariable(names[1],
                                                          names[2])
         ts_jd2r(ts_variable$getTsData())
       })
@@ -491,10 +491,10 @@ specTS_jd2r<- function(spec = NA, context_dictionnary = NULL,
                                                          td_var_description)
     }
 
-    if(!is.null(context_dictionnary)){
+    if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionnary$getTsVariable(names[1],
+        ts_variable <- context_dictionary$getTsVariable(names[1],
                                                          names[2])
         ts_jd2r(ts_variable$getTsData())
       })

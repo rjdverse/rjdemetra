@@ -1,13 +1,14 @@
 setClass(
-  Class = "JD2_X13_java",
-  contains = "JD2_ProcResults"
+  Class = "X13_java",
+  contains = "ProcResults"
 )
 #' Seasonal Adjustment with  X-13ARIMA-SEATS
 #'
 #' @description
-#' Function to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
+#' Functions to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+#' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
 #' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSA5c"}, or an object of class \code{c("SA_spec","X13")}.
@@ -32,6 +33,9 @@ setClass(
 #' }
 #'
 #' @return
+#'
+#' \code{jx13} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{x13}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#'
 #' \code{x13} returns an object of class \code{c("SA","X13")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
@@ -57,8 +61,8 @@ setClass(
 #' \item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
 #' \item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
 #' \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
-#' }
-#' }
+#' }}
+#' \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
 #'
 #' @seealso
 #'
@@ -109,10 +113,9 @@ x13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
 }
 #' @export
 x13.SA_spec <- function(series, spec, userdefined = NULL){
-  if (!inherits(spec, "X13"))
-    stop("use only with c(\"SA_spec\",\"X13\") class object")
-
-  # create the java objects
+  # jsa_obj <- jx13.SA_spec(series, spec)
+  # jrslt <- jsa_obj[["result"]]@internal
+  # jrspec <- jsa_obj[["spec"]]
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
   jdictionary <- specX13_r2jd(spec,jrspec)
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(series))
@@ -123,8 +126,8 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
-  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
+  jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
+  jrobct <- new(Class = "X13_java", internal = jrslt)
 
   if (is.null(jrobct@internal)) {
     return(NaN)
@@ -151,27 +154,24 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
 #' @export
 x13.character <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
                     userdefined = NULL){
-  spec <- match.arg(spec)
-  # create the java objects
-  jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
-  jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
-  jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
+  jsa_obj <- jx13.character(series, spec)
+  jrslt <- jsa_obj[["result"]]@internal
+  jrspec <- jsa_obj[["spec"]]
 
   return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
 #Extract the results of the SA of a X13 object
 x13JavaResults <- function(jrslt, spec, userdefined = NULL,
-                           context_dictionnary = NULL,
+                           context_dictionary = NULL,
                            extra_info = FALSE, freq = NA){
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
-  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
+  jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
+  jrobct <- new(Class = "X13_java", internal = jrslt)
 
   if (is.null(jrobct@internal)) {
-    return(NaN)
+    return(NULL)
   }
 
   #Error with preliminary check
@@ -183,7 +183,7 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
-                         context_dictionnary = context_dictionnary,
+                         context_dictionary = context_dictionary,
                          extra_info = extra_info)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
   fin <- final(jrobj = jrobct)
@@ -196,76 +196,5 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   class(z) <- c("SA","X13")
   return(z)
 }
-sa_jd2r <- function(jrslt, spec,
-                    userdefined = NULL,
-                    context_dictionnary = NULL,
-                    extra_info = FALSE, freq = NA){
-  if (is.null(jrslt))
-    return(NULL)
 
-  if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
-    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                          context_dictionnary = context_dictionnary,
-                          extra_info = extra_info)
-  }else{
-    if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
-      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                     context_dictionnary = context_dictionnary,
-                     extra_info = extra_info, freq = freq)
-    }else{
-      stop("Wrong spec argument")
-    }
-
-  }
-}
-
-#Extract the results of the SA of a X13 object
-x13JavaResults <- function(jrslt, spec, userdefined = NULL,
-                           context_dictionnary = NULL,
-                           extra_info = FALSE, freq = NA){
-
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "JD2_RegArima_java",internal = jrarima)
-  jrobct <- new(Class = "JD2_X13_java", internal = jrslt)
-
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }
-
-  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
-                         context_dictionnary = context_dictionnary,
-                         extra_info = extra_info)
-  deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
-  fin <- final(jrobj = jrobct)
-  diagn <- diagnostics(jrobj = jrobct)
-
-  z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn,
-            user_defined = user_defined(userdefined, jrobct))
-
-  class(z) <- c("SA","X13")
-  return(z)
-}
-sa_jd2r <- function(jrslt, spec,
-                    userdefined = NULL,
-                    context_dictionnary = NULL,
-                    extra_info = FALSE, freq = NA){
-  if (is.null(jrslt))
-    return(NULL)
-
-  if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
-    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                          context_dictionnary = context_dictionnary,
-                          extra_info = extra_info)
-  }else{
-    if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
-      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                     context_dictionnary = context_dictionnary,
-                     extra_info = extra_info, freq = freq)
-    }else{
-      stop("Wrong spec argument")
-    }
-
-  }
-}
 

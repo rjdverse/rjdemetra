@@ -136,7 +136,7 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
   if (missing(name))
     name <- deparse(substitute(sa_obj))
 
-  sa_obj <- complete_dictionnary(workspace, sa_obj)
+  sa_obj <- complete_dictionary(workspace, sa_obj)
   jspec <- get_jspec(sa_obj)
   y <- sa_obj$final$series[, "y"]
 
@@ -184,14 +184,14 @@ get_jspec.sa_item <- function(x, ...){
   spec
 }
 
-complete_dictionnary <- function(workspace, sa_obj){
+complete_dictionary <- function(workspace, sa_obj){
   userdef <- sa_obj$regarima$specification$regression$userdef
   ud_var <- userdef$variables
   if (!userdef$specification["variables"] || is.na(ud_var$series))
     return(sa_obj)
 
-  context_dictionnary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
-  ts_variable_managers <- context_dictionnary$getTsVariableManagers()
+  context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
+  ts_variable_managers <- context_dictionary$getTsVariableManagers()
   ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
   jd_r_variables <- ts_variable_managers$get("r")
   if (is.null(jd_r_variables)) {

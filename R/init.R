@@ -193,11 +193,11 @@ setGeneric(name="dictionary", def = function( object, ... ){standardGeneric("dic
 
 
 setClass(
-  Class="JD2_ProcResults",
+  Class="ProcResults",
   representation = representation(internal = "jobjRef" )
 )
 
-setMethod("dictionary", "JD2_ProcResults", function(object){
+setMethod("dictionary", "ProcResults", function(object){
   if (is.null(object@internal)){
     NULL
   }else{
@@ -206,7 +206,7 @@ setMethod("dictionary", "JD2_ProcResults", function(object){
 
 })
 
-setMethod("result", signature = c(object="JD2_ProcResults", id="character"), function(object, id){
+setMethod("result", signature = c(object="ProcResults", id="character"), function(object, id){
   if (is.null(object@internal)){
     NULL
   }else{

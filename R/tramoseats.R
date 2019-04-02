@@ -1,6 +1,6 @@
 setClass(
-  Class="JD2_TramoSeats_java",
-  contains = "JD2_ProcResults"
+  Class="TramoSeats_java",
+  contains = "ProcResults"
 )
 
 #' Seasonal Adjustment with TRAMO-SEATS
@@ -9,6 +9,7 @@ setClass(
 #' Function to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 #' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+#' \code{tramoseats} returns a preformatted result while \code{jtramoseats} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
 #' @param spec model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSAfull"}, or an object of class \code{c("SA_spec","TRAMO_SEATS")}.
@@ -33,6 +34,9 @@ setClass(
 #' }
 #'
 #' @return
+#'
+#' \code{jtramoseats} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#'
 #' \code{tramoseats} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
 #'
 #' \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
@@ -57,8 +61,8 @@ setClass(
 #' \item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
 #' \item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
 #' \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
-#' }
-#' }
+#' }}
+#' \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
 #'
 #' @references
 #' Info on 'JDemetra+', usage and functions:
@@ -98,7 +102,7 @@ setClass(
 #' plot(mysa2$decomposition)
 #' }
 #' @export
-tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA", "RSA4", "RSA5"),
+tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                        userdefined = NULL){
   if (!is.ts(series)) {
     stop("series must be a time series")
@@ -108,22 +112,16 @@ tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA"
 #' @export
 tramoseats.SA_spec <- function(series, spec,
                       userdefined = NULL){
-
-  if (!inherits(spec, "TRAMO_SEATS"))
-    stop("use only with c(\"SA_spec\",\"TRAMO_SEATS\") class object")
-  # create the java objects
-  jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
-  jdictionary <- specTS_r2jd(spec,jrspec)
-  specSeats_r2jd(spec,jrspec)
-  jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
-  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jsa_obj <- jtramoseats.SA_spec(series, spec)
+  jrslt <- jsa_obj[["result"]]@internal
+  jrspec <- jsa_obj[["spec"]]
 
   # Or, using the fonction x13JavaResults:
   # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new (Class = "JD2_TRAMO_java",internal = jrarima)
-  jrobct <- new (Class = "JD2_TramoSeats_java", internal = jrslt)
+  jrobct_arima <- new (Class = "TRAMO_java",internal = jrarima)
+  jrobct <- new (Class = "TramoSeats_java", internal = jrslt)
 
   if (is.null(jrobct@internal)){
     return (NaN)
@@ -152,23 +150,20 @@ tramoseats.SA_spec <- function(series, spec,
 #' @export
 tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                            userdefined = NULL){
-  spec <- match.arg(spec)
-  # create the java objects
-  jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
-  jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
-  jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )
+  jsa_obj <- jtramoseats.character(series, spec)
+  jrslt <- jsa_obj[["result"]]@internal
+  jrspec <- jsa_obj[["spec"]]
 
   return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
 tramoseatsJavaResults <- function(jrslt, spec,
                                   userdefined = NULL,
-                                  context_dictionnary = NULL,
+                                  context_dictionary = NULL,
                                   extra_info = FALSE){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "JD2_TRAMO_java",internal = jrarima)
-  jrobct <- new(Class = "JD2_TramoSeats_java", internal = jrslt)
+  jrobct_arima <- new(Class = "TRAMO_java",internal = jrarima)
+  jrobct <- new(Class = "TramoSeats_java", internal = jrslt)
 
   if (is.null(jrobct@internal))
     return(NaN)
@@ -182,34 +177,7 @@ tramoseatsJavaResults <- function(jrslt, spec,
   }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
-                        context_dictionnary = context_dictionnary,
-                        extra_info = extra_info)
-  deco <- decomp_defTS(jrobj = jrobct, spec = spec)
-  fin <- final(jrobj = jrobct)
-  diagn <- diagnostics(jrobj = jrobct)
-
-  z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn,
-            user_defined = user_defined(userdefined, jrobct))
-
-  class(z) <- c("SA","TRAMO_SEATS")
-  return(z)
-
-}
-
-tramoseatsJavaResults <- function(jrslt, spec,
-                                  userdefined = NULL,
-                                  context_dictionnary = NULL,
-                                  extra_info = FALSE){
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "JD2_TRAMO_java",internal = jrarima)
-  jrobct <- new(Class = "JD2_TramoSeats_java", internal = jrslt)
-
-  if (is.null(jrobct@internal))
-    return(NaN)
-
-  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
-                        context_dictionnary = context_dictionnary,
+                        context_dictionary = context_dictionary,
                         extra_info = extra_info)
   deco <- decomp_defTS(jrobj = jrobct, spec = spec)
   fin <- final(jrobj = jrobct)
