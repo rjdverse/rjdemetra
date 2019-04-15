@@ -9,3 +9,4 @@
 ^doc$
 cran-comments.md
 TODO.R
+^NEWS$

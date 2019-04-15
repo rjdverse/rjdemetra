@@ -39,9 +39,10 @@
 
 <meta property="og:title" content="Seasonal Adjustment with  X-13ARIMA-SEATS — x13" />
 
-<meta property="og:description" content="x13/x13_def estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
+<meta property="og:description" content="Functions to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
-The final seasonally adjusted series shall be free of seasonal and calendar-related movements." />
+The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+x13 returns a preformatted result while jx13 returns the Java objects of the seasonal adjustment." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -74,7 +75,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -101,6 +102,9 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -123,22 +127,24 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Seasonal Adjustment with  X-13ARIMA-SEATS</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/x13.R'><code>R/x13.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/jx13.R'><code>R/jx13.R</code></a>, <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/x13.R'><code>R/x13.R</code></a></small>
     <div class="hidden name"><code>x13.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>x13</code>/<code>x13_def</code> estimates the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
+    <p>Functions to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
-The final seasonally adjusted series shall be free of seasonal and calendar-related movements.</p>
+The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+<code>x13</code> returns a preformatted result while <code>jx13</code> returns the Java objects of the seasonal adjustment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>x13</span>(<span class='no'>series</span>, <span class='no'>spec</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>jx13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2c"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4c"</span>),
+  <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>x13_def</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2c"</span>, <span class='st'>"RSA3"</span>,
-  <span class='st'>"RSA4c"</span>), <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>x13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2c"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4c"</span>),
+  <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,10 +155,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
     </tr>
     <tr>
       <th>spec</th>
-      <td><p>model specification X13. For the function:</p><ul>
-<li><p><code>x13</code>, object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code></p></li>
-<li><p><code>x13_def</code>, predefined X13 'JDemetra+' model specification (see <em>Details</em>). The default is "RSA5c".</p></li>
-</ul></td>
+      <td><p>model specification X13.  It can be a <code>character</code> of predefined X13 'JDemetra+' model specification (see <em>Details</em>), or an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","X13")</a></code>. The default is <code>"RSA5c"</code>.</p></td>
     </tr>
     <tr>
       <th>userdefined</th>
@@ -162,12 +165,13 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>x13</code>/<code>x13_def</code> returns an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA","X13")</a></code>, a list containing the following components:</p>
+    <p><code>jx13</code> returns a <code><a href='jSA.html'>jSA</a></code> object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with <code>x13</code>. The results can the seasonal adjustment can be extract by <code><a href='jSA.html'>get_indicators</a></code>.</p>
+<p><code>x13</code> returns an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA","X13")</a></code>, a list containing the following components:</p>
 <dt>regarima</dt><dd><p>object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima","X13")</a></code>. See <em>Value</em> of the function <code><a href='regarima.html'>regarima</a></code>.</p></dd>
 
 <dt>decomposition</dt><dd><p>object of class <code>"decomposition_X11"</code>, six elements list:
 <ul>
-<li><p><code>specification</code> list with the X11 algorithm specification. See also function <code><a href='x13_spec_def.html'>x13_spec</a></code></p></li>
+<li><p><code>specification</code> list with the X11 algorithm specification. See also function <code><a href='x13_spec.html'>x13_spec</a></code></p></li>
 <li><p><code>mode</code> decomposition mode</p></li>
 <li><p><code>mstats</code> matrix with the  M statistics</p></li>
 <li><p><code>si_ratio</code> time series matrix (mts) with the <code>d8</code> and <code>d10</code> series</p></li>
@@ -186,6 +190,7 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
 <li><p><code>residuals_test</code> data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)</p></li>
 <li><p><code>combined_test</code>  combined tests for stable seasonality in the entire series. Two elements list with: <code>tests_for_stable_seasonality</code> - data.frame with the tests (includes the statistic, p-value and parameters description) and <code>combined_seasonality_test</code> - the summary.</p></li>
 </ul></p></dd>
+<dt>user_defined</dt><dd><p>object of class <code>"user_defined"</code>. List containing the userdefined additional variables defined in the <code>userdefined</code> argument.</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -194,9 +199,9 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)), multiplicative (\(y = t * s * i\)), log-additive (\(log(y) = log(t)+log(s)+log(i)\)) or pseudo-additive (\(y = t*(s+i-1)\)).
 The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
 <p>In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.</p>
-<p>As regards the available predefined 'JDemetra+' X13 model specifications (for the function <code>x13_def</code>), they are described in the table below.</p><table class='table'>
+<p>As regards the available predefined 'JDemetra+' X13 model specifications, they are described in the table below.</p><table class='table'>
 <tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td></tr>
-<tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calender effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
+<tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calendar effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
 <tr><td></td><td></td><td>RSA0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
 <tr><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td></tr>
 <tr><td>RSA1 |</td><td>automatic |</td><td>AO/LS/TC  |</td><td></td><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td></tr>
@@ -216,14 +221,14 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'></div>
-    <div class='dont-index'><p><code><a href='x13_spec_def.html'>x13_spec</a></code>, <code><a href='tramoseats.html'>tramoseats</a></code></p></div>
+    <div class='dont-index'><p><code><a href='x13_spec.html'>x13_spec</a></code>, <code><a href='tramoseats.html'>tramoseats</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_def</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>x13</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
 
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
             <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>,<span class='st'>"AO"</span>),
             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
@@ -382,7 +387,7 @@ The final seasonally adjusted series (sa) shall be free of seasonal and calendar
 #&gt; Residual standard error: 1.729 on 11 degrees of freedom
 #&gt; Log likelihood = -637.1, aic =  1296, aicc =  1297, bic(corrected for length) = 1.274
 #&gt; </div><div class='input'>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span><span class='fl'>FALSE</span>,
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='no'>mysa</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span><span class='fl'>FALSE</span>,
             <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
             <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
             <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),

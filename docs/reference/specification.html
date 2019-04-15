@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@
       <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -197,21 +200,21 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_def_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>,
+<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
+<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>,
              <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='st'>"2005-10-01"</span>,
              <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='st'>"2010-03-01"</span>)
 
-<span class='fu'>s_estimate</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  span tolerance
-#&gt;   All     1e-07</div><div class='input'><span class='fu'>s_estimate</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;             span tolerance
-#&gt;  From 2005-10-01     1e-07</div><div class='input'>
+<span class='fu'>s_estimate</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  preliminary.check span tolerance
+#&gt;               TRUE  All     1e-07</div><div class='input'><span class='fu'>s_estimate</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  preliminary.check            span tolerance
+#&gt;               TRUE From 2005-10-01     1e-07</div><div class='input'>
 <span class='fu'>s_transform</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;  tfunction adjust aicdiff
 #&gt;       Auto   None      -2</div><div class='input'><span class='fu'>s_transform</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  tfunction adjust aicdiff
 #&gt;       Auto   None      -2</div><div class='input'>
 <span class='fu'>s_usrdef</span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   outlier outlier.coef variables variables.coef
 #&gt; 1   FALSE        FALSE     FALSE          FALSE</div><div class='input'><span class='fu'>s_usrdef</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;  outlier outlier.coef variables variables.coef
 #&gt;    FALSE        FALSE     FALSE          FALSE</div><div class='input'>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2009-10-01"</span>, <span class='st'>"2005-02-01"</span>))
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
@@ -224,9 +227,9 @@
 <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 <span class='no'>var3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
-<span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_def_x13</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>,
-                                 <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                                 <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var3</span>)
+<span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>,
+                             <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                             <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var3</span>)
 <span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
 
 <span class='fu'>s_preVar</span>(<span class='no'>myspec3</span>)</div><div class='output co'>#&gt; $series
@@ -940,7 +943,7 @@
 #&gt;                   0.95            1.05    FALSE       0       1       1
 #&gt;  arima.bp arima.bd arima.bq arima.coef
 #&gt;         0        1        1      FALSE</div><div class='input'>
-<span class='no'>myspec4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_def_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='no'>myspec4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
              <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
              <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>,<span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
              <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>0.2</span>, <span class='fl'>4</span>),
@@ -964,7 +967,7 @@
 #&gt; outlier   All 1900-01-01 2020-12-31  0  0</div><div class='input'><span class='fu'>s_span</span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;          type         d0         d1 n0 n1
 #&gt; estimate From 2005-10-01 2020-12-31  0  0
 #&gt; outlier  From 2010-03-01 2020-12-31  0  0</div><div class='input'>
-<span class='no'>myspec5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>myspec5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>mysa5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec5</span>)
 
 <span class='fu'>s_x11</span>(<span class='no'>mysa5</span>)</div><div class='output co'>#&gt;   x11.mode x11.seasonalComp x11.lsigma x11.usigma x11.trendAuto x11.trendma
@@ -974,7 +977,7 @@
 #&gt;  Undefined            FALSE        1.5        2.5          TRUE          13
 #&gt;  x11.seasonalma x11.fcasts x11.bcasts x11.excludeFcasts
 #&gt;             Msr         -1          0             FALSE</div><div class='input'>
-<span class='no'>myspec6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSAfull"</span>), <span class='kw'>seats.approx</span> <span class='kw'>=</span> <span class='st'>"Noisy"</span>)
+<span class='no'>myspec6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSAfull"</span>, <span class='kw'>seats.approx</span> <span class='kw'>=</span> <span class='st'>"Noisy"</span>)
 <span class='no'>mysa6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6</span>)
 
 <span class='fu'>s_seats</span>(<span class='no'>mysa6</span>)</div><div class='output co'>#&gt;  seats.approx seats.maBoundary seats.trendBoundary seats.seasdBoundary

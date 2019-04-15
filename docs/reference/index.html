@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -96,6 +96,9 @@
       <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -139,25 +142,25 @@
       <tr>
         
         <td>
-          <p><code><a href="x13.html">x13()</a></code> <code><a href="x13.html">x13_def()</a></code> </p>
+          <p><code><a href="x13.html">jx13()</a></code> <code><a href="x13.html">x13()</a></code> </p>
         </td>
         <td><p>Seasonal Adjustment with  X-13ARIMA-SEATS</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="x13_spec_def.html">x13_spec_def()</a></code> <code><a href="x13_spec_def.html">x13_spec()</a></code> </p>
+          <p><code><a href="x13_spec.html">x13_spec()</a></code> </p>
         </td>
         <td><p>X-13ARIMA-SEATS model specification, SA/X13</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="tramoseats.html">tramoseats()</a></code> <code><a href="tramoseats.html">tramoseats_def()</a></code> </p>
+          <p><code><a href="tramoseats.html">jtramoseats()</a></code> <code><a href="tramoseats.html">tramoseats()</a></code> </p>
         </td>
         <td><p>Seasonal Adjustment with TRAMO-SEATS</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="tramoseats_spec_def.html">tramoseats_spec_def()</a></code> <code><a href="tramoseats_spec_def.html">tramoseats_spec()</a></code> </p>
+          <p><code><a href="tramoseats_spec.html">tramoseats_spec()</a></code> </p>
         </td>
         <td><p>TRAMO-SEATS model specification, SA/TRAMO-SEATS</p></td>
       </tr><tr>
@@ -195,21 +198,35 @@
       <tr>
         
         <td>
-          <p><code><a href="regarima.html">regarima()</a></code> <code><a href="regarima.html">regarima_def_tramoseats()</a></code> <code><a href="regarima.html">regarima_def_x13()</a></code> </p>
+          <p><code><a href="regarima.html">jregarima()</a></code> <code><a href="regarima.html">jregarima_tramoseats()</a></code> <code><a href="regarima.html">jregarima_x13()</a></code> <code><a href="regarima.html">regarima()</a></code> <code><a href="regarima.html">regarima_tramoseats()</a></code> <code><a href="regarima.html">regarima_x13()</a></code> </p>
         </td>
         <td><p>RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="regarima_spec_def_tramoseats.html">regarima_spec_def_tramoseats()</a></code> <code><a href="regarima_spec_def_tramoseats.html">regarima_spec_tramoseats()</a></code> </p>
+          <p><code><a href="regarima_spec_tramoseats.html">regarima_spec_tramoseats()</a></code> </p>
         </td>
         <td><p>RegARIMA model specification, pre-adjustment in TRAMO-SEATS</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="regarima_spec_def_x13.html">regarima_spec_def_x13()</a></code> <code><a href="regarima_spec_def_x13.html">regarima_spec_x13()</a></code> </p>
+          <p><code><a href="regarima_spec_x13.html">regarima_spec_x13()</a></code> </p>
         </td>
         <td><p>RegARIMA model specification, pre-adjustment in X13</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-manipulate-java-objects" class="hasAnchor"><a href="#section-manipulate-java-objects" class="anchor"></a>Manipulate Java objects</h2>
+          <p class="section-desc"><p>Functions to manipulate the Java objects of a seasonal adjustment or a regARIMA model</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="jSA.html">get_dictionary()</a></code> <code><a href="jSA.html">get_indicators()</a></code> <code><a href="jSA.html">jSA2R()</a></code> </p>
+        </td>
+        <td><p>Functions around 'jSA' objects</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -245,7 +262,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="get_model.html">get_model()</a></code> </p>
+          <p><code><a href="get_model.html">get_jmodel()</a></code> <code><a href="get_model.html">get_model()</a></code> </p>
         </td>
         <td><p>Get the seasonally adjusted model from a workspace</p></td>
       </tr><tr>
@@ -293,6 +310,20 @@
         </td>
         <td><p>Industrial Production Indices in manufacturing in the European Union</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-deprecated-functions" class="hasAnchor"><a href="#section-deprecated-functions" class="anchor"></a>Deprecated functions</h2>
+          <p class="section-desc"><p>Deprecated functions</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="deprecated-RJDemetra.html">x13_spec_def()</a></code> <code><a href="deprecated-RJDemetra.html">x13_def()</a></code> <code><a href="deprecated-RJDemetra.html">tramoseats_spec_def()</a></code> <code><a href="deprecated-RJDemetra.html">tramoseats_def()</a></code> <code><a href="deprecated-RJDemetra.html">regarima_spec_def_tramoseats()</a></code> <code><a href="deprecated-RJDemetra.html">regarima_def_tramoseats()</a></code> <code><a href="deprecated-RJDemetra.html">regarima_def_x13()</a></code> <code><a href="deprecated-RJDemetra.html">regarima_spec_def_x13()</a></code> </p>
+        </td>
+        <td><p>Deprecated functions</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -302,8 +333,10 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-seasonal-adjustment-functions">Seasonal adjustment functions</a></li>
       <li><a href="#section-regarima-functions">RegARIMA functions</a></li>
+      <li><a href="#section-manipulate-java-objects">Manipulate Java objects</a></li>
       <li><a href="#section-manipulate-jdemetra-workspaces">Manipulate JDemetra+ workspaces</a></li>
       <li><a href="#section-database">Database</a></li>
+      <li><a href="#section-deprecated-functions">Deprecated functions</a></li>
     </ul>
   </div>
 </div>
