@@ -14,7 +14,7 @@ tramoseats(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
 \arguments{
 \item{series}{a univariate time series}
 
-\item{spec}{model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSAfull"}, or an object of class \code{c("SA_spec","TRAMO_SEATS")}.}
+\item{spec}{model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","TRAMO_SEATS")}. The default is \code{"RSAfull"}.}
 
 \item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }
@@ -62,7 +62,7 @@ In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA 
 
 As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.
 \tabular{rrrrrrrr}{
-\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+\strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
 RSA1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
 RSA2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr

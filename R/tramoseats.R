@@ -12,7 +12,7 @@ setClass(
 #' \code{tramoseats} returns a preformatted result while \code{jtramoseats} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
-#' @param spec model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSAfull"}, or an object of class \code{c("SA_spec","TRAMO_SEATS")}.
+#' @param spec model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","TRAMO_SEATS")}. The default is \code{"RSAfull"}.
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
@@ -23,7 +23,7 @@ setClass(
 #'
 #' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.
 #' \tabular{rrrrrrrr}{
-#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
 #' RSA1 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab Airline(+mean)\cr
 #' RSA2 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
