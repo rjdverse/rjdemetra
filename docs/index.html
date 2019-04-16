@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -66,6 +66,9 @@
       <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -96,7 +99,7 @@
 <a href="#rjdemetra" class="anchor"></a>RJDemetra <img src="reference/figures/logo.png" align="right" alt="">
 </h1></div>
 
-<p>RJDemetra is a R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
+<p>RJDemetra is an R interface to JDemetra+, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
 <p>Besides seasonal adjustment, JDemetra+ bundles other time series models that are useful in the production or analysis of economic statistics, including for instance outlier detection, nowcasting, temporal disaggregation or benchmarking.</p>
 <p>For more details on the JDemetra+ software see <a href="https://github.com/jdemetra/jdemetra-app" class="uri">https://github.com/jdemetra/jdemetra-app</a>.</p>
 <p>RJDemetra offers full access to all options and outputs of JDemetra+.</p>
@@ -114,11 +117,11 @@
 <div id="basic-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-example" class="anchor"></a>Basic example</h2>
-<p>To seasonally adjust a time series with a pre-defined specification you can either use the <code><a href="reference/x13.html">x13_def()</a></code> function for the X-13ARIMA method or the <code><a href="reference/tramoseats.html">tramoseats_def()</a></code> function for the TRAMO-SEATS method.</p>
+<p>To seasonally adjust a time series with a pre-defined specification you can either use the <code><a href="reference/deprecated-RJDemetra.html">x13_def()</a></code> function for the X-13ARIMA method or the <code><a href="reference/deprecated-RJDemetra.html">tramoseats_def()</a></code> function for the TRAMO-SEATS method.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(RJDemetra)</a>
 <a class="sourceLine" id="cb2-2" title="2">myseries &lt;-<span class="st"> </span>ipi_c_eu[, <span class="st">"FR"</span>]</a>
-<a class="sourceLine" id="cb2-3" title="3">x13_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/x13.html">x13_def</a></span>(myseries) <span class="co"># X-13ARIMA method</span></a>
-<a class="sourceLine" id="cb2-4" title="4">ts_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/tramoseats.html">tramoseats_def</a></span>(myseries) <span class="co"># TRAMO-SEATS method</span></a>
+<a class="sourceLine" id="cb2-3" title="3">x13_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/deprecated-RJDemetra.html">x13_def</a></span>(myseries) <span class="co"># X-13ARIMA method</span></a>
+<a class="sourceLine" id="cb2-4" title="4">ts_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/deprecated-RJDemetra.html">tramoseats_def</a></span>(myseries) <span class="co"># TRAMO-SEATS method</span></a>
 <a class="sourceLine" id="cb2-5" title="5"></a>
 <a class="sourceLine" id="cb2-6" title="6"><span class="co"># Basic plot with the original series, the trend and the SA series</span></a>
 <a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model, <span class="dt">type_chart =</span> <span class="st">"sa-trend"</span>)</a></code></pre></div>
@@ -165,6 +168,9 @@
 <li><a href="https://travis-ci.com/jdemetra/rjdemetra"><img src="https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://cran.r-project.org/package=RJDemetra"><img src="http://www.r-pkg.org/badges/version/RJDemetra" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=RJDemetra"><img src="http://www.r-pkg.org/badges/last-release/RJDemetra" alt="CRAN last release"></a></li>
+<li><a href="https://cran.r-project.org/package=RJDemetra"><img src="http://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey" alt="CRAN monthly downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=RJDemetra"><img src="http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgrey" alt="CRAN downloads"></a></li>
+<li><a href="http://www.awesomeofficialstatistics.org"><img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Official Statistics"></a></li>
 </ul>
 </div>
 </div>

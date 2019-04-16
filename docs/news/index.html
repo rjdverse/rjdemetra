@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get objects inside a workspace or multiprocessing — get_object • RJDemetra</title>
+<title>Changelog • RJDemetra</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,10 +37,7 @@
 
 
 
-<meta property="og:title" content="Get objects inside a workspace or multiprocessing — get_object" />
-
-<meta property="og:description" content="Generics functions to get all (get_all_objects()) multiprocessing (respectively sa_item)
-from a workspace (respectively multiprocessing)  or to get a given one (get_object()) ." />
+<meta property="og:title" content="Changelog" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -60,7 +57,7 @@ from a workspace (respectively multiprocessing)  or to get a given one (get_obje
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -124,73 +121,60 @@ from a workspace (respectively multiprocessing)  or to get a given one (get_obje
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get objects inside a workspace or multiprocessing</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/import_workspace.R'><code>R/import_workspace.R</code></a></small>
-    <div class="hidden name"><code>get_object.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Generics functions to get all (<code>get_all_objects()</code>) <code>multiprocessing</code> (respectively <code>sa_item</code>)
-from a <code>workspace</code> (respectively <code>multiprocessing</code>)  or to get a given one (<code>get_object()</code>) .</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>get_object</span>(<span class='no'>x</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>get_all_objects</span>(<span class='no'>x</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>the object where to extract the <code>multiprocessing</code> or the <code>sa_item</code>.</p></td>
-    </tr>
-    <tr>
-      <th>pos</th>
-      <td><p>the index of the object to extract.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An object of class <code>multiprocessing</code> or <code>sa_item</code> (for <code>get_object()</code>) or a list
-of objects of class <code>multiprocessing</code> or <code>sa_item</code> (for <code>get_all_objects()</code>).</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other functions to get informations from a workspace, multiprocessing or sa_item: <code><a href='count.html'>count</a></code>,
-  <code><a href='get_model.html'>get_model</a></code>, <code><a href='get_name.html'>get_name</a></code>,
-  <code><a href='get_ts.html'>get_ts</a></code></p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
-
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
-
-<span class='co'># Other way to get the multiprocessing:</span>
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'>get_object</span>(<span class='no'>wk</span>, <span class='fl'>1</span>)
-<span class='co'># To get the sa_item object:</span>
-<span class='no'>sa_item</span> <span class='kw'>&lt;-</span> <span class='fu'>get_object</span>(<span class='no'>mp</span>, <span class='fl'>1</span>)</div></pre>
+    <div id="rjdemetra-012" class="section level1">
+<h1 class="page-header">
+<a href="#rjdemetra-012" class="anchor"></a>RJDemetra 0.1.2<small> Unreleased </small>
+</h1>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h2>
+<ul>
+<li>All _def functions are now deprecated and replaced by the functions with the same name but without _def. Use: <code>x13_spec</code> instead of <code>x13_spec_def</code>, <code>x13</code> instead of <code>x13_def</code>, <code>tramoseats_spec</code> instead of <code>tramoseats_spec_def</code>, <code>tramoseats</code> instead of <code>tramoseats_def</code>, <code>regarima_spec_tramoseats</code> instead of <code>regarima_spec_def_tramoseats</code>, <code>regarima_tramoseats</code> instead of <code>regarima_def_tramoseats</code>, <code>regarima_x13</code> instead of <code>regarima_def_x13</code> and <code>regarima_spec_x13</code> instead of <code>regarima_spec_def_x13</code>.<br>
+</li>
+<li>
+<code>object</code> argument renamed by <code>spec</code> in <code>x13_spec</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>regarima_spec_tramoseats</code>.</li>
+</ul>
+</div>
+<div id="new-functionalities" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functionalities" class="anchor"></a>New functionalities</h2>
+<ul>
+<li>Parameter <code>preliminary.check</code> added to the specifications functions (<code>regarima_spec_tramoseats</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>x13_spec</code>). By default (<code>preliminary.check = TRUE</code>), JDemetra+ checks the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values. When <code>preliminary.check = FALSE</code>, the thresholds are ignored and process is performed, when possible. (issue <a href='https://github.com/jdemetra/rjdemetra/issues/39'>#39</a>)<br>
+</li>
+<li>Error message returned when the seasonal adjustment fails due to the preliminary.check.<br>
+</li>
+<li>Possibility to use user-defined calendar regressors. To do it use <code>tradingdays.option = "UserDefined</code> and add new regressors variables (<code>usrdef.varEnabled = TRUE</code> to enable user-defined regressors and <code>usrdef.var</code> to define the regressors) using <code>usrdef.varType = "Calendar"</code>.<br>
+</li>
+<li>
+<code>usrdef.varType</code> argument is recycled with the number of variables defined in the <code>usrdef.var</code> parameter.<br>
+</li>
+<li>News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: <code>jx13</code>, <code>jtramoseats</code>, <code>jregarima</code>, <code>jregarima_x13</code>, <code>jregarima_tramoseats</code> and <code>get_jmodel</code>. Therefore, there is no formatting and the computation is faster than the non ‘j’ functions (<code>x13</code>, <code>tramoseats</code>, <code>regarima</code>, <code>regarima_x13</code>, <code>regarima_tramoseats</code> and <code>get_model</code>). To manipulate these objects, there are three functions: <code>get_dictionary</code> to get the indicators that can be extracted, <code>get_indicators</code> to extract these indicators and <code>jSA2R</code> to get the formatted R model.</li>
+</ul>
+</div>
+<div id="bug-fixed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixed" class="anchor"></a>Bug fixed</h2>
+<ul>
+<li>
+<code>x11.fcast</code> can now be set to 0 or 1 (issue <a href='https://github.com/jdemetra/rjdemetra/issues/42'>#42</a>)</li>
+</ul>
+</div>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rjdemetra-012">0.1.2</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

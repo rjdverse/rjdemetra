@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@
       <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -199,7 +202,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13_def</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>))
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSA5c"</span>))
  <span class='co'># RegArima</span>
 <span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>) <span class='co'># 6 graphics are plotted by default</span></div><div class='img'><img src='plot-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To only plot one graphic (here the residuals) changing the title:</span>
 <span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Plot of residuals"</span>)</div><div class='img'><img src='plot-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>mysa</span>$<span class='no'>regarima</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='img'><img src='plot-8.png' alt='' width='700' height='433' /></div><div class='input'>

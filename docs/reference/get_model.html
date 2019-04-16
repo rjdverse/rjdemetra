@@ -40,7 +40,7 @@
 <meta property="og:title" content="Get the seasonally adjusted model from a workspace — get_model" />
 
 <meta property="og:description" content="Generics functions to get seasonally adjusted model(s) from workspace,
-multiprocessing or sa_item object." />
+multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects while  get_jmodel returns the Java objects of the models." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -73,7 +73,7 @@ multiprocessing or sa_item object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ multiprocessing or sa_item object." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -122,18 +125,20 @@ multiprocessing or sa_item object." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get the seasonally adjusted model from a workspace</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/import_workspace.R'><code>R/import_workspace.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/get_jmodel.R'><code>R/get_jmodel.R</code></a>, <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/import_workspace.R'><code>R/import_workspace.R</code></a></small>
     <div class="hidden name"><code>get_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p>Generics functions to get seasonally adjusted model(s) from <code>workspace</code>,
-<code>multiprocessing</code> or <code>sa_item</code> object.</p>
+<code>multiprocessing</code> or <code>sa_item</code> object. <code>get_model</code> returns a <code>"SA"</code> objects while  <code>get_jmodel</code> returns the Java objects of the models.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_model</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_jmodel</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>get_model</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,11 +165,11 @@ multiprocessing or sa_item object." />
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>get_model()</code> returns a seasonnaly adjust object (class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA", "X13")</a></code> or <code>c("SA", "TRAMO_SEATS"</code>) or list of seasonnaly adjust objects:</p><ul>
-<li><p>if <code>x</code> is a <code>sa_item</code> object, <code>get_model(x)</code> returns a <code>"SA"</code> object;</p></li>
+<li><p>if <code>x</code> is a <code>sa_item</code> object, <code>get_model(x)</code> returns a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>);</p></li>
 <li><p>if <code>x</code> is a <code>multiprocessing</code> object, <code><a href='get_ts.html'>get_ts(x)</a></code> returns list of length the number
- of sa_items, each element containing a <code>"SA"</code> object;</p></li>
+ of sa_items, each element containing a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>);</p></li>
 <li><p>if <code>x</code> is a <code>workspace</code> object, <code><a href='get_ts.html'>get_ts(x)</a></code> returns list of length the number of multiprocessing,
- each element containing a list of a <code>"SA"</code> object.</p></li>
+ each element containing a list of a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>).</p></li>
 </ul>
 
     
@@ -177,9 +182,9 @@ multiprocessing or sa_item object." />
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec_def.html'>x13_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
-<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec_def.html'>tramoseats_spec_def</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
+<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
 <span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
 
 <span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()

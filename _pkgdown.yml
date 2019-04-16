@@ -30,9 +30,9 @@ reference:
   desc: Functions to perform seasonal adjustment with X-13ARIMA or TRAMO-SEATS
   contents:
   - '`x13`'
-  - '`x13_spec_def`'
+  - '`x13_spec`'
   - '`tramoseats`'
-  - '`tramoseats_spec_def`'
+  - '`tramoseats_spec`'
   - '`user_defined_variables`'
   - '`plot`'
   - '`save_spec`'
@@ -41,8 +41,12 @@ reference:
   desc: Functions to only peform regARIMA estimation
   contents:
   - '`regarima`'
-  - '`regarima_spec_def_tramoseats`'
-  - '`regarima_spec_def_x13`'
+  - '`regarima_spec_tramoseats`'
+  - '`regarima_spec_x13`'
+- title: Manipulate Java objects
+  desc: Functions to manipulate the Java objects of a seasonal adjustment or a regARIMA model
+  contents:
+  - '`jSA`'
 - title: Manipulate JDemetra+ workspaces
   desc: Functions to import and export models JDemetra+ workspaces
   contents:
@@ -60,3 +64,8 @@ reference:
   desc: ~
   contents:
   - '`ipi_c_eu`'
+- title: Deprecated functions
+  desc: Deprecated functions
+  contents:
+  - '`deprecated-RJDemetra`'
+  

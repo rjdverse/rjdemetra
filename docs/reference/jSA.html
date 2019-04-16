@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the names of the user-defined variables — user_defined_variables • RJDemetra</title>
+<title>Functions around 'jSA' objects — jSA • RJDemetra</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,10 +37,9 @@
 
 
 
-<meta property="og:title" content="Get the names of the user-defined variables — user_defined_variables" />
+<meta property="og:title" content="Functions around 'jSA' objects — jSA" />
 
-<meta property="og:description" content="Function to get the names of the additional output variables that can be defined in
-x13 and tramoseats with the parameter userdefined." />
+<meta property="og:description" content="get_dictionary returns the indicators that can be extracted from &quot;jSA&quot; objects, get_indicators extract a list of indicators and ." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -124,32 +123,59 @@ x13 and tramoseats with the parameter userdefined." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the names of the user-defined variables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/user_defined.R'><code>R/user_defined.R</code></a></small>
-    <div class="hidden name"><code>user_defined_variables.Rd</code></div>
+    <h1>Functions around 'jSA' objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/jsa2r.R'><code>R/jsa2r.R</code></a></small>
+    <div class="hidden name"><code>jSA.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function to get the names of the additional output variables that can be defined in
-<code><a href='x13.html'>x13</a></code> and <code><a href='tramoseats.html'>tramoseats</a></code> with the parameter <code>userdefined</code>.</p>
+    <p><code>get_dictionary</code> returns the indicators that can be extracted from <code>"jSA"</code> objects, <code>get_indicators</code> extract a list of indicators and .</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>user_defined_variables</span>(<span class='kw'>sa_object</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"X13-ARIMA"</span>, <span class='st'>"TRAMO-SEATS"</span>))</pre>
+    <pre class="usage"><span class='fu'>get_dictionary</span>(<span class='no'>x</span>)
+
+<span class='fu'>get_indicators</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>jSA2R</span>(<span class='no'>x</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sa_object</th>
-      <td><p>a character: <code>"X13-ARIMA"</code> to get the additional output variables available for the X13-ARIMA method and <code>"TRAMO-SEATS"</code> for the TRAMO-SEATS method.</p></td>
+      <th>x</th>
+      <td><p>a <code>"jSA"</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>characters containing the names of the indicators to extract.</p></td>
+    </tr>
+    <tr>
+      <th>userdefined</th>
+      <td><p>userdefined vector with characters for additional output variables (see <code><a href='user_defined_variables.html'>user_defined_variables</a></code>). Only used for <code>"SA"</code> objects.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>get_dictionary</code> a vector of characters, <code>get_indicators</code> returns a list containing the indicators that are extracted and <code>jSA2R</code> returns a <code>"SA"</code> or a <code>"regarima"</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>A <code>"jSA"</code> object is a list with three elements:</p><ul>
+<li><p><code>"result"</code>: the Java object with the results of a seasonal adjustment or a pre-adjustment method.</p></li>
+<li><p><code>"spec"</code>: the Java object with the specification of a seasonal adjustment or a pre-adjustment method.</p></li>
+<li><p><code>"dictionary"</code>: the Java object with dictionnary of a seasonal adjustment or a pre-adjustment method. In particular, it contains all the user-defined regressors.</p></li>
+</ul>
+    <p><code>get_dictionary</code> returns the list of indicators that can be extracted from a <code>jSA</code> object by the function <code>get_indicators</code>.</p>
+<p><code>jSA2R</code> returns the corresponding formatted seasonal adjustment (<code>"SA"</code> object) or RegARIMA (<code>"regarima"</code> object) model.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>user_defined_variables</span>(<span class='st'>"X13-ARIMA"</span>)</div><div class='output co'>#&gt;   [1] "y"                                              
+    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+<span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>jx13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
+<span class='fu'>get_dictionary</span>(<span class='no'>mysa</span>)</div><div class='output co'>#&gt;   [1] "y"                                              
 #&gt;   [2] "y_f"                                            
 #&gt;   [3] "t"                                              
 #&gt;   [4] "t_f"                                            
@@ -457,301 +483,285 @@ x13 and tramoseats with the parameter userdefined." />
 #&gt; [306] "diagnostics.ic-ratio-henderson"                 
 #&gt; [307] "diagnostics.ic-ratio"                           
 #&gt; [308] "diagnostics.msr-global"                         
-#&gt; [309] "diagnostics.msr(*)"                             </div><div class='input'><span class='fu'>user_defined_variables</span>(<span class='st'>"TRAMO-SEATS"</span>)</div><div class='output co'>#&gt;   [1] "y"                                               
-#&gt;   [2] "y_f"                                             
-#&gt;   [3] "t"                                               
-#&gt;   [4] "t_f"                                             
-#&gt;   [5] "sa"                                              
-#&gt;   [6] "sa_f"                                            
-#&gt;   [7] "s"                                               
-#&gt;   [8] "s_f"                                             
-#&gt;   [9] "i"                                               
-#&gt;  [10] "i_f"                                             
-#&gt;  [11] "mode"                                            
-#&gt;  [12] "preprocessing.model.span.start"                  
-#&gt;  [13] "preprocessing.model.span.end"                    
-#&gt;  [14] "preprocessing.model.span.n"                      
-#&gt;  [15] "preprocessing.model.espan.start"                 
-#&gt;  [16] "preprocessing.model.espan.end"                   
-#&gt;  [17] "preprocessing.model.espan.n"                     
-#&gt;  [18] "preprocessing.model.log"                         
-#&gt;  [19] "preprocessing.model.adjust"                      
-#&gt;  [20] "preprocessing.model.y"                           
-#&gt;  [21] "preprocessing.model.y_f"                         
-#&gt;  [22] "preprocessing.model.y_ef"                        
-#&gt;  [23] "preprocessing.model.yc"                          
-#&gt;  [24] "preprocessing.model.yc_f"                        
-#&gt;  [25] "preprocessing.model.yc_ef"                       
-#&gt;  [26] "preprocessing.model.l"                           
-#&gt;  [27] "preprocessing.model.y_lin"                       
-#&gt;  [28] "preprocessing.model.y_lin_f"                     
-#&gt;  [29] "preprocessing.model.ycal"                        
-#&gt;  [30] "preprocessing.model.ycal_f"                      
-#&gt;  [31] "preprocessing.model.det"                         
-#&gt;  [32] "preprocessing.model.det_f"                       
-#&gt;  [33] "preprocessing.model.l_f"                         
-#&gt;  [34] "preprocessing.model.l_b"                         
-#&gt;  [35] "preprocessing.model.cal"                         
-#&gt;  [36] "preprocessing.model.cal_f"                       
-#&gt;  [37] "preprocessing.model.tde"                         
-#&gt;  [38] "preprocessing.model.tde_f"                       
-#&gt;  [39] "preprocessing.model.mhe"                         
-#&gt;  [40] "preprocessing.model.mhe_f"                       
-#&gt;  [41] "preprocessing.model.ee"                          
-#&gt;  [42] "preprocessing.model.ee_f"                        
-#&gt;  [43] "preprocessing.model.omhe"                        
-#&gt;  [44] "preprocessing.model.omhe_f"                      
-#&gt;  [45] "preprocessing.model.out(*)"                      
-#&gt;  [46] "preprocessing.model.out_f"                       
-#&gt;  [47] "preprocessing.model.out_i"                       
-#&gt;  [48] "preprocessing.model.out_i_f"                     
-#&gt;  [49] "preprocessing.model.out_t"                       
-#&gt;  [50] "preprocessing.model.out_t_f"                     
-#&gt;  [51] "preprocessing.model.out_s"                       
-#&gt;  [52] "preprocessing.model.out_s_f"                     
-#&gt;  [53] "preprocessing.model.reg"                         
-#&gt;  [54] "preprocessing.model.reg_f"                       
-#&gt;  [55] "preprocessing.model.reg_t"                       
-#&gt;  [56] "preprocessing.model.reg_t_f"                     
-#&gt;  [57] "preprocessing.model.reg_s"                       
-#&gt;  [58] "preprocessing.model.reg_s_f"                     
-#&gt;  [59] "preprocessing.model.reg_i"                       
-#&gt;  [60] "preprocessing.model.reg_i_f"                     
-#&gt;  [61] "preprocessing.model.reg_sa"                      
-#&gt;  [62] "preprocessing.model.reg_sa_f"                    
-#&gt;  [63] "preprocessing.model.reg_y"                       
-#&gt;  [64] "preprocessing.model.reg_y_f"                     
-#&gt;  [65] "preprocessing.model.reg_u"                       
-#&gt;  [66] "preprocessing.model.reg_u_f"                     
-#&gt;  [67] "preprocessing.model.fullresiduals"               
-#&gt;  [68] "preprocessing.model.lp"                          
-#&gt;  [69] "preprocessing.model.ntd"                         
-#&gt;  [70] "preprocessing.model.nmh"                         
-#&gt;  [71] "preprocessing.model.td(*)"                       
-#&gt;  [72] "preprocessing.model.easter"                      
-#&gt;  [73] "preprocessing.model.nout"                        
-#&gt;  [74] "preprocessing.model.noutao"                      
-#&gt;  [75] "preprocessing.model.noutls"                      
-#&gt;  [76] "preprocessing.model.nouttc"                      
-#&gt;  [77] "preprocessing.model.noutso"                      
-#&gt;  [78] "preprocessing.model.coefficients"                
-#&gt;  [79] "preprocessing.model.description"                 
-#&gt;  [80] "preprocessing.model.covar"                       
-#&gt;  [81] "preprocessing.model.pcovar"                      
-#&gt;  [82] "preprocessing.model.fcasts(?)"                   
-#&gt;  [83] "preprocessing.model.bcasts(?)"                   
-#&gt;  [84] "preprocessing.model.lin_fcasts(?)"               
-#&gt;  [85] "preprocessing.model.lin_bcasts(?)"               
-#&gt;  [86] "preprocessing.model.efcasts(?)"                  
-#&gt;  [87] "preprocessing.arima.parameters"                  
-#&gt;  [88] "preprocessing.arima.p"                           
-#&gt;  [89] "preprocessing.arima.d"                           
-#&gt;  [90] "preprocessing.arima.q"                           
-#&gt;  [91] "preprocessing.arima.bp"                          
-#&gt;  [92] "preprocessing.arima.bd"                          
-#&gt;  [93] "preprocessing.arima.bq"                          
-#&gt;  [94] "preprocessing.likelihood.neffectiveobs"          
-#&gt;  [95] "preprocessing.likelihood.np"                     
-#&gt;  [96] "preprocessing.likelihood.logvalue"               
-#&gt;  [97] "preprocessing.likelihood.adjustedlogvalue"       
-#&gt;  [98] "preprocessing.likelihood.ssqerr"                 
-#&gt;  [99] "preprocessing.likelihood.aic"                    
-#&gt; [100] "preprocessing.likelihood.aicc"                   
-#&gt; [101] "preprocessing.likelihood.bic"                    
-#&gt; [102] "preprocessing.likelihood.bicc"                   
-#&gt; [103] "preprocessing.likelihood.ser"                    
-#&gt; [104] "preprocessing.likelihood.ser-ml"                 
-#&gt; [105] "preprocessing.residuals.res"                     
-#&gt; [106] "preprocessing.residuals.mean"                    
-#&gt; [107] "preprocessing.residuals.skewness"                
-#&gt; [108] "preprocessing.residuals.kurtosis"                
-#&gt; [109] "preprocessing.residuals.dh"                      
-#&gt; [110] "preprocessing.residuals.lb"                      
-#&gt; [111] "preprocessing.residuals.lb2"                     
-#&gt; [112] "preprocessing.residuals.seaslb"                  
-#&gt; [113] "preprocessing.residuals.bp"                      
-#&gt; [114] "preprocessing.residuals.bp2"                     
-#&gt; [115] "preprocessing.residuals.seasbp"                  
-#&gt; [116] "preprocessing.residuals.nruns"                   
-#&gt; [117] "preprocessing.residuals.lruns"                   
-#&gt; [118] "decomposition.y_lin"                             
-#&gt; [119] "decomposition.y_lin_f"                           
-#&gt; [120] "decomposition.y_lin_ef"                          
-#&gt; [121] "decomposition.t_lin"                             
-#&gt; [122] "decomposition.t_lin_f"                           
-#&gt; [123] "decomposition.t_lin_e"                           
-#&gt; [124] "decomposition.t_lin_ef"                          
-#&gt; [125] "decomposition.sa_lin"                            
-#&gt; [126] "decomposition.sa_lin_f"                          
-#&gt; [127] "decomposition.sa_lin_e"                          
-#&gt; [128] "decomposition.sa_lin_ef"                         
-#&gt; [129] "decomposition.s_lin"                             
-#&gt; [130] "decomposition.s_lin_f"                           
-#&gt; [131] "decomposition.s_lin_e"                           
-#&gt; [132] "decomposition.s_lin_ef"                          
-#&gt; [133] "decomposition.i_lin"                             
-#&gt; [134] "decomposition.i_lin_f"                           
-#&gt; [135] "decomposition.i_lin_e"                           
-#&gt; [136] "decomposition.i_lin_ef"                          
-#&gt; [137] "decomposition.y_cmp"                             
-#&gt; [138] "decomposition.y_cmp_f"                           
-#&gt; [139] "decomposition.t_cmp"                             
-#&gt; [140] "decomposition.t_cmp_f"                           
-#&gt; [141] "decomposition.sa_cmp"                            
-#&gt; [142] "decomposition.sa_cmp_f"                          
-#&gt; [143] "decomposition.s_cmp"                             
-#&gt; [144] "decomposition.s_cmp_f"                           
-#&gt; [145] "decomposition.i_cmp"                             
-#&gt; [146] "decomposition.i_cmp_f"                           
-#&gt; [147] "decomposition.i_cmp_e"                           
-#&gt; [148] "decomposition.t_cmp_e"                           
-#&gt; [149] "decomposition.s_cmp_e"                           
-#&gt; [150] "decomposition.sa_cmp_e"                          
-#&gt; [151] "decomposition.i_cmp_ef"                          
-#&gt; [152] "decomposition.t_cmp_ef"                          
-#&gt; [153] "decomposition.s_cmp_ef"                          
-#&gt; [154] "decomposition.sa_cmp_ef"                         
-#&gt; [155] "decomposition.parameterscutoff"                  
-#&gt; [156] "decomposition.modelchanged"                      
-#&gt; [157] "decomposition.model.ar"                          
-#&gt; [158] "decomposition.model.diff"                        
-#&gt; [159] "decomposition.model.ma"                          
-#&gt; [160] "decomposition.model.fullar"                      
-#&gt; [161] "decomposition.model.innovationvariance"          
-#&gt; [162] "decomposition.tmodel.ar"                         
-#&gt; [163] "decomposition.tmodel.diff"                       
-#&gt; [164] "decomposition.tmodel.ma"                         
-#&gt; [165] "decomposition.tmodel.fullar"                     
-#&gt; [166] "decomposition.tmodel.innovationvariance"         
-#&gt; [167] "decomposition.smodel.ar"                         
-#&gt; [168] "decomposition.smodel.diff"                       
-#&gt; [169] "decomposition.smodel.ma"                         
-#&gt; [170] "decomposition.smodel.fullar"                     
-#&gt; [171] "decomposition.smodel.innovationvariance"         
-#&gt; [172] "decomposition.samodel.ar"                        
-#&gt; [173] "decomposition.samodel.diff"                      
-#&gt; [174] "decomposition.samodel.ma"                        
-#&gt; [175] "decomposition.samodel.fullar"                    
-#&gt; [176] "decomposition.samodel.innovationvariance"        
-#&gt; [177] "decomposition.transitorymodel.ar"                
-#&gt; [178] "decomposition.transitorymodel.diff"              
-#&gt; [179] "decomposition.transitorymodel.ma"                
-#&gt; [180] "decomposition.transitorymodel.fullar"            
-#&gt; [181] "decomposition.transitorymodel.innovationvariance"
-#&gt; [182] "decomposition.imodel.ar"                         
-#&gt; [183] "decomposition.imodel.diff"                       
-#&gt; [184] "decomposition.imodel.ma"                         
-#&gt; [185] "decomposition.imodel.fullar"                     
-#&gt; [186] "decomposition.imodel.innovationvariance"         
-#&gt; [187] "diagnostics.qs"                                  
-#&gt; [188] "diagnostics.ftest"                               
-#&gt; [189] "diagnostics.qs.on.i"                             
-#&gt; [190] "diagnostics.ftest.on.i"                          
-#&gt; [191] "diagnostics.combined.all.kruskalwallis"          
-#&gt; [192] "diagnostics.combined.all.stable"                 
-#&gt; [193] "diagnostics.combined.all.evolutive"              
-#&gt; [194] "diagnostics.combined.all.summary"                
-#&gt; [195] "diagnostics.combined.all.stable.ssm"             
-#&gt; [196] "diagnostics.combined.all.stable.ssr"             
-#&gt; [197] "diagnostics.combined.all.stable.ssq"             
-#&gt; [198] "diagnostics.combined.all.evolutive.ssm"          
-#&gt; [199] "diagnostics.combined.all.evolutive.ssr"          
-#&gt; [200] "diagnostics.combined.all.evolutive.ssq"          
-#&gt; [201] "diagnostics.combined.end.kruskalwallis"          
-#&gt; [202] "diagnostics.combined.end.stable"                 
-#&gt; [203] "diagnostics.combined.end.evolutive"              
-#&gt; [204] "diagnostics.combined.end.summary"                
-#&gt; [205] "diagnostics.combined.end.stable.ssm"             
-#&gt; [206] "diagnostics.combined.end.stable.ssr"             
-#&gt; [207] "diagnostics.combined.end.stable.ssq"             
-#&gt; [208] "diagnostics.combined.end.evolutive.ssm"          
-#&gt; [209] "diagnostics.combined.end.evolutive.ssr"          
-#&gt; [210] "diagnostics.combined.end.evolutive.ssq"          
-#&gt; [211] "diagnostics.combined.residual.all.kruskalwallis" 
-#&gt; [212] "diagnostics.combined.residual.all.stable"        
-#&gt; [213] "diagnostics.combined.residual.all.evolutive"     
-#&gt; [214] "diagnostics.combined.residual.all.summary"       
-#&gt; [215] "diagnostics.combined.residual.all.stable.ssm"    
-#&gt; [216] "diagnostics.combined.residual.all.stable.ssr"    
-#&gt; [217] "diagnostics.combined.residual.all.stable.ssq"    
-#&gt; [218] "diagnostics.combined.residual.all.evolutive.ssm" 
-#&gt; [219] "diagnostics.combined.residual.all.evolutive.ssr" 
-#&gt; [220] "diagnostics.combined.residual.all.evolutive.ssq" 
-#&gt; [221] "diagnostics.combined.residual.end.kruskalwallis" 
-#&gt; [222] "diagnostics.combined.residual.end.stable"        
-#&gt; [223] "diagnostics.combined.residual.end.evolutive"     
-#&gt; [224] "diagnostics.combined.residual.end.summary"       
-#&gt; [225] "diagnostics.combined.residual.end.stable.ssm"    
-#&gt; [226] "diagnostics.combined.residual.end.stable.ssr"    
-#&gt; [227] "diagnostics.combined.residual.end.stable.ssq"    
-#&gt; [228] "diagnostics.combined.residual.end.evolutive.ssm" 
-#&gt; [229] "diagnostics.combined.residual.end.evolutive.ssr" 
-#&gt; [230] "diagnostics.combined.residual.end.evolutive.ssq" 
-#&gt; [231] "diagnostics.residual.all"                        
-#&gt; [232] "diagnostics.residual.end"                        
-#&gt; [233] "diagnostics.residualtd"                          
-#&gt; [234] "diagnostics.residualtd.on.i"                     
-#&gt; [235] "diagnostics.variancedecomposition"               
-#&gt; [236] "diagnostics.logstat"                             
-#&gt; [237] "diagnostics.levelstat"                           
-#&gt; [238] "diagnostics.fcast-insample-mean"                 
-#&gt; [239] "diagnostics.fcast-outsample-mean"                
-#&gt; [240] "diagnostics.fcast-outsample-variance"            
-#&gt; [241] "diagnostics.seas-lin-f"                          
-#&gt; [242] "diagnostics.seas-lin-qs"                         
-#&gt; [243] "diagnostics.seas-lin-kw"                         
-#&gt; [244] "diagnostics.seas-lin-friedman"                   
-#&gt; [245] "diagnostics.seas-lin-periodogram"                
-#&gt; [246] "diagnostics.seas-lin-spectralpeaks"              
-#&gt; [247] "diagnostics.seas-si-combined"                    
-#&gt; [248] "diagnostics.seas-si-evolutive"                   
-#&gt; [249] "diagnostics.seas-si-stable"                      
-#&gt; [250] "diagnostics.seas-res-f"                          
-#&gt; [251] "diagnostics.seas-res-qs"                         
-#&gt; [252] "diagnostics.seas-res-kw"                         
-#&gt; [253] "diagnostics.seas-res-friedman"                   
-#&gt; [254] "diagnostics.seas-res-periodogram"                
-#&gt; [255] "diagnostics.seas-res-spectralpeaks"              
-#&gt; [256] "diagnostics.seas-res-combined"                   
-#&gt; [257] "diagnostics.seas-res-combined3"                  
-#&gt; [258] "diagnostics.seas-res-evolutive"                  
-#&gt; [259] "diagnostics.seas-res-stable"                     
-#&gt; [260] "diagnostics.seas-i-f"                            
-#&gt; [261] "diagnostics.seas-i-qs"                           
-#&gt; [262] "diagnostics.seas-i-kw"                           
-#&gt; [263] "diagnostics.seas-i-periodogram"                  
-#&gt; [264] "diagnostics.seas-i-spectralpeaks"                
-#&gt; [265] "diagnostics.seas-i-combined"                     
-#&gt; [266] "diagnostics.seas-i-combined3"                    
-#&gt; [267] "diagnostics.seas-i-evolutive"                    
-#&gt; [268] "diagnostics.seas-i-stable"                       
-#&gt; [269] "diagnostics.seas-sa-f"                           
-#&gt; [270] "diagnostics.seas-sa-qs"                          
-#&gt; [271] "diagnostics.seas-sa-kw"                          
-#&gt; [272] "diagnostics.seas-sa-friedman"                    
-#&gt; [273] "diagnostics.seas-sa-periodogram"                 
-#&gt; [274] "diagnostics.seas-sa-spectralpeaks"               
-#&gt; [275] "diagnostics.seas-sa-combined"                    
-#&gt; [276] "diagnostics.seas-sa-combined3"                   
-#&gt; [277] "diagnostics.seas-sa-evolutive"                   
-#&gt; [278] "diagnostics.seas-sa-stable"                      
-#&gt; [279] "diagnostics.seas-sa-ac1"                         
-#&gt; [280] "diagnostics.td-sa-all"                           
-#&gt; [281] "diagnostics.td-sa-last"                          
-#&gt; [282] "diagnostics.td-i-all"                            
-#&gt; [283] "diagnostics.td-i-last"                           
-#&gt; [284] "diagnostics.td-res-all"                          
-#&gt; [285] "diagnostics.td-res-last"                         
-#&gt; [286] "diagnostics.ic-ratio-henderson"                  
-#&gt; [287] "diagnostics.ic-ratio"                            
-#&gt; [288] "diagnostics.msr-global"                          
-#&gt; [289] "diagnostics.msr(*)"                              </div></pre>
+#&gt; [309] "diagnostics.msr(*)"                             </div><div class='input'>
+<span class='fu'>get_indicators</span>(<span class='no'>mysa</span>, <span class='st'>"decomposition.b2"</span>, <span class='st'>"decomposition.d10"</span>)</div><div class='output co'>#&gt; $decomposition.b2
+#&gt;            Jan       Feb       Mar       Apr       May       Jun       Jul
+#&gt; 1990                                                              72.81606
+#&gt; 1991  71.79743  71.68024  71.64589  71.55773  71.52495  71.56958  71.49960
+#&gt; 1992  71.27281  71.22519  71.03194  70.76615  70.54668  70.32064  70.02536
+#&gt; 1993  67.38024  67.09041  66.83558  66.60880  66.29927  66.01210  65.90924
+#&gt; 1994  67.05880  67.40160  67.75609  68.18424  68.76302  69.43857  70.01124
+#&gt; 1995  72.30924  72.51606  72.66661  72.79874  72.77725  72.77547  72.81410
+#&gt; 1996  72.75332  72.73698  72.85085  72.92897  73.00902  73.06096  73.06031
+#&gt; 1997  74.92023  75.42547  75.89510  76.49960  77.13115  77.70993  78.40107
+#&gt; 1998  81.44960  81.73007  81.89219  82.07607  82.27505  82.43690  82.47964
+#&gt; 1999  83.10107  83.24874  83.50225  83.89630  84.31177  84.69126  85.07174
+#&gt; 2000  88.09186  88.54981  88.91735  89.22763  89.55159  89.92536  90.30749
+#&gt; 2001  91.55291  91.66626  91.83948  91.83076  91.66442  91.30507  90.99106
+#&gt; 2002  90.14326  89.99274  89.90005  89.80356  89.75411  89.67374  89.49543
+#&gt; 2003  88.47023  88.28380  88.06177  88.03710  88.00198  87.98076  88.04690
+#&gt; 2004  89.05782  89.19430  89.38909  89.64202  89.77313  89.84781  90.01269
+#&gt; 2005  89.97964  89.94326  90.04359  89.96757  89.95885  90.13857  90.13208
+#&gt; 2006  91.05924  91.29523  91.42078  91.57791  91.68975  91.71297  91.85160
+#&gt; 2007  92.83624  93.07043  93.16865  93.25160  93.40609  93.45507  93.54523
+#&gt; 2008  94.13732  94.27705  94.36816  94.27784  94.15919  94.18357  94.21296
+#&gt; 2009  93.57673  93.80434  94.15943  94.44461  94.80983  95.11117  95.29450
+#&gt; 2010  97.65343  97.93443  98.14211  98.40283  98.65579  98.97279  99.46577
+#&gt; 2011 102.08200 102.32896 102.49595 102.62410 102.84038 102.99510 102.91777
+#&gt; 2012 101.36332 101.32517 101.28227 101.00568 100.54285 100.17339  99.92300
+#&gt; 2013  99.15396  98.93260  98.73158  98.71426  98.81064  98.83860  98.83529
+#&gt; 2014  98.73092  98.72783  98.74329  98.72279  98.59184  98.56229  98.62843
+#&gt; 2015  99.12696  99.21160  99.39455  99.56176  99.82741 100.01426 100.16950
+#&gt; 2016 100.24438 100.23485 100.22618 100.14839 100.17180 100.22684 100.18832
+#&gt; 2017 101.19493 101.46842 101.67731 102.11360 102.60044 102.93200 103.27099
+#&gt; 2018 105.06921 105.32232 105.59445 105.77455 105.89967 106.09710          
+#&gt;            Aug       Sep       Oct       Nov       Dec
+#&gt; 1990  72.72429  72.54606  72.36152  72.05376  71.88948
+#&gt; 1991  71.38952  71.32788  71.33517  71.39619  71.35230
+#&gt; 1992  69.65136  69.18076  68.67692  68.24257  67.77135
+#&gt; 1993  65.90367  65.94523  66.06661  66.27791  66.65225
+#&gt; 1994  70.51771  71.03293  71.48531  71.79743  72.03109
+#&gt; 1995  72.74643  72.70036  72.67730  72.71447  72.80074
+#&gt; 1996  73.15969  73.45899  73.85027  74.15107  74.46255
+#&gt; 1997  79.07560  79.56982  79.96083  80.43380  80.94510
+#&gt; 1998  82.50165  82.56826  82.69776  82.79257  82.93385
+#&gt; 1999  85.53902  86.09781  86.63408  87.14499  87.64049
+#&gt; 2000  90.64105  91.02190  91.30422  91.41606  91.51245
+#&gt; 2001  90.82429  90.66689  90.59069  90.47876  90.29781
+#&gt; 2002  89.37314  89.24282  89.12577  88.93857  88.64172
+#&gt; 2003  88.13000  88.17832  88.21966  88.40853  88.74027
+#&gt; 2004  90.13724  90.09082  90.04970  90.08208  90.09808
+#&gt; 2005  90.04688  90.13318  90.26473  90.44326  90.76859
+#&gt; 2006  92.08071  92.31774  92.48339  92.65773  92.73328
+#&gt; 2007  93.71652  93.81245  93.87336  93.93365  93.99503
+#&gt; 2008  94.21345  94.05591  93.87489  93.75417  93.64177
+#&gt; 2009  95.49151  95.88312  96.41678  96.94077  97.31955
+#&gt; 2010 100.12270 100.71009 101.07314 101.45943 101.83794
+#&gt; 2011 102.62442 102.34351 102.23238 101.96467 101.57805
+#&gt; 2012  99.71433  99.51925  99.34305  99.27279  99.24601
+#&gt; 2013  98.90050  98.97851  98.99896  98.86593  98.72741
+#&gt; 2014  98.61963  98.65943  98.75461  98.89033  99.08496
+#&gt; 2015 100.34900 100.39775 100.36530 100.39249 100.35395
+#&gt; 2016 100.14840 100.25220 100.43375 100.61646 100.87928
+#&gt; 2017 103.63979 103.96288 104.26253 104.55039 104.80925
+#&gt; 2018                                                  
+#&gt; 
+#&gt; $decomposition.d10
+#&gt;               Jan          Feb          Mar          Apr          May
+#&gt; 1990  -3.43358181  -2.79298747   7.08534396   1.15547739  -3.15912292
+#&gt; 1991  -3.38973288  -2.86104178   6.94156257   1.15454975  -3.10124288
+#&gt; 1992  -3.28924983  -3.02463814   6.74631613   1.14998270  -3.12045113
+#&gt; 1993  -3.20004794  -3.25185274   6.54683478   1.13249128  -3.07979167
+#&gt; 1994  -3.22613188  -3.48248715   6.45424261   1.13158590  -3.14237932
+#&gt; 1995  -3.34699418  -3.66714193   6.47060341   1.07583133  -3.12235496
+#&gt; 1996  -3.49228704  -3.85977963   6.68000234   0.98777740  -3.22776804
+#&gt; 1997  -3.60522411  -4.07767133   7.01262728   0.83957060  -3.19720540
+#&gt; 1998  -3.75318599  -4.22302426   7.56107921   0.69707690  -3.22935820
+#&gt; 1999  -3.82120522  -4.22766264   8.21618404   0.57735011  -3.23654940
+#&gt; 2000  -3.84140732  -4.11717526   9.01090077   0.65738366  -3.49096106
+#&gt; 2001  -3.84191645  -3.89071887   9.64355061   0.88112428  -3.80274730
+#&gt; 2002  -3.86778789  -3.65405953  10.05930721   1.21886237  -4.10935198
+#&gt; 2003  -3.88858662  -3.53206090  10.07825045   1.45242285  -4.13464469
+#&gt; 2004  -3.89788703  -3.57201707   9.86750554   1.53069825  -3.86110323
+#&gt; 2005  -3.88893870  -3.65843012   9.48950368   1.35924211  -3.32582926
+#&gt; 2006  -3.74565774  -3.69203207   9.12288933   1.04668756  -2.76282900
+#&gt; 2007  -3.57832988  -3.71553140   8.86929130   0.80580254  -2.29601083
+#&gt; 2008  -3.33383519  -3.59070066   8.73239526   0.82722816  -2.09485285
+#&gt; 2009  -3.15670299  -3.42854170   8.66822753   1.08952294  -2.11969725
+#&gt; 2010  -3.01087959  -3.20402352   8.57843931   1.53013436  -2.25048607
+#&gt; 2011  -3.12280609  -3.04232609   8.55361380   2.01859496  -2.35521385
+#&gt; 2012  -3.30382307  -2.82394045   8.58316526   2.42080797  -2.52142275
+#&gt; 2013  -3.45660000  -2.65220181   8.63728171   2.63887860  -2.68066152
+#&gt; 2014  -3.46391762  -2.56932638   8.73680863   2.61181107  -2.79209786
+#&gt; 2015  -3.41326157  -2.59518040   8.87002893   2.44504925  -2.78918835
+#&gt; 2016  -3.28221865  -2.70285431   9.07330749   2.22439199  -2.76573298
+#&gt; 2017  -3.11552030  -2.82441560   9.21538185   2.03400186  -2.71091112
+#&gt;               Jun          Jul          Aug          Sep          Oct
+#&gt; 1990  10.49951731  -1.63339905 -26.84050439   5.77297230   9.27917342
+#&gt; 1991  10.50094865  -1.49653032 -26.81587901   5.73136912   9.22661744
+#&gt; 1992  10.51294649  -1.20786150 -26.76878406   5.67486280   9.09029874
+#&gt; 1993  10.48075785  -0.83251540 -26.75860820   5.60469322   8.92993944
+#&gt; 1994  10.49422821  -0.45118417 -26.87818678   5.63462666   8.90934652
+#&gt; 1995  10.57384811  -0.08855159 -27.26017730   5.68872234   8.98588392
+#&gt; 1996  10.78809784   0.18699742 -27.81160551   5.84101663   9.18957132
+#&gt; 1997  11.04750759   0.40950708 -28.41348859   5.91593721   9.37841396
+#&gt; 1998  11.34981381   0.49502718 -28.95631652   6.00966513   9.66306265
+#&gt; 1999  11.62613706   0.50417547 -29.42785255   6.15095519   9.78464384
+#&gt; 2000  11.73925810   0.45079186 -29.72454625   6.41297342   9.93271869
+#&gt; 2001  11.75261560   0.39812001 -29.89969837   6.81478679  10.00414769
+#&gt; 2002  11.74467585   0.26974944 -29.97939291   7.27733039  10.15166538
+#&gt; 2003  11.86552757   0.18222396 -30.06281652   7.77904040  10.13642328
+#&gt; 2004  11.97851731   0.21120961 -30.02564517   8.06062883  10.14322028
+#&gt; 2005  12.15869941   0.38845330 -29.87613816   8.15702299   9.96237025
+#&gt; 2006  12.21686454   0.62862980 -29.48131670   8.05429784   9.67204131
+#&gt; 2007  12.06604912   0.92080807 -28.87821963   7.91988889   9.11229452
+#&gt; 2008  11.52046007   1.29734548 -28.10164930   7.60833142   8.63499734
+#&gt; 2009  10.78815013   1.72886315 -27.30101643   7.39530178   8.05111660
+#&gt; 2010  10.05650230   1.98531661 -26.52189418   7.14150110   7.62276838
+#&gt; 2011   9.47080223   2.11822913 -25.88967683   6.97824123   7.18499463
+#&gt; 2012   9.16013327   1.96654892 -25.32602810   6.71025439   7.03235621
+#&gt; 2013   9.02452500   1.66049064 -24.85691676   6.57446426   6.86066742
+#&gt; 2014   9.04306286   1.15969912 -24.44743516   6.37359795   6.89526551
+#&gt; 2015   8.99577499   0.71506334 -24.15851931   6.22463886   6.97110028
+#&gt; 2016   8.95565407   0.30973812 -23.93881234   6.00031998   7.19182379
+#&gt; 2017   8.83465222   0.08980872 -23.80461653   5.89143898   7.32997666
+#&gt;               Nov          Dec
+#&gt; 1990   2.64044096   1.46417473
+#&gt; 1991   2.64217676   1.56389728
+#&gt; 1992   2.61562779   1.76896549
+#&gt; 1993   2.56632661   2.07398830
+#&gt; 1994   2.40812856   2.34240502
+#&gt; 1995   2.33271806   2.51796293
+#&gt; 1996   2.29831587   2.46958234
+#&gt; 1997   2.37867358   2.21884553
+#&gt; 1998   2.33795467   1.67993279
+#&gt; 1999   2.36130737   0.91174553
+#&gt; 2000   2.26210749   0.05515349
+#&gt; 2001   2.12493560  -0.76138566
+#&gt; 2002   1.91440985  -1.37661506
+#&gt; 2003   1.77144148  -1.80077824
+#&gt; 2004   1.59028084  -2.07321344
+#&gt; 2005   1.41494197  -2.31457950
+#&gt; 2006   1.34424536  -2.58715497
+#&gt; 2007   1.36745029  -2.95402241
+#&gt; 2008   1.45503749  -3.30266398
+#&gt; 2009   1.44373201  -3.50721786
+#&gt; 2010   1.48426543  -3.55091968
+#&gt; 2011   1.40200885  -3.40929912
+#&gt; 2012   1.33393308  -3.24003971
+#&gt; 2013   1.33348139  -3.06132289
+#&gt; 2014   1.60011132  -3.05589201
+#&gt; 2015   1.94332424  -3.14822333
+#&gt; 2016   2.28758920  -3.31650128
+#&gt; 2017   2.52680901  -3.43568125
+#&gt; </div><div class='input'>
+<span class='co'># To convert to the R object</span>
+<span class='fu'>jSA2R</span>(<span class='no'>mysa</span>)</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
+#&gt; Coefficients:
+#&gt;           Estimate Std. Error
+#&gt; Theta(1)   -0.5270      0.048
+#&gt; BTheta(1)  -0.4865      0.051
+#&gt; 
+#&gt;               Estimate Std. Error
+#&gt; Monday       -0.133839      0.164
+#&gt; Tuesday      -0.002384      0.163
+#&gt; Wednesday     0.241712      0.163
+#&gt; Thursday     -0.531275      0.163
+#&gt; Friday        0.432474      0.164
+#&gt; Saturday      0.152956      0.163
+#&gt; Leap year    -0.045977      0.501
+#&gt; Easter [1]   -1.094082      0.335
+#&gt; LS (11-2008) -8.441602      1.307
+#&gt; LS (1-2009)  -7.274012      1.306
+#&gt; LS (5-2008)  -5.020079      1.257
+#&gt; 
+#&gt; 
+#&gt; Residual standard error: 1.665 on 323 degrees of freedom
+#&gt; Log likelihood = -624.7, aic =  1277 aicc =  1279, bic(corrected for length) = 1.252
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
+#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt;       M stats
+#&gt; M(1)    0.061
+#&gt; M(2)    0.034
+#&gt; M(3)    0.840
+#&gt; M(4)    0.420
+#&gt; M(5)    0.697
+#&gt; M(6)    0.236
+#&gt; M(7)    0.075
+#&gt; M(8)    0.206
+#&gt; M(9)    0.055
+#&gt; M(10)   0.166
+#&gt; M(11)   0.137
+#&gt; Q       0.272
+#&gt; Q-M2    0.301
+#&gt; 
+#&gt; Final filters: 
+#&gt; Seasonal filter:  3x5
+#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; Last observed values
+#&gt;              y       sa        t            s          i
+#&gt; Jan 2017  97.4 100.8114 100.6915  -3.41138724  0.1198412
+#&gt; Feb 2017  97.5 100.3129 101.0507  -2.81292129 -0.7377402
+#&gt; Mar 2017 112.0 102.3507 101.5023   9.64931855  0.8483317
+#&gt; Apr 2017 103.0 101.2637 101.9608   1.73628825 -0.6971084
+#&gt; May 2017 100.4 103.0054 102.3694  -2.60542262  0.6359951
+#&gt; Jun 2017 111.2 102.4641 102.7599   8.73585142 -0.2957736
+#&gt; Jul 2017 103.4 103.4507 103.1325  -0.05071812  0.3182150
+#&gt; Aug 2017  79.3 103.3966 103.5091 -24.09656399 -0.1125714
+#&gt; Sep 2017 109.7 103.2231 103.8871   6.47686943 -0.6640036
+#&gt; Oct 2017 114.0 106.9659 104.2566   7.03410972  2.7093305
+#&gt; Nov 2017 107.7 105.4628 104.5657   2.23724550  0.8970898
+#&gt; Dec 2017 101.4 104.4099 104.8237  -3.00989466 -0.4138486
+#&gt; 
+#&gt; Forecasts:
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2018 102.00877 104.9065 105.0038  -2.8977705 -0.09720660
+#&gt; Feb 2018 102.14378 105.0529 105.1506  -2.9091625 -0.09761841
+#&gt; Mar 2018 113.92764 105.4072 105.3021   8.5204140  0.10515354
+#&gt; Apr 2018 107.88844 105.4548 105.4869   2.4336221 -0.03210021
+#&gt; May 2018 102.83006 105.7518 105.7343  -2.9217368  0.01749135
+#&gt; Jun 2018 115.26921 105.9309 106.0232   9.3383460 -0.09234653
+#&gt; Jul 2018 106.09888 106.4237 106.3248  -0.3248322  0.09889228
+#&gt; Aug 2018  82.95525 106.5440 106.6390 -23.5887165 -0.09503822
+#&gt; Sep 2018 112.41847 106.6179 106.9320   5.8005883 -0.31411494
+#&gt; Oct 2018 115.41327 107.8929 107.1812   7.5203393  0.71172901
+#&gt; Nov 2018 109.88167 107.2964 107.3766   2.5852407 -0.08013772
+#&gt; Dec 2018 103.58107 107.2605 107.5126  -3.6794200 -0.25212937
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
+#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt;  portion of the variance in the original series,
+#&gt;  after the removal of the long term trend </span><span>
+#&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
+#&gt;            Component
+#&gt;  Cycle         1.646
+#&gt;  Seasonal     49.667
+#&gt;  Irregular     0.411
+#&gt;  TD &amp; Hol.     0.057
+#&gt;  Others       49.814
+#&gt;  Total       101.596
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt;  Non parametric tests for stable seasonality
+#&gt;                                                           P.value
+#&gt;    Kruskall-Wallis test                                      0.000
+#&gt;    Test for the presence of seasonality assuming stability   0.000
+#&gt;    Evolutive seasonality test                                0.013
+#&gt;  
+#&gt;  Identifiable seasonality present
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt;                                       P.value
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           1.000
+#&gt;  f-test on sa (seasonal dummies)        0.980
+#&gt;  f-test on i (seasonal dummies)         0.922
+#&gt;  Residual seasonality (entire series)   0.969
+#&gt;  Residual seasonality (last 3 years)    0.897
+#&gt;  f-test on sa (td)                      0.980
+#&gt;  f-test on i (td)                       1.000
+#&gt; 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

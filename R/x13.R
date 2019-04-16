@@ -11,7 +11,7 @@ setClass(
 #' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
-#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), the default is \code{"RSA5c"}, or an object of class \code{c("SA_spec","X13")}.
+#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","X13")}. The default is \code{"RSA5c"}.
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
@@ -23,7 +23,7 @@ setClass(
 #'
 #' As regards the available predefined 'JDemetra+' X13 model specifications, they are described in the table below.
 #' \tabular{rrrrrrr}{
-#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calender effects} |\tab \strong{ARIMA}\cr
+#' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
 #' RSA1 |\tab automatic |\tab AO/LS/TC  |\tab \emph{NA} |\tab Airline(+mean)\cr
 #' RSA2c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
