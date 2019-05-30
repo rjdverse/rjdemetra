@@ -21,6 +21,9 @@ navbar:
       menu:
       - text: Download JDemetra+
         href: https://github.com/jdemetra/jdemetra-app/releases
+    news:
+      text: News
+      href: news/index.html
     github:
       icon: fa-github fa-lg
       href: https://github.com/jdemetra/rjdemetra
@@ -68,4 +71,4 @@ reference:
   desc: Deprecated functions
   contents:
   - '`deprecated-RJDemetra`'
-  
+
