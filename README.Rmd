@@ -50,11 +50,11 @@ devtools::install_github("jdemetra/rjdemetra")
 
 To seasonally adjust a time series with a pre-defined specification you can either use the `x13_def()` function for the X-13ARIMA method or the `tramoseats_def()` function for the TRAMO-SEATS method.
 
-```{r plot-example, eval = TRUE, warning=FALSE}
+```{r plot-example, eval = TRUE}
 library(RJDemetra)
 myseries <- ipi_c_eu[, "FR"]
-x13_model <- x13_def(myseries) # X-13ARIMA method
-ts_model <- tramoseats_def(myseries) # TRAMO-SEATS method
+x13_model <- x13(myseries) # X-13ARIMA method
+ts_model <- tramoseats(myseries) # TRAMO-SEATS method
 
 # Basic plot with the original series, the trend and the SA series
 plot(x13_model, type_chart = "sa-trend")
