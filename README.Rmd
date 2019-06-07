@@ -18,7 +18,6 @@ options(enable_print_style = FALSE)
 # RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![Build Status](https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master)](https://travis-ci.com/jdemetra/rjdemetra)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AQLT/rjdemetra?branch=master&svg=true)](https://ci.appveyor.com/project/AQLT/rjdemetra)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN monthly downloads](http://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
@@ -49,7 +48,7 @@ devtools::install_github("jdemetra/rjdemetra")
 
 ## Basic example
 
-To seasonally adjust a time series with a pre-defined specification you can either use the `x13_def()` function for the X-13ARIMA method or the `tramoseats_def()` function for the TRAMO-SEATS method.
+To seasonally adjust a time series with a pre-defined specification you can either use the `x13()` function for the X-13ARIMA method or the `tramoseats()` function for the TRAMO-SEATS method.
 
 ```{r plot-example, eval = TRUE}
 library(RJDemetra)
@@ -59,7 +58,6 @@ ts_model <- tramoseats(myseries) # TRAMO-SEATS method
 
 # Basic plot with the original series, the trend and the SA series
 plot(x13_model, type_chart = "sa-trend")
-
 # S-I ratio
 plot(x13_model$decomposition)
 ```
