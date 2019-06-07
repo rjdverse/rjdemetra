@@ -1,3 +1,11 @@
+# RJDemetra 0.1.3
+
+## Bug fixed
+
+-  When the multiprocessing is empty, get_model no longer produce an error  
+- Correction of the option setOutliers in TRAMO-SEATS
+
+
 # RJDemetra 0.1.2
 ## Major changes
 
