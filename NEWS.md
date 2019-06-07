@@ -2,8 +2,8 @@
 
 ## Bug fixed
 
--  When the multiprocessing is empty, get_model no longer produce an error  
-- Correction of the option setOutliers in TRAMO-SEATS
+-  When the multiprocessing is empty, get_model no longer produce an error.  
+- Correction of the option setOutliers in TRAMO-SEATS.
 
 
 # RJDemetra 0.1.2
@@ -24,4 +24,4 @@
 
 ## Bug fixed
 
--  `x11.fcast` can now be set to 0 or 1 (issue #42)
+-  `x11.fcast` can now be set to 0 or 1 (issue #42).
