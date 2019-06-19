@@ -10,4 +10,5 @@ r:
 - release
 - devel
 
-r_check_args: --as-cran
+r_check_args: --as-cran --run-donttest
+
