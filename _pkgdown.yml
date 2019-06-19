@@ -8,6 +8,7 @@ navbar:
     - tutorials
     - news
     - jdemetra
+    - rpackages
     right: github
   components:
     home:
@@ -16,14 +17,25 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
-    articles:
+    news:
+      text: News
+      href: news/index.html
+    jdemetra:
       text: JDemetra+
       menu:
       - text: Download JDemetra+
         href: https://github.com/jdemetra/jdemetra-app/releases
-    news:
-      text: News
-      href: news/index.html
+      - text: JDemetra+ documentation
+        href: https://jdemetradocumentation.github.io/JDemetra-documentation/
+    rpackages:
+      text: Around JDemetra+ and R
+      menu:
+      - text: ggdemetra
+        href: https://github.com/AQLT/ggdemetra
+      - text: rjdqa
+        href: https://github.com/AQLT/rjdqa
+      - text: rjwsacruncher
+        href: https://github.com/AQLT/rjwsacruncher
     github:
       icon: fa-github fa-lg
       href: https://github.com/jdemetra/rjdemetra
@@ -67,8 +79,3 @@ reference:
   desc: ~
   contents:
   - '`ipi_c_eu`'
-- title: Deprecated functions
-  desc: Deprecated functions
-  contents:
-  - '`deprecated-RJDemetra`'
-
