@@ -3,11 +3,11 @@ sudo: false
 cache: packages
 
 r:
-- 3.1
 - 3.2
 - 3.3
 - oldrel
 - release
 - devel
 
-r_check_args: --as-cran
+r_check_args: --as-cran --run-donttest
+

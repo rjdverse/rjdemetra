@@ -15,7 +15,7 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgre
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 
-RJDemetra is a R interface to JDemetra+, the seasonal adjustment
+RJDemetra is an R interface to JDemetra+, the seasonal adjustment
 software [officially
 recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf)
 to the members of the European Statistical System (ESS) and the European
@@ -52,14 +52,14 @@ devtools::install_github("jdemetra/rjdemetra")
 ## Basic example
 
 To seasonally adjust a time series with a pre-defined specification you
-can either use the `x13_def()` function for the X-13ARIMA method or the
-`tramoseats_def()` function for the TRAMO-SEATS method.
+can either use the `x13()` function for the X-13ARIMA method or the
+`tramoseats()` function for the TRAMO-SEATS method.
 
 ``` r
 library(RJDemetra)
 myseries <- ipi_c_eu[, "FR"]
-x13_model <- x13_def(myseries) # X-13ARIMA method
-ts_model <- tramoseats_def(myseries) # TRAMO-SEATS method
+x13_model <- x13(myseries) # X-13ARIMA method
+ts_model <- tramoseats(myseries) # TRAMO-SEATS method
 
 # Basic plot with the original series, the trend and the SA series
 plot(x13_model, type_chart = "sa-trend")
@@ -68,7 +68,6 @@ plot(x13_model, type_chart = "sa-trend")
 <img src="man/figures/README-plot-example-1.png" style="display: block; margin: auto;" />
 
 ``` r
-
 # S-I ratio
 plot(x13_model$decomposition)
 ```

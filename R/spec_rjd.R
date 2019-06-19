@@ -145,11 +145,8 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
   n_prespecified_out <- .jcall(jregression,"I","getPrespecifiedOutliersCount")
 
   if(n_prespecified_out > 0 ){
-    # Outlier.coef is set to TRUE: if the coefficient isn't fixed, the
-    # coef value will be equal to 0 and the outlier will be estimated
-    result$userdef_spec$specification$outlier <-
-      result$userdef_spec$specification$outlier.coef <-
-      TRUE
+
+    result$userdef_spec$specification$outlier <- TRUE
 
     outliers <- lapply(1:n_prespecified_out, function(i){
       .jcall(jregression,
@@ -160,6 +157,12 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
     type <- sapply(outliers, function(x) x$getCode())
     date <- sapply(outliers, function(x) x$getPosition())
     coeff <- sapply(outliers, function(x) x$getCoefficient())
+    if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
+      result$userdef_spec$specification$outlier.coef <- FALSE
+      coeff <- coeff * NA
+    }else{
+      result$userdef_spec$specification$outlier.coef <- TRUE
+    }
     outlier_spec <- data.frame(type = type, date = date, coeff = coeff)
 
     result$userdef_spec$outliers <- outlier_spec
@@ -169,12 +172,7 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
   n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
 
   if(n_userdefined_var > 0 ){
-
-    # variables.coef is set to TRUE: if the coefficient isn't fixed, the
-    # coef value will be equal to 0 and the variable will be estimated
-    result$userdef_spec$specification$variables <-
-      result$userdef_spec$specification$variables.coef <-
-      TRUE
+    result$userdef_spec$specification$variables <- TRUE
 
     ud_vars <- lapply(1:n_userdefined_var, function(i){
       .jcall(jregression,
@@ -190,6 +188,13 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
     var_names <- sapply(var_names_split, function(x) x[2])
     var_names <- base::make.names(var_names, unique = TRUE)
     var_names <- gsub(".","_", var_names, fixed = TRUE)
+
+    if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
+      result$userdef_spec$specification$variables.coef <- FALSE
+      coeff <- coeff * NA
+    }else{
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
 
     result$userdef_spec$variables$description <- data.frame(type = type,
                                                             coeff = coeff,
@@ -229,7 +234,7 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
       TRUE
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
-                                     coeff = 0, row.names = var_names)
+                                     coeff = NA, row.names = var_names)
     if(identical(result$userdef_spec$variables$description, NA)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
@@ -406,9 +411,7 @@ specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
   if(n_prespecified_out > 0 ){
     # Outlier.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the outlier will be estimated
-    result$userdef_spec$specification$outlier <-
-      result$userdef_spec$specification$outlier.coef <-
-      TRUE
+    result$userdef_spec$specification$outlier <- TRUE
 
     outliers <- lapply(1:n_prespecified_out, function(i){
       .jcall(jregression,
@@ -419,6 +422,13 @@ specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
     type <- sapply(outliers, function(x) x$getCode())
     date <- sapply(outliers, function(x) x$getPosition())
     coeff <- sapply(outliers, function(x) x$getCoefficient())
+
+    if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
+      result$userdef_spec$specification$outlier.coef <- FALSE
+      coeff <- coeff * NA
+    }else{
+      result$userdef_spec$specification$outlier.coef <- TRUE
+    }
     outlier_spec <- data.frame(type = type, date = date, coeff = coeff)
 
     result$userdef_spec$outliers <- outlier_spec
@@ -430,9 +440,7 @@ specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
 
     # variables.coef is set to TRUE: if the coefficient isn't fixed, the
     # coef value will be equal to 0 and the variable will be estimated
-    result$userdef_spec$specification$variables <-
-      result$userdef_spec$specification$variables.coef <-
-      TRUE
+    result$userdef_spec$specification$variables <- TRUE
 
     ud_vars <- lapply(1:n_userdefined_var, function(i){
       .jcall(jregression,
@@ -446,6 +454,13 @@ specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
     var_names <- sapply(ud_vars, function(x) x$getName())
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
+
+    if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
+      result$userdef_spec$specification$variables.coef <- FALSE
+      coeff <- coeff * NA
+    }else{
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
 
     result$userdef_spec$variables$description <- data.frame(type = type,
                                                             coeff = coeff,
@@ -483,7 +498,7 @@ specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
       TRUE
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
-                                     coeff = 0, row.names = var_names)
+                                     coeff = NA, row.names = var_names)
     if(identical(result$userdef_spec$variables$description, NA)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
@@ -933,6 +948,7 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   span_r2jd(jsobjct = joutlier.span, type = span[2,1], d0=as.character(span[2,2]), d1=as.character(span[2,3]),
             n0 = as.integer(span[2,4]), n1=as.integer(span[2,5]))
 
+  .jcall(joutlier,"V","setOutliersDetectionEnabled", as.logical(outliers[1]))
   .jcall(joutlier,"V","setAO", as.logical(outliers[3]))
   .jcall(joutlier,"V","setTC", as.logical(outliers[4]))
   .jcall(joutlier,"V","setLS", as.logical(outliers[5]))
@@ -945,7 +961,6 @@ specTS_r2jd <- function(rspec = NA, jdspec =NA){
   }
   .jcall(joutlier,"V","setEML", as.logical(outliers[9]))
   .jcall(joutlier,"V","setTCRate", as.numeric(outliers[10]))
-  .jcall(joutlier,"V","setOutliersDetectionEnabled", as.logical(outliers[1]))
 
   #Arima
   jarima<-.jcall(jdspec,"Ljdr/spec/tramoseats/ArimaSpec;","getArima")
@@ -1028,3 +1043,4 @@ specSeats_r2jd <- function(rspec = NA, jdspec = NA){
   .jcall(jseats,"V","setMethod", as.character(seats[[7]]))
 
 }
+
