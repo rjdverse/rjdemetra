@@ -49,6 +49,9 @@ install.packages("RJDemetra")
 devtools::install_github("jdemetra/rjdemetra")
 ```
 
+If you have troubles with the installation, check the [installation
+manual](https://jdemetra.github.io/rjdemetra/articles/installation-manual.html).
+
 ## Basic example
 
 To seasonally adjust a time series with a pre-defined specification you

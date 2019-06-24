@@ -7,6 +7,11 @@
 - jaxb.jar files added: `save_workspace` now works on Java 9 and higher (jaxb is no longer provided by default since Java 9).  
 - deprecated functions removed.
 
+## Documentation
+
+- `jSA` documentation improved.  
+- Installation manual
+
 
 # RJDemetra 0.1.2
 ## Major changes

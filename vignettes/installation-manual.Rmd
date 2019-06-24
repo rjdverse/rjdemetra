@@ -1,0 +1,75 @@
+---
+title: "Installation manual"
+author: "Alain Quartier-la-Tente"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Installation manual}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
+```
+
+To use `RJDemetra`, Java SE 8 or later version is required. If you have Java 7 or lower and you can't update it (for example for security reasons) you can install a portable version of Java. The goal of this vignette is to show the most common errors while installing `RJDemetra` and how to configure R with a portable version of Java.
+
+# Common errors
+
+The first thing to check whether you can load or not `RJDemetra`. If you can't it's certainly because Java is wrongly configured in your R session:
+
+```{r, include = FALSE}
+Sys.setenv(JAVA_HOME='D:/')
+```
+
+```{r}
+library(RJDemetra)
+```
+
+```{r, include = FALSE}
+Sys.setenv(JAVA_HOME="")
+```
+
+When your R session is rightly configured but with a wrong version of Java (7 or lower) you won't have an error loading the package but running a seasonal adjusment:
+```{r}
+library(RJDemetra)
+x13(ipi_c_eu[, "FR"])
+```
+
+To check which Java version is used by your R session:
+```{r, eval=TRUE}
+library(rJava)
+.jinit()
+.jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+```
+
+# Set a portable version of Java
+
+There are several websites where you can download a portable version of Java, for example:
+
+- https://jdk.java.net/java-se-ri/12 
+- https://portableapps.com/apps/utilities/java_portable
+
+If you use a 64-bit of R be sure to install a 64-bit version of Java. When the portable version is installed and unzip, you just need to use configure the environment variable `JAVA_HOME` with the command `Sys.setenv()` BEFORE loading `RJDemetra` or `rJava`. Thus, if you already have loaded `RJDemetra` or `rJava`, you have to restart your R session. If Java is installed in `D:/Software/Java64`:
+```{r}
+Sys.setenv(JAVA_HOME='D:/Software/Java64')
+```
+
+And to check the value of the environment variable:
+```{r}
+Sys.getenv("JAVA_HOME")
+```
+
+You can now use `RJDemetra`:
+```{r, eval=FALSE}
+library(RJDemetra)
+mysa <- x13(ipi_c_eu[, "FR"])
+```
+
+If you use Windows, you can also set the environment variable `JAVA_HOME` of your user account (creating it or editing the existing one) for not having to set is each time you open R.
+
