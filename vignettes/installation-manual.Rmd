@@ -71,5 +71,5 @@ library(RJDemetra)
 mysa <- x13(ipi_c_eu[, "FR"])
 ```
 
-If you use Windows, you can also set the environment variable `JAVA_HOME` of your user account (creating it or editing the existing one) for not having to set is each time you open R.
+If you use Windows, you can also set the environment variable `JAVA_HOME` of your user account (creating it or editing the existing one) for not having to set is each time you open R. See for example https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html.
 

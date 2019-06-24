@@ -5,4 +5,8 @@
 
 
 ## R CMD check results
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+* checking installed package size ... NOTE
+    installed size is  5.1Mb
+    sub-directories of 1Mb or more:
+      java   4.4Mb
