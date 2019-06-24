@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -57,6 +57,41 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    All vignettes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/installation-manual.html">Installation manual</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="news/index.html">News</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Around JDemetra+ and R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="https://github.com/AQLT/ggdemetra">ggdemetra</a>
+    </li>
+    <li>
+      <a href="https://github.com/AQLT/rjdqa">rjdqa</a>
+    </li>
+    <li>
+      <a href="https://github.com/AQLT/rjwsacruncher">rjwsacruncher</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     JDemetra+
      
     <span class="caret"></span>
@@ -65,13 +100,11 @@
 <li>
       <a href="https://github.com/jdemetra/jdemetra-app/releases">Download JDemetra+</a>
     </li>
+    <li>
+      <a href="https://jdemetradocumentation.github.io/JDemetra-documentation/">JDemetra+ documentation</a>
+    </li>
   </ul>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
     <span class="fa fa-github fa-lg"></span>
@@ -113,22 +146,22 @@
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Install development version from GitHub</span></a>
 <a class="sourceLine" id="cb1-5" title="5"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jdemetra/rjdemetra"</span>)</a></code></pre></div>
+<p>If you have troubles with the installation, check the <a href="https://jdemetra.github.io/rjdemetra/articles/installation-manual.html">installation manual</a>.</p>
 </div>
 <div id="basic-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-example" class="anchor"></a>Basic example</h2>
-<p>To seasonally adjust a time series with a pre-defined specification you can either use the <code><a href="reference/deprecated-RJDemetra.html">x13_def()</a></code> function for the X-13ARIMA method or the <code><a href="reference/deprecated-RJDemetra.html">tramoseats_def()</a></code> function for the TRAMO-SEATS method.</p>
+<p>To seasonally adjust a time series with a pre-defined specification you can either use the <code><a href="reference/x13.html">x13()</a></code> function for the X-13ARIMA method or the <code><a href="reference/tramoseats.html">tramoseats()</a></code> function for the TRAMO-SEATS method.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(RJDemetra)</a>
 <a class="sourceLine" id="cb2-2" title="2">myseries &lt;-<span class="st"> </span>ipi_c_eu[, <span class="st">"FR"</span>]</a>
-<a class="sourceLine" id="cb2-3" title="3">x13_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/deprecated-RJDemetra.html">x13_def</a></span>(myseries) <span class="co"># X-13ARIMA method</span></a>
-<a class="sourceLine" id="cb2-4" title="4">ts_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/deprecated-RJDemetra.html">tramoseats_def</a></span>(myseries) <span class="co"># TRAMO-SEATS method</span></a>
+<a class="sourceLine" id="cb2-3" title="3">x13_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/x13.html">x13</a></span>(myseries) <span class="co"># X-13ARIMA method</span></a>
+<a class="sourceLine" id="cb2-4" title="4">ts_model &lt;-<span class="st"> </span><span class="kw"><a href="reference/tramoseats.html">tramoseats</a></span>(myseries) <span class="co"># TRAMO-SEATS method</span></a>
 <a class="sourceLine" id="cb2-5" title="5"></a>
 <a class="sourceLine" id="cb2-6" title="6"><span class="co"># Basic plot with the original series, the trend and the SA series</span></a>
 <a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model, <span class="dt">type_chart =</span> <span class="st">"sa-trend"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-plot-example-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># S-I ratio</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model<span class="op">$</span>decomposition)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># S-I ratio</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="reference/plot.html">plot</a></span>(x13_model<span class="op">$</span>decomposition)</a></code></pre></div>
 <p><img src="reference/figures/README-plot-example-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>

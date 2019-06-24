@@ -4,7 +4,13 @@
 
 -  When the multiprocessing is empty, `get_model` no longer produces an error.  
 - Correction of the option setOutliers in TRAMO-SEATS.  
-- jaxb.jar files added: `save_workspace` now works on Java 9 and higher (jaxb is no longer provided by default since Java 9)
+- jaxb.jar files added: `save_workspace` now works on Java 9 and higher (jaxb is no longer provided by default since Java 9).  
+- deprecated functions removed.
+
+## Documentation
+
+- `jSA` documentation improved.  
+- Installation manual
 
 
 # RJDemetra 0.1.2

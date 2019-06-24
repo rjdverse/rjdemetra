@@ -31,7 +31,7 @@ regarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
 \item{spec}{model specification. For the function:
 \itemize{
 \item \code{regarima}, object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}).
-See functions \code{\link{regarima_spec_x13}, \link{regarima_spec_def_x13} and \link{regarima_spec_tramoseats}}.
+See functions \code{\link{regarima_spec_x13} and \link{regarima_spec_tramoseats}}.
 \item \code{regarima_x13}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
 \item \code{regarima_tramoseats}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
 }}

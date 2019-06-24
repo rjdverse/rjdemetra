@@ -46,6 +46,8 @@ install.packages("RJDemetra")
 devtools::install_github("jdemetra/rjdemetra")
 ```
 
+If you have troubles with the installation, check the [installation manual](https://jdemetra.github.io/rjdemetra/articles/installation-manual.html).
+
 ## Basic example
 
 To seasonally adjust a time series with a pre-defined specification you can either use the `x13()` function for the X-13ARIMA method or the `tramoseats()` function for the TRAMO-SEATS method.

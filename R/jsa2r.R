@@ -9,7 +9,7 @@ is.jSA <- function(x){
 
 #' Functions around 'jSA' objects
 #'
-#' \code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and .
+#' \code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and \code{"jSA2R"} returns returns the corresponding \code{"SA"} or a \code{"regarima"} object.
 #'
 #' @param x a \code{"jSA"} object.
 #' @param ... characters containing the names of the indicators to extract.
