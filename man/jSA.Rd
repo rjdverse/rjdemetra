@@ -24,7 +24,7 @@ jSA2R(x, userdefined = NULL)
 \code{get_dictionary} a vector of characters, \code{get_indicators} returns a list containing the indicators that are extracted and \code{jSA2R} returns a \code{"SA"} or a \code{"regarima"} object.
 }
 \description{
-\code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and .
+\code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and \code{"jSA2R"} returns returns the corresponding \code{"SA"} or a \code{"regarima"} object.
 }
 \details{
 A \code{"jSA"} object is a list with three elements: \itemize{
