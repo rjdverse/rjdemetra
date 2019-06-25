@@ -216,3 +216,8 @@ setMethod("result", signature = c(object="ProcResults", id="character"), functio
 rjdemetra_java <- new.env(parent = emptyenv())
 rjdemetra_java$clobject <- NULL
 
+check_valid_java_version <- function(){
+  # Check if Java
+  jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  (substr(jv, 1L, 2L) != "1.") | substr(jv, 1L, 3L) == "1.8"
+}

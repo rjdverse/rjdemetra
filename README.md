@@ -50,7 +50,7 @@ devtools::install_github("jdemetra/rjdemetra")
 ```
 
 If you have troubles with the installation, check the [installation
-manual](https://jdemetra.github.io/rjdemetra/articles/installation-manual.html).
+manual](https://github.com/jdemetra/rjdemetra/wiki/Installation-manual).
 
 ## Basic example
 

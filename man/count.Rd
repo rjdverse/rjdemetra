@@ -22,8 +22,5 @@ count(mp) # 0 sa_item inside the multiprocessing mp
 
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}},
-  \code{\link{get_name}}, \code{\link{get_object}},
-  \code{\link{get_ts}}
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 }
-\concept{functions to get informations from a workspace, multiprocessing or sa_item}
