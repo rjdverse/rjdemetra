@@ -38,8 +38,5 @@ sa_item <- get_object(mp, 1)
 }
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
-  \code{\link{get_model}}, \code{\link{get_name}},
-  \code{\link{get_ts}}
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 }
-\concept{functions to get informations from a workspace, multiprocessing or sa_item}

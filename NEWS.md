@@ -9,8 +9,11 @@
 
 ## Documentation
 
-- `jSA` documentation improved.  
-- Installation manual
+- `jSA` documentation improved.
+
+## Other
+
+- Error added while loading the package if you don't have Java 8 or higher.
 
 
 # RJDemetra 0.1.2

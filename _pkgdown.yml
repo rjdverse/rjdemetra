@@ -18,11 +18,6 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
-    articles:
-      text: All vignettes
-      menu:
-      - text: Installation manual
-        href: articles/installation-manual.html
     news:
       text: News
       href: news/index.html

@@ -59,10 +59,7 @@ get_model(wk)
 
 }
 \seealso{
-\code{\link{compute}}
+Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}},
-  \code{\link{get_name}}, \code{\link{get_object}},
-  \code{\link{get_ts}}
+\code{\link{compute}}
 }
-\concept{functions to get informations from a workspace, multiprocessing or sa_item}
