@@ -43,7 +43,7 @@ x13_spec(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
   x11.usigma = NA_integer_, x11.trendAuto = NA,
   x11.trendma = NA_integer_, x11.seasonalma = NA_character_,
   x11.fcasts = NA_integer_, x11.bcasts = NA_integer_,
-  x11.excludeFcasts = NA, object)
+  x11.excludeFcasts = NA)
 }
 \arguments{
 \item{spec}{model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","X13")} or an object of class \code{c("SA", "X13")}. The default is \code{"RSA5c"}.
@@ -212,8 +212,6 @@ E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fix
 \item{x11.bcasts}{numeric, backcast. Length of the backcasts used in X11. Negative figures are translated in years of backcasts.}
 
 \item{x11.excludeFcasts}{logicals, exclude forecats and backcasts. If \code{TRUE} forecasts and backcasts from the RegARIMA model are not used in the generation of extreme values in the seasonal adjustment routines.}
-
-\item{object}{deprecated argument.}
 }
 \value{
 A two-elements list of class \code{c("SA_spec", "X13")}: (1) object of class \code{c("regarima_spec", "X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec", "data.frame")} with the X11 algorithm specification.

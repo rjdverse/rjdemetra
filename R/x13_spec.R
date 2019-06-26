@@ -190,12 +190,7 @@ x13_spec <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
                      x11.seasonalma = NA_character_,
                      x11.fcasts = NA_integer_,
                      x11.bcasts = NA_integer_,
-                     x11.excludeFcasts = NA,
-                     object){
-  if (!missing("object")){
-    warning("'object' argument deprecated: use 'spec' instead")
-    spec <- object
-  }
+                     x11.excludeFcasts = NA){
   UseMethod("x13_spec", spec)
 }
 #' @export
@@ -274,8 +269,7 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
                          x11.seasonalma = NA_character_,
                          x11.fcasts = NA_integer_,
                          x11.bcasts = NA_integer_,
-                         x11.excludeFcasts = NA,
-                         object)
+                         x11.excludeFcasts = NA)
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
@@ -374,8 +368,7 @@ x13_spec.X13 <- function(spec,
                     x11.seasonalma = NA_character_,
                     x11.fcasts = NA_integer_,
                     x11.bcasts = NA_integer_,
-                    x11.excludeFcasts = NA,
-                    object)
+                    x11.excludeFcasts = NA)
 {
   if (!inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)

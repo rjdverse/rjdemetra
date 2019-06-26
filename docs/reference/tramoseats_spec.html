@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -194,7 +194,7 @@
   <span class='kw'>seats.trendBoundary</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>seats.seasdBoundary</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
   <span class='kw'>seats.seasdBoundary1</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>seats.seasTol</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
   <span class='kw'>seats.maBoundary</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>, <span class='kw'>seats.method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Burman"</span>,
-  <span class='st'>"KalmanSmoother"</span>, <span class='st'>"McElroyMatrix"</span>), <span class='no'>object</span>)</pre>
+  <span class='st'>"KalmanSmoother"</span>, <span class='st'>"McElroyMatrix"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -499,10 +499,6 @@ E.g.: <code>arima.coef = c(-0.8,-0.6,NA)</code>, <code>arima.coefType = c("Fixed
     <tr>
       <th>seats.method</th>
       <td><p>character, estimation method of the unobserved components. The choice can be made from: <code>"Burman"</code> (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); <code>"KalmanSmoother"</code> (it is not disturbed by the (quasi-) unit roots in MA); <code>"McElroyMatrix"</code> (has the same stability issues as the Burman's algorithm).</p></td>
-    </tr>
-    <tr>
-      <th>object</th>
-      <td><p>deprecated argument.</p></td>
     </tr>
     </table>
     

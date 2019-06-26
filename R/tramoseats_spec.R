@@ -187,13 +187,8 @@ tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", 
                      seats.seasdBoundary1 = NA_integer_,
                      seats.seasTol = NA_integer_,
                      seats.maBoundary = NA_integer_,
-                     seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"),
-                     object
+                     seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix")
                      ){
-  if (!missing("object")){
-    warning("'object' argument deprecated: use 'spec' instead")
-    spec <- object
-  }
   UseMethod("tramoseats_spec", spec)
 }
 #' @export
@@ -269,8 +264,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
                                 seats.seasdBoundary1 = NA_integer_,
                                 seats.seasTol = NA_integer_,
                                 seats.maBoundary = NA_integer_,
-                                seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"),
-                                object)
+                                seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "TR", spec)
@@ -403,8 +397,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                             seats.seasdBoundary1 = NA_integer_,
                             seats.seasTol = NA_integer_,
                             seats.maBoundary = NA_integer_,
-                            seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"),
-                            object)
+                            seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
 {
   if ( !inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
