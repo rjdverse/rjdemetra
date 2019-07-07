@@ -824,7 +824,7 @@ spec_x11 <- function(x11spc){
 spec_seats <- function(seatspc){
   seats <- seatspc
 
-  for (i in c(1:7)){
+  for (i in seq_len(ncol(seats))){
     seats[3,i] <- if(!is.na(seats[2,i])) {seats[2,i]} else {seats[1,i]}
   }
   rownames(seats) <- c("Predefined","User_modif","Final")

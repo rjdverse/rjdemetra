@@ -9,6 +9,8 @@
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #'
 #' @inheritParams  regarima_spec_tramoseats
+#' @param seats.predictionLength integer, number of forecasts used in the decomposition. Negative values correspond to numbers of years.
+#'
 #' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
 #' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
 #' @param seats.seasdBoundary numeric, seasonal boundary. Boundary from which a negative AR root is integrated in the seasonal component.
@@ -181,6 +183,7 @@ tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", 
                      arima.coef= NA,
                      arima.coefType = NA,
                      fcst.horizon = NA_integer_,
+                     seats.predictionLength = NA_integer_,
                      seats.approx = c(NA, "None", "Legacy", "Noisy"),
                      seats.trendBoundary = NA_integer_,
                      seats.seasdBoundary = NA_integer_,
@@ -258,6 +261,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
                                 arima.coef= NA,
                                 arima.coefType = NA,
                                 fcst.horizon = NA_integer_,
+                                seats.predictionLength = NA_integer_,
                                 seats.approx = c(NA, "None", "Legacy", "Noisy"),
                                 seats.trendBoundary = NA_integer_,
                                 seats.seasdBoundary = NA_integer_,
@@ -281,7 +285,8 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
                                             automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
                                             arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
 
-  seats <- seats_spec_def(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
+  seats <- seats_spec_def(spec,seats.predictionLength, seats.approx, seats.trendBoundary,
+                          seats.seasdBoundary, seats.seasdBoundary1,
                           seats.seasTol, seats.maBoundary, seats.method)
 
   z <- list(regarima = regarima, seats = seats)
@@ -290,6 +295,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
 }
 
 seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                           seats.predictionLength = NA_integer_,
                           seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                           seats.trendBoundary = NA_integer_,
                           seats.seasdBoundary = NA_integer_,
@@ -302,7 +308,8 @@ seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RS
   seats.approx <- match.arg(seats.approx)
   seats.method <- match.arg(seats.method)
 
-  list.numeric <- list("seats.trendBoundary", "seats.seasdBoundary", "seats.seasdBoundary1",
+  list.numeric <- list("seats.predictionLength", "seats.trendBoundary",
+                       "seats.seasdBoundary", "seats.seasdBoundary1",
                        "seats.seasTol", "seats.maBoundary")
 
   var.list<-list()
@@ -391,6 +398,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                             arima.coef= NA,
                             arima.coefType = NA,
                             fcst.horizon = NA_integer_,
+                            seats.predictionLength = NA_integer_,
                             seats.approx = c(NA, "None", "Legacy", "Noisy"),
                             seats.trendBoundary = NA_integer_,
                             seats.seasdBoundary = NA_integer_,
@@ -415,8 +423,9 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                                     automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
                                     arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
 
-  seats <- seats_spec(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
-                            seats.seasTol, seats.maBoundary, seats.method)
+  seats <- seats_spec(spec, seats.predictionLength, seats.approx,
+                      seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
+                      seats.seasTol, seats.maBoundary, seats.method)
 
   z <- list(regarima = regarima, seats = seats)
   class(z) <- c("SA_spec","TRAMO_SEATS")
@@ -424,6 +433,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
 }
 
 seats_spec<- function(spec,
+                      seats.predictionLength = NA_integer_,
                       seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                       seats.trendBoundary = NA_integer_,
                       seats.seasdBoundary = NA_integer_,
@@ -435,7 +445,8 @@ seats_spec<- function(spec,
   seats.approx <- match.arg(seats.approx)
   seats.method <- match.arg(seats.method)
 
-  list.numeric <- list("seats.trendBoundary", "seats.seasdBoundary", "seats.seasdBoundary1",
+  list.numeric <- list("seats.predictionLength","seats.trendBoundary",
+                       "seats.seasdBoundary", "seats.seasdBoundary1",
                        "seats.seasTol", "seats.maBoundary")
 
   var.list<-list()
