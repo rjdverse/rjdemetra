@@ -4,9 +4,9 @@
 #' Function to create (and/or modify) a \code{c("regarima_spec","TRAMO_SEATS")} class object with the RegARIMA model specification for the TRAMO-SEATS method. The object can be created from a predefined 'JDemetra+' model specification  (a \code{character}), a previous specification (\code{c("regarima_spec","TRAMO_SEATS")} object) or a TRAMO-SEATS RegARIMA model (\code{c("regarima","TRAMO_SEATS")}).
 #'
 #' @param spec model specification.  It can be a \code{character} of predefined 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("regarima_spec","TRAMO_SEATS")} or an object of class \code{c("regarima", "TRAMO_SEATS")}. The default is \code{"TRfull"}.
+#' @param preliminary.check boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
 #'
 #' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
-#' @param preliminary.check boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
 #' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
 #'
 #' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.

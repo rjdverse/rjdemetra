@@ -47,11 +47,11 @@ tramoseats_spec(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
   "KalmanSmoother", "McElroyMatrix"))
 }
 \arguments{
-\item{spec}{model specification X13.  It can be a \code{character} of predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}. The default is \code{"RSAfull"}.
+\item{spec}{model specification X13.  It can be a \code{character} of predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}. The default is \code{"RSAfull"}.}
+
+\item{preliminary.check}{boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
 
 The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
-
-\item{preliminary.check}{boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.}
 
 \item{estimate.from}{character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 
