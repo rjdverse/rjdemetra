@@ -1,3 +1,15 @@
+# RJDemetra 0.1.4
+
+## Bug fixed
+
+- Error while loading a workspace with metadata. (issue #53)
+
+## New functionalities
+
+- parameter `seats.predictionLength` added to `tramoseats_spec`.  
+- parameter `x11.calendarSigma` added to `x1"_spec`.  
+
+
 # RJDemetra 0.1.3
 
 ## Bug fixed
