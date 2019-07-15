@@ -341,7 +341,7 @@ spec_seasma <- function(seasma=NA){
   if (sum(is.na(seasma))!=0){
     return(NA)
   } else if (!is.vector(seasma)|is.list(seasma)|length(setdiff(seasma,seasma.type))>0){
-      warning("wrong format of the x11.seasonalma.\nPossisble filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+      warning("wrong format of the x11.seasonalma.\nPossibles filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
       return(NA)
   } else if (!(len %in% c(1,2,4,12))){
     warning("wrong format of the x11.seasonalma.\nPre-specified seasonal filters will be ignored.", call. = FALSE)
@@ -351,7 +351,24 @@ spec_seasma <- function(seasma=NA){
     return(z)
   }
 }
+spec_calendar_sigma <- function(calendarSigma=NA){
 
+  len <- length(calendarSigma)
+  calendarSigma.type <- c("None","Signif","All","Select")
+  warning_msg <- "wrong format of the x11.calendarSigma.\nPre-specified calendarSigma will be ignored."
+  if (sum(is.na(calendarSigma))!=0){
+    return(NA)
+  } else if (!is.vector(calendarSigma)|is.list(calendarSigma)|length(setdiff(calendarSigma,calendarSigma.type))>0){
+    warning("wrong format of the x11.seasonalma.\nPossibles filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+    return(NA)
+  } else if (!(len %in% c(1,2,4,12))){
+    warning("wrong format of the x11.seasonalma.\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+    return(NA)
+  } else {
+    z <- toString(calendarSigma)
+    return(z)
+  }
+}
 spec_trendma <- function(trendma=NA){
 
   if (sum(!is.na(trendma))==0){
