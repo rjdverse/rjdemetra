@@ -13,7 +13,7 @@ jd_span <- function(type,d0,d1,n0,n1){
 }
 
 
-specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
+spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
                          extra_info = FALSE){
 
   #Estimate
@@ -280,7 +280,7 @@ specX13_jd2r <- function(spec = NA, context_dictionary = NULL,
   result
 }
 
-specTS_jd2r<- function(spec = NA, context_dictionary = NULL,
+spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
                        extra_info = FALSE){
 
   #Estimate
@@ -736,7 +736,7 @@ arimaCoef_jd2r <- function(jparams){
                                   1:len)
   data_param
 }
-specX13_r2jd <- function(rspec = NA, jdspec =NA){
+spec_regarima_X13_r2jd <- function(rspec = NA, jdspec =NA){
 
   est <- s_estimate(rspec)
   trans <- s_transform(rspec)
@@ -861,7 +861,7 @@ specX13_r2jd <- function(rspec = NA, jdspec =NA){
   return(jdictionary)
 }
 
-specTS_r2jd <- function(rspec = NA, jdspec =NA){
+spec_TRAMO_r2jd <- function(rspec = NA, jdspec =NA){
 
   est <- s_estimate(rspec)
   trans <- s_transform(rspec)
