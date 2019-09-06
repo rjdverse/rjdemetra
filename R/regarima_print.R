@@ -114,7 +114,7 @@ print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L
   cat("Residual standard error:",
       formatC(x$residuals_st_err,digits = digits),
       "on",
-      loglik["np",], "degrees of freedom", sep = " ")
+      loglik["neffectiveobs",] - loglik["np",], "degrees of freedom", sep = " ")
   cat("\n")
   cat("Log likelihood = ", formatC(loglik["logvalue",], digits = digits),
       ", aic = ",formatC(loglik["aic", ], digits = digits),
@@ -196,10 +196,13 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     }
   }
   cat("\n\n")
-  cat("Residual standard error:",formatC(res_err,digits = digits),"on",loglik[3],"degrees of freedom", sep = " ")
+  cat("Residual standard error:",formatC(res_err,digits = digits),
+      "on",loglik["neffectiveobs",] - loglik["np",],"degrees of freedom", sep = " ")
   cat("\n")
-  cat("Log likelihood = ",formatC(loglik[1],digits = digits),", aic = ",formatC(loglik[4],digits = digits)," aicc = ",
-      formatC(loglik[5],digits = digits),", bic(corrected for length) = ",formatC(loglik[7],digits = digits), sep = "")
+  cat("Log likelihood = ", formatC(loglik["logvalue",], digits = digits),
+      ", aic = ", formatC(loglik["aic",], digits = digits),
+      " aicc = ", formatC(loglik["aicc",], digits = digits),
+      ", bic(corrected for length) = ",formatC(loglik["bicc", ],digits = digits), sep = "")
   cat("\n\n")
   invisible(x)
 }
