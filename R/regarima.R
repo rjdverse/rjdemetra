@@ -257,7 +257,7 @@ regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
                             extra_info = FALSE){
   horizon <- -2
   # extract model specification from the java object
-  rspec <- specX13_jd2r(spec = spec, context_dictionary = context_dictionary,
+  rspec <- spec_regarima_X13_jd2r(spec = spec, context_dictionary = context_dictionary,
                         extra_info = extra_info)
 
   estimate <- with(rspec,
@@ -338,7 +338,7 @@ regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
   # extract model specification from the java object
 
   horizon <- -2
-  rspec <- specTS_jd2r(spec = spec, context_dictionary = context_dictionary,
+  rspec <- spec_TRAMO_jd2r(spec = spec, context_dictionary = context_dictionary,
                         extra_info = extra_info)
 
   estimate <- with(rspec,

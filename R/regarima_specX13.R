@@ -455,7 +455,7 @@ regarima_spec_x13.character <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r(spec = jrspec, extra_info = FALSE)
+  rspec <- spec_regarima_X13_jd2r(spec = jrspec, extra_info = FALSE)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)

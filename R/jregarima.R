@@ -17,7 +17,7 @@ jregarima.X13 <- function(series, spec = NA){
   # create the java objects
   jrspec <- .jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", "RG1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
-  jdictionary <- specX13_r2jd(spec,jrspec)
+  jdictionary <- spec_regarima_X13_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/regarima/Processor",
                   "Lec/tstoolkit/jdr/regarima/Processor$Results;",
@@ -37,7 +37,7 @@ jregarima.TRAMO_SEATS <- function(series, spec = NA){
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", "TR1")
   # introduce modifications from the spec and create the java dictionary with the user-defined variables
-  jdictionary <- specTS_r2jd(spec,jrspec)
+  jdictionary <- spec_TRAMO_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/tstoolkit/modelling/arima/tramo/TramoSpecification;",
                   "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/regarima/Processor",

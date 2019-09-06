@@ -494,7 +494,7 @@ regarima_spec_tramoseats.character <- function(spec = c("TRfull", "TR0", "TR1", 
   jrspec<-.jcall("jdr/spec/tramoseats/TramoSpec", "Ljdr/spec/tramoseats/TramoSpec;", "of", spec)
 
   # Extract model specification from the java object
-  rspec <- specTS_jd2r( spec = jrspec)
+  rspec <- spec_TRAMO_jd2r( spec = jrspec)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)
