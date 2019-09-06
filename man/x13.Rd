@@ -14,7 +14,7 @@ x13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
 \arguments{
 \item{series}{a univariate time series}
 
-\item{spec}{model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","X13")}. The default is \code{"RSA5c"}.}
+\item{spec}{model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or a specification created by \code{\link{x13_spec}}. The default is \code{"RSA5c"}.}
 
 \item{userdefined}{vector with characters for additional output variables (see \code{\link{user_defined_variables}}).}
 }

@@ -212,6 +212,10 @@ E.g.: \code{arima.coef = c(-0.8,-0.6,NA)}, \code{arima.coefType = c("Fixed","Fix
 \item{x11.bcasts}{numeric, backcast. Length of the backcasts used in X11. Negative figures are translated in years of backcasts.}
 
 \item{x11.excludeFcasts}{logicals, exclude forecats and backcasts. If \code{TRUE} forecasts and backcasts from the RegARIMA model are not used in the generation of extreme values in the seasonal adjustment routines.}
+
+\item{x11.calendarSigma}{character to specify if the standard errors used for extreme values detection and adjustment are computed from 5 year spans of irregulars (\code{"None"}, the default); separately for each calendar month/quarter (\code{"All"}); separately for each period only if Cochran’s hypothesis test determines that the irregular component is heteroskedastic by calendar month/quarter (\code{"signif"}); separately for two complementary sets of calendar months/quarters specified by the sigmavec parameter (\code{"Select"}, see parameter \code{x11.sigmaVector}).}
+
+\item{x11.sigmaVector}{vector to specifies one of the two groups of periods for whose standard errors used for extreme values detection and adjustment will be computed. Only used if \code{x11.calendarSigma = "Select"}. Possibe values are : XXXXXX}
 }
 \value{
 A two-elements list of class \code{c("SA_spec", "X13")}: (1) object of class \code{c("regarima_spec", "X13")} with the RegARIMA model specification, (2) object of class \code{c("X11_spec", "data.frame")} with the X11 algorithm specification.
