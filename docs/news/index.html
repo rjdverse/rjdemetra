@@ -23,13 +23,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -52,6 +54,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -137,6 +140,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -146,21 +150,52 @@
       <small>Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rjdemetra-013" class="section level1">
+    <div id="rjdemetra-0-1-4" class="section level1">
 <h1 class="page-header">
-<a href="#rjdemetra-013" class="anchor"></a>RJDemetra 0.1.3<small> 2019-06-26 </small>
+<a href="#rjdemetra-0-1-4" class="anchor"></a>RJDemetra 0.1.4<small> Unreleased </small>
 </h1>
 <div id="bug-fixed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixed" class="anchor"></a>Bug fixed</h2>
 <ul>
+<li>Error while loading a workspace with metadata. (issue <a href='https://github.com/jdemetra/rjdemetra/issues/53'>#53</a>)<br>
+</li>
+<li>The degree of freedom were wrong with the <code>summary</code> functions.</li>
+<li>
+<code>jregarima</code> function is now exported.<br>
+</li>
+<li>The message was not complete when there was an error importing a model with <code>get_model</code>.</li>
+</ul>
+</div>
+<div id="new-functionalities" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functionalities" class="anchor"></a>New functionalities</h2>
+<ul>
+<li>Parameter <code>seats.predictionLength</code> added to <code>tramoseats_spec</code>.<br>
+</li>
+<li>Parameters <code>x11.calendarSigma</code> and <code>x11.sigmaVector</code> added to <code>x13_spec</code>.<br>
+</li>
+<li>Parameter <code>ylim</code> added to <code>plot</code> functions (issue <a href='https://github.com/jdemetra/rjdemetra/issues/60'>#60</a>).<br>
+</li>
+<li>New generic functions: <code>logLik</code>, <code>vcov</code>, <code>df.residual</code>, <code>nobs</code>, <code>residuals</code> (linked to issue <a href='https://github.com/jdemetra/rjdemetra/issues/56'>#56</a>).</li>
+</ul>
+</div>
+</div>
+    <div id="rjdemetra-0-1-3" class="section level1">
+<h1 class="page-header">
+<a href="#rjdemetra-0-1-3" class="anchor"></a>RJDemetra 0.1.3<small> 2019-06-26 </small>
+</h1>
+<div id="bug-fixed-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
+<ul>
 <li>When the multiprocessing is empty, <code>get_model</code> no longer produces an error.<br>
 </li>
-<li>Correction of the option setOutliers in TRAMO-SEATS.<br>
+<li>Correction of the option <code>setOutliers</code> in TRAMO-SEATS.<br>
 </li>
 <li>jaxb.jar files added: <code>save_workspace</code> now works on Java 9 and higher (jaxb is no longer provided by default since Java 9).<br>
 </li>
-<li>deprecated functions removed.</li>
+<li>Deprecated functions removed.</li>
 </ul>
 </div>
 <div id="documentation" class="section level2">
@@ -179,9 +214,9 @@
 </ul>
 </div>
 </div>
-    <div id="rjdemetra-012" class="section level1">
+    <div id="rjdemetra-0-1-2" class="section level1">
 <h1 class="page-header">
-<a href="#rjdemetra-012" class="anchor"></a>RJDemetra 0.1.2<small> 2019-04-16 </small>
+<a href="#rjdemetra-0-1-2" class="anchor"></a>RJDemetra 0.1.2<small> 2019-04-16 </small>
 </h1>
 <div id="major-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -193,9 +228,9 @@
 <code>object</code> argument renamed by <code>spec</code> in <code>x13_spec</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>regarima_spec_tramoseats</code>.</li>
 </ul>
 </div>
-<div id="new-functionalities" class="section level2">
+<div id="new-functionalities-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functionalities" class="anchor"></a>New functionalities</h2>
+<a href="#new-functionalities-1" class="anchor"></a>New functionalities</h2>
 <ul>
 <li>Parameter <code>preliminary.check</code> added to the specifications functions (<code>regarima_spec_tramoseats</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>x13_spec</code>). By default (<code>preliminary.check = TRUE</code>), JDemetra+ checks the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values. When <code>preliminary.check = FALSE</code>, the thresholds are ignored and process is performed, when possible. (issue <a href='https://github.com/jdemetra/rjdemetra/issues/39'>#39</a>)<br>
 </li>
@@ -209,9 +244,9 @@
 <li>News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: <code>jx13</code>, <code>jtramoseats</code>, <code>jregarima</code>, <code>jregarima_x13</code>, <code>jregarima_tramoseats</code> and <code>get_jmodel</code>. Therefore, there is no formatting and the computation is faster than the non ‘j’ functions (<code>x13</code>, <code>tramoseats</code>, <code>regarima</code>, <code>regarima_x13</code>, <code>regarima_tramoseats</code> and <code>get_model</code>). To manipulate these objects, there are three functions: <code>get_dictionary</code> to get the indicators that can be extracted, <code>get_indicators</code> to extract these indicators and <code>jSA2R</code> to get the formatted R model.</li>
 </ul>
 </div>
-<div id="bug-fixed-1" class="section level2">
+<div id="bug-fixed-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-2" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>
 <code>x11.fcast</code> can now be set to 0 or 1 (issue <a href='https://github.com/jdemetra/rjdemetra/issues/42'>#42</a>).</li>
@@ -224,13 +259,15 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rjdemetra-013">0.1.3</a></li>
-        <li><a href="#rjdemetra-012">0.1.2</a></li>
+        <li><a href="#rjdemetra-0-1-4">0.1.4</a></li>
+        <li><a href="#rjdemetra-0-1-3">0.1.3</a></li>
+        <li><a href="#rjdemetra-0-1-2">0.1.2</a></li>
       </ul>
     </div>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -238,13 +275,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

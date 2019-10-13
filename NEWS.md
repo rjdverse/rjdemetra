@@ -4,24 +4,25 @@
 
 - Error while loading a workspace with metadata. (issue #53)  
 - The degree of freedom were wrong with the `summary` functions.
-- `jregarima` function is now exported.
+- `jregarima` function is now exported.  
+- The message was not complete when there was an error importing a model with `get_model`.
 
 ## New functionalities
 
-- parameter `seats.predictionLength` added to `tramoseats_spec`.  
-- parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
-- parameter `ylim` added to `plot` functions (issue #60).  
-- new generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals` (linked to issue #56).
+- Parameter `seats.predictionLength` added to `tramoseats_spec`.  
+- Parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
+- Parameter `ylim` added to `plot` functions (issue #60).  
+- New generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals` (linked to issue #56).
 
 
 # RJDemetra 0.1.3
 
 ## Bug fixed
 
--  When the multiprocessing is empty, `get_model` no longer produces an error.  
+- When the multiprocessing is empty, `get_model` no longer produces an error.  
 - Correction of the option `setOutliers` in TRAMO-SEATS.  
 - jaxb.jar files added: `save_workspace` now works on Java 9 and higher (jaxb is no longer provided by default since Java 9).  
-- deprecated functions removed.
+- Deprecated functions removed.
 
 ## Documentation
 
