@@ -444,7 +444,8 @@ get_model.sa_item <- function(x, workspace,
             context_dictionary = context_dictionary,
             extra_info = TRUE, freq = frequency(y_ts))
   },error = function(e){
-    warning("Error while importing a model: NULL object will be returned")
+    warning(e, "Error while importing a model: NULL object will be returned",
+            call. = FALSE)
     NULL
   })
 
