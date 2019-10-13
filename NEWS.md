@@ -2,14 +2,15 @@
 
 ## Bug fixed
 
-- Error while loading a workspace with metadata. (issue #53)
+- Error while loading a workspace with metadata. (issue #53)  
+- The degree of freedom were wrong with the `summary` functions.
 
 ## New functionalities
 
 - parameter `seats.predictionLength` added to `tramoseats_spec`.  
 - parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
-- parameter `ylim` added to `plot` functions.  
-- new generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals`.
+- parameter `ylim` added to `plot` functions (issue #60).  
+- new generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals` (linked to issue #56).
 
 
 # RJDemetra 0.1.3
