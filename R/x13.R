@@ -11,7 +11,7 @@ setClass(
 #' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
-#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","X13")}. The default is \code{"RSA5c"}.
+#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or a specification created by \code{\link{x13_spec}}. The default is \code{"RSA5c"}.
 #' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
@@ -117,7 +117,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   # jrslt <- jsa_obj[["result"]]@internal
   # jrspec <- jsa_obj[["spec"]]
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
-  jdictionary <- specX13_r2jd(spec,jrspec)
+  jdictionary <- spec_regarima_X13_r2jd(spec,jrspec)
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(series))
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)

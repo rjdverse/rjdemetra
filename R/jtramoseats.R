@@ -16,7 +16,7 @@ jtramoseats.SA_spec <- function(series, spec,
     stop("use only with c(\"SA_spec\",\"TRAMO_SEATS\") class object")
   # create the java objects
   jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", "RSA0")
-  jdictionary <- specTS_r2jd(spec,jrspec)
+  jdictionary <- spec_TRAMO_r2jd(spec,jrspec)
   specSeats_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/satoolkit/tramoseats/TramoSeatsSpecification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/TramoSeatsResults;", "tramoseats", ts_r2jd(series), jspec, jdictionary )

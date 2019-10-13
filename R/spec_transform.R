@@ -335,15 +335,15 @@ spec_arimaCoefF <- function(enabled=NA, armaP=NA, armaF=NA , coefP=NA, coefF=NA)
 }
 
 spec_seasma <- function(seasma=NA){
-
   len <- length(seasma)
   seasma.type <- c("Msr","Stable","X11Default","S3X1","S3X3","S3X5","S3X9","S3X15")
-  if (sum(is.na(seasma))!=0){
+  if (sum(is.na(seasma)) != 0) {
     return(NA)
-  } else if (!is.vector(seasma)|is.list(seasma)|length(setdiff(seasma,seasma.type))>0){
-      warning("wrong format of the x11.seasonalma.\nPossisble filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
+  } else if (!is.vector(seasma) | is.list(seasma) |
+             length(setdiff(seasma,seasma.type)) > 0) {
+      warning("wrong format of the x11.seasonalma.\nPossibles filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
       return(NA)
-  } else if (!(len %in% c(1,2,4,12))){
+  } else if (!(len %in% c(1, 2, 4, 6, 12))) {
     warning("wrong format of the x11.seasonalma.\nPre-specified seasonal filters will be ignored.", call. = FALSE)
     return(NA)
   } else {
@@ -351,7 +351,29 @@ spec_seasma <- function(seasma=NA){
     return(z)
   }
 }
+spec_calendar_sigma <- function(calendarSigma = NA, sigmaVector = NA){
+  len <- length(calendarSigma)
+  calendarSigma.type <- c("None","Signif","All","Select")
+  sigmaVector.type <- c("Group1", "Group2")
 
+  if (is.na(calendarSigma)){
+    calendarSigma <- sigmaVector <- NA
+  } else if (is.list(calendarSigma)||length(calendarSigma) > 1 || !calendarSigma %in% calendarSigma.type){
+    warning("Wrong format of the x11.calendarSigma.\nPossibles values are: \"None\",\"Signif\", \"All\", \"Select\".\nParameters will be ignored.", call. = FALSE)
+    calendarSigma <- sigmaVector <- NA
+  } else if (identical(calendarSigma, "Select")){
+    if (is.na(sigmaVector) || length(setdiff(sigmaVector, sigmaVector.type))>0 ||
+        !(length(sigmaVector) %in% c(2, 4, 6, 12))){
+      warning("Wrong format of the x11.sigmaVector.\nIt will be ignored.", call. = FALSE)
+      sigmaVector <- NA
+    }else{
+      sigmaVector <- toString(sigmaVector)
+    }
+  } else {
+    sigmaVector <- NA
+  }
+  list(calendarSigma = calendarSigma, sigmaVector = sigmaVector)
+}
 spec_trendma <- function(trendma=NA){
 
   if (sum(!is.na(trendma))==0){
@@ -824,7 +846,7 @@ spec_x11 <- function(x11spc){
 spec_seats <- function(seatspc){
   seats <- seatspc
 
-  for (i in c(1:7)){
+  for (i in seq_len(ncol(seats))){
     seats[3,i] <- if(!is.na(seats[2,i])) {seats[2,i]} else {seats[1,i]}
   }
   rownames(seats) <- c("Predefined","User_modif","Final")

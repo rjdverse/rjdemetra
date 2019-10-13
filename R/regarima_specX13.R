@@ -5,9 +5,9 @@
 #'
 #' @param spec model specification.  It can be a \code{character} of predefined 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("regarima_spec","X13")} or an object of class \code{c("regarima", "X13")}. The default is \code{"RG5c"}.
 #'
-#' The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
-#'
 #' @param preliminary.check boolean to check the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values.
+#'
+#' The time span of the series to be used for the estimation of the RegARIMA model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
 #' @param estimate.from character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
 #'
 #' @param estimate.to character in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31"). Can be combined with \code{estimate.from}.
@@ -455,7 +455,7 @@ regarima_spec_x13.character <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "
   jrspec<-.jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
 
   # extract model specification from the java object
-  rspec <- specX13_jd2r(spec = jrspec, extra_info = FALSE)
+  rspec <- spec_regarima_X13_jd2r(spec = jrspec, extra_info = FALSE)
 
   # Predefined and modified values
   predef.out <- list(Predefined = NA, Final = predef.outliers)

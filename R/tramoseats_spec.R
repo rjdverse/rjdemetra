@@ -6,9 +6,9 @@
 #'
 #' @param spec model specification X13.  It can be a \code{character} of predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}. The default is \code{"RSAfull"}.
 #'
-#' The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
-#'
 #' @inheritParams  regarima_spec_tramoseats
+#' @param seats.predictionLength integer, number of forecasts used in the decomposition. Negative values correspond to numbers of years.
+#'
 #' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
 #' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
 #' @param seats.seasdBoundary numeric, seasonal boundary. Boundary from which a negative AR root is integrated in the seasonal component.
@@ -181,6 +181,7 @@ tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", 
                      arima.coef= NA,
                      arima.coefType = NA,
                      fcst.horizon = NA_integer_,
+                     seats.predictionLength = NA_integer_,
                      seats.approx = c(NA, "None", "Legacy", "Noisy"),
                      seats.trendBoundary = NA_integer_,
                      seats.seasdBoundary = NA_integer_,
@@ -258,6 +259,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
                                 arima.coef= NA,
                                 arima.coefType = NA,
                                 fcst.horizon = NA_integer_,
+                                seats.predictionLength = NA_integer_,
                                 seats.approx = c(NA, "None", "Legacy", "Noisy"),
                                 seats.trendBoundary = NA_integer_,
                                 seats.seasdBoundary = NA_integer_,
@@ -268,21 +270,43 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "TR", spec)
-  regarima <-  regarima_spec_tramoseats(reg_spec,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
-                                            estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
-                                            usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
-                                            usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
-                                            tradingdays.option,tradingdays.leapyear,tradingdays.stocktd,tradingdays.test,
-                                            easter.type,easter.julian,easter.duration,easter.test,outlier.enabled,
-                                            outlier.from,outlier.to,outlier.first,outlier.last,outlier.exclFirst,
-                                            outlier.exclLast,outlier.ao,outlier.tc,outlier.ls,outlier.so,outlier.usedefcv,
-                                            outlier.cv,outlier.eml,outlier.tcrate,automdl.enabled,automdl.acceptdefault,
-                                            automdl.cancel,automdl.ub1,automdl.ub2,automdl.armalimit,automdl.reducecv,
-                                            automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
-                                            arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
+  regarima <-  regarima_spec_tramoseats(spec = reg_spec, preliminary.check = preliminary.check,
+                                        estimate.from = estimate.from, estimate.to = estimate.to,
+                                        estimate.first = estimate.first, estimate.last = estimate.last,
+                                        estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+                                        estimate.tol = estimate.tol, estimate.eml = estimate.eml,
+                                        estimate.urfinal = estimate.urfinal, transform.function = transform.function,
+                                        transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
+                                        usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
+                                        usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
+                                        usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
+                                        usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
+                                        tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
+                                        tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+                                        tradingdays.test = tradingdays.test, easter.type = easter.type,
+                                        easter.julian = easter.julian, easter.duration = easter.duration,
+                                        easter.test = easter.test, outlier.enabled = outlier.enabled,
+                                        outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+                                        outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+                                        outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+                                        outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+                                        outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+                                        outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
+                                        automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                                        automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                                        automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
+                                        automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                                        automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
+                                        arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+                                        arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+                                        arima.coef = arima.coef, arima.coefType = arima.coefType,
+                                        fcst.horizon = fcst.horizon)
 
-  seats <- seats_spec_def(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
-                          seats.seasTol, seats.maBoundary, seats.method)
+  seats <- seats_spec_def(spec = spec, seats.predictionLength = seats.predictionLength,
+                          seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
+                          seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
+                          seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
+                          seats.method = seats.method)
 
   z <- list(regarima = regarima, seats = seats)
   class(z) <- c("SA_spec","TRAMO_SEATS")
@@ -290,6 +314,7 @@ tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2"
 }
 
 seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                           seats.predictionLength = NA_integer_,
                           seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                           seats.trendBoundary = NA_integer_,
                           seats.seasdBoundary = NA_integer_,
@@ -302,7 +327,8 @@ seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RS
   seats.approx <- match.arg(seats.approx)
   seats.method <- match.arg(seats.method)
 
-  list.numeric <- list("seats.trendBoundary", "seats.seasdBoundary", "seats.seasdBoundary1",
+  list.numeric <- list("seats.predictionLength", "seats.trendBoundary",
+                       "seats.seasdBoundary", "seats.seasdBoundary1",
                        "seats.seasTol", "seats.maBoundary")
 
   var.list<-list()
@@ -391,6 +417,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                             arima.coef= NA,
                             arima.coefType = NA,
                             fcst.horizon = NA_integer_,
+                            seats.predictionLength = NA_integer_,
                             seats.approx = c(NA, "None", "Legacy", "Noisy"),
                             seats.trendBoundary = NA_integer_,
                             seats.seasdBoundary = NA_integer_,
@@ -402,21 +429,43 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
   if ( !inherits(spec, c("SA","SA_spec")))
     stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_tramoseats(spec,preliminary.check, estimate.from,estimate.to,estimate.first,estimate.last,estimate.exclFirst,estimate.exclLast,
-                                    estimate.tol,estimate.eml,estimate.urfinal,transform.function,transform.fct,
-                                    usrdef.outliersEnabled,usrdef.outliersType,usrdef.outliersDate,usrdef.outliersCoef,
-                                    usrdef.varEnabled,usrdef.var,usrdef.varType,usrdef.varCoef,tradingdays.mauto,tradingdays.pftd,
-                                    tradingdays.option,tradingdays.leapyear,tradingdays.stocktd,tradingdays.test,
-                                    easter.type,easter.julian,easter.duration,easter.test,outlier.enabled,
-                                    outlier.from,outlier.to,outlier.first,outlier.last,outlier.exclFirst,
-                                    outlier.exclLast,outlier.ao,outlier.tc,outlier.ls,outlier.so,outlier.usedefcv,
-                                    outlier.cv,outlier.eml,outlier.tcrate,automdl.enabled,automdl.acceptdefault,
-                                    automdl.cancel,automdl.ub1,automdl.ub2,automdl.armalimit,automdl.reducecv,
-                                    automdl.ljungboxlimit,automdl.compare,arima.mu,arima.p,arima.d,arima.q,
-                                    arima.bp,arima.bd,arima.bq,arima.coefEnabled,arima.coef,arima.coefType,fcst.horizon)
+  regarima <- regarima_spec_tramoseats(spec = spec, preliminary.check = preliminary.check,
+                                       estimate.from = estimate.from, estimate.to = estimate.to,
+                                       estimate.first = estimate.first, estimate.last = estimate.last,
+                                       estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+                                       estimate.tol = estimate.tol, estimate.eml = estimate.eml,
+                                       estimate.urfinal = estimate.urfinal, transform.function = transform.function,
+                                       transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
+                                       usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
+                                       usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
+                                       usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
+                                       usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
+                                       tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
+                                       tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+                                       tradingdays.test = tradingdays.test, easter.type = easter.type,
+                                       easter.julian = easter.julian, easter.duration = easter.duration,
+                                       easter.test = easter.test, outlier.enabled = outlier.enabled,
+                                       outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+                                       outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+                                       outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+                                       outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+                                       outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+                                       outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
+                                       automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                                       automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                                       automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
+                                       automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                                       automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
+                                       arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+                                       arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+                                       arima.coef = arima.coef, arima.coefType = arima.coefType,
+                                       fcst.horizon = fcst.horizon)
 
-  seats <- seats_spec(spec,seats.approx, seats.trendBoundary, seats.seasdBoundary, seats.seasdBoundary1,
-                            seats.seasTol, seats.maBoundary, seats.method)
+  seats <- seats_spec(spec = spec, seats.predictionLength = seats.predictionLength,
+                      seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
+                      seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
+                      seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
+                      seats.method = seats.method)
 
   z <- list(regarima = regarima, seats = seats)
   class(z) <- c("SA_spec","TRAMO_SEATS")
@@ -424,6 +473,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
 }
 
 seats_spec<- function(spec,
+                      seats.predictionLength = NA_integer_,
                       seats.approx = c(NA_character_,"None","Legacy","Noisy"),
                       seats.trendBoundary = NA_integer_,
                       seats.seasdBoundary = NA_integer_,
@@ -435,7 +485,8 @@ seats_spec<- function(spec,
   seats.approx <- match.arg(seats.approx)
   seats.method <- match.arg(seats.method)
 
-  list.numeric <- list("seats.trendBoundary", "seats.seasdBoundary", "seats.seasdBoundary1",
+  list.numeric <- list("seats.predictionLength","seats.trendBoundary",
+                       "seats.seasdBoundary", "seats.seasdBoundary1",
                        "seats.seasTol", "seats.maBoundary")
 
   var.list<-list()
