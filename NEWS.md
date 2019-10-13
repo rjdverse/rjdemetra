@@ -7,7 +7,9 @@
 ## New functionalities
 
 - parameter `seats.predictionLength` added to `tramoseats_spec`.  
-- parameter `x11.calendarSigma` added to `x1"_spec`.  
+- parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
+- parameter `ylim` added to `plot` functions.  
+- new generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals`.
 
 
 # RJDemetra 0.1.3
@@ -15,7 +17,7 @@
 ## Bug fixed
 
 -  When the multiprocessing is empty, `get_model` no longer produces an error.  
-- Correction of the option setOutliers in TRAMO-SEATS.  
+- Correction of the option `setOutliers` in TRAMO-SEATS.  
 - jaxb.jar files added: `save_workspace` now works on Java 9 and higher (jaxb is no longer provided by default since Java 9).  
 - deprecated functions removed.
 
