@@ -4,6 +4,7 @@
 
 - Error while loading a workspace with metadata. (issue #53)  
 - The degree of freedom were wrong with the `summary` functions.
+- `jregarima` function was not exported.
 
 ## New functionalities
 
