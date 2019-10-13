@@ -184,12 +184,7 @@ setClass(
 #' @export
 # Generic function to create a "regarima" S3 class object from a user-defined specification (for X13 or TRAMO-SEATS method)
 regarima <- function(series, spec = NA){
-
-  if (!inherits(spec, "regarima_spec")) {
-    stop("use only with \"regarima_spec\" object", call. = FALSE)
-  }else{
-    UseMethod("regarima", spec)
-  }
+  UseMethod("regarima", spec)
 }
 # Method: "X13"
 #' @export

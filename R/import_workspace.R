@@ -268,6 +268,16 @@ get_ts.sa_item <- function(x){
 get_ts.SA <- function(x){
   return(x$final$series[,"y"])
 }
+#' @export
+get_ts.regarima <- function(x){
+  mts <- x[["model"]][["effects"]]
+  y <- mts[,"y_lin"] + mts[,"tde"] + mts[,"ee"] + mts[,"omhe"] + mts[,"out"]
+  if (x$model$spec_rslt[1, "Log transformation"]) {
+    y <- exp(y)
+  }
+
+  return(y)
+}
 
 #' Compute the multi-processing from a workspace
 #'
@@ -434,7 +444,8 @@ get_model.sa_item <- function(x, workspace,
             context_dictionary = context_dictionary,
             extra_info = TRUE, freq = frequency(y_ts))
   },error = function(e){
-    warning("Error while importing a model: NULL object will be returned")
+    warning(e, "Error while importing a model: NULL object will be returned",
+            call. = FALSE)
     NULL
   })
 

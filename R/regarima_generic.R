@@ -43,11 +43,11 @@ logLik.SA <- function(object, ...) {
 vcov.regarima <- function(object, ...){
   if (is.null(object))
     return(NULL)
-
-  jmod <- jregarima(object)
+  y <- get_ts(object)
+  jmod <- jregarima(y, object)
   result <- get_indicators(jmod, "model.covar")[[1]]
   rownames(result) <- colnames(result) <-
-    result <- get_indicators(jmod, "model.description")[[1]]
+    get_indicators(jmod, "model.description")[[1]]
   result
 }
 #' @export
