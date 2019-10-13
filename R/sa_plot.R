@@ -55,12 +55,10 @@ plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio
   m <- matrix(c(1:freq), nrow = 1, ncol = freq)
   layout(m,  widths = c(1, rep.int(0.8, ncol(m) - 1)))
   par(cex = 0.7, mai = c(0.1, 0.3, 0.4, 0))
-  if (!missing(ylim)) {
+  if (missing(ylim)) {
     y_min <- min(d8,d10)
     y_max <- max(d8,d10)
     ylim <- c(y_min - abs(y_min)*0.2, y_max + abs(y_max)*0.2)
-  }else{
-    ylim <- NULL
   }
 
   if (freq==12){
@@ -115,13 +113,12 @@ plot.decomposition_SEATS = function(x, first_date, last_date, caption = "S-I rat
   layout(m,  widths = c(1,rep.int(0.8, ncol(m)-1)))
   par(cex=0.7, mai=c(0.1,0.3,0.4,0))
 
-  if (!missing(ylim)) {
+  if (missing(ylim)) {
     y_min <- min(z)
     y_max <- max(z)
     ylim <- c(y_min - abs(y_min)*0.2, y_max + abs(y_max)*0.2)
-  }else{
-    ylim <- NULL
   }
+
   if (freq==12){
     leg<- c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
   }else if (freq==4){
