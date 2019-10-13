@@ -335,15 +335,15 @@ spec_arimaCoefF <- function(enabled=NA, armaP=NA, armaF=NA , coefP=NA, coefF=NA)
 }
 
 spec_seasma <- function(seasma=NA){
-
   len <- length(seasma)
   seasma.type <- c("Msr","Stable","X11Default","S3X1","S3X3","S3X5","S3X9","S3X15")
-  if (sum(is.na(seasma))!=0){
+  if (sum(is.na(seasma)) != 0) {
     return(NA)
-  } else if (!is.vector(seasma)|is.list(seasma)|length(setdiff(seasma,seasma.type))>0){
+  } else if (!is.vector(seasma) | is.list(seasma) |
+             length(setdiff(seasma,seasma.type)) > 0) {
       warning("wrong format of the x11.seasonalma.\nPossibles filters per period: \"Msr\",\"Stable\", \"X11Default\", \"S3X1\", \"S3X3\", \"S3X5\", \"S3X9\" and \"S3X15\".\nPre-specified seasonal filters will be ignored.", call. = FALSE)
       return(NA)
-  } else if (!(len %in% c(1, 2, 4, 6, 12))){
+  } else if (!(len %in% c(1, 2, 4, 6, 12))) {
     warning("wrong format of the x11.seasonalma.\nPre-specified seasonal filters will be ignored.", call. = FALSE)
     return(NA)
   } else {

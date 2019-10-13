@@ -546,12 +546,12 @@ spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
 }
 
 specX11_jd2r <- function(spec = NA, freq = NA){
-  jx11 <-.jcall(spec,"Ljdr/spec/x13/X11Spec;","getX11")
+  jx11 <- .jcall(spec,"Ljdr/spec/x13/X11Spec;","getX11")
 
-  if(!is.na(freq)){
+  if (!is.na(freq)) {
     .jcall(jx11,"V","setFreq", as.integer(freq))
     fullseasonalma <- .jcall(jx11,"[S","getFullSeasonalMA")
-    if(!is.null(fullseasonalma) && length(unique(fullseasonalma))  > 1){
+    if (!is.null(fullseasonalma) && length(unique(fullseasonalma)) > 1) {
       seasonalma <- paste(fullseasonalma, collapse = ", ")
     }else{
       seasonalma <- .jcall(jx11,"S","getSeasonalMA")
@@ -560,29 +560,40 @@ specX11_jd2r <- function(spec = NA, freq = NA){
     seasonalma <- .jcall(jx11,"S","getSeasonalMA")
   }
 
-  mode <-.jcall(jx11,"S","getMode")
-  seasonalComp <-.jcall(jx11,"Z","isSeasonal")
-  lsigma <-.jcall(jx11,"D","getLSigma")
-  usigma <-.jcall(jx11,"D","getUSigma")
+  mode <- .jcall(jx11,"S","getMode")
+  seasonalComp <- .jcall(jx11,"Z","isSeasonal")
+  lsigma <- .jcall(jx11,"D","getLSigma")
+  usigma <- .jcall(jx11,"D","getUSigma")
   trendAuto <- .jcall(jx11,"Z","isAutoTrendMA")
   trendma <- .jcall(jx11,"I","getTrendMA")
-  fcasts<- .jcall(jx11,"I","getForecastHorizon")
+  fcasts <- .jcall(jx11,"I","getForecastHorizon")
   bcasts <- .jcall(jx11,"I","getBackcastHorizon")
   excludeFcasts <- .jcall(jx11,"Z","isExcludefcst")
+  calendarSigma <- jx11$getCalendarSigma()$toString()
+  sigmaVector <- .jcall(jx11,returnSig = "[S", "getSigmavec") #TODO
+  if (length(sigmaVector) == 0) {
+    sigmaVector <- NA
+  }else{
+    sigmaVector <- paste(sigmaVector, collapse = ", ")
+  }
 
   var <- data.frame(mode,seasonalComp,lsigma,usigma,trendAuto,trendma,seasonalma,
-                    fcasts,bcasts,excludeFcasts,
+                    fcasts, bcasts,
+                    calendarSigma, sigmaVector,
+                    excludeFcasts,
                     stringsAsFactors = FALSE)
   names(var) <- sprintf("x11.%s",
                         c("mode","seasonalComp","lsigma","usigma",
                           "trendAuto","trendma","seasonalma",
-                          "fcasts","bcasts","excludeFcasts"))
+                          "fcasts","bcasts",
+                          "calendarSigma", "sigmaVector",
+                          "excludeFcasts"))
   return(var)
 }
 
 specSeats_jd2r <- function(spec = NA){
 
-  jseats <-.jcall(spec,"Ljdr/spec/tramoseats/SeatsSpec;","getSeats")
+  jseats <- .jcall(spec,"Ljdr/spec/tramoseats/SeatsSpec;","getSeats")
   predictionLength <- .jcall(jseats,"I","getPredictionLength")
   approx <- .jcall(jseats,"S","getApproximationMode")
   maBoundary <- .jcall(jseats,"D","getXl")
@@ -594,7 +605,8 @@ specSeats_jd2r <- function(spec = NA){
 
   var <- list(predictionLength, approx,maBoundary,trendBoundary,seasdBoundary,seasdBoundary1,seasTol,
               method)
-  names(var) <- c("predictionLength", "approx","maBoundary","trendBoundary","seasdBoundary","seasdBoundary1","seasTol",
+  names(var) <- c("predictionLength", "approx", "maBoundary", "trendBoundary",
+                  "seasdBoundary","seasdBoundary1","seasTol",
                   "method")
   return(var)
 
@@ -990,41 +1002,59 @@ spec_TRAMO_r2jd <- function(rspec = NA, jdspec =NA){
   return(jdictionary)
 }
 
-specX11_r2jd <-function( rspec = NA, jdspec = NA , freq = NA)
-{
+specX11_r2jd <- function(rspec = NA, jdspec = NA , freq = NA){
   x11 <- s_x11(rspec)
-  jx11 <-.jcall(jdspec,"Ljdr/spec/x13/X11Spec;","getX11")
+  jx11 <- .jcall(jdspec,"Ljdr/spec/x13/X11Spec;","getX11")
 
-  seasonalma <- unlist(strsplit(as.character(x11[[7]]),split=", "))
-  len <- length(seasonalma)
+  seasonalma <- unlist(strsplit(as.character(x11[["x11.seasonalma"]]),
+                                split = ", "))
+  len.ma <- length(seasonalma)
 
-  .jcall(jx11,"V","setMode",as.character(x11[[1]]))
-  .jcall(jx11,"V","setSeasonal",as.logical(x11[[2]]))
-  .jcall(jx11,"V","setLSigma",as.numeric(x11[[3]]))
-  .jcall(jx11,"V","setUSigma",as.numeric(x11[[4]]))
-  if (x11[[5]]==TRUE){
-    .jcall(jx11,"V","setTrendMA",as.integer(x11[[6]]))
-    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[[5]]))
+  .jcall(jx11,"V","setMode",as.character(x11[["x11.mode"]]))
+  .jcall(jx11,"V","setSeasonal",as.logical(x11[["x11.seasonalComp"]]))
+  .jcall(jx11,"V","setLSigma",as.numeric(x11[["x11.lsigma"]]))
+  .jcall(jx11,"V","setUSigma",as.numeric(x11[["x11.usigma"]]))
+  if (x11[["x11.trendAuto"]]) {
+    .jcall(jx11,"V","setTrendMA",as.integer(x11[["x11.trendma"]]))
   }else{
-    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[[5]]))
-    .jcall(jx11,"V","setTrendMA",as.integer(x11[[6]]))
+    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[["x11.trendAuto"]]))
+    .jcall(jx11,"V","setTrendMA",as.integer(x11[["x11.trendma"]]))
   }
-  if (len ==1){
-    .jcall(jx11,"V","setSeasonalMA",seasonalma)
+  .jcall(jx11,"V","setFreq", as.integer(freq))
+  if (len.ma == 1) {
+    .jcall(jx11, "V", "setSeasonalMA", seasonalma)
     seasma <- seasonalma
-  }else if (len != freq) {
+  }else if (len.ma != freq) {
     .jcall(jx11,"V","setSeasonalMA","Msr")
-    warning(paste0("wrong frequency of the x11.seasonalma (",len," instead of ",freq,").",
-            "\nPre-specified seasonal filters will be ignored (x11.seasonalma=\"Msr\")."), call. = FALSE)
+    warning(paste0("wrong frequency of the x11.seasonalma (",
+                   len.ma, " instead of ", freq, ").",
+            "\nPre-specified seasonal filters will be ignored (x11.seasonalma=\"Msr\")."),
+            call. = FALSE)
     seasma <- "Msr"
   } else {
-    .jcall(jx11,"V","setFreq", as.integer(freq))
+
     .jcall(jx11,"V","setFullSeasonalMA",seasonalma)
-    seasma <- as.character(x11[[7]])
+    seasma <- as.character(x11[["x11.seasonalma"]])
   }
-  .jcall(jx11,"V","setForecastHorizon",as.integer(x11[[8]]))
-  .jcall(jx11,"V","setBackcastHorizon",as.integer(x11[[9]]))
-  .jcall(jx11,"V","setExcludefcst",as.logical(x11[[10]]))
+  .jcall(jx11, "V", "setForecastHorizon", as.integer(x11[["x11.fcasts"]]))
+  .jcall(jx11, "V", "setBackcastHorizon", as.integer(x11[["x11.bcasts"]]))
+
+  .jcall(jx11, "V", "setCalendarSigma", x11[["x11.calendarSigma"]])
+
+  if (x11[["x11.calendarSigma"]] == "Select" && !is.na(x11[["x11.sigmaVector"]])) {
+    # sigmaVector is change only if x11.calendarSigma is set to "Select"
+    sigmaVector <- unlist(strsplit(as.character(x11[["x11.sigmaVector"]]),
+                                  split = ", "))
+    if (length(sigmaVector) != freq) {
+      warning(paste0("Wrong frequency of the x11.sigmaVector (",
+                     length(sigmaVector), " instead of ", freq, ").",
+                     "\nThis parameter will be ignored."), call. = FALSE)
+    } else {
+      .jcall(jx11, "V", "setSigmavec", sigmaVector)
+    }
+
+  }
+  .jcall(jx11, "V", "setExcludefcst", as.logical(x11[["x11.excludeFcasts"]]))
 
   return(seasma)
 }
