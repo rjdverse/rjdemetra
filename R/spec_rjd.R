@@ -49,71 +49,73 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     tradingdays.option <- .jcall(jtd,"S","getTradingDays")
   }
 
-  tradingdays.autoadjust<-.jcall(jtd,"Z","isAutoAdjust")
-  tradingdays.leapyear <-.jcall(jtd,"S","getLengthOfPeriod")
-  tradingdays.stocktd <-.jcall(jtd,"I","getW")
-  tradingdays.test <-.jcall(jtd,"S","getTest")
-  easter.enabled <-.jcall(jeaster,"Z","isEnabled")
-  easter.julian <-.jcall(jeaster,"Z","isJulian")
-  easter.duration <-.jcall(jeaster,"I","getDuration")
-  easter.test <-.jcall(jeaster,"S","getTest")
+  tradingdays.autoadjust <- .jcall(jtd,"Z","isAutoAdjust")
+  tradingdays.leapyear <- .jcall(jtd,"S","getLengthOfPeriod")
+  tradingdays.stocktd <- .jcall(jtd,"I","getW")
+  tradingdays.test <- .jcall(jtd,"S","getTest")
+  easter.enabled <- .jcall(jeaster,"Z","isEnabled")
+  easter.julian <- .jcall(jeaster,"Z","isJulian")
+  easter.duration <- .jcall(jeaster,"I","getDuration")
+  easter.test <- .jcall(jeaster,"S","getTest")
 
   #Outlier
-  joutlier<-.jcall(spec,"Ljdr/spec/x13/OutlierSpec;","getOutliers")
-  joutlier.span <-.jcall(joutlier,"Ljdr/spec/ts/SpanSelector;","getSpan")
+  joutlier <- .jcall(spec,"Ljdr/spec/x13/OutlierSpec;","getOutliers")
+  joutlier.span <- .jcall(joutlier,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
-  outlier.enabled<-.jcall(joutlier,"Z","isEnabled")
+  outlier.enabled <- .jcall(joutlier,"Z","isEnabled")
   outlier.type <- .jcall(joutlier.span,"S","getType")
   outlier.d0 <- .jcall(joutlier.span,"S","getD0")
   outlier.d1 <- .jcall(joutlier.span,"S","getD1")
   outlier.n0 <- .jcall(joutlier.span,"I","getN0")
   outlier.n1 <- .jcall(joutlier.span,"I","getN1")
-  outlier.span <- jd_span(type= outlier.type,d0=outlier.d0,d1=outlier.d1,n0=outlier.n0,n1=outlier.n1)
-  outlier.ao <-.jcall(joutlier,"Z","isAO")
-  outlier.tc <-.jcall(joutlier,"Z","isTC")
-  outlier.ls <-.jcall(joutlier,"Z","isLS")
-  outlier.so <-.jcall(joutlier,"Z","isSO")
-  outlier.usedefcv <-.jcall(joutlier,"Z","isDefaultVa")
-  outlier.cv <-.jcall(joutlier,"D","getVa")
-  outlier.method <-.jcall(joutlier,"S","getMethod")
-  outlier.tcrate <-.jcall(joutlier,"D","getTCRate")
+  outlier.span <- jd_span(type = outlier.type,
+                          d0 = outlier.d0, d1 = outlier.d1,
+                          n0 = outlier.n0, n1 = outlier.n1)
+  outlier.ao <- .jcall(joutlier, "Z", "isAO")
+  outlier.tc <- .jcall(joutlier, "Z", "isTC")
+  outlier.ls <- .jcall(joutlier, "Z", "isLS")
+  outlier.so <- .jcall(joutlier, "Z", "isSO")
+  outlier.usedefcv <- .jcall(joutlier, "Z", "isDefaultVa")
+  outlier.cv <- .jcall(joutlier, "D", "getVa")
+  outlier.method <- .jcall(joutlier, "S", "getMethod")
+  outlier.tcrate <- .jcall(joutlier, "D", "getTCRate")
 
   #Arima
-  jarima<-.jcall(spec,"Ljdr/spec/x13/ArimaSpec;","getArima")
+  jarima <- .jcall(spec, "Ljdr/spec/x13/ArimaSpec;", "getArima")
 
-  automdl.enabled <-.jcall(jarima,"Z","isAmiEnabled")
-  automdl.acceptdefault <-.jcall(jarima,"Z","isAcceptDefault")
-  automdl.cancel <-.jcall(jarima,"D","getCancel")
-  automdl.ub1 <-.jcall(jarima,"D","getUb1")
-  automdl.ub2 <-.jcall(jarima,"D","getUb2")
-  automdl.mixed  <-.jcall(jarima,"Z","isMixed")
-  automdl.balanced <-.jcall(jarima,"Z","isBalanced")
-  automdl.armalimit <-.jcall(jarima,"D","getTsig")
-  automdl.reducecv <-.jcall(jarima,"D","getPredCV")
-  automdl.ljungboxlimit <-.jcall(jarima,"D","getPcr")
-  automdl.ubfinal <-.jcall(jarima,"D","getUbFinal")
-  arima.mu <-.jcall(jarima,"Z","isMean")
-  arima.p <-.jcall(jarima,"I","getP")
-  arima.d <-.jcall(jarima,"I","getD")
-  arima.q <-.jcall(jarima,"I","getQ")
-  arima.bp <-.jcall(jarima,"I","getBP")
-  arima.bd <-.jcall(jarima,"I","getBD")
-  arima.bq <-.jcall(jarima,"I","getBQ")
+  automdl.enabled <- .jcall(jarima, "Z", "isAmiEnabled")
+  automdl.acceptdefault <- .jcall(jarima,"Z","isAcceptDefault")
+  automdl.cancel <- .jcall(jarima,"D","getCancel")
+  automdl.ub1 <- .jcall(jarima,"D","getUb1")
+  automdl.ub2 <- .jcall(jarima,"D","getUb2")
+  automdl.mixed  <- .jcall(jarima,"Z","isMixed")
+  automdl.balanced <- .jcall(jarima,"Z","isBalanced")
+  automdl.armalimit <- .jcall(jarima,"D","getTsig")
+  automdl.reducecv <- .jcall(jarima,"D","getPredCV")
+  automdl.ljungboxlimit <- .jcall(jarima,"D","getPcr")
+  automdl.ubfinal <- .jcall(jarima,"D","getUbFinal")
+  arima.mu <- .jcall(jarima,"Z","isMean")
+  arima.p <- .jcall(jarima,"I","getP")
+  arima.d <- .jcall(jarima,"I","getD")
+  arima.q <- .jcall(jarima,"I","getQ")
+  arima.bp <- .jcall(jarima,"I","getBP")
+  arima.bd <- .jcall(jarima,"I","getBD")
+  arima.bq <- .jcall(jarima,"I","getBQ")
 
   #span matrix
-  type<-c(estimate.type,outlier.type)
-  d0<-c(estimate.d0,outlier.d0)
-  d1<-c(estimate.d1,outlier.d1)
-  n0<-c(estimate.n0,outlier.n0)
-  n1<-c(estimate.n1,outlier.n1)
+  type <- c(estimate.type,outlier.type)
+  d0 <- c(estimate.d0,outlier.d0)
+  d1 <- c(estimate.d1,outlier.d1)
+  n0 <- c(estimate.n0,outlier.n0)
+  n1 <- c(estimate.n1,outlier.n1)
 
-  span<-data.frame(type=type,d0=d0,d1=d1,n0=n0,n1=n1)
-  rownames(span)<-c("estimate","outlier")
+  span <- data.frame(type=type,d0=d0,d1=d1,n0=n0,n1=n1)
+  rownames(span) <- c("estimate","outlier")
 
   #Default values:
 
   arima.coef <- FALSE
-  userdef_spec <-list(specification = data.frame(outlier = FALSE,
+  userdef_spec <- list(specification = data.frame(outlier = FALSE,
                                                  outlier.coef = FALSE,
                                                  variables = FALSE,
                                                  variables.coef = FALSE,
@@ -235,7 +237,7 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = NA, row.names = var_names)
-    if(identical(result$userdef_spec$variables$description, NA)){
+    if(identical_na(result$userdef_spec$variables$description)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
       result$userdef_spec$variables$description <- rbind(result$userdef_spec$variables$description,
@@ -251,7 +253,7 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      if(!identical(result$userdef_spec$variables$series, NA)){
+      if(!identical_na(result$userdef_spec$variables$series)){
         var_series <- ts.union(result$userdef_spec$variables$series, var_series)
       }
       if(is.mts(var_series))
@@ -499,7 +501,7 @@ spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = NA, row.names = var_names)
-    if(identical(result$userdef_spec$variables$description, NA)){
+    if(identical_na(result$userdef_spec$variables$description)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
       result$userdef_spec$variables$description <- rbind(result$userdef_spec$variables$description,
@@ -515,7 +517,7 @@ spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
-      if(!identical(result$userdef_spec$variables$series, NA)){
+      if(!identical_na(result$userdef_spec$variables$series)){
         var_series <- ts.union(result$userdef_spec$variables$series, var_series)
       }
       if(is.mts(var_series))
@@ -1041,7 +1043,8 @@ specX11_r2jd <- function(rspec = NA, jdspec = NA , freq = NA){
 
   .jcall(jx11, "V", "setCalendarSigma", x11[["x11.calendarSigma"]])
 
-  if (x11[["x11.calendarSigma"]] == "Select" && !is.na(x11[["x11.sigmaVector"]])) {
+  if (x11[["x11.calendarSigma"]] == "Select" &&
+      !identical_na(x11[["x11.sigmaVector"]])) {
     # sigmaVector is change only if x11.calendarSigma is set to "Select"
     sigmaVector <- unlist(strsplit(as.character(x11[["x11.sigmaVector"]]),
                                   split = ", "))
