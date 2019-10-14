@@ -370,8 +370,13 @@ spec_calendar_sigma <- function(calendarSigma = NA, sigmaVector = NA){
             "\nParameters will be ignored.", call. = FALSE)
     calendarSigma <- sigmaVector <- NA
   } else if (identical(calendarSigma, "Select")) {
-    if (identical_na(sigmaVector) ||
-               length(setdiff(sigmaVector, sigmaVector.type)) > 0 ||
+    if (identical_na(sigmaVector)) {
+      warning("x11.sigmaVector must be specified when x11.calendarSigma = \"Select\"." ,
+              "\nx11.calendarSigma will be set to ",
+              '"None".', call. = FALSE)
+      sigmaVector <- NA
+      calendarSigma <- "None"
+    }else if (length(setdiff(sigmaVector, sigmaVector.type)) > 0 ||
         !(length(sigmaVector) %in% c(2, 4, 6, 12))) {
       warning("Wrong format of the x11.sigmaVector." ,
               "\nIt will be ignored and x11.calendarSigma is set to ",
