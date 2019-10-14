@@ -106,8 +106,17 @@ NULL
 #' }
 #' @export
 s_estimate <- function(object = NA){
-  if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
+  if (!inherits(object, c("regarima","regarima_spec","SA","SA_spec")))
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$estimate)
@@ -131,6 +140,15 @@ s_transform <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
 
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
+
   if (inherits(object, "regarima")){
     return(object$specification$transform)
   } else if (inherits(object, "regarima_spec")){
@@ -149,9 +167,18 @@ s_transform <- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_usrdef<- function(object = NA){
+s_usrdef <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$regression$userdef$specification)
@@ -171,9 +198,18 @@ s_usrdef<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_preOut<- function(object = NA){
+s_preOut <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$regression$userdef$outliers)
@@ -189,9 +225,18 @@ s_preOut<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_preVar<- function(object = NA){
+s_preVar <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$regression$userdef$variables)
@@ -207,9 +252,18 @@ s_preVar<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_td<- function(object = NA){
+s_td <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$regression$trading.days)
@@ -229,9 +283,18 @@ s_td<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_easter<- function(object = NA){
+s_easter <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$regression$easter)
@@ -251,9 +314,18 @@ s_easter<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_out<- function(object = NA){
+s_out <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$outliers)
@@ -272,9 +344,18 @@ s_out<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_arima<- function(object = NA){
+s_arima <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$arima$specification)
@@ -294,9 +375,18 @@ s_arima<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_arimaCoef<- function(object = NA){
+s_arimaCoef <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$arima$coefficients)
@@ -315,6 +405,15 @@ s_fcst <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
 
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
+
   if (inherits(object, "regarima")){
     return(object$specification$forecast)
   }else if (inherits(object, "regarima_spec")){
@@ -331,9 +430,18 @@ s_fcst <- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_span<- function(object = NA){
+s_span <- function(object = NA){
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("use only with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "X13") &&
+      (
+        (inherits(object, "regarima_spec") && is.null(object$estimate)) ||
+        (inherits(object, "regarima") && is.null(object$specification$estimate)) ||
+        (inherits(object, "SA_spec") && is.null(object$regarima$estimate)) ||
+        (inherits(object, "SA") && is.null(object$regarima$specification$estimate))
+      ))
+    return(NULL)
 
   if (inherits(object, "regarima")){
     return(object$specification$span)
@@ -349,7 +457,7 @@ s_span<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_x11<- function(object = NA){
+s_x11 <- function(object = NA){
   if (inherits(object, c("SA","SA_spec"))==FALSE)
     stop("use only with \"SA\" and \"SA_spec\" objects", call. = FALSE)
 
@@ -364,7 +472,7 @@ s_x11<- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
-s_seats<- function(object = NA){
+s_seats <- function(object = NA){
   if (inherits(object, c("SA","SA_spec"))==FALSE)
     stop("use only with \"SA\" and \"SA_spec\" objects", call. = FALSE)
 

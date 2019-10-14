@@ -2,7 +2,7 @@
 
 ## Bug fixed
 
-- Error while loading a workspace with metadata. (issue #53)  
+- Error while loading a workspace with metadata (issue #53). 
 - The degree of freedom were wrong with the `summary` functions.
 - `jregarima` function is now exported.  
 - The message was not complete when there was an error importing a model with `get_model`.
@@ -13,6 +13,7 @@
 - Parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
 - Parameter `ylim` added to `plot` functions (issue #60).  
 - New generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals` (linked to issue #56).
+- New pre-specified specification "X11" (no pre-processing; linked to issue #59)
 
 
 # RJDemetra 0.1.3

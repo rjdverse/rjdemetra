@@ -1,13 +1,23 @@
 # Method: "regarima" for the function summary
 #' @export
 #' @export
-summary.regarima <- function (object, ...){
+summary.regarima <- function(object, ...){
+  if (is.null(object$arma)) {
+    result <- list(arma_orders = NULL, results_spec = NULL,
+                   coefficients = list(arima = NULL,
+                                       regression = NULL,
+                                       fixed_out = NULL,
+                                       fixed_var = NULL),
+                   loglik = NULL, residuals_st_err = NULL)
+    class(result) <- "summary.regarima"
+    return(result)
+  }
 
   arma <- object$arma
   arima_coef <- object$arima.coefficients
   reg_coef <- object$regression.coefficients
   rslt_spec <- object$model$spec_rslt
-  loglik<- object$loglik
+  loglik <- object$loglik
   res_err <- object$residuals.stat$st.error
   usr_spec <- object$specification$regression$userdef$specification
   out <- s_preOut(object)
@@ -66,6 +76,8 @@ summary.regarima <- function (object, ...){
 }
 #' @export
 print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), signif.stars = getOption("show.signif.stars"), ...){
+  if (is.null(x$arma_orders))
+    return(invisible(x))
 
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(x$arma_orders))),sep="")
   cat("\n\n")
@@ -128,11 +140,16 @@ print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L
 # Method: "regarima" for the function print
 #' @export
 print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
+  if (is.null(x$arma)) {
+    cat("No Reg-ARIMA model computed")
+    return(invisible(x))
+  }
+
 
   arma <- x$arma
   arima_coef <- x$arima.coefficients
   reg_coef <- x$regression.coefficients
-  loglik<- x$loglik
+  loglik <- x$loglik
   res_err <- x$residuals.stat$st.error
   usr_spec <- x$specification$regression$userdef$specification
   out <- s_preOut(x)

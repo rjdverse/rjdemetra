@@ -1,5 +1,14 @@
 # Function to extract results from the RegARIMA S4 java object
 regarima_rslts <- function(jrobj, fcsth){
+  if (is.jnull(jrobj@internal) || is.null(jrobj@internal$getModel()))
+    return(list(arma = NULL,
+                arima.coefficients = NULL,
+                regression.coefficients = NULL,
+                loglik = NULL,
+                model = NULL,
+                residuals = NULL,
+                residuals.stat = NULL,
+                forecast = NULL))
 
   # ARIMA model
   arma_names <- paste0("arima.",c("p","d","q","bp","bd","bq"))
@@ -131,14 +140,14 @@ regarima_rslts <- function(jrobj, fcsth){
     forecast <- ts.union(fcst,fcsterr)
   }
 
-  z <- list(arma=arma,
-            arima.coefficients = arima.coefficients,
-            regression.coefficients = regression.coefficients,
-            loglik=loglik,
-            model=model,
-            residuals = residuals,
-            residuals.stat = residuals.stat,
-            forecast = forecast)
+  list(arma = arma,
+       arima.coefficients = arima.coefficients,
+       regression.coefficients = regression.coefficients,
+       loglik = loglik,
+       model = model,
+       residuals = residuals,
+       residuals.stat = residuals.stat,
+       forecast = forecast)
 }
 
 

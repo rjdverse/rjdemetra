@@ -5,11 +5,11 @@
 \alias{jx13}
 \title{Seasonal Adjustment with  X-13ARIMA-SEATS}
 \usage{
-jx13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
-  userdefined = NULL)
+jx13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
+  "X11"), userdefined = NULL)
 
-x13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c"),
-  userdefined = NULL)
+x13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
+  "X11"), userdefined = NULL)
 }
 \arguments{
 \item{series}{a univariate time series}
@@ -70,7 +70,8 @@ RSA1 |\tab automatic |\tab AO/LS/TC  |\tab \emph{NA} |\tab Airline(+mean)\cr
 RSA2c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab Airline(+mean)\cr
 RSA3 |\tab automatic |\tab AO/LS/TC |\tab \emph{NA} |\tab automatic\cr
 RSA4c |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic\cr
-RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic
+RSA5c |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
+X11 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab NA
 }
 }
 \examples{

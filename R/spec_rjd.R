@@ -750,7 +750,9 @@ arimaCoef_jd2r <- function(jparams){
                                   1:len)
   data_param
 }
-spec_regarima_X13_r2jd <- function(rspec = NA, jdspec =NA){
+spec_regarima_X13_r2jd <- function(rspec = NA, jdspec = NA){
+  if (is.null(s_estimate(rspec)))
+    return(.jnew("jdr/spec/ts/Utility$Dictionary"))
 
   est <- s_estimate(rspec)
   trans <- s_transform(rspec)
