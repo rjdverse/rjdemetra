@@ -502,15 +502,30 @@ regarima_spec_x13.character <- function(spec = c("RG5c", "RG0", "RG1", "RG2c", "
   arima <- spec_arimaX13(arimaspc=v_arima, arimaco=arima.coeff)
   forecast <- spec_forecast(fcst=v_forecast)
 
-  z <- list(estimate=estimate,
-           transform=transform,
-           regression=regression,
-           outliers=outliers,
-           arima=arima,
-           forecast = forecast,
-           span=span)
+  new_regarima_spec_x13(estimate = estimate,
+                        transform = transform,
+                        regression = regression,
+                        outliers = outliers,
+                        arima = arima,
+                        forecast = forecast,
+                        span = span)
+}
+new_regarima_spec_x13 <- function(estimate = NULL,
+                                  transform = NULL,
+                                  regression = NULL,
+                                  outliers = NULL,
+                                  arima = NULL,
+                                  forecast = NULL,
+                                  span = NULL){
+  z <- list(estimate = estimate,
+            transform = transform,
+            regression = regression,
+            outliers = outliers,
+            arima = arima,
+            forecast = forecast,
+            span = span)
   class(z) = c("regarima_spec","X13")
-  return(z)
+  z
 }
 reformat_spec_def <- function(x, parameter){
   data_names <- names(x[[parameter]])
@@ -602,14 +617,16 @@ regarima_spec_x13.X13 <- function(spec,
 {
   if (!inherits(spec, "X13") & (!inherits(spec, "regarima") | !inherits(spec, "regarima_spec")))
     stop("use only with c(\"regarima\",\"X13\") or c(\"regarima_spec\",\"X13\") objects", call. = FALSE)
+  if (is.null(s_estimate(spec)))
+    return(new_regarima_spec_x13())
 
-  transform.function <-match.arg(transform.function)
-  transform.adjust <-match.arg(transform.adjust)
-  tradingdays.option <-match.arg(tradingdays.option)
-  tradingdays.leapyear <-match.arg(tradingdays.leapyear)
-  tradingdays.test <-match.arg(tradingdays.test)
-  easter.test <-match.arg(easter.test)
-  outlier.method <-match.arg(outlier.method)
+  transform.function <- match.arg(transform.function)
+  transform.adjust <- match.arg(transform.adjust)
+  tradingdays.option <- match.arg(tradingdays.option)
+  tradingdays.leapyear <- match.arg(tradingdays.leapyear)
+  tradingdays.test <- match.arg(tradingdays.test)
+  easter.test <- match.arg(easter.test)
+  outlier.method <- match.arg(outlier.method)
   estimate.fromD <- as.Date(estimate.from)
   estimate.toD <- as.Date(estimate.to)
   outlier.fromD <- as.Date(outlier.from)
@@ -724,14 +741,12 @@ regarima_spec_x13.X13 <- function(spec,
   arima <- spec_arimaX13(arimaspc=v_arima, arimaco=arima.coeff)
   forecast <- spec_forecast(fcst=v_forecast)
 
-  z <- list(estimate=estimate,
-            transform=transform,
-            regression=regression,
-            outliers=outliers,
-            arima=arima,
-            forecast = forecast,
-            span=span)
-  class(z) = c("regarima_spec","X13")
-  return(z)
+  new_regarima_spec_x13(estimate = estimate,
+                        transform = transform,
+                        regression = regression,
+                        outliers = outliers,
+                        arima = arima,
+                        forecast = forecast,
+                        span = span)
 
 }

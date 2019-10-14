@@ -154,7 +154,12 @@ get_jspec <- function(x, ...){
 }
 get_jspec.X13 <- function(x, ...){
   spec <- x13_spec(x, ...)
-  jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
+  if (is.null(s_estimate(spec))) {
+    # For X-11 specification
+    jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
+  } else {
+    jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
+  }
   jdictionary <- spec_regarima_X13_r2jd(spec,jrspec)
   seasma <- specX11_r2jd(spec,jrspec, freq = frequency(x$final$series))
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
@@ -187,7 +192,7 @@ get_jspec.sa_item <- function(x, ...){
 complete_dictionary <- function(workspace, sa_obj){
   userdef <- sa_obj$regarima$specification$regression$userdef
   ud_var <- userdef$variables
-  if (!userdef$specification["variables"] || is.na(ud_var$series))
+  if (is.null(ud_var) || !userdef$specification["variables"] || is.na(ud_var$series))
     return(sa_obj)
 
   context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")

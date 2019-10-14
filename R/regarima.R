@@ -409,7 +409,7 @@ regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
 
 regarima_X13 <- function(jrobj, spec){
   # results
-  jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
+  jd_results <- regarima_rslts(jrobj, as.numeric(s_fcst(spec)))
   # import the model specification
   estimate <- s_estimate(spec)
   transform <- s_transform(spec)
