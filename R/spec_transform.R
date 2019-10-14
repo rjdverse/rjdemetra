@@ -356,16 +356,33 @@ spec_calendar_sigma <- function(calendarSigma = NA, sigmaVector = NA){
   calendarSigma.type <- c("None","Signif","All","Select")
   sigmaVector.type <- c("Group1", "Group2")
 
-  if (is.na(calendarSigma)){
+  if (identical_na(calendarSigma)) {
+    if (!identical_na(sigmaVector)) {
+      warning("x11.sigmaVector will be ignored: x11.calendarSigma has to be set to \"Select\"", call. = FALSE)
+    }
     calendarSigma <- sigmaVector <- NA
-  } else if (is.list(calendarSigma)||length(calendarSigma) > 1 || !calendarSigma %in% calendarSigma.type){
-    warning("Wrong format of the x11.calendarSigma.\nPossibles values are: \"None\",\"Signif\", \"All\", \"Select\".\nParameters will be ignored.", call. = FALSE)
+  } else if (is.list(calendarSigma) ||
+             length(calendarSigma) > 1 ||
+             !calendarSigma %in% calendarSigma.type) {
+    warning("Wrong format of the x11.calendarSigma.",
+            "\nPossibles values are: ",
+            "\"None\",\"Signif\", \"All\", \"Select\".",
+            "\nParameters will be ignored.", call. = FALSE)
     calendarSigma <- sigmaVector <- NA
-  } else if (identical(calendarSigma, "Select")){
-    if (is.na(sigmaVector) || length(setdiff(sigmaVector, sigmaVector.type))>0 ||
-        !(length(sigmaVector) %in% c(2, 4, 6, 12))){
-      warning("Wrong format of the x11.sigmaVector.\nIt will be ignored.", call. = FALSE)
+  } else if (identical(calendarSigma, "Select")) {
+    if (identical_na(sigmaVector)) {
+      warning("x11.sigmaVector must be specified when x11.calendarSigma = \"Select\"." ,
+              "\nx11.calendarSigma will be set to ",
+              '"None".', call. = FALSE)
       sigmaVector <- NA
+      calendarSigma <- "None"
+    }else if (length(setdiff(sigmaVector, sigmaVector.type)) > 0 ||
+        !(length(sigmaVector) %in% c(2, 4, 6, 12))) {
+      warning("Wrong format of the x11.sigmaVector." ,
+              "\nIt will be ignored and x11.calendarSigma is set to ",
+              '"None".', call. = FALSE)
+      sigmaVector <- NA
+      calendarSigma <- "None"
     }else{
       sigmaVector <- toString(sigmaVector)
     }
@@ -748,7 +765,7 @@ spec_arimaTS <-function(arimaspc, arimaco){
 
 # Common for X-13 and TRAMO-SEATS
 
-spec_userdef <-function(usrspc, out, var, tf) {
+spec_userdef <- function(usrspc, out, var, tf) {
   outF <- out$Final
   outP <- out$Predefined
   varF <- var$Final
@@ -813,7 +830,7 @@ spec_userdef <-function(usrspc, out, var, tf) {
   return(x)
 }
 
-spec_forecast <-function(fcst){
+spec_forecast <- function(fcst){
   fcst[3,1] <- if (!is.na(fcst[2,1])) {fcst[2,1]} else {fcst[1,1]}
   rownames(fcst) <- c("Predefined","User_modif","Final")
   return(fcst)
@@ -821,22 +838,30 @@ spec_forecast <-function(fcst){
 
 # X11/ SEATS
 
-spec_x11 <- function(x11spc){
+spec_x11 <- function(x11){
 
-  x11 <- x11spc
-
-  for (i in c(1:5,8:10)){
-    x11[3,i] <- if(!is.na(x11[2,i])) {x11[2,i]} else {x11[1,i]}
+  for (i in c("x11.mode", "x11.seasonalComp", "x11.lsigma", "x11.usigma",
+              "x11.trendAuto", "x11.fcasts", "x11.bcasts", "x11.excludeFcasts")
+  ) {
+    x11[3,i] <- if (!is.na(x11[2,i])) {x11[2,i]} else {x11[1,i]}
   }
-  if(x11[3,5] | is.na(x11[2,6])){
-    x11[3,6]<- x11[1,6]
+  if (x11[3,"x11.trendAuto"] | is.na(x11[2, "x11.trendma"])) {
+    x11[3, "x11.trendma"] <- x11[1, "x11.trendma"]
   }else {
-    x11[3,6] <- x11[2,6]
+    x11[3,"x11.trendma"] <- x11[2, "x11.trendma"]
   }
-  if(x11[3,2]==FALSE | is.na(x11[2,7])){
-    x11[3,7] <- x11[1,7]
+  if(x11[3,"x11.seasonalComp"] | is.na(x11[2,"x11.seasonalma"])){
+    x11[3,"x11.seasonalma"] <- x11[1,"x11.seasonalma"]
   }else {
-    x11[3,7] <- x11[2,7]
+    x11[3,"x11.seasonalma"] <- x11[2,"x11.seasonalma"]
+  }
+  if (is.na(x11[2, "x11.calendarSigma"])) {
+    x11[3, c("x11.calendarSigma","x11.sigmaVector")] <- x11[1, c("x11.calendarSigma","x11.sigmaVector")]
+  } else if (!identical(x11[2, "x11.calendarSigma"], "Select")){
+    x11[3, "x11.calendarSigma"] <- x11[2, "x11.calendarSigma"]
+    x11[3, "x11.sigmaVector"] <- NA
+  } else{
+    x11[3, c("x11.calendarSigma","x11.sigmaVector")] <- x11[2, c("x11.calendarSigma","x11.sigmaVector")]
   }
 
   rownames(x11) <- c("Predefined","User_modif","Final")
@@ -846,8 +871,8 @@ spec_x11 <- function(x11spc){
 spec_seats <- function(seatspc){
   seats <- seatspc
 
-  for (i in seq_len(ncol(seats))){
-    seats[3,i] <- if(!is.na(seats[2,i])) {seats[2,i]} else {seats[1,i]}
+  for (i in seq_len(ncol(seats))) {
+    seats[3,i] <- if (!is.na(seats[2,i])) {seats[2,i]} else {seats[1,i]}
   }
   rownames(seats) <- c("Predefined","User_modif","Final")
   return(seats)
