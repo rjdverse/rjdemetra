@@ -181,16 +181,16 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   }
 
   #Error with preliminary check
-  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+  if (is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
     proc_info <- jrslt$getResults()$getProcessingInformation()
     error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
-    if(!error_msg$isEmpty())
+    if (!error_msg$isEmpty())
       stop(error_msg$toString())
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
                          context_dictionary = context_dictionary,
-                         extra_info = extra_info)
+                         extra_info = extra_info, freq = freq)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
   fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)

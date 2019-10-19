@@ -50,15 +50,16 @@ summary.regarima <- function(object, ...){
     }
   }
   if (usr_spec[3] & usr_spec[4]){
-    nvar0 <-dim(var)[1]
+    nvar0 <- dim(var)[1]
     var <- cbind(var,c(1:nvar0))
+    var[is.na(var[,2]), 2] <- 0
     var <- var[var[,2]!=0,]
     nvar <- dim(var)[1]
     if (nvar!=0){
       colnames(var) <- c("","Coefficients")
       fvar <- var[2]
       rownames(fvar) <- sprintf("r.%s", rownames(fvar))
-      fvar <- cbind(fout, NA)
+      fvar <- cbind(fvar, NA)
       colnames(fvar)[ncol(fvar)] <- "Pr(>|t|)"
     }
   }
@@ -197,9 +198,10 @@ print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
     }
   }
   if (usr_spec[3] & usr_spec[4]){
-    nvar0 <-dim(var)[1]
+    nvar0 <- dim(var)[1]
     var <- cbind(var,c(1:nvar0))
-    var <- var[var[,2]!=0,]
+    var[is.na(var[,2]), 2] <- 0
+    var <- var[var[,2]!=0, ]
     nvar <- dim(var)[1]
     if (nvar!=0){
       var_dsc <- if (nvar0==1){c("r.userdef")} else {paste("r.userdef",var[,3],sep="_")}

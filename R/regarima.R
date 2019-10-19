@@ -249,11 +249,12 @@ regarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "
 }
 
 regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
-                            extra_info = FALSE){
+                            extra_info = FALSE,
+                            freq = NA){
   horizon <- -2
   # extract model specification from the java object
   rspec <- spec_regarima_X13_jd2r(spec = spec, context_dictionary = context_dictionary,
-                        extra_info = extra_info)
+                        extra_info = extra_info, freq = freq)
 
   estimate <- with(rspec,
                    data.frame(preliminary.check = preliminary.check,
@@ -329,12 +330,12 @@ regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
 }
 
 regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
-                           extra_info = FALSE){
+                           extra_info = FALSE, freq = NA){
   # extract model specification from the java object
 
   horizon <- -2
   rspec <- spec_TRAMO_jd2r(spec = spec, context_dictionary = context_dictionary,
-                        extra_info = extra_info)
+                        extra_info = extra_info, freq = freq)
 
   estimate <- with(rspec,
                    data.frame(preliminary.check = preliminary.check,

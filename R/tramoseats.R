@@ -160,7 +160,8 @@ tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RS
 tramoseatsJavaResults <- function(jrslt, spec,
                                   userdefined = NULL,
                                   context_dictionary = NULL,
-                                  extra_info = FALSE){
+                                  extra_info = FALSE,
+                                  freq = NA){
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new(Class = "TRAMO_java",internal = jrarima)
   jrobct <- new(Class = "TramoSeats_java", internal = jrslt)
@@ -178,7 +179,8 @@ tramoseatsJavaResults <- function(jrslt, spec,
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
                         context_dictionary = context_dictionary,
-                        extra_info = extra_info)
+                        extra_info = extra_info,
+                        freq = freq)
   deco <- decomp_defTS(jrobj = jrobct, spec = spec)
   fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)

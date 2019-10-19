@@ -14,7 +14,8 @@ jd_span <- function(type,d0,d1,n0,n1){
 
 
 spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
-                         extra_info = FALSE){
+                         extra_info = FALSE,
+                         freq = NA){
 
   #Estimate
   preliminary.check <- spec$getBasic()$isPreliminaryCheck()
@@ -263,6 +264,85 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     }
   }
 
+  ## Ramp effects
+  core_regression <- jregression$getCore()$getRegression()
+  jramps <- core_regression$getRamps()
+  nb_ramps <- core_regression$getRampsCount()
+  if (nb_ramps > 0) {
+    var_names <- sapply(seq_len(nb_ramps), function(x) jramps[[x]]$getDescription())
+
+    result$userdef_spec$specification$variables <-
+      TRUE
+
+    coeff <- NA
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_len(nb_ramps), function(i){
+        jramp <- jramps[[i]]
+        ramp_name <- jramp$getName()
+        fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+        if (is.null(fixed_coeff)) {
+          NA
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
+
+    td_var_description <- data.frame(type = rep("Series", length(var_names)),
+                                     coeff = coeff, row.names = var_names)
+    if (identical_na(result$userdef_spec$variables$description)) {
+      result$userdef_spec$variables$description <-
+        td_var_description
+    }else{
+      result$userdef_spec$variables$description <-
+        rbind(result$userdef_spec$variables$description,
+              td_var_description)
+    }
+
+    if (!is.na(freq) || !identical_na(result$userdef_spec$variables$series)) {
+      if (is.na(freq))
+        freq <- frequency(result$userdef_spec$variables$series)
+
+      if (!identical_na(result$userdef_spec$variables$series)) {
+        start_ts <- start(result$userdef_spec$variables$series)
+        end_ts <- end(result$userdef_spec$variables$series)
+        ramp_series <- lapply(seq_len(nb_ramps), function(i){
+          jramp <- jramps[[i]]
+          jstart <- jramp$getStart()
+          jend <- jramp$getEnd()
+
+          start_ramp <- c(jstart$getYear(), jstart$getMonth())
+          end_ramp <- c(jend$getYear(), jend$getMonth())
+          ramp(start = start_ts, end = end_ts,
+               start_ramp = start_ramp, end_ramp = end_ramp,
+               frequency = freq)
+        })
+      } else {
+        ramp_series <- lapply(seq_len(nb_ramps), function(i){
+          jramp <- jramps[[i]]
+          jstart <- jramp$getStart()
+          jend <- jramp$getEnd()
+
+          start_ramp <- c(jstart$getYear(), jstart$getMonth())
+          end_ramp <- c(jend$getYear(), jend$getMonth())
+          ramp(start_ramp = start_ramp, end_ramp = end_ramp,
+               frequency = freq)
+        })
+      }
+      ramp_series <- ts(simplify2array(ramp_series),
+                        start = start(ramp_series[[1]]),
+                        frequency = frequency(ramp_series[[1]]))
+      if (!identical_na(result$userdef_spec$variables$series)) {
+        ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+      }
+      if (is.mts(ramp_series))
+        colnames(ramp_series) <- rownames(result$userdef_spec$variables$description)
+
+      result$userdef_spec$variables$series <- ramp_series
+    }
+  }
+
   Phi <- jarima$getPhi()
   BPhi <- jarima$getBPhi()
   Theta <- jarima$getTheta()
@@ -282,13 +362,13 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
   result
 }
 
-spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
-                       extra_info = FALSE){
+spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
+                       extra_info = FALSE, freq = NA){
 
   #Estimate
   preliminary.check <- spec$getBasic()$isPreliminaryCheck()
-  jestimate <-.jcall(spec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
-  jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
+  jestimate <- .jcall(spec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
+  jest.span <- .jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
   estimate.type <- .jcall(jest.span,"S","getType")
   estimate.d0 <- .jcall(jest.span,"S","getD0")
@@ -498,9 +578,23 @@ spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
 
     result$userdef_spec$specification$variables <-
       TRUE
+    coeff <- NA
+    # if (core_regression$hasFixedCoefficients()) {
+    #   # coeff <- sapply(seq_len(nb_ramps), function(i){
+    #   #   jramp <- jramps[[i]]
+    #   #   ramp_name <- jramp$getName()
+    #   #   fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+    #   #   if (is.null(fixed_coeff)) {
+    #   #     NA
+    #   #   }else{
+    #   #     fixed_coeff
+    #   #   }
+    #   # })
+    #   # result$userdef_spec$specification$variables.coef <- TRUE
+    # }
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
-                                     coeff = NA, row.names = var_names)
+                                     coeff = coeff, row.names = var_names)
     if(identical_na(result$userdef_spec$variables$description)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
@@ -526,6 +620,86 @@ spec_TRAMO_jd2r<- function(spec = NA, context_dictionary = NULL,
       result$userdef_spec$variables$series <- var_series
     }
   }
+
+  ## Ramp effects
+  core_regression <- jregression$getCore()$getRegression()
+  jramps <- core_regression$getRamps()
+  nb_ramps <- core_regression$getRampsCount()
+  if (nb_ramps > 0) {
+    var_names <- sapply(seq_len(nb_ramps), function(x) jramps[[x]]$getDescription())
+
+    result$userdef_spec$specification$variables <-
+      TRUE
+    coeff <- NA
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_len(nb_ramps), function(i){
+        jramp <- jramps[[i]]
+        ramp_name <- jramp$getName()
+        fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+        if (is.null(fixed_coeff)) {
+          NA
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
+
+    td_var_description <- data.frame(type = rep("Series", length(var_names)),
+                                     coeff = coeff, row.names = var_names)
+    if (identical_na(result$userdef_spec$variables$description)) {
+      result$userdef_spec$variables$description <-
+        td_var_description
+    }else{
+      result$userdef_spec$variables$description <-
+        rbind(result$userdef_spec$variables$description,
+              td_var_description)
+    }
+
+    if (!is.na(freq) || !identical_na(result$userdef_spec$variables$series)) {
+      if (is.na(freq))
+        freq <- frequency(result$userdef_spec$variables$series)
+
+      if (!identical_na(result$userdef_spec$variables$series)) {
+        start_ts <- start(result$userdef_spec$variables$series)
+        end_ts <- end(result$userdef_spec$variables$series)
+        ramp_series <- lapply(seq_len(nb_ramps), function(i){
+          jramp <- jramps[[i]]
+          jstart <- jramp$getStart()
+          jend <- jramp$getEnd()
+
+          start_ramp <- c(jstart$getYear(), jstart$getMonth())
+          end_ramp <- c(jend$getYear(), jend$getMonth())
+          ramp(start = start_ts, end = end_ts,
+               start_ramp = start_ramp, end_ramp = end_ramp,
+               frequency = freq)
+        })
+      } else {
+        ramp_series <- lapply(seq_len(nb_ramps), function(i){
+          jramp <- jramps[[i]]
+          jstart <- jramp$getStart()
+          jend <- jramp$getEnd()
+
+          start_ramp <- c(jstart$getYear(), jstart$getMonth())
+          end_ramp <- c(jend$getYear(), jend$getMonth())
+          ramp(start_ramp = start_ramp, end_ramp = end_ramp,
+               frequency = freq)
+        })
+      }
+      ramp_series <- ts(simplify2array(ramp_series),
+                       start = start(ramp_series[[1]]),
+                       frequency = frequency(ramp_series[[1]]))
+      if (!identical_na(result$userdef_spec$variables$series)) {
+        ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+      }
+      if (is.mts(ramp_series))
+        colnames(ramp_series) <- rownames(result$userdef_spec$variables$description)
+
+      result$userdef_spec$variables$series <- ramp_series
+    }
+  }
+
+
 
   #Arima
   Phi <- jarima$getPhi()
