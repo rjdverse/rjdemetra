@@ -10,7 +10,7 @@ get_jmodel(x, workspace, userdefined = NULL, progress_bar = TRUE)
 get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 }
 \arguments{
-\item{x}{the object to get the seasonnaly adjusted model.}
+\item{x}{the object to get the seasonally adjusted model.}
 
 \item{workspace}{the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.}
 
@@ -20,7 +20,7 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 \item{progress_bar}{boolean: if \code{TRUE} a progress bar is printed.}
 }
 \value{
-\code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects:
+\code{get_model()} returns a seasonally adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonally adjust objects:
 \itemize{
  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number

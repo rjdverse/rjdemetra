@@ -77,8 +77,10 @@ summary.regarima <- function(object, ...){
 }
 #' @export
 print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), signif.stars = getOption("show.signif.stars"), ...){
-  if (is.null(x$arma_orders))
+  if (is.null(x$arma_orders)) {
+    cat("No pre-processing")
     return(invisible(x))
+  }
 
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(x$arma_orders))),sep="")
   cat("\n\n")
@@ -140,9 +142,9 @@ print.summary.regarima <- function (x, digits = max(3L, getOption("digits") - 3L
 
 # Method: "regarima" for the function print
 #' @export
-print.regarima=function (x, digits = max(3L, getOption("digits") - 3L), ...){
+print.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), ...){
   if (is.null(x$arma)) {
-    cat("No Reg-ARIMA model computed")
+    cat("No pre-processing")
     return(invisible(x))
   }
 

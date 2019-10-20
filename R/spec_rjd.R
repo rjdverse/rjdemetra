@@ -699,8 +699,6 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     }
   }
 
-
-
   #Arima
   Phi <- jarima$getPhi()
   BPhi <- jarima$getBPhi()

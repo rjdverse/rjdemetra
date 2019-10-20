@@ -269,6 +269,10 @@ get_ts.SA <- function(x){
   return(x$final$series[,"y"])
 }
 #' @export
+get_ts.jSA <- function(x){
+  return(get_indicators(x, "y")[[1]])
+}
+#' @export
 get_ts.regarima <- function(x){
   mts <- x[["model"]][["effects"]]
   y <- mts[,"y_lin"] + mts[,"tde"] + mts[,"ee"] + mts[,"omhe"] + mts[,"out"]
@@ -338,13 +342,13 @@ compute <- function(workspace, i) {
 #' Generics functions to get seasonally adjusted model(s) from \code{workspace},
 #' \code{multiprocessing} or \code{sa_item} object. \code{get_model} returns a \code{"SA"} objects while  \code{get_jmodel} returns the Java objects of the models.
 #'
-#' @param x the object to get the seasonnaly adjusted model.
+#' @param x the object to get the seasonally adjusted model.
 #' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.
 #' @param userdefined vector with characters for additional output variables.
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
 #' @param progress_bar boolean: if \code{TRUE} a progress bar is printed.
 #'
-#' @return \code{get_model()} returns a seasonnaly adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonnaly adjust objects:
+#' @return \code{get_model()} returns a seasonally adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonally adjust objects:
 #' \itemize{
 #'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
 #'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
