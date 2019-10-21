@@ -84,13 +84,13 @@ jSA2R <- function(x, userdefined = NULL){
     # X13-RegARIMA object
     model <- regarima_defX13(jrobj = x[["result"]], spec = jspec,
                              context_dictionary = context_dictionary,
-                             extra_info = TRUE)
+                             extra_info = TRUE, freq = frequency(y_ts))
   }else{
     if(.jinstanceof(jspec, "jdr/spec/tramoseats/TramoSpec")){
       # TRAMOSEATS-RegARIMA object
       model <- regarima_defTS(jrobj = x[["result"]], spec = jspec,
                               context_dictionary = context_dictionary,
-                              extra_info = TRUE)
+                              extra_info = TRUE, freq = frequency(y_ts))
     }else{
       y_ts <- result(x[["result"]], "y")
       # SA object
@@ -114,7 +114,7 @@ sa_jd2r <- function(jrslt, spec,
   if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
     tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
                           context_dictionary = context_dictionary,
-                          extra_info = extra_info)
+                          extra_info = extra_info, freq = freq)
   }else{
     if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
       x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,

@@ -13,7 +13,10 @@
 - Parameters `x11.calendarSigma` and `x11.sigmaVector` added to `x13_spec`.  
 - Parameter `ylim` added to `plot` functions (issue #60).  
 - New generic functions: `logLik`, `vcov`, `df.residual`, `nobs`, `residuals` (linked to issue #56).
-- New pre-specified specification "X11" (no pre-processing; linked to issue #59)
+- New pre-specified specification "X11" (no pre-processing; linked to issue #59).  
+- Ramp effects are now imported.
+- `add_sa_item` now compatible with `jSA` object.
+- When a model is added to a workspace with `add_sa_item`, the external regressors are renamed only if they don't already exist in the workspace.
 
 
 # RJDemetra 0.1.3
