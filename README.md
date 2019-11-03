@@ -21,7 +21,7 @@ recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release
 to the members of the European Statistical System (ESS) and the European
 System of Central Banks. JDemetra+ implements the two leading seasonal
 adjustment methods
-[TRAMO/SEATS+](http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html)
+[TRAMO/SEATS+](http://gretl.sourceforge.net/tramo/tramo-seats.html)
 and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
 
 Besides seasonal adjustment, JDemetra+ bundles other time series models
