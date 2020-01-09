@@ -665,7 +665,7 @@ spec_tdTS<-function(td){
 
   #UserDefined TD regressors
   if(td[3, "option"] == "UserDefined"){
-    if(any(!is.na(td[1, c("leapyear", "stocktd")]))){
+    if(any(!is.na(td[1, c("automatic","leapyear", "stocktd")]))){
       warning("With tradingdays.option = \"UserDefined\", the parameters tradingdays.leapyear and tradingdays.stocktd are ignored.\n",
               call. = FALSE)
     }
