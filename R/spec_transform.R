@@ -451,42 +451,47 @@ spec_transformX13<-function(trans){
 
 spec_tdX13<-function(td, tf, tadj){
 
-  td[3,1] <- if(!is.na(td[2,1])) {td[2,1]} else {td[1,1]}
-  td[3,4] <- if(!is.na(td[2,4])) {td[2,4]} else {td[1,4]}
+  td[3, "option"] <- if(!is.na(td[2, "option"])) {td[2, "option"]} else {td[1, "option"]}
+  td[3, "stocktd"] <- if(!is.na(td[2, "stocktd"])) {td[2, "stocktd"]} else {td[1, "stocktd"]}
 
-  if (td[3,1]=="None" & td[3,4]==0) {
-    td[3,2]<- td[1,2]
-    td[3,c(3,5)]<- "None"
-  } else if (td[3,1]=="None") {
-    td[3,2]<- td[1,2]
-    td[3,3]<- "None"
+  if (td[3, "option"]=="None" & td[3, "stocktd"]==0) {
+    td[3, "autoadjust"]<- td[1, "autoadjust"]
+    td[3,c("leapyear", "test")]<- "None"
+  } else if (td[3, "option"]=="None") {
+    td[3, "autoadjust"]<- td[1, "autoadjust"]
+    td[3, "leapyear"]<- "None"
   } else {
-    td[3,4] <-0
+    td[3, "stocktd"] <-0
   }
-  if (is.na(td[3,2])){
-    td[3,2] <- if(!is.na(td[2,2])) {td[2,2]} else {td[1,2]}
+  if (is.na(td[3, "autoadjust"])){
+    td[3, "autoadjust"] <- if(!is.na(td[2, "autoadjust"])) {td[2, "autoadjust"]} else {td[1, "autoadjust"]}
 
-    if (td[3,2] & as.character(tf)=="Auto") {
-      td[3,3]<- td[1,3]
+    if (td[3, "autoadjust"] & as.character(tf)=="Auto") {
+      td[3, "leapyear"]<- td[1, "leapyear"]
     }else{
-      td[3,2]<-FALSE
+      td[3, "autoadjust"]<-FALSE
     }
   }
-  if (is.na(td[3,3])){
+  if (is.na(td[3, "leapyear"])){
     if (tadj!="None") {
-      td[3,3] <- "None"
+      td[3, "leapyear"] <- "None"
     }else{
-      td[3,3] <- if(!is.na(td[2,3])) {td[2,3]} else {td[1,3]}
+      td[3, "leapyear"] <- if(!is.na(td[2, "leapyear"])) {td[2, "leapyear"]} else {td[1, "leapyear"]}
     }
   }
-  if (is.na(td[3,5]))
-    td[3,5] <- if(!is.na(td[2,5])) {td[2,5]} else {td[1,5]}
+  if (is.na(td[3, "test"]))
+    td[3, "test"] <- if(!is.na(td[2, "test"])) {td[2, "test"]} else {td[1, "test"]}
 
   #UserDefined TD regressors
-  if(td[3,1] == "UserDefined"){
-    td[3,3] <- "None"
-    td[3,2] <- FALSE
-    td[3,4] <- 0
+  if(td[3, "option"] == "UserDefined"){
+    if(any(!is.na(td[1, c("autoadjust", "leapyear", "stocktd")]))){
+      warning("With tradingdays.option = \"UserDefined\", the parameters tradingdays.autoadjust, tradingdays.leapyear and tradingdays.stocktd are ignored.\n",
+              call. = FALSE)
+    }
+
+    td[3, "leapyear"] <- "None"
+    td[3, "autoadjust"] <- FALSE
+    td[3, "stocktd"] <- 0
   }
   rownames(td) <- c("Predefined","User_modif","Final")
   return(td)
@@ -635,33 +640,38 @@ spec_transformTS<-function(trans){
 
 spec_tdTS<-function(td){
 
-  td[3,1] <- if(!is.na(td[2,1])) {td[2,1]} else {td[1,1]}
+  td[3, "automatic"] <- if(!is.na(td[2, "automatic"])) {td[2, "automatic"]} else {td[1, "automatic"]}
 
-  if (td[3,1]!= "Unused"){
-    td[3,2] <- if(!is.na(td[2,2])) {td[2,2]} else {td[1,2]}
-    td[3,3:6] <- td[1,3:6]
+  if (td[3, "automatic"]== "Unused"){
+    td[3, "pftd"] <- if(!is.na(td[2, "pftd"])) {td[2, "pftd"]} else {td[1, "pftd"]}
+    td[3, c("option", "leapyear", "stocktd", "test")] <- td[1, c("option", "leapyear", "stocktd", "test")]
   }else{
-    td[3,2] <-td[1,2]
-    td[3,3] <- if(!is.na(td[2,3])) {td[2,3]} else {td[1,3]}
-    td[3,5] <- if(!is.na(td[2,5])) {td[2,5]} else {td[1,5]}
+    td[3, "pftd"] <-td[1, "pftd"]
+    td[3, "option"] <- if(!is.na(td[2, "option"])) {td[2, "option"]} else {td[1, "option"]}
+    td[3, "stocktd"] <- if(!is.na(td[2, "stocktd"])) {td[2, "stocktd"]} else {td[1, "stocktd"]}
 
-    if (td[3,3]=="None" & td[3,5]==0){
-      td[3,4] <- FALSE
-      td[3,6] <- "None"
-    }else if (td[3,3]=="None"){
-     td[3,4] <- FALSE
-      td[3,6] <- if(!is.na(td[2,6])) {td[2,6]} else {td[1,6]}
+    if (td[3, "option"]=="None" & td[3, "stocktd"]==0){
+      td[3, "leapyear"] <- FALSE
+      td[3, "test"] <- "None"
+    }else if (td[3, "option"]=="None"){
+     td[3, "leapyear"] <- FALSE
+      td[3, "test"] <- if(!is.na(td[2, "test"])) {td[2, "test"]} else {td[1, "test"]}
     }else{
-      td[3,5]<-0
-      td[3,4] <- if(!is.na(td[2,4])) {td[2,4]} else {td[1,4]}
-      td[3,6] <- if(!is.na(td[2,6])) {td[2,6]} else {td[1,6]}
+      td[3, "stocktd"]<-0
+      td[3, "leapyear"] <- if(!is.na(td[2, "leapyear"])) {td[2, "leapyear"]} else {td[1, "leapyear"]}
+      td[3, "test"] <- if(!is.na(td[2, "test"])) {td[2, "test"]} else {td[1, "test"]}
     }
   }
 
   #UserDefined TD regressors
-  if(td[3,3] == "UserDefined"){
-    td[3,4] <- FALSE
-    td[3,5] <- 0
+  if(td[3, "option"] == "UserDefined"){
+    if(any(!is.na(td[1, c("leapyear", "stocktd")]))){
+      warning("With tradingdays.option = \"UserDefined\", the parameters tradingdays.leapyear and tradingdays.stocktd are ignored.\n",
+              call. = FALSE)
+    }
+    td[3, "automatic"] <- td[1, "automatic"]
+    td[3, "leapyear"] <- FALSE
+    td[3, "stocktd"] <- 0
   }
 
   rownames(td) <- c("Predefined","User_modif","Final")

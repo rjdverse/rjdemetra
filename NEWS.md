@@ -6,6 +6,7 @@
 - The degree of freedom were wrong with the `summary` functions.
 - `jregarima` function is now exported.  
 - The message was not complete when there was an error importing a model with `get_model`.
+- The trading-days specification was not correctly specified with TRAMO-SEATS.
 
 ## New functionalities
 
@@ -17,6 +18,7 @@
 - Ramp effects are now imported.
 - `add_sa_item` now compatible with `jSA` object.
 - When a model is added to a workspace with `add_sa_item`, the external regressors are renamed only if they don't already exist in the workspace.
+- Warning added when `tradingdays.option = "UserDefined"` and `tradingdays.autoadjust`, `tradingdays.leapyear` or `tradingdays.stocktdtradingdays` are defined in a new specification (because they are currently ignored). (issue #67)
 
 
 # RJDemetra 0.1.3
