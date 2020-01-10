@@ -11,19 +11,21 @@
 \usage{
 jregarima(series, spec = NA)
 
-jregarima_tramoseats(series, spec = c("TRfull", "TR0", "TR1", "TR2",
-  "TR3", "TR4", "TR5"))
+jregarima_tramoseats(
+  series,
+  spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")
+)
 
-jregarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
-  "RG4c"))
+jregarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"))
 
 regarima(series, spec = NA)
 
-regarima_tramoseats(series, spec = c("TRfull", "TR0", "TR1", "TR2",
-  "TR3", "TR4", "TR5"))
+regarima_tramoseats(
+  series,
+  spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")
+)
 
-regarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3",
-  "RG4c"))
+regarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"))
 }
 \arguments{
 \item{series}{a univariate time series}

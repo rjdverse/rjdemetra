@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,13 +41,13 @@
 
 
 
-<meta property="og:title" content="RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS — regarima" />
 
+<meta property="og:title" content="RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS — regarima" />
 <meta property="og:description" content="regarima/regarima_x13/regarima_tramoseats decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
 jregarima/jregarima_x13/jregarima_tramoseats does the same computation but returns the Java objects without formatting the output" />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -55,6 +59,7 @@ jregarima/jregarima_x13/jregarima_tramoseats does the same computation but retur
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -110,7 +115,6 @@ jregarima/jregarima_x13/jregarima_tramoseats does the same computation but retur
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -140,6 +144,7 @@ jregarima/jregarima_x13/jregarima_tramoseats does the same computation but retur
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -151,28 +156,28 @@ jregarima/jregarima_x13/jregarima_tramoseats does the same computation but retur
     </div>
 
     <div class="ref-description">
-    
     <p><code>regarima/regarima_x13/regarima_tramoseats</code> decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
 <code>jregarima/jregarima_x13/jregarima_tramoseats</code> does the same computation but returns the Java objects without formatting the output</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>jregarima</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
-<span class='fu'>jregarima_tramoseats</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>, <span class='st'>"TR0"</span>, <span class='st'>"TR1"</span>, <span class='st'>"TR2"</span>,
-  <span class='st'>"TR3"</span>, <span class='st'>"TR4"</span>, <span class='st'>"TR5"</span>))
+<span class='fu'>jregarima_tramoseats</span>(
+  <span class='no'>series</span>,
+  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TRfull"</span>, <span class='st'>"TR0"</span>, <span class='st'>"TR1"</span>, <span class='st'>"TR2"</span>, <span class='st'>"TR3"</span>, <span class='st'>"TR4"</span>, <span class='st'>"TR5"</span>)
+)
 
-<span class='fu'>jregarima_x13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>,
-  <span class='st'>"RG4c"</span>))
+<span class='fu'>jregarima_x13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>, <span class='st'>"RG4c"</span>))
 
 <span class='fu'>regarima</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
-<span class='fu'>regarima_tramoseats</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TRfull"</span>, <span class='st'>"TR0"</span>, <span class='st'>"TR1"</span>, <span class='st'>"TR2"</span>,
-  <span class='st'>"TR3"</span>, <span class='st'>"TR4"</span>, <span class='st'>"TR5"</span>))
+<span class='fu'>regarima_tramoseats</span>(
+  <span class='no'>series</span>,
+  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TRfull"</span>, <span class='st'>"TR0"</span>, <span class='st'>"TR1"</span>, <span class='st'>"TR2"</span>, <span class='st'>"TR3"</span>, <span class='st'>"TR4"</span>, <span class='st'>"TR5"</span>)
+)
 
-<span class='fu'>regarima_x13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>,
-  <span class='st'>"RG4c"</span>))</pre>
-    
+<span class='fu'>regarima_x13</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>, <span class='st'>"RG4c"</span>))</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -190,32 +195,31 @@ See functions <code><a href='regarima_spec_x13.html'>regarima_spec_x13</a> and <
 </ul></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>jregarima/jregarima_x13/jregarima_tramoseats</code> return a <code><a href='jSA.html'>jSA</a></code> object. It contains the Java objects of the result of the preadjustment method without any formatting. Therefore the computation is faster than with <code>regarima/regarima_x13/regarima_tramoseats</code>. The results can the seasonal adjustment can be extract by <code><a href='jSA.html'>get_indicators</a></code>.</p>
-<p><code>regarima/regarima_x13/regarima_tramoseats</code> return an object of class <code>"regarima"</code> and sub-class <code>"X13"</code> or <code>"TRAMO_SEATS"</code>. <code>regarima_x13</code> returns an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima","X13")</a></code> and <code>regarima_tramoseats</code> an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima","TRAMO_SEATS")</a></code>.
+<p><code>regarima/regarima_x13/regarima_tramoseats</code> return an object of class <code>"regarima"</code> and sub-class <code>"X13"</code> or <code>"TRAMO_SEATS"</code>. <code>regarima_x13</code> returns an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("regarima","X13")</a></code> and <code>regarima_tramoseats</code> an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("regarima","TRAMO_SEATS")</a></code>.
 For the function <code>regarima</code>, the sub-class of the object depends on the used method that is defined by the class of the <code>spec</code> object.</p>
 <p>An object of class <code>"regarima"</code> is a list containing the following components:</p>
 <dt>specification</dt><dd><p>list with the model specification as defined by the <code>spec</code> argument. See also Value of the <code><a href='regarima_spec_x13.html'>regarima_spec_x13</a></code> and  <code><a href='regarima_spec_tramoseats.html'>regarima_spec_tramoseats</a></code> functions.</p></dd>
 
 <dt>arma</dt><dd><p>vector with the orders of the autoregressive (AR), moving average (MA), seasonal AR and seasonal MA processes, as well as with the regular and seasonal differencing orders (P,D,Q) (BP,BD,BQ).</p></dd>
 
-<dt>arima.coefficients</dt><dd><p>matrix with the regular and seasonal AR and MA coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function <code><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></code> (the output includes also the regression coefficients).</p></dd>
+<dt>arima.coefficients</dt><dd><p>matrix with the regular and seasonal AR and MA coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> (the output includes also the regression coefficients).</p></dd>
 
-<dt>regression.coefficients</dt><dd><p>matrix with the regression variables (i.e.: mean, calendar effect, outliers and user-defined regressors) coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function <code><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></code> (output includes also the arima coefficients).</p></dd>
+<dt>regression.coefficients</dt><dd><p>matrix with the regression variables (i.e.: mean, calendar effect, outliers and user-defined regressors) coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> (output includes also the arima coefficients).</p></dd>
 
-<dt>loglik</dt><dd><p>matrix containing the log-likelihood of the RegARIMA model as well as the associated model selection criteria statistics (AIC, AICC, BIC and BICC) and parameters (<code>np</code> = number of parameters in the likelihood, <code>neffectiveobs</code> = number of effective observations in the likelihood). These statistics can be also extracted with the function <code><a href='https://www.rdocumentation.org/packages/stats/topics/logLik'>logLik</a></code>.</p></dd>
+<dt>loglik</dt><dd><p>matrix containing the log-likelihood of the RegARIMA model as well as the associated model selection criteria statistics (AIC, AICC, BIC and BICC) and parameters (<code>np</code> = number of parameters in the likelihood, <code>neffectiveobs</code> = number of effective observations in the likelihood). These statistics can be also extracted with the function <code><a href='https://rdrr.io/r/stats/logLik.html'>logLik</a></code>.</p></dd>
 
 <dt>model</dt><dd><p>list containing the information on the model specification after its estimation (<code>spec_rslt</code>), as well as the decomposed elements of the input series (ts matrix, <code>effects</code>). The model specification includes the information on the estimation method (<code>Model</code>) and time span (<code>T.span</code>), whether the original series was log transformed (<code>Log transformation</code>) and details on the regression part of the RegARIMA model; i.e. if it includes a <code>Mean</code>, <code>Trading days</code> effects (if yes, it provides the number of regressors), <code>Leap year</code> effect, <code>Easter</code> effect and whether outliers were detected (<code>Outliers</code>; if yes, it provides the number of outliers). The decomposed elements of the input series contain the linearised series (<code>y_lin</code>) and the deterministic components; i.e.: trading days effect (<code>tde</code>), Easter effect (<code>ee</code>), other moving holidays effect (<code>omhe</code>) and outliers effect (total - <code>out</code>, related to irregular - <code>out_i</code>, related to trend - <code>out_t</code>, related to seasonal - <code>out_s</code>).</p></dd>
 
-<dt>residuals</dt><dd><p>the residuals (time series). They can be also extracted with the function <code><a href='https://www.rdocumentation.org/packages/stats/topics/residuals'>residuals</a></code>.</p></dd>
+<dt>residuals</dt><dd><p>the residuals (time series). They can be also extracted with the function <code><a href='https://rdrr.io/r/stats/residuals.html'>residuals</a></code>.</p></dd>
 
-<dt>residuals.stat</dt><dd><p>List containing statistics on the RegARIMA residuals. It provides residuals standard error (<code>st.error</code>) and results for the tests on the normality, independence and linearity of the residuals (<code>tests</code>) - object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima_rtests","data.frame")</a></code>.</p></dd>
+<dt>residuals.stat</dt><dd><p>List containing statistics on the RegARIMA residuals. It provides residuals standard error (<code>st.error</code>) and results for the tests on the normality, independence and linearity of the residuals (<code>tests</code>) - object of class <code><a href='https://rdrr.io/r/base/c.html'>c("regarima_rtests","data.frame")</a></code>.</p></dd>
 
 <dt>forecast</dt><dd><p>ts matrix containing the forecast of the original series (<code>fcst</code>) and it's standard error (<code>fcsterr</code>).</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In the X13 and TRAMO-SEATS seasonal adjustment the first step consists of pre-adjusting the original series with a RegARIMA model, where the original series is corrected for any deterministic effects and missing observations. This step is also referred as linearization of the original series.</p>
@@ -228,63 +232,62 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 <li><p>\(x_t\) - a disturbance that follows the general ARIMA process:
 \(\phi(B)\delta(B)x_t=\theta(B)a_t\); \(\phi(B), \delta(B)\) and \(\theta(B)\) are the finite polynomials in \(B\); \(a_t\) is a white-noise variable with zero mean and a constant variance.</p></li>
 </ul>
-    <p>The polynomial \(\phi(B)\) is a stationary autoregressive (AR) polynomial in \(B\), which is a product of the stationary regular AR polynomial in \(B\) and the stationary seasonal polynomial in \(B^s\):</p>
+
+<p>The polynomial \(\phi(B)\) is a stationary autoregressive (AR) polynomial in \(B\), which is a product of the stationary regular AR polynomial in \(B\) and the stationary seasonal polynomial in \(B^s\):</p>
 <p>$$\phi(B)=\phi_p(B)\Phi_{bp}(B^s)=(1+\phi_1B+...+\phi_pB^p)(1+\Phi_1B^s+...+\Phi_{bp}B^{bps})$$</p>
 <p>where:</p><ul>
 <li><p>\(p\) - number of regular AR terms (here and in 'JDemetra+' \(p \le 3\));</p></li>
 <li><p>\(bp\) - number of seasonal AR terms (here and in 'JDemetra+' \(bp \le 1\));</p></li>
 <li><p>\(s\) - number of observations per year (frequency of the time series).</p></li>
 </ul>
-    <p>The polynomial \(\theta(B)\) is an invertible moving average (MA) polynomial in \(B\), which is a product of the invertible regular MA polynomial in \(B\) and the invertible seasonal MA polynomial in \(B^s\):</p>
+
+<p>The polynomial \(\theta(B)\) is an invertible moving average (MA) polynomial in \(B\), which is a product of the invertible regular MA polynomial in \(B\) and the invertible seasonal MA polynomial in \(B^s\):</p>
 <p>$$\theta(B)=\theta_q(B)\Theta_{bq}(B^s)=(1+\theta_1B+...+\theta_qB^q)(1+\Theta_1B^s+...+\Theta_{bq}B^{bqs})$$</p>
 <p>where:</p><ul>
 <li><p>\(q\) - number of regular MA terms (here and in 'JDemetra+' \(q \le 3\));</p></li>
 <li><p>\(bq\) - number of seasonal MA terms (here and in 'JDemetra+' \(bq \le 1\));</p></li>
 </ul>
-    <p>The polynomial \(\delta(B)\) is the non-stationary AR polynomial in \(B\) (unit roots):</p>
+
+<p>The polynomial \(\delta(B)\) is the non-stationary AR polynomial in \(B\) (unit roots):</p>
 <p>$$\delta(B)=(1-B)^d(1-B^s)^{d_s}$$</p>
 <p>where:</p><ul>
 <li><p>\(d\) - regular differencing order (here and in 'JDemetra+' \(d \le 1\));</p></li>
 <li><p>\(d_s\) - seasonal differencing order (here and in 'JDemetra+' \(d_s \le 1\));</p></li>
 </ul>
-    <p>Notations used for AR and MA processes, model denoted as ARIMA \((P,D,Q)(BP,BD,BQ)\), are consistent with those in 'JDemetra+'.</p>
+
+<p>Notations used for AR and MA processes, model denoted as ARIMA \((P,D,Q)(BP,BD,BQ)\), are consistent with those in 'JDemetra+'.</p>
 <p>As regards the available predefined 'JDemetra+' X13 and TRAMO-SEATS model specifications, they are described in the tables below.</p>
 <p><strong>X13:</strong></p><table class='table'>
-<tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td></tr>
-<tr><td><strong>Outliers detection</strong></td><td>|</td><td></td><td><strong>Calendar effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td></tr>
-<tr><td></td><td></td><td>RG0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
-<tr><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td></tr>
-<tr><td>RG1 |</td><td>automatic |</td><td>AO/LS/TC  |</td><td></td><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td></tr>
-<tr><td></td><td>RG2c |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>Airline(+mean)</td><td></td></tr>
-<tr><td>RG3 |</td><td>automatic |</td><td>AO/LS/TC |</td><td></td><td><em>NA</em></td><td>|</td><td>automatic</td></tr>
-<tr><td></td><td>RG4c |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>automatic</td><td></td></tr>
-<tr><td>RG5c |</td><td>automatic |</td><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td><td></td><td><strong>Identifier</strong></td></tr>
+<tr><td><strong>Identifier</strong> |</td><td><strong>Log/level detection</strong> |</td><td><strong>Outliers detection</strong> |</td><td><strong>Calendar effects</strong> |</td><td><strong>ARIMA</strong></td><td>RG0 |</td><td><em>NA</em> |</td></tr>
+<tr><td><em>NA</em> |</td><td><em>NA</em> |</td><td>Airline(+mean)</td><td>RG1 |</td><td>automatic |</td><td>AO/LS/TC  |</td><td><em>NA</em> |</td></tr>
+<tr><td>Airline(+mean)</td><td>RG2c |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>Airline(+mean)</td><td>RG3 |</td></tr>
+<tr><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td><td>automatic</td><td>RG4c |</td><td>automatic |</td><td>AO/LS/TC |</td></tr>
+<tr><td>2 td vars + Easter |</td><td>automatic</td><td>RG5c |</td><td>automatic |</td><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td></tr>
 </table>
-    <p><strong>TRAMO-SEATS:</strong></p><table class='table'>
-<tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td><td><strong>Outliers detection</strong></td></tr>
-<tr><td>|</td><td></td><td><strong>Calendar effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td><td></td><td></td></tr>
-<tr><td>TR0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
-<tr><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td><td>TR1 |</td><td>automatic |</td><td>AO/LS/TC |</td><td></td></tr>
-<tr><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td><td>TR2 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td></tr>
-<tr><td>Airline(+mean)</td><td></td><td>TR3 |</td><td>automatic |</td><td>AO/LS/TC |</td><td></td><td><em>NA</em></td><td>|</td></tr>
-<tr><td>automatic</td><td></td><td>TR4 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>automatic</td><td></td></tr>
-<tr><td>TR5 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td><td></td><td>TRfull |</td><td>automatic |</td></tr>
-<tr><td>AO/LS/TC |</td><td>automatic |</td><td>automatic</td><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td></tr>
+
+
+<p><strong>TRAMO-SEATS:</strong></p><table class='table'>
+<tr><td><strong>Identifier</strong> |</td><td><strong>Log/level detection</strong> |</td><td><strong>Outliers detection</strong> |</td><td><strong>Calendar effects</strong> |</td><td><strong>ARIMA</strong></td><td>TR0 |</td><td><em>NA</em> |</td><td><em>NA</em> |</td></tr>
+<tr><td><em>NA</em> |</td><td>Airline(+mean)</td><td>TR1 |</td><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td><td>Airline(+mean)</td><td>TR2 |</td></tr>
+<tr><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>Airline(+mean)</td><td>TR3 |</td><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td></tr>
+<tr><td>automatic</td><td>TR4 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>automatic</td><td>TR5 |</td><td>automatic |</td></tr>
+<tr><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td><td>TRfull |</td><td>automatic |</td><td>AO/LS/TC |</td><td>automatic |</td><td>automatic</td></tr>
 </table>
-    
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='co'># X13 method</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+ <span class='co'># X13 method</span>
 <span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myreg</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_x13</span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span><span class='st'>"RG5c"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>myreg</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>myreg</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; 
 #&gt; Model: RegARIMA - X13
 #&gt; Estimation span: from 1-1990 to 12-2017
@@ -297,7 +300,7 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; Theta(1)  -0.52700    0.04825 -10.922   &lt;2e-16 ***
 #&gt; BTheta(1) -0.48650    0.05076  -9.585   &lt;2e-16 ***
 #&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
 #&gt; Regression model: 
 #&gt;               Estimate Std. Error T-stat Pr(&gt;|t|)    
@@ -313,19 +316,19 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; LS (1-2009)  -7.274012   1.306302 -5.568 5.42e-08 ***
 #&gt; LS (5-2008)  -5.020079   1.257066 -3.993 8.07e-05 ***
 #&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.665 on 14 degrees of freedom
+#&gt; Residual standard error: 1.665 on 309 degrees of freedom
 #&gt; Log likelihood = -624.7, aic =  1277, aicc =  1279, bic(corrected for length) = 1.252
 #&gt; </div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>myreg</span>)</div><div class='img'><img src='regarima-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
 
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
-             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
-             <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
+             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
+             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
+             <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
              <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
 <span class='no'>myreg2</span></div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
@@ -351,20 +354,20 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; AO (1-2002)            14
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.729 on 323 degrees of freedom
+#&gt; Residual standard error: 1.729 on 312 degrees of freedom
 #&gt; Log likelihood = -637.1, aic =  1296 aicc =  1297, bic(corrected for length) = 1.274
 #&gt; </div><div class='input'>
 <span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
              <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>,
              <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
              <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
-             <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
+             <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
+             <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
 <span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec3</span>)</div><div class='output co'>#&gt;                Type Value
 #&gt; Phi(1)        Fixed  -0.8
 #&gt; Theta(1)      Fixed  -0.6
 #&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>myreg3</span>)</div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>myreg3</span>)</div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
 #&gt; 
 #&gt; Model: RegARIMA - X13
 #&gt; Estimation span: from 1-1990 to 12-2017
@@ -378,7 +381,7 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; Theta(1)  -0.60000    0.00000     NA       NA    
 #&gt; BTheta(1) -0.45415    0.05131  -8.85   &lt;2e-16 ***
 #&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
 #&gt; Regression model: 
 #&gt;              Estimate Std. Error T-stat Pr(&gt;|t|)    
@@ -392,10 +395,10 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; Easter [1]   -1.20959    0.27484 -4.401 1.47e-05 ***
 #&gt; AO (10-2005) -4.95487    1.18171 -4.193 3.56e-05 ***
 #&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 2.096 on 11 degrees of freedom
+#&gt; Residual standard error: 2.096 on 312 degrees of freedom
 #&gt; Log likelihood = -698.8, aic =  1420, aicc =  1420, bic(corrected for length) = 1.659
 #&gt; </div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>myreg3</span>)</div><div class='img'><img src='regarima-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-8.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-9.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-10.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='regarima-12.png' alt='' width='700' height='433' /></div><div class='input'>
  <span class='co'># TRAMO-SEATS method</span>
@@ -423,7 +426,7 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; AO (8-2001)   0.0447084      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01593 on 308 degrees of freedom
 #&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
 #&gt; </div><div class='input'>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_tramoseats.html'>regarima_spec_tramoseats</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
@@ -432,9 +435,9 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
              <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
 
-<span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
+<span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
+<span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
+<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
 <span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_tramoseats.html'>regarima_spec_tramoseats</a></span>(<span class='no'>myspec</span>,
              <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
 <span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myspec3</span>)</div><div class='output co'>#&gt; $series
@@ -805,26 +808,24 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; AO (8-2001)   4.478e-02      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01593 on 306 degrees of freedom
 #&gt; Log likelihood = 875.8, aic =  1265 aicc =  1267, bic(corrected for length) = -7.993
-#&gt; </div></pre>
+#&gt; </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -832,13 +833,16 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

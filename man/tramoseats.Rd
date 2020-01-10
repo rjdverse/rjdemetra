@@ -5,11 +5,17 @@
 \alias{jtramoseats}
 \title{Seasonal Adjustment with TRAMO-SEATS}
 \usage{
-jtramoseats(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
-  "RSA4", "RSA5"), userdefined = NULL)
+jtramoseats(
+  series,
+  spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+  userdefined = NULL
+)
 
-tramoseats(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3",
-  "RSA4", "RSA5"), userdefined = NULL)
+tramoseats(
+  series,
+  spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+  userdefined = NULL
+)
 }
 \arguments{
 \item{series}{a univariate time series}
