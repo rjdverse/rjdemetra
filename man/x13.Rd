@@ -5,11 +5,17 @@
 \alias{jx13}
 \title{Seasonal Adjustment with  X-13ARIMA-SEATS}
 \usage{
-jx13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
-  "X11"), userdefined = NULL)
+jx13(
+  series,
+  spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
+  userdefined = NULL
+)
 
-x13(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
-  "X11"), userdefined = NULL)
+x13(
+  series,
+  spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
+  userdefined = NULL
+)
 }
 \arguments{
 \item{series}{a univariate time series}

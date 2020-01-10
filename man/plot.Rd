@@ -9,22 +9,32 @@
 \alias{plot.SA}
 \title{Plotting regarima, decomposition or final results of SA}
 \usage{
-\method{plot}{regarima}(x, which = 1:6, caption = list("Residuals",
-  "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
-  "PACF of residuals", "Decomposition", list("Y linearised",
-  "Calendar effects", "Outliers effects"))[sort(which)],
-  ask = prod(par("mfcol")) < length(which) && dev.interactive(), ...)
+\method{plot}{regarima}(
+  x,
+  which = 1:6,
+  caption = list("Residuals", "Histogram of residuals", "Normal Q-Q",
+    "ACF of residuals", "PACF of residuals", "Decomposition", list("Y linearised",
+    "Calendar effects", "Outliers effects"))[sort(which)],
+  ask = prod(par("mfcol")) < length(which) && dev.interactive(),
+  ...
+)
 
-\method{plot}{decomposition_X11}(x, first_date, last_date,
-  caption = "S-I ratio", ylim, ...)
+\method{plot}{decomposition_X11}(x, first_date, last_date, caption = "S-I ratio", ylim, ...)
 
-\method{plot}{decomposition_SEATS}(x, first_date, last_date,
-  caption = "S-I ratio", ylim, ...)
+\method{plot}{decomposition_SEATS}(x, first_date, last_date, caption = "S-I ratio", ylim, ...)
 
-\method{plot}{final}(x, first_date, last_date, forecast = TRUE,
-  type_chart = c("sa-trend", "cal-seas-irr"), caption = c(`sa-trend` =
-  "Y, Sa, trend", `cal-seas-irr` = "Cal., sea., irr.")[type_chart],
-  ask = length(type_chart) > 1 && dev.interactive(), ylim, ...)
+\method{plot}{final}(
+  x,
+  first_date,
+  last_date,
+  forecast = TRUE,
+  type_chart = c("sa-trend", "cal-seas-irr"),
+  caption = c(`sa-trend` = "Y, Sa, trend", `cal-seas-irr` =
+    "Cal., sea., irr.")[type_chart],
+  ask = length(type_chart) > 1 && dev.interactive(),
+  ylim,
+  ...
+)
 
 \method{plot}{SA}(x, ...)
 }

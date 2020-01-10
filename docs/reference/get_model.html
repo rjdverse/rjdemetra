@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,13 +41,13 @@
 
 
 
-<meta property="og:title" content="Get the seasonally adjusted model from a workspace — get_model" />
 
+<meta property="og:title" content="Get the seasonally adjusted model from a workspace — get_model" />
 <meta property="og:description" content="Generics functions to get seasonally adjusted model(s) from workspace,
 multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects while  get_jmodel returns the Java objects of the models." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -55,6 +59,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -110,7 +115,6 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -140,6 +144,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -151,22 +156,20 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
     </div>
 
     <div class="ref-description">
-    
     <p>Generics functions to get seasonally adjusted model(s) from <code>workspace</code>,
 <code>multiprocessing</code> or <code>sa_item</code> object. <code>get_model</code> returns a <code>"SA"</code> objects while  <code>get_jmodel</code> returns the Java objects of the models.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>get_jmodel</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>get_model</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the object to get the seasonnaly adjusted model.</p></td>
+      <td><p>the object to get the seasonally adjusted model.</p></td>
     </tr>
     <tr>
       <th>workspace</th>
@@ -182,10 +185,10 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
       <td><p>boolean: if <code>TRUE</code> a progress bar is printed.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_model()</code> returns a seasonnaly adjust object (class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA", "X13")</a></code> or <code>c("SA", "TRAMO_SEATS"</code>) or list of seasonnaly adjust objects:</p><ul>
+    <p><code>get_model()</code> returns a seasonally adjust object (class <code><a href='https://rdrr.io/r/base/c.html'>c("SA", "X13")</a></code> or <code>c("SA", "TRAMO_SEATS"</code>) or list of seasonally adjust objects:</p><ul>
 <li><p>if <code>x</code> is a <code>sa_item</code> object, <code>get_model(x)</code> returns a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>);</p></li>
 <li><p>if <code>x</code> is a <code>multiprocessing</code> object, <code><a href='get_ts.html'>get_ts(x)</a></code> returns list of length the number
  of sa_items, each element containing a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>);</p></li>
@@ -193,15 +196,14 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
  each element containing a list of a <code>"SA"</code> object (or a <code><a href='jSA.html'>jSA</a></code> object with <code>get_jmodel(x)</code>).</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other functions to get informations from a workspace, multiprocessing or sa_item: <code><a href='count.html'>count</a></code>, <code><a href='get_name.html'>get_name</a></code>, <code><a href='get_ts.html'>get_ts</a></code>.</p>
 <p><code><a href='compute.html'>compute</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
 <span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
 <span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
@@ -235,7 +237,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; LS (5-2008)  -5.17890      1.271
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Residual standard error: 1.692 on 310 degrees of freedom
 #&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
 #&gt; 
 #&gt; 
@@ -259,7 +261,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
-#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; Trend filter:  13-Henderson
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
@@ -352,7 +354,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; LS (5-2008)  -5.17890      1.271
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Residual standard error: 1.692 on 310 degrees of freedom
 #&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
 #&gt; 
 #&gt; 
@@ -376,7 +378,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
-#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; Trend filter:  13-Henderson
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
@@ -471,7 +473,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; AO (8-2001)   0.0447823      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01594 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01594 on 308 degrees of freedom
 #&gt; Log likelihood = 875.5, aic =  1262 aicc =  1263, bic(corrected for length) = -8.027
 #&gt; 
 #&gt; 
@@ -597,7 +599,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; LS (5-2008)  -5.17890      1.271
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.692 on 323 degrees of freedom
+#&gt; Residual standard error: 1.692 on 310 degrees of freedom
 #&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
 #&gt; 
 #&gt; 
@@ -621,7 +623,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
-#&gt; Trend filter:  13 terms Henderson moving average
+#&gt; Trend filter:  13-Henderson
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
@@ -716,7 +718,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; AO (8-2001)   0.0447823      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01594 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01594 on 308 degrees of freedom
 #&gt; Log likelihood = 875.5, aic =  1262 aicc =  1263, bic(corrected for length) = -8.027
 #&gt; 
 #&gt; 
@@ -817,23 +819,22 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
 #&gt; 
-#&gt; </div></span><div class='input'>
-</div></pre>
+#&gt; </div><div class='input'># }
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -841,13 +842,16 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

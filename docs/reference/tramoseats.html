@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,15 +41,15 @@
 
 
 
-<meta property="og:title" content="Seasonal Adjustment with TRAMO-SEATS — tramoseats" />
 
+<meta property="og:title" content="Seasonal Adjustment with TRAMO-SEATS — tramoseats" />
 <meta property="og:description" content="Function to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 tramoseats returns a preformatted result while jtramoseats returns the Java objects of the seasonal adjustment." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -57,6 +61,7 @@ tramoseats returns a preformatted result while jtramoseats returns the Java obje
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -112,7 +117,6 @@ tramoseats returns a preformatted result while jtramoseats returns the Java obje
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -142,6 +146,7 @@ tramoseats returns a preformatted result while jtramoseats returns the Java obje
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -153,20 +158,24 @@ tramoseats returns a preformatted result while jtramoseats returns the Java obje
     </div>
 
     <div class="ref-description">
-    
     <p>Function to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
 This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
 The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 <code>tramoseats</code> returns a preformatted result while <code>jtramoseats</code> returns the Java objects of the seasonal adjustment.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>jtramoseats</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSAfull"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2"</span>, <span class='st'>"RSA3"</span>,
-  <span class='st'>"RSA4"</span>, <span class='st'>"RSA5"</span>), <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>jtramoseats</span>(
+  <span class='no'>series</span>,
+  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RSAfull"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4"</span>, <span class='st'>"RSA5"</span>),
+  <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
-<span class='fu'>tramoseats</span>(<span class='no'>series</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"RSAfull"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2"</span>, <span class='st'>"RSA3"</span>,
-  <span class='st'>"RSA4"</span>, <span class='st'>"RSA5"</span>), <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+<span class='fu'>tramoseats</span>(
+  <span class='no'>series</span>,
+  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RSAfull"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4"</span>, <span class='st'>"RSA5"</span>),
+  <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -176,19 +185,19 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
     </tr>
     <tr>
       <th>spec</th>
-      <td><p>model specification TRAMO-SEATS. It can be a <code>character</code> of the predefined TRAMO-SEATS 'JDemetra+' model specification (see <em>Details</em>), or an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA_spec","TRAMO_SEATS")</a></code>. The default is <code>"RSAfull"</code>.</p></td>
+      <td><p>model specification TRAMO-SEATS. It can be a <code>character</code> of the predefined TRAMO-SEATS 'JDemetra+' model specification (see <em>Details</em>), or an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("SA_spec","TRAMO_SEATS")</a></code>. The default is <code>"RSAfull"</code>.</p></td>
     </tr>
     <tr>
       <th>userdefined</th>
       <td><p>vector with characters for additional output variables (see <code><a href='user_defined_variables.html'>user_defined_variables</a></code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>jtramoseats</code> returns a <code><a href='jSA.html'>jSA</a></code> object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with <code>tramoseats</code>. The results can the seasonal adjustment can be extract by <code><a href='jSA.html'>get_indicators</a></code>.</p>
-<p><code>tramoseats</code> returns an object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("SA","TRAMO_SEATS")</a></code>, a list containing the following components:</p>
-<dt>regarima</dt><dd><p>object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("regarima","TRAMO_SEATS")</a></code>. See <em>Value</em> of the function <code><a href='regarima.html'>regarima</a></code>.</p></dd>
+<p><code>tramoseats</code> returns an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("SA","TRAMO_SEATS")</a></code>, a list containing the following components:</p>
+<dt>regarima</dt><dd><p>object of class <code><a href='https://rdrr.io/r/base/c.html'>c("regarima","TRAMO_SEATS")</a></code>. See <em>Value</em> of the function <code><a href='regarima.html'>regarima</a></code>.</p></dd>
 
 <dt>decomposition</dt><dd><p>object of class <code>"decomposition_SEATS"</code>, five elements list:
 <ul>
@@ -199,7 +208,7 @@ The final seasonally adjusted series shall be free of seasonal and calendar-rela
 <li><p><code>components</code> time series matrix (mts) with the decomposition components (input series <code>y_cmp</code>, seasonally adjusted <code>sa_cmp</code>, trend <code>t_cmp</code>, seasonal <code>s_cmp</code>, irregular <code>i_cmp</code>)</p></li>
 </ul></p></dd>
 
-<dt>final</dt><dd><p>object of class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("final","mts","ts","matrix")</a></code>. Matrix with the final results of the seasonal adjustment.
+<dt>final</dt><dd><p>object of class <code><a href='https://rdrr.io/r/base/c.html'>c("final","mts","ts","matrix")</a></code>. Matrix with the final results of the seasonal adjustment.
 It includes time series: original time series (<code>y</code>), forecast of the original series (<code>y_f</code>), trend (<code>t</code>), forecast of the trend (<code>t_f</code>),
 seasonally adjusted series (<code>sa</code>), forecast of the seasonally adjusted series (<code>sa_f</code>),
 seasonal component (<code>s</code>), forecast of the seasonal component (<code>s_f</code>), irregular component (<code>i</code>) and the forecast of the irregular component (<code>i_f</code>).</p></dd>
@@ -212,38 +221,33 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
 </ul></p></dd>
 <dt>user_defined</dt><dd><p>object of class <code>"user_defined"</code>. List containing the userdefined additional variables defined in the <code>userdefined</code> argument.</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: <code><a href='regarima.html'>regarima</a></code>).
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)) or multiplicative (\(y = t * s * i\)). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
 <p>In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (<a href='https://www.bde.es'>https://www.bde.es</a>).</p>
 <p>As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.</p><table class='table'>
-<tr><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td><td>|</td><td></td><td><strong>Outliers detection</strong></td></tr>
-<tr><td>|</td><td></td><td><strong>Calendar effects</strong></td><td>|</td><td></td><td><strong>ARIMA</strong></td><td></td><td></td></tr>
-<tr><td>RSA0 |</td><td></td><td><em>NA</em></td><td>|</td><td></td><td><em>NA</em></td><td>|</td><td></td></tr>
-<tr><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td><td>RSA1 |</td><td>automatic |</td><td>AO/LS/TC |</td><td></td></tr>
-<tr><td><em>NA</em></td><td>|</td><td>Airline(+mean)</td><td></td><td>RSA2 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td></tr>
-<tr><td>Airline(+mean)</td><td></td><td>RSA3 |</td><td>automatic |</td><td>AO/LS/TC |</td><td></td><td><em>NA</em></td><td>|</td></tr>
-<tr><td>automatic</td><td></td><td>RSA4 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>automatic</td><td></td></tr>
-<tr><td>RSA5 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td><td></td><td>RSAfull |</td><td>automatic |</td></tr>
-<tr><td>AO/LS/TC |</td><td>automatic |</td><td>automatic</td><td></td><td><strong>Identifier</strong></td><td>|</td><td></td><td><strong>Log/level detection</strong></td></tr>
+<tr><td><strong>Identifier</strong> |</td><td><strong>Log/level detection</strong> |</td><td><strong>Outliers detection</strong> |</td><td><strong>Calendar effects</strong> |</td><td><strong>ARIMA</strong></td><td>RSA0 |</td><td><em>NA</em> |</td><td><em>NA</em> |</td></tr>
+<tr><td><em>NA</em> |</td><td>Airline(+mean)</td><td>RSA1 |</td><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td><td>Airline(+mean)</td><td>RSA2 |</td></tr>
+<tr><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>Airline(+mean)</td><td>RSA3 |</td><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td></tr>
+<tr><td>automatic</td><td>RSA4 |</td><td>automatic |</td><td>AO/LS/TC |</td><td>2 td vars + Easter |</td><td>automatic</td><td>RSA5 |</td><td>automatic |</td></tr>
+<tr><td>AO/LS/TC |</td><td>7 td vars + Easter |</td><td>automatic</td><td>RSAfull |</td><td>automatic |</td><td>AO/LS/TC |</td><td>automatic |</td><td>automatic</td></tr>
 </table>
-    
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Info on 'JDemetra+', usage and functions:
 <a href='https://ec.europa.eu/eurostat/cros/content/documentation_en'>https://ec.europa.eu/eurostat/cros/content/documentation_en</a></p>
 <p>BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.</p>
 <p>BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley &amp; Sons, Hoboken, N. J., 5th edition.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='tramoseats_spec.html'>tramoseats_spec</a></code>, <code><a href='x13.html'>x13</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
 <span class='no'>myspec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='st'>"RSAfull"</span>)
 <span class='no'>mysa</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec</span>)
 <span class='no'>mysa</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
@@ -269,7 +273,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; AO (8-2001)   0.0447084      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01593 on 308 degrees of freedom
 #&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
 #&gt; 
 #&gt; 
@@ -394,7 +398,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; AO (8-2001)   0.0447084      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 323 degrees of freedom
+#&gt; Residual standard error: 0.01593 on 308 degrees of freedom
 #&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
 #&gt; 
 #&gt; 
@@ -494,9 +498,9 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
-<span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts'>ts</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/start'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ts.union'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
+<span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
+<span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
+<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='no'>myspec</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
                            <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>,
                            <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
@@ -846,86 +850,92 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; var1 Undefined    NA
 #&gt; var2 Undefined    NA
 #&gt; </div><div class='input'><span class='no'>mysa2</span> <span class='kw'>&lt;-</span> <span class='fu'>tramoseats</span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>,
-                    <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"decomposition.sa_lin_f"</span>,
+                    <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"decomposition.sa_lin_f"</span>,
                                     <span class='st'>"decomposition.sa_lin_e"</span>))
 <span class='no'>mysa2</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5043      0.049
-#&gt; BTheta(1)  -0.6378      0.045
+#&gt; Theta(1)   -0.4872      0.050
+#&gt; BTheta(1)  -0.6202      0.046
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; Mean          9.613e-05      0.000
-#&gt; r.var1       -4.442e-05      0.000
-#&gt; r.var2       -1.487e-05      0.000
-#&gt; Easter [6]   -1.254e-02      0.003
-#&gt; LS (11-2008) -8.187e-02      0.014
-#&gt; LS (1-2009)  -7.505e-02      0.014
+#&gt; Mean          9.754e-05      0.000
+#&gt; r.var1       -1.316e-05      0.000
+#&gt; r.var2       -1.611e-05      0.000
+#&gt; Monday       -2.412e-03      0.002
+#&gt; Tuesday       4.093e-04      0.002
+#&gt; Wednesday     3.609e-03      0.002
+#&gt; Thursday     -5.620e-03      0.002
+#&gt; Friday        3.941e-03      0.002
+#&gt; Saturday      1.331e-03      0.002
+#&gt; Easter [6]   -1.152e-02      0.003
+#&gt; LS (11-2008) -8.200e-02      0.014
+#&gt; LS (1-2009)  -7.245e-02      0.014
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01668 on 323 degrees of freedom
-#&gt; Log likelihood = 860.6, aic =  1280 aicc =  1280, bic(corrected for length) = -8.044
+#&gt; Residual standard error: 0.01622 on 308 degrees of freedom
+#&gt; Log likelihood =   870, aic =  1273 aicc =  1274, bic(corrected for length) = -7.993
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.504312 B - 0.637771 B^12 + 0.321636 B^13 
+#&gt; MA :  1 - 0.487217 B - 0.620195 B^12 + 0.302169 B^13 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.473667 B + 0.491676 B^2 
-#&gt; Innovation variance:  0.6903292 
+#&gt; MA :  1 - 1.455260 B + 0.474997 B^2 
+#&gt; Innovation variance:  0.6762408 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.036726 B - 0.963274 B^2 
-#&gt; Innovation variance:  0.04149603 
+#&gt; MA :  1 + 0.038960 B - 0.961040 B^2 
+#&gt; Innovation variance:  0.04338303 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.266498 B + 1.237236 B^2 + 1.099824 B^3 + 0.874641 B^4 + 0.626180 B^5 + 0.378099 B^6 + 0.148617 B^7 - 0.034666 B^8 - 0.198016 B^9 - 0.301999 B^10 - 0.541576 B^11 
-#&gt; Innovation variance:  0.03283495 
+#&gt; MA :  1 + 1.294122 B + 1.284635 B^2 + 1.160421 B^3 + 0.941778 B^4 + 0.694557 B^5 + 0.443563 B^6 + 0.207891 B^7 + 0.016996 B^8 - 0.155311 B^9 - 0.266540 B^10 - 0.517141 B^11 
+#&gt; Innovation variance:  0.03682298 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.3793902 
+#&gt; Innovation variance:  0.3629049 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
 #&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.7467 101.0087 0.9667807 0.9974066
-#&gt; Feb 2017  97.5 100.5336 101.3231 0.9698251 0.9922080
-#&gt; Mar 2017 112.0 102.5403 101.7538 1.0922535 1.0077294
-#&gt; Apr 2017 103.0 101.4786 102.1810 1.0149922 0.9931257
-#&gt; May 2017 100.4 103.4710 102.5846 0.9703206 1.0086403
-#&gt; Jun 2017 111.2 102.4926 102.9249 1.0849567 0.9957997
-#&gt; Jul 2017 103.4 103.0804 103.2872 1.0031009 0.9979978
-#&gt; Aug 2017  79.3 103.8723 103.7259 0.7634372 1.0014119
-#&gt; Sep 2017 109.7 103.4867 104.2372 1.0600392 0.9928000
-#&gt; Oct 2017 114.0 106.0521 104.7597 1.0749434 1.0123369
-#&gt; Nov 2017 107.7 105.3437 105.0630 1.0223682 1.0026713
-#&gt; Dec 2017 101.4 104.9499 105.1974 0.9661754 0.9976468
+#&gt; Jan 2017  97.4 101.0664 101.0398 0.9637233 1.0002625
+#&gt; Feb 2017  97.5 100.5190 101.3301 0.9699658 0.9919952
+#&gt; Mar 2017 112.0 102.3520 101.7383 1.0942630 1.0060319
+#&gt; Apr 2017 103.0 101.5745 102.1724 1.0140343 0.9941477
+#&gt; May 2017 100.4 103.3341 102.5928 0.9716057 1.0072261
+#&gt; Jun 2017 111.2 102.5352 102.9647 1.0845057 0.9958282
+#&gt; Jul 2017 103.4 103.3960 103.3473 1.0000388 1.0004707
+#&gt; Aug 2017  79.3 103.9703 103.7448 0.7627180 1.0021731
+#&gt; Sep 2017 109.7 103.1140 104.2136 1.0638710 0.9894486
+#&gt; Oct 2017 114.0 106.1869 104.7496 1.0735789 1.0137213
+#&gt; Nov 2017 107.7 105.5005 105.0329 1.0208483 1.0044522
+#&gt; Dec 2017 101.4 104.6106 105.1005 0.9693087 0.9953395
 #&gt; 
 #&gt; Forecasts:
 #&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 101.93983 105.3511 105.3545 0.9666943 0.9999679
-#&gt; Feb 2018 102.44638 105.5350 105.5384 0.9693877 0.9999679
-#&gt; Mar 2018 114.08415 105.7201 105.7235 1.0789173 0.9999679
-#&gt; Apr 2018 109.07292 105.9063 105.9097 1.0272929 0.9999679
-#&gt; May 2018 102.95448 106.0937 106.0971 0.9705641 0.9999679
-#&gt; Jun 2018 115.39033 106.2823 106.2857 1.0845371 0.9999679
-#&gt; Jul 2018 106.72036 106.4720 106.4754 1.0028303 0.9999679
-#&gt; Aug 2018  81.46585 106.6629 106.6663 0.7633868 0.9999679
-#&gt; Sep 2018 113.24931 106.8550 106.8585 1.0595841 0.9999679
-#&gt; Oct 2018 115.04451 107.0483 107.0518 1.0755787 0.9999679
-#&gt; Nov 2018 109.63370 107.2428 107.2463 1.0225172 0.9999679
-#&gt; Dec 2018 103.91469 107.4385 107.4419 0.9660701 0.9999679
+#&gt; Jan 2018 101.98607 105.2241 105.2271 0.9684120 0.9999716
+#&gt; Feb 2018 102.30905 105.4079 105.4109 0.9694076 0.9999716
+#&gt; Mar 2018 113.98997 105.5928 105.5958 1.0794307 0.9999716
+#&gt; Apr 2018 108.34445 105.7789 105.7819 1.0214123 0.9999716
+#&gt; May 2018 102.63147 105.9662 105.9692 0.9686829 0.9999716
+#&gt; Jun 2018 115.99260 106.1547 106.1577 1.0916076 0.9999716
+#&gt; Jul 2018 106.16845 106.3444 106.3474 0.9989746 0.9999716
+#&gt; Aug 2018  81.56503 106.5352 106.5382 0.7654083 0.9999716
+#&gt; Sep 2018 112.89319 106.7272 106.7303 1.0576636 0.9999716
+#&gt; Oct 2018 115.34413 106.9205 106.9235 1.0796393 0.9999716
+#&gt; Nov 2018 109.40668 107.1149 107.1180 1.0214743 0.9999716
+#&gt; Dec 2018 103.45031 107.3106 107.3136 0.9629348 0.9999716
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -934,19 +944,19 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.034
-#&gt;  Seasonal     64.653
-#&gt;  Irregular     0.386
-#&gt;  TD &amp; Hol.     0.034
-#&gt;  Others       32.364
-#&gt;  Total        99.472
+#&gt;  Cycle         2.066
+#&gt;  Seasonal     65.266
+#&gt;  Irregular     0.345
+#&gt;  TD &amp; Hol.     0.075
+#&gt;  Others       31.637
+#&gt;  Total        99.388
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.236
+#&gt;    Evolutive seasonality test                                0.165
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -957,33 +967,30 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.952
-#&gt;  f-test on sa (td)                      0.001
-#&gt;  f-test on i (td)                       0.001
+#&gt;  Residual seasonality (last 3 years)    0.898
+#&gt;  f-test on sa (td)                      0.910
+#&gt;  f-test on i (td)                       1.000
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
 #&gt; Names of additional variables (2):
-#&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)</div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>)</div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>regarima</span>)</div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span>(<span class='no'>mysa2</span>$<span class='no'>decomposition</span>)</div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div><div class='input'># }
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -991,13 +998,16 @@ In the second part, the pre-adjusted series is decomposed into the following com
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
