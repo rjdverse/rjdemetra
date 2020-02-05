@@ -1108,7 +1108,7 @@ spec_TRAMO_r2jd <- function(rspec = NA, jdspec =NA){
     .jcall(jtd,"V","setOption","UserDefined")
   }else{
     if (td[5]==0) {
-      .jcall(jtd,"V","setW",as.integer(td[5]))
+#      .jcall(jtd,"V","setW",as.integer(td[5]))
       .jcall(jtd,"V","setTradingDays",as.character(td[3]))
     }else{
       .jcall(jtd,"V","setTradingDays",as.character(td[3]))
