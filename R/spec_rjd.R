@@ -1191,9 +1191,9 @@ specX11_r2jd <- function(rspec = NA, jdspec = NA , freq = NA){
   .jcall(jx11,"V","setLSigma",as.numeric(x11[["x11.lsigma"]]))
   .jcall(jx11,"V","setUSigma",as.numeric(x11[["x11.usigma"]]))
   if (x11[["x11.trendAuto"]]) {
-    .jcall(jx11,"V","setTrendMA",as.integer(x11[["x11.trendma"]]))
+    .jcall(jx11,"V","setAutoTrendMA",as.logical(T))
   }else{
-    .jcall(jx11,"V","setAutoTrendMA",as.logical(x11[["x11.trendAuto"]]))
+    .jcall(jx11,"V","setAutoTrendMA",as.logical(F))
     .jcall(jx11,"V","setTrendMA",as.integer(x11[["x11.trendma"]]))
   }
   .jcall(jx11,"V","setFreq", as.integer(freq))
