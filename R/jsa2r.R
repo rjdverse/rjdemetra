@@ -9,7 +9,9 @@ is.jSA <- function(x){
 
 #' Functions around 'jSA' objects
 #'
-#' \code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects, \code{get_indicators} extract a list of indicators and \code{"jSA2R"} returns returns the corresponding \code{"SA"} or a \code{"regarima"} object.
+#' \code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects,
+#' \code{get_indicators} extract a list of indicators and
+#' \code{jSA2R} returns the corresponding \code{"SA"}.
 #'
 #' @param x a \code{"jSA"} object.
 #' @param ... characters containing the names of the indicators to extract.
@@ -26,7 +28,13 @@ is.jSA <- function(x){
 #'
 #' \code{jSA2R} returns the corresponding formatted seasonal adjustment (\code{"SA"} object) or RegARIMA (\code{"regarima"} object) model.
 #'
-#' @return \code{get_dictionary} a vector of characters, \code{get_indicators} returns a list containing the indicators that are extracted and \code{jSA2R} returns a \code{"SA"} or a \code{"regarima"} object.
+#' \code{get_jspec} returns the Java object that contains the specification from an object
+#' \code{"jSA"}, \code{"X13"}, \code{"TRAMO_SEATS"} or \code{"sa_item"}.
+#'
+#' @return \code{get_dictionary} a vector of characters,
+#' \code{get_indicators} returns a list containing the indicators that are extracted,
+#' \code{jSA2R} returns a \code{"SA"} or a \code{"regarima"} object and
+#' \code{get_jspec} returns a Java object.
 #'
 #' @examples
 #' myseries <- ipi_c_eu[, "FR"]
