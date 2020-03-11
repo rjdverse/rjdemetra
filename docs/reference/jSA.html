@@ -43,7 +43,9 @@
 
 
 <meta property="og:title" content="Functions around 'jSA' objects — jSA" />
-<meta property="og:description" content="get_dictionary returns the indicators that can be extracted from &quot;jSA&quot; objects, get_indicators extract a list of indicators and &quot;jSA2R&quot; returns returns the corresponding &quot;SA&quot; or a &quot;regarima&quot; object." />
+<meta property="og:description" content="get_dictionary returns the indicators that can be extracted from &quot;jSA&quot; objects,
+get_indicators extract a list of indicators and
+jSA2R returns the corresponding &quot;SA&quot;." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -150,15 +152,19 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Functions around 'jSA' objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/jsa2r.R'><code>R/jsa2r.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/get_jspec.R'><code>R/get_jspec.R</code></a>, <a href='https://github.com/jdemetra/rjdemetra/blob/master/R/jsa2r.R'><code>R/jsa2r.R</code></a></small>
     <div class="hidden name"><code>jSA.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>get_dictionary</code> returns the indicators that can be extracted from <code>"jSA"</code> objects, <code>get_indicators</code> extract a list of indicators and <code>"jSA2R"</code> returns returns the corresponding <code>"SA"</code> or a <code>"regarima"</code> object.</p>
+    <p><code>get_dictionary</code> returns the indicators that can be extracted from <code>"jSA"</code> objects,
+<code>get_indicators</code> extract a list of indicators and
+<code>jSA2R</code> returns the corresponding <code>"SA"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_dictionary</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>get_jspec</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>get_dictionary</span>(<span class='no'>x</span>)
 
 <span class='fu'>get_indicators</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -183,7 +189,10 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_dictionary</code> a vector of characters, <code>get_indicators</code> returns a list containing the indicators that are extracted and <code>jSA2R</code> returns a <code>"SA"</code> or a <code>"regarima"</code> object.</p>
+    <p><code>get_dictionary</code> a vector of characters,
+<code>get_indicators</code> returns a list containing the indicators that are extracted,
+<code>jSA2R</code> returns a <code>"SA"</code> or a <code>"regarima"</code> object and
+<code>get_jspec</code> returns a Java object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A <code>"jSA"</code> object is a list with three elements:</p><ul>
@@ -194,6 +203,8 @@
 
 <p><code>get_dictionary</code> returns the list of indicators that can be extracted from a <code>jSA</code> object by the function <code>get_indicators</code>.</p>
 <p><code>jSA2R</code> returns the corresponding formatted seasonal adjustment (<code>"SA"</code> object) or RegARIMA (<code>"regarima"</code> object) model.</p>
+<p><code>get_jspec</code> returns the Java object that contains the specification from an object
+<code>"jSA"</code>, <code>"X13"</code>, <code>"TRAMO_SEATS"</code> or <code>"sa_item"</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]

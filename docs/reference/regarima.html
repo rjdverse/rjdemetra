@@ -78,7 +78,7 @@ jregarima/jregarima_x13/jregarima_tramoseats does the same computation but retur
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -784,32 +784,25 @@ For the function <code>regarima</code>, the sub-class of the object depends on t
 #&gt; var1 Undefined    NA
 #&gt; var2 Undefined    NA
 #&gt; </div><div class='input'><span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima</span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
-<span class='no'>myreg3</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+<span class='no'>myreg3</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3631      0.257
-#&gt; Phi(2)      0.1379      0.131
-#&gt; Theta(1)   -0.1774      0.258
-#&gt; BTheta(1)  -0.6109      0.047
+#&gt; Phi(1)      0.5399      0.055
+#&gt; Phi(2)      0.2501      0.055
+#&gt; BTheta(1)  -0.6224      0.046
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; r.var1       -5.582e-07      0.000
-#&gt; r.var2        2.420e-06      0.000
-#&gt; Monday       -2.325e-03      0.002
-#&gt; Tuesday       6.257e-04      0.002
-#&gt; Wednesday     3.138e-03      0.002
-#&gt; Thursday     -5.408e-03      0.002
-#&gt; Friday        3.269e-03      0.002
-#&gt; Saturday      1.942e-03      0.002
-#&gt; Easter [6]   -1.104e-02      0.003
-#&gt; LS (11-2008) -7.925e-02      0.013
-#&gt; LS (1-2009)  -7.068e-02      0.013
-#&gt; AO (8-2001)   4.478e-02      0.013
+#&gt; r.var1        4.499e-06      0.000
+#&gt; r.var2        4.791e-06      0.000
+#&gt; Easter [6]   -1.167e-02      0.003
+#&gt; LS (11-2008) -7.671e-02      0.013
+#&gt; LS (1-2009)  -7.209e-02      0.013
+#&gt; AO (8-2001)   4.669e-02      0.013
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 306 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1265 aicc =  1267, bic(corrected for length) = -7.993
+#&gt; Residual standard error: 0.01635 on 313 degrees of freedom
+#&gt; Log likelihood = 867.3, aic =  1268 aicc =  1269, bic(corrected for length) = -8.066
 #&gt; </div><div class='input'># }
 </div></pre>
   </div>

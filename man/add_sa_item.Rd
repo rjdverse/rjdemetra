@@ -13,7 +13,7 @@ add_sa_item(workspace, multiprocessing, sa_obj, name)
 
 \item{sa_obj}{the seasonally adjust object to export.}
 
-\item{name}{The name of the seasonally adjust model in the multiprocessing.
+\item{name}{the name of the seasonally adjust model in the multiprocessing.
 By default the name of the \code{sa_obj} is used.}
 }
 \description{

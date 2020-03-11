@@ -1,3 +1,14 @@
+# RJDemetra 0.1.5
+
+## Bug fixed
+
+- Henderson filter was not correctly selected (issue #73).  
+- Bug in the selection of TD with tramoseats (issue #71).
+
+## New functionalities
+
+- Function `get_jspec`, to get the Java object that contains the specificatio, is now exported.
+
 # RJDemetra 0.1.4
 
 ## Bug fixed
