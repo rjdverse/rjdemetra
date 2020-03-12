@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -616,21 +616,15 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5290      0.048
-#&gt; BTheta(1)  -0.5767      0.048
+#&gt; Theta(1)   -0.5398      0.047
+#&gt; BTheta(1)  -0.5876      0.047
 #&gt; 
-#&gt;               Estimate Std. Error
-#&gt; Monday        -0.07228      0.192
-#&gt; Tuesday        0.11018      0.190
-#&gt; Wednesday      0.16251      0.191
-#&gt; Thursday      -0.55185      0.190
-#&gt; Friday         0.41498      0.192
-#&gt; Saturday       0.13543      0.191
-#&gt; Easter [6]    -1.12520      0.394
-#&gt; LS (11-2008) -12.25330      1.561
-#&gt; AO (12-2002)  -6.45816      1.493
-#&gt; LS (1-2009)   -7.07048      1.498
-#&gt; LS (9-2008)   -6.20208      1.500
+#&gt;              Estimate Std. Error
+#&gt; Easter [6]     -1.295      0.386
+#&gt; LS (11-2008)  -12.204      1.561
+#&gt; AO (12-2002)   -6.798      1.494
+#&gt; LS (1-2009)    -7.276      1.499
+#&gt; LS (9-2008)    -6.386      1.499
 #&gt; 
 #&gt; Fixed outliers: 
 #&gt;              Coefficients
@@ -638,67 +632,67 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; LS (1-2003)            -8
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.858 on 309 degrees of freedom
-#&gt; Log likelihood =  -661, aic =  1350 aicc =  1351, bic(corrected for length) = 1.471
+#&gt; Residual standard error: 1.891 on 315 degrees of freedom
+#&gt; Log likelihood = -666.8, aic =  1350 aicc =  1350, bic(corrected for length) = 1.399
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.529038 B - 0.576652 B^12 + 0.305071 B^13 
+#&gt; MA :  1 - 0.539849 B - 0.587601 B^12 + 0.317215 B^13 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.493010 B + 0.513732 B^2 
-#&gt; Innovation variance:  0.6429039 
+#&gt; MA :  1 - 1.504610 B + 0.524202 B^2 
+#&gt; Innovation variance:  0.6515091 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.044711 B - 0.955289 B^2 
-#&gt; Innovation variance:  0.03452403 
+#&gt; MA :  1 + 0.043219 B - 0.956781 B^2 
+#&gt; Innovation variance:  0.03347114 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.222150 B + 1.160157 B^2 + 1.000327 B^3 + 0.763420 B^4 + 0.512045 B^5 + 0.268153 B^6 + 0.048532 B^7 - 0.122082 B^8 - 0.270259 B^9 - 0.360991 B^10 - 0.581084 B^11 
-#&gt; Innovation variance:  0.04338372 
+#&gt; MA :  1 + 1.200286 B + 1.121604 B^2 + 0.950072 B^3 + 0.706762 B^4 + 0.453508 B^5 + 0.211477 B^6 - 0.003264 B^7 - 0.167332 B^8 - 0.307562 B^9 - 0.390907 B^10 - 0.600582 B^11 
+#&gt; Innovation variance:  0.04047222 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.3632607 
+#&gt; Innovation variance:  0.3735469 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
 #&gt;              y       sa        t           s           i
-#&gt; Jan 2017  97.4 100.7979 100.9584  -3.3979068 -0.16047894
-#&gt; Feb 2017  97.5 100.4892 101.2959  -2.9892168 -0.80664833
-#&gt; Mar 2017 112.0 102.5769 101.7208   9.4231475  0.85605254
-#&gt; Apr 2017 103.0 101.4948 102.1242   1.5051912 -0.62944043
-#&gt; May 2017 100.4 103.1439 102.5098  -2.7438926  0.63412880
-#&gt; Jun 2017 111.2 102.5950 102.8643   8.6049570 -0.26928561
-#&gt; Jul 2017 103.4 103.2819 103.2055   0.1181372  0.07637373
-#&gt; Aug 2017  79.3 103.3246 103.5825 -24.0245752 -0.25791384
-#&gt; Sep 2017 109.7 103.1983 104.0809   6.5016545 -0.88258093
-#&gt; Oct 2017 114.0 106.2017 104.6202   7.7982962  1.58152641
-#&gt; Nov 2017 107.7 105.4460 104.9030   2.2539632  0.54299390
-#&gt; Dec 2017 101.4 104.4912 104.9886  -3.0911545 -0.49745990
+#&gt; Jan 2017  97.4 100.6147 100.9465  -3.2147392 -0.33172012
+#&gt; Feb 2017  97.5 100.4828 101.2835  -2.9827752 -0.80071707
+#&gt; Mar 2017 112.0 102.6320 101.7114   9.3680442  0.92059941
+#&gt; Apr 2017 103.0 101.3921 102.1155   1.6078771 -0.72340616
+#&gt; May 2017 100.4 103.2694 102.5020  -2.8693635  0.76731911
+#&gt; Jun 2017 111.2 102.6050 102.8419   8.5949962 -0.23689135
+#&gt; Jul 2017 103.4 103.0972 103.1646   0.3028472 -0.06744171
+#&gt; Aug 2017  79.3 103.1029 103.5603 -23.8029192 -0.45738669
+#&gt; Sep 2017 109.7 103.5428 104.0885   6.1571532 -0.54563883
+#&gt; Oct 2017 114.0 106.1718 104.6169   7.8282200  1.55486115
+#&gt; Nov 2017 107.7 105.1864 104.9012   2.5136349  0.28519828
+#&gt; Dec 2017 101.4 104.7542 105.0264  -3.3541974 -0.27222016
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f          s_f          i_f
-#&gt; Jan 2018 102.06576 105.1151 105.1151  -3.04936263 1.220712e-11
-#&gt; Feb 2018 102.22450 105.2868 105.2868  -3.06228987 1.148237e-11
-#&gt; Mar 2018 113.95694 105.4585 105.4585   8.49847169 1.313083e-11
-#&gt; Apr 2018 107.79414 105.6301 105.6301   2.16400028 1.155342e-11
-#&gt; May 2018 102.59676 105.8018 105.8018  -3.20504699 1.095657e-11
-#&gt; Jun 2018 115.21892 105.9735 105.9735   9.24544124 1.355716e-11
-#&gt; Jul 2018 106.21789 106.1452 106.1452   0.07273947 1.278977e-11
-#&gt; Aug 2018  82.55735 106.3168 106.3168 -23.75946902 1.050182e-11
-#&gt; Sep 2018 112.30108 106.4885 106.4885   5.81258745 1.290346e-11
-#&gt; Oct 2018 114.93423 106.6602 106.6602   8.27405932 1.314504e-11
-#&gt; Nov 2018 109.38136 106.8318 106.8318   2.54952421 1.145395e-11
-#&gt; Dec 2018 103.39058 107.0035 107.0035  -3.61293045 1.223555e-11
+#&gt;                y_f     sa_f      t_f         s_f          i_f
+#&gt; Jan 2018 101.94082 105.1738 105.1738  -3.2330276 2.675904e-11
+#&gt; Feb 2018 102.29778 105.3446 105.3446  -3.0468385 2.637535e-11
+#&gt; Mar 2018 113.84878 105.5154 105.5154   8.3333969 2.748379e-11
+#&gt; Apr 2018 108.30198 105.6862 105.6862   2.6158237 2.651745e-11
+#&gt; May 2018 103.01448 105.8569 105.8569  -2.8424436 2.610534e-11
+#&gt; Jun 2018 114.58049 106.0277 106.0277   8.5528036 2.810907e-11
+#&gt; Jul 2018 106.47093 106.1985 106.1985   0.2724785 2.761169e-11
+#&gt; Aug 2018  82.51395 106.3692 106.3692 -23.8552724 2.587797e-11
+#&gt; Sep 2018 112.64843 106.5400 106.5400   6.1084368 2.785328e-11
+#&gt; Oct 2018 114.64248 106.7108 106.7108   7.9317241 2.793854e-11
+#&gt; Nov 2018 109.41636 106.8815 106.8815   2.5348292 2.680167e-11
+#&gt; Dec 2018 103.68038 107.0523 107.0523  -3.3719109 2.725642e-11
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -707,19 +701,19 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.499
-#&gt;  Seasonal     45.062
-#&gt;  Irregular     0.357
-#&gt;  TD &amp; Hol.     0.056
-#&gt;  Others       52.353
-#&gt;  Total        99.327
+#&gt;  Cycle         1.457
+#&gt;  Seasonal     44.394
+#&gt;  Irregular     0.381
+#&gt;  TD &amp; Hol.     0.030
+#&gt;  Others       53.129
+#&gt;  Total        99.391
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.054
+#&gt;    Evolutive seasonality test                                0.067
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -730,9 +724,9 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.974
-#&gt;  f-test on sa (td)                      0.998
-#&gt;  f-test on i (td)                       1.000
+#&gt;  Residual seasonality (last 3 years)    0.987
+#&gt;  f-test on sa (td)                      0.032
+#&gt;  f-test on i (td)                       0.022
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>mysa5</span>)</div><div class='output co'>#&gt;   type       date coeff

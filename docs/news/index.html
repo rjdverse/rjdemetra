@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -152,13 +152,34 @@
       <small>Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rjdemetra-0-1-4" class="section level1">
+    <div id="rjdemetra-0-1-5" class="section level1">
 <h1 class="page-header">
-<a href="#rjdemetra-0-1-4" class="anchor"></a>RJDemetra 0.1.4<small> 2020-01-09 </small>
+<a href="#rjdemetra-0-1-5" class="anchor"></a>RJDemetra 0.1.5<small> 2020-03-11 </small>
 </h1>
 <div id="bug-fixed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixed" class="anchor"></a>Bug fixed</h2>
+<ul>
+<li>Henderson filter was not correctly selected (issue <a href='https://github.com/jdemetra/rjdemetra/issues/73'>#73</a>).<br>
+</li>
+<li>Bug in the selection of TD with tramoseats (issue <a href='https://github.com/jdemetra/rjdemetra/issues/71'>#71</a>).</li>
+</ul>
+</div>
+<div id="new-functionalities" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functionalities" class="anchor"></a>New functionalities</h2>
+<ul>
+<li>Function <code>get_jspec</code>, to get the Java object that contains the specificatio, is now exported.</li>
+</ul>
+</div>
+</div>
+    <div id="rjdemetra-0-1-4" class="section level1">
+<h1 class="page-header">
+<a href="#rjdemetra-0-1-4" class="anchor"></a>RJDemetra 0.1.4<small> 2020-01-09 </small>
+</h1>
+<div id="bug-fixed-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>Error while loading a workspace with metadata (issue <a href='https://github.com/jdemetra/rjdemetra/issues/53'>#53</a>).</li>
 <li>The degree of freedom were wrong with the <code>summary</code> functions.</li>
@@ -169,9 +190,9 @@
 <li>The trading-days specification was not correctly specified with TRAMO-SEATS.</li>
 </ul>
 </div>
-<div id="new-functionalities" class="section level2">
+<div id="new-functionalities-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functionalities" class="anchor"></a>New functionalities</h2>
+<a href="#new-functionalities-1" class="anchor"></a>New functionalities</h2>
 <ul>
 <li>Parameter <code>seats.predictionLength</code> added to <code>tramoseats_spec</code>.<br>
 </li>
@@ -194,9 +215,9 @@
 <h1 class="page-header">
 <a href="#rjdemetra-0-1-3" class="anchor"></a>RJDemetra 0.1.3<small> 2019-06-26 </small>
 </h1>
-<div id="bug-fixed-1" class="section level2">
+<div id="bug-fixed-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-2" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>When the multiprocessing is empty, <code>get_model</code> no longer produces an error.<br>
 </li>
@@ -237,9 +258,9 @@
 <code>object</code> argument renamed by <code>spec</code> in <code>x13_spec</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>regarima_spec_tramoseats</code>.</li>
 </ul>
 </div>
-<div id="new-functionalities-1" class="section level2">
+<div id="new-functionalities-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functionalities-1" class="anchor"></a>New functionalities</h2>
+<a href="#new-functionalities-2" class="anchor"></a>New functionalities</h2>
 <ul>
 <li>Parameter <code>preliminary.check</code> added to the specifications functions (<code>regarima_spec_tramoseats</code>, <code>tramoseats_spec</code>, <code>regarima_spec_x13</code> and <code>x13_spec</code>). By default (<code>preliminary.check = TRUE</code>), JDemetra+ checks the quality of the input series and exclude highly problematic ones: e.g. these with a number of identical observations and/or missing values above pre-specified threshold values. When <code>preliminary.check = FALSE</code>, the thresholds are ignored and process is performed, when possible. (issue <a href='https://github.com/jdemetra/rjdemetra/issues/39'>#39</a>)<br>
 </li>
@@ -253,9 +274,9 @@
 <li>News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: <code>jx13</code>, <code>jtramoseats</code>, <code>jregarima</code>, <code>jregarima_x13</code>, <code>jregarima_tramoseats</code> and <code>get_jmodel</code>. Therefore, there is no formatting and the computation is faster than the non ‘j’ functions (<code>x13</code>, <code>tramoseats</code>, <code>regarima</code>, <code>regarima_x13</code>, <code>regarima_tramoseats</code> and <code>get_model</code>). To manipulate these objects, there are three functions: <code>get_dictionary</code> to get the indicators that can be extracted, <code>get_indicators</code> to extract these indicators and <code>jSA2R</code> to get the formatted R model.</li>
 </ul>
 </div>
-<div id="bug-fixed-2" class="section level2">
+<div id="bug-fixed-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-2" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-3" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>
 <code>x11.fcast</code> can now be set to 0 or 1 (issue <a href='https://github.com/jdemetra/rjdemetra/issues/42'>#42</a>).</li>
@@ -268,6 +289,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rjdemetra-0-1-5">0.1.5</a></li>
         <li><a href="#rjdemetra-0-1-4">0.1.4</a></li>
         <li><a href="#rjdemetra-0-1-3">0.1.3</a></li>
         <li><a href="#rjdemetra-0-1-2">0.1.2</a></li>
