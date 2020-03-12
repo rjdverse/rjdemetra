@@ -7,7 +7,7 @@
 
 ## New functionalities
 
-- Function `get_jspec`, to get the Java object that contains the specificatio, is now exported.
+- Function `get_jspec`, to get the Java object that contains the specification, is now exported.
 
 # RJDemetra 0.1.4
 
