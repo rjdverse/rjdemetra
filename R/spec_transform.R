@@ -860,10 +860,10 @@ spec_x11 <- function(x11){
   }else {
     x11[3,"x11.trendma"] <- x11[2, "x11.trendma"]
   }
-  if(x11[3,"x11.seasonalComp"] | is.na(x11[2,"x11.seasonalma"])){
-    x11[3,"x11.seasonalma"] <- x11[1,"x11.seasonalma"]
-  }else {
+  if(x11[3,"x11.seasonalComp"] & !is.na(x11[2,"x11.seasonalma"])){
     x11[3,"x11.seasonalma"] <- x11[2,"x11.seasonalma"]
+  }else {
+    x11[3,"x11.seasonalma"] <- x11[1,"x11.seasonalma"]
   }
   if (is.na(x11[2, "x11.calendarSigma"])) {
     x11[3, c("x11.calendarSigma","x11.sigmaVector")] <- x11[1, c("x11.calendarSigma","x11.sigmaVector")]
