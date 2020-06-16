@@ -1,3 +1,9 @@
+# RJDemetra 0.1.6
+
+## Bug fixed
+
+- `x11.seasonalma` argument wasn't taken into account (issue #78).
+
 # RJDemetra 0.1.5
 
 ## Bug fixed
