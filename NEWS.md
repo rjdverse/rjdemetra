@@ -1,3 +1,9 @@
+# RJDemetra 0.1.6
+
+## Bug fixed
+
+- `x11.seasonalma` argument wasn't taken into account (issue #78).
+
 # RJDemetra 0.1.5
 
 ## Bug fixed
@@ -7,7 +13,7 @@
 
 ## New functionalities
 
-- Function `get_jspec`, to get the Java object that contains the specificatio, is now exported.
+- Function `get_jspec`, to get the Java object that contains the specification, is now exported.
 
 # RJDemetra 0.1.4
 
