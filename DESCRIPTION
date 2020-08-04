@@ -17,7 +17,7 @@ Description: Interface around 'JDemetra+' (<https://github.com/jdemetra/jdemetra
     It offers full access to all options and outputs of 'JDemetra+', including the two leading seasonal adjustment methods
     TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
 Depends:
-    R (>= 3.5.0),
+    R (>= 3.1.1),
 Imports:
     rJava (>= 0.9-8),
     graphics,
