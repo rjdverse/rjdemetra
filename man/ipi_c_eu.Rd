@@ -4,7 +4,9 @@
 \name{ipi_c_eu}
 \alias{ipi_c_eu}
 \title{Industrial Production Indices in manufacturing in the European Union}
-\format{A monthly \code{ts} object from january 1990 to december 2017 with 37 variables.}
+\format{
+A monthly \code{ts} object from january 1990 to december 2019 with 34 variables.
+}
 \source{
 \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 }
@@ -15,11 +17,8 @@ ipi_c_eu
 A dataset containing on monthly industrial production indices in manufacturing in the European Union (from sts_inpr_m dataset of Eurostat). Data are based 100 in 2015 and are unadjusted, i.e. neither seasonally adjusted nor calendar adjusted.
 }
 \details{
-The dataset contains 37 time series corresponding to the following geographical area
+The dataset contains 34 time series corresponding to the following geographical area
 \tabular{cl}{
-EU28      \tab European Union (current composition)            \cr
-EU27_2019 \tab European Union (without United Kingdom)         \cr
-EA19      \tab Euro area (19 countries)                        \cr
 BE        \tab Belgium                                         \cr
 BG        \tab Bulgaria                                        \cr
 CZ        \tab Czechia                                         \cr
@@ -49,11 +48,12 @@ FI        \tab Finland                                         \cr
 SE        \tab Sweden                                          \cr
 UK        \tab United Kingdom                                  \cr
 NO        \tab Norway                                          \cr
+CH        \tab Switzerland                                     \cr
 ME        \tab Montenegro                                      \cr
 MK        \tab Former Yugoslav Republic of Macedonia, the      \cr
 RS        \tab Serbia                                          \cr
 TR        \tab Turkey                                          \cr
-BA        \tab Bosnia and Herzegovina                          
+BA        \tab Bosnia and Herzegovina
 }
 }
 \keyword{datasets}
