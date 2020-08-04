@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,8 +50,7 @@
 <meta property="og:description" content="Function to compute all the multi-processings or a given one from a workspace.
 By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
 (with get_model)." />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -65,7 +68,7 @@ By default the workspace only contains definitions: computation is needed to get
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -197,47 +200,47 @@ By default all the multi-processings are compute.</p></td>
 <span class='fu'>compute</span>(<span class='no'>wk</span>)
 
 <span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Returns the SA model sa_x13</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
+#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
 #&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5393      0.048
-#&gt; BTheta(1)  -0.5076      0.050
+#&gt;            Estimate Std. Error
+#&gt; Phi(1)     0.008774      0.119
+#&gt; Phi(2)     0.098387      0.081
+#&gt; Theta(1)  -0.562495      0.110
+#&gt; BTheta(1) -0.738153      0.039
 #&gt; 
-#&gt;              Estimate Std. Error
-#&gt; Monday       -0.07677      0.168
-#&gt; Tuesday       0.06278      0.167
-#&gt; Wednesday     0.20386      0.168
-#&gt; Thursday     -0.56900      0.168
-#&gt; Friday        0.48643      0.168
-#&gt; Saturday      0.16823      0.168
-#&gt; Leap year    -0.04202      0.516
-#&gt; LS (11-2008) -8.47862      1.328
-#&gt; LS (1-2009)  -7.24743      1.328
-#&gt; LS (5-2008)  -5.17890      1.271
+#&gt;                Estimate Std. Error
+#&gt; Monday        0.0058623      0.002
+#&gt; Tuesday       0.0091349      0.002
+#&gt; Wednesday     0.0109267      0.002
+#&gt; Thursday      0.0005156      0.002
+#&gt; Friday        0.0091500      0.002
+#&gt; Saturday     -0.0161713      0.002
+#&gt; AO (5-2011)   0.1278938      0.018
+#&gt; LS (11-2008) -0.1157755      0.016
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.692 on 310 degrees of freedom
-#&gt; Log likelihood = -630.1, aic =  1286 aicc =  1287, bic(corrected for length) = 1.266
+#&gt; Residual standard error: 0.02153 on 334 degrees of freedom
+#&gt; Log likelihood = 834.5, aic =  1562 aicc =  1564, bic(corrected for length) = -7.474
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.070
-#&gt; M(2)    0.044
-#&gt; M(3)    0.908
-#&gt; M(4)    0.621
-#&gt; M(5)    0.702
-#&gt; M(6)    0.225
+#&gt; M(1)    0.094
+#&gt; M(2)    0.049
+#&gt; M(3)    0.978
+#&gt; M(4)    0.421
+#&gt; M(5)    0.969
+#&gt; M(6)    0.180
 #&gt; M(7)    0.075
-#&gt; M(8)    0.212
-#&gt; M(9)    0.057
-#&gt; M(10)   0.186
-#&gt; M(11)   0.160
-#&gt; Q       0.298
-#&gt; Q-M2    0.330
+#&gt; M(8)    0.211
+#&gt; M(9)    0.063
+#&gt; M(10)   0.250
+#&gt; M(11)   0.232
+#&gt; Q       0.323
+#&gt; Q-M2    0.357
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -246,34 +249,34 @@ By default all the multi-processings are compute.</p></td>
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t           s          i
-#&gt; Jan 2017  97.4 100.8343 100.7013  -3.4343306  0.1330766
-#&gt; Feb 2017  97.5 100.3650 101.0249  -2.8649615 -0.6599802
-#&gt; Mar 2017 112.0 102.2535 101.4647   9.7464542  0.7888578
-#&gt; Apr 2017 103.0 101.0035 101.9216   1.9964916 -0.9181391
-#&gt; May 2017 100.4 103.0243 102.3451  -2.6243031  0.6791988
-#&gt; Jun 2017 111.2 102.5088 102.7541   8.6911964 -0.2453078
-#&gt; Jul 2017 103.4 103.6337 103.1399  -0.2336808  0.4937705
-#&gt; Aug 2017  79.3 103.2251 103.5264 -23.9251325 -0.3013005
-#&gt; Sep 2017 109.7 103.2506 103.9215   6.4494326 -0.6709239
-#&gt; Oct 2017 114.0 107.0447 104.3063   6.9552773  2.7383859
-#&gt; Nov 2017 107.7 105.5642 104.6206   2.1358354  0.9435229
-#&gt; Dec 2017 101.4 104.5036 104.8670  -3.1036149 -0.3633398
+#&gt;              y       sa        t         s         i
+#&gt; Jan 2019 103.9 105.3314 105.1139 0.9864104 1.0020689
+#&gt; Feb 2019 101.9 106.3742 105.3665 0.9579387 1.0095639
+#&gt; Mar 2019 111.0 104.5953 105.4822 1.0612327 0.9915923
+#&gt; Apr 2019 107.4 105.0934 105.4192 1.0219484 0.9969091
+#&gt; May 2019 105.5 106.8159 105.2936 0.9876808 1.0144578
+#&gt; Jun 2019 105.8 101.4580 105.1024 1.0427961 0.9653249
+#&gt; Jul 2019 110.1 105.3379 104.7923 1.0452083 1.0052062
+#&gt; Aug 2019  78.7 103.0406 104.3781 0.7637769 0.9871852
+#&gt; Sep 2019 108.5 104.4959 103.8759 1.0383182 1.0059689
+#&gt; Oct 2019 116.8 104.9663 103.3582 1.1127377 1.0155587
+#&gt; Nov 2019 103.8 101.6218 102.9772 1.0214349 0.9868375
+#&gt; Dec 2019  97.7 101.8080 102.7604 0.9596494 0.9907318
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f         s_f           i_f
-#&gt; Jan 2018 102.12660 104.9825 105.0158  -2.8558846 -0.0333189370
-#&gt; Feb 2018 102.18467 105.1651 105.1322  -2.9804296  0.0328501611
-#&gt; Mar 2018 114.75482 104.9927 105.2650   9.7620667 -0.2722128214
-#&gt; Apr 2018 107.12347 105.4543 105.4551   1.6692056 -0.0008294846
-#&gt; May 2018 102.76596 105.8226 105.7251  -3.0566117  0.0974629726
-#&gt; Jun 2018 115.36179 106.0357 106.0400   9.3261226 -0.0043589056
-#&gt; Jul 2018 106.15595 106.5844 106.3555  -0.4284186  0.2288559841
-#&gt; Aug 2018  82.90307 106.3248 106.6641 -23.4217780 -0.3392719434
-#&gt; Sep 2018 112.28236 106.6926 106.9366   5.5897789 -0.2440563282
-#&gt; Oct 2018 115.41162 107.9129 107.1741   7.4986863  0.7388293101
-#&gt; Nov 2018 109.85751 107.2445 107.3673   2.6130640 -0.1228820216
-#&gt; Dec 2018 103.52884 107.3040 107.5048  -3.7751434 -0.2008278423
+#&gt;                y_f     sa_f      t_f       s_f       i_f
+#&gt; Jan 2020 101.59660 103.0784 102.6789 0.9856249 1.0038905
+#&gt; Feb 2020 100.87436 103.2029 102.7042 0.9774377 1.0048553
+#&gt; Mar 2020 111.27482 102.6228 102.7383 1.0843091 0.9988753
+#&gt; Apr 2020 105.12395 103.3465 102.7663 1.0171986 1.0056464
+#&gt; May 2020  96.44225 102.2715 102.7176 0.9430021 0.9956572
+#&gt; Jun 2020 112.46775 102.4907 102.6115 1.0973459 0.9988229
+#&gt; Jul 2020 106.58633 102.4070 102.5858 1.0408106 0.9982572
+#&gt; Aug 2020  76.49372 102.5838 102.6507 0.7456707 0.9993479
+#&gt; Sep 2020 111.06093 103.4916 102.7527 1.0731400 1.0071907
+#&gt; Oct 2020 111.06175 102.3655 102.8697 1.0849527 0.9950991
+#&gt; Nov 2020 104.14664 102.6519 102.9955 1.0145617 0.9966639
+#&gt; Dec 2020 101.63644 103.5595 103.0930 0.9814307 1.0045245
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -282,19 +285,19 @@ By default all the multi-processings are compute.</p></td>
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.648
-#&gt;  Seasonal     49.383
-#&gt;  Irregular     0.419
-#&gt;  TD &amp; Hol.     0.039
-#&gt;  Others       50.184
-#&gt;  Total       101.672
+#&gt;  Cycle         2.426
+#&gt;  Seasonal     72.514
+#&gt;  Irregular     1.136
+#&gt;  TD &amp; Hol.     2.703
+#&gt;  Others       21.274
+#&gt;  Total       100.053
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.011
+#&gt;    Evolutive seasonality test                                0.498
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -302,12 +305,12 @@ By default all the multi-processings are compute.</p></td>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.970
-#&gt;  f-test on i (seasonal dummies)         0.887
-#&gt;  Residual seasonality (entire series)   0.967
-#&gt;  Residual seasonality (last 3 years)    0.931
-#&gt;  f-test on sa (td)                      0.974
-#&gt;  f-test on i (td)                       0.999
+#&gt;  f-test on sa (seasonal dummies)        0.964
+#&gt;  f-test on i (seasonal dummies)         0.936
+#&gt;  Residual seasonality (entire series)   0.970
+#&gt;  Residual seasonality (last 3 years)    0.994
+#&gt;  f-test on sa (td)                      0.996
+#&gt;  f-test on i (td)                       0.993
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'># }
@@ -315,14 +318,10 @@ By default all the multi-processings are compute.</p></td>
 
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -333,7 +332,7 @@ By default all the multi-processings are compute.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

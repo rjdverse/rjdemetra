@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,8 +48,7 @@
 
 <meta property="og:title" content="Saving and loading a model specification, SA and pre-adjustment in X13 and TRAMO-SEATS — save_spec" />
 <meta property="og:description" content="save_spec saves a SA or RegARIMA model specification. load_spec loads the previously saved model specification." />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -237,62 +240,70 @@
 <span class='no'>myspec7b</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"saTS.RData"</span>))
 
 
-<span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2a</span>)</div><div class='output co'>#&gt; y = regression model + arima (1, 1, 0, 0, 1, 1)
+<span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2a</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.2650      0.084
-#&gt; BTheta(1)  -0.6913      0.067
+#&gt; Theta(1)   -0.2939      0.079
+#&gt; BTheta(1)  -0.7651      0.058
 #&gt; 
-#&gt;            Estimate Std. Error
-#&gt; Easter [1] -0.01809      0.006
+#&gt;              Estimate Std. Error
+#&gt; Monday       0.010967      0.003
+#&gt; Tuesday      0.012055      0.003
+#&gt; Wednesday    0.006858      0.003
+#&gt; Thursday     0.001519      0.003
+#&gt; Friday       0.013811      0.003
+#&gt; Saturday    -0.020566      0.003
+#&gt; Easter [1]  -0.017599      0.006
+#&gt; AO (5-2011)  0.128270      0.018
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01978 on 130 degrees of freedom
-#&gt; Log likelihood = 331.6, aic = 583.3 aicc = 583.6, bic(corrected for length) = -7.737
+#&gt; Residual standard error: 0.0229 on 147 degrees of freedom
+#&gt; Log likelihood = 367.2, aic = 749.1 aicc = 750.9, bic(corrected for length) = -7.233
 #&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6a</span>)</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
+#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5270      0.048
-#&gt; BTheta(1)  -0.4865      0.051
+#&gt; Phi(1)     0.02578      0.118
+#&gt; Phi(2)     0.15940      0.078
+#&gt; Theta(1)  -0.51733      0.113
+#&gt; BTheta(1) -0.70304      0.041
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday       -0.133839      0.164
-#&gt; Tuesday      -0.002384      0.163
-#&gt; Wednesday     0.241712      0.163
-#&gt; Thursday     -0.531275      0.163
-#&gt; Friday        0.432474      0.164
-#&gt; Saturday      0.152956      0.163
-#&gt; Leap year    -0.045977      0.501
-#&gt; Easter [1]   -1.094082      0.335
-#&gt; LS (11-2008) -8.441602      1.307
-#&gt; LS (1-2009)  -7.274012      1.306
-#&gt; LS (5-2008)  -5.020079      1.257
+#&gt; Monday        0.004967      0.002
+#&gt; Tuesday       0.008415      0.002
+#&gt; Wednesday     0.010614      0.002
+#&gt; Thursday      0.002060      0.002
+#&gt; Friday        0.008274      0.002
+#&gt; Saturday     -0.016328      0.002
+#&gt; Easter [1]   -0.021145      0.004
+#&gt; AO (5-2011)   0.128134      0.017
+#&gt; LS (11-2008) -0.087008      0.017
+#&gt; LS (1-2009)  -0.068435      0.017
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.665 on 309 degrees of freedom
-#&gt; Log likelihood = -624.7, aic =  1277 aicc =  1279, bic(corrected for length) = 1.252
+#&gt; Residual standard error: 0.02041 on 332 degrees of freedom
+#&gt; Log likelihood = 853.7, aic =  1528 aicc =  1530, bic(corrected for length) = -7.547
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.061
-#&gt; M(2)    0.034
-#&gt; M(3)    0.840
-#&gt; M(4)    0.420
-#&gt; M(5)    0.697
-#&gt; M(6)    0.236
-#&gt; M(7)    0.075
-#&gt; M(8)    0.206
-#&gt; M(9)    0.055
-#&gt; M(10)   0.166
-#&gt; M(11)   0.137
-#&gt; Q       0.272
-#&gt; Q-M2    0.301
+#&gt; M(1)    0.097
+#&gt; M(2)    0.053
+#&gt; M(3)    0.995
+#&gt; M(4)    0.421
+#&gt; M(5)    0.950
+#&gt; M(6)    0.154
+#&gt; M(7)    0.074
+#&gt; M(8)    0.211
+#&gt; M(9)    0.064
+#&gt; M(10)   0.267
+#&gt; M(11)   0.250
+#&gt; Q       0.322
+#&gt; Q-M2    0.355
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -301,34 +312,34 @@
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t            s          i
-#&gt; Jan 2017  97.4 100.8114 100.6915  -3.41138724  0.1198412
-#&gt; Feb 2017  97.5 100.3129 101.0507  -2.81292129 -0.7377402
-#&gt; Mar 2017 112.0 102.3507 101.5023   9.64931855  0.8483317
-#&gt; Apr 2017 103.0 101.2637 101.9608   1.73628825 -0.6971084
-#&gt; May 2017 100.4 103.0054 102.3694  -2.60542262  0.6359951
-#&gt; Jun 2017 111.2 102.4641 102.7599   8.73585142 -0.2957736
-#&gt; Jul 2017 103.4 103.4507 103.1325  -0.05071812  0.3182150
-#&gt; Aug 2017  79.3 103.3966 103.5091 -24.09656399 -0.1125714
-#&gt; Sep 2017 109.7 103.2231 103.8871   6.47686943 -0.6640036
-#&gt; Oct 2017 114.0 106.9659 104.2566   7.03410972  2.7093305
-#&gt; Nov 2017 107.7 105.4628 104.5657   2.23724550  0.8970898
-#&gt; Dec 2017 101.4 104.4099 104.8237  -3.00989466 -0.4138486
+#&gt;              y       sa        t         s         i
+#&gt; Jan 2019 103.9 105.1945 105.1440 0.9876940 1.0004808
+#&gt; Feb 2019 101.9 106.3206 105.5014 0.9584217 1.0077654
+#&gt; Mar 2019 111.0 104.7345 105.7233 1.0598229 0.9906473
+#&gt; Apr 2019 107.4 106.1448 105.7281 1.0118257 1.0039413
+#&gt; May 2019 105.5 106.2039 105.5978 0.9933724 1.0057396
+#&gt; Jun 2019 105.8 101.1898 105.3259 1.0455597 0.9607304
+#&gt; Jul 2019 110.1 105.3543 104.8985 1.0450450 1.0043457
+#&gt; Aug 2019  78.7 102.9339 104.3791 0.7645685 0.9861536
+#&gt; Sep 2019 108.5 104.4720 103.8115 1.0385554 1.0063631
+#&gt; Oct 2019 116.8 104.8375 103.2992 1.1141052 1.0148919
+#&gt; Nov 2019 103.8 101.7212 102.9938 1.0204364 0.9876441
+#&gt; Dec 2019  97.7 101.8723 102.8805 0.9590443 0.9902000
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f         s_f         i_f
-#&gt; Jan 2018 102.00877 104.9065 105.0038  -2.8977705 -0.09720660
-#&gt; Feb 2018 102.14378 105.0529 105.1506  -2.9091625 -0.09761841
-#&gt; Mar 2018 113.92764 105.4072 105.3021   8.5204140  0.10515354
-#&gt; Apr 2018 107.88844 105.4548 105.4869   2.4336221 -0.03210021
-#&gt; May 2018 102.83006 105.7518 105.7343  -2.9217368  0.01749135
-#&gt; Jun 2018 115.26921 105.9309 106.0232   9.3383460 -0.09234653
-#&gt; Jul 2018 106.09888 106.4237 106.3248  -0.3248322  0.09889228
-#&gt; Aug 2018  82.95525 106.5440 106.6390 -23.5887165 -0.09503822
-#&gt; Sep 2018 112.41847 106.6179 106.9320   5.8005883 -0.31411494
-#&gt; Oct 2018 115.41327 107.8929 107.1812   7.5203393  0.71172901
-#&gt; Nov 2018 109.88167 107.2964 107.3766   2.5852407 -0.08013772
-#&gt; Dec 2018 103.58107 107.2605 107.5126  -3.6794200 -0.25212937
+#&gt;                y_f     sa_f      t_f       s_f       i_f
+#&gt; Jan 2020 101.79694 103.1662 102.8951 0.9867273 1.0026346
+#&gt; Feb 2020 101.02102 103.3357 102.9515 0.9776003 1.0037323
+#&gt; Mar 2020 112.10997 103.5043 102.9465 1.0831427 1.0054189
+#&gt; Apr 2020 104.50015 103.4303 102.8832 1.0103439 1.0053179
+#&gt; May 2020  96.60823 101.9351 102.7280 0.9477426 0.9922819
+#&gt; Jun 2020 112.13668 102.1960 102.5441 1.0972706 0.9966052
+#&gt; Jul 2020 106.78914 102.3841 102.4931 1.0430249 0.9989358
+#&gt; Aug 2020  76.62863 102.6907 102.5880 0.7462084 1.0010004
+#&gt; Sep 2020 110.85790 103.4529 102.7454 1.0715783 1.0068865
+#&gt; Oct 2020 111.29327 102.4307 102.8914 1.0865224 0.9955221
+#&gt; Nov 2020 104.21972 102.6701 103.0257 1.0150931 0.9965489
+#&gt; Dec 2020 101.55551 103.4907 103.1115 0.9813009 1.0036778
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -337,120 +348,119 @@
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.646
-#&gt;  Seasonal     49.667
-#&gt;  Irregular     0.411
-#&gt;  TD &amp; Hol.     0.057
-#&gt;  Others       49.814
-#&gt;  Total       101.596
+#&gt;  Cycle         1.941
+#&gt;  Seasonal     62.123
+#&gt;  Irregular     0.842
+#&gt;  TD &amp; Hol.     2.428
+#&gt;  Others       32.787
+#&gt;  Total       100.121
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.013
+#&gt;    Evolutive seasonality test                                0.283
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.980
-#&gt;  f-test on i (seasonal dummies)         0.922
-#&gt;  Residual seasonality (entire series)   0.969
-#&gt;  Residual seasonality (last 3 years)    0.897
-#&gt;  f-test on sa (td)                      0.980
-#&gt;  f-test on i (td)                       1.000
+#&gt;  qs test on sa                          0.909
+#&gt;  qs test on i                           0.746
+#&gt;  f-test on sa (seasonal dummies)        0.974
+#&gt;  f-test on i (seasonal dummies)         0.947
+#&gt;  Residual seasonality (entire series)   0.932
+#&gt;  Residual seasonality (last 3 years)    0.940
+#&gt;  f-test on sa (td)                      0.985
+#&gt;  f-test on i (td)                       0.983
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec7a</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
+#&gt; Phi(1)      0.3858      0.053
+#&gt; Phi(2)      0.2428      0.053
+#&gt; BTheta(1)  -0.7134      0.040
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
+#&gt;              Estimate Std. Error
+#&gt; Week days    0.007131      0.000
+#&gt; Leap year    0.022154      0.007
+#&gt; Easter [6]  -0.021360      0.004
+#&gt; AO (5-2011)  0.128991      0.017
+#&gt; AO (5-2000)  0.057730      0.017
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 308 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
+#&gt; Residual standard error: 0.02174 on 338 degrees of freedom
+#&gt; Log likelihood = 831.8, aic =  1560 aicc =  1560, bic(corrected for length) = -7.523
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.186819 B - 0.610856 B^12 + 0.114119 B^13 
+#&gt; MA :  1 - 0.713428 B^12 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.314459 B + 0.340427 B^2 
-#&gt; Innovation variance:  0.4669153 
+#&gt; MA :  1 - 0.975113 B + 0.003731 B^2 - 0.003172 B^3 + 0.002186 B^4 
+#&gt; Innovation variance:  0.7469663 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.040206 B - 0.959794 B^2 
-#&gt; Innovation variance:  0.04869563 
+#&gt; MA :  1 + 0.027738 B - 0.972262 B^2 
+#&gt; Innovation variance:  0.06986498 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 0.717848 B + 0.460721 B^2 + 0.310085 B^3 + 0.132447 B^4 - 0.049053 B^5 - 0.216655 B^6 - 0.354556 B^7 - 0.445030 B^8 - 0.469587 B^9 - 0.376625 B^10 - 0.166397 B^11 - 0.410618 B^12 - 0.132580 B^13 
-#&gt; Innovation variance:  0.1601924 
+#&gt; MA :  1 + 1.353435 B + 1.194117 B^2 + 1.260347 B^3 + 1.124065 B^4 + 0.886062 B^5 + 0.682894 B^6 + 0.440009 B^7 + 0.271828 B^8 + 0.020068 B^9 - 0.054641 B^10 - 0.222194 B^11 
+#&gt; Innovation variance:  0.03026107 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; MA :  1 - 0.316265 B - 0.683735 B^2 
+#&gt; Innovation variance:  0.05225072 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2056884 
+#&gt; Innovation variance:  0.2217707 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
 #&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.9393 100.9657 0.9649365 0.9997384
-#&gt; Feb 2017  97.5 100.7654 101.2610 0.9675939 0.9951058
-#&gt; Mar 2017 112.0 102.0879 101.7064 1.0970937 1.0037513
-#&gt; Apr 2017 103.0 101.8416 102.1713 1.0113745 0.9967732
-#&gt; May 2017 100.4 103.0277 102.6087 0.9744949 1.0040835
-#&gt; Jun 2017 111.2 102.7958 102.9753 1.0817564 0.9982567
-#&gt; Jul 2017 103.4 103.3099 103.3367 1.0008726 0.9997398
-#&gt; Aug 2017  79.3 103.7805 103.7458 0.7641131 1.0003339
-#&gt; Sep 2017 109.7 103.7154 104.2747 1.0577017 0.9946372
-#&gt; Oct 2017 114.0 105.6674 104.8749 1.0788572 1.0075559
-#&gt; Nov 2017 107.7 105.4730 105.1795 1.0211146 1.0027905
-#&gt; Dec 2017 101.4 104.9614 105.2317 0.9660690 0.9974316
+#&gt; Jan 2019 103.9 105.1743 104.9429 0.9878842 1.0022048
+#&gt; Feb 2019 101.9 105.9207 105.1941 0.9620400 1.0069073
+#&gt; Mar 2019 111.0 104.4311 105.2847 1.0629021 0.9918924
+#&gt; Apr 2019 107.4 105.5933 105.4042 1.0171096 1.0017943
+#&gt; May 2019 105.5 107.2997 105.1676 0.9832269 1.0202734
+#&gt; Jun 2019 105.8 101.9020 104.5972 1.0382528 0.9742326
+#&gt; Jul 2019 110.1 106.0606 104.2943 1.0380862 1.0169351
+#&gt; Aug 2019  78.7 103.0620 104.0531 0.7636179 0.9904748
+#&gt; Sep 2019 108.5 103.7505 103.8759 1.0457777 0.9987934
+#&gt; Oct 2019 116.8 105.1043 103.5817 1.1112766 1.0147004
+#&gt; Nov 2019 103.8 102.2380 102.8763 1.0152784 0.9937947
+#&gt; Dec 2019  97.7 101.4426 102.3135 0.9631060 0.9914880
 #&gt; 
 #&gt; Forecasts:
 #&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 102.19076 105.3388 105.3397 0.9701155 0.9999914
-#&gt; Feb 2018 102.32758 105.5082 105.5091 0.9698541 0.9999914
-#&gt; Mar 2018 114.29051 105.6780 105.6789 1.0814979 0.9999914
-#&gt; Apr 2018 107.91102 105.8480 105.8489 1.0194904 0.9999914
-#&gt; May 2018 102.68809 106.0183 106.0192 0.9685884 0.9999914
-#&gt; Jun 2018 115.89624 106.1889 106.1898 1.0914161 0.9999914
-#&gt; Jul 2018 106.23593 106.3597 106.3606 0.9988362 0.9999914
-#&gt; Aug 2018  81.47084 106.5308 106.5317 0.7647630 0.9999914
-#&gt; Sep 2018 112.88837 106.7022 106.7031 1.0579757 0.9999914
-#&gt; Oct 2018 115.34277 106.8739 106.8748 1.0792417 0.9999914
-#&gt; Nov 2018 109.29540 107.0458 107.0468 1.0210148 0.9999914
-#&gt; Dec 2018 103.27711 107.2181 107.2190 0.9632435 0.9999914
+#&gt; Jan 2020 101.14796 102.4076 102.1524 0.9876994 1.0024982
+#&gt; Feb 2020  98.73586 102.2044 102.1359 0.9660638 1.0006702
+#&gt; Mar 2020 111.14762 102.0245 102.1194 1.0894214 0.9990702
+#&gt; Apr 2020 103.85947 102.1162 102.1029 1.0170713 1.0001303
+#&gt; May 2020  95.54759 102.0976 102.0864 0.9358456 1.0001098
+#&gt; Jun 2020 111.32747 102.0557 102.0699 1.0908507 0.9998602
+#&gt; Jul 2020 105.98668 102.0495 102.0535 1.0385811 0.9999614
+#&gt; Aug 2020  75.98545 102.0352 102.0370 0.7446983 0.9999830
+#&gt; Sep 2020 109.40398 102.0154 102.0205 1.0724264 0.9999501
+#&gt; Oct 2020 110.59660 101.9997 102.0040 1.0842840 0.9999575
+#&gt; Nov 2020 103.53656 101.9837 101.9875 1.0152266 0.9999627
+#&gt; Dec 2020 100.67280 101.9669 101.9711 0.9873092 0.9999589
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -459,19 +469,19 @@
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.181
-#&gt;  Seasonal     66.768
-#&gt;  Irregular     0.106
-#&gt;  TD &amp; Hol.     0.069
-#&gt;  Others       30.507
-#&gt;  Total        99.630
+#&gt;  Cycle         5.694
+#&gt;  Seasonal     88.840
+#&gt;  Irregular     0.820
+#&gt;  TD &amp; Hol.     3.412
+#&gt;  Others        0.469
+#&gt;  Total        99.234
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.185
+#&gt;    Evolutive seasonality test                                0.344
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -482,9 +492,9 @@
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.977
-#&gt;  f-test on sa (td)                      0.927
-#&gt;  f-test on i (td)                       1.000
+#&gt;  Residual seasonality (last 3 years)    0.984
+#&gt;  f-test on sa (td)                      0.135
+#&gt;  f-test on i (td)                       0.256
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
@@ -492,67 +502,70 @@
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.4987      0.049
-#&gt; BTheta(1)  -0.6179      0.046
+#&gt; Theta(1)   -0.5960      0.044
+#&gt; BTheta(1)  -0.7032      0.041
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; Mean          9.636e-05      0.000
-#&gt; Monday       -2.104e-03      0.002
-#&gt; Tuesday       1.781e-04      0.002
-#&gt; Wednesday     3.680e-03      0.002
-#&gt; Thursday     -5.706e-03      0.002
-#&gt; Friday        4.013e-03      0.002
-#&gt; Saturday      1.271e-03      0.002
-#&gt; Easter [6]   -1.063e-02      0.003
-#&gt; LS (11-2008) -8.174e-02      0.013
-#&gt; LS (1-2009)  -7.134e-02      0.013
+#&gt; Mean          2.029e-05      0.000
+#&gt; Monday        5.066e-03      0.002
+#&gt; Tuesday       8.286e-03      0.002
+#&gt; Wednesday     1.075e-02      0.002
+#&gt; Thursday      1.973e-03      0.002
+#&gt; Friday        7.949e-03      0.002
+#&gt; Saturday     -1.622e-02      0.002
+#&gt; Leap year     2.031e-02      0.007
+#&gt; Easter [6]   -1.884e-02      0.004
+#&gt; AO (5-2011)   1.251e-01      0.017
+#&gt; LS (11-2008) -8.905e-02      0.017
+#&gt; LS (1-2009)  -6.888e-02      0.017
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01633 on 310 degrees of freedom
-#&gt; Log likelihood = 867.8, aic =  1273 aicc =  1274, bic(corrected for length) = -8.015
+#&gt; Residual standard error: 0.0205 on 332 degrees of freedom
+#&gt; Log likelihood = 852.3, aic =  1531 aicc =  1532, bic(corrected for length) = -7.539
 #&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6b</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
+#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5270      0.048
-#&gt; BTheta(1)  -0.4865      0.051
+#&gt; Phi(1)     0.02578      0.118
+#&gt; Phi(2)     0.15940      0.078
+#&gt; Theta(1)  -0.51733      0.113
+#&gt; BTheta(1) -0.70304      0.041
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday       -0.133839      0.164
-#&gt; Tuesday      -0.002384      0.163
-#&gt; Wednesday     0.241712      0.163
-#&gt; Thursday     -0.531275      0.163
-#&gt; Friday        0.432474      0.164
-#&gt; Saturday      0.152956      0.163
-#&gt; Leap year    -0.045977      0.501
-#&gt; Easter [1]   -1.094082      0.335
-#&gt; LS (11-2008) -8.441602      1.307
-#&gt; LS (1-2009)  -7.274012      1.306
-#&gt; LS (5-2008)  -5.020079      1.257
+#&gt; Monday        0.004967      0.002
+#&gt; Tuesday       0.008415      0.002
+#&gt; Wednesday     0.010614      0.002
+#&gt; Thursday      0.002060      0.002
+#&gt; Friday        0.008274      0.002
+#&gt; Saturday     -0.016328      0.002
+#&gt; Easter [1]   -0.021145      0.004
+#&gt; AO (5-2011)   0.128134      0.017
+#&gt; LS (11-2008) -0.087008      0.017
+#&gt; LS (1-2009)  -0.068435      0.017
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.665 on 309 degrees of freedom
-#&gt; Log likelihood = -624.7, aic =  1277 aicc =  1279, bic(corrected for length) = 1.252
+#&gt; Residual standard error: 0.02041 on 332 degrees of freedom
+#&gt; Log likelihood = 853.7, aic =  1528 aicc =  1530, bic(corrected for length) = -7.547
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.061
-#&gt; M(2)    0.034
-#&gt; M(3)    0.840
-#&gt; M(4)    0.420
-#&gt; M(5)    0.697
-#&gt; M(6)    0.236
-#&gt; M(7)    0.075
-#&gt; M(8)    0.206
-#&gt; M(9)    0.055
-#&gt; M(10)   0.166
-#&gt; M(11)   0.137
-#&gt; Q       0.272
-#&gt; Q-M2    0.301
+#&gt; M(1)    0.097
+#&gt; M(2)    0.053
+#&gt; M(3)    0.995
+#&gt; M(4)    0.421
+#&gt; M(5)    0.950
+#&gt; M(6)    0.154
+#&gt; M(7)    0.074
+#&gt; M(8)    0.211
+#&gt; M(9)    0.064
+#&gt; M(10)   0.267
+#&gt; M(11)   0.250
+#&gt; Q       0.322
+#&gt; Q-M2    0.355
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -561,34 +574,34 @@
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t            s          i
-#&gt; Jan 2017  97.4 100.8114 100.6915  -3.41138724  0.1198412
-#&gt; Feb 2017  97.5 100.3129 101.0507  -2.81292129 -0.7377402
-#&gt; Mar 2017 112.0 102.3507 101.5023   9.64931855  0.8483317
-#&gt; Apr 2017 103.0 101.2637 101.9608   1.73628825 -0.6971084
-#&gt; May 2017 100.4 103.0054 102.3694  -2.60542262  0.6359951
-#&gt; Jun 2017 111.2 102.4641 102.7599   8.73585142 -0.2957736
-#&gt; Jul 2017 103.4 103.4507 103.1325  -0.05071812  0.3182150
-#&gt; Aug 2017  79.3 103.3966 103.5091 -24.09656399 -0.1125714
-#&gt; Sep 2017 109.7 103.2231 103.8871   6.47686943 -0.6640036
-#&gt; Oct 2017 114.0 106.9659 104.2566   7.03410972  2.7093305
-#&gt; Nov 2017 107.7 105.4628 104.5657   2.23724550  0.8970898
-#&gt; Dec 2017 101.4 104.4099 104.8237  -3.00989466 -0.4138486
+#&gt;              y       sa        t         s         i
+#&gt; Jan 2019 103.9 105.1945 105.1440 0.9876940 1.0004808
+#&gt; Feb 2019 101.9 106.3206 105.5014 0.9584217 1.0077654
+#&gt; Mar 2019 111.0 104.7345 105.7233 1.0598229 0.9906473
+#&gt; Apr 2019 107.4 106.1448 105.7281 1.0118257 1.0039413
+#&gt; May 2019 105.5 106.2039 105.5978 0.9933724 1.0057396
+#&gt; Jun 2019 105.8 101.1898 105.3259 1.0455597 0.9607304
+#&gt; Jul 2019 110.1 105.3543 104.8985 1.0450450 1.0043457
+#&gt; Aug 2019  78.7 102.9339 104.3791 0.7645685 0.9861536
+#&gt; Sep 2019 108.5 104.4720 103.8115 1.0385554 1.0063631
+#&gt; Oct 2019 116.8 104.8375 103.2992 1.1141052 1.0148919
+#&gt; Nov 2019 103.8 101.7212 102.9938 1.0204364 0.9876441
+#&gt; Dec 2019  97.7 101.8723 102.8805 0.9590443 0.9902000
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f         s_f         i_f
-#&gt; Jan 2018 102.00877 104.9065 105.0038  -2.8977705 -0.09720660
-#&gt; Feb 2018 102.14378 105.0529 105.1506  -2.9091625 -0.09761841
-#&gt; Mar 2018 113.92764 105.4072 105.3021   8.5204140  0.10515354
-#&gt; Apr 2018 107.88844 105.4548 105.4869   2.4336221 -0.03210021
-#&gt; May 2018 102.83006 105.7518 105.7343  -2.9217368  0.01749135
-#&gt; Jun 2018 115.26921 105.9309 106.0232   9.3383460 -0.09234653
-#&gt; Jul 2018 106.09888 106.4237 106.3248  -0.3248322  0.09889228
-#&gt; Aug 2018  82.95525 106.5440 106.6390 -23.5887165 -0.09503822
-#&gt; Sep 2018 112.41847 106.6179 106.9320   5.8005883 -0.31411494
-#&gt; Oct 2018 115.41327 107.8929 107.1812   7.5203393  0.71172901
-#&gt; Nov 2018 109.88167 107.2964 107.3766   2.5852407 -0.08013772
-#&gt; Dec 2018 103.58107 107.2605 107.5126  -3.6794200 -0.25212937
+#&gt;                y_f     sa_f      t_f       s_f       i_f
+#&gt; Jan 2020 101.79694 103.1662 102.8951 0.9867273 1.0026346
+#&gt; Feb 2020 101.02102 103.3357 102.9515 0.9776003 1.0037323
+#&gt; Mar 2020 112.10997 103.5043 102.9465 1.0831427 1.0054189
+#&gt; Apr 2020 104.50015 103.4303 102.8832 1.0103439 1.0053179
+#&gt; May 2020  96.60823 101.9351 102.7280 0.9477426 0.9922819
+#&gt; Jun 2020 112.13668 102.1960 102.5441 1.0972706 0.9966052
+#&gt; Jul 2020 106.78914 102.3841 102.4931 1.0430249 0.9989358
+#&gt; Aug 2020  76.62863 102.6907 102.5880 0.7462084 1.0010004
+#&gt; Sep 2020 110.85790 103.4529 102.7454 1.0715783 1.0068865
+#&gt; Oct 2020 111.29327 102.4307 102.8914 1.0865224 0.9955221
+#&gt; Nov 2020 104.21972 102.6701 103.0257 1.0150931 0.9965489
+#&gt; Dec 2020 101.55551 103.4907 103.1115 0.9813009 1.0036778
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -597,120 +610,119 @@
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.646
-#&gt;  Seasonal     49.667
-#&gt;  Irregular     0.411
-#&gt;  TD &amp; Hol.     0.057
-#&gt;  Others       49.814
-#&gt;  Total       101.596
+#&gt;  Cycle         1.941
+#&gt;  Seasonal     62.123
+#&gt;  Irregular     0.842
+#&gt;  TD &amp; Hol.     2.428
+#&gt;  Others       32.787
+#&gt;  Total       100.121
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.013
+#&gt;    Evolutive seasonality test                                0.283
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.980
-#&gt;  f-test on i (seasonal dummies)         0.922
-#&gt;  Residual seasonality (entire series)   0.969
-#&gt;  Residual seasonality (last 3 years)    0.897
-#&gt;  f-test on sa (td)                      0.980
-#&gt;  f-test on i (td)                       1.000
+#&gt;  qs test on sa                          0.909
+#&gt;  qs test on i                           0.746
+#&gt;  f-test on sa (seasonal dummies)        0.974
+#&gt;  f-test on i (seasonal dummies)         0.947
+#&gt;  Residual seasonality (entire series)   0.932
+#&gt;  Residual seasonality (last 3 years)    0.940
+#&gt;  f-test on sa (td)                      0.985
+#&gt;  f-test on i (td)                       0.983
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec7b</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
-#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3525      0.256
-#&gt; Phi(2)      0.1336      0.130
-#&gt; Theta(1)   -0.1868      0.256
-#&gt; BTheta(1)  -0.6109      0.047
+#&gt; Phi(1)      0.3858      0.053
+#&gt; Phi(2)      0.2428      0.053
+#&gt; BTheta(1)  -0.7134      0.040
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday       -0.0022941      0.002
-#&gt; Tuesday       0.0005841      0.002
-#&gt; Wednesday     0.0032202      0.002
-#&gt; Thursday     -0.0054984      0.002
-#&gt; Friday        0.0033421      0.002
-#&gt; Saturday      0.0018654      0.002
-#&gt; Easter [6]   -0.0110283      0.003
-#&gt; LS (11-2008) -0.0794304      0.013
-#&gt; LS (1-2009)  -0.0711852      0.013
-#&gt; AO (8-2001)   0.0447084      0.013
+#&gt;              Estimate Std. Error
+#&gt; Week days    0.007131      0.000
+#&gt; Leap year    0.022154      0.007
+#&gt; Easter [6]  -0.021360      0.004
+#&gt; AO (5-2011)  0.128991      0.017
+#&gt; AO (5-2000)  0.057730      0.017
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.01593 on 308 degrees of freedom
-#&gt; Log likelihood = 875.8, aic =  1261 aicc =  1263, bic(corrected for length) = -8.028
+#&gt; Residual standard error: 0.02174 on 338 degrees of freedom
+#&gt; Log likelihood = 831.8, aic =  1560 aicc =  1560, bic(corrected for length) = -7.523
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.186819 B - 0.610856 B^12 + 0.114119 B^13 
+#&gt; MA :  1 - 0.713428 B^12 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.314459 B + 0.340427 B^2 
-#&gt; Innovation variance:  0.4669153 
+#&gt; MA :  1 - 0.975113 B + 0.003731 B^2 - 0.003172 B^3 + 0.002186 B^4 
+#&gt; Innovation variance:  0.7469663 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.040206 B - 0.959794 B^2 
-#&gt; Innovation variance:  0.04869563 
+#&gt; MA :  1 + 0.027738 B - 0.972262 B^2 
+#&gt; Innovation variance:  0.06986498 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.352498 B + 0.133616 B^2 
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 0.717848 B + 0.460721 B^2 + 0.310085 B^3 + 0.132447 B^4 - 0.049053 B^5 - 0.216655 B^6 - 0.354556 B^7 - 0.445030 B^8 - 0.469587 B^9 - 0.376625 B^10 - 0.166397 B^11 - 0.410618 B^12 - 0.132580 B^13 
-#&gt; Innovation variance:  0.1601924 
+#&gt; MA :  1 + 1.353435 B + 1.194117 B^2 + 1.260347 B^3 + 1.124065 B^4 + 0.886062 B^5 + 0.682894 B^6 + 0.440009 B^7 + 0.271828 B^8 + 0.020068 B^9 - 0.054641 B^10 - 0.222194 B^11 
+#&gt; Innovation variance:  0.03026107 
+#&gt; 
+#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; MA :  1 - 0.316265 B - 0.683735 B^2 
+#&gt; Innovation variance:  0.05225072 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2056884 
+#&gt; Innovation variance:  0.2217707 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
 #&gt;              y       sa        t         s         i
-#&gt; Jan 2017  97.4 100.9393 100.9657 0.9649365 0.9997384
-#&gt; Feb 2017  97.5 100.7654 101.2610 0.9675939 0.9951058
-#&gt; Mar 2017 112.0 102.0879 101.7064 1.0970937 1.0037513
-#&gt; Apr 2017 103.0 101.8416 102.1713 1.0113745 0.9967732
-#&gt; May 2017 100.4 103.0277 102.6087 0.9744949 1.0040835
-#&gt; Jun 2017 111.2 102.7958 102.9753 1.0817564 0.9982567
-#&gt; Jul 2017 103.4 103.3099 103.3367 1.0008726 0.9997398
-#&gt; Aug 2017  79.3 103.7805 103.7458 0.7641131 1.0003339
-#&gt; Sep 2017 109.7 103.7154 104.2747 1.0577017 0.9946372
-#&gt; Oct 2017 114.0 105.6674 104.8749 1.0788572 1.0075559
-#&gt; Nov 2017 107.7 105.4730 105.1795 1.0211146 1.0027905
-#&gt; Dec 2017 101.4 104.9614 105.2317 0.9660690 0.9974316
+#&gt; Jan 2019 103.9 105.1743 104.9429 0.9878842 1.0022048
+#&gt; Feb 2019 101.9 105.9207 105.1941 0.9620400 1.0069073
+#&gt; Mar 2019 111.0 104.4311 105.2847 1.0629021 0.9918924
+#&gt; Apr 2019 107.4 105.5933 105.4042 1.0171096 1.0017943
+#&gt; May 2019 105.5 107.2997 105.1676 0.9832269 1.0202734
+#&gt; Jun 2019 105.8 101.9020 104.5972 1.0382528 0.9742326
+#&gt; Jul 2019 110.1 106.0606 104.2943 1.0380862 1.0169351
+#&gt; Aug 2019  78.7 103.0620 104.0531 0.7636179 0.9904748
+#&gt; Sep 2019 108.5 103.7505 103.8759 1.0457777 0.9987934
+#&gt; Oct 2019 116.8 105.1043 103.5817 1.1112766 1.0147004
+#&gt; Nov 2019 103.8 102.2380 102.8763 1.0152784 0.9937947
+#&gt; Dec 2019  97.7 101.4426 102.3135 0.9631060 0.9914880
 #&gt; 
 #&gt; Forecasts:
 #&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2018 102.19076 105.3388 105.3397 0.9701155 0.9999914
-#&gt; Feb 2018 102.32758 105.5082 105.5091 0.9698541 0.9999914
-#&gt; Mar 2018 114.29051 105.6780 105.6789 1.0814979 0.9999914
-#&gt; Apr 2018 107.91102 105.8480 105.8489 1.0194904 0.9999914
-#&gt; May 2018 102.68809 106.0183 106.0192 0.9685884 0.9999914
-#&gt; Jun 2018 115.89624 106.1889 106.1898 1.0914161 0.9999914
-#&gt; Jul 2018 106.23593 106.3597 106.3606 0.9988362 0.9999914
-#&gt; Aug 2018  81.47084 106.5308 106.5317 0.7647630 0.9999914
-#&gt; Sep 2018 112.88837 106.7022 106.7031 1.0579757 0.9999914
-#&gt; Oct 2018 115.34277 106.8739 106.8748 1.0792417 0.9999914
-#&gt; Nov 2018 109.29540 107.0458 107.0468 1.0210148 0.9999914
-#&gt; Dec 2018 103.27711 107.2181 107.2190 0.9632435 0.9999914
+#&gt; Jan 2020 101.14796 102.4076 102.1524 0.9876994 1.0024982
+#&gt; Feb 2020  98.73586 102.2044 102.1359 0.9660638 1.0006702
+#&gt; Mar 2020 111.14762 102.0245 102.1194 1.0894214 0.9990702
+#&gt; Apr 2020 103.85947 102.1162 102.1029 1.0170713 1.0001303
+#&gt; May 2020  95.54759 102.0976 102.0864 0.9358456 1.0001098
+#&gt; Jun 2020 111.32747 102.0557 102.0699 1.0908507 0.9998602
+#&gt; Jul 2020 105.98668 102.0495 102.0535 1.0385811 0.9999614
+#&gt; Aug 2020  75.98545 102.0352 102.0370 0.7446983 0.9999830
+#&gt; Sep 2020 109.40398 102.0154 102.0205 1.0724264 0.9999501
+#&gt; Oct 2020 110.59660 101.9997 102.0040 1.0842840 0.9999575
+#&gt; Nov 2020 103.53656 101.9837 101.9875 1.0152266 0.9999627
+#&gt; Dec 2020 100.67280 101.9669 101.9711 0.9873092 0.9999589
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -719,19 +731,19 @@
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.181
-#&gt;  Seasonal     66.768
-#&gt;  Irregular     0.106
-#&gt;  TD &amp; Hol.     0.069
-#&gt;  Others       30.507
-#&gt;  Total        99.630
+#&gt;  Cycle         5.694
+#&gt;  Seasonal     88.840
+#&gt;  Irregular     0.820
+#&gt;  TD &amp; Hol.     3.412
+#&gt;  Others        0.469
+#&gt;  Total        99.234
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.185
+#&gt;    Evolutive seasonality test                                0.344
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
@@ -742,24 +754,18 @@
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.977
-#&gt;  f-test on sa (td)                      0.927
-#&gt;  f-test on i (td)                       1.000
+#&gt;  Residual seasonality (last 3 years)    0.984
+#&gt;  f-test on sa (td)                      0.135
+#&gt;  f-test on i (td)                       0.256
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'># }
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -770,7 +776,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

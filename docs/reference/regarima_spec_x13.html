@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,8 +48,7 @@
 
 <meta property="og:title" content="RegARIMA model specification, pre-adjustment in X13 — regarima_spec_x13" />
 <meta property="og:description" content="Function to create (and/or modify) a c(&quot;regarima_spec&quot;,&quot;X13&quot;) class object with the RegARIMA model specification for the X13 method. The object can be created from a predefined 'JDemetra+' model specification  (a character), a previous specification (c(&quot;regarima_spec&quot;,&quot;X13&quot;) object) or a X13 RegARIMA model (c(&quot;regarima&quot;,&quot;X13&quot;))." />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="/logo.svg" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -568,22 +571,31 @@ The final values of the <code>specification</code> can be also accessed with the
               <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
 
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5367      0.048
-#&gt; BTheta(1)  -0.5083      0.050
+#&gt; Phi(1)      0.1057      0.114
+#&gt; Phi(2)      0.2141      0.076
+#&gt; Theta(1)   -0.4709      0.111
+#&gt; BTheta(1)  -0.6642      0.043
 #&gt; 
-#&gt;              Estimate Std. Error
-#&gt; Easter [1]     -1.169      0.338
-#&gt; AO (9-2008)    31.410      2.181
-#&gt; LS (9-2008)   -56.648      2.256
-#&gt; TC (9-2008)    24.181      3.256
-#&gt; LS (2-2002)    14.708      1.526
-#&gt; LS (12-2001)  -14.648      1.681
-#&gt; AO (12-2001)   13.030      1.731
-#&gt; LS (5-2008)    -5.485      1.296
+#&gt;               Estimate Std. Error
+#&gt; Monday         0.58039      0.234
+#&gt; Tuesday        0.82241      0.235
+#&gt; Wednesday      1.10804      0.234
+#&gt; Thursday       0.09871      0.232
+#&gt; Friday         0.89917      0.233
+#&gt; Saturday      -1.62006      0.231
+#&gt; Leap year      2.14549      0.731
+#&gt; Easter [1]    -2.34335      0.456
+#&gt; AO (9-2008)   32.07187      2.931
+#&gt; LS (9-2008)  -57.03600      2.631
+#&gt; AO (5-2011)   13.22101      1.841
+#&gt; TC (9-2008)   23.33640      3.967
+#&gt; TC (12-2001) -20.56517      2.911
+#&gt; AO (12-2001)  17.24940      2.981
+#&gt; TC (2-2002)   10.70687      1.939
 #&gt; 
 #&gt; Fixed outliers: 
 #&gt;              Coefficients
@@ -591,8 +603,8 @@ The final values of the <code>specification</code> can be also accessed with the
 #&gt; AO (1-2002)            14
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.729 on 312 degrees of freedom
-#&gt; Log likelihood = -637.1, aic =  1296 aicc =  1297, bic(corrected for length) = 1.274
+#&gt; Residual standard error: 2.185 on 327 degrees of freedom
+#&gt; Log likelihood = -767.3, aic =  1575 aicc =  1577, bic(corrected for length) = 1.883
 #&gt; </div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   type       date coeff
 #&gt; 1   LS 2008-10-01    36
 #&gt; 2   AO 2002-01-01    14</div><div class='input'>
@@ -607,31 +619,31 @@ The final values of the <code>specification</code> can be also accessed with the
 <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                              <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
 <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
+<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5274      0.048
-#&gt; BTheta(1)  -0.4863      0.051
+#&gt; Phi(1)    -0.01674      0.118
+#&gt; Phi(2)     0.15656      0.077
+#&gt; Theta(1)  -0.53112      0.112
+#&gt; BTheta(1) -0.71657      0.041
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; r.var1        1.774e-03      0.008
-#&gt; r.var2       -1.298e-05      0.001
-#&gt; Monday       -1.386e-01      0.166
-#&gt; Tuesday       2.413e-03      0.166
-#&gt; Wednesday     2.401e-01      0.165
-#&gt; Thursday     -5.340e-01      0.165
-#&gt; Friday        4.324e-01      0.164
-#&gt; Saturday      1.547e-01      0.166
-#&gt; Leap year    -4.446e-02      0.504
-#&gt; Easter [1]   -1.084e+00      0.339
-#&gt; LS (11-2008) -8.443e+00      1.317
-#&gt; LS (1-2009)  -7.279e+00      1.321
-#&gt; LS (5-2008)  -5.052e+00      1.268
+#&gt; r.var1       -8.812e-05      0.000
+#&gt; r.var2        1.179e-05      0.000
+#&gt; Monday        4.985e-03      0.002
+#&gt; Tuesday       8.384e-03      0.002
+#&gt; Wednesday     1.115e-02      0.002
+#&gt; Thursday      1.387e-03      0.002
+#&gt; Friday        8.397e-03      0.002
+#&gt; Saturday     -1.641e-02      0.002
+#&gt; Easter [1]   -2.156e-02      0.004
+#&gt; AO (5-2011)   1.302e-01      0.018
+#&gt; LS (11-2008) -1.155e-01      0.016
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 1.665 on 307 degrees of freedom
-#&gt; Log likelihood = -624.7, aic =  1281 aicc =  1283, bic(corrected for length) = 1.287
+#&gt; Residual standard error: 0.02081 on 331 degrees of freedom
+#&gt; Log likelihood = 846.8, aic =  1544 aicc =  1546, bic(corrected for length) = -7.492
 #&gt; </div><div class='input'>
 <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                              <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var1</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>2</span>,
@@ -639,92 +651,98 @@ The final values of the <code>specification</code> can be also accessed with the
 <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
 <span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myreg2</span>)</div><div class='output co'>#&gt; $series
 #&gt;               Jan          Feb          Mar          Apr          May
-#&gt; 1990  -4.24674825 -11.43137603   2.33440224  -1.89236577 -16.63411256
-#&gt; 1991  13.22088309  13.65964636  -2.49723710  -4.24721350  10.98439335
-#&gt; 1992   9.34707631  -4.72669846  15.83013221   5.97754220   4.66084586
-#&gt; 1993   5.34635439  -9.87628560  11.87792273  -5.17542212  -2.59560251
-#&gt; 1994 -16.97191918   6.42287683  -9.95239613   9.63813900 -16.56037231
-#&gt; 1995  -7.49165418   5.18199077  -1.92337214   0.28809812   3.58590886
-#&gt; 1996   2.72277021 -10.81659008 -23.29399361  -5.49625959  -0.72579991
-#&gt; 1997  12.22702835  10.77188166  -6.11945460   5.06866968   4.60068373
-#&gt; 1998  11.94158303   9.13057148  -7.86752993  -4.10929700   4.76373682
-#&gt; 1999 -13.02671671   6.34857535   9.99655161  -3.37748953  -0.86033607
-#&gt; 2000  -6.61257061   5.48811286  -5.39367800  -1.71318426  -7.66734605
-#&gt; 2001  -0.47539083   7.86925425  11.66684112  -2.71823871  -3.13704285
-#&gt; 2002 -11.14492926  -8.42058813 -15.04294209  -2.84026455   0.42869041
-#&gt; 2003  -5.78524902  -1.69109048 -19.19232520 -15.34266387 -11.14761221
-#&gt; 2004   9.71396469  -5.79663020  16.04179789   2.25973337  -5.14857122
-#&gt; 2005 -15.55643970   0.93501283  -3.66949421  -1.29408799   4.07795520
-#&gt; 2006 -16.09575292 -10.49710115  20.52033974   1.76436411  11.28307358
-#&gt; 2007  -2.81725199  -7.91679461   0.01653727 -11.87530126   3.62417465
-#&gt; 2008   4.95847824  12.99750970 -16.15985506 -12.50367945  15.82132306
-#&gt; 2009  17.40218394  -3.24455939  -4.47511333   4.16082526 -12.95865368
-#&gt; 2010  -7.00069022  18.60931509  18.03924959 -13.56043492  -3.14751072
-#&gt; 2011 -14.00912333  14.45014910  -4.23481621  -7.33749597  -7.08484753
-#&gt; 2012  17.47150257  -0.81704668   1.24141586   3.92236141   3.78419970
-#&gt; 2013  12.07632181   0.32001384   1.80397550   0.77160580   5.58395338
-#&gt; 2014   8.15566796   1.20032668   8.81789848 -17.98743117  -9.57051078
-#&gt; 2015   2.26820843  -5.91868492  -4.05414494  14.14224665   2.41625825
-#&gt; 2016  -3.44214729   6.45775407 -15.34500551   5.99672514  -5.04358892
-#&gt; 2017  20.20798363 -18.38661562   1.72937164  -7.63245040 -11.18492914
+#&gt; 1990  11.94158303   9.13057148  -7.86752993  -4.10929700   4.76373682
+#&gt; 1991 -13.02671671   6.34857535   9.99655161  -3.37748953  -0.86033607
+#&gt; 1992  -6.61257061   5.48811286  -5.39367800  -1.71318426  -7.66734605
+#&gt; 1993  -0.47539083   7.86925425  11.66684112  -2.71823871  -3.13704285
+#&gt; 1994 -11.14492926  -8.42058813 -15.04294209  -2.84026455   0.42869041
+#&gt; 1995  -5.78524902  -1.69109048 -19.19232520 -15.34266387 -11.14761221
+#&gt; 1996   9.71396469  -5.79663020  16.04179789   2.25973337  -5.14857122
+#&gt; 1997 -15.55643970   0.93501283  -3.66949421  -1.29408799   4.07795520
+#&gt; 1998 -16.09575292 -10.49710115  20.52033974   1.76436411  11.28307358
+#&gt; 1999  -2.81725199  -7.91679461   0.01653727 -11.87530126   3.62417465
+#&gt; 2000   4.95847824  12.99750970 -16.15985506 -12.50367945  15.82132306
+#&gt; 2001  17.40218394  -3.24455939  -4.47511333   4.16082526 -12.95865368
+#&gt; 2002  -7.00069022  18.60931509  18.03924959 -13.56043492  -3.14751072
+#&gt; 2003 -14.00912333  14.45014910  -4.23481621  -7.33749597  -7.08484753
+#&gt; 2004  17.47150257  -0.81704668   1.24141586   3.92236141   3.78419970
+#&gt; 2005  12.07632181   0.32001384   1.80397550   0.77160580   5.58395338
+#&gt; 2006   8.15566796   1.20032668   8.81789848 -17.98743117  -9.57051078
+#&gt; 2007   2.26820843  -5.91868492  -4.05414494  14.14224665   2.41625825
+#&gt; 2008  -3.44214729   6.45775407 -15.34500551   5.99672514  -5.04358892
+#&gt; 2009  20.20798363 -18.38661562   1.72937164  -7.63245040 -11.18492914
+#&gt; 2010  -0.17532122  -3.90664205  -4.02775110  12.76706963   8.21075754
+#&gt; 2011  12.13732488  15.03810074 -11.69425021   6.13377167  14.83931321
+#&gt; 2012   7.34408890  -5.75309458   0.74897554   0.59301839   8.48264703
+#&gt; 2013  -7.59094766  -5.09303603  -1.56039669   1.32582442  -9.74084022
+#&gt; 2014  -9.75148693  -0.27117079   4.46671886  -3.29112249   1.13049080
+#&gt; 2015  28.39266231   9.61819160   5.08432001   2.59523192  -7.73404126
+#&gt; 2016  13.22082615  12.00558995  -7.81874565  -4.41476451  -2.46028129
+#&gt; 2017   6.34250029   8.65538237  -4.30593090   0.13030894   0.51249629
+#&gt; 2018  -2.76989004   1.36469589  10.67207722   0.01828103   1.40092252
+#&gt; 2019 -10.62911432  16.33683158   5.40830359  14.56857971 -19.33784243
 #&gt;               Jun          Jul          Aug          Sep          Oct
-#&gt; 1990  19.15690770  -8.16894436   3.83650493  -4.58632251  -7.15703978
-#&gt; 1991   6.70923041   0.30954656  23.68511961  25.85788113  12.12280955
-#&gt; 1992  -7.44367537   9.59055258   1.52637081  -7.69368697  13.93080739
-#&gt; 1993  -3.28064671   0.73432395  -2.47863020 -13.73862256  -0.40445818
-#&gt; 1994  10.70861091  -1.09026360  18.99186393 -11.37030733  -2.79719758
-#&gt; 1995  -0.28995035  11.47042072   3.73588935   3.23339211  -8.29819320
-#&gt; 1996  10.32288404   2.15138526  -4.94340125  15.12138281  -5.79463264
-#&gt; 1997  14.84391861   8.81963226  -5.36702239  12.85553707   5.87848533
-#&gt; 1998   1.85915868 -13.24716253  11.72371055   2.31492772   4.83071904
-#&gt; 1999 -17.18817584  -9.29121572   8.13676046   5.26413546  10.11957390
-#&gt; 2000  -6.06574846  16.47312821   8.41069348   3.38175097  -4.04883076
-#&gt; 2001  -2.86300150  -8.03440263  -0.94555455  -0.74046506   7.14490683
-#&gt; 2002  -0.08866413 -29.49083784   0.20358254  -0.98446980   5.89109098
-#&gt; 2003  15.97811635  -6.39805078  15.66690553 -14.49155712  -7.91503959
-#&gt; 2004  -8.23788240   3.34415250  -0.93490765   3.04062078  -4.76507534
-#&gt; 2005  -5.83968954  -1.93449890  -2.69546670   0.73658232   3.57236138
-#&gt; 2006   4.35001744   5.48833492   6.47418304   8.78463454   3.50797869
-#&gt; 2007  -5.49435319   6.92949838  -0.60843916 -11.93540930  -1.19908059
-#&gt; 2008  12.52529118  -2.09395701  -6.39033687   3.98902937  13.41973500
-#&gt; 2009   6.82633090   4.96913333  14.39660656  12.07358558   2.38514694
-#&gt; 2010 -10.19265181  -6.12249656  -2.89068749  15.06983292   3.67722694
-#&gt; 2011  14.75092459   8.45004185  12.93994431   2.98161142  -4.05682490
-#&gt; 2012   1.66175673  11.53387369   0.14748302   0.21440845  -8.26352170
-#&gt; 2013  -1.66854367  -2.27980619   2.42666056  -9.28482969  15.15406678
-#&gt; 2014  -4.74058606 -18.60461283   2.53690073  -2.14401713 -23.70181451
-#&gt; 2015 -14.36087478  -3.14552745  -4.80542811   8.36254248  -0.52349287
-#&gt; 2016  -4.06909625  -4.60935206  22.14908426  14.86967820  -3.55098858
-#&gt; 2017  11.97977461   9.81193912  11.91749205   6.32833568   5.32825947
+#&gt; 1990   1.85915868 -13.24716253  11.72371055   2.31492772   4.83071904
+#&gt; 1991 -17.18817584  -9.29121572   8.13676046   5.26413546  10.11957390
+#&gt; 1992  -6.06574846  16.47312821   8.41069348   3.38175097  -4.04883076
+#&gt; 1993  -2.86300150  -8.03440263  -0.94555455  -0.74046506   7.14490683
+#&gt; 1994  -0.08866413 -29.49083784   0.20358254  -0.98446980   5.89109098
+#&gt; 1995  15.97811635  -6.39805078  15.66690553 -14.49155712  -7.91503959
+#&gt; 1996  -8.23788240   3.34415250  -0.93490765   3.04062078  -4.76507534
+#&gt; 1997  -5.83968954  -1.93449890  -2.69546670   0.73658232   3.57236138
+#&gt; 1998   4.35001744   5.48833492   6.47418304   8.78463454   3.50797869
+#&gt; 1999  -5.49435319   6.92949838  -0.60843916 -11.93540930  -1.19908059
+#&gt; 2000  12.52529118  -2.09395701  -6.39033687   3.98902937  13.41973500
+#&gt; 2001   6.82633090   4.96913333  14.39660656  12.07358558   2.38514694
+#&gt; 2002 -10.19265181  -6.12249656  -2.89068749  15.06983292   3.67722694
+#&gt; 2003  14.75092459   8.45004185  12.93994431   2.98161142  -4.05682490
+#&gt; 2004   1.66175673  11.53387369   0.14748302   0.21440845  -8.26352170
+#&gt; 2005  -1.66854367  -2.27980619   2.42666056  -9.28482969  15.15406678
+#&gt; 2006  -4.74058606 -18.60461283   2.53690073  -2.14401713 -23.70181451
+#&gt; 2007 -14.36087478  -3.14552745  -4.80542811   8.36254248  -0.52349287
+#&gt; 2008  -4.06909625  -4.60935206  22.14908426  14.86967820  -3.55098858
+#&gt; 2009  11.97977461   9.81193912  11.91749205   6.32833568   5.32825947
+#&gt; 2010   4.19785146  17.11661220 -22.15632715  -1.84878197   6.71168243
+#&gt; 2011  -4.43773736   2.68589741 -12.28216829   4.78528762  16.69859573
+#&gt; 2012  25.75396587   0.94259964  -5.19949532   7.74428621  12.28289259
+#&gt; 2013 -12.50949663  -0.46336042  11.37387771  12.64449891  -5.48742076
+#&gt; 2014  10.51229395   3.26977400   7.87037444   4.41559619 -10.19304514
+#&gt; 2015 -18.05527531   1.78383232  -5.25777309   4.00186316  -1.22587586
+#&gt; 2016   3.65792190  -0.34132882   2.96227003  -2.21059772   1.87706159
+#&gt; 2017   5.38638152   5.19672613 -24.22911275  -8.06290253  -4.84679992
+#&gt; 2018  -5.20598538  23.65811636 -16.96474415   6.82585584  13.61561976
+#&gt; 2019  -8.80400798  -7.97730162  -8.86130974  -2.94827785  -8.86651693
 #&gt;               Nov          Dec
-#&gt; 1990   4.29548541 -11.69852745
-#&gt; 1991 -12.51196841   4.00266042
-#&gt; 1992   9.18668766  10.16087064
-#&gt; 1993   4.21538239   2.01597506
-#&gt; 1994  -8.94129051   1.36701846
-#&gt; 1995  13.94462582  -1.91543577
-#&gt; 1996  16.74789634 -10.00980259
-#&gt; 1997 -13.08482026   3.16726325
-#&gt; 1998  -5.35319580  13.78135819
-#&gt; 1999   8.31379809   4.15134145
-#&gt; 2000   9.00009039  11.90666655
-#&gt; 2001   1.24718366  12.96594339
-#&gt; 2002  -4.25751629   6.34658985
-#&gt; 2003  -5.04480733   4.01826700
-#&gt; 2004  -2.41311717   8.24155833
-#&gt; 2005   5.50428418   0.38401793
-#&gt; 2006   0.49879720   8.35749446
-#&gt; 2007  -7.08107950 -16.16663973
-#&gt; 2008  -0.37607422   5.43670114
-#&gt; 2009  -2.98837878  13.84621050
-#&gt; 2010  -0.20034941  -9.79921959
-#&gt; 2011  -1.38807578  -2.22592731
-#&gt; 2012   0.47399133  -2.93107372
-#&gt; 2013  -8.11598824  13.11247408
-#&gt; 2014   0.03258078   6.69745568
-#&gt; 2015   9.51957625  14.94512798
-#&gt; 2016   8.76203737  -2.14696646
-#&gt; 2017  -8.20121900  -1.59325676
+#&gt; 1990  -5.35319580  13.78135819
+#&gt; 1991   8.31379809   4.15134145
+#&gt; 1992   9.00009039  11.90666655
+#&gt; 1993   1.24718366  12.96594339
+#&gt; 1994  -4.25751629   6.34658985
+#&gt; 1995  -5.04480733   4.01826700
+#&gt; 1996  -2.41311717   8.24155833
+#&gt; 1997   5.50428418   0.38401793
+#&gt; 1998   0.49879720   8.35749446
+#&gt; 1999  -7.08107950 -16.16663973
+#&gt; 2000  -0.37607422   5.43670114
+#&gt; 2001  -2.98837878  13.84621050
+#&gt; 2002  -0.20034941  -9.79921959
+#&gt; 2003  -1.38807578  -2.22592731
+#&gt; 2004   0.47399133  -2.93107372
+#&gt; 2005  -8.11598824  13.11247408
+#&gt; 2006   0.03258078   6.69745568
+#&gt; 2007   9.51957625  14.94512798
+#&gt; 2008   8.76203737  -2.14696646
+#&gt; 2009  -8.20121900  -1.59325676
+#&gt; 2010  -7.95140242 -15.66257835
+#&gt; 2011  -0.36455545  -4.40936271
+#&gt; 2012  18.80606885  -1.25241723
+#&gt; 2013   6.82391430  -9.29773363
+#&gt; 2014  -1.58698326 -16.37701292
+#&gt; 2015  -0.71345032  20.95734365
+#&gt; 2016  -4.38062172  -0.88733579
+#&gt; 2017  -6.53077284  -2.93764247
+#&gt; 2018  19.05955757  -6.72838542
+#&gt; 2019   0.99084673   7.20546895
 #&gt; 
 #&gt; $description
 #&gt;              type coeff
@@ -741,40 +759,33 @@ The final values of the <code>specification</code> can be also accessed with the
 #&gt; Theta(1)      Fixed  -0.6
 #&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
 <span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: no
+#&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
 #&gt; Phi(1)     -0.8000      0.000
 #&gt; Theta(1)   -0.6000      0.000
-#&gt; BTheta(1)  -0.4542      0.051
+#&gt; BTheta(1)  -0.6933      0.041
 #&gt; 
 #&gt;              Estimate Std. Error
-#&gt; Monday       -0.05826      0.139
-#&gt; Tuesday      -0.02508      0.139
-#&gt; Wednesday     0.30165      0.137
-#&gt; Thursday     -0.59487      0.138
-#&gt; Friday        0.50268      0.140
-#&gt; Saturday      0.03995      0.138
-#&gt; Leap year    -0.04011      0.451
-#&gt; Easter [1]   -1.20959      0.275
-#&gt; AO (10-2005) -4.95487      1.182
+#&gt; Monday       0.005835      0.002
+#&gt; Tuesday      0.007964      0.002
+#&gt; Wednesday    0.010841      0.002
+#&gt; Thursday     0.001883      0.002
+#&gt; Friday       0.009833      0.002
+#&gt; Saturday    -0.018229      0.002
+#&gt; Easter [1]  -0.020470      0.004
+#&gt; AO (5-2011)  0.144191      0.016
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 2.096 on 312 degrees of freedom
-#&gt; Log likelihood = -698.8, aic =  1420 aicc =  1420, bic(corrected for length) = 1.659
+#&gt; Residual standard error: 0.02585 on 337 degrees of freedom
+#&gt; Log likelihood =   772, aic =  1681 aicc =  1682, bic(corrected for length) = -7.159
 #&gt; </div><div class='input'># }
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -785,7 +796,7 @@ The final values of the <code>specification</code> can be also accessed with the
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
