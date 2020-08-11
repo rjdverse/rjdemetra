@@ -4,6 +4,10 @@
 
 - `x11.seasonalma` argument wasn't taken into account (issue #78).
 
+- `ipi_c_eu` updated: the previous data were calendar adjusted data, they are now unadjusted (neither seasonally adjusted nor calendar adjusted data).
+
+- the print result of the combined test was incorrect.
+
 # RJDemetra 0.1.5
 
 ## Bug fixed

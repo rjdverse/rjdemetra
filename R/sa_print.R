@@ -91,11 +91,11 @@ print.combined_test <- function(x, digits = max(3L, getOption("digits") - 3L),
              sep ="\n"))
 
   cat("\n")
-  combined_test_result <- ngettext(match(x$combined_seasonality_test,
-                                         c("Present","ProbablyNone","None")),
-                                   "Identifiable seasonality present",
-                                   "Identifiable seasonality probably present",
-                                   "Identifiable seasonality not present")
+  combined_test_result <- c(Present = "Identifiable seasonality present",
+                            ProbablyNone = "Identifiable seasonality probably present",
+                            None =  "Identifiable seasonality not present")
+  combined_test_result <- combined_test_result[x$combined_seasonality_test]
+
   cat(combined_test_result)
   invisible(x)
 }
@@ -174,7 +174,7 @@ print.final <- function(x, calendar, n_last_obs = frequency(x$series), print_for
     }else{# No forecast
       cat("\nNo forecast")
     }
-    
+
   }
   invisible(x)
 }
