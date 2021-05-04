@@ -811,7 +811,6 @@ preOut_r2jd <- function(jsobjct = NA, coefEna = NA, out = NA, outDate = NA, outC
     .jcall(jsobjct,"V","addPrespecifiedOutlier", out[i],outDate[i],coef[i])
   }
 }
-
 preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
                         prevar_spec = list(series = NA, description = data.frame(NA,NA)),
                         jtd = NA) {
@@ -829,9 +828,15 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
 
   calendar_def <- grep("Calendar",type)
   n_calendar_def <- length(calendar_def)
+  jcoreg = jsobjct$getCore()$getRegression()
+
   if (nvar == 1){
     if(n_calendar_def == 1){
       .jcall(jsdict,"V","add",varNames,ts_r2jd(series))
+      if(coef!=0){
+        jcoreg$setFixedCoefficients(paste0("td|r@",varNames),
+                                    .jarray(coef))
+      }
       .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",varNames)))
 
     }else{
@@ -842,8 +847,13 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
   }else{
     if(n_calendar_def == 0 | n_calendar_def == nvar){
       if(n_calendar_def >0){
+
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
+          if(coef[i]!=0){
+            jcoreg$setFixedCoefficients(paste0("td|r@",varNames[i]),
+                                        .jarray(coef[i]))
+          }
         }
         .jcall(jtd,"V","setUserVariables",
                paste0("r.",varNames)
@@ -867,12 +877,15 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
       for (i in calendar_def){
         .jcall(jsdict,"V","add",varNames[i],
                ts_r2jd(series[, i]))
+        if(coef[i]!=0){
+          jcoreg$setFixedCoefficients(paste0("td|r@",varNames[i]),
+                                      .jarray(coef[i]))
+        }
       }
       .jcall(jtd,"V","setUserVariables",
              .jarray(paste0("r.",varNames[calendar_def])))
     }
   }
-
 }
 
 arimaCoef_r2jd <- function(jsobjct = NA, acoef = NA, p = NA , q = NA, bp = NA, bq = NA){
@@ -922,21 +935,21 @@ arimaCoef_jd2r <- function(jparams){
                                   1:len)
   data_param
 }
-spec_regarima_X13_r2jd <- function(rspec = NA, jdspec = NA){
-  if (is.null(s_estimate(rspec)))
+spec_regarima_X13_r2jd <- function(spec = NA, jdspec = NA){
+  if (is.null(s_estimate(spec)))
     return(.jnew("jdr/spec/ts/Utility$Dictionary"))
 
-  est <- s_estimate(rspec)
-  trans <- s_transform(rspec)
-  usrspc <- s_usrdef(rspec)
-  outF <- s_preOut(rspec)
-  varF <- s_preVar(rspec)
-  td <- s_td(rspec)
-  easter <- s_easter(rspec)
-  outliers <- s_out(rspec)
-  arimaspc <- s_arima(rspec)
-  arimacoF <- s_arimaCoef(rspec)
-  span <- s_span(rspec)
+  est <- s_estimate(spec)
+  trans <- s_transform(spec)
+  usrspc <- s_usrdef(spec)
+  outF <- s_preOut(spec)
+  varF <- s_preVar(spec)
+  td <- s_td(spec)
+  easter <- s_easter(spec)
+  outliers <- s_out(spec)
+  arimaspc <- s_arima(spec)
+  arimacoF <- s_arimaCoef(spec)
+  span <- s_span(spec)
 
   #Estimate
   jestimate <-.jcall(jdspec,"Ljdr/spec/x13/EstimateSpec;","getEstimate")
@@ -965,7 +978,6 @@ spec_regarima_X13_r2jd <- function(rspec = NA, jdspec = NA){
   #User-defined variables
   .jcall(jregression,"V","clearUserDefinedVariables")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")
-
 
 
   #Calendar
@@ -1049,19 +1061,19 @@ spec_regarima_X13_r2jd <- function(rspec = NA, jdspec = NA){
   return(jdictionary)
 }
 
-spec_TRAMO_r2jd <- function(rspec = NA, jdspec =NA){
+spec_TRAMO_r2jd <- function(spec = NA, jdspec =NA){
 
-  est <- s_estimate(rspec)
-  trans <- s_transform(rspec)
-  usrspc <- s_usrdef(rspec)
-  outF <- s_preOut(rspec)
-  varF <- s_preVar(rspec)
-  td <- s_td(rspec)
-  easter <- s_easter(rspec)
-  outliers <- s_out(rspec)
-  arimaspc <- s_arima(rspec)
-  arimacoF <- s_arimaCoef(rspec)
-  span <- s_span(rspec)
+  est <- s_estimate(spec)
+  trans <- s_transform(spec)
+  usrspc <- s_usrdef(spec)
+  outF <- s_preOut(spec)
+  varF <- s_preVar(spec)
+  td <- s_td(spec)
+  easter <- s_easter(spec)
+  outliers <- s_out(spec)
+  arimaspc <- s_arima(spec)
+  arimacoF <- s_arimaCoef(spec)
+  span <- s_span(spec)
 
   #Estimate
   jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
