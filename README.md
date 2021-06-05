@@ -22,7 +22,7 @@ to the members of the European Statistical System (ESS) and the European
 System of Central Banks. JDemetra+ implements the two leading seasonal
 adjustment methods
 [TRAMO/SEATS+](http://gretl.sourceforge.net/tramo/tramo-seats.html) and
-[X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
+[X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
 
 Besides seasonal adjustment, JDemetra+ bundles other time series models
 that are useful in the production or analysis of economic statistics,
