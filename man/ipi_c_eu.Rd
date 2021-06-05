@@ -5,7 +5,7 @@
 \alias{ipi_c_eu}
 \title{Industrial Production Indices in manufacturing in the European Union}
 \format{
-A monthly \code{ts} object from january 1990 to december 2019 with 34 variables.
+A monthly \code{ts} object from january 1990 to december 2020 with 34 variables.
 }
 \source{
 \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}

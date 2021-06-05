@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,87 +161,87 @@
     <p>Function to create (and/or modify) a <code><a href='https://rdrr.io/r/base/c.html'>c("SA_spec", "X13")</a></code> class object with the SA model specification for the X13 method. It can be done from a pre-defined 'JDemetra+' model specification (a <code>character</code>), a previous specification (<code><a href='https://rdrr.io/r/base/c.html'>c("SA_spec", "X13")</a></code> object) or a seasonal adjustment model (<code><a href='https://rdrr.io/r/base/c.html'>c("SA", "X13")</a></code> object).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>x13_spec</span>(
-  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RSA5c"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2c"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4c"</span>, <span class='st'>"X11"</span>),
-  <span class='kw'>preliminary.check</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>estimate.to</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>estimate.first</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.last</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.exclFirst</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.exclLast</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.tol</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Auto"</span>, <span class='st'>"None"</span>, <span class='st'>"Log"</span>),
-  <span class='kw'>transform.adjust</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"None"</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>),
-  <span class='kw'>transform.aicdiff</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"TradingDays"</span>, <span class='st'>"WorkingDays"</span>, <span class='st'>"UserDefined"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>tradingdays.autoadjust</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>tradingdays.leapyear</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>tradingdays.stocktd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>tradingdays.test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Remove"</span>, <span class='st'>"Add"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>easter.julian</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>easter.duration</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>easter.test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Add"</span>, <span class='st'>"Remove"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>outlier.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>outlier.to</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>outlier.first</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.last</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.exclFirst</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.exclLast</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.ao</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.tc</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.ls</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.so</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.usedefcv</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.cv</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"AddOne"</span>, <span class='st'>"AddAll"</span>),
-  <span class='kw'>outlier.tcrate</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.acceptdefault</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.cancel</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ub1</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ub2</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.mixed</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.balanced</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.armalimit</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.reducecv</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ljungboxlimit</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ubfinal</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.d</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>fcst.horizon</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.mode</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Undefined"</span>, <span class='st'>"Additive"</span>, <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>,
-    <span class='st'>"PseudoAdditive"</span>),
-  <span class='kw'>x11.seasonalComp</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.lsigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.usigma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.trendAuto</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.trendma</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>x11.fcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.bcasts</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>x11.calendarSigma</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.sigmaVector</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x11.excludeFcasts</span> <span class='kw'>=</span> <span class='fl'>NA</span>
-)</pre>
+    <pre class="usage"><span class='fu'>x13_spec</span><span class='op'>(</span>
+  spec <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"RSA5c"</span>, <span class='st'>"RSA0"</span>, <span class='st'>"RSA1"</span>, <span class='st'>"RSA2c"</span>, <span class='st'>"RSA3"</span>, <span class='st'>"RSA4c"</span>, <span class='st'>"X11"</span><span class='op'>)</span>,
+  preliminary.check <span class='op'>=</span> <span class='cn'>NA</span>,
+  estimate.from <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  estimate.to <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  estimate.first <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.last <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.exclFirst <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.exclLast <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.tol <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  transform.function <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Auto"</span>, <span class='st'>"None"</span>, <span class='st'>"Log"</span><span class='op'>)</span>,
+  transform.adjust <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"None"</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span><span class='op'>)</span>,
+  transform.aicdiff <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  usrdef.outliersEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersType <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersDate <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersCoef <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.var <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varType <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varCoef <span class='op'>=</span> <span class='cn'>NA</span>,
+  tradingdays.option <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"TradingDays"</span>, <span class='st'>"WorkingDays"</span>, <span class='st'>"UserDefined"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  tradingdays.autoadjust <span class='op'>=</span> <span class='cn'>NA</span>,
+  tradingdays.leapyear <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  tradingdays.stocktd <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  tradingdays.test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Remove"</span>, <span class='st'>"Add"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  easter.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  easter.julian <span class='op'>=</span> <span class='cn'>NA</span>,
+  easter.duration <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  easter.test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Add"</span>, <span class='st'>"Remove"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  outlier.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.from <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  outlier.to <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  outlier.first <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.last <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.exclFirst <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.exclLast <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.ao <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.tc <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.ls <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.so <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.usedefcv <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.cv <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"AddOne"</span>, <span class='st'>"AddAll"</span><span class='op'>)</span>,
+  outlier.tcrate <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.acceptdefault <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.cancel <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ub1 <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ub2 <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.mixed <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.balanced <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.armalimit <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.reducecv <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ljungboxlimit <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ubfinal <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.mu <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.p <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.d <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.q <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bp <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bd <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bq <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.coefEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.coef <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.coefType <span class='op'>=</span> <span class='cn'>NA</span>,
+  fcst.horizon <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.mode <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Undefined"</span>, <span class='st'>"Additive"</span>, <span class='st'>"Multiplicative"</span>, <span class='st'>"LogAdditive"</span>,
+    <span class='st'>"PseudoAdditive"</span><span class='op'>)</span>,
+  x11.seasonalComp <span class='op'>=</span> <span class='cn'>NA</span>,
+  x11.lsigma <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.usigma <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.trendAuto <span class='op'>=</span> <span class='cn'>NA</span>,
+  x11.trendma <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.seasonalma <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  x11.fcasts <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.bcasts <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  x11.calendarSigma <span class='op'>=</span> <span class='cn'>NA</span>,
+  x11.sigmaVector <span class='op'>=</span> <span class='cn'>NA</span>,
+  x11.excludeFcasts <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -602,56 +602,59 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>)
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
+<span class='va'>myseries</span> <span class='op'>&lt;-</span> <span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>
+<span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span><span class='op'>)</span>
+<span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='va'>myspec1</span><span class='op'>)</span>
 
 <span class='co'># Modify a pre-specified model specification</span>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
-<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)
+<span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+<span class='va'>myreg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='va'>myspec2</span><span class='op'>)</span>
 
 <span class='co'># Modify the model specification from a "X13" object</span>
- <span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='no'>myreg1</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
- <span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
+ <span class='va'>myspec3</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span><span class='va'>myreg1</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+ <span class='va'>myreg3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec3</span><span class='op'>)</span>
 
 <span class='co'># Modify the model specification from a "X13_spec" object</span>
- <span class='no'>myspec4</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='no'>myspec1</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
- <span class='no'>myreg4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
+ <span class='va'>myspec4</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span><span class='va'>myspec1</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+ <span class='va'>myreg4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec4</span><span class='op'>)</span>
 
 <span class='co'># Pre-specified outliers</span>
- <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
-             <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
-             <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
-             <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
+ <span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, usrdef.outliersEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+             usrdef.outliersType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LS"</span>, <span class='st'>"AO"</span><span class='op'>)</span>,
+             usrdef.outliersDate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span><span class='op'>)</span>,
+             usrdef.outliersCoef <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>36</span>, <span class='fl'>14</span><span class='op'>)</span>,
+             transform.function <span class='op'>=</span> <span class='st'>"None"</span><span class='op'>)</span>
 
- <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
- <span class='no'>myreg1</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+ <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+ <span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.1057      0.114
-#&gt; Phi(2)      0.2141      0.076
-#&gt; Theta(1)   -0.4709      0.111
-#&gt; BTheta(1)  -0.6642      0.043
+#&gt; Phi(1)     0.07859      0.114
+#&gt; Phi(2)     0.19792      0.076
+#&gt; Theta(1)  -0.48272      0.111
+#&gt; BTheta(1) -0.65916      0.043
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday         0.58039      0.234
-#&gt; Tuesday        0.82241      0.235
-#&gt; Wednesday      1.10804      0.234
-#&gt; Thursday       0.09871      0.232
-#&gt; Friday         0.89917      0.233
-#&gt; Saturday      -1.62006      0.231
-#&gt; Leap year      2.14549      0.731
-#&gt; Easter [1]    -2.34335      0.456
-#&gt; AO (9-2008)   32.07187      2.931
-#&gt; LS (9-2008)  -57.03600      2.631
-#&gt; AO (5-2011)   13.22101      1.841
-#&gt; TC (9-2008)   23.33640      3.967
-#&gt; TC (12-2001) -20.56517      2.911
-#&gt; AO (12-2001)  17.24940      2.981
-#&gt; TC (2-2002)   10.70687      1.939
+#&gt; Monday         0.64094      0.228
+#&gt; Tuesday        0.81794      0.229
+#&gt; Wednesday      1.05374      0.229
+#&gt; Thursday       0.06981      0.228
+#&gt; Friday         0.93434      0.228
+#&gt; Saturday      -1.63686      0.226
+#&gt; Leap year      2.11550      0.697
+#&gt; Easter [1]    -2.38135      0.451
+#&gt; AO (9-2008)   31.95554      2.924
+#&gt; LS (9-2008)  -57.04093      2.657
+#&gt; TC (4-2020)  -35.62104      2.120
+#&gt; AO (3-2020)  -21.00931      2.145
+#&gt; AO (5-2011)   13.21877      1.832
+#&gt; TC (9-2008)   23.44654      4.001
+#&gt; TC (12-2001) -20.47521      2.922
+#&gt; AO (12-2001)  17.13461      2.962
+#&gt; TC (2-2002)   10.61731      1.937
 #&gt; 
 #&gt; Fixed outliers: 
 #&gt;              Coefficients
@@ -659,27 +662,27 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; AO (1-2002)            14
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 2.185 on 327 degrees of freedom
-#&gt; Log likelihood = -767.3, aic =  1575 aicc =  1577, bic(corrected for length) = 1.883
+#&gt; Residual standard error: 2.178 on 337 degrees of freedom
+#&gt; Log likelihood = -792.6, aic =  1629 aicc =  1632, bic(corrected for length) = 1.901
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.141
-#&gt; M(2)    0.079
-#&gt; M(3)    1.235
-#&gt; M(4)    0.421
-#&gt; M(5)    1.083
-#&gt; M(6)    0.025
-#&gt; M(7)    0.084
-#&gt; M(8)    0.236
-#&gt; M(9)    0.047
-#&gt; M(10)   0.255
-#&gt; M(11)   0.240
-#&gt; Q       0.356
-#&gt; Q-M2    0.391
+#&gt; M(1)    0.151
+#&gt; M(2)    0.097
+#&gt; M(3)    1.206
+#&gt; M(4)    0.558
+#&gt; M(5)    1.041
+#&gt; M(6)    0.037
+#&gt; M(7)    0.082
+#&gt; M(8)    0.242
+#&gt; M(9)    0.062
+#&gt; M(10)   0.267
+#&gt; M(11)   0.252
+#&gt; Q       0.366
+#&gt; Q-M2    0.399
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -688,34 +691,34 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t           s            i
-#&gt; Jan 2019 103.9 105.1283 105.1200  -1.2282924  0.008279642
-#&gt; Feb 2019 101.9 106.0190 105.4062  -4.1190475  0.612828917
-#&gt; Mar 2019 111.0 104.5647 105.5846   6.4353294 -1.019956247
-#&gt; Apr 2019 107.4 106.1904 105.6134   1.2095984  0.576997697
-#&gt; May 2019 105.5 106.0389 105.5526  -0.5388967  0.486297209
-#&gt; Jun 2019 105.8 100.9035 105.3689   4.8965398 -4.465403016
-#&gt; Jul 2019 110.1 105.4033 105.0100   4.6966957  0.393271648
-#&gt; Aug 2019  78.7 103.3862 104.5357 -24.6862487 -1.149431050
-#&gt; Sep 2019 108.5 104.5228 103.9942   3.9771575  0.528676270
-#&gt; Oct 2019 116.8 105.0244 103.4956  11.7756247  1.528791350
-#&gt; Nov 2019 103.8 101.7248 103.1841   2.0751974 -1.459264138
-#&gt; Dec 2019  97.7 101.9645 103.0531  -4.2645362 -1.088545538
+#&gt;              y        sa        t            s           i
+#&gt; Jan 2020 101.0 102.89447 102.9447  -1.89446776  -0.0502488
+#&gt; Feb 2020 100.1 103.56224 102.9860  -3.46224124   0.5762734
+#&gt; Mar 2020  91.8  82.81896 103.2071   8.98103618 -20.3881828
+#&gt; Apr 2020  66.7  66.62390 103.6164   0.07610348 -36.9925073
+#&gt; May 2020  73.7  78.88976 104.0255  -5.18976181 -25.1357871
+#&gt; Jun 2020  98.2  87.30845 104.3450  10.89154932 -17.0365408
+#&gt; Jul 2020  97.4  92.39390 104.4861   5.00609785 -12.0921816
+#&gt; Aug 2020  71.7  97.51560 104.3380 -25.81559971  -6.8224392
+#&gt; Sep 2020 104.7  97.40102 103.9044   7.29897634  -6.5033820
+#&gt; Oct 2020 106.7  98.39408 103.3109   8.30592464  -4.9168409
+#&gt; Nov 2020 101.6 100.23574 102.7824   1.36426365  -2.5467131
+#&gt; Dec 2020  96.6  99.67219 102.4984  -3.07218537  -2.8261840
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f         s_f        i_f
-#&gt; Jan 2020 102.21622 103.4251 103.0441  -1.2088796  0.3809940
-#&gt; Feb 2020  99.95203 103.4974 103.0612  -3.5453586  0.4361614
-#&gt; Mar 2020 112.07522 103.4829 103.0151   8.5923235  0.4677573
-#&gt; Apr 2020 104.38199 103.4163 102.9213   0.9656826  0.4950351
-#&gt; May 2020  96.83109 102.1021 102.7618  -5.2709823 -0.6597729
-#&gt; Jun 2020 111.87859 102.0150 102.5999   9.8635972 -0.5849235
-#&gt; Jul 2020 106.90231 102.4777 102.5807   4.4246394 -0.1030684
-#&gt; Aug 2020  76.02869 103.0997 102.7007 -27.0709810  0.3989725
-#&gt; Sep 2020 110.58476 103.4537 102.8614   7.1310799  0.5922947
-#&gt; Oct 2020 111.74768 102.4560 102.9954   9.2916534 -0.5393773
-#&gt; Nov 2020 104.38299 102.8633 103.1082   1.5196712 -0.2449275
-#&gt; Dec 2020 101.41574 103.4436 103.1822  -2.0278301  0.2613430
+#&gt;                y_f     sa_f      t_f          s_f         i_f
+#&gt; Jan 2021  94.41766 101.0272 102.4220  -6.60952495 -1.39481900
+#&gt; Feb 2021  97.82331 101.6172 102.4196  -3.79385040 -0.80247216
+#&gt; Mar 2021 114.01485 102.1273 102.3712  11.88751670 -0.24388469
+#&gt; Apr 2021 102.04691 102.0672 102.2273  -0.02033583 -0.16002624
+#&gt; May 2021  95.95071 101.4262 102.0682  -5.47547024 -0.64200227
+#&gt; Jun 2021 112.61492 101.2166 101.9501  11.39833187 -0.73348910
+#&gt; Jul 2021 104.00289 101.5502 101.9316   2.45263829 -0.38137799
+#&gt; Aug 2021  79.03331 102.3155 102.0544 -23.28216183  0.26109558
+#&gt; Sep 2021 108.98851 102.3414 102.2480   6.64711680  0.09343944
+#&gt; Oct 2021 108.49736 102.1909 102.4372   6.30644391 -0.24626669
+#&gt; Nov 2021 106.32534 102.4451 102.6074   3.88025741 -0.16229864
+#&gt; Dec 2021  99.71313 102.9154 102.7518  -3.20223190  0.16356694
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -724,85 +727,90 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.783
-#&gt;  Seasonal     46.184
-#&gt;  Irregular     0.810
-#&gt;  TD &amp; Hol.     2.086
-#&gt;  Others       50.912
-#&gt;  Total       101.775
+#&gt;  Cycle         1.625
+#&gt;  Seasonal     41.918
+#&gt;  Irregular     0.727
+#&gt;  TD &amp; Hol.     1.851
+#&gt;  Others       55.678
+#&gt;  Total       101.800
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.022
+#&gt;    Evolutive seasonality test                                0.042
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.833
-#&gt;  qs test on i                           0.622
-#&gt;  f-test on sa (seasonal dummies)        0.948
-#&gt;  f-test on i (seasonal dummies)         0.875
-#&gt;  Residual seasonality (entire series)   0.807
-#&gt;  Residual seasonality (last 3 years)    0.856
+#&gt;  qs test on sa                          0.974
+#&gt;  qs test on i                           0.779
+#&gt;  f-test on sa (seasonal dummies)        0.921
+#&gt;  f-test on i (seasonal dummies)         0.826
+#&gt;  Residual seasonality (entire series)   0.770
+#&gt;  Residual seasonality (last 3 years)    0.894
 #&gt;  f-test on sa (td)                      0.974
-#&gt;  f-test on i (td)                       0.981
+#&gt;  f-test on i (td)                       0.988
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'> <span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   type       date coeff
+#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'> <span class='fu'><a href='specification.html'>s_preOut</a></span><span class='op'>(</span><span class='va'>myreg1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   type       date coeff
 #&gt; 1   LS 2008-10-01    36
 #&gt; 2   AO 2002-01-01    14</div><div class='input'>
 
 <span class='co'># User-defined calendar regressors</span>
- <span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
- <span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
- <span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
- <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"UserDefined"</span>,
-                     <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                     <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>,
-                     <span class='kw'>usrdef.varType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Calendar"</span>, <span class='st'>"Calendar"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: With tradingdays.option = "UserDefined", the parameters tradingdays.autoadjust, tradingdays.leapyear and tradingdays.stocktd are ignored.</span></div><div class='input'> <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
- <span class='no'>myreg1</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+ <span class='va'>var1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>, frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+ <span class='va'>var2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>100</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>, frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+ <span class='va'>var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span><span class='op'>(</span><span class='va'>var1</span>, <span class='va'>var2</span><span class='op'>)</span>
+ <span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"UserDefined"</span>,
+                     usrdef.varEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                     usrdef.var <span class='op'>=</span> <span class='va'>var</span>,
+                     usrdef.varType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Calendar"</span>, <span class='st'>"Calendar"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: With tradingdays.option = "UserDefined", the parameters tradingdays.autoadjust, tradingdays.leapyear and tradingdays.stocktd are ignored.</span></div><div class='input'> <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+ <span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (3, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)     0.33648      0.378
-#&gt; Phi(2)     0.06353      0.378
-#&gt; Phi(3)    -0.41840      0.271
-#&gt; Theta(1)  -0.67609      0.364
-#&gt; BTheta(1) -0.73379      0.040
+#&gt; Phi(1)      0.3595      0.209
+#&gt; Phi(2)      0.1177      0.210
+#&gt; Phi(3)     -0.3259      0.155
+#&gt; Theta(1)   -0.6771      0.192
+#&gt; BTheta(1)  -0.7343      0.039
 #&gt; 
 #&gt;              Estimate Std. Error
-#&gt; Easter [8]   -0.02456      0.006
-#&gt; LS (11-2008) -0.09205      0.017
-#&gt; AO (5-2011)   0.08996      0.021
-#&gt; LS (1-2009)  -0.07635      0.017
+#&gt; Easter [8]     -2.891      0.686
+#&gt; TC (4-2020)   -36.231      2.021
+#&gt; AO (3-2020)   -22.969      2.463
+#&gt; LS (11-2008)  -12.368      1.610
+#&gt; AO (5-2011)     9.825      2.265
+#&gt; TC (2-2009)    -8.128      1.857
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02698 on 337 degrees of freedom
-#&gt; Log likelihood = 755.8, aic =  1714 aicc =  1715, bic(corrected for length) = -7.074
+#&gt; Residual standard error: 2.839 on 347 degrees of freedom
+#&gt; Log likelihood = -889.4, aic =  1803 aicc =  1804, bic(corrected for length) = 2.267
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.298
-#&gt; M(2)    0.276
+#&gt; M(1)    0.376
+#&gt; M(2)    0.310
 #&gt; M(3)    3.000
-#&gt; M(4)    0.454
-#&gt; M(5)    2.096
-#&gt; M(6)    0.558
-#&gt; M(7)    0.113
-#&gt; M(8)    0.273
-#&gt; M(9)    0.089
-#&gt; M(10)   0.396
-#&gt; M(11)   0.379
-#&gt; Q       0.759
-#&gt; Q-M2    0.819
+#&gt; M(4)    0.733
+#&gt; M(5)    2.377
+#&gt; M(6)    0.514
+#&gt; M(7)    0.116
+#&gt; M(8)    0.294
+#&gt; M(9)    0.074
+#&gt; M(10)   0.369
+#&gt; M(11)   0.334
+#&gt; Q       0.818
+#&gt; Q-M2    0.881
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -811,34 +819,34 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y        sa        t         s         i
-#&gt; Jan 2019 103.9 105.95263 105.9423 0.9806269 1.0000972
-#&gt; Feb 2019 101.9 106.72619 106.1401 0.9547797 1.0055216
-#&gt; Mar 2019 111.0 100.93443 106.2326 1.0997238 0.9501269
-#&gt; Apr 2019 107.4 108.35947 106.2125 0.9911454 1.0202144
-#&gt; May 2019 105.5 108.32879 106.0760 0.9738870 1.0212371
-#&gt; Jun 2019 105.8  98.10432 105.8235 1.0784439 0.9270558
-#&gt; Jul 2019 110.1 107.47489 105.4650 1.0244254 1.0190574
-#&gt; Aug 2019  78.7 101.71055 105.0329 0.7737644 0.9683683
-#&gt; Sep 2019 108.5 104.12987 104.5740 1.0419680 0.9957531
-#&gt; Oct 2019 116.8 105.84574 104.1333 1.1034927 1.0164450
-#&gt; Nov 2019 103.8 100.84420 103.7430 1.0293105 0.9720574
-#&gt; Dec 2019  97.7 103.23642 103.4390 0.9463714 0.9980419
+#&gt;              y        sa        t          s             i
+#&gt; Jan 2020 101.0 103.76443 103.7718  -2.764432  -0.007371637
+#&gt; Feb 2020 100.1 104.34515 103.9252  -4.245147   0.419965250
+#&gt; Mar 2020  91.8  81.04300 104.1168  10.757002 -23.073821166
+#&gt; Apr 2020  66.7  68.07471 104.2936  -1.374714 -36.218923904
+#&gt; May 2020  73.7  77.34542 104.4050  -3.645424 -27.059534745
+#&gt; Jun 2020  98.2  88.68292 104.4313   9.517080 -15.748342655
+#&gt; Jul 2020  97.4  93.46921 104.3778   3.930791 -10.908580688
+#&gt; Aug 2020  71.7  95.43752 104.2570 -23.737519  -8.819459329
+#&gt; Sep 2020 104.7  99.17267 104.0850   5.527329  -4.912314376
+#&gt; Oct 2020 106.7  97.12864 103.8669   9.571357  -6.738282414
+#&gt; Nov 2020 101.6  99.69487 103.6276   1.905134  -3.932784061
+#&gt; Dec 2020  96.6 102.36060 103.4003  -5.760595  -1.039736263
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 103.19553 104.8378 103.2285 0.9843354 1.0155894
-#&gt; Feb 2020  97.97326 102.7994 103.0967 0.9530532 0.9971160
-#&gt; Mar 2020 112.53987 102.3923 103.0368 1.0991044 0.9937453
-#&gt; Apr 2020 104.35876 105.1246 103.0187 0.9927153 1.0204412
-#&gt; May 2020  99.40669 102.1157 103.0034 0.9734708 0.9913823
-#&gt; Jun 2020 110.49273 102.4854 103.0048 1.0781315 0.9949574
-#&gt; Jul 2020 105.57679 102.7670 103.0011 1.0273415 0.9977271
-#&gt; Aug 2020  78.93925 102.1948 103.0550 0.7724389 0.9916528
-#&gt; Sep 2020 108.57592 104.3315 103.1229 1.0406824 1.0117201
-#&gt; Oct 2020 113.30516 102.4371 103.2548 1.1060945 0.9920810
-#&gt; Nov 2020 105.67402 102.8250 103.2991 1.0277075 0.9954104
-#&gt; Dec 2020  99.22963 105.1491 103.3814 0.9437036 1.0170996
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2021  98.44952 101.2056 103.1901  -2.7560785 -1.98454698
+#&gt; Feb 2021  98.43821 102.5471 103.0165  -4.1088538 -0.46944312
+#&gt; Mar 2021 110.75460 101.9734 102.8973   8.7811716 -0.92383422
+#&gt; Apr 2021 103.71542 102.9016 102.8411   0.8138272  0.06051994
+#&gt; May 2021  99.53055 103.1863 102.8510  -3.6557369  0.33528360
+#&gt; Jun 2021 111.31381 101.6749 102.8754   9.6388933 -1.20051449
+#&gt; Jul 2021 105.69802 101.5389 102.9077   4.1591091 -1.36882965
+#&gt; Aug 2021  79.42133 103.3872 102.9666 -23.9658420  0.42058783
+#&gt; Sep 2021 108.59095 102.9687 103.0586   5.6222373 -0.08983556
+#&gt; Oct 2021 112.00799 102.4761 103.1532   9.5318659 -0.67704911
+#&gt; Nov 2021 105.36088 103.8747 103.2467   1.4862299  0.62793860
+#&gt; Dec 2021  98.66941 104.3502 103.4522  -5.6808324  0.89800432
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -847,190 +855,198 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.881
-#&gt;  Seasonal     59.583
-#&gt;  Irregular     2.746
-#&gt;  TD &amp; Hol.     0.106
-#&gt;  Others       36.375
-#&gt;  Total       100.691
+#&gt;  Cycle         1.963
+#&gt;  Seasonal     59.842
+#&gt;  Irregular     3.416
+#&gt;  TD &amp; Hol.     0.172
+#&gt;  Others       34.046
+#&gt;  Total        99.439
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.553
+#&gt;    Evolutive seasonality test                                0.269
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          0.000
-#&gt;  qs test on i                           0.001
-#&gt;  f-test on sa (seasonal dummies)        0.862
-#&gt;  f-test on i (seasonal dummies)         0.809
-#&gt;  Residual seasonality (entire series)   0.733
-#&gt;  Residual seasonality (last 3 years)    0.831
+#&gt;  qs test on i                           0.002
+#&gt;  f-test on sa (seasonal dummies)        0.813
+#&gt;  f-test on i (seasonal dummies)         0.754
+#&gt;  Residual seasonality (entire series)   0.568
+#&gt;  Residual seasonality (last 3 years)    1.000
 #&gt;  f-test on sa (td)                      0.000
 #&gt;  f-test on i (td)                       0.000
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
- <span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var1</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-             <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
- <span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
- <span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myreg2</span>)</div><div class='output co'>#&gt; $series
+ <span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, usrdef.varEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+             usrdef.var <span class='op'>=</span> <span class='va'>var1</span>, usrdef.varCoef <span class='op'>=</span> <span class='fl'>2</span>,
+             transform.function <span class='op'>=</span> <span class='st'>"None"</span><span class='op'>)</span>
+ <span class='va'>myreg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec2</span><span class='op'>)</span>
+ <span class='fu'><a href='specification.html'>s_preVar</a></span><span class='op'>(</span><span class='va'>myreg2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $series
 #&gt;               Jan          Feb          Mar          Apr          May
-#&gt; 1990  -7.37468113  -1.25015343   2.79824147  -4.47372026   0.47957680
-#&gt; 1991   3.26711666  -9.63575111   4.78657978   7.80564917  -1.85425499
-#&gt; 1992  -4.19990291  -5.14581743  -4.81189141  -0.22896117  -2.35817375
-#&gt; 1993  -1.83718896   5.64549112  -6.45663305 -19.84197517  -9.32810794
-#&gt; 1994  12.35461267 -10.96546214  -6.78783706  -5.59867238   2.15476356
-#&gt; 1995   0.35119899 -11.20976025  -3.31965872 -12.77255127   5.38651328
-#&gt; 1996   2.25022902  -6.88411870  -6.48787614   4.71731346   1.74606248
-#&gt; 1997  11.90267693   1.91977818 -18.27600531  -8.40076820  16.23393990
-#&gt; 1998  -7.80711972  -6.82293210 -22.43426371   1.80276393   7.81506635
-#&gt; 1999  10.15744026  -3.95593431  21.59511068  22.15581578  -2.55717069
-#&gt; 2000  -5.91062251   8.56944610   5.08893390   3.97103898   3.86757251
-#&gt; 2001  -5.03572195 -17.13177445   7.52451631  -8.83402109   1.36518779
-#&gt; 2002  -4.93380941 -12.28615839  12.84563150  12.11780172   0.17867075
-#&gt; 2003  17.91430812  -8.01034578  -5.57933180   7.56117489  -0.65654280
-#&gt; 2004   6.99530402  -4.78932287 -13.14202741  -9.03645819  -6.82677769
-#&gt; 2005   6.85714751 -15.74190181 -10.39202637  10.62892692 -12.79380891
-#&gt; 2006   6.55348285   2.08748369   4.79304525  11.19721889   3.58970059
-#&gt; 2007 -16.27036866  10.95973351 -11.30615770   7.49407597   5.07040903
-#&gt; 2008 -16.41368825   1.85576753   8.08139505   4.62741902  -1.40862948
-#&gt; 2009  21.10958544   1.06319181   2.88638282  -8.28129022   2.59246188
-#&gt; 2010   7.49492399  13.68161796   8.09041925  10.52043916  15.76710173
-#&gt; 2011  14.61477127  -3.93734253   5.88577012 -10.59461309   7.02083603
-#&gt; 2012  -4.70589637  26.18843475  17.81970431   3.11227898   6.04652922
-#&gt; 2013   6.97447152   8.50194263  -2.82469962  10.56820511  -1.64563751
-#&gt; 2014   6.45915651   2.86538618 -19.55302496  -0.70122520 -19.93476957
-#&gt; 2015  -4.71600217  -3.86758443  -0.32921492 -15.89925204 -16.31630380
-#&gt; 2016 -15.66243530  -8.27262343  10.43432242  -5.61818713   4.58990225
-#&gt; 2017 -13.44497531  -0.07853537  -7.09360740  14.19910316  21.00753869
-#&gt; 2018  16.38748991   7.14250476   0.21730272  -7.10864161   0.67650247
-#&gt; 2019  19.42670865   4.54756408  -4.35878269  16.42250741  -1.19391302
+#&gt; 1990  -4.93380941 -12.28615839  12.84563150  12.11780172   0.17867075
+#&gt; 1991  17.91430812  -8.01034578  -5.57933180   7.56117489  -0.65654280
+#&gt; 1992   6.99530402  -4.78932287 -13.14202741  -9.03645819  -6.82677769
+#&gt; 1993   6.85714751 -15.74190181 -10.39202637  10.62892692 -12.79380891
+#&gt; 1994   6.55348285   2.08748369   4.79304525  11.19721889   3.58970059
+#&gt; 1995 -16.27036866  10.95973351 -11.30615770   7.49407597   5.07040903
+#&gt; 1996 -16.41368825   1.85576753   8.08139505   4.62741902  -1.40862948
+#&gt; 1997  21.10958544   1.06319181   2.88638282  -8.28129022   2.59246188
+#&gt; 1998   7.49492399  13.68161796   8.09041925  10.52043916  15.76710173
+#&gt; 1999  14.61477127  -3.93734253   5.88577012 -10.59461309   7.02083603
+#&gt; 2000  -4.70589637  26.18843475  17.81970431   3.11227898   6.04652922
+#&gt; 2001   6.97447152   8.50194263  -2.82469962  10.56820511  -1.64563751
+#&gt; 2002   6.45915651   2.86538618 -19.55302496  -0.70122520 -19.93476957
+#&gt; 2003  -4.71600217  -3.86758443  -0.32921492 -15.89925204 -16.31630380
+#&gt; 2004 -15.66243530  -8.27262343  10.43432242  -5.61818713   4.58990225
+#&gt; 2005 -13.44497531  -0.07853537  -7.09360740  14.19910316  21.00753869
+#&gt; 2006  16.38748991   7.14250476   0.21730272  -7.10864161   0.67650247
+#&gt; 2007  19.42670865   4.54756408  -4.35878269  16.42250741  -1.19391302
+#&gt; 2008  -6.44304935  -3.17781887 -26.11142582  -4.04070180  19.63939389
+#&gt; 2009  -4.30394846  13.18921431   7.86662563   3.90908196   5.55016634
+#&gt; 2010  -3.55226178   9.79276002 -11.74070697  -3.96460863   0.28959344
+#&gt; 2011   3.71975670   7.52496103  -8.44102704 -14.74703765  -1.27286512
+#&gt; 2012   3.04153582  -1.56110528   6.66411599 -21.43024893  -7.85684050
+#&gt; 2013  15.28664770   2.85760869   9.66478863   0.41676859  -1.86568045
+#&gt; 2014   9.16852243  11.82521119   0.89920960 -14.23925932   1.85840157
+#&gt; 2015  18.72999491  -9.15749659  -0.12128002 -11.17237976   2.69965596
+#&gt; 2016 -15.34357208   0.26618737   3.62927093  -6.77324332  -3.86793166
+#&gt; 2017  -1.52302024  13.18666001  -7.75961869  11.48134828  11.40960766
+#&gt; 2018 -11.51931160  -8.74614335  -0.56005464  -6.48120780   2.67518834
+#&gt; 2019   1.30699486   8.77061311   5.57893934  11.50015537  -2.82304681
+#&gt; 2020  -1.61878192   5.52162660   3.48733451  -0.62679216  -4.82827570
 #&gt;               Jun          Jul          Aug          Sep          Oct
-#&gt; 1990  10.92852535   5.08009676  -8.69910799  -7.02676476 -13.59407270
-#&gt; 1991  -3.71415762  -3.75906415 -10.49773092   1.35509887 -10.41934249
-#&gt; 1992  -0.42915889  -5.33472185   2.40923657   2.75787999   9.87337885
-#&gt; 1993  18.64559750   3.07668334 -18.73476807 -13.81586373  12.14281005
-#&gt; 1994 -20.55435201  -5.20408628   2.52263906   1.53156424   4.92124424
-#&gt; 1995  13.48841284   6.01111502  -0.12719586   7.16138996   4.05634420
-#&gt; 1996  -3.93274869   1.23240578 -20.06667650  12.09783540   1.40372442
-#&gt; 1997   1.60041454  16.00151269   1.14274708 -13.65424549   4.38538734
-#&gt; 1998  -9.57231341   0.91407055  -4.15741978  -6.61423552   6.83971635
-#&gt; 1999   3.02291700  -6.65805050  -6.96061207   6.83341934  -5.89274870
-#&gt; 2000   3.70136185  10.36723098  23.58765058  -9.13602075  12.75599423
-#&gt; 2001   4.26281885  -9.25139751  -9.69095736  -2.26582778  -9.78223964
-#&gt; 2002  17.00247776  13.44115353   2.47249503  -0.95850995  -1.05894771
-#&gt; 2003  14.03825101   8.06123109  -1.25334438  -5.64422544   9.40777992
-#&gt; 2004   3.74599658   8.09784422 -10.27311894   2.71204716   3.72163386
-#&gt; 2005 -17.65259960 -23.94684943   6.61851420   2.79202139 -19.75798133
-#&gt; 2006  11.98583489   5.63019465   3.60364311   8.25363990  -0.40392584
-#&gt; 2007   1.49227768   7.56914894  -4.27224530 -13.47831121   0.82595585
-#&gt; 2008 -18.30167300   4.04087877  -0.13750674  -1.02241238   2.02454445
-#&gt; 2009  -4.95230738  -2.89501667   6.40683953  -1.41462861  -8.79847386
-#&gt; 2010  11.52029911  -5.17742857  -6.35012824  -4.00123911   5.93241461
-#&gt; 2011  -2.54390092  -3.80451079   7.22051799  13.27842786  -1.25492499
-#&gt; 2012   8.02925361  -7.42182079 -10.86486271  15.85888347  -1.40704169
-#&gt; 2013  -5.05197318  -4.02419900  22.95251358  -0.58040167   1.22377660
-#&gt; 2014   1.21132684   4.35595856   1.38904324   9.82497501  -2.86391397
-#&gt; 2015  -6.19216932  -4.28563857  21.43623439  13.81055332  -9.81823126
-#&gt; 2016   4.61175487   5.88209678  13.65187644   2.37584966 -13.01932383
-#&gt; 2017   0.56429659   8.05545122  -1.92729984  -1.20578134  -2.41185306
-#&gt; 2018  18.67312976   7.39326267   9.65687441   4.69334931   7.32928056
-#&gt; 2019   0.03403357  -2.87662480  10.04914840 -15.19681487  10.80588866
+#&gt; 1990  17.00247776  13.44115353   2.47249503  -0.95850995  -1.05894771
+#&gt; 1991  14.03825101   8.06123109  -1.25334438  -5.64422544   9.40777992
+#&gt; 1992   3.74599658   8.09784422 -10.27311894   2.71204716   3.72163386
+#&gt; 1993 -17.65259960 -23.94684943   6.61851420   2.79202139 -19.75798133
+#&gt; 1994  11.98583489   5.63019465   3.60364311   8.25363990  -0.40392584
+#&gt; 1995   1.49227768   7.56914894  -4.27224530 -13.47831121   0.82595585
+#&gt; 1996 -18.30167300   4.04087877  -0.13750674  -1.02241238   2.02454445
+#&gt; 1997  -4.95230738  -2.89501667   6.40683953  -1.41462861  -8.79847386
+#&gt; 1998  11.52029911  -5.17742857  -6.35012824  -4.00123911   5.93241461
+#&gt; 1999  -2.54390092  -3.80451079   7.22051799  13.27842786  -1.25492499
+#&gt; 2000   8.02925361  -7.42182079 -10.86486271  15.85888347  -1.40704169
+#&gt; 2001  -5.05197318  -4.02419900  22.95251358  -0.58040167   1.22377660
+#&gt; 2002   1.21132684   4.35595856   1.38904324   9.82497501  -2.86391397
+#&gt; 2003  -6.19216932  -4.28563857  21.43623439  13.81055332  -9.81823126
+#&gt; 2004   4.61175487   5.88209678  13.65187644   2.37584966 -13.01932383
+#&gt; 2005   0.56429659   8.05545122  -1.92729984  -1.20578134  -2.41185306
+#&gt; 2006  18.67312976   7.39326267   9.65687441   4.69334931   7.32928056
+#&gt; 2007   0.03403357  -2.87662480  10.04914840 -15.19681487  10.80588866
+#&gt; 2008  -9.08038236   2.31002822  10.83031391 -10.23062790  19.75884923
+#&gt; 2009   4.95861493 -15.88836847  -3.21264477 -15.52052891   9.61515998
+#&gt; 2010 -14.70506429   9.65172228  -7.81441694  12.57319338 -20.46247314
+#&gt; 2011  -1.13083340  18.06296611  -9.16313634   3.26036046  17.29406356
+#&gt; 2012   8.56316142  -3.54721322   1.86108946   3.85897720   6.05504903
+#&gt; 2013 -13.51099737  -9.53225887 -12.82607152  13.48738780   0.87489524
+#&gt; 2014   6.47343621   1.23381550  -5.57040623  -4.24403791  14.21456362
+#&gt; 2015  15.11653990  -5.93155678 -16.14954366 -13.73896551  11.92737540
+#&gt; 2016  -2.10774079  -6.33652476   0.79569318   2.38637053  -5.11546412
+#&gt; 2017  -3.34901191   6.29659134   7.34016764  18.02049619 -11.48480057
+#&gt; 2018   3.49756194 -12.17302032   0.81927914  -7.95643416  -5.84737942
+#&gt; 2019 -17.42631121   4.01343311   6.49059795  10.87865196  11.59117507
+#&gt; 2020  19.95979803 -12.51509572   5.28487960 -12.47616265  -0.41651340
 #&gt;               Nov          Dec
-#&gt; 1990   3.45646991   4.21805481
-#&gt; 1991  13.71543461   2.11723020
-#&gt; 1992  -6.07175018  -2.43155234
-#&gt; 1993   1.41481904   0.63103851
-#&gt; 1994   5.33822382  -2.07132362
-#&gt; 1995  -3.54852294  -8.31256082
-#&gt; 1996  -8.75827874   9.62364735
-#&gt; 1997  -9.61507272  12.16348887
-#&gt; 1998   8.92384341  -7.26907567
-#&gt; 1999  -0.74093549 -11.12271027
-#&gt; 2000 -14.39090092   0.38142207
-#&gt; 2001  -5.33354128   8.66392934
-#&gt; 2002 -12.61154714 -17.60210399
-#&gt; 2003  12.69808946  12.65038490
-#&gt; 2004 -14.73803514 -14.22799149
-#&gt; 2005   4.96506933  13.53031635
-#&gt; 2006  -6.05456736  -4.78648838
-#&gt; 2007  11.53728116  25.86841900
-#&gt; 2008   8.03320548  -5.87793245
-#&gt; 2009  -5.23639611  -6.13436596
-#&gt; 2010  -0.01094905 -18.90227763
-#&gt; 2011  11.39794704  -7.84406639
-#&gt; 2012  -9.75276634  -0.91846724
-#&gt; 2013  -2.00777681   4.60803569
-#&gt; 2014  16.94152064   5.21310799
-#&gt; 2015  13.12917276   3.72374042
-#&gt; 2016  17.37977175  14.64151538
-#&gt; 2017  -2.55729561  -2.08778684
-#&gt; 2018  13.33797734  13.30182641
-#&gt; 2019   4.35371426 -13.89147408
+#&gt; 1990 -12.61154714 -17.60210399
+#&gt; 1991  12.69808946  12.65038490
+#&gt; 1992 -14.73803514 -14.22799149
+#&gt; 1993   4.96506933  13.53031635
+#&gt; 1994  -6.05456736  -4.78648838
+#&gt; 1995  11.53728116  25.86841900
+#&gt; 1996   8.03320548  -5.87793245
+#&gt; 1997  -5.23639611  -6.13436596
+#&gt; 1998  -0.01094905 -18.90227763
+#&gt; 1999  11.39794704  -7.84406639
+#&gt; 2000  -9.75276634  -0.91846724
+#&gt; 2001  -2.00777681   4.60803569
+#&gt; 2002  16.94152064   5.21310799
+#&gt; 2003  13.12917276   3.72374042
+#&gt; 2004  17.37977175  14.64151538
+#&gt; 2005  -2.55729561  -2.08778684
+#&gt; 2006  13.33797734  13.30182641
+#&gt; 2007   4.35371426 -13.89147408
+#&gt; 2008   5.01748489   9.33783648
+#&gt; 2009 -10.86315269 -17.16257245
+#&gt; 2010  18.19078188 -13.67382107
+#&gt; 2011   6.18631030  -2.43510381
+#&gt; 2012   5.22120605  16.07831850
+#&gt; 2013  -5.66758222   5.73972934
+#&gt; 2014  -8.10897493  -6.78534611
+#&gt; 2015   1.16453951   1.97141988
+#&gt; 2016  -8.20642372 -14.97546434
+#&gt; 2017  12.16381354  -6.73465522
+#&gt; 2018   5.34806561  -5.30695812
+#&gt; 2019 -15.10504494   1.14206605
+#&gt; 2020 -10.54737293  -0.98173680
 #&gt; 
 #&gt; $description
 #&gt;              type coeff
 #&gt; userdef Undefined     2
 #&gt; </div><div class='input'>
 <span class='co'># Pre-specified ARMA coefficients</span>
- <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-             <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-             <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-             <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
-             <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
+ <span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, automdl.enabled <span class='op'>=</span> <span class='cn'>FALSE</span>,
+             arima.p <span class='op'>=</span> <span class='fl'>1</span>, arima.q <span class='op'>=</span> <span class='fl'>1</span>, arima.bp <span class='op'>=</span> <span class='fl'>0</span>, arima.bq <span class='op'>=</span> <span class='fl'>1</span>,
+             arima.coefEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+             arima.coef <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.8</span>, <span class='op'>-</span><span class='fl'>0.6</span>, <span class='fl'>0</span><span class='op'>)</span>,
+             arima.coefType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Fixed"</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='st'>"Undefined"</span><span class='op'>)</span><span class='op'>)</span>
 
- <span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;                Type Value
+ <span class='fu'><a href='specification.html'>s_arimaCoef</a></span><span class='op'>(</span><span class='va'>myspec1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                Type Value
 #&gt; Phi(1)        Fixed  -0.8
 #&gt; Theta(1)      Fixed  -0.6
-#&gt; BTheta(1) Undefined   0.0</div><div class='input'> <span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
- <span class='no'>myreg1</span></div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; BTheta(1) Undefined   0.0</div><div class='input'> <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+ <span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)     -0.8000      0.000
-#&gt; Theta(1)   -0.6000      0.000
-#&gt; BTheta(1)  -0.6933      0.041
+#&gt; Phi(1)     -0.8000       0.00
+#&gt; Theta(1)   -0.6000       0.00
+#&gt; BTheta(1)  -0.6977       0.04
 #&gt; 
 #&gt;              Estimate Std. Error
-#&gt; Monday       0.005835      0.002
-#&gt; Tuesday      0.007964      0.002
-#&gt; Wednesday    0.010841      0.002
-#&gt; Thursday     0.001883      0.002
-#&gt; Friday       0.009833      0.002
-#&gt; Saturday    -0.018229      0.002
-#&gt; Easter [1]  -0.020470      0.004
-#&gt; AO (5-2011)  0.144191      0.016
+#&gt; Monday       0.006317      0.002
+#&gt; Tuesday      0.007824      0.002
+#&gt; Wednesday    0.010528      0.002
+#&gt; Thursday     0.001857      0.002
+#&gt; Friday       0.010099      0.002
+#&gt; Saturday    -0.018439      0.002
+#&gt; Easter [1]  -0.020593      0.004
+#&gt; TC (4-2020) -0.475720      0.031
+#&gt; AO (3-2020) -0.213355      0.023
+#&gt; AO (5-2011)  0.143705      0.016
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02585 on 337 degrees of freedom
-#&gt; Log likelihood =   772, aic =  1681 aicc =  1682, bic(corrected for length) = -7.159
+#&gt; Residual standard error: 0.0256 on 347 degrees of freedom
+#&gt; Log likelihood = 802.3, aic =  1733 aicc =  1734, bic(corrected for length) = -7.15
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.104
-#&gt; M(2)    0.050
-#&gt; M(3)    0.820
-#&gt; M(4)    0.810
-#&gt; M(5)    0.774
-#&gt; M(6)    0.144
+#&gt; M(1)    0.097
+#&gt; M(2)    0.052
+#&gt; M(3)    0.750
+#&gt; M(4)    0.749
+#&gt; M(5)    0.731
+#&gt; M(6)    0.126
 #&gt; M(7)    0.075
-#&gt; M(8)    0.213
-#&gt; M(9)    0.060
-#&gt; M(10)   0.281
-#&gt; M(11)   0.274
-#&gt; Q       0.317
-#&gt; Q-M2    0.350
+#&gt; M(8)    0.220
+#&gt; M(9)    0.075
+#&gt; M(10)   0.293
+#&gt; M(11)   0.281
+#&gt; Q       0.300
+#&gt; Q-M2    0.331
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -1039,34 +1055,34 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.4392 105.1420 0.9854022 1.0028269
-#&gt; Feb 2019 101.9 106.5484 105.5999 0.9563728 1.0089822
-#&gt; Mar 2019 111.0 104.9544 105.8893 1.0576025 0.9911709
-#&gt; Apr 2019 107.4 106.1896 105.9114 1.0113981 1.0026268
-#&gt; May 2019 105.5 106.3579 105.7434 0.9919334 1.0058112
-#&gt; Jun 2019 105.8 101.4914 105.4084 1.0424527 0.9628395
-#&gt; Jul 2019 110.1 105.3528 104.9476 1.0450604 1.0038607
-#&gt; Aug 2019  78.7 102.9607 104.4123 0.7643693 0.9860971
-#&gt; Sep 2019 108.5 104.2297 103.7658 1.0409699 1.0044713
-#&gt; Oct 2019 116.8 104.6445 103.0383 1.1161596 1.0155886
-#&gt; Nov 2019 103.8 101.4319 102.3438 1.0233467 0.9910901
-#&gt; Dec 2019  97.7 101.3468 101.6903 0.9640167 0.9966220
+#&gt;              y        sa        t         s         i
+#&gt; Jan 2020 101.0 103.50059 103.4716 0.9758398 1.0002804
+#&gt; Feb 2020 100.1 103.70789 104.1959 0.9652110 0.9953168
+#&gt; Mar 2020  91.8  85.02419 105.2353 1.0796927 0.8079439
+#&gt; Apr 2020  66.7  66.06576 106.3700 1.0096002 0.6210940
+#&gt; May 2020  73.7  77.29646 107.2332 0.9534719 0.7208256
+#&gt; Jun 2020  98.2  88.21419 107.6348 1.1131996 0.8195693
+#&gt; Jul 2020  97.4  92.04371 107.5406 1.0581929 0.8558971
+#&gt; Aug 2020  71.7  95.53300 106.9592 0.7505260 0.8931720
+#&gt; Sep 2020 104.7  97.32774 105.9849 1.0757467 0.9183169
+#&gt; Oct 2020 106.7  98.74148 104.7928 1.0805996 0.9422542
+#&gt; Nov 2020 101.6 100.23569 103.5604 1.0136110 0.9678964
+#&gt; Dec 2020  96.6  99.45166 102.3889 0.9713262 0.9713127
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f      sa_f       t_f       s_f       i_f
-#&gt; Jan 2020  99.39834 100.81133 101.08186 0.9859837 0.9973237
-#&gt; Feb 2020  97.82021 100.50616 100.52964 0.9732758 0.9997664
-#&gt; Mar 2020 108.74299 100.55838 100.01880 1.0813916 1.0053948
-#&gt; Apr 2020 101.08116 100.17315  99.58960 1.0090645 1.0058596
-#&gt; May 2020  93.07749  98.52290  99.19467 0.9447295 0.9932278
-#&gt; Jun 2020 108.00847  98.50199  98.83464 1.0965105 0.9966343
-#&gt; Jul 2020 102.83686  98.50394  98.60286 1.0439872 0.9989968
-#&gt; Aug 2020  73.50899  98.60445  98.48637 0.7454936 1.0011989
-#&gt; Sep 2020 106.31917  99.06688  98.43519 1.0732059 1.0064173
-#&gt; Oct 2020 106.67440  98.00056  98.38190 1.0885080 0.9961239
-#&gt; Nov 2020  99.86793  97.97595  98.33449 1.0193106 0.9963538
-#&gt; Dec 2020  97.16631  98.52982  98.27442 0.9861614 1.0025989
+#&gt;                y_f     sa_f       t_f       s_f       i_f
+#&gt; Jan 2021  91.86627 99.03608 101.33234 0.9276040 0.9773393
+#&gt; Feb 2021  93.73814 98.76312 100.39814 0.9491209 0.9837146
+#&gt; Mar 2021 109.97904 99.04192  99.55589 1.1104292 0.9948373
+#&gt; Apr 2021  99.51314 98.51411  98.84092 1.0101410 0.9966935
+#&gt; May 2021  92.44138 97.26558  98.27297 0.9504018 0.9897491
+#&gt; Jun 2021 109.51917 97.80126  97.82297 1.1198135 0.9997780
+#&gt; Jul 2021  99.72232 96.85484  97.49522 1.0296059 0.9934317
+#&gt; Aug 2021  74.93973 97.28720  97.30419 0.7702938 0.9998254
+#&gt; Sep 2021 104.15955 97.30940  97.21500 1.0703955 1.0009711
+#&gt; Oct 2021 102.57254 96.84676  97.16553 1.0591221 0.9967193
+#&gt; Nov 2021 100.68100 96.97009  97.14932 1.0382686 0.9981552
+#&gt; Dec 2021  94.63045 97.42206  97.13060 0.9713452 1.0030007
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -1075,39 +1091,40 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         5.744
-#&gt;  Seasonal     89.850
-#&gt;  Irregular     1.230
-#&gt;  TD &amp; Hol.     3.698
-#&gt;  Others        0.489
-#&gt;  Total       101.012
+#&gt;  Cycle         5.183
+#&gt;  Seasonal     82.105
+#&gt;  Irregular     1.148
+#&gt;  TD &amp; Hol.     3.365
+#&gt;  Others       10.592
+#&gt;  Total       102.393
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.272
+#&gt;    Evolutive seasonality test                                0.406
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.992
-#&gt;  qs test on i                           0.858
-#&gt;  f-test on sa (seasonal dummies)        0.988
-#&gt;  f-test on i (seasonal dummies)         0.970
-#&gt;  Residual seasonality (entire series)   0.984
-#&gt;  Residual seasonality (last 3 years)    0.952
-#&gt;  f-test on sa (td)                      0.989
-#&gt;  f-test on i (td)                       0.946
+#&gt;  qs test on sa                          1.000
+#&gt;  qs test on i                           0.939
+#&gt;  f-test on sa (seasonal dummies)        0.990
+#&gt;  f-test on i (seasonal dummies)         0.972
+#&gt;  Residual seasonality (entire series)   0.989
+#&gt;  Residual seasonality (last 3 years)    0.996
+#&gt;  f-test on sa (td)                      0.994
+#&gt;  f-test on i (td)                       0.959
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
 <span class='co'># Defined seasonal filters</span>
- <span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>x13_spec</span>(<span class='st'>"RSA5c"</span>, <span class='kw'>x11.seasonalma</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"S3X1"</span>, <span class='fl'>12</span>))
- <span class='no'>mysa1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='co'># }</span></div></span></pre>
+ <span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span><span class='st'>"RSA5c"</span>, x11.seasonalma <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"S3X1"</span>, <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='va'>mysa1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+<span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -1123,7 +1140,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

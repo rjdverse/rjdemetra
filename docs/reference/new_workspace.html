@@ -81,7 +81,7 @@ add a multi-processing to it (new_multiprocessing())." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ add a multi-processing to it (new_multiprocessing())." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,7 +136,7 @@ add a multi-processing to it (new_multiprocessing())." />
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,9 +163,9 @@ add a multi-processing to it (new_multiprocessing())." />
 add a multi-processing to it (<code>new_multiprocessing()</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_workspace</span>()
+    <pre class="usage"><span class='fu'>new_workspace</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>new_multiprocessing</span>(<span class='no'>workspace</span>, <span class='no'>name</span>)</pre>
+<span class='fu'>new_multiprocessing</span><span class='op'>(</span><span class='va'>workspace</span>, <span class='va'>name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,8 +191,11 @@ add a multi-processing to it (<code>new_multiprocessing()</code>).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Create and export a empty 'JDemetra+' workspace</span>
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'>new_workspace</span>()
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'>new_multiprocessing</span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)</div></pre>
+<span class='va'>wk</span> <span class='op'>&lt;-</span> <span class='fu'>new_workspace</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mp</span> <span class='op'>&lt;-</span> <span class='fu'>new_multiprocessing</span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span><span class='op'>)</span>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -208,7 +211,7 @@ add a multi-processing to it (<code>new_multiprocessing()</code>).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

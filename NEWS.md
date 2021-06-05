@@ -1,5 +1,7 @@
 # RJDemetra 0.1.7
 
+Data updated until December 2020.
+
 ## Bug fixed
 
 - fixed coefficients with user-defined calendar regressors can now correctly be used (issue #87).

@@ -81,7 +81,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,7 +136,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,9 +163,9 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 <code>multiprocessing</code> or <code>sa_item</code> object. <code>get_model</code> returns a <code>"SA"</code> objects while  <code>get_jmodel</code> returns the Java objects of the models.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_jmodel</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>get_jmodel</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>workspace</span>, userdefined <span class='op'>=</span> <span class='cn'>NULL</span>, progress_bar <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>get_model</span>(<span class='no'>x</span>, <span class='no'>workspace</span>, <span class='kw'>userdefined</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>get_model</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>workspace</span>, userdefined <span class='op'>=</span> <span class='cn'>NULL</span>, progress_bar <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,61 +206,65 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
-<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
-<span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
+<span class='va'>spec_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, easter.enabled <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>sa_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_x13</span><span class='op'>)</span>
+<span class='va'>spec_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5"</span><span class='op'>)</span>
+<span class='va'>sa_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_ts</span><span class='op'>)</span>
 
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_ts</span>, <span class='st'>"TramoSeats"</span>)
+<span class='va'>wk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span><span class='op'>)</span>
+<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_x13</span>, <span class='st'>"X13"</span><span class='op'>)</span>
+<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_ts</span>, <span class='st'>"TramoSeats"</span><span class='op'>)</span>
 
-<span class='fu'><a href='compute.html'>compute</a></span>(<span class='no'>wk</span>) <span class='co'># It's important to compute the workspace to get the SA model</span>
-<span class='no'>sa_item1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>1</span>)
+<span class='fu'><a href='compute.html'>compute</a></span><span class='op'>(</span><span class='va'>wk</span><span class='op'>)</span> <span class='co'># It's important to compute the workspace to get the SA model</span>
+<span class='va'>sa_item1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span><span class='op'>(</span><span class='va'>mp</span>, <span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>get_model</span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Extract the model of the sa_item1: its the object sa_x13</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+<span class='fu'>get_model</span><span class='op'>(</span><span class='va'>sa_item1</span>, <span class='va'>wk</span><span class='op'>)</span> <span class='co'># Extract the model of the sa_item1: its the object sa_x13</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;            Estimate Std. Error
-#&gt; Phi(1)     0.008774      0.119
-#&gt; Phi(2)     0.098387      0.081
-#&gt; Theta(1)  -0.562495      0.110
-#&gt; BTheta(1) -0.738153      0.039
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     0.02043      0.107
+#&gt; Phi(2)     0.11093      0.077
+#&gt; Theta(1)  -0.58663      0.098
+#&gt; BTheta(1) -0.69921      0.041
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday        0.0058623      0.002
-#&gt; Tuesday       0.0091349      0.002
-#&gt; Wednesday     0.0109267      0.002
-#&gt; Thursday      0.0005156      0.002
-#&gt; Friday        0.0091500      0.002
-#&gt; Saturday     -0.0161713      0.002
-#&gt; AO (5-2011)   0.1278938      0.018
-#&gt; LS (11-2008) -0.1157755      0.016
+#&gt;              Estimate Std. Error
+#&gt; Monday         0.6788      0.244
+#&gt; Tuesday        0.9500      0.245
+#&gt; Wednesday      1.0053      0.246
+#&gt; Thursday      -0.0656      0.245
+#&gt; Friday         1.0304      0.245
+#&gt; Saturday      -1.5721      0.245
+#&gt; Leap year      2.1513      0.753
+#&gt; TC (4-2020)  -36.1532      2.193
+#&gt; AO (3-2020)  -20.2213      2.255
+#&gt; AO (5-2011)   13.2210      1.970
+#&gt; LS (11-2008) -12.7459      1.663
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02153 on 334 degrees of freedom
-#&gt; Log likelihood = 834.5, aic =  1562 aicc =  1564, bic(corrected for length) = -7.474
+#&gt; Residual standard error: 2.294 on 343 degrees of freedom
+#&gt; Log likelihood = -811.8, aic =  1656 aicc =  1657, bic(corrected for length) = 1.907
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.094
-#&gt; M(2)    0.049
-#&gt; M(3)    0.978
-#&gt; M(4)    0.421
-#&gt; M(5)    0.969
-#&gt; M(6)    0.180
-#&gt; M(7)    0.075
-#&gt; M(8)    0.211
+#&gt; M(1)    0.127
+#&gt; M(2)    0.076
+#&gt; M(3)    1.139
+#&gt; M(4)    0.080
+#&gt; M(5)    1.072
+#&gt; M(6)    0.030
+#&gt; M(7)    0.084
+#&gt; M(8)    0.244
 #&gt; M(9)    0.063
-#&gt; M(10)   0.250
-#&gt; M(11)   0.232
-#&gt; Q       0.323
-#&gt; Q-M2    0.357
+#&gt; M(10)   0.254
+#&gt; M(11)   0.239
+#&gt; Q       0.319
+#&gt; Q-M2    0.349
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -269,34 +273,34 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.3314 105.1139 0.9864104 1.0020689
-#&gt; Feb 2019 101.9 106.3742 105.3665 0.9579387 1.0095639
-#&gt; Mar 2019 111.0 104.5953 105.4822 1.0612327 0.9915923
-#&gt; Apr 2019 107.4 105.0934 105.4192 1.0219484 0.9969091
-#&gt; May 2019 105.5 106.8159 105.2936 0.9876808 1.0144578
-#&gt; Jun 2019 105.8 101.4580 105.1024 1.0427961 0.9653249
-#&gt; Jul 2019 110.1 105.3379 104.7923 1.0452083 1.0052062
-#&gt; Aug 2019  78.7 103.0406 104.3781 0.7637769 0.9871852
-#&gt; Sep 2019 108.5 104.4959 103.8759 1.0383182 1.0059689
-#&gt; Oct 2019 116.8 104.9663 103.3582 1.1127377 1.0155587
-#&gt; Nov 2019 103.8 101.6218 102.9772 1.0214349 0.9868375
-#&gt; Dec 2019  97.7 101.8080 102.7604 0.9596494 0.9907318
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.92412 102.8147  -1.9241199   0.1094395
+#&gt; Feb 2020 100.1 103.50547 102.8976  -3.4054722   0.6078825
+#&gt; Mar 2020  91.8  83.00218 103.1831   8.7978221 -20.1809275
+#&gt; Apr 2020  66.7  65.83747 103.6570   0.8625259 -37.8194996
+#&gt; May 2020  73.7  78.73548 104.1282  -5.0354792 -25.3926864
+#&gt; Jun 2020  98.2  87.26580 104.5188  10.9342001 -17.2529628
+#&gt; Jul 2020  97.4  92.53528 104.7033   4.8647224 -12.1679796
+#&gt; Aug 2020  71.7  97.64618 104.5690 -25.9461813  -6.9227978
+#&gt; Sep 2020 104.7  97.34380 104.1405   7.3562012  -6.7967236
+#&gt; Oct 2020 106.7  98.78451 103.5511   7.9154948  -4.7665946
+#&gt; Nov 2020 101.6 100.50933 103.0298   1.0906693  -2.5204281
+#&gt; Dec 2020  96.6  99.74645 102.7263  -3.1464483  -2.9798265
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59660 103.0784 102.6789 0.9856249 1.0038905
-#&gt; Feb 2020 100.87436 103.2029 102.7042 0.9774377 1.0048553
-#&gt; Mar 2020 111.27482 102.6228 102.7383 1.0843091 0.9988753
-#&gt; Apr 2020 105.12395 103.3465 102.7663 1.0171986 1.0056464
-#&gt; May 2020  96.44225 102.2715 102.7176 0.9430021 0.9956572
-#&gt; Jun 2020 112.46775 102.4907 102.6115 1.0973459 0.9988229
-#&gt; Jul 2020 106.58633 102.4070 102.5858 1.0408106 0.9982572
-#&gt; Aug 2020  76.49372 102.5838 102.6507 0.7456707 0.9993479
-#&gt; Sep 2020 111.06093 103.4916 102.7527 1.0731400 1.0071907
-#&gt; Oct 2020 111.06175 102.3655 102.8697 1.0849527 0.9950991
-#&gt; Nov 2020 104.14664 102.6519 102.9955 1.0145617 0.9966639
-#&gt; Dec 2020 101.63644 103.5595 103.0930 0.9814307 1.0045245
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2021  94.82712 101.3420 102.6158  -6.5148928 -1.27380795
+#&gt; Feb 2021  98.00197 101.8372 102.5826  -3.8352640 -0.74540432
+#&gt; Mar 2021 113.62540 101.9088 102.5235  11.7165747 -0.61463800
+#&gt; Apr 2021 103.28588 102.3855 102.3987   0.9004327 -0.01326784
+#&gt; May 2021  96.23640 101.5938 102.2898  -5.3574428 -0.69592946
+#&gt; Jun 2021 113.04727 101.6902 102.2365  11.3570720 -0.54632230
+#&gt; Jul 2021 104.27161 101.8281 102.2910   2.4435091 -0.46291753
+#&gt; Aug 2021  79.29357 102.6462 102.4831 -23.3526340  0.16311885
+#&gt; Sep 2021 109.23197 102.7863 102.7326   6.4456639  0.05371199
+#&gt; Oct 2021 108.79200 102.9386 102.9781   5.8533505 -0.03947210
+#&gt; Nov 2021 106.90616 102.9549 103.2017   3.9512094 -0.24675320
+#&gt; Dec 2021 100.22813 103.5456 103.3775  -3.3174206  0.16802658
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -305,79 +309,83 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.426
-#&gt;  Seasonal     72.514
-#&gt;  Irregular     1.136
-#&gt;  TD &amp; Hol.     2.703
-#&gt;  Others       21.274
-#&gt;  Total       100.053
+#&gt;  Cycle         2.238
+#&gt;  Seasonal     59.768
+#&gt;  Irregular     1.203
+#&gt;  TD &amp; Hol.     2.436
+#&gt;  Others       34.383
+#&gt;  Total       100.028
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.498
+#&gt;    Evolutive seasonality test                                0.059
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.964
-#&gt;  f-test on i (seasonal dummies)         0.936
-#&gt;  Residual seasonality (entire series)   0.970
-#&gt;  Residual seasonality (last 3 years)    0.994
-#&gt;  f-test on sa (td)                      0.996
-#&gt;  f-test on i (td)                       0.993
+#&gt;  qs test on i                           0.985
+#&gt;  f-test on sa (seasonal dummies)        0.916
+#&gt;  f-test on i (seasonal dummies)         0.812
+#&gt;  Residual seasonality (entire series)   0.902
+#&gt;  Residual seasonality (last 3 years)    0.966
+#&gt;  f-test on sa (td)                      0.983
+#&gt;  f-test on i (td)                       0.998
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
 <span class='co'># To get all the models of the multiprocessing mp:</span>
-<span class='fu'>get_model</span>(<span class='no'>mp</span>, <span class='no'>wk</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $X13
+<span class='fu'>get_model</span><span class='op'>(</span><span class='va'>mp</span>, <span class='va'>wk</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $X13
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;            Estimate Std. Error
-#&gt; Phi(1)     0.008774      0.119
-#&gt; Phi(2)     0.098387      0.081
-#&gt; Theta(1)  -0.562495      0.110
-#&gt; BTheta(1) -0.738153      0.039
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     0.02043      0.107
+#&gt; Phi(2)     0.11093      0.077
+#&gt; Theta(1)  -0.58663      0.098
+#&gt; BTheta(1) -0.69921      0.041
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday        0.0058623      0.002
-#&gt; Tuesday       0.0091349      0.002
-#&gt; Wednesday     0.0109267      0.002
-#&gt; Thursday      0.0005156      0.002
-#&gt; Friday        0.0091500      0.002
-#&gt; Saturday     -0.0161713      0.002
-#&gt; AO (5-2011)   0.1278938      0.018
-#&gt; LS (11-2008) -0.1157755      0.016
+#&gt;              Estimate Std. Error
+#&gt; Monday         0.6788      0.244
+#&gt; Tuesday        0.9500      0.245
+#&gt; Wednesday      1.0053      0.246
+#&gt; Thursday      -0.0656      0.245
+#&gt; Friday         1.0304      0.245
+#&gt; Saturday      -1.5721      0.245
+#&gt; Leap year      2.1513      0.753
+#&gt; TC (4-2020)  -36.1532      2.193
+#&gt; AO (3-2020)  -20.2213      2.255
+#&gt; AO (5-2011)   13.2210      1.970
+#&gt; LS (11-2008) -12.7459      1.663
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02153 on 334 degrees of freedom
-#&gt; Log likelihood = 834.5, aic =  1562 aicc =  1564, bic(corrected for length) = -7.474
+#&gt; Residual standard error: 2.294 on 343 degrees of freedom
+#&gt; Log likelihood = -811.8, aic =  1656 aicc =  1657, bic(corrected for length) = 1.907
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.094
-#&gt; M(2)    0.049
-#&gt; M(3)    0.978
-#&gt; M(4)    0.421
-#&gt; M(5)    0.969
-#&gt; M(6)    0.180
-#&gt; M(7)    0.075
-#&gt; M(8)    0.211
+#&gt; M(1)    0.127
+#&gt; M(2)    0.076
+#&gt; M(3)    1.139
+#&gt; M(4)    0.080
+#&gt; M(5)    1.072
+#&gt; M(6)    0.030
+#&gt; M(7)    0.084
+#&gt; M(8)    0.244
 #&gt; M(9)    0.063
-#&gt; M(10)   0.250
-#&gt; M(11)   0.232
-#&gt; Q       0.323
-#&gt; Q-M2    0.357
+#&gt; M(10)   0.254
+#&gt; M(11)   0.239
+#&gt; Q       0.319
+#&gt; Q-M2    0.349
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -386,34 +394,34 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.3314 105.1139 0.9864104 1.0020689
-#&gt; Feb 2019 101.9 106.3742 105.3665 0.9579387 1.0095639
-#&gt; Mar 2019 111.0 104.5953 105.4822 1.0612327 0.9915923
-#&gt; Apr 2019 107.4 105.0934 105.4192 1.0219484 0.9969091
-#&gt; May 2019 105.5 106.8159 105.2936 0.9876808 1.0144578
-#&gt; Jun 2019 105.8 101.4580 105.1024 1.0427961 0.9653249
-#&gt; Jul 2019 110.1 105.3379 104.7923 1.0452083 1.0052062
-#&gt; Aug 2019  78.7 103.0406 104.3781 0.7637769 0.9871852
-#&gt; Sep 2019 108.5 104.4959 103.8759 1.0383182 1.0059689
-#&gt; Oct 2019 116.8 104.9663 103.3582 1.1127377 1.0155587
-#&gt; Nov 2019 103.8 101.6218 102.9772 1.0214349 0.9868375
-#&gt; Dec 2019  97.7 101.8080 102.7604 0.9596494 0.9907318
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.92412 102.8147  -1.9241199   0.1094395
+#&gt; Feb 2020 100.1 103.50547 102.8976  -3.4054722   0.6078825
+#&gt; Mar 2020  91.8  83.00218 103.1831   8.7978221 -20.1809275
+#&gt; Apr 2020  66.7  65.83747 103.6570   0.8625259 -37.8194996
+#&gt; May 2020  73.7  78.73548 104.1282  -5.0354792 -25.3926864
+#&gt; Jun 2020  98.2  87.26580 104.5188  10.9342001 -17.2529628
+#&gt; Jul 2020  97.4  92.53528 104.7033   4.8647224 -12.1679796
+#&gt; Aug 2020  71.7  97.64618 104.5690 -25.9461813  -6.9227978
+#&gt; Sep 2020 104.7  97.34380 104.1405   7.3562012  -6.7967236
+#&gt; Oct 2020 106.7  98.78451 103.5511   7.9154948  -4.7665946
+#&gt; Nov 2020 101.6 100.50933 103.0298   1.0906693  -2.5204281
+#&gt; Dec 2020  96.6  99.74645 102.7263  -3.1464483  -2.9798265
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59660 103.0784 102.6789 0.9856249 1.0038905
-#&gt; Feb 2020 100.87436 103.2029 102.7042 0.9774377 1.0048553
-#&gt; Mar 2020 111.27482 102.6228 102.7383 1.0843091 0.9988753
-#&gt; Apr 2020 105.12395 103.3465 102.7663 1.0171986 1.0056464
-#&gt; May 2020  96.44225 102.2715 102.7176 0.9430021 0.9956572
-#&gt; Jun 2020 112.46775 102.4907 102.6115 1.0973459 0.9988229
-#&gt; Jul 2020 106.58633 102.4070 102.5858 1.0408106 0.9982572
-#&gt; Aug 2020  76.49372 102.5838 102.6507 0.7456707 0.9993479
-#&gt; Sep 2020 111.06093 103.4916 102.7527 1.0731400 1.0071907
-#&gt; Oct 2020 111.06175 102.3655 102.8697 1.0849527 0.9950991
-#&gt; Nov 2020 104.14664 102.6519 102.9955 1.0145617 0.9966639
-#&gt; Dec 2020 101.63644 103.5595 103.0930 0.9814307 1.0045245
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2021  94.82712 101.3420 102.6158  -6.5148928 -1.27380795
+#&gt; Feb 2021  98.00197 101.8372 102.5826  -3.8352640 -0.74540432
+#&gt; Mar 2021 113.62540 101.9088 102.5235  11.7165747 -0.61463800
+#&gt; Apr 2021 103.28588 102.3855 102.3987   0.9004327 -0.01326784
+#&gt; May 2021  96.23640 101.5938 102.2898  -5.3574428 -0.69592946
+#&gt; Jun 2021 113.04727 101.6902 102.2365  11.3570720 -0.54632230
+#&gt; Jul 2021 104.27161 101.8281 102.2910   2.4435091 -0.46291753
+#&gt; Aug 2021  79.29357 102.6462 102.4831 -23.3526340  0.16311885
+#&gt; Sep 2021 109.23197 102.7863 102.7326   6.4456639  0.05371199
+#&gt; Oct 2021 108.79200 102.9386 102.9781   5.8533505 -0.03947210
+#&gt; Nov 2021 106.90616 102.9549 103.2017   3.9512094 -0.24675320
+#&gt; Dec 2021 100.22813 103.5456 103.3775  -3.3174206  0.16802658
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -422,32 +430,32 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.426
-#&gt;  Seasonal     72.514
-#&gt;  Irregular     1.136
-#&gt;  TD &amp; Hol.     2.703
-#&gt;  Others       21.274
-#&gt;  Total       100.053
+#&gt;  Cycle         2.238
+#&gt;  Seasonal     59.768
+#&gt;  Irregular     1.203
+#&gt;  TD &amp; Hol.     2.436
+#&gt;  Others       34.383
+#&gt;  Total       100.028
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.498
+#&gt;    Evolutive seasonality test                                0.059
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.964
-#&gt;  f-test on i (seasonal dummies)         0.936
-#&gt;  Residual seasonality (entire series)   0.970
-#&gt;  Residual seasonality (last 3 years)    0.994
-#&gt;  f-test on sa (td)                      0.996
-#&gt;  f-test on i (td)                       0.993
+#&gt;  qs test on i                           0.985
+#&gt;  f-test on sa (seasonal dummies)        0.916
+#&gt;  f-test on i (seasonal dummies)         0.812
+#&gt;  Residual seasonality (entire series)   0.902
+#&gt;  Residual seasonality (last 3 years)    0.966
+#&gt;  f-test on sa (td)                      0.983
+#&gt;  f-test on i (td)                       0.998
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
@@ -455,90 +463,92 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; $TramoSeats
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.0241      0.123
-#&gt; Phi(2)      0.1482      0.080
-#&gt; Theta(1)   -0.5102      0.118
-#&gt; BTheta(1)  -0.7193      0.040
+#&gt; Phi(1)     0.02572      0.108
+#&gt; Phi(2)     0.16988      0.075
+#&gt; Theta(1)  -0.53992      0.102
+#&gt; BTheta(1) -0.67459      0.042
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday        0.004951      0.002
-#&gt; Tuesday       0.008599      0.002
-#&gt; Wednesday     0.011454      0.002
-#&gt; Thursday      0.001241      0.002
-#&gt; Friday        0.007779      0.002
-#&gt; Saturday     -0.015954      0.002
-#&gt; Leap year     0.022096      0.007
-#&gt; Easter [6]   -0.019882      0.004
-#&gt; AO (5-2011)   0.128286      0.018
-#&gt; LS (11-2008) -0.114105      0.016
+#&gt; Monday         0.56114      0.231
+#&gt; Tuesday        0.89966      0.231
+#&gt; Wednesday      1.06703      0.232
+#&gt; Thursday       0.02403      0.232
+#&gt; Friday         0.86378      0.234
+#&gt; Saturday      -1.55222      0.231
+#&gt; Leap year      2.19751      0.712
+#&gt; Easter [6]    -2.31734      0.461
+#&gt; TC (4-2020)  -20.83317      2.183
+#&gt; TC (3-2020)  -20.98304      2.183
+#&gt; AO (5-2011)   13.28128      1.872
+#&gt; LS (11-2008) -12.57486      1.631
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02084 on 332 degrees of freedom
-#&gt; Log likelihood = 846.3, aic =  1543 aicc =  1544, bic(corrected for length) = -7.506
+#&gt; Residual standard error: 2.221 on 342 degrees of freedom
+#&gt; Log likelihood = -799.8, aic =  1634 aicc =  1635, bic(corrected for length) = 1.858
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.024102 B + 0.148206 B^2 
+#&gt; AR :  1 + 0.025720 B + 0.169879 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.510230 B - 0.719325 B^12 + 0.367021 B^13 
+#&gt; MA :  1 - 0.539919 B - 0.674594 B^12 + 0.364227 B^13 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.505621 B + 0.518275 B^2 
-#&gt; Innovation variance:  0.5963745 
+#&gt; MA :  1 - 1.531766 B + 0.545834 B^2 
+#&gt; Innovation variance:  0.5502022 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.027051 B - 0.972949 B^2 
-#&gt; Innovation variance:  0.03262266 
+#&gt; MA :  1 + 0.032214 B - 0.967786 B^2 
+#&gt; Innovation variance:  0.02623268 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.024102 B + 0.148206 B^2 
+#&gt; AR :  1 + 0.025720 B + 0.169879 B^2 
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.307845 B + 0.758576 B^2 + 0.703126 B^3 + 0.603379 B^4 + 0.494040 B^5 + 0.433104 B^6 + 0.314376 B^7 + 0.311439 B^8 + 0.215331 B^9 + 0.323556 B^10 + 0.288284 B^11 - 0.162781 B^12 - 0.347675 B^13 
-#&gt; Innovation variance:  0.131756 
+#&gt; MA :  1 + 1.245052 B + 0.658623 B^2 + 0.593270 B^3 + 0.481574 B^4 + 0.366624 B^5 + 0.304938 B^6 + 0.184553 B^7 + 0.190108 B^8 + 0.095090 B^9 + 0.221559 B^10 + 0.186281 B^11 - 0.207005 B^12 - 0.348481 B^13 
+#&gt; Innovation variance:  0.1464012 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.3408261 
+#&gt; Innovation variance:  0.3257068 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1230 104.9050 0.9883662 1.0020778
-#&gt; Feb 2019 101.9 105.5664 105.0034 0.9652688 1.0053621
-#&gt; Mar 2019 111.0 104.5184 105.0206 1.0620135 0.9952184
-#&gt; Apr 2019 107.4 105.2891 105.0542 1.0200482 1.0022362
-#&gt; May 2019 105.5 106.9239 104.9010 0.9866832 1.0192835
-#&gt; Jun 2019 105.8 102.2691 104.5675 1.0345256 0.9780200
-#&gt; Jul 2019 110.1 105.8170 104.3421 1.0404759 1.0141350
-#&gt; Aug 2019  78.7 103.4109 104.1245 0.7610418 0.9931464
-#&gt; Sep 2019 108.5 104.0283 103.8893 1.0429858 1.0013378
-#&gt; Oct 2019 116.8 104.6908 103.5909 1.1156663 1.0106173
-#&gt; Nov 2019 103.8 102.2897 103.1567 1.0147647 0.9915958
-#&gt; Dec 2019  97.7 102.0473 102.8588 0.9573990 0.9921103
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.72726 103.1221  -1.7272634  -0.3948220
+#&gt; Feb 2020 100.1 102.95124 103.1797  -2.8512352  -0.2284534
+#&gt; Mar 2020  91.8  82.31999 103.3030   9.4800115 -20.9830366
+#&gt; Apr 2020  66.7  66.85029 103.5340  -0.1502858 -36.6836970
+#&gt; May 2020  73.7  79.46771 103.9124  -5.7677083 -24.4446419
+#&gt; Jun 2020  98.2  87.82311 104.2371  10.3768872 -16.4139594
+#&gt; Jul 2020  97.4  92.74114 104.3260   4.6588650 -11.5848433
+#&gt; Aug 2020  71.7  97.04194 104.1300 -25.3419376  -7.0880934
+#&gt; Sep 2020 104.7  97.32774 103.6918   7.3722629  -6.3640867
+#&gt; Oct 2020 106.7  98.66536 103.2317   8.0346351  -4.5663227
+#&gt; Nov 2020 101.6 100.05441 102.8519   1.5455901  -2.7974884
+#&gt; Dec 2020  96.6  99.35191 102.5735  -2.7519144  -3.2215659
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59890 102.7892 102.7929 0.9884197 0.9999634
-#&gt; Feb 2020  99.81313 102.7988 102.8025 0.9709572 0.9999634
-#&gt; Mar 2020 112.05983 102.8084 102.8121 1.0899876 0.9999634
-#&gt; Apr 2020 104.38189 102.8180 102.8217 1.0152106 0.9999634
-#&gt; May 2020  96.45762 102.8276 102.8313 0.9380522 0.9999634
-#&gt; Jun 2020 112.13530 102.8372 102.8409 1.0904162 0.9999634
-#&gt; Jul 2020 106.56822 102.8468 102.8505 1.0361846 0.9999634
-#&gt; Aug 2020  76.56202 102.8564 102.8601 0.7443586 0.9999634
-#&gt; Sep 2020 110.92049 102.8660 102.8697 1.0783011 0.9999634
-#&gt; Oct 2020 111.00686 102.8756 102.8793 1.0790401 0.9999634
-#&gt; Nov 2020 104.15494 102.8852 102.8890 1.0123416 0.9999634
-#&gt; Dec 2020 101.56243 102.8948 102.8986 0.9870513 0.9999634
+#&gt;                y_f     sa_f      t_f        s_f         i_f
+#&gt; Jan 2021  94.55690 101.0346 102.4680  -6.477689 -1.43341231
+#&gt; Feb 2021  97.86506 101.4506 102.4540  -3.585540 -1.00338862
+#&gt; Mar 2021 113.01303 101.7376 102.4400  11.275402 -0.70237203
+#&gt; Apr 2021 103.19842 101.9344 102.4260   1.264068 -0.49166042
+#&gt; May 2021  96.00309 102.0679 102.4120  -6.064764 -0.34416230
+#&gt; Jun 2021 112.77599 102.1571 102.3980  10.618882 -0.24091361
+#&gt; Jul 2021 104.03135 102.2154 102.3840   1.815959 -0.16863953
+#&gt; Aug 2021  79.09787 102.2520 102.3700 -23.154116 -0.11804767
+#&gt; Sep 2021 109.04546 102.2734 102.3560   6.772048 -0.08263337
+#&gt; Oct 2021 108.59337 102.2842 102.3421   6.309157 -0.05784336
+#&gt; Nov 2021 106.47776 102.2876 102.3281   4.190193 -0.04049035
+#&gt; Dec 2021  99.77303 102.2857 102.3141  -2.512692 -0.02834325
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -547,30 +557,30 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.126
-#&gt;  Seasonal     71.716
-#&gt;  Irregular     0.501
-#&gt;  TD &amp; Hol.     2.739
-#&gt;  Others       20.785
-#&gt;  Total        97.867
+#&gt;  Cycle         1.887
+#&gt;  Seasonal     58.928
+#&gt;  Irregular     0.509
+#&gt;  TD &amp; Hol.     2.598
+#&gt;  Others       33.908
+#&gt;  Total        97.830
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.381
+#&gt;    Evolutive seasonality test                                0.064
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.995
+#&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.964
+#&gt;  Residual seasonality (last 3 years)    0.968
 #&gt;  f-test on sa (td)                      0.984
 #&gt;  f-test on i (td)                       1.000
 #&gt; 
@@ -578,51 +588,55 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
 #&gt; </div><div class='input'>
 <span class='co'># To get all the models of the workspace wk:</span>
-<span class='fu'>get_model</span>(<span class='no'>wk</span>)</div><div class='output co'>#&gt; Multiprocessing 1 on 1:
+<span class='fu'>get_model</span><span class='op'>(</span><span class='va'>wk</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Multiprocessing 1 on 1:
 #&gt;   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; $sa1
 #&gt; $sa1$X13
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;            Estimate Std. Error
-#&gt; Phi(1)     0.008774      0.119
-#&gt; Phi(2)     0.098387      0.081
-#&gt; Theta(1)  -0.562495      0.110
-#&gt; BTheta(1) -0.738153      0.039
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     0.02043      0.107
+#&gt; Phi(2)     0.11093      0.077
+#&gt; Theta(1)  -0.58663      0.098
+#&gt; BTheta(1) -0.69921      0.041
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday        0.0058623      0.002
-#&gt; Tuesday       0.0091349      0.002
-#&gt; Wednesday     0.0109267      0.002
-#&gt; Thursday      0.0005156      0.002
-#&gt; Friday        0.0091500      0.002
-#&gt; Saturday     -0.0161713      0.002
-#&gt; AO (5-2011)   0.1278938      0.018
-#&gt; LS (11-2008) -0.1157755      0.016
+#&gt;              Estimate Std. Error
+#&gt; Monday         0.6788      0.244
+#&gt; Tuesday        0.9500      0.245
+#&gt; Wednesday      1.0053      0.246
+#&gt; Thursday      -0.0656      0.245
+#&gt; Friday         1.0304      0.245
+#&gt; Saturday      -1.5721      0.245
+#&gt; Leap year      2.1513      0.753
+#&gt; TC (4-2020)  -36.1532      2.193
+#&gt; AO (3-2020)  -20.2213      2.255
+#&gt; AO (5-2011)   13.2210      1.970
+#&gt; LS (11-2008) -12.7459      1.663
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02153 on 334 degrees of freedom
-#&gt; Log likelihood = 834.5, aic =  1562 aicc =  1564, bic(corrected for length) = -7.474
+#&gt; Residual standard error: 2.294 on 343 degrees of freedom
+#&gt; Log likelihood = -811.8, aic =  1656 aicc =  1657, bic(corrected for length) = 1.907
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
 #&gt;       M stats
-#&gt; M(1)    0.094
-#&gt; M(2)    0.049
-#&gt; M(3)    0.978
-#&gt; M(4)    0.421
-#&gt; M(5)    0.969
-#&gt; M(6)    0.180
-#&gt; M(7)    0.075
-#&gt; M(8)    0.211
+#&gt; M(1)    0.127
+#&gt; M(2)    0.076
+#&gt; M(3)    1.139
+#&gt; M(4)    0.080
+#&gt; M(5)    1.072
+#&gt; M(6)    0.030
+#&gt; M(7)    0.084
+#&gt; M(8)    0.244
 #&gt; M(9)    0.063
-#&gt; M(10)   0.250
-#&gt; M(11)   0.232
-#&gt; Q       0.323
-#&gt; Q-M2    0.357
+#&gt; M(10)   0.254
+#&gt; M(11)   0.239
+#&gt; Q       0.319
+#&gt; Q-M2    0.349
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
@@ -631,34 +645,34 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.3314 105.1139 0.9864104 1.0020689
-#&gt; Feb 2019 101.9 106.3742 105.3665 0.9579387 1.0095639
-#&gt; Mar 2019 111.0 104.5953 105.4822 1.0612327 0.9915923
-#&gt; Apr 2019 107.4 105.0934 105.4192 1.0219484 0.9969091
-#&gt; May 2019 105.5 106.8159 105.2936 0.9876808 1.0144578
-#&gt; Jun 2019 105.8 101.4580 105.1024 1.0427961 0.9653249
-#&gt; Jul 2019 110.1 105.3379 104.7923 1.0452083 1.0052062
-#&gt; Aug 2019  78.7 103.0406 104.3781 0.7637769 0.9871852
-#&gt; Sep 2019 108.5 104.4959 103.8759 1.0383182 1.0059689
-#&gt; Oct 2019 116.8 104.9663 103.3582 1.1127377 1.0155587
-#&gt; Nov 2019 103.8 101.6218 102.9772 1.0214349 0.9868375
-#&gt; Dec 2019  97.7 101.8080 102.7604 0.9596494 0.9907318
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.92412 102.8147  -1.9241199   0.1094395
+#&gt; Feb 2020 100.1 103.50547 102.8976  -3.4054722   0.6078825
+#&gt; Mar 2020  91.8  83.00218 103.1831   8.7978221 -20.1809275
+#&gt; Apr 2020  66.7  65.83747 103.6570   0.8625259 -37.8194996
+#&gt; May 2020  73.7  78.73548 104.1282  -5.0354792 -25.3926864
+#&gt; Jun 2020  98.2  87.26580 104.5188  10.9342001 -17.2529628
+#&gt; Jul 2020  97.4  92.53528 104.7033   4.8647224 -12.1679796
+#&gt; Aug 2020  71.7  97.64618 104.5690 -25.9461813  -6.9227978
+#&gt; Sep 2020 104.7  97.34380 104.1405   7.3562012  -6.7967236
+#&gt; Oct 2020 106.7  98.78451 103.5511   7.9154948  -4.7665946
+#&gt; Nov 2020 101.6 100.50933 103.0298   1.0906693  -2.5204281
+#&gt; Dec 2020  96.6  99.74645 102.7263  -3.1464483  -2.9798265
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59660 103.0784 102.6789 0.9856249 1.0038905
-#&gt; Feb 2020 100.87436 103.2029 102.7042 0.9774377 1.0048553
-#&gt; Mar 2020 111.27482 102.6228 102.7383 1.0843091 0.9988753
-#&gt; Apr 2020 105.12395 103.3465 102.7663 1.0171986 1.0056464
-#&gt; May 2020  96.44225 102.2715 102.7176 0.9430021 0.9956572
-#&gt; Jun 2020 112.46775 102.4907 102.6115 1.0973459 0.9988229
-#&gt; Jul 2020 106.58633 102.4070 102.5858 1.0408106 0.9982572
-#&gt; Aug 2020  76.49372 102.5838 102.6507 0.7456707 0.9993479
-#&gt; Sep 2020 111.06093 103.4916 102.7527 1.0731400 1.0071907
-#&gt; Oct 2020 111.06175 102.3655 102.8697 1.0849527 0.9950991
-#&gt; Nov 2020 104.14664 102.6519 102.9955 1.0145617 0.9966639
-#&gt; Dec 2020 101.63644 103.5595 103.0930 0.9814307 1.0045245
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2021  94.82712 101.3420 102.6158  -6.5148928 -1.27380795
+#&gt; Feb 2021  98.00197 101.8372 102.5826  -3.8352640 -0.74540432
+#&gt; Mar 2021 113.62540 101.9088 102.5235  11.7165747 -0.61463800
+#&gt; Apr 2021 103.28588 102.3855 102.3987   0.9004327 -0.01326784
+#&gt; May 2021  96.23640 101.5938 102.2898  -5.3574428 -0.69592946
+#&gt; Jun 2021 113.04727 101.6902 102.2365  11.3570720 -0.54632230
+#&gt; Jul 2021 104.27161 101.8281 102.2910   2.4435091 -0.46291753
+#&gt; Aug 2021  79.29357 102.6462 102.4831 -23.3526340  0.16311885
+#&gt; Sep 2021 109.23197 102.7863 102.7326   6.4456639  0.05371199
+#&gt; Oct 2021 108.79200 102.9386 102.9781   5.8533505 -0.03947210
+#&gt; Nov 2021 106.90616 102.9549 103.2017   3.9512094 -0.24675320
+#&gt; Dec 2021 100.22813 103.5456 103.3775  -3.3174206  0.16802658
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -667,32 +681,32 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.426
-#&gt;  Seasonal     72.514
-#&gt;  Irregular     1.136
-#&gt;  TD &amp; Hol.     2.703
-#&gt;  Others       21.274
-#&gt;  Total       100.053
+#&gt;  Cycle         2.238
+#&gt;  Seasonal     59.768
+#&gt;  Irregular     1.203
+#&gt;  TD &amp; Hol.     2.436
+#&gt;  Others       34.383
+#&gt;  Total       100.028
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.498
+#&gt;    Evolutive seasonality test                                0.059
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.964
-#&gt;  f-test on i (seasonal dummies)         0.936
-#&gt;  Residual seasonality (entire series)   0.970
-#&gt;  Residual seasonality (last 3 years)    0.994
-#&gt;  f-test on sa (td)                      0.996
-#&gt;  f-test on i (td)                       0.993
+#&gt;  qs test on i                           0.985
+#&gt;  f-test on sa (seasonal dummies)        0.916
+#&gt;  f-test on i (seasonal dummies)         0.812
+#&gt;  Residual seasonality (entire series)   0.902
+#&gt;  Residual seasonality (last 3 years)    0.966
+#&gt;  f-test on sa (td)                      0.983
+#&gt;  f-test on i (td)                       0.998
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
@@ -700,90 +714,92 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt; $sa1$TramoSeats
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.0241      0.123
-#&gt; Phi(2)      0.1482      0.080
-#&gt; Theta(1)   -0.5102      0.118
-#&gt; BTheta(1)  -0.7193      0.040
+#&gt; Phi(1)     0.02572      0.108
+#&gt; Phi(2)     0.16988      0.075
+#&gt; Theta(1)  -0.53992      0.102
+#&gt; BTheta(1) -0.67459      0.042
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday        0.004951      0.002
-#&gt; Tuesday       0.008599      0.002
-#&gt; Wednesday     0.011454      0.002
-#&gt; Thursday      0.001241      0.002
-#&gt; Friday        0.007779      0.002
-#&gt; Saturday     -0.015954      0.002
-#&gt; Leap year     0.022096      0.007
-#&gt; Easter [6]   -0.019882      0.004
-#&gt; AO (5-2011)   0.128286      0.018
-#&gt; LS (11-2008) -0.114105      0.016
+#&gt; Monday         0.56114      0.231
+#&gt; Tuesday        0.89966      0.231
+#&gt; Wednesday      1.06703      0.232
+#&gt; Thursday       0.02403      0.232
+#&gt; Friday         0.86378      0.234
+#&gt; Saturday      -1.55222      0.231
+#&gt; Leap year      2.19751      0.712
+#&gt; Easter [6]    -2.31734      0.461
+#&gt; TC (4-2020)  -20.83317      2.183
+#&gt; TC (3-2020)  -20.98304      2.183
+#&gt; AO (5-2011)   13.28128      1.872
+#&gt; LS (11-2008) -12.57486      1.631
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02084 on 332 degrees of freedom
-#&gt; Log likelihood = 846.3, aic =  1543 aicc =  1544, bic(corrected for length) = -7.506
+#&gt; Residual standard error: 2.221 on 342 degrees of freedom
+#&gt; Log likelihood = -799.8, aic =  1634 aicc =  1635, bic(corrected for length) = 1.858
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
 #&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.024102 B + 0.148206 B^2 
+#&gt; AR :  1 + 0.025720 B + 0.169879 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.510230 B - 0.719325 B^12 + 0.367021 B^13 
+#&gt; MA :  1 - 0.539919 B - 0.674594 B^12 + 0.364227 B^13 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>SA</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 1.505621 B + 0.518275 B^2 
-#&gt; Innovation variance:  0.5963745 
+#&gt; MA :  1 - 1.531766 B + 0.545834 B^2 
+#&gt; Innovation variance:  0.5502022 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Trend</span><span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.027051 B - 0.972949 B^2 
-#&gt; Innovation variance:  0.03262266 
+#&gt; MA :  1 + 0.032214 B - 0.967786 B^2 
+#&gt; Innovation variance:  0.02623268 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
-#&gt; AR :  1 + 0.024102 B + 0.148206 B^2 
+#&gt; AR :  1 + 0.025720 B + 0.169879 B^2 
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.307845 B + 0.758576 B^2 + 0.703126 B^3 + 0.603379 B^4 + 0.494040 B^5 + 0.433104 B^6 + 0.314376 B^7 + 0.311439 B^8 + 0.215331 B^9 + 0.323556 B^10 + 0.288284 B^11 - 0.162781 B^12 - 0.347675 B^13 
-#&gt; Innovation variance:  0.131756 
+#&gt; MA :  1 + 1.245052 B + 0.658623 B^2 + 0.593270 B^3 + 0.481574 B^4 + 0.366624 B^5 + 0.304938 B^6 + 0.184553 B^7 + 0.190108 B^8 + 0.095090 B^9 + 0.221559 B^10 + 0.186281 B^11 - 0.207005 B^12 - 0.348481 B^13 
+#&gt; Innovation variance:  0.1464012 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.3408261 
+#&gt; Innovation variance:  0.3257068 
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1230 104.9050 0.9883662 1.0020778
-#&gt; Feb 2019 101.9 105.5664 105.0034 0.9652688 1.0053621
-#&gt; Mar 2019 111.0 104.5184 105.0206 1.0620135 0.9952184
-#&gt; Apr 2019 107.4 105.2891 105.0542 1.0200482 1.0022362
-#&gt; May 2019 105.5 106.9239 104.9010 0.9866832 1.0192835
-#&gt; Jun 2019 105.8 102.2691 104.5675 1.0345256 0.9780200
-#&gt; Jul 2019 110.1 105.8170 104.3421 1.0404759 1.0141350
-#&gt; Aug 2019  78.7 103.4109 104.1245 0.7610418 0.9931464
-#&gt; Sep 2019 108.5 104.0283 103.8893 1.0429858 1.0013378
-#&gt; Oct 2019 116.8 104.6908 103.5909 1.1156663 1.0106173
-#&gt; Nov 2019 103.8 102.2897 103.1567 1.0147647 0.9915958
-#&gt; Dec 2019  97.7 102.0473 102.8588 0.9573990 0.9921103
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.72726 103.1221  -1.7272634  -0.3948220
+#&gt; Feb 2020 100.1 102.95124 103.1797  -2.8512352  -0.2284534
+#&gt; Mar 2020  91.8  82.31999 103.3030   9.4800115 -20.9830366
+#&gt; Apr 2020  66.7  66.85029 103.5340  -0.1502858 -36.6836970
+#&gt; May 2020  73.7  79.46771 103.9124  -5.7677083 -24.4446419
+#&gt; Jun 2020  98.2  87.82311 104.2371  10.3768872 -16.4139594
+#&gt; Jul 2020  97.4  92.74114 104.3260   4.6588650 -11.5848433
+#&gt; Aug 2020  71.7  97.04194 104.1300 -25.3419376  -7.0880934
+#&gt; Sep 2020 104.7  97.32774 103.6918   7.3722629  -6.3640867
+#&gt; Oct 2020 106.7  98.66536 103.2317   8.0346351  -4.5663227
+#&gt; Nov 2020 101.6 100.05441 102.8519   1.5455901  -2.7974884
+#&gt; Dec 2020  96.6  99.35191 102.5735  -2.7519144  -3.2215659
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59890 102.7892 102.7929 0.9884197 0.9999634
-#&gt; Feb 2020  99.81313 102.7988 102.8025 0.9709572 0.9999634
-#&gt; Mar 2020 112.05983 102.8084 102.8121 1.0899876 0.9999634
-#&gt; Apr 2020 104.38189 102.8180 102.8217 1.0152106 0.9999634
-#&gt; May 2020  96.45762 102.8276 102.8313 0.9380522 0.9999634
-#&gt; Jun 2020 112.13530 102.8372 102.8409 1.0904162 0.9999634
-#&gt; Jul 2020 106.56822 102.8468 102.8505 1.0361846 0.9999634
-#&gt; Aug 2020  76.56202 102.8564 102.8601 0.7443586 0.9999634
-#&gt; Sep 2020 110.92049 102.8660 102.8697 1.0783011 0.9999634
-#&gt; Oct 2020 111.00686 102.8756 102.8793 1.0790401 0.9999634
-#&gt; Nov 2020 104.15494 102.8852 102.8890 1.0123416 0.9999634
-#&gt; Dec 2020 101.56243 102.8948 102.8986 0.9870513 0.9999634
+#&gt;                y_f     sa_f      t_f        s_f         i_f
+#&gt; Jan 2021  94.55690 101.0346 102.4680  -6.477689 -1.43341231
+#&gt; Feb 2021  97.86506 101.4506 102.4540  -3.585540 -1.00338862
+#&gt; Mar 2021 113.01303 101.7376 102.4400  11.275402 -0.70237203
+#&gt; Apr 2021 103.19842 101.9344 102.4260   1.264068 -0.49166042
+#&gt; May 2021  96.00309 102.0679 102.4120  -6.064764 -0.34416230
+#&gt; Jun 2021 112.77599 102.1571 102.3980  10.618882 -0.24091361
+#&gt; Jul 2021 104.03135 102.2154 102.3840   1.815959 -0.16863953
+#&gt; Aug 2021  79.09787 102.2520 102.3700 -23.154116 -0.11804767
+#&gt; Sep 2021 109.04546 102.2734 102.3560   6.772048 -0.08263337
+#&gt; Oct 2021 108.59337 102.2842 102.3421   6.309157 -0.05784336
+#&gt; Nov 2021 106.47776 102.2876 102.3281   4.190193 -0.04049035
+#&gt; Dec 2021  99.77303 102.2857 102.3141  -2.512692 -0.02834325
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
@@ -792,37 +808,37 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 #&gt;  after the removal of the long term trend </span><span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.126
-#&gt;  Seasonal     71.716
-#&gt;  Irregular     0.501
-#&gt;  TD &amp; Hol.     2.739
-#&gt;  Others       20.785
-#&gt;  Total        97.867
+#&gt;  Cycle         1.887
+#&gt;  Seasonal     58.928
+#&gt;  Irregular     0.509
+#&gt;  TD &amp; Hol.     2.598
+#&gt;  Others       33.908
+#&gt;  Total        97.830
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.381
+#&gt;    Evolutive seasonality test                                0.064
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
 #&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.995
+#&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.964
+#&gt;  Residual seasonality (last 3 years)    0.968
 #&gt;  f-test on sa (td)                      0.984
 #&gt;  f-test on i (td)                       1.000
 #&gt; 
 #&gt; 
 #&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
 #&gt; 
-#&gt; </div><div class='input'># }
+#&gt; </div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>
@@ -840,7 +856,7 @@ multiprocessing or sa_item object. get_model returns a &quot;SA&quot; objects wh
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

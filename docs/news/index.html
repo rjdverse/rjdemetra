@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -134,7 +134,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -155,13 +155,26 @@
       <small>Source: <a href='https://github.com/jdemetra/rjdemetra/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rjdemetra-017" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.7">
+<a href="#rjdemetra-017" class="anchor"></a>RJDemetra 0.1.7<small> Unreleased </small>
+</h1>
+<p>Data updated until December 2020.</p>
+<div id="bug-fixed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixed" class="anchor"></a>Bug fixed</h2>
+<ul>
+<li>fixed coefficients with user-defined calendar regressors can now correctly be used (issue <a href='https://github.com/jdemetra/rjdemetra/issues/87'>#87</a>).</li>
+</ul>
+</div>
+</div>
     <div id="rjdemetra-016" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.6">
 <a href="#rjdemetra-016" class="anchor"></a>RJDemetra 0.1.6<small> 2020-08-10 </small>
 </h1>
-<div id="bug-fixed" class="section level2">
+<div id="bug-fixed-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li><p><code>x11.seasonalma</code> argument wasn’t taken into account (issue <a href='https://github.com/jdemetra/rjdemetra/issues/78'>#78</a>).</p></li>
 <li><p><code>ipi_c_eu</code> updated: the previous data were calendar adjusted data, they are now unadjusted (neither seasonally adjusted nor calendar adjusted data).</p></li>
@@ -173,9 +186,9 @@
 <h1 class="page-header" data-toc-text="0.1.5">
 <a href="#rjdemetra-015" class="anchor"></a>RJDemetra 0.1.5<small> 2020-03-11 </small>
 </h1>
-<div id="bug-fixed-1" class="section level2">
+<div id="bug-fixed-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-1" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-2" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>Henderson filter was not correctly selected (issue <a href='https://github.com/jdemetra/rjdemetra/issues/73'>#73</a>).<br>
 </li>
@@ -194,9 +207,9 @@
 <h1 class="page-header" data-toc-text="0.1.4">
 <a href="#rjdemetra-014" class="anchor"></a>RJDemetra 0.1.4<small> 2020-01-09 </small>
 </h1>
-<div id="bug-fixed-2" class="section level2">
+<div id="bug-fixed-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-2" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-3" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>Error while loading a workspace with metadata (issue <a href='https://github.com/jdemetra/rjdemetra/issues/53'>#53</a>).</li>
 <li>The degree of freedom were wrong with the <code>summary</code> functions.</li>
@@ -232,9 +245,9 @@
 <h1 class="page-header" data-toc-text="0.1.3">
 <a href="#rjdemetra-013" class="anchor"></a>RJDemetra 0.1.3<small> 2019-06-26 </small>
 </h1>
-<div id="bug-fixed-3" class="section level2">
+<div id="bug-fixed-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-3" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-4" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>When the multiprocessing is empty, <code>get_model</code> no longer produces an error.<br>
 </li>
@@ -291,9 +304,9 @@
 <li>News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: <code>jx13</code>, <code>jtramoseats</code>, <code>jregarima</code>, <code>jregarima_x13</code>, <code>jregarima_tramoseats</code> and <code>get_jmodel</code>. Therefore, there is no formatting and the computation is faster than the non ‘j’ functions (<code>x13</code>, <code>tramoseats</code>, <code>regarima</code>, <code>regarima_x13</code>, <code>regarima_tramoseats</code> and <code>get_model</code>). To manipulate these objects, there are three functions: <code>get_dictionary</code> to get the indicators that can be extracted, <code>get_indicators</code> to extract these indicators and <code>jSA2R</code> to get the formatted R model.</li>
 </ul>
 </div>
-<div id="bug-fixed-4" class="section level2">
+<div id="bug-fixed-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixed-4" class="anchor"></a>Bug fixed</h2>
+<a href="#bug-fixed-5" class="anchor"></a>Bug fixed</h2>
 <ul>
 <li>
 <code>x11.fcast</code> can now be set to 0 or 1 (issue <a href='https://github.com/jdemetra/rjdemetra/issues/42'>#42</a>).</li>
@@ -317,7 +330,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
