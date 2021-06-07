@@ -6,6 +6,8 @@ Data updated until December 2020.
 
 - fixed coefficients with user-defined calendar regressors can now correctly be used (issue #87).
 
+- there was a bug in `add_sa_item` (more precisely in `complete_dictionary.SA`) when a userdefined variable was already in the workspace but with a different suffix.
+
 # RJDemetra 0.1.6
 
 ## Bug fixed
