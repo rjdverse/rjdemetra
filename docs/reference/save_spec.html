@@ -265,7 +265,7 @@
 #&gt; Residual standard error: 2.656 on 156 degrees of freedom
 #&gt; Log likelihood = -411.2, aic = 850.3 aicc = 853.1, bic(corrected for length) = 2.346
 #&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec6a</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -295,8 +295,8 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
 #&gt; M(1)    0.163
 #&gt; M(2)    0.089
@@ -317,7 +317,7 @@
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t            s             i
 #&gt; Jan 2020 101.0 102.95613 102.9586  -1.95613209  -0.002494203
@@ -349,10 +349,10 @@
 #&gt; Dec 2021  99.79901 103.0831 102.8580  -3.28410831  0.2251086
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         2.251
@@ -362,7 +362,7 @@
 #&gt;  Others       33.718
 #&gt;  Total        99.395
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -371,7 +371,7 @@
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          0.985
 #&gt;  qs test on i                           0.865
@@ -383,8 +383,8 @@
 #&gt;  f-test on i (td)                       0.993
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7a</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7a</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -408,40 +408,40 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
 #&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; <span style='font-weight: bold;'>SA</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
 #&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
 #&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
 #&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
 #&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; <span style='font-weight: bold;'>Transitory</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
 #&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; <span style='font-weight: bold;'>Irregular</span>
 #&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t           s            i
 #&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
@@ -473,10 +473,10 @@
 #&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         6.087
@@ -486,7 +486,7 @@
 #&gt;  Others        8.102
 #&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                       0.00
@@ -495,7 +495,7 @@
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
@@ -507,7 +507,7 @@
 #&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
 <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec4a</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
@@ -535,7 +535,7 @@
 #&gt; Residual standard error: 2.243 on 343 degrees of freedom
 #&gt; Log likelihood = -803.2, aic =  1638 aicc =  1640, bic(corrected for length) = 1.861
 #&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec6b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -565,8 +565,8 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
 #&gt; M(1)    0.163
 #&gt; M(2)    0.089
@@ -587,7 +587,7 @@
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t            s             i
 #&gt; Jan 2020 101.0 102.95613 102.9586  -1.95613209  -0.002494203
@@ -619,10 +619,10 @@
 #&gt; Dec 2021  99.79901 103.0831 102.8580  -3.28410831  0.2251086
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         2.251
@@ -632,7 +632,7 @@
 #&gt;  Others       33.718
 #&gt;  Total        99.395
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -641,7 +641,7 @@
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          0.985
 #&gt;  qs test on i                           0.865
@@ -653,8 +653,8 @@
 #&gt;  f-test on i (td)                       0.993
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7b</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -678,40 +678,40 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
 #&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; <span style='font-weight: bold;'>SA</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
 #&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
 #&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
 #&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
 #&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; <span style='font-weight: bold;'>Transitory</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
 #&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; <span style='font-weight: bold;'>Irregular</span>
 #&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t           s            i
 #&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
@@ -743,10 +743,10 @@
 #&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         6.087
@@ -756,7 +756,7 @@
 #&gt;  Others        8.102
 #&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                       0.00
@@ -765,7 +765,7 @@
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
@@ -777,8 +777,8 @@
 #&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='co'># }</span>
-</div></span></pre>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

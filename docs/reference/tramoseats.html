@@ -228,7 +228,7 @@ seasonal component (<code>s</code>), forecast of the seasonal component (<code>s
 
     <p>The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: <code><a href='regarima.html'>regarima</a></code>).
 In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\(y = t + s + i\)) or multiplicative (\(y = t * s * i\)). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.</p>
-<p>In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (<a href='https://www.bde.es'>https://www.bde.es</a>).</p>
+<p>In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (<a href='https://www.bde.es/bde/es/'>https://www.bde.es/bde/es/</a>).</p>
 <p>As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.</p><table class='table'>
 <tr><td><strong>Identifier</strong> |</td><td><strong>Log/level detection</strong> |</td><td><strong>Outliers detection</strong> |</td><td><strong>Calendar effects</strong> |</td><td><strong>ARIMA</strong></td><td>RSA0 |</td><td><em>NA</em> |</td><td><em>NA</em> |</td></tr>
 <tr><td><em>NA</em> |</td><td>Airline(+mean)</td><td>RSA1 |</td><td>automatic |</td><td>AO/LS/TC |</td><td><em>NA</em> |</td><td>Airline(+mean)</td><td>RSA2 |</td></tr>
@@ -254,7 +254,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 <span class='va'>myspec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span><span class='op'>(</span><span class='st'>"RSAfull"</span><span class='op'>)</span>
 <span class='va'>mysa</span> <span class='op'>&lt;-</span> <span class='fu'>tramoseats</span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec</span><span class='op'>)</span>
 <span class='va'>mysa</span>
-</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -278,40 +278,40 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
 #&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; <span style='font-weight: bold;'>SA</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
 #&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
 #&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
 #&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
 #&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; <span style='font-weight: bold;'>Transitory</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
 #&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; <span style='font-weight: bold;'>Irregular</span>
 #&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t           s            i
 #&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
@@ -343,10 +343,10 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         6.087
@@ -356,7 +356,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  Others        8.102
 #&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                       0.00
@@ -365,7 +365,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
@@ -377,11 +377,11 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
 <span class='co'># Equivalent to:</span>
 <span class='va'>mysa1</span> <span class='op'>&lt;-</span> <span class='fu'>tramoseats</span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='st'>"RSAfull"</span><span class='op'>)</span>
 <span class='va'>mysa1</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -405,40 +405,40 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
 #&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; <span style='font-weight: bold;'>SA</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
 #&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
 #&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
 #&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
 #&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
+#&gt; <span style='font-weight: bold;'>Transitory</span>
 #&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
 #&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; <span style='font-weight: bold;'>Irregular</span>
 #&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t           s            i
 #&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
@@ -470,10 +470,10 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         6.087
@@ -483,7 +483,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  Others        8.102
 #&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                       0.00
@@ -492,7 +492,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
@@ -504,7 +504,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
 <span class='va'>var1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>, frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
 <span class='va'>var2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>100</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>, frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
 <span class='va'>var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span><span class='op'>(</span><span class='va'>var1</span>, <span class='va'>var2</span><span class='op'>)</span>
@@ -897,7 +897,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
                     userdefined <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"decomposition.sa_lin_f"</span>,
                                     <span class='st'>"decomposition.sa_lin_e"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>mysa2</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -928,33 +928,33 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
 #&gt; D :  1 - B - B^12 + B^13 
 #&gt; MA :  1 - 0.621691 B - 0.669330 B^12 + 0.416116 B^13 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
+#&gt; <span style='font-weight: bold;'>SA</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 - 1.591988 B + 0.604331 B^2 
 #&gt; Innovation variance:  0.7134019 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
 #&gt; MA :  1 + 0.032818 B - 0.967182 B^2 
 #&gt; Innovation variance:  0.02522463 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
 #&gt; MA :  1 + 0.843770 B + 0.604408 B^2 + 0.338179 B^3 + 0.083129 B^4 - 0.136631 B^5 - 0.307818 B^6 - 0.425620 B^7 - 0.491945 B^8 - 0.514346 B^9 - 0.505950 B^10 - 0.487176 B^11 
 #&gt; Innovation variance:  0.03081912 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
+#&gt; <span style='font-weight: bold;'>Irregular</span>
 #&gt; Innovation variance:  0.4555274 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t           s             i
 #&gt; Jan 2020 101.0 102.81851 103.3050  -1.8185112  -0.486470495
@@ -986,10 +986,10 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt; Dec 2021 100.05011 102.6143 102.6431  -2.598606 -0.02885741
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         1.828
@@ -999,7 +999,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  Others       33.791
 #&gt;  Total        97.976
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -1008,7 +1008,7 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
@@ -1020,13 +1020,13 @@ In the second part, the pre-adjusted series is decomposed into the following com
 #&gt;  f-test on i (td)                       1.000
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span>
 #&gt; Names of additional variables (2):
 #&gt; decomposition.sa_lin_f, decomposition.sa_lin_e</div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>mysa2</span><span class='op'>)</span>
 </div><div class='img'><img src='tramoseats-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>mysa2</span><span class='op'>$</span><span class='va'>regarima</span><span class='op'>)</span>
 </div><div class='img'><img src='tramoseats-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='tramoseats-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>mysa2</span><span class='op'>$</span><span class='va'>decomposition</span><span class='op'>)</span>
 </div><div class='img'><img src='tramoseats-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

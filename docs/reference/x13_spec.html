@@ -627,7 +627,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 
  <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
  <span class='va'>myreg1</span>
-</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -667,8 +667,8 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
 #&gt; M(1)    0.151
 #&gt; M(2)    0.097
@@ -689,7 +689,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t            s           i
 #&gt; Jan 2020 101.0 102.89447 102.9447  -1.89446776  -0.0502488
@@ -721,10 +721,10 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Dec 2021  99.71313 102.9154 102.7518  -3.20223190  0.16356694
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         1.625
@@ -734,7 +734,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  Others       55.678
 #&gt;  Total       101.800
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -743,7 +743,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          0.974
 #&gt;  qs test on i                           0.779
@@ -755,7 +755,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  f-test on i (td)                       0.988
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'> <span class='fu'><a href='specification.html'>s_preOut</a></span><span class='op'>(</span><span class='va'>myreg1</span><span class='op'>)</span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'> <span class='fu'><a href='specification.html'>s_preOut</a></span><span class='op'>(</span><span class='va'>myreg1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   type       date coeff
 #&gt; 1   LS 2008-10-01    36
 #&gt; 2   AO 2002-01-01    14</div><div class='input'>
@@ -770,7 +770,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
                      usrdef.varType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Calendar"</span>, <span class='st'>"Calendar"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: With tradingdays.option = "UserDefined", the parameters tradingdays.autoadjust, tradingdays.leapyear and tradingdays.stocktd are ignored.</span></div><div class='input'> <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
  <span class='va'>myreg1</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (3, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
@@ -795,8 +795,8 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
 #&gt; M(1)    0.376
 #&gt; M(2)    0.310
@@ -817,7 +817,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Trend filter:  23-Henderson
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t          s             i
 #&gt; Jan 2020 101.0 103.76443 103.7718  -2.764432  -0.007371637
@@ -849,10 +849,10 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Dec 2021  98.66941 104.3502 103.4522  -5.6808324  0.89800432
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         1.963
@@ -862,7 +862,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  Others       34.046
 #&gt;  Total        99.439
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -871,7 +871,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          0.000
 #&gt;  qs test on i                           0.002
@@ -883,7 +883,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  f-test on i (td)                       0.000
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
  <span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, usrdef.varEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
              usrdef.var <span class='op'>=</span> <span class='va'>var1</span>, usrdef.varCoef <span class='op'>=</span> <span class='fl'>2</span>,
              transform.function <span class='op'>=</span> <span class='st'>"None"</span><span class='op'>)</span>
@@ -1004,7 +1004,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Theta(1)      Fixed  -0.6
 #&gt; BTheta(1) Undefined   0.0</div><div class='input'> <span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
  <span class='va'>myreg1</span>
-</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
@@ -1031,8 +1031,8 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
 #&gt; M(1)    0.097
 #&gt; M(2)    0.052
@@ -1053,7 +1053,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
 #&gt;              y        sa        t         s         i
 #&gt; Jan 2020 101.0 103.50059 103.4716 0.9758398 1.0002804
@@ -1085,10 +1085,10 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt; Dec 2021  94.63045 97.42206  97.13060 0.9713452 1.0030007
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
 #&gt;  Cycle         5.183
@@ -1098,7 +1098,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  Others       10.592
 #&gt;  Total       102.393
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
@@ -1107,7 +1107,7 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           0.939
@@ -1119,12 +1119,12 @@ BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Contr
 #&gt;  f-test on i (td)                       0.959
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
 <span class='co'># Defined seasonal filters</span>
  <span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>x13_spec</span><span class='op'>(</span><span class='st'>"RSA5c"</span>, x11.seasonalma <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"S3X1"</span>, <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span>
  <span class='va'>mysa1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
 <span class='co'># }</span>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
