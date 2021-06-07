@@ -193,9 +193,13 @@ complete_dictionary.SA <- function(workspace, sa_obj){
                                                   sep = "_")
           }
           model_var_names[i] <- name <- tail(model_new_var_names, 1)
-          tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
-                         name, ts_r2jd(ud_var$series[, i]))
-          jd_r_variables$set(name, tsvar)
+          if (!any(same_data)){
+            # If we didn't find any TsVariable with the same prefix with the same data,
+            # we create a new one
+            tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
+                           name, ts_r2jd(ud_var$series[, i]))
+            jd_r_variables$set(name, tsvar)
+          }
         }
       }
     }
@@ -222,9 +226,13 @@ complete_dictionary.SA <- function(workspace, sa_obj){
         }
 
         model_var_names <- name <- tail(model_new_var_names, 1)
-        tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
-                       name, ts_r2jd(ud_var$series))
-        jd_r_variables$set(name, tsvar)
+        if (!any(same_data)){
+          # If we didn't find any TsVariable with the same prefix with the same data,
+          # we create a new one
+          tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
+                         name, ts_r2jd(ud_var$series))
+          jd_r_variables$set(name, tsvar)
+        }
       }
     }
   }

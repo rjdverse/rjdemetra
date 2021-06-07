@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,9 +161,9 @@
     <p><code>save_spec</code> saves a SA or RegARIMA model specification. <code>load_spec</code> loads the previously saved model specification.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>save_spec</span>(<span class='no'>object</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"spec.RData"</span>))
+    <pre class="usage"><span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>object</span>, file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"spec.RData"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>load_spec</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"spec.RData"</span>)</pre>
+<span class='fu'>load_spec</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>"spec.RData"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,575 +192,593 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_x13</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span>(<span class='no'>myreg1</span>, <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='st'>"2005-10-01"</span>, <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='st'>"2010-03-01"</span>)
-<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
+<span class='va'>myseries</span> <span class='op'>&lt;-</span> <span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>
+<span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='st'>"RG5c"</span><span class='op'>)</span>
+<span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima_spec_x13.html'>regarima_spec_x13</a></span><span class='op'>(</span><span class='va'>myreg1</span>, estimate.from <span class='op'>=</span> <span class='st'>"2005-10-01"</span>, outlier.from <span class='op'>=</span> <span class='st'>"2010-03-01"</span><span class='op'>)</span>
+<span class='va'>myreg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec2</span><span class='op'>)</span>
 
-<span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_tramoseats</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"TRfull"</span>)
-<span class='no'>myspec4</span> <span class='kw'>&lt;-</span><span class='fu'><a href='regarima_spec_tramoseats.html'>regarima_spec_tramoseats</a></span>(<span class='no'>myreg3</span>, <span class='kw'>tradingdays.mauto</span> <span class='kw'>=</span> <span class='st'>"Unused"</span>,
-                                  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span><span class='st'>"WorkingDays"</span>,
-                                  <span class='kw'>easter.type</span> <span class='kw'>=</span> <span class='st'>"Standard"</span>,
-                                  <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>myreg4</span> <span class='kw'>&lt;-</span><span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
+<span class='va'>myreg3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima_tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='st'>"TRfull"</span><span class='op'>)</span>
+<span class='va'>myspec4</span> <span class='op'>&lt;-</span><span class='fu'><a href='regarima_spec_tramoseats.html'>regarima_spec_tramoseats</a></span><span class='op'>(</span><span class='va'>myreg3</span>, tradingdays.mauto <span class='op'>=</span> <span class='st'>"Unused"</span>,
+                                  tradingdays.option <span class='op'>=</span><span class='st'>"WorkingDays"</span>,
+                                  easter.type <span class='op'>=</span> <span class='st'>"Standard"</span>,
+                                  automdl.enabled <span class='op'>=</span> <span class='cn'>FALSE</span>, arima.mu <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>myreg4</span> <span class='op'>&lt;-</span><span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec4</span><span class='op'>)</span>
 
-<span class='no'>myspec6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='st'>"RSA5c"</span>)
-<span class='no'>mysa6</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6</span>)
+<span class='va'>myspec6</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span><span class='op'>(</span><span class='st'>"RSA5c"</span><span class='op'>)</span>
+<span class='va'>mysa6</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec6</span><span class='op'>)</span>
 
-<span class='no'>myspec7</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='st'>"RSAfull"</span>)
-<span class='no'>mysa7</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec7</span>)
+<span class='va'>myspec7</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span><span class='op'>(</span><span class='st'>"RSAfull"</span><span class='op'>)</span>
+<span class='va'>mysa7</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7</span><span class='op'>)</span>
 
-<span class='no'>dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+<span class='va'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
 
  <span class='co'># Save the model specification from a c("regarima_spec","X13") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myspec2</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>, <span class='st'>"specx13.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myspec2</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>, <span class='st'>"specx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save the model specification from a c("regarima","X13") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myreg2</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"regx13.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myreg2</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"regx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save the model specification from a c("regarima_spec","TRAMO_SEATS") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myspec4</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specTS.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myspec4</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save the model specification from a c("regarima","TRAMO_SEATS") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myreg4</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"regTS.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myreg4</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"regTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save model from a c("SA_spec","X13") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myspec6</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specFullx13.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myspec6</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specFullx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save model from a c("SA","X13") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>mysa6</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"sax13.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>mysa6</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"sax13.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save model from a c("SA_spec","TRAMO_SEATS") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>myspec7</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specFullTS.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>myspec7</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specFullTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
  <span class='co'># Save model from a c("SA","TRAMO_SEATS") class object</span>
-<span class='fu'>save_spec</span>(<span class='no'>mysa7</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"saTS.RData"</span>))
+<span class='fu'>save_spec</span><span class='op'>(</span><span class='va'>mysa7</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"saTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
 
  <span class='co'># Load the model specification</span>
-<span class='no'>myspec2a</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specx13.RData"</span>))
-<span class='no'>myspec2b</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"regx13.RData"</span>))
-<span class='no'>myspec4a</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specTS.RData"</span>))
-<span class='no'>myspec4b</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"regTS.RData"</span>))
-<span class='no'>myspec6a</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specFullx13.RData"</span>))
-<span class='no'>myspec6b</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"sax13.RData"</span>))
-<span class='no'>myspec7a</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"specFullTS.RData"</span>))
-<span class='no'>myspec7b</span> <span class='kw'>&lt;-</span> <span class='fu'>load_spec</span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>,<span class='st'>"saTS.RData"</span>))
+<span class='va'>myspec2a</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec2b</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"regx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec4a</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec4b</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"regTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec6a</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specFullx13.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec6b</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"sax13.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec7a</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"specFullTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>myspec7b</span> <span class='op'>&lt;-</span> <span class='fu'>load_spec</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>,<span class='st'>"saTS.RData"</span><span class='op'>)</span><span class='op'>)</span>
 
 
-<span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2a</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+<span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec2a</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.2939      0.079
-#&gt; BTheta(1)  -0.7651      0.058
+#&gt; Theta(1)   -0.2211      0.077
+#&gt; BTheta(1)  -0.6911      0.060
 #&gt; 
 #&gt;              Estimate Std. Error
-#&gt; Monday       0.010967      0.003
-#&gt; Tuesday      0.012055      0.003
-#&gt; Wednesday    0.006858      0.003
-#&gt; Thursday     0.001519      0.003
-#&gt; Friday       0.013811      0.003
-#&gt; Saturday    -0.020566      0.003
-#&gt; Easter [1]  -0.017599      0.006
-#&gt; AO (5-2011)  0.128270      0.018
+#&gt; Monday        1.32698      0.340
+#&gt; Tuesday       1.10991      0.346
+#&gt; Wednesday     0.68412      0.351
+#&gt; Thursday      0.04219      0.348
+#&gt; Friday        1.43827      0.348
+#&gt; Saturday     -1.99253      0.345
+#&gt; Leap year     2.01847      1.152
+#&gt; Easter [8]   -2.11412      0.702
+#&gt; LS (3-2020) -21.59400      2.876
+#&gt; AO (4-2020) -16.22087      2.287
+#&gt; AO (5-2011)  13.50260      2.048
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.0229 on 147 degrees of freedom
-#&gt; Log likelihood = 367.2, aic = 749.1 aicc = 750.9, bic(corrected for length) = -7.233
-#&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6a</span>)</div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; Residual standard error: 2.656 on 156 degrees of freedom
+#&gt; Log likelihood = -411.2, aic = 850.3 aicc = 853.1, bic(corrected for length) = 2.346
+#&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec6a</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Phi(1)     0.02578      0.118
-#&gt; Phi(2)     0.15940      0.078
-#&gt; Theta(1)  -0.51733      0.113
-#&gt; BTheta(1) -0.70304      0.041
+#&gt;             Estimate Std. Error
+#&gt; Phi(1)     0.0003269      0.108
+#&gt; Phi(2)     0.1688192      0.074
+#&gt; Theta(1)  -0.5485606      0.102
+#&gt; BTheta(1) -0.6660849      0.042
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday        0.004967      0.002
-#&gt; Tuesday       0.008415      0.002
-#&gt; Wednesday     0.010614      0.002
-#&gt; Thursday      0.002060      0.002
-#&gt; Friday        0.008274      0.002
-#&gt; Saturday     -0.016328      0.002
-#&gt; Easter [1]   -0.021145      0.004
-#&gt; AO (5-2011)   0.128134      0.017
-#&gt; LS (11-2008) -0.087008      0.017
-#&gt; LS (1-2009)  -0.068435      0.017
+#&gt; Monday         0.55932      0.228
+#&gt; Tuesday        0.88221      0.228
+#&gt; Wednesday      1.03996      0.229
+#&gt; Thursday       0.04943      0.229
+#&gt; Friday         0.91132      0.230
+#&gt; Saturday      -1.57769      0.228
+#&gt; Leap year      2.15403      0.705
+#&gt; Easter [1]    -2.37950      0.454
+#&gt; TC (4-2020)  -35.59245      2.173
+#&gt; AO (3-2020)  -20.89026      2.180
+#&gt; AO (5-2011)   13.49850      1.857
+#&gt; LS (11-2008) -12.54901      1.636
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02041 on 332 degrees of freedom
-#&gt; Log likelihood = 853.7, aic =  1528 aicc =  1530, bic(corrected for length) = -7.547
+#&gt; Residual standard error: 2.218 on 342 degrees of freedom
+#&gt; Log likelihood = -799.1, aic =  1632 aicc =  1634, bic(corrected for length) = 1.855
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
-#&gt; M(1)    0.097
-#&gt; M(2)    0.053
-#&gt; M(3)    0.995
-#&gt; M(4)    0.421
-#&gt; M(5)    0.950
-#&gt; M(6)    0.154
-#&gt; M(7)    0.074
-#&gt; M(8)    0.211
-#&gt; M(9)    0.064
-#&gt; M(10)   0.267
-#&gt; M(11)   0.250
-#&gt; Q       0.322
-#&gt; Q-M2    0.355
+#&gt; M(1)    0.163
+#&gt; M(2)    0.089
+#&gt; M(3)    1.181
+#&gt; M(4)    0.558
+#&gt; M(5)    1.020
+#&gt; M(6)    0.090
+#&gt; M(7)    0.083
+#&gt; M(8)    0.244
+#&gt; M(9)    0.062
+#&gt; M(10)   0.272
+#&gt; M(11)   0.256
+#&gt; Q       0.368
+#&gt; Q-M2    0.402
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1945 105.1440 0.9876940 1.0004808
-#&gt; Feb 2019 101.9 106.3206 105.5014 0.9584217 1.0077654
-#&gt; Mar 2019 111.0 104.7345 105.7233 1.0598229 0.9906473
-#&gt; Apr 2019 107.4 106.1448 105.7281 1.0118257 1.0039413
-#&gt; May 2019 105.5 106.2039 105.5978 0.9933724 1.0057396
-#&gt; Jun 2019 105.8 101.1898 105.3259 1.0455597 0.9607304
-#&gt; Jul 2019 110.1 105.3543 104.8985 1.0450450 1.0043457
-#&gt; Aug 2019  78.7 102.9339 104.3791 0.7645685 0.9861536
-#&gt; Sep 2019 108.5 104.4720 103.8115 1.0385554 1.0063631
-#&gt; Oct 2019 116.8 104.8375 103.2992 1.1141052 1.0148919
-#&gt; Nov 2019 103.8 101.7212 102.9938 1.0204364 0.9876441
-#&gt; Dec 2019  97.7 101.8723 102.8805 0.9590443 0.9902000
+#&gt;              y        sa        t            s             i
+#&gt; Jan 2020 101.0 102.95613 102.9586  -1.95613209  -0.002494203
+#&gt; Feb 2020 100.1 103.50876 102.9592  -3.40875640   0.549602816
+#&gt; Mar 2020  91.8  82.87617 103.1664   8.92382800 -20.290271773
+#&gt; Apr 2020  66.7  66.65243 103.5971   0.04756625 -36.944710027
+#&gt; May 2020  73.7  78.87836 104.0393  -5.17835604 -25.160905985
+#&gt; Jun 2020  98.2  87.34544 104.3804  10.85456021 -17.034985133
+#&gt; Jul 2020  97.4  92.47436 104.5319   4.92563707 -12.057551871
+#&gt; Aug 2020  71.7  97.47245 104.3751 -25.77244698  -6.902636199
+#&gt; Sep 2020 104.7  97.37717 103.9182   7.32282919  -6.541070626
+#&gt; Oct 2020 106.7  98.24194 103.3047   8.45805540  -5.062719500
+#&gt; Nov 2020 101.6 100.26862 102.7746   1.33138152  -2.506014899
+#&gt; Dec 2020  96.6  99.66730 102.5133  -3.06729670  -2.845961796
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.79694 103.1662 102.8951 0.9867273 1.0026346
-#&gt; Feb 2020 101.02102 103.3357 102.9515 0.9776003 1.0037323
-#&gt; Mar 2020 112.10997 103.5043 102.9465 1.0831427 1.0054189
-#&gt; Apr 2020 104.50015 103.4303 102.8832 1.0103439 1.0053179
-#&gt; May 2020  96.60823 101.9351 102.7280 0.9477426 0.9922819
-#&gt; Jun 2020 112.13668 102.1960 102.5441 1.0972706 0.9966052
-#&gt; Jul 2020 106.78914 102.3841 102.4931 1.0430249 0.9989358
-#&gt; Aug 2020  76.62863 102.6907 102.5880 0.7462084 1.0010004
-#&gt; Sep 2020 110.85790 103.4529 102.7454 1.0715783 1.0068865
-#&gt; Oct 2020 111.29327 102.4307 102.8914 1.0865224 0.9955221
-#&gt; Nov 2020 104.21972 102.6701 103.0257 1.0150931 0.9965489
-#&gt; Dec 2020 101.55551 103.4907 103.1115 0.9813009 1.0036778
+#&gt;                y_f     sa_f      t_f          s_f        i_f
+#&gt; Jan 2021  94.53021 101.0902 102.4794  -6.56002888 -1.3891608
+#&gt; Feb 2021  97.90024 101.7395 102.5246  -3.83928384 -0.7850772
+#&gt; Mar 2021 114.09983 102.3065 102.5087  11.79328397 -0.2021598
+#&gt; Apr 2021 102.16781 102.2220 102.3759  -0.05422341 -0.1538967
+#&gt; May 2021  96.01612 101.5450 102.2100  -5.52888123 -0.6650098
+#&gt; Jun 2021 112.76658 101.3438 102.0725  11.42275939 -0.7286526
+#&gt; Jul 2021 104.13805 101.6681 102.0297   2.46989932 -0.3615193
+#&gt; Aug 2021  79.13003 102.3617 102.1360 -23.23171595  0.2257112
+#&gt; Sep 2021 109.06438 102.4772 102.3249   6.58713572  0.1523168
+#&gt; Oct 2021 108.64207 102.1329 102.5185   6.50921416 -0.3856588
+#&gt; Nov 2021 106.46022 102.5908 102.6996   3.86943752 -0.1088338
+#&gt; Dec 2021  99.79901 103.0831 102.8580  -3.28410831  0.2251086
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.941
-#&gt;  Seasonal     62.123
-#&gt;  Irregular     0.842
-#&gt;  TD &amp; Hol.     2.428
-#&gt;  Others       32.787
-#&gt;  Total       100.121
+#&gt;  Cycle         2.251
+#&gt;  Seasonal     59.750
+#&gt;  Irregular     1.067
+#&gt;  TD &amp; Hol.     2.610
+#&gt;  Others       33.718
+#&gt;  Total        99.395
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.283
+#&gt;    Evolutive seasonality test                                0.034
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.909
-#&gt;  qs test on i                           0.746
-#&gt;  f-test on sa (seasonal dummies)        0.974
-#&gt;  f-test on i (seasonal dummies)         0.947
-#&gt;  Residual seasonality (entire series)   0.932
-#&gt;  Residual seasonality (last 3 years)    0.940
-#&gt;  f-test on sa (td)                      0.985
-#&gt;  f-test on i (td)                       0.983
+#&gt;  qs test on sa                          0.985
+#&gt;  qs test on i                           0.865
+#&gt;  f-test on sa (seasonal dummies)        0.958
+#&gt;  f-test on i (seasonal dummies)         0.893
+#&gt;  Residual seasonality (entire series)   0.876
+#&gt;  Residual seasonality (last 3 years)    0.906
+#&gt;  f-test on sa (td)                      0.987
+#&gt;  f-test on i (td)                       0.993
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec7a</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7a</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3858      0.053
-#&gt; Phi(2)      0.2428      0.053
-#&gt; BTheta(1)  -0.7134      0.040
+#&gt; Phi(1)      0.4032      0.051
+#&gt; Phi(2)      0.2883      0.051
+#&gt; BTheta(1)  -0.6641      0.042
 #&gt; 
-#&gt;              Estimate Std. Error
-#&gt; Week days    0.007131      0.000
-#&gt; Leap year    0.022154      0.007
-#&gt; Easter [6]  -0.021360      0.004
-#&gt; AO (5-2011)  0.128991      0.017
-#&gt; AO (5-2000)  0.057730      0.017
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.02174 on 338 degrees of freedom
-#&gt; Log likelihood = 831.8, aic =  1560 aicc =  1560, bic(corrected for length) = -7.523
+#&gt;             Estimate Std. Error
+#&gt; Week days     0.6994      0.032
+#&gt; Leap year     2.3231      0.690
+#&gt; Easter [6]   -2.5154      0.436
+#&gt; AO (5-2011)  13.4679      1.787
+#&gt; TC (4-2020) -22.2128      2.205
+#&gt; TC (3-2020) -21.0391      2.217
+#&gt; AO (5-2000)   6.7386      1.794
 #&gt; 
 #&gt; 
+#&gt; Residual standard error: 2.326 on 348 degrees of freedom
+#&gt; Log likelihood = -816.1, aic =  1654 aicc =  1655, bic(corrected for length) = 1.852
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; 
+#&gt; 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.713428 B^12 
+#&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; <span style='font-weight: bold;'>SA</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 0.975113 B + 0.003731 B^2 - 0.003172 B^3 + 0.002186 B^4 
-#&gt; Innovation variance:  0.7469663 
+#&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
+#&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.027738 B - 0.972262 B^2 
-#&gt; Innovation variance:  0.06986498 
+#&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
+#&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.353435 B + 1.194117 B^2 + 1.260347 B^3 + 1.124065 B^4 + 0.886062 B^5 + 0.682894 B^6 + 0.440009 B^7 + 0.271828 B^8 + 0.020068 B^9 - 0.054641 B^10 - 0.222194 B^11 
-#&gt; Innovation variance:  0.03026107 
+#&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
+#&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
-#&gt; MA :  1 - 0.316265 B - 0.683735 B^2 
-#&gt; Innovation variance:  0.05225072 
+#&gt; <span style='font-weight: bold;'>Transitory</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
+#&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
+#&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2217707 
+#&gt; <span style='font-weight: bold;'>Irregular</span>
+#&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1743 104.9429 0.9878842 1.0022048
-#&gt; Feb 2019 101.9 105.9207 105.1941 0.9620400 1.0069073
-#&gt; Mar 2019 111.0 104.4311 105.2847 1.0629021 0.9918924
-#&gt; Apr 2019 107.4 105.5933 105.4042 1.0171096 1.0017943
-#&gt; May 2019 105.5 107.2997 105.1676 0.9832269 1.0202734
-#&gt; Jun 2019 105.8 101.9020 104.5972 1.0382528 0.9742326
-#&gt; Jul 2019 110.1 106.0606 104.2943 1.0380862 1.0169351
-#&gt; Aug 2019  78.7 103.0620 104.0531 0.7636179 0.9904748
-#&gt; Sep 2019 108.5 103.7505 103.8759 1.0457777 0.9987934
-#&gt; Oct 2019 116.8 105.1043 103.5817 1.1112766 1.0147004
-#&gt; Nov 2019 103.8 102.2380 102.8763 1.0152784 0.9937947
-#&gt; Dec 2019  97.7 101.4426 102.3135 0.9631060 0.9914880
+#&gt;              y        sa        t           s            i
+#&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
+#&gt; Feb 2020 100.1 103.53944 103.2312  -3.4394383   0.30818847
+#&gt; Mar 2020  91.8  82.47698 103.4998   9.3230241 -21.02286361
+#&gt; Apr 2020  66.7  65.77310 103.9608   0.9268969 -38.18766871
+#&gt; May 2020  73.7  79.43342 104.7269  -5.7334221 -25.29345247
+#&gt; Jun 2020  98.2  88.07766 105.3319  10.1223443 -17.25422206
+#&gt; Jul 2020  97.4  92.71048 105.4216   4.6895154 -12.71111705
+#&gt; Aug 2020  71.7  97.32129 104.9801 -25.6212858  -7.65880696
+#&gt; Sep 2020 104.7  97.44274 104.0807   7.2572622  -6.63793072
+#&gt; Oct 2020 106.7  98.20925 103.1711   8.4907485  -4.96183772
+#&gt; Nov 2020 101.6  99.98044 102.4813   1.6195550  -2.50088282
+#&gt; Dec 2020  96.6  98.99458 101.9735  -2.3945790  -2.97892307
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.14796 102.4076 102.1524 0.9876994 1.0024982
-#&gt; Feb 2020  98.73586 102.2044 102.1359 0.9660638 1.0006702
-#&gt; Mar 2020 111.14762 102.0245 102.1194 1.0894214 0.9990702
-#&gt; Apr 2020 103.85947 102.1162 102.1029 1.0170713 1.0001303
-#&gt; May 2020  95.54759 102.0976 102.0864 0.9358456 1.0001098
-#&gt; Jun 2020 111.32747 102.0557 102.0699 1.0908507 0.9998602
-#&gt; Jul 2020 105.98668 102.0495 102.0535 1.0385811 0.9999614
-#&gt; Aug 2020  75.98545 102.0352 102.0370 0.7446983 0.9999830
-#&gt; Sep 2020 109.40398 102.0154 102.0205 1.0724264 0.9999501
-#&gt; Oct 2020 110.59660 101.9997 102.0040 1.0842840 0.9999575
-#&gt; Nov 2020 103.53656 101.9837 101.9875 1.0152266 0.9999627
-#&gt; Dec 2020 100.67280 101.9669 101.9711 0.9873092 0.9999589
+#&gt;                y_f     sa_f      t_f        s_f         i_f
+#&gt; Jan 2021  93.22264 100.1984 101.7578  -6.975740 -1.55946363
+#&gt; Feb 2021  96.81455 100.8845 101.7113  -4.069924 -0.82679910
+#&gt; Mar 2021 111.72198 100.8668 101.6647  10.855228 -0.79795880
+#&gt; Apr 2021 102.76178 101.0716 101.6181   1.690178 -0.54654378
+#&gt; May 2021  95.52744 101.2474 101.5716  -5.719910 -0.32422597
+#&gt; Jun 2021 111.44221 101.2711 101.5250  10.171157 -0.25395653
+#&gt; Jul 2021 103.57813 101.2947 101.4784   2.283395 -0.18370915
+#&gt; Aug 2021  78.21363 101.3135 101.4319 -23.099833 -0.11841662
+#&gt; Sep 2021 108.57631 101.3000 101.3853   7.276282 -0.08528380
+#&gt; Oct 2021 107.32040 101.2771 101.3387   6.043321 -0.06166933
+#&gt; Nov 2021 105.33458 101.2505 101.2922   4.084088 -0.04168414
+#&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         5.694
-#&gt;  Seasonal     88.840
-#&gt;  Irregular     0.820
-#&gt;  TD &amp; Hol.     3.412
-#&gt;  Others        0.469
-#&gt;  Total        99.234
+#&gt;  Cycle         6.087
+#&gt;  Seasonal     80.528
+#&gt;  Irregular     0.965
+#&gt;  TD &amp; Hol.     3.590
+#&gt;  Others        8.102
+#&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
-#&gt;    Kruskall-Wallis test                                      0.000
-#&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.344
+#&gt;    Kruskall-Wallis test                                       0.00
+#&gt;    Test for the presence of seasonality assuming stability    0.00
+#&gt;    Evolutive seasonality test                                 0.01
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.984
-#&gt;  f-test on sa (td)                      0.135
-#&gt;  f-test on i (td)                       0.256
+#&gt;  Residual seasonality (last 3 years)    0.974
+#&gt;  f-test on sa (td)                      0.152
+#&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'>
-<span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4a</span>)</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'>
+<span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec4a</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; y = regression model + arima (0, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Theta(1)   -0.5960      0.044
-#&gt; BTheta(1)  -0.7032      0.041
+#&gt; Theta(1)   -0.6221      0.043
+#&gt; BTheta(1)  -0.6720      0.042
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; Mean          2.029e-05      0.000
-#&gt; Monday        5.066e-03      0.002
-#&gt; Tuesday       8.286e-03      0.002
-#&gt; Wednesday     1.075e-02      0.002
-#&gt; Thursday      1.973e-03      0.002
-#&gt; Friday        7.949e-03      0.002
-#&gt; Saturday     -1.622e-02      0.002
-#&gt; Leap year     2.031e-02      0.007
-#&gt; Easter [6]   -1.884e-02      0.004
-#&gt; AO (5-2011)   1.251e-01      0.017
-#&gt; LS (11-2008) -8.905e-02      0.017
-#&gt; LS (1-2009)  -6.888e-02      0.017
+#&gt; Mean           0.001332      0.016
+#&gt; Monday         0.577428      0.239
+#&gt; Tuesday        0.842975      0.238
+#&gt; Wednesday      1.073966      0.240
+#&gt; Thursday       0.030442      0.239
+#&gt; Friday         0.872297      0.241
+#&gt; Saturday      -1.555483      0.238
+#&gt; Leap year      2.136324      0.726
+#&gt; Easter [6]    -2.170391      0.484
+#&gt; TC (4-2020)  -21.181047      2.222
+#&gt; TC (3-2020)  -21.228566      2.217
+#&gt; AO (5-2011)   12.919433      1.907
+#&gt; LS (11-2008) -12.465765      1.648
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.0205 on 332 degrees of freedom
-#&gt; Log likelihood = 852.3, aic =  1531 aicc =  1532, bic(corrected for length) = -7.539
-#&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec6b</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; Residual standard error: 2.243 on 343 degrees of freedom
+#&gt; Log likelihood = -803.2, aic =  1638 aicc =  1640, bic(corrected for length) = 1.861
+#&gt; </div><div class='input'><span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec6b</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;           Estimate Std. Error
-#&gt; Phi(1)     0.02578      0.118
-#&gt; Phi(2)     0.15940      0.078
-#&gt; Theta(1)  -0.51733      0.113
-#&gt; BTheta(1) -0.70304      0.041
+#&gt;             Estimate Std. Error
+#&gt; Phi(1)     0.0003269      0.108
+#&gt; Phi(2)     0.1688192      0.074
+#&gt; Theta(1)  -0.5485606      0.102
+#&gt; BTheta(1) -0.6660849      0.042
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday        0.004967      0.002
-#&gt; Tuesday       0.008415      0.002
-#&gt; Wednesday     0.010614      0.002
-#&gt; Thursday      0.002060      0.002
-#&gt; Friday        0.008274      0.002
-#&gt; Saturday     -0.016328      0.002
-#&gt; Easter [1]   -0.021145      0.004
-#&gt; AO (5-2011)   0.128134      0.017
-#&gt; LS (11-2008) -0.087008      0.017
-#&gt; LS (1-2009)  -0.068435      0.017
+#&gt; Monday         0.55932      0.228
+#&gt; Tuesday        0.88221      0.228
+#&gt; Wednesday      1.03996      0.229
+#&gt; Thursday       0.04943      0.229
+#&gt; Friday         0.91132      0.230
+#&gt; Saturday      -1.57769      0.228
+#&gt; Leap year      2.15403      0.705
+#&gt; Easter [1]    -2.37950      0.454
+#&gt; TC (4-2020)  -35.59245      2.173
+#&gt; AO (3-2020)  -20.89026      2.180
+#&gt; AO (5-2011)   13.49850      1.857
+#&gt; LS (11-2008) -12.54901      1.636
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02041 on 332 degrees of freedom
-#&gt; Log likelihood = 853.7, aic =  1528 aicc =  1530, bic(corrected for length) = -7.547
+#&gt; Residual standard error: 2.218 on 342 degrees of freedom
+#&gt; Log likelihood = -799.1, aic =  1632 aicc =  1634, bic(corrected for length) = 1.855
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
-#&gt; M(1)    0.097
-#&gt; M(2)    0.053
-#&gt; M(3)    0.995
-#&gt; M(4)    0.421
-#&gt; M(5)    0.950
-#&gt; M(6)    0.154
-#&gt; M(7)    0.074
-#&gt; M(8)    0.211
-#&gt; M(9)    0.064
-#&gt; M(10)   0.267
-#&gt; M(11)   0.250
-#&gt; Q       0.322
-#&gt; Q-M2    0.355
+#&gt; M(1)    0.163
+#&gt; M(2)    0.089
+#&gt; M(3)    1.181
+#&gt; M(4)    0.558
+#&gt; M(5)    1.020
+#&gt; M(6)    0.090
+#&gt; M(7)    0.083
+#&gt; M(8)    0.244
+#&gt; M(9)    0.062
+#&gt; M(10)   0.272
+#&gt; M(11)   0.256
+#&gt; Q       0.368
+#&gt; Q-M2    0.402
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1945 105.1440 0.9876940 1.0004808
-#&gt; Feb 2019 101.9 106.3206 105.5014 0.9584217 1.0077654
-#&gt; Mar 2019 111.0 104.7345 105.7233 1.0598229 0.9906473
-#&gt; Apr 2019 107.4 106.1448 105.7281 1.0118257 1.0039413
-#&gt; May 2019 105.5 106.2039 105.5978 0.9933724 1.0057396
-#&gt; Jun 2019 105.8 101.1898 105.3259 1.0455597 0.9607304
-#&gt; Jul 2019 110.1 105.3543 104.8985 1.0450450 1.0043457
-#&gt; Aug 2019  78.7 102.9339 104.3791 0.7645685 0.9861536
-#&gt; Sep 2019 108.5 104.4720 103.8115 1.0385554 1.0063631
-#&gt; Oct 2019 116.8 104.8375 103.2992 1.1141052 1.0148919
-#&gt; Nov 2019 103.8 101.7212 102.9938 1.0204364 0.9876441
-#&gt; Dec 2019  97.7 101.8723 102.8805 0.9590443 0.9902000
+#&gt;              y        sa        t            s             i
+#&gt; Jan 2020 101.0 102.95613 102.9586  -1.95613209  -0.002494203
+#&gt; Feb 2020 100.1 103.50876 102.9592  -3.40875640   0.549602816
+#&gt; Mar 2020  91.8  82.87617 103.1664   8.92382800 -20.290271773
+#&gt; Apr 2020  66.7  66.65243 103.5971   0.04756625 -36.944710027
+#&gt; May 2020  73.7  78.87836 104.0393  -5.17835604 -25.160905985
+#&gt; Jun 2020  98.2  87.34544 104.3804  10.85456021 -17.034985133
+#&gt; Jul 2020  97.4  92.47436 104.5319   4.92563707 -12.057551871
+#&gt; Aug 2020  71.7  97.47245 104.3751 -25.77244698  -6.902636199
+#&gt; Sep 2020 104.7  97.37717 103.9182   7.32282919  -6.541070626
+#&gt; Oct 2020 106.7  98.24194 103.3047   8.45805540  -5.062719500
+#&gt; Nov 2020 101.6 100.26862 102.7746   1.33138152  -2.506014899
+#&gt; Dec 2020  96.6  99.66730 102.5133  -3.06729670  -2.845961796
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.79694 103.1662 102.8951 0.9867273 1.0026346
-#&gt; Feb 2020 101.02102 103.3357 102.9515 0.9776003 1.0037323
-#&gt; Mar 2020 112.10997 103.5043 102.9465 1.0831427 1.0054189
-#&gt; Apr 2020 104.50015 103.4303 102.8832 1.0103439 1.0053179
-#&gt; May 2020  96.60823 101.9351 102.7280 0.9477426 0.9922819
-#&gt; Jun 2020 112.13668 102.1960 102.5441 1.0972706 0.9966052
-#&gt; Jul 2020 106.78914 102.3841 102.4931 1.0430249 0.9989358
-#&gt; Aug 2020  76.62863 102.6907 102.5880 0.7462084 1.0010004
-#&gt; Sep 2020 110.85790 103.4529 102.7454 1.0715783 1.0068865
-#&gt; Oct 2020 111.29327 102.4307 102.8914 1.0865224 0.9955221
-#&gt; Nov 2020 104.21972 102.6701 103.0257 1.0150931 0.9965489
-#&gt; Dec 2020 101.55551 103.4907 103.1115 0.9813009 1.0036778
+#&gt;                y_f     sa_f      t_f          s_f        i_f
+#&gt; Jan 2021  94.53021 101.0902 102.4794  -6.56002888 -1.3891608
+#&gt; Feb 2021  97.90024 101.7395 102.5246  -3.83928384 -0.7850772
+#&gt; Mar 2021 114.09983 102.3065 102.5087  11.79328397 -0.2021598
+#&gt; Apr 2021 102.16781 102.2220 102.3759  -0.05422341 -0.1538967
+#&gt; May 2021  96.01612 101.5450 102.2100  -5.52888123 -0.6650098
+#&gt; Jun 2021 112.76658 101.3438 102.0725  11.42275939 -0.7286526
+#&gt; Jul 2021 104.13805 101.6681 102.0297   2.46989932 -0.3615193
+#&gt; Aug 2021  79.13003 102.3617 102.1360 -23.23171595  0.2257112
+#&gt; Sep 2021 109.06438 102.4772 102.3249   6.58713572  0.1523168
+#&gt; Oct 2021 108.64207 102.1329 102.5185   6.50921416 -0.3856588
+#&gt; Nov 2021 106.46022 102.5908 102.6996   3.86943752 -0.1088338
+#&gt; Dec 2021  99.79901 103.0831 102.8580  -3.28410831  0.2251086
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         1.941
-#&gt;  Seasonal     62.123
-#&gt;  Irregular     0.842
-#&gt;  TD &amp; Hol.     2.428
-#&gt;  Others       32.787
-#&gt;  Total       100.121
+#&gt;  Cycle         2.251
+#&gt;  Seasonal     59.750
+#&gt;  Irregular     1.067
+#&gt;  TD &amp; Hol.     2.610
+#&gt;  Others       33.718
+#&gt;  Total        99.395
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.283
+#&gt;    Evolutive seasonality test                                0.034
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
-#&gt;  qs test on sa                          0.909
-#&gt;  qs test on i                           0.746
-#&gt;  f-test on sa (seasonal dummies)        0.974
-#&gt;  f-test on i (seasonal dummies)         0.947
-#&gt;  Residual seasonality (entire series)   0.932
-#&gt;  Residual seasonality (last 3 years)    0.940
-#&gt;  f-test on sa (td)                      0.985
-#&gt;  f-test on i (td)                       0.983
+#&gt;  qs test on sa                          0.985
+#&gt;  qs test on i                           0.865
+#&gt;  f-test on sa (seasonal dummies)        0.958
+#&gt;  f-test on i (seasonal dummies)         0.893
+#&gt;  Residual seasonality (entire series)   0.876
+#&gt;  Residual seasonality (last 3 years)    0.906
+#&gt;  f-test on sa (td)                      0.987
+#&gt;  f-test on i (td)                       0.993
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec7b</span>)</div><div class='output co'>#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec7b</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 0, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.3858      0.053
-#&gt; Phi(2)      0.2428      0.053
-#&gt; BTheta(1)  -0.7134      0.040
+#&gt; Phi(1)      0.4032      0.051
+#&gt; Phi(2)      0.2883      0.051
+#&gt; BTheta(1)  -0.6641      0.042
 #&gt; 
-#&gt;              Estimate Std. Error
-#&gt; Week days    0.007131      0.000
-#&gt; Leap year    0.022154      0.007
-#&gt; Easter [6]  -0.021360      0.004
-#&gt; AO (5-2011)  0.128991      0.017
-#&gt; AO (5-2000)  0.057730      0.017
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.02174 on 338 degrees of freedom
-#&gt; Log likelihood = 831.8, aic =  1560 aicc =  1560, bic(corrected for length) = -7.523
+#&gt;             Estimate Std. Error
+#&gt; Week days     0.6994      0.032
+#&gt; Leap year     2.3231      0.690
+#&gt; Easter [6]   -2.5154      0.436
+#&gt; AO (5-2011)  13.4679      1.787
+#&gt; TC (4-2020) -22.2128      2.205
+#&gt; TC (3-2020) -21.0391      2.217
+#&gt; AO (5-2000)   6.7386      1.794
 #&gt; 
 #&gt; 
+#&gt; Residual standard error: 2.326 on 348 degrees of freedom
+#&gt; Log likelihood = -816.1, aic =  1654 aicc =  1655, bic(corrected for length) = 1.852
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'>Model</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; 
+#&gt; 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'>Model</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - B - B^12 + B^13 
-#&gt; MA :  1 - 0.713428 B^12 
+#&gt; MA :  1 - 0.664088 B^12 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>SA</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
+#&gt; <span style='font-weight: bold;'>SA</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 - 0.975113 B + 0.003731 B^2 - 0.003172 B^3 + 0.002186 B^4 
-#&gt; Innovation variance:  0.7469663 
+#&gt; MA :  1 - 0.970348 B + 0.005940 B^2 - 0.005813 B^3 + 0.003576 B^4 
+#&gt; Innovation variance:  0.7043507 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Trend</span><span>
+#&gt; <span style='font-weight: bold;'>Trend</span>
 #&gt; D :  1 - 2.000000 B + B^2 
-#&gt; MA :  1 + 0.027738 B - 0.972262 B^2 
-#&gt; Innovation variance:  0.06986498 
+#&gt; MA :  1 + 0.033519 B - 0.966481 B^2 
+#&gt; Innovation variance:  0.06093642 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Seasonal</span><span>
+#&gt; <span style='font-weight: bold;'>Seasonal</span>
 #&gt; D :  1 + B + B^2 + B^3 + B^4 + B^5 + B^6 + B^7 + B^8 + B^9 + B^10 + B^11 
-#&gt; MA :  1 + 1.353435 B + 1.194117 B^2 + 1.260347 B^3 + 1.124065 B^4 + 0.886062 B^5 + 0.682894 B^6 + 0.440009 B^7 + 0.271828 B^8 + 0.020068 B^9 - 0.054641 B^10 - 0.222194 B^11 
-#&gt; Innovation variance:  0.03026107 
+#&gt; MA :  1 + 1.328957 B + 1.105787 B^2 + 1.185470 B^3 + 1.067845 B^4 + 0.820748 B^5 + 0.632456 B^6 + 0.404457 B^7 + 0.245256 B^8 + 0.001615 B^9 - 0.055617 B^10 - 0.203557 B^11 
+#&gt; Innovation variance:  0.04290744 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Transitory</span><span>
-#&gt; AR :  1 + 0.385785 B + 0.242834 B^2 
-#&gt; MA :  1 - 0.316265 B - 0.683735 B^2 
-#&gt; Innovation variance:  0.05225072 
+#&gt; <span style='font-weight: bold;'>Transitory</span>
+#&gt; AR :  1 + 0.403230 B + 0.288342 B^2 
+#&gt; MA :  1 - 0.260079 B - 0.739921 B^2 
+#&gt; Innovation variance:  0.05287028 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'>Irregular</span><span>
-#&gt; Innovation variance:  0.2217707 
+#&gt; <span style='font-weight: bold;'>Irregular</span>
+#&gt; Innovation variance:  0.2032994 
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.1743 104.9429 0.9878842 1.0022048
-#&gt; Feb 2019 101.9 105.9207 105.1941 0.9620400 1.0069073
-#&gt; Mar 2019 111.0 104.4311 105.2847 1.0629021 0.9918924
-#&gt; Apr 2019 107.4 105.5933 105.4042 1.0171096 1.0017943
-#&gt; May 2019 105.5 107.2997 105.1676 0.9832269 1.0202734
-#&gt; Jun 2019 105.8 101.9020 104.5972 1.0382528 0.9742326
-#&gt; Jul 2019 110.1 106.0606 104.2943 1.0380862 1.0169351
-#&gt; Aug 2019  78.7 103.0620 104.0531 0.7636179 0.9904748
-#&gt; Sep 2019 108.5 103.7505 103.8759 1.0457777 0.9987934
-#&gt; Oct 2019 116.8 105.1043 103.5817 1.1112766 1.0147004
-#&gt; Nov 2019 103.8 102.2380 102.8763 1.0152784 0.9937947
-#&gt; Dec 2019  97.7 101.4426 102.3135 0.9631060 0.9914880
+#&gt;              y        sa        t           s            i
+#&gt; Jan 2020 101.0 102.93775 103.0182  -1.9377453  -0.08043801
+#&gt; Feb 2020 100.1 103.53944 103.2312  -3.4394383   0.30818847
+#&gt; Mar 2020  91.8  82.47698 103.4998   9.3230241 -21.02286361
+#&gt; Apr 2020  66.7  65.77310 103.9608   0.9268969 -38.18766871
+#&gt; May 2020  73.7  79.43342 104.7269  -5.7334221 -25.29345247
+#&gt; Jun 2020  98.2  88.07766 105.3319  10.1223443 -17.25422206
+#&gt; Jul 2020  97.4  92.71048 105.4216   4.6895154 -12.71111705
+#&gt; Aug 2020  71.7  97.32129 104.9801 -25.6212858  -7.65880696
+#&gt; Sep 2020 104.7  97.44274 104.0807   7.2572622  -6.63793072
+#&gt; Oct 2020 106.7  98.20925 103.1711   8.4907485  -4.96183772
+#&gt; Nov 2020 101.6  99.98044 102.4813   1.6195550  -2.50088282
+#&gt; Dec 2020  96.6  98.99458 101.9735  -2.3945790  -2.97892307
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.14796 102.4076 102.1524 0.9876994 1.0024982
-#&gt; Feb 2020  98.73586 102.2044 102.1359 0.9660638 1.0006702
-#&gt; Mar 2020 111.14762 102.0245 102.1194 1.0894214 0.9990702
-#&gt; Apr 2020 103.85947 102.1162 102.1029 1.0170713 1.0001303
-#&gt; May 2020  95.54759 102.0976 102.0864 0.9358456 1.0001098
-#&gt; Jun 2020 111.32747 102.0557 102.0699 1.0908507 0.9998602
-#&gt; Jul 2020 105.98668 102.0495 102.0535 1.0385811 0.9999614
-#&gt; Aug 2020  75.98545 102.0352 102.0370 0.7446983 0.9999830
-#&gt; Sep 2020 109.40398 102.0154 102.0205 1.0724264 0.9999501
-#&gt; Oct 2020 110.59660 101.9997 102.0040 1.0842840 0.9999575
-#&gt; Nov 2020 103.53656 101.9837 101.9875 1.0152266 0.9999627
-#&gt; Dec 2020 100.67280 101.9669 101.9711 0.9873092 0.9999589
+#&gt;                y_f     sa_f      t_f        s_f         i_f
+#&gt; Jan 2021  93.22264 100.1984 101.7578  -6.975740 -1.55946363
+#&gt; Feb 2021  96.81455 100.8845 101.7113  -4.069924 -0.82679910
+#&gt; Mar 2021 111.72198 100.8668 101.6647  10.855228 -0.79795880
+#&gt; Apr 2021 102.76178 101.0716 101.6181   1.690178 -0.54654378
+#&gt; May 2021  95.52744 101.2474 101.5716  -5.719910 -0.32422597
+#&gt; Jun 2021 111.44221 101.2711 101.5250  10.171157 -0.25395653
+#&gt; Jul 2021 103.57813 101.2947 101.4784   2.283395 -0.18370915
+#&gt; Aug 2021  78.21363 101.3135 101.4319 -23.099833 -0.11841662
+#&gt; Sep 2021 108.57631 101.3000 101.3853   7.276282 -0.08528380
+#&gt; Oct 2021 107.32040 101.2771 101.3387   6.043321 -0.06166933
+#&gt; Nov 2021 105.33458 101.2505 101.2922   4.084088 -0.04168414
+#&gt; Dec 2021  98.79675 101.2164 101.2456  -2.419656 -0.02920922
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         5.694
-#&gt;  Seasonal     88.840
-#&gt;  Irregular     0.820
-#&gt;  TD &amp; Hol.     3.412
-#&gt;  Others        0.469
-#&gt;  Total        99.234
+#&gt;  Cycle         6.087
+#&gt;  Seasonal     80.528
+#&gt;  Irregular     0.965
+#&gt;  TD &amp; Hol.     3.590
+#&gt;  Others        8.102
+#&gt;  Total        99.271
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
-#&gt;    Kruskall-Wallis test                                      0.000
-#&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.344
+#&gt;    Kruskall-Wallis test                                       0.00
+#&gt;    Test for the presence of seasonality assuming stability    0.00
+#&gt;    Evolutive seasonality test                                 0.01
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
 #&gt;  qs test on i                           1.000
 #&gt;  f-test on sa (seasonal dummies)        1.000
 #&gt;  f-test on i (seasonal dummies)         1.000
 #&gt;  Residual seasonality (entire series)   1.000
-#&gt;  Residual seasonality (last 3 years)    0.984
-#&gt;  f-test on sa (td)                      0.135
-#&gt;  f-test on i (td)                       0.256
+#&gt;  Residual seasonality (last 3 years)    0.974
+#&gt;  f-test on sa (td)                      0.152
+#&gt;  f-test on i (td)                       0.224
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'># }
-</div></span></pre>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -776,7 +794,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

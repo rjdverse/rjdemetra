@@ -82,7 +82,7 @@ By default the workspace only contains definitions: computation is needed to get
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ By default the workspace only contains definitions: computation is needed to get
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -137,7 +137,7 @@ By default the workspace only contains definitions: computation is needed to get
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -165,7 +165,7 @@ By default the workspace only contains definitions: computation is needed to get
 (with <code><a href='get_model.html'>get_model</a></code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute</span>(<span class='no'>workspace</span>, <span class='no'>i</span>)</pre>
+    <pre class="usage"><span class='fu'>compute</span><span class='op'>(</span><span class='va'>workspace</span>, <span class='va'>i</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,136 +187,141 @@ By default all the multi-processings are compute.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
+<span class='va'>spec_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, easter.enabled <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>sa_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_x13</span><span class='op'>)</span>
 
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
-<span class='no'>sa_item1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>1</span>)
+<span class='va'>wk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span><span class='op'>)</span>
+<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_x13</span>, <span class='st'>"X13"</span><span class='op'>)</span>
+<span class='va'>sa_item1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span><span class='op'>(</span><span class='va'>mp</span>, <span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Returns NULL</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The result of the object is NULL: have you compute the workspace importing?</span>
+<span class='fu'><a href='get_model.html'>get_model</a></span><span class='op'>(</span><span class='va'>sa_item1</span>, <span class='va'>wk</span><span class='op'>)</span> <span class='co'># Returns NULL</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The result of the object is NULL: have you compute the workspace importing?</span>
 #&gt; <span class='warning'>See ?compute for more information</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='fu'>compute</span>(<span class='no'>wk</span>)
+<span class='fu'>compute</span><span class='op'>(</span><span class='va'>wk</span><span class='op'>)</span>
 
-<span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>sa_item1</span>, <span class='no'>wk</span>) <span class='co'># Returns the SA model sa_x13</span></div><div class='output co'>#&gt; <span style='font-weight: bold;text-decoration: underline;'>RegARIMA</span><span>
+<span class='fu'><a href='get_model.html'>get_model</a></span><span class='op'>(</span><span class='va'>sa_item1</span>, <span class='va'>wk</span><span class='op'>)</span> <span class='co'># Returns the SA model sa_x13</span>
+</div><div class='output co'>#&gt; <span style='font-weight: bold; text-decoration: underline;'>RegARIMA</span>
 #&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+#&gt; Log-transformation: no
 #&gt; Coefficients:
-#&gt;            Estimate Std. Error
-#&gt; Phi(1)     0.008774      0.119
-#&gt; Phi(2)     0.098387      0.081
-#&gt; Theta(1)  -0.562495      0.110
-#&gt; BTheta(1) -0.738153      0.039
+#&gt;           Estimate Std. Error
+#&gt; Phi(1)     0.02043      0.107
+#&gt; Phi(2)     0.11093      0.077
+#&gt; Theta(1)  -0.58663      0.098
+#&gt; BTheta(1) -0.69921      0.041
 #&gt; 
-#&gt;                Estimate Std. Error
-#&gt; Monday        0.0058623      0.002
-#&gt; Tuesday       0.0091349      0.002
-#&gt; Wednesday     0.0109267      0.002
-#&gt; Thursday      0.0005156      0.002
-#&gt; Friday        0.0091500      0.002
-#&gt; Saturday     -0.0161713      0.002
-#&gt; AO (5-2011)   0.1278938      0.018
-#&gt; LS (11-2008) -0.1157755      0.016
-#&gt; 
-#&gt; 
-#&gt; Residual standard error: 0.02153 on 334 degrees of freedom
-#&gt; Log likelihood = 834.5, aic =  1562 aicc =  1564, bic(corrected for length) = -7.474
-#&gt; 
+#&gt;              Estimate Std. Error
+#&gt; Monday         0.6788      0.244
+#&gt; Tuesday        0.9500      0.245
+#&gt; Wednesday      1.0053      0.246
+#&gt; Thursday      -0.0656      0.245
+#&gt; Friday         1.0304      0.245
+#&gt; Saturday      -1.5721      0.245
+#&gt; Leap year      2.1513      0.753
+#&gt; TC (4-2020)  -36.1532      2.193
+#&gt; AO (3-2020)  -20.2213      2.255
+#&gt; AO (5-2011)   13.2210      1.970
+#&gt; LS (11-2008) -12.7459      1.663
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Decomposition</span><span>
-#&gt; </span><span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span><span> 
+#&gt; Residual standard error: 2.294 on 343 degrees of freedom
+#&gt; Log likelihood = -811.8, aic =  1656 aicc =  1657, bic(corrected for length) = 1.907
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Decomposition</span>
+#&gt; <span style='font-weight: bold;'> Monitoring and Quality Assessment Statistics: </span> 
 #&gt;       M stats
-#&gt; M(1)    0.094
-#&gt; M(2)    0.049
-#&gt; M(3)    0.978
-#&gt; M(4)    0.421
-#&gt; M(5)    0.969
-#&gt; M(6)    0.180
-#&gt; M(7)    0.075
-#&gt; M(8)    0.211
+#&gt; M(1)    0.127
+#&gt; M(2)    0.076
+#&gt; M(3)    1.139
+#&gt; M(4)    0.080
+#&gt; M(5)    1.072
+#&gt; M(6)    0.030
+#&gt; M(7)    0.084
+#&gt; M(8)    0.244
 #&gt; M(9)    0.063
-#&gt; M(10)   0.250
-#&gt; M(11)   0.232
-#&gt; Q       0.323
-#&gt; Q-M2    0.357
+#&gt; M(10)   0.254
+#&gt; M(11)   0.239
+#&gt; Q       0.319
+#&gt; Q-M2    0.349
 #&gt; 
 #&gt; Final filters: 
 #&gt; Seasonal filter:  3x5
 #&gt; Trend filter:  13 terms Henderson moving average
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Final</span><span>
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Final</span>
 #&gt; Last observed values
-#&gt;              y       sa        t         s         i
-#&gt; Jan 2019 103.9 105.3314 105.1139 0.9864104 1.0020689
-#&gt; Feb 2019 101.9 106.3742 105.3665 0.9579387 1.0095639
-#&gt; Mar 2019 111.0 104.5953 105.4822 1.0612327 0.9915923
-#&gt; Apr 2019 107.4 105.0934 105.4192 1.0219484 0.9969091
-#&gt; May 2019 105.5 106.8159 105.2936 0.9876808 1.0144578
-#&gt; Jun 2019 105.8 101.4580 105.1024 1.0427961 0.9653249
-#&gt; Jul 2019 110.1 105.3379 104.7923 1.0452083 1.0052062
-#&gt; Aug 2019  78.7 103.0406 104.3781 0.7637769 0.9871852
-#&gt; Sep 2019 108.5 104.4959 103.8759 1.0383182 1.0059689
-#&gt; Oct 2019 116.8 104.9663 103.3582 1.1127377 1.0155587
-#&gt; Nov 2019 103.8 101.6218 102.9772 1.0214349 0.9868375
-#&gt; Dec 2019  97.7 101.8080 102.7604 0.9596494 0.9907318
+#&gt;              y        sa        t           s           i
+#&gt; Jan 2020 101.0 102.92412 102.8147  -1.9241199   0.1094395
+#&gt; Feb 2020 100.1 103.50547 102.8976  -3.4054722   0.6078825
+#&gt; Mar 2020  91.8  83.00218 103.1831   8.7978221 -20.1809275
+#&gt; Apr 2020  66.7  65.83747 103.6570   0.8625259 -37.8194996
+#&gt; May 2020  73.7  78.73548 104.1282  -5.0354792 -25.3926864
+#&gt; Jun 2020  98.2  87.26580 104.5188  10.9342001 -17.2529628
+#&gt; Jul 2020  97.4  92.53528 104.7033   4.8647224 -12.1679796
+#&gt; Aug 2020  71.7  97.64618 104.5690 -25.9461813  -6.9227978
+#&gt; Sep 2020 104.7  97.34380 104.1405   7.3562012  -6.7967236
+#&gt; Oct 2020 106.7  98.78451 103.5511   7.9154948  -4.7665946
+#&gt; Nov 2020 101.6 100.50933 103.0298   1.0906693  -2.5204281
+#&gt; Dec 2020  96.6  99.74645 102.7263  -3.1464483  -2.9798265
 #&gt; 
 #&gt; Forecasts:
-#&gt;                y_f     sa_f      t_f       s_f       i_f
-#&gt; Jan 2020 101.59660 103.0784 102.6789 0.9856249 1.0038905
-#&gt; Feb 2020 100.87436 103.2029 102.7042 0.9774377 1.0048553
-#&gt; Mar 2020 111.27482 102.6228 102.7383 1.0843091 0.9988753
-#&gt; Apr 2020 105.12395 103.3465 102.7663 1.0171986 1.0056464
-#&gt; May 2020  96.44225 102.2715 102.7176 0.9430021 0.9956572
-#&gt; Jun 2020 112.46775 102.4907 102.6115 1.0973459 0.9988229
-#&gt; Jul 2020 106.58633 102.4070 102.5858 1.0408106 0.9982572
-#&gt; Aug 2020  76.49372 102.5838 102.6507 0.7456707 0.9993479
-#&gt; Sep 2020 111.06093 103.4916 102.7527 1.0731400 1.0071907
-#&gt; Oct 2020 111.06175 102.3655 102.8697 1.0849527 0.9950991
-#&gt; Nov 2020 104.14664 102.6519 102.9955 1.0145617 0.9966639
-#&gt; Dec 2020 101.63644 103.5595 103.0930 0.9814307 1.0045245
+#&gt;                y_f     sa_f      t_f         s_f         i_f
+#&gt; Jan 2021  94.82712 101.3420 102.6158  -6.5148928 -1.27380795
+#&gt; Feb 2021  98.00197 101.8372 102.5826  -3.8352640 -0.74540432
+#&gt; Mar 2021 113.62540 101.9088 102.5235  11.7165747 -0.61463800
+#&gt; Apr 2021 103.28588 102.3855 102.3987   0.9004327 -0.01326784
+#&gt; May 2021  96.23640 101.5938 102.2898  -5.3574428 -0.69592946
+#&gt; Jun 2021 113.04727 101.6902 102.2365  11.3570720 -0.54632230
+#&gt; Jul 2021 104.27161 101.8281 102.2910   2.4435091 -0.46291753
+#&gt; Aug 2021  79.29357 102.6462 102.4831 -23.3526340  0.16311885
+#&gt; Sep 2021 109.23197 102.7863 102.7326   6.4456639  0.05371199
+#&gt; Oct 2021 108.79200 102.9386 102.9781   5.8533505 -0.03947210
+#&gt; Nov 2021 106.90616 102.9549 103.2017   3.9512094 -0.24675320
+#&gt; Dec 2021 100.22813 103.5456 103.3775  -3.3174206  0.16802658
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Diagnostics</span><span>
-#&gt; </span><span style='font-weight: bold;'> Relative contribution of the components to the stationary
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Diagnostics</span>
+#&gt; <span style='font-weight: bold;'> Relative contribution of the components to the stationary
 #&gt;  portion of the variance in the original series,
-#&gt;  after the removal of the long term trend </span><span>
+#&gt;  after the removal of the long term trend </span>
 #&gt;  Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)
 #&gt;            Component
-#&gt;  Cycle         2.426
-#&gt;  Seasonal     72.514
-#&gt;  Irregular     1.136
-#&gt;  TD &amp; Hol.     2.703
-#&gt;  Others       21.274
-#&gt;  Total       100.053
+#&gt;  Cycle         2.238
+#&gt;  Seasonal     59.768
+#&gt;  Irregular     1.203
+#&gt;  TD &amp; Hol.     2.436
+#&gt;  Others       34.383
+#&gt;  Total       100.028
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Combined test in the entire series </span><span>
+#&gt; <span style='font-weight: bold;'> Combined test in the entire series </span>
 #&gt;  Non parametric tests for stable seasonality
 #&gt;                                                           P.value
 #&gt;    Kruskall-Wallis test                                      0.000
 #&gt;    Test for the presence of seasonality assuming stability   0.000
-#&gt;    Evolutive seasonality test                                0.498
+#&gt;    Evolutive seasonality test                                0.059
 #&gt;  
 #&gt;  Identifiable seasonality present
 #&gt; 
-#&gt; </span><span style='font-weight: bold;'> Residual seasonality tests </span><span>
+#&gt; <span style='font-weight: bold;'> Residual seasonality tests </span>
 #&gt;                                       P.value
 #&gt;  qs test on sa                          1.000
-#&gt;  qs test on i                           1.000
-#&gt;  f-test on sa (seasonal dummies)        0.964
-#&gt;  f-test on i (seasonal dummies)         0.936
-#&gt;  Residual seasonality (entire series)   0.970
-#&gt;  Residual seasonality (last 3 years)    0.994
-#&gt;  f-test on sa (td)                      0.996
-#&gt;  f-test on i (td)                       0.993
+#&gt;  qs test on i                           0.985
+#&gt;  f-test on sa (seasonal dummies)        0.916
+#&gt;  f-test on i (seasonal dummies)         0.812
+#&gt;  Residual seasonality (entire series)   0.902
+#&gt;  Residual seasonality (last 3 years)    0.966
+#&gt;  f-test on sa (td)                      0.983
+#&gt;  f-test on i (td)                       0.998
 #&gt; 
 #&gt; 
-#&gt; </span><span style='font-weight: bold;text-decoration: underline;'>Additional output variables</span><span></div><div class='input'># }
+#&gt; <span style='font-weight: bold; text-decoration: underline;'>Additional output variables</span></div><div class='input'><span class='co'># }</span>
 
 
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -332,7 +337,7 @@ By default all the multi-processings are compute.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

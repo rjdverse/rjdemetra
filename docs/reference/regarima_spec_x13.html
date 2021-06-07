@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,74 +161,74 @@
     <p>Function to create (and/or modify) a <code><a href='https://rdrr.io/r/base/c.html'>c("regarima_spec","X13")</a></code> class object with the RegARIMA model specification for the X13 method. The object can be created from a predefined 'JDemetra+' model specification  (a <code>character</code>), a previous specification (<code><a href='https://rdrr.io/r/base/c.html'>c("regarima_spec","X13")</a></code> object) or a X13 RegARIMA model (<code><a href='https://rdrr.io/r/base/c.html'>c("regarima","X13")</a></code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>regarima_spec_x13</span>(
-  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>, <span class='st'>"RG4c"</span>),
-  <span class='kw'>preliminary.check</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>estimate.from</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>estimate.to</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>estimate.first</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.last</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.exclFirst</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.exclLast</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>estimate.tol</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Auto"</span>, <span class='st'>"None"</span>, <span class='st'>"Log"</span>),
-  <span class='kw'>transform.adjust</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"None"</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>),
-  <span class='kw'>transform.aicdiff</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"TradingDays"</span>, <span class='st'>"WorkingDays"</span>, <span class='st'>"UserDefined"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>tradingdays.autoadjust</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>tradingdays.leapyear</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>tradingdays.stocktd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>tradingdays.test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Remove"</span>, <span class='st'>"Add"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>easter.julian</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>easter.duration</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>easter.test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Add"</span>, <span class='st'>"Remove"</span>, <span class='st'>"None"</span>),
-  <span class='kw'>outlier.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.from</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>outlier.to</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>outlier.first</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.last</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.exclFirst</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.exclLast</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.ao</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.tc</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.ls</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.so</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.usedefcv</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outlier.cv</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>outlier.method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"AddOne"</span>, <span class='st'>"AddAll"</span>),
-  <span class='kw'>outlier.tcrate</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.enabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.acceptdefault</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.cancel</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ub1</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ub2</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.mixed</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.balanced</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>automdl.armalimit</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.reducecv</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ljungboxlimit</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>automdl.ubfinal</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.mu</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.d</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bd</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>,
-  <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>fcst.horizon</span> <span class='kw'>=</span> <span class='fl'>NA_integer_</span>
-)</pre>
+    <pre class="usage"><span class='fu'>regarima_spec_x13</span><span class='op'>(</span>
+  spec <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"RG5c"</span>, <span class='st'>"RG0"</span>, <span class='st'>"RG1"</span>, <span class='st'>"RG2c"</span>, <span class='st'>"RG3"</span>, <span class='st'>"RG4c"</span><span class='op'>)</span>,
+  preliminary.check <span class='op'>=</span> <span class='cn'>NA</span>,
+  estimate.from <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  estimate.to <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  estimate.first <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.last <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.exclFirst <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.exclLast <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  estimate.tol <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  transform.function <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Auto"</span>, <span class='st'>"None"</span>, <span class='st'>"Log"</span><span class='op'>)</span>,
+  transform.adjust <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"None"</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span><span class='op'>)</span>,
+  transform.aicdiff <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  usrdef.outliersEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersType <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersDate <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.outliersCoef <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.var <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varType <span class='op'>=</span> <span class='cn'>NA</span>,
+  usrdef.varCoef <span class='op'>=</span> <span class='cn'>NA</span>,
+  tradingdays.option <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"TradingDays"</span>, <span class='st'>"WorkingDays"</span>, <span class='st'>"UserDefined"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  tradingdays.autoadjust <span class='op'>=</span> <span class='cn'>NA</span>,
+  tradingdays.leapyear <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"LeapYear"</span>, <span class='st'>"LengthOfPeriod"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  tradingdays.stocktd <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  tradingdays.test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Remove"</span>, <span class='st'>"Add"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  easter.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  easter.julian <span class='op'>=</span> <span class='cn'>NA</span>,
+  easter.duration <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  easter.test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Add"</span>, <span class='st'>"Remove"</span>, <span class='st'>"None"</span><span class='op'>)</span>,
+  outlier.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.from <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  outlier.to <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  outlier.first <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.last <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.exclFirst <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.exclLast <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.ao <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.tc <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.ls <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.so <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.usedefcv <span class='op'>=</span> <span class='cn'>NA</span>,
+  outlier.cv <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  outlier.method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"AddOne"</span>, <span class='st'>"AddAll"</span><span class='op'>)</span>,
+  outlier.tcrate <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.enabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.acceptdefault <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.cancel <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ub1 <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ub2 <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.mixed <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.balanced <span class='op'>=</span> <span class='cn'>NA</span>,
+  automdl.armalimit <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.reducecv <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ljungboxlimit <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  automdl.ubfinal <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.mu <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.p <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.d <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.q <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bp <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bd <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.bq <span class='op'>=</span> <span class='cn'>NA_integer_</span>,
+  arima.coefEnabled <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.coef <span class='op'>=</span> <span class='cn'>NA</span>,
+  arima.coefType <span class='op'>=</span> <span class='cn'>NA</span>,
+  fcst.horizon <span class='op'>=</span> <span class='cn'>NA_integer_</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -546,56 +546,59 @@ The final values of the <code>specification</code> can be also accessed with the
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>myseries</span> <span class='kw'>&lt;-</span> <span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>)
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec1</span>)
+<span class='va'>myseries</span> <span class='op'>&lt;-</span> <span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>
+<span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span><span class='op'>)</span>
+<span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='va'>myspec1</span><span class='op'>)</span>
 
  <span class='co'># Modify a pre-specified model specification</span>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>,
-                             <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
-<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>myspec2</span>)
+<span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span>,
+                             tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+<span class='va'>myreg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, spec <span class='op'>=</span> <span class='va'>myspec2</span><span class='op'>)</span>
 
  <span class='co'># Modify the model specification from a "regarima" object</span>
-<span class='no'>myspec3</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='no'>myreg1</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
-<span class='no'>myreg3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec3</span>)
+<span class='va'>myspec3</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span><span class='va'>myreg1</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+<span class='va'>myreg3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec3</span><span class='op'>)</span>
 
  <span class='co'># Modify the model specification from a "regarima_spec" object</span>
-<span class='no'>myspec4</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='no'>myspec1</span>, <span class='kw'>tradingdays.option</span> <span class='kw'>=</span> <span class='st'>"WorkingDays"</span>)
-<span class='no'>myreg4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec4</span>)
+<span class='va'>myspec4</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span><span class='va'>myspec1</span>, tradingdays.option <span class='op'>=</span> <span class='st'>"WorkingDays"</span><span class='op'>)</span>
+<span class='va'>myreg4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec4</span><span class='op'>)</span>
 
  <span class='co'># Pre-specified outliers</span>
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.outliersEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-              <span class='kw'>usrdef.outliersType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LS"</span>, <span class='st'>"AO"</span>),
-              <span class='kw'>usrdef.outliersDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span>),
-              <span class='kw'>usrdef.outliersCoef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>36</span>, <span class='fl'>14</span>),
-              <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
+<span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span>, usrdef.outliersEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+              usrdef.outliersType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LS"</span>, <span class='st'>"AO"</span><span class='op'>)</span>,
+              usrdef.outliersDate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2008-10-01"</span>, <span class='st'>"2002-01-01"</span><span class='op'>)</span>,
+              usrdef.outliersCoef <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>36</span>, <span class='fl'>14</span><span class='op'>)</span>,
+              transform.function <span class='op'>=</span> <span class='st'>"None"</span><span class='op'>)</span>
 
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+<span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+<span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)      0.1057      0.114
-#&gt; Phi(2)      0.2141      0.076
-#&gt; Theta(1)   -0.4709      0.111
-#&gt; BTheta(1)  -0.6642      0.043
+#&gt; Phi(1)     0.07859      0.114
+#&gt; Phi(2)     0.19792      0.076
+#&gt; Theta(1)  -0.48272      0.111
+#&gt; BTheta(1) -0.65916      0.043
 #&gt; 
 #&gt;               Estimate Std. Error
-#&gt; Monday         0.58039      0.234
-#&gt; Tuesday        0.82241      0.235
-#&gt; Wednesday      1.10804      0.234
-#&gt; Thursday       0.09871      0.232
-#&gt; Friday         0.89917      0.233
-#&gt; Saturday      -1.62006      0.231
-#&gt; Leap year      2.14549      0.731
-#&gt; Easter [1]    -2.34335      0.456
-#&gt; AO (9-2008)   32.07187      2.931
-#&gt; LS (9-2008)  -57.03600      2.631
-#&gt; AO (5-2011)   13.22101      1.841
-#&gt; TC (9-2008)   23.33640      3.967
-#&gt; TC (12-2001) -20.56517      2.911
-#&gt; AO (12-2001)  17.24940      2.981
-#&gt; TC (2-2002)   10.70687      1.939
+#&gt; Monday         0.64094      0.228
+#&gt; Tuesday        0.81794      0.229
+#&gt; Wednesday      1.05374      0.229
+#&gt; Thursday       0.06981      0.228
+#&gt; Friday         0.93434      0.228
+#&gt; Saturday      -1.63686      0.226
+#&gt; Leap year      2.11550      0.697
+#&gt; Easter [1]    -2.38135      0.451
+#&gt; AO (9-2008)   31.95554      2.924
+#&gt; LS (9-2008)  -57.04093      2.657
+#&gt; TC (4-2020)  -35.62104      2.120
+#&gt; AO (3-2020)  -21.00931      2.145
+#&gt; AO (5-2011)   13.21877      1.832
+#&gt; TC (9-2008)   23.44654      4.001
+#&gt; TC (12-2001) -20.47521      2.922
+#&gt; AO (12-2001)  17.13461      2.962
+#&gt; TC (2-2002)   10.61731      1.937
 #&gt; 
 #&gt; Fixed outliers: 
 #&gt;              Coefficients
@@ -603,183 +606,196 @@ The final values of the <code>specification</code> can be also accessed with the
 #&gt; AO (1-2002)            14
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 2.185 on 327 degrees of freedom
-#&gt; Log likelihood = -767.3, aic =  1575 aicc =  1577, bic(corrected for length) = 1.883
-#&gt; </div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span>(<span class='no'>myreg1</span>)</div><div class='output co'>#&gt;   type       date coeff
+#&gt; Residual standard error: 2.178 on 337 degrees of freedom
+#&gt; Log likelihood = -792.6, aic =  1629 aicc =  1632, bic(corrected for length) = 1.901
+#&gt; </div><div class='input'><span class='fu'><a href='specification.html'>s_preOut</a></span><span class='op'>(</span><span class='va'>myreg1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   type       date coeff
 #&gt; 1   LS 2008-10-01    36
 #&gt; 2   AO 2002-01-01    14</div><div class='input'>
 
  <span class='co'># User-defined variables</span>
-<span class='no'>var1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>10</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>),
-           <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>myseries</span>))*<span class='fl'>100</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span>(<span class='no'>myseries</span>),
-           <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-<span class='no'>var</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span>(<span class='no'>var1</span>, <span class='no'>var2</span>)
+<span class='va'>var1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>,
+           frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+<span class='va'>var2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>100</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/start.html'>start</a></span><span class='op'>(</span><span class='va'>myseries</span><span class='op'>)</span>,
+           frequency <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+<span class='va'>var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/ts.union.html'>ts.union</a></span><span class='op'>(</span><span class='va'>var1</span>, <span class='va'>var2</span><span class='op'>)</span>
 
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                             <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var</span>)
-<span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
-#&gt; Log-transformation: yes
+<span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span>, usrdef.varEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                             usrdef.var <span class='op'>=</span> <span class='va'>var</span><span class='op'>)</span>
+<span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+<span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; y = regression model + arima (2, 1, 1, 0, 1, 1)
+#&gt; Log-transformation: no
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)    -0.01674      0.118
-#&gt; Phi(2)     0.15656      0.077
-#&gt; Theta(1)  -0.53112      0.112
-#&gt; BTheta(1) -0.71657      0.041
+#&gt; Phi(1)     0.01422      0.108
+#&gt; Phi(2)     0.18591      0.074
+#&gt; Theta(1)  -0.53323      0.102
+#&gt; BTheta(1) -0.65832      0.043
 #&gt; 
 #&gt;                Estimate Std. Error
-#&gt; r.var1       -8.812e-05      0.000
-#&gt; r.var2        1.179e-05      0.000
-#&gt; Monday        4.985e-03      0.002
-#&gt; Tuesday       8.384e-03      0.002
-#&gt; Wednesday     1.115e-02      0.002
-#&gt; Thursday      1.387e-03      0.002
-#&gt; Friday        8.397e-03      0.002
-#&gt; Saturday     -1.641e-02      0.002
-#&gt; Easter [1]   -2.156e-02      0.004
-#&gt; AO (5-2011)   1.302e-01      0.018
-#&gt; LS (11-2008) -1.155e-01      0.016
+#&gt; r.var1        1.819e-02      0.010
+#&gt; r.var2       -4.022e-04      0.001
+#&gt; Monday        5.254e-01      0.228
+#&gt; Tuesday       9.187e-01      0.228
+#&gt; Wednesday     9.946e-01      0.230
+#&gt; Thursday      2.941e-02      0.228
+#&gt; Friday        9.787e-01      0.232
+#&gt; Saturday     -1.589e+00      0.227
+#&gt; Leap year     2.142e+00      0.700
+#&gt; Easter [1]   -2.438e+00      0.452
+#&gt; TC (4-2020)  -3.560e+01      2.163
+#&gt; AO (3-2020)  -2.092e+01      2.183
+#&gt; AO (5-2011)   1.355e+01      1.847
+#&gt; LS (11-2008) -1.252e+01      1.636
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02081 on 331 degrees of freedom
-#&gt; Log likelihood = 846.8, aic =  1544 aicc =  1546, bic(corrected for length) = -7.492
+#&gt; Residual standard error: 2.208 on 340 degrees of freedom
+#&gt; Log likelihood = -797.4, aic =  1633 aicc =  1635, bic(corrected for length) = 1.879
 #&gt; </div><div class='input'>
-<span class='no'>myspec2</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>usrdef.varEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                             <span class='kw'>usrdef.var</span> <span class='kw'>=</span> <span class='no'>var1</span>, <span class='kw'>usrdef.varCoef</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-                             <span class='kw'>transform.function</span> <span class='kw'>=</span> <span class='st'>"None"</span>)
-<span class='no'>myreg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec2</span>)
-<span class='fu'><a href='specification.html'>s_preVar</a></span>(<span class='no'>myreg2</span>)</div><div class='output co'>#&gt; $series
+<span class='va'>myspec2</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span>, usrdef.varEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                             usrdef.var <span class='op'>=</span> <span class='va'>var1</span>, usrdef.varCoef <span class='op'>=</span> <span class='fl'>2</span>,
+                             transform.function <span class='op'>=</span> <span class='st'>"None"</span><span class='op'>)</span>
+<span class='va'>myreg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec2</span><span class='op'>)</span>
+<span class='fu'><a href='specification.html'>s_preVar</a></span><span class='op'>(</span><span class='va'>myreg2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $series
 #&gt;               Jan          Feb          Mar          Apr          May
-#&gt; 1990  11.94158303   9.13057148  -7.86752993  -4.10929700   4.76373682
-#&gt; 1991 -13.02671671   6.34857535   9.99655161  -3.37748953  -0.86033607
-#&gt; 1992  -6.61257061   5.48811286  -5.39367800  -1.71318426  -7.66734605
-#&gt; 1993  -0.47539083   7.86925425  11.66684112  -2.71823871  -3.13704285
-#&gt; 1994 -11.14492926  -8.42058813 -15.04294209  -2.84026455   0.42869041
-#&gt; 1995  -5.78524902  -1.69109048 -19.19232520 -15.34266387 -11.14761221
-#&gt; 1996   9.71396469  -5.79663020  16.04179789   2.25973337  -5.14857122
-#&gt; 1997 -15.55643970   0.93501283  -3.66949421  -1.29408799   4.07795520
-#&gt; 1998 -16.09575292 -10.49710115  20.52033974   1.76436411  11.28307358
-#&gt; 1999  -2.81725199  -7.91679461   0.01653727 -11.87530126   3.62417465
-#&gt; 2000   4.95847824  12.99750970 -16.15985506 -12.50367945  15.82132306
-#&gt; 2001  17.40218394  -3.24455939  -4.47511333   4.16082526 -12.95865368
-#&gt; 2002  -7.00069022  18.60931509  18.03924959 -13.56043492  -3.14751072
-#&gt; 2003 -14.00912333  14.45014910  -4.23481621  -7.33749597  -7.08484753
-#&gt; 2004  17.47150257  -0.81704668   1.24141586   3.92236141   3.78419970
-#&gt; 2005  12.07632181   0.32001384   1.80397550   0.77160580   5.58395338
-#&gt; 2006   8.15566796   1.20032668   8.81789848 -17.98743117  -9.57051078
-#&gt; 2007   2.26820843  -5.91868492  -4.05414494  14.14224665   2.41625825
-#&gt; 2008  -3.44214729   6.45775407 -15.34500551   5.99672514  -5.04358892
-#&gt; 2009  20.20798363 -18.38661562   1.72937164  -7.63245040 -11.18492914
-#&gt; 2010  -0.17532122  -3.90664205  -4.02775110  12.76706963   8.21075754
-#&gt; 2011  12.13732488  15.03810074 -11.69425021   6.13377167  14.83931321
-#&gt; 2012   7.34408890  -5.75309458   0.74897554   0.59301839   8.48264703
-#&gt; 2013  -7.59094766  -5.09303603  -1.56039669   1.32582442  -9.74084022
-#&gt; 2014  -9.75148693  -0.27117079   4.46671886  -3.29112249   1.13049080
-#&gt; 2015  28.39266231   9.61819160   5.08432001   2.59523192  -7.73404126
-#&gt; 2016  13.22082615  12.00558995  -7.81874565  -4.41476451  -2.46028129
-#&gt; 2017   6.34250029   8.65538237  -4.30593090   0.13030894   0.51249629
-#&gt; 2018  -2.76989004   1.36469589  10.67207722   0.01828103   1.40092252
-#&gt; 2019 -10.62911432  16.33683158   5.40830359  14.56857971 -19.33784243
+#&gt; 1990 -11.14492926  -8.42058813 -15.04294209  -2.84026455   0.42869041
+#&gt; 1991  -5.78524902  -1.69109048 -19.19232520 -15.34266387 -11.14761221
+#&gt; 1992   9.71396469  -5.79663020  16.04179789   2.25973337  -5.14857122
+#&gt; 1993 -15.55643970   0.93501283  -3.66949421  -1.29408799   4.07795520
+#&gt; 1994 -16.09575292 -10.49710115  20.52033974   1.76436411  11.28307358
+#&gt; 1995  -2.81725199  -7.91679461   0.01653727 -11.87530126   3.62417465
+#&gt; 1996   4.95847824  12.99750970 -16.15985506 -12.50367945  15.82132306
+#&gt; 1997  17.40218394  -3.24455939  -4.47511333   4.16082526 -12.95865368
+#&gt; 1998  -7.00069022  18.60931509  18.03924959 -13.56043492  -3.14751072
+#&gt; 1999 -14.00912333  14.45014910  -4.23481621  -7.33749597  -7.08484753
+#&gt; 2000  17.47150257  -0.81704668   1.24141586   3.92236141   3.78419970
+#&gt; 2001  12.07632181   0.32001384   1.80397550   0.77160580   5.58395338
+#&gt; 2002   8.15566796   1.20032668   8.81789848 -17.98743117  -9.57051078
+#&gt; 2003   2.26820843  -5.91868492  -4.05414494  14.14224665   2.41625825
+#&gt; 2004  -3.44214729   6.45775407 -15.34500551   5.99672514  -5.04358892
+#&gt; 2005  20.20798363 -18.38661562   1.72937164  -7.63245040 -11.18492914
+#&gt; 2006  -0.17532122  -3.90664205  -4.02775110  12.76706963   8.21075754
+#&gt; 2007  12.13732488  15.03810074 -11.69425021   6.13377167  14.83931321
+#&gt; 2008   7.34408890  -5.75309458   0.74897554   0.59301839   8.48264703
+#&gt; 2009  -7.59094766  -5.09303603  -1.56039669   1.32582442  -9.74084022
+#&gt; 2010  -9.75148693  -0.27117079   4.46671886  -3.29112249   1.13049080
+#&gt; 2011  28.39266231   9.61819160   5.08432001   2.59523192  -7.73404126
+#&gt; 2012  13.22082615  12.00558995  -7.81874565  -4.41476451  -2.46028129
+#&gt; 2013   6.34250029   8.65538237  -4.30593090   0.13030894   0.51249629
+#&gt; 2014  -2.76989004   1.36469589  10.67207722   0.01828103   1.40092252
+#&gt; 2015 -10.62911432  16.33683158   5.40830359  14.56857971 -19.33784243
+#&gt; 2016  10.00469215   5.27999513  11.63605931   1.73137014   5.77917253
+#&gt; 2017 -11.29829171   3.87267796  12.70263382 -16.46117829  -1.23604069
+#&gt; 2018  -0.22954568  -1.91523237  -4.40614893 -19.41405982  14.15706719
+#&gt; 2019 -15.64734714   5.11589918 -15.39661373   3.62795564   7.70735944
+#&gt; 2020  -2.58953302   6.77025733  -4.20100735  10.47205425 -15.46576348
 #&gt;               Jun          Jul          Aug          Sep          Oct
-#&gt; 1990   1.85915868 -13.24716253  11.72371055   2.31492772   4.83071904
-#&gt; 1991 -17.18817584  -9.29121572   8.13676046   5.26413546  10.11957390
-#&gt; 1992  -6.06574846  16.47312821   8.41069348   3.38175097  -4.04883076
-#&gt; 1993  -2.86300150  -8.03440263  -0.94555455  -0.74046506   7.14490683
-#&gt; 1994  -0.08866413 -29.49083784   0.20358254  -0.98446980   5.89109098
-#&gt; 1995  15.97811635  -6.39805078  15.66690553 -14.49155712  -7.91503959
-#&gt; 1996  -8.23788240   3.34415250  -0.93490765   3.04062078  -4.76507534
-#&gt; 1997  -5.83968954  -1.93449890  -2.69546670   0.73658232   3.57236138
-#&gt; 1998   4.35001744   5.48833492   6.47418304   8.78463454   3.50797869
-#&gt; 1999  -5.49435319   6.92949838  -0.60843916 -11.93540930  -1.19908059
-#&gt; 2000  12.52529118  -2.09395701  -6.39033687   3.98902937  13.41973500
-#&gt; 2001   6.82633090   4.96913333  14.39660656  12.07358558   2.38514694
-#&gt; 2002 -10.19265181  -6.12249656  -2.89068749  15.06983292   3.67722694
-#&gt; 2003  14.75092459   8.45004185  12.93994431   2.98161142  -4.05682490
-#&gt; 2004   1.66175673  11.53387369   0.14748302   0.21440845  -8.26352170
-#&gt; 2005  -1.66854367  -2.27980619   2.42666056  -9.28482969  15.15406678
-#&gt; 2006  -4.74058606 -18.60461283   2.53690073  -2.14401713 -23.70181451
-#&gt; 2007 -14.36087478  -3.14552745  -4.80542811   8.36254248  -0.52349287
-#&gt; 2008  -4.06909625  -4.60935206  22.14908426  14.86967820  -3.55098858
-#&gt; 2009  11.97977461   9.81193912  11.91749205   6.32833568   5.32825947
-#&gt; 2010   4.19785146  17.11661220 -22.15632715  -1.84878197   6.71168243
-#&gt; 2011  -4.43773736   2.68589741 -12.28216829   4.78528762  16.69859573
-#&gt; 2012  25.75396587   0.94259964  -5.19949532   7.74428621  12.28289259
-#&gt; 2013 -12.50949663  -0.46336042  11.37387771  12.64449891  -5.48742076
-#&gt; 2014  10.51229395   3.26977400   7.87037444   4.41559619 -10.19304514
-#&gt; 2015 -18.05527531   1.78383232  -5.25777309   4.00186316  -1.22587586
-#&gt; 2016   3.65792190  -0.34132882   2.96227003  -2.21059772   1.87706159
-#&gt; 2017   5.38638152   5.19672613 -24.22911275  -8.06290253  -4.84679992
-#&gt; 2018  -5.20598538  23.65811636 -16.96474415   6.82585584  13.61561976
-#&gt; 2019  -8.80400798  -7.97730162  -8.86130974  -2.94827785  -8.86651693
+#&gt; 1990  -0.08866413 -29.49083784   0.20358254  -0.98446980   5.89109098
+#&gt; 1991  15.97811635  -6.39805078  15.66690553 -14.49155712  -7.91503959
+#&gt; 1992  -8.23788240   3.34415250  -0.93490765   3.04062078  -4.76507534
+#&gt; 1993  -5.83968954  -1.93449890  -2.69546670   0.73658232   3.57236138
+#&gt; 1994   4.35001744   5.48833492   6.47418304   8.78463454   3.50797869
+#&gt; 1995  -5.49435319   6.92949838  -0.60843916 -11.93540930  -1.19908059
+#&gt; 1996  12.52529118  -2.09395701  -6.39033687   3.98902937  13.41973500
+#&gt; 1997   6.82633090   4.96913333  14.39660656  12.07358558   2.38514694
+#&gt; 1998 -10.19265181  -6.12249656  -2.89068749  15.06983292   3.67722694
+#&gt; 1999  14.75092459   8.45004185  12.93994431   2.98161142  -4.05682490
+#&gt; 2000   1.66175673  11.53387369   0.14748302   0.21440845  -8.26352170
+#&gt; 2001  -1.66854367  -2.27980619   2.42666056  -9.28482969  15.15406678
+#&gt; 2002  -4.74058606 -18.60461283   2.53690073  -2.14401713 -23.70181451
+#&gt; 2003 -14.36087478  -3.14552745  -4.80542811   8.36254248  -0.52349287
+#&gt; 2004  -4.06909625  -4.60935206  22.14908426  14.86967820  -3.55098858
+#&gt; 2005  11.97977461   9.81193912  11.91749205   6.32833568   5.32825947
+#&gt; 2006   4.19785146  17.11661220 -22.15632715  -1.84878197   6.71168243
+#&gt; 2007  -4.43773736   2.68589741 -12.28216829   4.78528762  16.69859573
+#&gt; 2008  25.75396587   0.94259964  -5.19949532   7.74428621  12.28289259
+#&gt; 2009 -12.50949663  -0.46336042  11.37387771  12.64449891  -5.48742076
+#&gt; 2010  10.51229395   3.26977400   7.87037444   4.41559619 -10.19304514
+#&gt; 2011 -18.05527531   1.78383232  -5.25777309   4.00186316  -1.22587586
+#&gt; 2012   3.65792190  -0.34132882   2.96227003  -2.21059772   1.87706159
+#&gt; 2013   5.38638152   5.19672613 -24.22911275  -8.06290253  -4.84679992
+#&gt; 2014  -5.20598538  23.65811636 -16.96474415   6.82585584  13.61561976
+#&gt; 2015  -8.80400798  -7.97730162  -8.86130974  -2.94827785  -8.86651693
+#&gt; 2016  -1.16008707   9.04521145  -0.16586710  -9.22297409 -10.60114550
+#&gt; 2017  -9.71640654  10.68587364  23.16252874 -16.82873392   1.35875428
+#&gt; 2018   5.96399657  -6.52922289  -1.54144673  -4.43645660  -5.18233778
+#&gt; 2019 -12.88986224  -7.13194370  -1.02383386  -6.47611750  -3.73253836
+#&gt; 2020 -10.46005681 -22.72669757  -3.16651938 -14.76190645  -1.00387827
 #&gt;               Nov          Dec
-#&gt; 1990  -5.35319580  13.78135819
-#&gt; 1991   8.31379809   4.15134145
-#&gt; 1992   9.00009039  11.90666655
-#&gt; 1993   1.24718366  12.96594339
-#&gt; 1994  -4.25751629   6.34658985
-#&gt; 1995  -5.04480733   4.01826700
-#&gt; 1996  -2.41311717   8.24155833
-#&gt; 1997   5.50428418   0.38401793
-#&gt; 1998   0.49879720   8.35749446
-#&gt; 1999  -7.08107950 -16.16663973
-#&gt; 2000  -0.37607422   5.43670114
-#&gt; 2001  -2.98837878  13.84621050
-#&gt; 2002  -0.20034941  -9.79921959
-#&gt; 2003  -1.38807578  -2.22592731
-#&gt; 2004   0.47399133  -2.93107372
-#&gt; 2005  -8.11598824  13.11247408
-#&gt; 2006   0.03258078   6.69745568
-#&gt; 2007   9.51957625  14.94512798
-#&gt; 2008   8.76203737  -2.14696646
-#&gt; 2009  -8.20121900  -1.59325676
-#&gt; 2010  -7.95140242 -15.66257835
-#&gt; 2011  -0.36455545  -4.40936271
-#&gt; 2012  18.80606885  -1.25241723
-#&gt; 2013   6.82391430  -9.29773363
-#&gt; 2014  -1.58698326 -16.37701292
-#&gt; 2015  -0.71345032  20.95734365
-#&gt; 2016  -4.38062172  -0.88733579
-#&gt; 2017  -6.53077284  -2.93764247
-#&gt; 2018  19.05955757  -6.72838542
-#&gt; 2019   0.99084673   7.20546895
+#&gt; 1990  -4.25751629   6.34658985
+#&gt; 1991  -5.04480733   4.01826700
+#&gt; 1992  -2.41311717   8.24155833
+#&gt; 1993   5.50428418   0.38401793
+#&gt; 1994   0.49879720   8.35749446
+#&gt; 1995  -7.08107950 -16.16663973
+#&gt; 1996  -0.37607422   5.43670114
+#&gt; 1997  -2.98837878  13.84621050
+#&gt; 1998  -0.20034941  -9.79921959
+#&gt; 1999  -1.38807578  -2.22592731
+#&gt; 2000   0.47399133  -2.93107372
+#&gt; 2001  -8.11598824  13.11247408
+#&gt; 2002   0.03258078   6.69745568
+#&gt; 2003   9.51957625  14.94512798
+#&gt; 2004   8.76203737  -2.14696646
+#&gt; 2005  -8.20121900  -1.59325676
+#&gt; 2006  -7.95140242 -15.66257835
+#&gt; 2007  -0.36455545  -4.40936271
+#&gt; 2008  18.80606885  -1.25241723
+#&gt; 2009   6.82391430  -9.29773363
+#&gt; 2010  -1.58698326 -16.37701292
+#&gt; 2011  -0.71345032  20.95734365
+#&gt; 2012  -4.38062172  -0.88733579
+#&gt; 2013  -6.53077284  -2.93764247
+#&gt; 2014  19.05955757  -6.72838542
+#&gt; 2015   0.99084673   7.20546895
+#&gt; 2016 -17.87199640 -10.66551779
+#&gt; 2017   4.98437767  13.33462968
+#&gt; 2018   2.06107064  16.39453666
+#&gt; 2019   0.83347213   9.17216273
+#&gt; 2020  -7.46222611   2.03645883
 #&gt; 
 #&gt; $description
 #&gt;              type coeff
 #&gt; userdef Undefined     2
 #&gt; </div><div class='input'>
  <span class='co'># Pre-specified ARMA coefficients</span>
-<span class='no'>myspec1</span> <span class='kw'>&lt;-</span> <span class='fu'>regarima_spec_x13</span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RG5c"</span>, <span class='kw'>automdl.enabled</span> <span class='kw'>=</span><span class='fl'>FALSE</span>,
-             <span class='kw'>arima.p</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.q</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>arima.bp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>arima.bq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-             <span class='kw'>arima.coefEnabled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>arima.coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.8</span>, -<span class='fl'>0.6</span>, <span class='fl'>0</span>),
-             <span class='kw'>arima.coefType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Fixed"</span>, <span class='fl'>2</span>), <span class='st'>"Undefined"</span>))
+<span class='va'>myspec1</span> <span class='op'>&lt;-</span> <span class='fu'>regarima_spec_x13</span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RG5c"</span>, automdl.enabled <span class='op'>=</span><span class='cn'>FALSE</span>,
+             arima.p <span class='op'>=</span> <span class='fl'>1</span>, arima.q <span class='op'>=</span> <span class='fl'>1</span>, arima.bp <span class='op'>=</span> <span class='fl'>0</span>, arima.bq <span class='op'>=</span> <span class='fl'>1</span>,
+             arima.coefEnabled <span class='op'>=</span> <span class='cn'>TRUE</span>, arima.coef <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.8</span>, <span class='op'>-</span><span class='fl'>0.6</span>, <span class='fl'>0</span><span class='op'>)</span>,
+             arima.coefType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Fixed"</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='st'>"Undefined"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='specification.html'>s_arimaCoef</a></span>(<span class='no'>myspec1</span>)</div><div class='output co'>#&gt;                Type Value
+<span class='fu'><a href='specification.html'>s_arimaCoef</a></span><span class='op'>(</span><span class='va'>myspec1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                Type Value
 #&gt; Phi(1)        Fixed  -0.8
 #&gt; Theta(1)      Fixed  -0.6
-#&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='no'>myreg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span>(<span class='no'>myseries</span>, <span class='no'>myspec1</span>)
-<span class='no'>myreg1</span></div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
+#&gt; BTheta(1) Undefined   0.0</div><div class='input'><span class='va'>myreg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='regarima.html'>regarima</a></span><span class='op'>(</span><span class='va'>myseries</span>, <span class='va'>myspec1</span><span class='op'>)</span>
+<span class='va'>myreg1</span>
+</div><div class='output co'>#&gt; y = regression model + arima (1, 1, 1, 0, 1, 1)
 #&gt; Log-transformation: yes
 #&gt; Coefficients:
 #&gt;           Estimate Std. Error
-#&gt; Phi(1)     -0.8000      0.000
-#&gt; Theta(1)   -0.6000      0.000
-#&gt; BTheta(1)  -0.6933      0.041
+#&gt; Phi(1)     -0.8000       0.00
+#&gt; Theta(1)   -0.6000       0.00
+#&gt; BTheta(1)  -0.6977       0.04
 #&gt; 
 #&gt;              Estimate Std. Error
-#&gt; Monday       0.005835      0.002
-#&gt; Tuesday      0.007964      0.002
-#&gt; Wednesday    0.010841      0.002
-#&gt; Thursday     0.001883      0.002
-#&gt; Friday       0.009833      0.002
-#&gt; Saturday    -0.018229      0.002
-#&gt; Easter [1]  -0.020470      0.004
-#&gt; AO (5-2011)  0.144191      0.016
+#&gt; Monday       0.006317      0.002
+#&gt; Tuesday      0.007824      0.002
+#&gt; Wednesday    0.010528      0.002
+#&gt; Thursday     0.001857      0.002
+#&gt; Friday       0.010099      0.002
+#&gt; Saturday    -0.018439      0.002
+#&gt; Easter [1]  -0.020593      0.004
+#&gt; TC (4-2020) -0.475720      0.031
+#&gt; AO (3-2020) -0.213355      0.023
+#&gt; AO (5-2011)  0.143705      0.016
 #&gt; 
 #&gt; 
-#&gt; Residual standard error: 0.02585 on 337 degrees of freedom
-#&gt; Log likelihood =   772, aic =  1681 aicc =  1682, bic(corrected for length) = -7.159
-#&gt; </div><div class='input'># }
+#&gt; Residual standard error: 0.0256 on 347 degrees of freedom
+#&gt; Log likelihood = 802.3, aic =  1733 aicc =  1734, bic(corrected for length) = -7.15
+#&gt; </div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -796,7 +812,7 @@ The final values of the <code>specification</code> can be also accessed with the
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

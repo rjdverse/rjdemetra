@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,7 +161,7 @@
     <p>Function to add a new seasonally adjust object (class <code>"SA"</code> or <code>"jSA"</code>) in a <code>workspace</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_sa_item</span>(<span class='no'>workspace</span>, <span class='no'>multiprocessing</span>, <span class='no'>sa_obj</span>, <span class='no'>name</span>)</pre>
+    <pre class="usage"><span class='fu'>add_sa_item</span><span class='op'>(</span><span class='va'>workspace</span>, <span class='va'>multiprocessing</span>, <span class='va'>sa_obj</span>, <span class='va'>name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,19 +191,21 @@ By default the name of the <code>sa_obj</code> is used.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
-<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
-<span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>jtramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
+<span class='va'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>spec_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, easter.enabled <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>sa_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_x13</span><span class='op'>)</span>
+<span class='va'>spec_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5"</span><span class='op'>)</span>
+<span class='va'>sa_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>jtramoseats</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_ts</span><span class='op'>)</span>
 
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
-<span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
-<span class='fu'>add_sa_item</span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
-<span class='fu'>add_sa_item</span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_ts</span>, <span class='st'>"TramoSeats"</span>)
+<span class='va'>wk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span><span class='op'>)</span>
+<span class='fu'>add_sa_item</span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_x13</span>, <span class='st'>"X13"</span><span class='op'>)</span>
+<span class='fu'>add_sa_item</span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_ts</span>, <span class='st'>"TramoSeats"</span><span class='op'>)</span>
 
-<span class='fu'><a href='save_workspace.html'>save_workspace</a></span>(<span class='no'>wk</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>dir</span>, <span class='st'>"workspace.xml"</span>))
-<span class='co'># }</span></div></pre>
+<span class='fu'><a href='save_workspace.html'>save_workspace</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>dir</span>, <span class='st'>"workspace.xml"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -219,7 +221,7 @@ By default the name of the <code>sa_obj</code> is used.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

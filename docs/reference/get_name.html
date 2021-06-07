@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RJDemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,7 +161,7 @@
     <p>Generics functions to get the Java name of a <code>multiprocessing</code> or a <code>sa_item</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_name</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>get_name</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,34 +181,40 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>spec_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5c"</span>, <span class='kw'>easter.enabled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>sa_x13</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_x13</span>)
-<span class='no'>spec_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span>(<span class='kw'>spec</span> <span class='kw'>=</span> <span class='st'>"RSA5"</span>)
-<span class='no'>sa_ts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>], <span class='kw'>spec</span> <span class='kw'>=</span> <span class='no'>spec_ts</span>)
+<span class='va'>spec_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13_spec.html'>x13_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5c"</span>, easter.enabled <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>sa_x13</span> <span class='op'>&lt;-</span> <span class='fu'><a href='x13.html'>x13</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_x13</span><span class='op'>)</span>
+<span class='va'>spec_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats_spec.html'>tramoseats_spec</a></span><span class='op'>(</span>spec <span class='op'>=</span> <span class='st'>"RSA5"</span><span class='op'>)</span>
+<span class='va'>sa_ts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tramoseats.html'>tramoseats</a></span><span class='op'>(</span><span class='va'>ipi_c_eu</span><span class='op'>[</span>, <span class='st'>"FR"</span><span class='op'>]</span>, spec <span class='op'>=</span> <span class='va'>spec_ts</span><span class='op'>)</span>
 
-<span class='no'>wk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span>()
-<span class='no'>mp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_x13</span>, <span class='st'>"X13"</span>)
-<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span>(<span class='no'>wk</span>, <span class='st'>"sa1"</span>, <span class='no'>sa_ts</span>, <span class='st'>"TramoSeats"</span>)
+<span class='va'>wk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_workspace</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_workspace.html'>new_multiprocessing</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span><span class='op'>)</span>
+<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_x13</span>, <span class='st'>"X13"</span><span class='op'>)</span>
+<span class='fu'><a href='add_sa_item.html'>add_sa_item</a></span><span class='op'>(</span><span class='va'>wk</span>, <span class='st'>"sa1"</span>, <span class='va'>sa_ts</span>, <span class='st'>"TramoSeats"</span><span class='op'>)</span>
 
-<span class='no'>sa_item1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>1</span>)
-<span class='no'>sa_item2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span>(<span class='no'>mp</span>, <span class='fl'>2</span>)
+<span class='va'>sa_item1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span><span class='op'>(</span><span class='va'>mp</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>sa_item2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_object.html'>get_object</a></span><span class='op'>(</span><span class='va'>mp</span>, <span class='fl'>2</span><span class='op'>)</span>
 
-<span class='fu'>get_name</span>(<span class='no'>sa_item1</span>) <span class='co'># returns "X13"</span></div><div class='output co'>#&gt; [1] "X13"</div><div class='input'><span class='fu'>get_name</span>(<span class='no'>sa_item2</span>) <span class='co'># returns "TramoSeats"</span></div><div class='output co'>#&gt; [1] "TramoSeats"</div><div class='input'>
-<span class='fu'>get_name</span>(<span class='no'>mp</span>) <span class='co'># returns "sa1"</span></div><div class='output co'>#&gt; [1] "sa1"</div><div class='input'>
+<span class='fu'>get_name</span><span class='op'>(</span><span class='va'>sa_item1</span><span class='op'>)</span> <span class='co'># returns "X13"</span>
+</div><div class='output co'>#&gt; [1] "X13"</div><div class='input'><span class='fu'>get_name</span><span class='op'>(</span><span class='va'>sa_item2</span><span class='op'>)</span> <span class='co'># returns "TramoSeats"</span>
+</div><div class='output co'>#&gt; [1] "TramoSeats"</div><div class='input'>
+<span class='fu'>get_name</span><span class='op'>(</span><span class='va'>mp</span><span class='op'>)</span> <span class='co'># returns "sa1"</span>
+</div><div class='output co'>#&gt; [1] "sa1"</div><div class='input'>
 <span class='co'># To get all the name of the sa_items inside a multiprocessing:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='get_object.html'>get_all_objects</a></span>(<span class='no'>mp</span>), <span class='no'>get_name</span>)</div><div class='output co'>#&gt;          X13   TramoSeats 
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='get_object.html'>get_all_objects</a></span><span class='op'>(</span><span class='va'>mp</span><span class='op'>)</span>, <span class='va'>get_name</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          X13   TramoSeats 
 #&gt;        "X13" "TramoSeats" </div><div class='input'>
 <span class='co'># To get all the name of the multiprocessings inside a workspace:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='get_object.html'>get_all_objects</a></span>(<span class='no'>wk</span>), <span class='no'>get_name</span>)</div><div class='output co'>#&gt;   sa1 
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='get_object.html'>get_all_objects</a></span><span class='op'>(</span><span class='va'>wk</span><span class='op'>)</span>, <span class='va'>get_name</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   sa1 
 #&gt; "sa1" </div><div class='input'>
 <span class='co'># To get all the name of the sa_items inside a workspace:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='fu'><a href='get_object.html'>get_all_objects</a></span>(<span class='no'>wk</span>),<span class='kw'>function</span>(<span class='no'>mp</span>){
-  <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='get_object.html'>get_all_objects</a></span>(<span class='no'>mp</span>), <span class='no'>get_name</span>)
-})</div><div class='output co'>#&gt; $sa1
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fu'><a href='get_object.html'>get_all_objects</a></span><span class='op'>(</span><span class='va'>wk</span><span class='op'>)</span>,<span class='kw'>function</span><span class='op'>(</span><span class='va'>mp</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='get_object.html'>get_all_objects</a></span><span class='op'>(</span><span class='va'>mp</span><span class='op'>)</span>, <span class='va'>get_name</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $sa1
 #&gt;          X13   TramoSeats 
 #&gt;        "X13" "TramoSeats" 
-#&gt; </div><div class='input'># }
+#&gt; </div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,7 +231,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

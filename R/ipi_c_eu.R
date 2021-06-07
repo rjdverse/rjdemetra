@@ -41,7 +41,7 @@
 #' BA        \tab Bosnia and Herzegovina
 #' }
 #' @docType data
-#' @format A monthly \code{ts} object from january 1990 to december 2019 with 34 variables.
+#' @format A monthly \code{ts} object from january 1990 to december 2020 with 34 variables.
 #' @source \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 "ipi_c_eu"
 
@@ -57,5 +57,6 @@
 #                             "UK", "NO", "CH", "ME", "MK", "RS", "TR", "BA")],
 #                start = c(1990, 1), frequency = 12)
 # # # Last date is removed due to NA:
-# # ipi_c_eu <- window(ipi_c_eu, end = tail(time(ipi_c_eu),1) - 1/12)
+# ipi_c_eu <- window(ipi_c_eu, end = tail(time(ipi_c_eu),1) - 1/12)
+# ipi_c_eu <- window(ipi_c_eu, end = c(2020, 12))
 # save(ipi_c_eu,file = "data/ipi_c_eu.rda", version = 2)
