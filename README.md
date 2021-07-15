@@ -3,8 +3,7 @@
 
 # RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
 
-[![Build
-Status](https://api.travis-ci.com/jdemetra/rjdemetra.svg?branch=master)](https://travis-ci.com/jdemetra/rjdemetra)
+[![R-CMD-check](https://github.com/jdemetra/rjdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/jdemetra/rjdemetra/actions)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last
 release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
