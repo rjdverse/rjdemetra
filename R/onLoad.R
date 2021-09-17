@@ -9,7 +9,7 @@
     if (is.null(getOption("java_ncore", default = NA))){
       jopts_core <- NULL
     } else{
-      jopts_core <- sprinf("-XX:ActiveProcessorCount=%i", getOption("java_ncore"))
+      jopts_core <- sprintf("-XX:ActiveProcessorCount=%i", getOption("java_ncore"))
     }
   }
 
