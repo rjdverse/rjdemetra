@@ -1,3 +1,9 @@
+# RJDemetra 0.1.8
+
+- Java version restriction: JDemetra+ and RJDemetra are not compatible with Java 16 and higher. The compatibility with those versions of Java will be possible from next release of JDemetra+.
+
+- `java_ncore` option added to limit the number of cores used in Java to two to be sure to respect CRAN policies (to remove the option, use `options(java_ncore = NULL)`). However, it should not be necessary since RJDemetra shouldn't use multithread (issue #89).
+
 # RJDemetra 0.1.7
 
 Data updated until December 2020.
