@@ -5,6 +5,6 @@
   .jpackage(pkgname, lib.loc = libname)
 
   if (!check_valid_java_version())
-    stop("You need Java 8 or higher to use 'RJDemetra'")
+    stop("You need Java 8 or higher to use the RJDemetra package!")
 }
 

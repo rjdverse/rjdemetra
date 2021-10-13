@@ -4,7 +4,7 @@
 jx13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
                 userdefined = NULL){
   if (!is.ts(series)) {
-    stop("series must be a time series")
+    stop("The series must be a time series")
   }
   UseMethod("jx13", spec)
 }
@@ -13,9 +13,9 @@ jx13.SA_spec <- function(series, spec, userdefined = NULL){
   if (!inherits(spec, "X13"))
     stop("use only with c(\"SA_spec\",\"X13\") class object")
 
-  # create the java objects
+  # To create the Java objects
   if (is.null(s_estimate(spec))) {
-    # For X-11 specification
+    # For the X-11 specification
     jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
   } else {
     jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
@@ -31,7 +31,7 @@ jx13.SA_spec <- function(series, spec, userdefined = NULL){
 jx13.character <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
                           userdefined = NULL){
   spec <- match.arg(spec)
-  # create the java objects
+  # To create the Java objects
   jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", spec)
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")

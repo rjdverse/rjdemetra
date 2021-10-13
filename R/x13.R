@@ -2,26 +2,31 @@ setClass(
   Class = "X13_java",
   contains = "ProcResults"
 )
-#' Seasonal Adjustment with  X-13ARIMA-SEATS
+#' Seasonal Adjustment with  X13-ARIMA-SEATS
 #'
 #' @description
-#' Functions to estimate the seasonally adjusted series (sa) with the X-13ARIMA-SEATS method.
-#' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
+#' Functions to estimate the seasonally adjusted series (sa) with the X13-ARIMA-SEATS method.
+#' This is achieved by decomposing the time series (y) into the trend-cycle (t), the seasonal component (s) and the irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
-#' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects of the seasonal adjustment.
+#' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects resulting from the seasonal adjustment.
 #'
 #' @param series a univariate time series
-#' @param spec model specification X13.  It can be a \code{character} of predefined X13 'JDemetra+' model specification (see \emph{Details}), or a specification created by \code{\link{x13_spec}}. The default is \code{"RSA5c"}.
-#' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
+#' @param spec the x13 model specification. It can be the name (\code{character}) of a pre-defined X13 'JDemetra+' model specification
+#' (see \emph{Details}) or of a specification created with the \code{\link{x13_spec}} function. The default value is \code{"RSA5c"}.
+#' @param userdefined a \code{character} vector containing the additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
-#' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-#' In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}), multiplicative (\eqn{y = t * s * i}), log-additive (\eqn{log(y) = log(t)+log(s)+log(i)}) or pseudo-additive (\eqn{y = t*(s+i-1)}).
-#' The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
+#' The first step of a seasonal adjustment consist in pre-adjusting the time series. This is done by removing
+#' its deterministic effects, using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+#' In the second part, the pre-adjusted series is decomposed into the following components:
+#' trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be:
+#' additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa)
+#' shall be free of seasonal and calendar-related movements.
 #'
-#' In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters. More information on the method can be found on the U.S. Census Bureau website.
+#' In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters.
+#' More information on the method can be found on the U.S. Census Bureau website.
 #'
-#' As regards the available predefined 'JDemetra+' X13 model specifications, they are described in the table below.
+#' The available pre-defined 'JDemetra+' X13 model specifications are described in the table below:
 #' \tabular{rrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -35,35 +40,41 @@ setClass(
 #'
 #' @return
 #'
-#' \code{jx13} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{x13}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#' \code{jx13} returns the result of the seasonal adjustment in a Java (\code{\link{jSA}}) object, without any formatting.
+#' Therefore, the computation is faster than with the \code{x13} function. The results of the seasonal adjustment can be
+#' extracted with the function \code{\link{get_indicators}}.
 #'
-#' \code{x13} returns an object of class \code{c("SA","X13")}, a list containing the following components:
+#' \code{x13} returns an object of class \code{c("SA","X13")}, that is, a list containing the following components:
 #'
-#' \item{regarima}{object of class \code{c("regarima","X13")}. See \emph{Value} of the function \code{\link{regarima}}.}
+#' \item{regarima}{an object of class \code{c("regarima","X13")}. More info in the \emph{Value} section of the function \code{\link{regarima}}.}
 #'
-#' \item{decomposition}{object of class \code{"decomposition_X11"}, six elements list:
+#' \item{decomposition}{an object of class \code{"decomposition_X11"}, that is a six-element list:
 #' \itemize{
-#' \item \code{specification} list with the X11 algorithm specification. See also function \code{\link{x13_spec}}
-#' \item \code{mode} decomposition mode
-#' \item \code{mstats} matrix with the  M statistics
-#' \item \code{si_ratio} time series matrix (mts) with the \code{d8} and \code{d10} series
-#' \item \code{s_filter} seasonal filters
-#' \item \code{t_filter} trend filter
+#' \item \code{specification} a list with the X11 algorithm specification. See also the function \code{\link{x13_spec}}.
+#' \item \code{mode} the decomposition mode
+#' \item \code{mstats} the matrix with the M statistics
+#' \item \code{si_ratio} the time series matrix (mts) with the \code{d8} and \code{d10} series
+#' \item \code{s_filter} the seasonal filters
+#' \item \code{t_filter} the trend filter
 #' }
 #' }
 #'
-#' \item{final}{object of class \code{c("final","mts","ts","matrix")}. Matrix with the final results of the seasonal adjustment.
-#' It includes time series: original time series (\code{y}), forecast of the original series (\code{y_f}), trend (\code{t}), forecast of the trend (\code{t_f}),
-#' seasonally adjusted series (\code{sa}), forecast of the seasonally adjusted series (\code{sa_f}),
-#' seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), irregular component (\code{i}) and the forecast of the irregular component (\code{i_f}).}
+#' \item{final}{an object of class \code{c("final","mts","ts","matrix")}. The matrix contains the final results of the seasonal adjustment:
+#' the original time series (\code{y})and its forecast (\code{y_f}), the trend (\code{t}) and its forecast (\code{t_f}),
+#' the seasonally adjusted series (\code{sa}) and its forecast (\code{sa_f}), the seasonal component (\code{s})and its forecast (\code{s_f}),
+#' and the irregular component (\code{i}) and its forecast (\code{i_f}).}
 #'
-#' \item{diagnostics}{object of class \code{"diagnostics"}, list with three type of diagnostics tests:
+#' \item{diagnostics}{an object of class \code{"diagnostics"}, that is a list containing three types of tests results:
 #' \itemize{
-#' \item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
-#' \item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
-#' \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+#' \item \code{variance_decomposition} a data.frame with the tests results on the relative contribution of the components to the stationary
+#' portion of the variance in the original series, after the removal of the long term trend;
+#' \item \code{residuals_test} a data.frame with the tests results of the presence of seasonality in the residuals
+#' (including the statistic test values, the corresponding p-values and the parameters description);
+#' \item \code{combined_test} the combined tests for stable seasonality in the entire series. The format is a two elements list with:
+#' \code{tests_for_stable_seasonality}, a data.frame containing the tests results (including the statistic test value, its p-value and the parameters
+#' description), and \code{combined_seasonality_test}, the summary.
 #' }}
-#' \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
+#' \item{user_defined}{an object of class \code{"user_defined"}: a list containing the additional userdefined  variables.}
 #'
 #' @seealso
 #'
@@ -108,7 +119,7 @@ setClass(
 x13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
                        userdefined = NULL){
   if (!is.ts(series)) {
-    stop("series must be a time series")
+    stop("The series must be a time series!")
   }
   UseMethod("x13", spec)
 }
@@ -118,7 +129,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   # jrslt <- jsa_obj[["result"]]@internal
   # jrspec <- jsa_obj[["spec"]]
   if (is.null(s_estimate(spec))) {
-    # For X-11 specification
+    # For the X11 specification
     jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
   } else {
     jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
@@ -128,7 +139,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
-  # Or, using the fonction x13JavaResults:
+  # Or, using the function x13JavaResults:
   # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
@@ -138,7 +149,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   if (is.null(jrobct@internal)) {
     return(NaN)
   }else{
-    #Error with preliminary check
+    # Error with the preliminary check
     if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
       proc_info <- jrslt$getResults()$getProcessingInformation()
       error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
@@ -167,7 +178,7 @@ x13.character <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RS
   return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
-#Extract the results of the SA of a X13 object
+# To extract the results of the SA of a X13 object
 x13JavaResults <- function(jrslt, spec, userdefined = NULL,
                            context_dictionary = NULL,
                            extra_info = FALSE, freq = NA){
@@ -180,7 +191,7 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
     return(NULL)
   }
 
-  #Error with preliminary check
+  # Error during the preliminary check
   if (is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
     proc_info <- jrslt$getResults()$getProcessingInformation()
     error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)

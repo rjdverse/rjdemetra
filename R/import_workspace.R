@@ -44,18 +44,18 @@ load_workspace <- function(file){
 }
 
 
-#' Get objects inside a workspace or multiprocessing
+#' To retrieve objects inside a workspace or multiprocessing
 #'
-#' Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-#' from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
+#' Generic functions to retreive all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+#' from a \code{workspace} (respectively \code{multiprocessing}) or to retreive a single one (\code{get_object()}) .
 #'
-#' @param x the object where to extract the \code{multiprocessing} or the \code{sa_item}.
+#' @param x the object to store the extracted \code{multiprocessing} or \code{sa_item}.
 #' @param pos the index of the object to extract.
 #'
 #' @return An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_object()}) or a list
 #' of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 #'
-#' @seealso Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+#' @seealso Other functions to retrieve informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 #'
 #' @examples\donttest{
 #'
@@ -65,9 +65,9 @@ load_workspace <- function(file){
 #' mp <- new_multiprocessing(wk, "sa1")
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #'
-#' # Other way to get the multiprocessing:
+#' # A way to retrieve the multiprocessing:
 #' mp <- get_object(wk, 1)
-#' # To get the sa_item object:
+#' # And the sa_item object:
 #' sa_item <- get_object(mp, 1)
 #' }
 #' @name get_object
@@ -115,15 +115,15 @@ get_all_objects.workspace <- function(x){
   all_multiprocessings
 }
 
-#' Get the Java name of a multiprocessing or a sa_item
+#' To retrieve the Java name of a multiprocessing or a sa_item
 #'
-#' Generics functions to get the Java name of a \code{multiprocessing} or a \code{sa_item}.
+#' Generic functions to retrieve the Java name of a \code{multiprocessing} or a \code{sa_item}.
 #'
-#' @param x the object to get the name from.
+#' @param x the object to retrieve the name from.
 #'
 #' @return A \code{character}.
 #'
-#' @seealso Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_ts}}.
+#' @seealso Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_ts}}.
 #'
 #' @examples \donttest{
 #' spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
@@ -144,13 +144,13 @@ get_all_objects.workspace <- function(x){
 #'
 #' get_name(mp) # returns "sa1"
 #'
-#' # To get all the name of the sa_items inside a multiprocessing:
+#' # To retrieve the name of every sa_item in a given multiprocessing:
 #' sapply(get_all_objects(mp), get_name)
 #'
-#' # To get all the name of the multiprocessings inside a workspace:
+#' # To retrieve the name of every multiprocessing in a given workspace:
 #' sapply(get_all_objects(wk), get_name)
 #'
-#' # To get all the name of the sa_items inside a workspace:
+#' # To retrieve the name of every sa_item in a given workspace:
 #' lapply(get_all_objects(wk),function(mp){
 #'   sapply(get_all_objects(mp), get_name)
 #' })
@@ -173,14 +173,14 @@ get_name.sa_item <- function(x){
   return(name)
 }
 
-#' Count the number of objects inside a workspace or multiprocessing
+#' To count the number of objects inside a workspace or multiprocessing
 #'
-#' Generics functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
+#' Generic functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
 #' inside a \code{workspace} (respectively \code{multiprocessing}).
 #'
-#' @param x the \code{workspace} or the code{multiprocessing}.
+#' @param x the \code{workspace} or the \code{multiprocessing}.
 #'
-#' @seealso Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+#' @seealso Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 #'
 #' @examples
 #' wk <- new_workspace()
@@ -202,22 +202,22 @@ count.workspace <- function(x){
   return(.jcall(x, "I", "getMultiProcessingCount"))
 }
 
-#' Get the input raw time series
+#' To retrieve the input raw time series
 #'
-#' Generics functions to get the input raw time series of a \code{workspace}, \code{multiprocessing},
+#' Generic functions to retrieve the input raw time series of a \code{workspace}, \code{multiprocessing},
 #' \code{sa_item} or \code{SA} object.
 #'
-#' @param x the object where to get the time series.
+#' @param x the object from which to retrieve the time series.
 #'
 #' @return \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects:
 #' \itemize{
 #'  \item if \code{x} is a \code{sa_item} or a \code{SA} object, \code{get_ts(x)} returns a single \code{ts} object;
-#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
-#'  of sa_items, each a \code{ts} object;
-#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
-#'  each element containing a list of \code{ts} object.
+#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns a list of length the number
+#'  of sa_items, each element being a \code{ts} object;
+#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns a list of length the number of multiprocessings,
+#'  each element being a list of \code{ts} objects.
 #'}
-#' @seealso Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}.
+#' @seealso Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}.
 #'
 #' @examples\donttest{
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = "RSA5c")
@@ -227,20 +227,20 @@ count.workspace <- function(x){
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' sa_item <- get_object(mp, 1)
 #'
-#'   # Extracting from a SA:
+#'   # Extracting the raw time series from an adjusted series:
 #' get_ts(sa_x13) # Returns the ts object ipi_c_eu[, "FR"]
 #'
-#'   # Extracting from a sa_item:
+#'   # Extracting the raw time series from a sa_item:
 #' get_ts(sa_item) # Returns the ts object ipi_c_eu[, "FR"]
 #'
-#'   # Extracting from a multiprocessing:
+#'   # Extracting all raw time series from a multiprocessing:
 #' # Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]:
 #' get_ts(mp)
 #'
 #'
-#'   # Extracting from a workspace:
+#'   # Extracting all raw time series from a workspace:
 #' # Returns a list of length 1 named "sa1" containing a list
-#' # of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
+#' # of length 1 named "X13", containing the ts object ipi_c_eu[, "FR"]
 #' get_ts(wk)
 #' }
 #' @export
@@ -283,15 +283,15 @@ get_ts.regarima <- function(x){
   return(y)
 }
 
-#' Compute the multi-processing from a workspace
+#' To compute a workspace multi-processing(s)
 #'
-#' Function to compute all the multi-processings or a given one from a workspace.
-#' By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
+#' Function to compute all the multi-processings or only a given one from a workspace.
+#' By default, the workspace only contains definitions: computation is needed to recalculate and access the adjusted model
 #' (with \code{\link{get_model}}).
 #'
 #' @param workspace the workspace to compute.
 #' @param i a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute.
-#' By default all the multi-processings are compute.
+#' By default, all multi-processings are computed.
 #'
 #' @seealso \code{\link{get_model}}
 #'
@@ -337,26 +337,26 @@ compute <- function(workspace, i) {
 }
 
 
-#' Get the seasonally adjusted model from a workspace
+#' To retrieve the seasonally adjusted model from a workspace
 #'
-#' Generics functions to get seasonally adjusted model(s) from \code{workspace},
-#' \code{multiprocessing} or \code{sa_item} object. \code{get_model} returns a \code{"SA"} objects while  \code{get_jmodel} returns the Java objects of the models.
+#' Generic functions to retrieve seasonally adjusted model(s) from \code{workspace},
+#' \code{multiprocessing} or \code{sa_item} object. \code{get_model} returns a \code{"SA"} object while \code{get_jmodel} returns the Java objects of the models.
 #'
-#' @param x the object to get the seasonally adjusted model.
-#' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object this parameter is not used.
-#' @param userdefined vector with characters for additional output variables.
+#' @param x the object from which to retrieve the seasonally adjusted model.
+#' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object, this parameter is not used.
+#' @param userdefined a vector containing the names of additional output variables.
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
-#' @param progress_bar boolean: if \code{TRUE} a progress bar is printed.
+#' @param progress_bar boolean: if \code{TRUE}, a progress bar is printed.
 #'
-#' @return \code{get_model()} returns a seasonally adjust object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or list of seasonally adjust objects:
+#' @return \code{get_model()} returns a seasonally adjusted object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or a list of seasonally adjusted objects:
 #' \itemize{
 #'  \item if \code{x} is a \code{sa_item} object, \code{get_model(x)} returns a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
-#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
+#'  \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns a list of length the number
 #'  of sa_items, each element containing a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)});
-#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
-#'  each element containing a list of a \code{"SA"} object (or a \code{\link{jSA}} object with \code{get_jmodel(x)}).
+#'  \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessings,
+#'  each element containing a list of \code{"SA"} object(s) (or \code{\link{jSA}} object's) with \code{get_jmodel(x)}).
 #'}
-#' @seealso Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+#' @seealso Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 #' @seealso \code{\link{compute}}
 #'
 #' @examples\donttest{
@@ -370,15 +370,15 @@ compute <- function(workspace, i) {
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
-#' compute(wk) # It's important to compute the workspace to get the SA model
+#' compute(wk) # It's important to compute the workspace before retrieving the SA model
 #' sa_item1 <- get_object(mp, 1)
 #'
-#' get_model(sa_item1, wk) # Extract the model of the sa_item1: its the object sa_x13
+#' get_model(sa_item1, wk) # To extract the model of the sa_item1: its the object sa_x13
 #'
-#' # To get all the models of the multiprocessing mp:
+#' # To get all models from the multiprocessing mp:
 #' get_model(mp, wk)
 #'
-#' # To get all the models of the workspace wk:
+#' # To get all models from the workspace wk:
 #' get_model(wk)
 #' }
 #'
@@ -456,16 +456,16 @@ get_model.sa_item <- function(x, workspace,
   result
 }
 
-# Get the results of an saitem
+# To retrieve the results of an sa_item
 sa_results <- function(jsa) {
   jresult <- .jcall(jsa, "Ldemetra/algorithm/IProcResults;", "getResults")
   if (is.null(jresult))
-    warning("The result of the object is NULL: have you compute the workspace importing?\n",
-            "See ?compute for more information")
+    warning("The result of the object is NULL: have you computed the workspace after importing it?\n",
+            "See ?compute for more information.")
   return(jresult)
 }
 
-# Get the specification of an saitem (possible type: Domain, Estimation, Point)
+# To retrieve the specifications of a sa_item (possible values for type: Domain, Estimation, Point)
 sa_spec <- function(jsa, type = "Domain") {
   jt <- .jcall(jsa, "Ldemetra/datatypes/sa/SaItemType;", "getSaDefinition")
   if (type == "Domain") {

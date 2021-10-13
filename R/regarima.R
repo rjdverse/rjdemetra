@@ -1,4 +1,4 @@
-#Define the S4 java object
+# To define a S4 java object
 setClass(
   Class = "RegArima_java",
   contains = "ProcResults"
@@ -9,68 +9,79 @@ setClass(
 )
 #' RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS
 #' @description
-#' \code{regarima/regarima_x13/regarima_tramoseats} decomposes the time series in a linear deterministic component and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects. The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
-#' \code{jregarima/jregarima_x13/jregarima_tramoseats} does the same computation but returns the Java objects without formatting the output
+#' The \code{regarima/regarima_x13/regarima_tramoseats} functions decompose the input time series in a linear deterministic component
+#' and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects.
+#' The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
+#' The \code{jregarima/jregarima_x13/jregarima_tramoseats} functions do the same computation but return the Java objects instead of
+#' a formatted output.
 #'
 #' @param series a univariate time series
-#' @param spec model specification. For the function:
+#' @param spec the model specification. For the function:
 #' \itemize{
-#' \item \code{regarima}, object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}).
-#' See functions \code{\link{regarima_spec_x13} and \link{regarima_spec_tramoseats}}.
-#' \item \code{regarima_x13}, predefined X13 'JDemetra+' model specification (see \emph{Details}). The default is "RG5c".
-#' \item \code{regarima_tramoseats}, predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}). The default is "TRfull".
+#' \item \code{regarima}: an object of class \code{c("regarima_spec","X13") or c("regarima_spec","TRAMO_SEATS")}.
+#' See the functions \code{\link{regarima_spec_x13} and \link{regarima_spec_tramoseats}}.
+#' \item \code{regarima_x13}: the name of a predefined X13 'JDemetra+' model specification (see \emph{Details}). The default value is "RG5c".
+#' \item \code{regarima_tramoseats}:the name of a predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}).
+#' The default value is "TRfull".
 #'}
 #'
 #' @details
-#' In the X13 and TRAMO-SEATS seasonal adjustment the first step consists of pre-adjusting the original series with a RegARIMA model, where the original series is corrected for any deterministic effects and missing observations. This step is also referred as linearization of the original series.
+#' When seasonally adjusting with X13 and TRAMO-SEATS, the first step consists in pre-adjusting the original series with a RegARIMA model,
+#' where the original series is corrected for any deterministic effects and missing observations.
+#' This step is also referred to as the linearization of the original series.
 #'
-#' The RegARIMA model (model with ARIMA errors) is specified as below.
+#' The RegARIMA model (model with ARIMA errors) is specified as such:
 #'
-#' \deqn{z_t=y_t\beta+x_t}
+#' \deqn{z_t = y_t\beta + x_t}
 #'
 #' where:
 #' \itemize{
-#' \item \eqn{z_t} - is the original series;
-#' \item \eqn{\beta = (\beta_1,...,\beta_n)} - a vector of regression coefficients;
-#' \item \eqn{y_t = (y_{1t},...,y_{nt})} - \eqn{n} regression variables (outliers, calendar effects, user-defined variables);
-#' \item \eqn{x_t} - a disturbance that follows the general ARIMA process:
-#' \eqn{\phi(B)\delta(B)x_t=\theta(B)a_t}; \eqn{\phi(B), \delta(B)} and \eqn{\theta(B)} are the finite polynomials in \eqn{B}; \eqn{a_t} is a white-noise variable with zero mean and a constant variance.
+#' \item \eqn{z_t} is the original series;
+#' \item \eqn{\beta = (\beta_1,...,\beta_n)} is a vector of regression coefficients;
+#' \item \eqn{y_t = (y_{1t},...,y_{nt})} are \eqn{n} regression variables (outliers, calendar effects, user-defined variables);
+#' \item \eqn{x_t} is a disturbance that follows the general ARIMA process:
+#' \eqn{\phi(B)\delta(B)x_t = \theta(B)a_t}; where \eqn{\phi(B), \delta(B)} and \eqn{\theta(B)} are finite polynomials in \eqn{B}
+#' and \eqn{a_t} is a white noise variable with zero mean and a constant variance.
 #' }
 #'
-#' The polynomial \eqn{\phi(B)} is a stationary autoregressive (AR) polynomial in \eqn{B}, which is a product of the stationary regular AR polynomial in \eqn{B} and the stationary seasonal polynomial in \eqn{B^s}:
+#' The polynomial \eqn{\phi(B)} is a stationary autoregressive (AR) polynomial in \eqn{B},
+#' which is a product of the stationary regular AR polynomial in \eqn{B} and the stationary seasonal polynomial
+#' in \eqn{B^s}:
 #'
 #' \deqn{\phi(B)=\phi_p(B)\Phi_{bp}(B^s)=(1+\phi_1B+...+\phi_pB^p)(1+\Phi_1B^s+...+\Phi_{bp}B^{bps})}
 #'
 #' where:
 #' \itemize{
-#' \item \eqn{p} - number of regular AR terms (here and in 'JDemetra+' \eqn{p \le 3});
-#' \item \eqn{bp} - number of seasonal AR terms (here and in 'JDemetra+' \eqn{bp \le 1});
-#' \item \eqn{s} - number of observations per year (frequency of the time series).
+#' \item \eqn{p} is the number of regular AR terms (here and in 'JDemetra+', \eqn{p \le 3});
+#' \item \eqn{bp} is the number of seasonal AR terms (here and in 'JDemetra+', \eqn{bp \le 1});
+#' \item \eqn{s} is the  number of observations per year (ie. The time series frequency).
 #' }
 #'
-#' The polynomial \eqn{\theta(B)} is an invertible moving average (MA) polynomial in \eqn{B}, which is a product of the invertible regular MA polynomial in \eqn{B} and the invertible seasonal MA polynomial in \eqn{B^s}:
+#' The polynomial \eqn{\theta(B)} is an invertible moving average (MA) polynomial in \eqn{B},
+#' which is a product of the invertible regular MA polynomial in \eqn{B} and the invertible seasonal MA polynomial in \eqn{B^s}:
 #'
 #' \deqn{\theta(B)=\theta_q(B)\Theta_{bq}(B^s)=(1+\theta_1B+...+\theta_qB^q)(1+\Theta_1B^s+...+\Theta_{bq}B^{bqs})}
 #'
 #' where:
 #' \itemize{
-#' \item \eqn{q} - number of regular MA terms (here and in 'JDemetra+' \eqn{q \le 3});
-#' \item \eqn{bq} - number of seasonal MA terms (here and in 'JDemetra+' \eqn{bq \le 1});
+#' \item \eqn{q} is the number of regular MA terms (here and in 'JDemetra+', \eqn{q \le 3});
+#' \item \eqn{bq} is the number of seasonal MA terms (here and in 'JDemetra+', \eqn{bq \le 1}).
 #' }
 #'
 #' The polynomial \eqn{\delta(B)} is the non-stationary AR polynomial in \eqn{B} (unit roots):
 #'
-#' \deqn{\delta(B)=(1-B)^d(1-B^s)^{d_s}}
+#' \deqn{\delta(B) = (1-B)^d(1-B^s)^{d_s}}
 #'
 #' where:
 #' \itemize{
-#' \item \eqn{d} - regular differencing order (here and in 'JDemetra+' \eqn{d \le 1});
-#' \item \eqn{d_s} - seasonal differencing order (here and in 'JDemetra+' \eqn{d_s \le 1});
+#' \item \eqn{d} is the regular differencing order (here and in 'JDemetra+', \eqn{d \le 1});
+#' \item \eqn{d_s} is the seasonal differencing order (here and in 'JDemetra+', \eqn{d_s \le 1}).
 #' }
 #'
-#' Notations used for AR and MA processes, model denoted as ARIMA \eqn{(P,D,Q)(BP,BD,BQ)}, are consistent with those in 'JDemetra+'.
+#' NB. The notations used for AR and MA processes, as well as the model denoted as ARIMA \eqn{(P,D,Q)(BP,BD,BQ)},
+#' are consistent with those in 'JDemetra+'.
 #'
-#' As regards the available predefined 'JDemetra+' X13 and TRAMO-SEATS model specifications, they are described in the tables below.
+#' The available predefined 'JDemetra+' X13 and TRAMO-SEATS model specifications are described in the tables below:
 #'
 #' \strong{X13:}
 #' \tabular{rrrrrrr}{
@@ -97,30 +108,55 @@ setClass(
 #'
 #' @return
 #'
-#' \code{jregarima/jregarima_x13/jregarima_tramoseats} return a \code{\link{jSA}} object. It contains the Java objects of the result of the preadjustment method without any formatting. Therefore the computation is faster than with \code{regarima/regarima_x13/regarima_tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#' The \code{jregarima/jregarima_x13/jregarima_tramoseats} functions return a \code{\link{jSA}} object
+#' that contains the result of the pre-adjustment method without any formatting. Therefore, the computation
+#' is faster than with the \code{regarima/regarima_x13/regarima_tramoseats} functions.
+#' The results of the seasonal adjustment can be extracted with the function \code{\link{get_indicators}}.
 #'
-#' \code{regarima/regarima_x13/regarima_tramoseats} return an object of class \code{"regarima"} and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}. \code{regarima_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_tramoseats} an object of class \code{c("regarima","TRAMO_SEATS")}.
-#' For the function \code{regarima}, the sub-class of the object depends on the used method that is defined by the class of the \code{spec} object.
+#' The \code{regarima/regarima_x13/regarima_tramoseats} functions return an object of class \code{"regarima"}
+#' and sub-class \code{"X13"} or \code{"TRAMO_SEATS"}.
+#' \code{regarima_x13} returns an object of class \code{c("regarima","X13")} and \code{regarima_tramoseats},
+#' an object of class \code{c("regarima","TRAMO_SEATS")}.
+#' For the function \code{regarima}, the sub-class of the object depends on the used method that is defined by
+#' the \code{spec} object class.
 #'
 #' An object of class \code{"regarima"} is a list containing the following components:
 #'
-#' \item{specification}{list with the model specification as defined by the \code{spec} argument. See also Value of the \code{\link{regarima_spec_x13}} and  \code{\link{regarima_spec_tramoseats}} functions.}
+#' \item{specification}{a list with the model specification as defined by the \code{spec} argument.
+#' See also the Value of the \code{\link{regarima_spec_x13}} and  \code{\link{regarima_spec_tramoseats}} functions.}
 #'
-#' \item{arma}{vector with the orders of the autoregressive (AR), moving average (MA), seasonal AR and seasonal MA processes, as well as with the regular and seasonal differencing orders (P,D,Q) (BP,BD,BQ).}
+#' \item{arma}{a vector containing the orders of the autoregressive (AR), moving average (MA), seasonal AR and seasonal MA processes,
+#' as well as the regular and seasonal differencing orders (P,D,Q) (BP,BD,BQ).}
 #'
-#' \item{arima.coefficients}{ matrix with the regular and seasonal AR and MA coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function \code{\link[stats]{coef}} (the output includes also the regression coefficients).}
+#' \item{arima.coefficients}{a matrix containing the estimated regular and seasonal AR and MA coefficients, as well as
+#' the associated standard errors and t-statistics values. The estimated coefficients can be also extracted
+#' with the function \code{\link[stats]{coef}} (whose output also includes the regression coefficients).}
 #'
-#' \item{regression.coefficients}{ matrix with the regression variables (i.e.: mean, calendar effect, outliers and user-defined regressors) coefficients. The matrix contains the estimated coefficients, standard errors and t-statistics values. The estimated coefficients can be also extracted with the function \code{\link[stats]{coef}} (output includes also the arima coefficients). }
+#' \item{regression.coefficients}{a matrix containing the estimated regression variables (i.e.: mean, calendar effect, outliers
+#' and user-defined regressors) coefficients, as welm as the associated standard errors and t-statistics values.
+#' The estimated coefficients can be also extracted with the function \code{\link[stats]{coef}} (whose output also includes
+#' the arima coefficients).}
 #'
-#' \item{loglik}{ matrix containing the log-likelihood of the RegARIMA model as well as the associated model selection criteria statistics (AIC, AICC, BIC and BICC) and parameters (\code{np} = number of parameters in the likelihood, \code{neffectiveobs} = number of effective observations in the likelihood). These statistics can be also extracted with the function \code{\link[stats]{logLik}}.}
+#' \item{loglik}{a matrix containing the log-likelihood of the RegARIMA model as well as the associated model selection criteria statistics
+#' (AIC, AICC, BIC and BICC) and parameters (\code{np} = number of parameters in the likelihood, \code{neffectiveobs} = number
+#' of effective observations in the likelihood). These statistics can also be extracted with the function \code{\link[stats]{logLik}}.}
 #'
-#' \item{model}{list containing the information on the model specification after its estimation (\code{spec_rslt}), as well as the decomposed elements of the input series (ts matrix, \code{effects}). The model specification includes the information on the estimation method (\code{Model}) and time span (\code{T.span}), whether the original series was log transformed (\code{Log transformation}) and details on the regression part of the RegARIMA model; i.e. if it includes a \code{Mean}, \code{Trading days} effects (if yes, it provides the number of regressors), \code{Leap year} effect, \code{Easter} effect and whether outliers were detected (\code{Outliers}; if yes, it provides the number of outliers). The decomposed elements of the input series contain the linearised series (\code{y_lin}) and the deterministic components; i.e.: trading days effect (\code{tde}), Easter effect (\code{ee}), other moving holidays effect (\code{omhe}) and outliers effect (total - \code{out}, related to irregular - \code{out_i}, related to trend - \code{out_t}, related to seasonal - \code{out_s}).}
+#' \item{model}{a list containing information on the model specification after its estimation (\code{spec_rslt}), as well as
+#' the decomposed elements of the input series (ts matrix, \code{effects}). The model specification includes information on the estimation method
+#' (\code{Model}) and time span (\code{T.span}), whether the original series was log transformed (\code{Log transformation})
+#' and details on the regression part of the RegARIMA model i.e. if it includes a \code{Mean}, \code{Trading days} effects
+#' (if so, it provides the number of regressors), \code{Leap year} effect, \code{Easter} effect and whether outliers were detected
+#' (\code{Outliers} (if so, it provides the number of outliers). The decomposed elements of the input series contain the linearised series
+#' (\code{y_lin}) and the deterministic components i.e.: trading days effect (\code{tde}), Easter effect (\code{ee}), other moving holidays effect
+#' (\code{omhe}) and outliers effect (total - \code{out}, related to irregular - \code{out_i}, related to trend - \code{out_t},
+#' related to seasonal - \code{out_s}).}
 #'
-#' \item{residuals}{ the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
+#' \item{residuals}{the residuals (time series). They can be also extracted with the function \code{\link[stats]{residuals}}.}
 #'
-#' \item{residuals.stat}{List containing statistics on the RegARIMA residuals. It provides residuals standard error (\code{st.error}) and results for the tests on the normality, independence and linearity of the residuals (\code{tests}) - object of class \code{c("regarima_rtests","data.frame")}.}
+#' \item{residuals.stat}{a list containing statistics on the RegARIMA residuals. It provides the residuals standard error (\code{st.error})
+#' and the results of normality, independence and linearity of the residuals (\code{tests}) - object of class \code{c("regarima_rtests","data.frame")}.}
 #'
-#' \item{forecast}{ts matrix containing the forecast of the original series (\code{fcst}) and it's standard error (\code{fcsterr}).}
+#' \item{forecast}{a ts matrix containing the forecast of the original series (\code{fcst}) and its standard error (\code{fcsterr}).}
 #'
 #'
 #' @references
@@ -252,7 +288,7 @@ regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
                             extra_info = FALSE,
                             freq = NA){
   horizon <- -2
-  # extract model specification from the java object
+  # To extract model specification from the Java object
   rspec <- spec_regarima_X13_jd2r(spec = spec, context_dictionary = context_dictionary,
                         extra_info = extra_info, freq = freq)
 
@@ -331,7 +367,7 @@ regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
 
 regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
                            extra_info = FALSE, freq = NA){
-  # extract model specification from the java object
+  # To extract model specification from the Java object
 
   horizon <- -2
   rspec <- spec_TRAMO_jd2r(spec = spec, context_dictionary = context_dictionary,
@@ -411,7 +447,7 @@ regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
 regarima_X13 <- function(jrobj, spec){
   # results
   jd_results <- regarima_rslts(jrobj, as.numeric(s_fcst(spec)))
-  # import the model specification
+  # To import the model specification
   estimate <- s_estimate(spec)
   transform <- s_transform(spec)
   usrdef <- s_usrdef(spec)
@@ -430,7 +466,7 @@ regarima_X13 <- function(jrobj, spec){
   # specification
   specification <- list(estimate = estimate, transform = transform, regression = regression,
                         outliers = outliers, arima = arima, forecast = forecast, span = span)
-  # new S3 class "regarima"
+  # the new S3 class "regarima"
   z <- list(specification = specification,
             arma = jd_results$arma,
             arima.coefficients = jd_results$arima.coefficients,
@@ -448,7 +484,7 @@ regarima_X13 <- function(jrobj, spec){
 regarima_TS <- function(jrobj, spec){
   # results
   jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
-  # import the model specification
+  # To import the model specification
   estimate <- s_estimate(spec)
   transform <- s_transform(spec)
   usrdef <- s_usrdef(spec)
@@ -467,7 +503,7 @@ regarima_TS <- function(jrobj, spec){
   # specification
   specification <- list(estimate = estimate, transform = transform, regression = regression,
                         outliers = outliers, arima = arima, forecast = forecast, span = span)
-  # new S3 class "regarima"
+  # The new S3 class "regarima"
   z <- list(specification = specification,
             arma = jd_results$arma,
             arima.coefficients = jd_results$arima.coefficients,
