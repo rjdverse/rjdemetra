@@ -11,3 +11,5 @@
 cran-comments.md
 TODO.R
 ^revdep$
+^\.github$
+.DS_Store
