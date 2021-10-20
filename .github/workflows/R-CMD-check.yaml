@@ -14,7 +14,7 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os-name }}, R ${{ matrix.config.r }}, Java ${{ matrix.config.java }}
 
     strategy:
       fail-fast: false
@@ -26,49 +26,31 @@ jobs:
           - {os: macOS-latest, r: 'release', java: 12, os-name: macos}
           - {os: macOS-latest, r: 'devel', java: 12, os-name: macos}
           - {os: macOS-latest, r: 'oldrel', java: 12, os-name: macos}
-          - {os: ubuntu-20.04, r: 'release', java: 12,os-name: ubuntu, rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: 'devel', java: 12,os-name: ubuntu, rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", http-user-agent: "R/4.1.0 (ubuntu-20.04) R (4.1.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
-          #- {os: ubuntu-20.04, r: 'release', java: 16,os-name: ubuntu, rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          #- {os: ubuntu-20.04, r: 'release', java: 12,os-name: ubuntu}
+          #- {os: ubuntu-20.04, r: 'devel', java: 12,os-name: ubuntu}
+          #- {os: ubuntu-20.04, r: 'release', java: 16,os-name: ubuntu}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
 
-      - name: Setup java (x86)
-        uses: actions/setup-java@v1
+      - uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.config.java }}
-          java-package: jdk
-          architecture: x86
-        if: matrix.config.os-name != 'macos'
-
-      - name: Setup java (x64)
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.config.java }}
-          java-package: jdk
-          architecture: x64
-        if: matrix.config.os-name != 'macos'
 
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
 
+      - name: Info
+        run: "bash -c 'java -version && which java && echo $PATH && echo $JAVA_HOME'"
+
+      - name: Setup R Java support
+        if: runner.os != 'Windows'
+        run: "echo export PATH=$PATH > reconf.sh; echo export JAVA_HOME=$JAVA_HOME >> reconf.sh; echo R CMD javareconf >> reconf.sh; sudo bash reconf.sh"
+
       - name: print effective R version
         run: version
         shell: Rscript {0}
-
-      - name: run javareconf # Yes it actually needs JAVA_HOME=$JAVA_HOME, doesn't use actual env vars (!)
-        if: runner.os != 'Windows'
-        run: |
-          java -version
-          echo java_home:$JAVA_HOME
-          echo library paths: $LD_LIBRARY_PATH
-          sudo R CMD javareconf JAVA_HOME=$JAVA_HOME
 
       - uses: r-lib/actions/setup-pandoc@v1
 
@@ -105,7 +87,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: |
           options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-multiarch"), error_on = "warning", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-multiarch", "--run-donttest"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
       - name: Upload check results
