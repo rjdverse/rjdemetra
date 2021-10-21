@@ -1,3 +1,7 @@
+# RJDemetra 0.1.9
+
+- easter specification was not working.
+
 # RJDemetra 0.1.8
 
 - Java version restriction: JDemetra+ and RJDemetra are not compatible with Java 16 and higher. The compatibility with those versions of Java will be possible from next release of JDemetra+.

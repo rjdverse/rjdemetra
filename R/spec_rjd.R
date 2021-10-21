@@ -985,10 +985,10 @@ spec_regarima_X13_r2jd <- function(spec = NA, jdspec = NA){
   jtd<-.jcall(jcalendar,"Ljdr/spec/x13/TradingDaysSpec;","getTradingDays")
   jeaster<-.jcall(jcalendar,"Ljdr/spec/x13/EasterSpec;","getEaster")
 
+  .jcall(jeaster,"V","setEnabled",as.logical(easter[1]))
+  .jcall(jeaster,"V","setTest", as.character(easter[4]))
   .jcall(jeaster,"V","setJulian",as.logical(easter[2]))
   .jcall(jeaster,"V","setDuration", as.integer(easter[3]))
-  .jcall(jeaster,"V","setTest", as.character(easter[4]))
-  .jcall(jeaster,"V","setEnabled",as.logical(easter[1]))
 
   #Calendar options:
   if(td[1] == "UserDefined"){
@@ -1131,10 +1131,10 @@ spec_TRAMO_r2jd <- function(spec = NA, jdspec =NA){
   }
   .jcall(jtd,"V","setRegressionTestType", as.character(td[6]))
 
+  .jcall(jeaster,"V","setOption",as.character(easter[1]))
   .jcall(jeaster,"V","setJulian",as.logical(easter[2]))
   .jcall(jeaster,"V","setDuration",as.integer(easter[3]))
   .jcall(jeaster,"V","setTest",as.logical(easter[4]))
-  .jcall(jeaster,"V","setOption",as.character(easter[1]))
 
   #user-defined specification
   if (usrspc[3]==TRUE)
