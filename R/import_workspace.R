@@ -44,7 +44,7 @@ load_workspace <- function(file){
 }
 
 
-#' To retrieve objects inside a workspace or multiprocessing
+#' Get objects inside a workspace or multiprocessing
 #'
 #' Generic functions to retreive all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
 #' from a \code{workspace} (respectively \code{multiprocessing}) or to retreive a single one (\code{get_object()}) .
@@ -115,7 +115,7 @@ get_all_objects.workspace <- function(x){
   all_multiprocessings
 }
 
-#' To retrieve the Java name of a multiprocessing or a sa_item
+#' Get the Java name of a multiprocessing or a sa_item
 #'
 #' Generic functions to retrieve the Java name of a \code{multiprocessing} or a \code{sa_item}.
 #'
@@ -173,7 +173,7 @@ get_name.sa_item <- function(x){
   return(name)
 }
 
-#' To count the number of objects inside a workspace or multiprocessing
+#' Count the number of objects inside a workspace or multiprocessing
 #'
 #' Generic functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
 #' inside a \code{workspace} (respectively \code{multiprocessing}).
@@ -202,7 +202,7 @@ count.workspace <- function(x){
   return(.jcall(x, "I", "getMultiProcessingCount"))
 }
 
-#' To retrieve the input raw time series
+#' Get the input raw time series
 #'
 #' Generic functions to retrieve the input raw time series of a \code{workspace}, \code{multiprocessing},
 #' \code{sa_item} or \code{SA} object.
@@ -283,7 +283,7 @@ get_ts.regarima <- function(x){
   return(y)
 }
 
-#' To compute a workspace multi-processing(s)
+#' Compute a workspace multi-processing(s)
 #'
 #' Function to compute all the multi-processings or only a given one from a workspace.
 #' By default, the workspace only contains definitions: computation is needed to recalculate and access the adjusted model
