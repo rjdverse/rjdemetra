@@ -1,4 +1,4 @@
-#' Creation of a workspace or a multi-processing
+#' Create a workspace or a multi-processing
 #'
 #' Functions to create a 'JDemetra+' workspace (\code{new_workspace()}) and
 #' to add a new multi-processing (\code{new_multiprocessing()}).
@@ -40,7 +40,7 @@ new_multiprocessing <- function(workspace, name) {
 
 
 
-#' To save a workspace
+#' Save a workspace
 #'
 #' Function to save a \code{workspace} object into a 'JDemetra+' workspace.
 #'
@@ -90,7 +90,7 @@ save_workspace <- function(workspace, file) {
 }
 
 
-#' To add a seasonally adjusted series to a multi-processing
+#' Add a seasonally adjusted series to a multi-processing
 #'
 #' Function to add a new seasonally adjusted object (class \code{"SA"} or \code{"jSA"}) to a \code{workspace} object.
 #'
@@ -104,14 +104,13 @@ save_workspace <- function(workspace, file) {
 #'
 #' @examples\donttest{
 #' dir <- tempdir()
-#' A
 #' # Adjustment of a series with the x13 and Tramo-Seats methods
 #' spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #' spec_ts <- tramoseats_spec(spec = "RSA5")
 #' sa_ts <- jtramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
-#' # Creation of a new workspace...
+#' # Creation of a new workspace..
 #' wk <- new_workspace()
 #' # and of the multiprocessing "sa1" that will contain the series
 #' new_multiprocessing(wk, "sa1")
