@@ -27,10 +27,12 @@
 #' @param seats.maBoundary numeric: the MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1),
 #' it is set to xl.
 #' @param seats.method character: the estimation method for the unobserved components. The choice can be made from:
+#' \itemize{
 #' \item \code{"Burman"}: the default value. May result in a significant underestimation of the components' standard deviation,
 #' as it may become numerically unstable when some roots of the MA polynomial are near 1;
 #' \item \code{"KalmanSmoother"}: it is not disturbed by the (quasi-) unit roots in MA;
 #' \item \code{"McElroyMatrix"}: it has the same stability issues as the Burman's algorithm.
+#' }
 #'
 #' @details
 #'
@@ -55,6 +57,7 @@
 #' (for details see the function arguments in the description).
 #' Each lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients)
 #' is structured as a data frame with columns denoting different variables of the model specification and rows referring to:
+#' \itemize{
 #' \item first row: the base specification, as provided within the argument \code{spec};
 #' \item second row: user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d});
 #' \item and third row: the final model specification.
@@ -67,7 +70,7 @@
 #'
 #' \item{seats}{a data.frame of class \code{c("seats_spec", "data.frame")}, containing the \emph{seats} variables in line with
 #' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
-#'
+#'}
 #' @references
 #' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}

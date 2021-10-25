@@ -123,6 +123,8 @@ save_spec = function (object, file = file.path(tempdir(), "spec.RData")) {
   save(spec, file = file)
 }
 # Generic function to load a previously saved model specification
+#' @rdname save_spec
+#' @name save_spec
 #' @export
 load_spec <- function (file = "spec.RData") {
   object <- get(load(file = file))

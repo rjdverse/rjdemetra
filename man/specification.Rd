@@ -16,7 +16,7 @@
 \alias{s_span}
 \alias{s_x11}
 \alias{s_seats}
-\title{Access model specification, SA and pre-adjustment in X13 and TRAMO-SEATS}
+\title{Access a model specification, a SA or a pre-adjustment model in X13 and TRAMO-SEATS}
 \usage{
 s_estimate(object = NA)
 
@@ -47,17 +47,20 @@ s_x11(object = NA)
 s_seats(object = NA)
 }
 \arguments{
-\item{object}{object of one of the classes: \code{c("SA","X13")}, \code{c("SA","TRAMO_SEATS")}, \code{c("SA_spec","X13")}, \code{c("SA_spec","TRAMO_SEATS")}, \code{c("regarima","X13")}, \code{c("regarima","TRAMO_SEATS")}, \code{c("regarima_spec","X13")}, \code{c("regarima_spec","TRAMO_SEATS")}.}
+\item{object}{an object of one of the following classes: \code{c("SA","X13")},
+\code{c("SA","TRAMO_SEATS")}, \code{c("SA_spec","X13")}, \code{c("SA_spec","TRAMO_SEATS")},
+\code{c("regarima","X13")}, \code{c("regarima","TRAMO_SEATS")}, \code{c("regarima_spec","X13")},
+\code{c("regarima_spec","TRAMO_SEATS")}.}
 }
 \value{
 \itemize{
 \item \code{s_estimate} returns a data.frame with the \emph{estimate} variables
-\item \code{s_transform} returns a data.frame with the \emph{transform} varaibles
+\item \code{s_transform} returns a data.frame with the \emph{transform} variables
 \item \code{s_usrdef} returns a data.frame with the \emph{user-defined regressors} (outliers and variables) model specification, indicating if those variables are included in the model and if coefficients are pre-specified
 \item \code{s_preOut} returns a data.frame with the \emph{pre-specified outliers}
-\item \code{s_preVar} returns a list with the information on the user-defined variables, including: \code{series} - the time series and \code{description} - data.frame with the variable type and coefficients
+\item \code{s_preVar} returns a list with information on the user-defined variables, including: \code{series} - the time series and \code{description} - data.frame with the variable type and coefficients
 \item \code{s_td} returns a data.frame with the \emph{trading.days} variables
-\item \code{s_easter} returns a data.frame with the \emph{easter} variables
+\item \code{s_easter} returns a data.frame with the \emph{easter} variable
 \item \code{s_out} returns a data.frame with the \emph{outliers} detection variables
 \item \code{s_arima} returns a data.frame with the \emph{arima} variables
 \item \code{s_arimaCoef} returns a data.frame with the user-specified ARMA coefficients
@@ -68,7 +71,8 @@ s_seats(object = NA)
 }
 }
 \description{
-Below functions access different parts of the final model specification as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
+The following functions enable the access to different parts of the final model specification,
+as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
 }
 \examples{
 \donttest{

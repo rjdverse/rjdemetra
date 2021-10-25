@@ -72,7 +72,7 @@
 #' @param usrdef.varType a vector of character(s) defining the user-defined variables component type.
 #' Possible types are: \code{"Undefined", "Series", "Trend", "Seasonal", "SeasonallyAdjusted", "Irregular", "Calendar"}.
 #' To use the user-defined calendar regressors, the type \code{"Calendar"} must be defined in conjunction with \code{tradingdays.option = "UserDefined"}.
-#' Otherwise, the program will automatically set \code{usrdef.varType = Undefined"}.
+#' Otherwise, the program will automatically set \code{usrdef.varType = "Undefined"}.
 #'
 #' @param usrdef.varCoef a vector providing fixed coefficients for the user-defined variables. The coefficients can't be fixed if
 #'  \code{ transform.function} is set to \code{"Auto"} (i.e. if the series transformation needs to be pre-defined).
@@ -259,7 +259,7 @@
 #' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified.
 #' The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list
 #' with the \code{Predefined} (base model specification) and \code{Final} values.
-#'
+#'\itemize{
 #' \item{estimate}{a data frame containing Variables referring to: \code{span} - time span for the model estimation,
 #' \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml}, \code{urfinal} - argument \code{esimate.urfinal}.
 #' The final values can be also accessed with the function \code{\link{s_estimate}}.}
@@ -317,7 +317,7 @@
 #' \item{span}{a matrix containing the final time span for the model estimation and outliers' detection.
 #' It contains the same information as the variable span in the data frames estimate and outliers.
 #' The matrix can be also accessed with the function \code{\link{s_span}}.}
-#'
+#'}
 #' @references
 #' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}

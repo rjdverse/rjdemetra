@@ -7,20 +7,20 @@
 get_ts(x)
 }
 \arguments{
-\item{x}{the object where to get the time series.}
+\item{x}{the object from which to retrieve the time series.}
 }
 \value{
 \code{get_ts()} returns a \code{\link[stats]{ts}} object or list of \code{\link[stats]{ts}} objects:
 \itemize{
  \item if \code{x} is a \code{sa_item} or a \code{SA} object, \code{get_ts(x)} returns a single \code{ts} object;
- \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns list of length the number
- of sa_items, each a \code{ts} object;
- \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns list of length the number of multiprocessing,
- each element containing a list of \code{ts} object.
+ \item if \code{x} is a \code{multiprocessing} object, \code{get_ts(x)} returns a list of length the number
+ of sa_items, each element being a \code{ts} object;
+ \item if \code{x} is a \code{workspace} object, \code{get_ts(x)} returns a list of length the number of multiprocessings,
+ each element being a list of \code{ts} objects.
 }
 }
 \description{
-Generics functions to get the input raw time series of a \code{workspace}, \code{multiprocessing},
+Generic functions to retrieve the input raw time series of a \code{workspace}, \code{multiprocessing},
 \code{sa_item} or \code{SA} object.
 }
 \examples{
@@ -32,23 +32,23 @@ mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
 sa_item <- get_object(mp, 1)
 
-  # Extracting from a SA:
+  # Extracting the raw time series from an adjusted series:
 get_ts(sa_x13) # Returns the ts object ipi_c_eu[, "FR"]
 
-  # Extracting from a sa_item:
+  # Extracting the raw time series from a sa_item:
 get_ts(sa_item) # Returns the ts object ipi_c_eu[, "FR"]
 
-  # Extracting from a multiprocessing:
+  # Extracting all raw time series from a multiprocessing:
 # Returns a list of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]:
 get_ts(mp)
 
 
-  # Extracting from a workspace:
+  # Extracting all raw time series from a workspace:
 # Returns a list of length 1 named "sa1" containing a list
-# of length 1 named "X13" containing the ts object ipi_c_eu[, "FR"]
+# of length 1 named "X13", containing the ts object ipi_c_eu[, "FR"]
 get_ts(wk)
 }
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}.
+Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}.
 }

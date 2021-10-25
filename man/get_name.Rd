@@ -7,13 +7,13 @@
 get_name(x)
 }
 \arguments{
-\item{x}{the object to get the name from.}
+\item{x}{the object to retrieve the name from.}
 }
 \value{
 A \code{character}.
 }
 \description{
-Generics functions to get the Java name of a \code{multiprocessing} or a \code{sa_item}.
+Generic functions to retrieve the Java name of a \code{multiprocessing} or a \code{sa_item}.
 }
 \examples{
 \donttest{
@@ -35,18 +35,18 @@ get_name(sa_item2) # returns "TramoSeats"
 
 get_name(mp) # returns "sa1"
 
-# To get all the name of the sa_items inside a multiprocessing:
+# To retrieve the name of every sa_item in a given multiprocessing:
 sapply(get_all_objects(mp), get_name)
 
-# To get all the name of the multiprocessings inside a workspace:
+# To retrieve the name of every multiprocessing in a given workspace:
 sapply(get_all_objects(wk), get_name)
 
-# To get all the name of the sa_items inside a workspace:
+# To retrieve the name of every sa_item in a given workspace:
 lapply(get_all_objects(wk),function(mp){
   sapply(get_all_objects(mp), get_name)
 })
 }
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_ts}}.
+Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_ts}}.
 }

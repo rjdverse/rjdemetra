@@ -10,19 +10,26 @@ save_spec(object, file = file.path(tempdir(), "spec.RData"))
 load_spec(file = "spec.RData")
 }
 \arguments{
-\item{object}{object of one of the classes: \code{c("SA_spec","X13")}, \code{c("SA_spec","TRAMO_SEATS")}, \code{c("SA","X13")}, \code{c("SA","TRAMO_SEATS")}, \code{c("regarima_spec","X13")}, \code{c("regarima_spec","TRAMO_SEATS")}, \code{c("regarima","X13")}, \code{c("regarima","TRAMO_SEATS")}.}
+\item{object}{an object of one of the following classes: \code{c("SA_spec","X13")},
+\code{c("SA_spec","TRAMO_SEATS")}, \code{c("SA","X13")}, \code{c("SA","TRAMO_SEATS")},
+\code{c("regarima_spec","X13")}, \code{c("regarima_spec","TRAMO_SEATS")}, \code{c("regarima","X13")},
+\code{c("regarima","TRAMO_SEATS")}.}
 
-\item{file}{(path and) name of the file where the model specification will be saved (have been saved).}
+\item{file}{the (path and) name of the file where the model specification will be/has been saved.}
 }
 \value{
-\code{load_spec}  returns an object of class \code{"SA_spec"} or \code{"regarima_spec"}.
+\code{load_spec} returns an object of class \code{"SA_spec"} or \code{"regarima_spec"}.
 }
 \description{
-\code{save_spec} saves a SA or RegARIMA model specification. \code{load_spec} loads the previously saved model specification.
+\code{save_spec} saves a SA or RegARIMA model specification.
+\code{load_spec} loads the previously saved model specification.
 }
 \details{
-\code{save_spec} saves the final model specification of a \code{"SA_spec"}, \code{"SA"}, \code{"regarima_spec"} or \code{"regarima"} class object.
-\code{load_spec} loads the previously saved model specification. It creates a \code{c("SA_spec","X13")}, \code{c("sA_spec","TRAMO_SEATS")}, \code{c("regarima_spec","X13")} or \code{c("regarima_spec","TRAMO_SEATS")} class object, in line with the class of the previously saved model specification.
+\code{save_spec} saves the final model specification of a \code{"SA_spec"}, \code{"SA"},
+\code{"regarima_spec"} or \code{"regarima"} class object.
+\code{load_spec} loads the previously saved model specification. It creates a \code{c("SA_spec","X13")},
+\code{c("sA_spec","TRAMO_SEATS")}, \code{c("regarima_spec","X13")} or \code{c("regarima_spec","TRAMO_SEATS")}
+class object, in line with the class of the previously saved model specification.
 }
 \examples{
 \donttest{
@@ -46,24 +53,24 @@ mysa7 <- tramoseats(myseries, myspec7)
 
 dir <- tempdir()
 
- # Save the model specification from a c("regarima_spec","X13") class object
+ # To save the model specification of a c("regarima_spec","X13") class object
 save_spec(myspec2, file.path(dir, "specx13.RData"))
- # Save the model specification from a c("regarima","X13") class object
+ # To save the model specification of a c("regarima","X13") class object
 save_spec(myreg2, file.path(dir,"regx13.RData"))
- # Save the model specification from a c("regarima_spec","TRAMO_SEATS") class object
+ # To save the model specification of a c("regarima_spec","TRAMO_SEATS") class object
 save_spec(myspec4, file.path(dir,"specTS.RData"))
- # Save the model specification from a c("regarima","TRAMO_SEATS") class object
+ # To save the model specification of a c("regarima","TRAMO_SEATS") class object
 save_spec(myreg4, file.path(dir,"regTS.RData"))
- # Save model from a c("SA_spec","X13") class object
+ # To save the model of a c("SA_spec","X13") class object
 save_spec(myspec6, file.path(dir,"specFullx13.RData"))
- # Save model from a c("SA","X13") class object
+ # To save the model of a c("SA","X13") class object
 save_spec(mysa6, file.path(dir,"sax13.RData"))
- # Save model from a c("SA_spec","TRAMO_SEATS") class object
+ # To save the model of a c("SA_spec","TRAMO_SEATS") class object
 save_spec(myspec7, file.path(dir,"specFullTS.RData"))
- # Save model from a c("SA","TRAMO_SEATS") class object
+ # To save the model of a c("SA","TRAMO_SEATS") class object
 save_spec(mysa7, file.path(dir,"saTS.RData"))
 
- # Load the model specification
+ # To load a model specification:
 myspec2a <- load_spec(file.path(dir,"specx13.RData"))
 myspec2b <- load_spec(file.path(dir,"regx13.RData"))
 myspec4a <- load_spec(file.path(dir,"specTS.RData"))
@@ -73,7 +80,7 @@ myspec6b <- load_spec(file.path(dir,"sax13.RData"))
 myspec7a <- load_spec(file.path(dir,"specFullTS.RData"))
 myspec7b <- load_spec(file.path(dir,"saTS.RData"))
 
-
+# To use the re-loaded specifications and models:
 regarima(myseries, myspec2a)
 x13(myseries, myspec6a)
 tramoseats(myseries, myspec7a)
@@ -84,6 +91,6 @@ tramoseats(myseries, myspec7b)
 }
 }
 \references{
-Info on JDemtra+, usage and functions:
+Info on JDemetra+, usage and functions:
 \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
 }

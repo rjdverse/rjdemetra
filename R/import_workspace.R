@@ -337,7 +337,7 @@ compute <- function(workspace, i) {
 }
 
 
-#' To retrieve the seasonally adjusted model from a workspace
+#' Get the seasonally adjusted model from a workspace
 #'
 #' Generic functions to retrieve seasonally adjusted model(s) from \code{workspace},
 #' \code{multiprocessing} or \code{sa_item} object. \code{get_model} returns a \code{"SA"} object while \code{get_jmodel} returns the Java objects of the models.

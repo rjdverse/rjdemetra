@@ -10,7 +10,7 @@ get_object(x, pos = 1)
 get_all_objects(x)
 }
 \arguments{
-\item{x}{the object where to extract the \code{multiprocessing} or the \code{sa_item}.}
+\item{x}{the object to store the extracted \code{multiprocessing} or \code{sa_item}.}
 
 \item{pos}{the index of the object to extract.}
 }
@@ -19,8 +19,8 @@ An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_objec
 of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 }
 \description{
-Generics functions to get all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-from a \code{workspace} (respectively \code{multiprocessing})  or to get a given one (\code{get_object()}) .
+Generic functions to retreive all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+from a \code{workspace} (respectively \code{multiprocessing}) or to retreive a single one (\code{get_object()}) .
 }
 \examples{
 \donttest{
@@ -31,12 +31,12 @@ wk <- new_workspace()
 mp <- new_multiprocessing(wk, "sa1")
 add_sa_item(wk, "sa1", sa_x13, "X13")
 
-# Other way to get the multiprocessing:
+# A way to retrieve the multiprocessing:
 mp <- get_object(wk, 1)
-# To get the sa_item object:
+# And the sa_item object:
 sa_item <- get_object(mp, 1)
 }
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+Other functions to retrieve informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 }

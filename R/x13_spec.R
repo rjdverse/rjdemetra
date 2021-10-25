@@ -1,4 +1,4 @@
-#' X13-ARIMA-SEATS model specification, SA/X13
+#' X-13ARIMA model specification, SA/X13
 #'
 #' @description
 #'
@@ -66,6 +66,7 @@
 #' see the function arguments in the description).
 #' Each lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients)
 #' is structured as a data frame with columns denoting different variables of the model specification and rows referring to:
+#' \itemize{
 #' \item first row: the base specification, as provided within the argument \code{spec};
 #' \item second row: user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d});
 #' \item and third row: the final model specification.
@@ -78,7 +79,7 @@
 #'
 #' \item{x11}{a data.frame of class \code{c("X11_spec", "data.frame")}, containing the \emph{x11} variables in line with
 #' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
-#'
+#'}
 #' @references
 #' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}

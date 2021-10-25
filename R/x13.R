@@ -2,10 +2,10 @@ setClass(
   Class = "X13_java",
   contains = "ProcResults"
 )
-#' Seasonal Adjustment with  X13-ARIMA-SEATS
+#' Seasonal Adjustment with  X13-ARIMA
 #'
 #' @description
-#' Functions to estimate the seasonally adjusted series (sa) with the X13-ARIMA-SEATS method.
+#' Functions to estimate the seasonally adjusted series (sa) with the X13-ARIMA method.
 #' This is achieved by decomposing the time series (y) into the trend-cycle (t), the seasonal component (s) and the irregular component (i).
 #' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
 #' \code{x13} returns a preformatted result while \code{jx13} returns the Java objects resulting from the seasonal adjustment.
