@@ -1,4 +1,4 @@
-#' To access a model specification, a SA or a pre-adjustment model in X13 and TRAMO-SEATS
+#' Access a model specification, a SA or a pre-adjustment model in X13 and TRAMO-SEATS
 #' @description
 #' The following functions enable the access to different parts of the final model specification,
 #' as included in the \code{"SA", "regarima", "SA_spec"} and \code{"regarima_spec"} S3 class objects.
