@@ -1,4 +1,4 @@
-#' The TRAMO-SEATS model specification, SA/TRAMO-SEATS
+#' TRAMO-SEATS model specification, SA/TRAMO-SEATS
 #'
 #' @description
 #'
