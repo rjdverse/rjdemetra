@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_workspace.R
 \name{compute}
 \alias{compute}
-\title{Compute the multi-processing from a workspace}
+\title{Compute a workspace multi-processing(s)}
 \usage{
 compute(workspace, i)
 }
@@ -10,11 +10,11 @@ compute(workspace, i)
 \item{workspace}{the workspace to compute.}
 
 \item{i}{a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute.
-By default all the multi-processings are compute.}
+By default, all multi-processings are computed.}
 }
 \description{
-Function to compute all the multi-processings or a given one from a workspace.
-By default the workspace only contains definitions: computation is needed to get the seasonal adjustment model
+Function to compute all the multi-processings or only a given one from a workspace.
+By default, the workspace only contains definitions: computation is needed to recalculate and access the adjusted model
 (with \code{\link{get_model}}).
 }
 \examples{

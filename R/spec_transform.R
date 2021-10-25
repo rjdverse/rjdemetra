@@ -1,4 +1,4 @@
-# Functions to maniputalte the "regarima_spec" object
+# Functions to manipualte the "regarima_spec" object
 
 spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=NA_integer_,
                     exclFirst=NA_integer_,exclLast=NA_integer_, var=NA_character_){
@@ -311,7 +311,7 @@ spec_arimaCoefF <- function(enabled=NA, armaP=NA, armaF=NA , coefP=NA, coefF=NA)
   }else if (dim(coefF)[1]!= sum(armaP)){
     coef <- NA
     ena<- FALSE
-    warning("wrong number of ARIMA coef was provided (arima.coef and arima.coefType). Defined ARIMA coef. variable(s) will be ignored.", call. = FALSE)
+    warning("A wrong number of ARIMA coef was provided (arima.coef and arima.coefType). Defined ARIMA coef. variable(s) will be ignored.", call. = FALSE)
   } else {
 
     dsc <-c()
@@ -358,7 +358,7 @@ spec_calendar_sigma <- function(calendarSigma = NA, sigmaVector = NA){
 
   if (identical_na(calendarSigma)) {
     if (!identical_na(sigmaVector)) {
-      warning("x11.sigmaVector will be ignored: x11.calendarSigma has to be set to \"Select\"", call. = FALSE)
+      warning("x11.sigmaVector will be ignored: x11.calendarSigma must be set to \"Select\"", call. = FALSE)
     }
     calendarSigma <- sigmaVector <- NA
   } else if (is.list(calendarSigma) ||
@@ -397,9 +397,9 @@ spec_trendma <- function(trendma=NA){
     return(NA)
   } else if (!is.numeric(trendma)){
     return(NA)
-    warning("Variable x11.trendma should be numeric.\nThe variable will be ignored.", call. = FALSE)
+    warning("The variable x11.trendma should be numeric.\nThe variable will be ignored.", call. = FALSE)
   } else if (trendma <= 1 | trendma > 101 | (floor(trendma/2)==trendma/2)) {
-    warning("Variable x11.trendma should be in the range (1,101] and be an odd number.\nThe variable will be ignored.", call. = FALSE)
+    warning("The variable x11.trendma should be in the range (1,101] and be an odd number.\nThe variable will be ignored.", call. = FALSE)
     return(NA)
     } else {
     return(trendma)
@@ -407,7 +407,7 @@ spec_trendma <- function(trendma=NA){
 }
 
 # Derive the final values in the "regarima_spec" object
-# X-13
+# X13
 spec_estimateX13<-function(est, spanP, spanM){
 
   est[3,"preliminary.check"] <- if(!is.na(est[2,"preliminary.check"])) {
@@ -482,7 +482,7 @@ spec_tdX13<-function(td, tf, tadj){
   if (is.na(td[3, "test"]))
     td[3, "test"] <- if(!is.na(td[2, "test"])) {td[2, "test"]} else {td[1, "test"]}
 
-  #UserDefined TD regressors
+  # UserDefined TD regressors
   if(td[3, "option"] == "UserDefined"){
     if(any(!is.na(td[1, c("autoadjust", "leapyear", "stocktd")]))){
       warning("With tradingdays.option = \"UserDefined\", the parameters tradingdays.autoadjust, tradingdays.leapyear and tradingdays.stocktd are ignored.\n",
@@ -586,7 +586,7 @@ spec_arimaX13 <-function(arimaspc, arimaco){
     arimaspc[3,12:18] <- arimaspc[1,12:18]
     arimaspc[3,19] <- FALSE
   }
-  # defined ARIMA-coefficents
+  # Defined ARIMA coefficents
   arma.cp <- c(arimaspc[3,13],arimaspc[3,15],arimaspc[3,16],arimaspc[3,18])
   arma.cf <- c(arimaspc[1,13],arimaspc[1,15],arimaspc[1,16],arimaspc[1,18])
 
@@ -663,7 +663,7 @@ spec_tdTS<-function(td){
     }
   }
 
-  #UserDefined TD regressors
+  # UserDefined TD regressors
   if(td[3, "option"] == "UserDefined"){
     if(any(!is.na(td[1, c("automatic","leapyear", "stocktd")]))){
       warning("With tradingdays.option = \"UserDefined\", the parameters tradingdays.leapyear and tradingdays.stocktd are ignored.\n",
@@ -757,7 +757,7 @@ spec_arimaTS <-function(arimaspc, arimaco){
     arimaspc[3,10:16] <- arimaspc[1,10:16]
     arimaspc[3,17] <- FALSE
   }
-  #Defined ARIMA-coefficents
+  # Defined ARIMA coefficents
   arma.cp <- c(arimaspc[3,11],arimaspc[3,13],arimaspc[3,14],arimaspc[3,16])
   arma.cf <- c(arimaspc[1,11],arimaspc[1,13],arimaspc[1,14],arimaspc[1,16])
 
@@ -773,7 +773,7 @@ spec_arimaTS <-function(arimaspc, arimaco){
   return(y)
 }
 
-# Common for X-13 and TRAMO-SEATS
+# Common for X13 and TRAMO-SEATS
 
 spec_userdef <- function(usrspc, out, var, tf) {
   outF <- out$Final

@@ -10,28 +10,31 @@ is.jSA <- function(x){
 #' Functions around 'jSA' objects
 #'
 #' \code{get_dictionary} returns the indicators that can be extracted from \code{"jSA"} objects,
-#' \code{get_indicators} extract a list of indicators and
+#' \code{get_indicators} extracts a list of indicators
 #' \code{jSA2R} returns the corresponding \code{"SA"}.
 #'
 #' @param x a \code{"jSA"} object.
 #' @param ... characters containing the names of the indicators to extract.
-#' @param userdefined userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}). Only used for \code{"SA"} objects.
+#' @param userdefined a userdefined vector containing the names of additional output variables (see \code{\link{user_defined_variables}}).
+#' Only used for \code{"SA"} objects.
 #'
 #' @details
-#' A \code{"jSA"} object is a list with three elements: \itemize{
-#' \item \code{"result"}: the Java object with the results of a seasonal adjustment or a pre-adjustment method.
-#' \item \code{"spec"}: the Java object with the specification of a seasonal adjustment or a pre-adjustment method.
-#' \item \code{"dictionary"}: the Java object with dictionnary of a seasonal adjustment or a pre-adjustment method. In particular, it contains all the user-defined regressors.
+#' A \code{"jSA"} object is a list of three elements:
+#' \itemize{
+#' \item \code{"result"}: the Java object containing the results of a seasonal adjustment or a pre-adjustment method.
+#' \item \code{"spec"}: the Java object containing the specification of a seasonal adjustment or a pre-adjustment method.
+#' \item \code{"dictionary"}: the Java object containing the dictionary of a seasonal adjustment or a pre-adjustment method.
+#' In particular, it contains all the user-defined regressors.
 #'  }
 #'
 #' \code{get_dictionary} returns the list of indicators that can be extracted from a \code{jSA} object by the function \code{get_indicators}.
 #'
-#' \code{jSA2R} returns the corresponding formatted seasonal adjustment (\code{"SA"} object) or RegARIMA (\code{"regarima"} object) model.
+#' \code{jSA2R} returns the corresponding formatted seasonally adjusted (\code{"SA"} object) or RegARIMA (\code{"regarima"} object) model.
 #'
-#' \code{get_jspec} returns the Java object that contains the specification from an object
+#' \code{get_jspec} returns the Java object that contains the specification of an object. Such object can be of type
 #' \code{"jSA"}, \code{"X13"}, \code{"TRAMO_SEATS"} or \code{"sa_item"}.
 #'
-#' @return \code{get_dictionary} a vector of characters,
+#' @return \code{get_dictionary} returns a vector of characters,
 #' \code{get_indicators} returns a list containing the indicators that are extracted,
 #' \code{jSA2R} returns a \code{"SA"} or a \code{"regarima"} object and
 #' \code{get_jspec} returns a Java object.
@@ -43,8 +46,9 @@ is.jSA <- function(x){
 #'
 #' get_indicators(mysa, "decomposition.b2", "decomposition.d10")
 #'
-#' # To convert to the R object
+#' # To convert the Java object to an R object
 #' jSA2R(mysa)
+#'
 #' @rdname jSA
 #' @name jSA
 #' @export

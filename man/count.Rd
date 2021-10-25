@@ -7,10 +7,10 @@
 count(x)
 }
 \arguments{
-\item{x}{the \code{workspace} or the code{multiprocessing}.}
+\item{x}{the \code{workspace} or the \code{multiprocessing}.}
 }
 \description{
-Generics functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
+Generic functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
 inside a \code{workspace} (respectively \code{multiprocessing}).
 }
 \examples{
@@ -22,5 +22,5 @@ count(mp) # 0 sa_item inside the multiprocessing mp
 
 }
 \seealso{
-Other functions to get informations from a workspace, multiprocessing or sa_item: \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 }

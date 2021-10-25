@@ -10,9 +10,9 @@ jregarima.X13 <- function(series, spec = NA){
     stop("series must be a time series")
   spec <- regarima_spec_x13(spec)
 
-  # create the java objects
+  # To create the Java objects
   jrspec <- .jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", "RG1")
-  # introduce modifications from the spec and create the java dictionary with the user-defined variables
+  # To introduce modifications to the spec and create the java dictionary with the user-defined variables
   jdictionary <- spec_regarima_X13_r2jd(spec,jrspec)
   jspec <- .jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/regarima/Processor",
@@ -26,7 +26,7 @@ jregarima.X13 <- function(series, spec = NA){
 #' @export
 jregarima.TRAMO_SEATS <- function(series, spec = NA){
   if (!is.ts(series))
-    stop("series must be a time series")
+    stop("The series must be a time series")
 
   spec <- regarima_spec_tramoseats(spec)
 
@@ -51,7 +51,7 @@ jregarima.TRAMO_SEATS <- function(series, spec = NA){
 #' @export
 jregarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")){
   if (!is.ts(series)) {
-    stop("series must be a time series")
+    stop("The series must be a time series")
   }
   spec <- match.arg(spec)
 
@@ -74,11 +74,11 @@ jregarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2",
 #' @export
 jregarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
   if (!is.ts(series)) {
-    stop("series must be a time series")
+    stop("The series must be a time series")
   }
   spec <- match.arg(spec)
 
-  # create the java objects
+  # To create the Java objects
   jrspec <- .jcall("jdr/spec/x13/RegArimaSpec", "Ljdr/spec/x13/RegArimaSpec;", "of", spec)
   jspec <- .jcall(jrspec, "Lec/tstoolkit/modelling/arima/x13/RegArimaSpecification;", "getCore")
   jdictionary <- .jnew("jdr/spec/ts/Utility$Dictionary")

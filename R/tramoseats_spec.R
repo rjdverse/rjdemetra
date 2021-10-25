@@ -2,24 +2,41 @@
 #'
 #' @description
 #'
-#' Function to create (and/or modify) a \code{c("SA_spec", "TRAMO_SEATS")} class object with the SA model specification for the TRAMO-SEATS method. It can be done from a pre-defined 'JDemetra+' model specification (a \code{character}), a previous specification (\code{c("SA_spec", "TRAMO_SEATS")} object) or a seasonal adjustment model (\code{c("SA", "TRAMO_SEATS")} object).
+#' Function to create (and/or modify) a \code{c("SA_spec", "TRAMO_SEATS")} class object with the SA model specification
+#' for the TRAMO-SEATS method. It can be done from a pre-defined 'JDemetra+' model specification (a \code{character}),
+#' a previous specification (\code{c("SA_spec", "TRAMO_SEATS")} object) or a seasonal adjustment model (\code{c("SA", "TRAMO_SEATS")} object).
 #'
-#' @param spec model specification X13.  It can be a \code{character} of predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}. The default is \code{"RSAfull"}.
+#' @param spec a TRAMO-SEATS model specification. It can be the 'JDemetra+' name (\code{character}) of a predefined TRAMO-SEATS model specification
+#' (see \emph{Details}), an object of class \code{c("SA_spec","TRAMO_SEATS")} or an object of class \code{c("SA", "TRAMO_SEATS")}.
+#' The default is \code{"RSAfull"}.
 #'
 #' @inheritParams  regarima_spec_tramoseats
-#' @param seats.predictionLength integer, number of forecasts used in the decomposition. Negative values correspond to numbers of years.
+#' @param seats.predictionLength integer: the number of forecasts used in the decomposition. Negative values correspond to numbers of years.
 #'
-#' @param seats.approx character, approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
-#' @param seats.trendBoundary numeric, trend boundary. The boundary from which an AR root is integrated in the trend component. If the modulus of the inverse real root is greater than Trend boundary, the AR root is integrated in the trend component. Below this value the root is integrated in the transitory component.
-#' @param seats.seasdBoundary numeric, seasonal boundary. Boundary from which a negative AR root is integrated in the seasonal component.
-#' @param seats.seasdBoundary1 numeric, seasonal boundary (unique). Boundary from which a negative AR root is integrated in the seasonal component when the root is the unique seasonal root.
-#' @param seats.seasTol numeric, seasonal tolerance. The tolerance (measured in degrees) to allocate the AR non-real roots to the seasonal component (if the modulus of the inverse complex AR root is greater than Trend boundary and the frequency of this root differs from one of the seasonal frequencies by less than Seasonal tolerance) or the transitory component (otherwise).
-#' @param seats.maBoundary numeric, MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1), it is set to xl.
-#' @param seats.method character, estimation method of the unobserved components. The choice can be made from: \code{"Burman"} (default, may result in a significant underestimation of the standard deviations of the components as it may become numerically unstable when some roots of the MA polynomial are near 1); \code{"KalmanSmoother"} (it is not disturbed by the (quasi-) unit roots in MA); \code{"McElroyMatrix"} (has the same stability issues as the Burman's algorithm).
+#' @param seats.approx character: the approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
+#' @param seats.trendBoundary numeric: the trend boundary. The boundary beyond which an AR root is integrated in the trend component.
+#' If the modulus of the inverse real root is greater than the trend boundary, the AR root is integrated in the trend component.
+#' Below this value, the root is integrated in the transitory component.
+#' @param seats.seasdBoundary numeric: the seasonal boundary. The boundary beyond which a negative AR root is integrated in the seasonal component.
+#' @param seats.seasdBoundary1 numeric: the seasonal boundary (unique). The boundary beyond which a negative AR root is integrated
+#' in the seasonal component, when the root is the unique seasonal root.
+#' @param seats.seasTol numeric: the seasonal tolerance. The tolerance (measured in degrees) to allocate the AR non-real roots
+#' to the seasonal component (if the modulus of the inverse complex AR root is greater than the trend boundary
+#' and the frequency of this root differs from one of the seasonal frequencies by less than Seasonal tolerance)
+#' or the transitory component (otherwise).
+#' @param seats.maBoundary numeric: the MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1),
+#' it is set to xl.
+#' @param seats.method character: the estimation method for the unobserved components. The choice can be made from:
+#' \itemize{
+#' \item \code{"Burman"}: the default value. May result in a significant underestimation of the components' standard deviation,
+#' as it may become numerically unstable when some roots of the MA polynomial are near 1;
+#' \item \code{"KalmanSmoother"}: it is not disturbed by the (quasi-) unit roots in MA;
+#' \item \code{"McElroyMatrix"}: it has the same stability issues as the Burman's algorithm.
+#' }
 #'
 #' @details
 #'
-#' The available predefined 'JDemetra+' model specifications are described in the table below.
+#' The available predefined 'JDemetra+' model specifications are described in the table below:
 #'
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
@@ -33,15 +50,27 @@
 #' }
 #' @return
 #'
-#' A two-elements list of class \code{c("SA_spec", "TRAMO_SEATS")}: (1) object of class \code{c("regarima_spec", "TRAMO_SEATS")} with the RegARIMA model specification, (2) object of class \code{c("seats_spec", "data.frame")} with the SEATS algorithm specification.
-#' Each component refers to different part of the SA model specification, mirroring the arguments of the function (for details see arguments description).
-#' Each of the lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients) is structured within a data frame with columns denoting different variables of the model specification and rows referring to: first row - base specification, as provided within the argument \code{spec}; second row - user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d}); and third row - final model specification.
-#' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified. The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list with the \code{Predefined} (base model specification) and \code{Final} values.
+#' A two-elements list of class \code{c("SA_spec", "TRAMO_SEATS")}, containing:
+#' (1) an object of class \code{c("regarima_spec", "TRAMO_SEATS")} with the RegARIMA model specification,
+#' (2) an object of class \code{c("seats_spec", "data.frame")} with the SEATS algorithm specification.
+#' Each component refers to a different part of the SA model specification, mirroring the arguments of the function
+#' (for details see the function arguments in the description).
+#' Each lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients)
+#' is structured as a data frame with columns denoting different variables of the model specification and rows referring to:
+#' \itemize{
+#' \item first row: the base specification, as provided within the argument \code{spec};
+#' \item second row: user modifications as specified by the remaining arguments of the function (e.g.: \code{arima.d});
+#' \item and third row: the final model specification.
 #'
-#' \item{regarima}{object of class \code{c("regarima_spec", "TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima_spec_tramoseats}}}
+#' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified.
+#' The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list of
+#' \code{Predefined} (base model specification) and \code{Final} values.
 #'
-#' \item{seats}{data.frame of class \code{c("seats_spec", "data.frame")}, containing the \emph{seats} variables in line with the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
+#' \item{regarima}{an object of class \code{c("regarima_spec", "TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima_spec_tramoseats}}.}
 #'
+#' \item{seats}{a data.frame of class \code{c("seats_spec", "data.frame")}, containing the \emph{seats} variables in line with
+#' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
+#'}
 #' @references
 #' Info on 'JDemetra+', usage and functions:
 #' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
@@ -56,20 +85,20 @@
 #' myspec1 <- tramoseats_spec(spec = c("RSAfull"))
 #' mysa1 <- tramoseats(myseries, spec = myspec1)
 #'
-#' # Modify a pre-specified model specification
+#' # To modify a pre-specified model specification
 #' myspec2 <- tramoseats_spec(spec = "RSAfull", tradingdays.mauto = "Unused",
 #'                            tradingdays.option = "WorkingDays",
 #'                            easter.type = "Standard",
 #'                            automdl.enabled = FALSE, arima.mu = TRUE)
 #' mysa2 <- tramoseats(myseries, spec = myspec2)
 #'
-#' # Modify the model specification from a "SA" object
+#' # To modify the model specification of a "SA" object
 #' myspec3 <- tramoseats_spec(mysa1, tradingdays.mauto = "Unused",
 #'                            tradingdays.option = "WorkingDays",
 #'                            easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
 #' mysa3 <- tramoseats(myseries, myspec3)
 #'
-#' # Modify the model specification from a "SA_spec" object
+#' # To modify the model specification of a "SA_spec" object
 #' myspec4 <- tramoseats_spec(myspec1, tradingdays.mauto = "Unused",
 #'                            tradingdays.option = "WorkingDays",
 #'                            easter.type = "Standard", automdl.enabled = FALSE, arima.mu = TRUE)
@@ -427,7 +456,7 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                             seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
 {
   if ( !inherits(spec, c("SA","SA_spec")))
-    stop("use only with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
+    stop("The function must only be used with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
 
   regarima <- regarima_spec_tramoseats(spec = spec, preliminary.check = preliminary.check,
                                        estimate.from = estimate.from, estimate.to = estimate.to,

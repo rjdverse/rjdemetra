@@ -12,16 +12,26 @@ setClass(
 #' \code{tramoseats} returns a preformatted result while \code{jtramoseats} returns the Java objects of the seasonal adjustment.
 #'
 #' @param series a univariate time series
-#' @param spec model specification TRAMO-SEATS. It can be a \code{character} of the predefined TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), or an object of class \code{c("SA_spec","TRAMO_SEATS")}. The default is \code{"RSAfull"}.
-#' @param userdefined vector with characters for additional output variables (see \code{\link{user_defined_variables}}).
+#' @param spec a TRAMO-SEATS model specification. It can be the name (\code{character}) of a pre-defined
+#' TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), or an object of class
+#' \code{c("SA_spec","TRAMO_SEATS")}. The default value is \code{"RSAfull"}.
+#' @param userdefined a \code{character} vector containing the additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
-#' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-#' In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
+
+#' The first step of a seasonal adjustment consist in pre-adjusting the time series. This is done by removing
+#' its deterministic effects, using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+#' In the second part, the pre-adjusted series is decomposed into the following components:
+#' trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be:
+#' additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa)
+#' shall be free of seasonal and calendar-related movements.
 #'
-#' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{https://www.bde.es/bde/es/}).
+#' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs
+#' an ARIMA-based decomposition of an observed time series into unobserved components.
+#' More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es}).
 #'
-#' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.
+#' The available predefined 'JDemetra+' TRAMO-SEATS model specifications are described in the table below:
+
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
@@ -35,34 +45,43 @@ setClass(
 #'
 #' @return
 #'
-#' \code{jtramoseats} returns a \code{\link{jSA}} object. It contains the Java objects of the result of the seasonal adjustment without any formatting. Therefore the computation is faster than with \code{tramoseats}. The results can the seasonal adjustment can be extract by \code{\link{get_indicators}}.
+#' \code{jtramoseats} returns a \code{\link{jSA}} object that contains the results of the seasonal adjustment without
+#' any formatting. Therefore, the computation is faster than with the function \code{tramoseats}. The results of the seasonal
+#' adjustment can be extracted with the function \code{\link{get_indicators}}.
 #'
-#' \code{tramoseats} returns an object of class \code{c("SA","TRAMO_SEATS")}, a list containing the following components:
+#' \code{tramoseats} returns an object of class \code{c("SA","TRAMO_SEATS")}, that is, a list containing :
 #'
-#' \item{regarima}{object of class \code{c("regarima","TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima}}.}
+#' \item{regarima}{an object of class \code{c("regarima","TRAMO_SEATS")}. More info in the \emph{Value} section of the function \code{\link{regarima}}.}
 #'
-#' \item{decomposition}{object of class \code{"decomposition_SEATS"}, five elements list:
+#' \item{decomposition}{an object of class \code{"decomposition_SEATS"}, that is a five-element list:
 #' \itemize{
-#' \item \code{specification} list with the SEATS algorithm specification. See also function \code{\link{tramoseats_spec}}
-#' \item \code{mode} decomposition mode
-#' \item \code{model} list with the SEATS models: \code{model, sa, trend, seasonal, transitory, irregular}. Each of them is a matrix with the estimated coefficients.
-#' \item \code{linearized} time series matrix (mts) with the stochastic series decomposition (input series \code{y_lin}, seasonally adjusted \code{sa_lin}, trend \code{t_lin}, seasonal \code{s_lin}, irregular \code{i_lin})
-#' \item \code{components} time series matrix (mts) with the decomposition components (input series \code{y_cmp}, seasonally adjusted \code{sa_cmp}, trend \code{t_cmp}, seasonal \code{s_cmp}, irregular \code{i_cmp})
+#' \item \code{specification} a list with the SEATS algorithm specification. See also the function \code{\link{tramoseats_spec}}.
+#' \item \code{mode} the decomposition mode
+#' \item \code{model} the SEATS model list: \code{model, sa, trend, seasonal, transitory, irregular},
+#' each element being a matrix of estimated coefficients.
+#' \item \code{linearized} the time series matrix (mts) with the stochastic series decomposition (input series \code{y_lin},
+#' seasonally adjusted series \code{sa_lin}, trend \code{t_lin}, seasonal \code{s_lin}, irregular \code{i_lin})
+#' \item \code{components} the time series matrix (mts) with the decomposition components (input series \code{y_cmp},
+#' seasonally adjusted series \code{sa_cmp}, trend \code{t_cmp}, seasonal component \code{s_cmp}, irregular \code{i_cmp})
 #' }
 #' }
 #'
-#' \item{final}{object of class \code{c("final","mts","ts","matrix")}. Matrix with the final results of the seasonal adjustment.
-#' It includes time series: original time series (\code{y}), forecast of the original series (\code{y_f}), trend (\code{t}), forecast of the trend (\code{t_f}),
-#' seasonally adjusted series (\code{sa}), forecast of the seasonally adjusted series (\code{sa_f}),
-#' seasonal component (\code{s}), forecast of the seasonal component (\code{s_f}), irregular component (\code{i}) and the forecast of the irregular component (\code{i_f}).}
+#' \item{final}{an object of class \code{c("final","mts","ts","matrix")}. The matrix contains the final results of the seasonal adjustment:
+#' the original time series (\code{y})and its forecast (\code{y_f}), the trend (\code{t}) and its forecast (\code{t_f}),
+#' the seasonally adjusted series (\code{sa}) and its forecast (\code{sa_f}), the seasonal component (\code{s})and its forecast (\code{s_f}),
+#' and the irregular component (\code{i}) and its forecast (\code{i_f}).}
 #'
-#' \item{diagnostics}{object of class \code{"diagnostics"}, list with three type of diagnostics tests:
+#' \item{diagnostics}{an object of class \code{"diagnostics"}, that is a list containing three types of tests results:
 #' \itemize{
-#' \item \code{variance_decomposition} data.frame with the tests on the relative contribution of the components to the stationary portion of the variance in the original series, after the removal of the long term trend.
-#' \item \code{residuals_test} data.frame with the tests on the presence of seasonality in the residuals (includes the statistic, p-value and parameters description)
-#' \item \code{combined_test}  combined tests for stable seasonality in the entire series. Two elements list with: \code{tests_for_stable_seasonality} - data.frame with the tests (includes the statistic, p-value and parameters description) and \code{combined_seasonality_test} - the summary.
+#' \item \code{variance_decomposition} a data.frame with the tests results on the relative contribution of the components to the stationary
+#' portion of the variance in the original series, after the removal of the long term trend;
+#' \item \code{residuals_test} a data.frame with the tests results of the presence of seasonality in the residuals
+#' (including the statistic test values, the corresponding p-values and the parameters description);
+#' \item \code{combined_test} the combined tests for stable seasonality in the entire series. The format is a two elements list with:
+#' \code{tests_for_stable_seasonality}, a data.frame containing the tests results (including the statistic test value, its p-value and the parameters
+#' description), and \code{combined_seasonality_test}, the summary.
 #' }}
-#' \item{user_defined}{object of class \code{"user_defined"}. List containing the userdefined additional variables defined in the \code{userdefined} argument.}
+#' \item{user_defined}{an object of class \code{"user_defined"}: a list containing the additional userdefined variables.}
 #'
 #' @references
 #' Info on 'JDemetra+', usage and functions:
@@ -75,6 +94,7 @@ setClass(
 #' @seealso \code{\link{tramoseats_spec}}, \code{\link{x13}}
 #'
 #' @examples \donttest{
+#' #Example 1
 #' myseries <- ipi_c_eu[, "FR"]
 #' myspec <- tramoseats_spec("RSAfull")
 #' mysa <- tramoseats(myseries, myspec)
@@ -84,6 +104,7 @@ setClass(
 #' mysa1 <- tramoseats(myseries, spec = "RSAfull")
 #' mysa1
 #'
+#' #Example 2
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
 #' var <- ts.union(var1, var2)
@@ -105,7 +126,7 @@ setClass(
 tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
                        userdefined = NULL){
   if (!is.ts(series)) {
-    stop("series must be a time series")
+    stop("The series must be a time series!")
   }
   UseMethod("tramoseats", spec)
 }
@@ -127,7 +148,7 @@ tramoseats.SA_spec <- function(series, spec,
     return (NaN)
   }else{
 
-    #Error with preliminary check
+    # Error during the preliminary check
     if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
       proc_info <- jrslt$getResults()$getProcessingInformation()
       error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
@@ -169,7 +190,7 @@ tramoseatsJavaResults <- function(jrslt, spec,
   if (is.null(jrobct@internal))
     return(NaN)
 
-  #Error with preliminary check
+  # Error in preliminary check
   if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
     proc_info <- jrslt$getResults()$getProcessingInformation()
     error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)

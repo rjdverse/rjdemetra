@@ -18,5 +18,6 @@
 
   if (!check_valid_java_version())
     stop("You need Java JDK >= 8 and <= 15 to use 'RJDemetra'")
+
 }
 
