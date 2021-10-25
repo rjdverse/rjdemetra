@@ -129,13 +129,10 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   # jrslt <- jsa_obj[["result"]]@internal
   # jrspec <- jsa_obj[["spec"]]
   if (is.null(s_estimate(spec))) {
-<<<<<<< HEAD
-    # For X-11 specification
-    jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
-=======
+
     # For the X11 specification
     jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
->>>>>>> comment_correction
+
   } else {
     jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
   }
@@ -144,13 +141,9 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   jspec <- .jcall(jdspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
-<<<<<<< HEAD
-  # Or, using the fonction x13JavaResults:
-  # return(x13JavaResults(jrslt = jrslt, spec = jdspec, userdefined = userdefined))
-=======
   # Or, using the function x13JavaResults:
   # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
->>>>>>> comment_correction
+
 
   jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
   jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)

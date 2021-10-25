@@ -17,10 +17,8 @@
             parameters = c(getOption("java.parameters"), jopts_core))
 
   if (!check_valid_java_version())
-<<<<<<< HEAD
-    stop("You need Java JDK >= 8 and <= 15 to use 'RJDemetra'")
-=======
+
     stop("You need Java 8 or higher to use the RJDemetra package!")
->>>>>>> comment_correction
+
 }
 

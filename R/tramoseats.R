@@ -18,14 +18,7 @@ setClass(
 #' @param userdefined a \code{character} vector containing the additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
-<<<<<<< HEAD
-#' The first step of the seasonal adjustment consist of pre-adjusting the time series by removing from it the deterministic effects by means of a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-#' In the second part, the pre-adjusted series is decomposed into the following components: trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be: additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa) shall be free of seasonal and calendar-related movements.
-#'
-#' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs an ARIMA-based decomposition of an observed time series into unobserved components. More information on the method can be found on the Bank of Spian website (\url{https://www.bde.es/bde/es/}).
-#'
-#' As regards the available predefined 'JDemetra+' TRAMO-SEATS model specifications, they are described in the table below.
-=======
+
 #' The first step of a seasonal adjustment consist in pre-adjusting the time series. This is done by removing
 #' its deterministic effects, using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
 #' In the second part, the pre-adjusted series is decomposed into the following components:
@@ -38,7 +31,7 @@ setClass(
 #' More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es}).
 #'
 #' The available predefined 'JDemetra+' TRAMO-SEATS model specifications are described in the table below:
->>>>>>> comment_correction
+
 #' \tabular{rrrrrrrr}{
 #' \strong{Identifier} |\tab \strong{Log/level detection} |\tab \strong{Outliers detection} |\tab \strong{Calendar effects} |\tab \strong{ARIMA}\cr
 #' RSA0 |\tab \emph{NA} |\tab \emph{NA} |\tab \emph{NA} |\tab Airline(+mean)\cr
