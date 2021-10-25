@@ -1,4 +1,4 @@
-# To extract a jspec from a R SA object or from a sa_item
+# Extract a jspec from a R SA object or from a sa_item
 
 #' @rdname jSA
 #' @name jSA
