@@ -10,7 +10,7 @@ user_defined <- function(namedvector, jrobct){
   result
 }
 
-#' To retrieve the user-defined variable names
+#' Retrieve the user-defined variable names
 #'
 #' Function to retrieve the names of the additional output variables that can be defined in
 #' \code{\link{x13}} and \code{\link{tramoseats}} with the parameter \code{userdefined}.
