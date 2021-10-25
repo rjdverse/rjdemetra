@@ -1,3 +1,10 @@
+#' To retrieve the main components of a series, as well as their forecasted values
+#'
+#' @param jrobj a series in Java format
+#'
+#' @return the raw series, the adjusted series, the trend-cycle, the seasonal component and the irregular,
+#' as well as their forecasted values
+
 final <- function(jrobj){
 
   finals_ts_names1 <- c("y", "sa", "t", "s", "i")

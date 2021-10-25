@@ -1,7 +1,7 @@
-#' Create a workspace or a multi-processing
+#' Creation of a workspace or a multi-processing
 #'
-#' Functions to create a 'JDemetra+' workspace (\code{new_workspace()})
-#' add a multi-processing to it (\code{new_multiprocessing()}).
+#' Functions to create a 'JDemetra+' workspace (\code{new_workspace()}) and
+#' to add a new multi-processing (\code{new_multiprocessing()}).
 #'
 #' @param workspace a workspace object
 #' @param name character name of the new multiprocessing
@@ -13,7 +13,7 @@
 #' \code{\link{add_sa_item}}
 #'
 #' @examples
-#' # Create and export a empty 'JDemetra+' workspace
+#' # To create and export an empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' mp <- new_multiprocessing(wk, "sa1")
 #'
@@ -40,25 +40,25 @@ new_multiprocessing <- function(workspace, name) {
 
 
 
-#' Save a workspace
+#' To save a workspace
 #'
-#' Functions save a \code{workspace} object into a 'JDemetra+'' workspace.
+#' Function to save a \code{workspace} object into a 'JDemetra+' workspace.
 #'
-#' @param workspace a workspace object to export
-#' @param file the path to the export 'JDemetra+' workspace (.xml file).
-#' By default a dialog box opens.
+#' @param workspace the workspace object to export
+#' @param file the path where to export the 'JDemetra+' workspace (.xml file).
+#' By default, if not specified, a dialog box opens.
 #'
 #' @seealso \code{\link{load_workspace}}
 #'
 #' @examples \donttest{
 #' dir <- tempdir()
-#' # Create and export a empty 'JDemetra+' workspace
+#' # Creation and export of an empty 'JDemetra+' workspace
 #' wk <- new_workspace()
 #' new_multiprocessing(wk, "sa1")
 #' save_workspace(wk, file.path(dir, "workspace.xml"))
 #'}
 #'
-#' @return A boolean indicating whether the export has suceed.
+#' @return A boolean indicating whether the export is successful.
 #' @export
 save_workspace <- function(workspace, file) {
   if (missing(file) || is.null(file)) {
@@ -70,7 +70,7 @@ save_workspace <- function(workspace, file) {
       file <- NULL # base::file.choose()
     }
     if (length(file) == 0)
-      stop("You have to choose a file !")
+      stop("You must choose a file !")
   }
   if (length(grep("\\.xml$",file)) == 0)
     stop("The file must be a .xml !")
@@ -90,30 +90,36 @@ save_workspace <- function(workspace, file) {
 }
 
 
-#' Add a seasonally adjust model to a multi-processing
+#' To add a seasonally adjusted series to a multi-processing
 #'
-#' Function to add a new seasonally adjust object (class \code{"SA"} or \code{"jSA"}) in a \code{workspace} object.
+#' Function to add a new seasonally adjusted object (class \code{"SA"} or \code{"jSA"}) to a \code{workspace} object.
 #'
-#' @param workspace the workspace to add the seasonally adjust model.
-#' @param multiprocessing the name or index of the multiprocessing to add the seasonally adjust model.
-#' @param sa_obj the seasonally adjust object to export.
-#' @param name the name of the seasonally adjust model in the multiprocessing.
+#' @param workspace the workspace to add the seasonally adjusted series to.
+#' @param multiprocessing the name or index of the multiprocessing to add the seasonally adjusted series to.
+#' @param sa_obj the seasonally adjusted object to add
+#' @param name the name of the seasonally adjustd series in the multiprocessing.
 #' By default the name of the \code{sa_obj} is used.
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}
 #'
 #' @examples\donttest{
 #' dir <- tempdir()
+#' A
+#' # Adjustment of a series with the x13 and Tramo-Seats methods
 #' spec_x13 <- x13_spec(spec = "RSA5c", easter.enabled = FALSE)
 #' sa_x13 <- x13(ipi_c_eu[, "FR"], spec = spec_x13)
 #' spec_ts <- tramoseats_spec(spec = "RSA5")
 #' sa_ts <- jtramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 #'
+#' # Creation of a new workspace...
 #' wk <- new_workspace()
+#' # and of the multiprocessing "sa1" that will contain the series
 #' new_multiprocessing(wk, "sa1")
+#' # Addition of the adjusted series to the workspace via the sa1 multiprocessing
 #' add_sa_item(wk, "sa1", sa_x13, "X13")
 #' add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
 #'
+#' # Export of the new filled workspace
 #' save_workspace(wk, file.path(dir, "workspace.xml"))
 #' }
 #'
@@ -131,7 +137,7 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
       stop("The multiprocessing ",multiprocessing," doesn't exist !")
   }
   if (!is.numeric(multiprocessing))
-    stop("The parameter multiprocessing must be a character or a numeric")
+    stop("The parameter for the multiprocessing must be a character or a numeric")
 
   if (missing(name))
     name <- deparse(substitute(sa_obj))

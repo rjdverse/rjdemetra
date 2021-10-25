@@ -10,12 +10,13 @@ user_defined <- function(namedvector, jrobct){
   result
 }
 
-#' Get the names of the user-defined variables
+#' To retrieve the user-defined variable names
 #'
-#' Function to get the names of the additional output variables that can be defined in
+#' Function to retrieve the names of the additional output variables that can be defined in
 #' \code{\link{x13}} and \code{\link{tramoseats}} with the parameter \code{userdefined}.
 #'
-#' @param sa_object a character: \code{"X13-ARIMA"} to get the additional output variables available for the X13-ARIMA method and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
+#' @param sa_object a character: \code{"X13-ARIMA"} to retrieve the additional output variables available for the X13-ARIMA method
+#' and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
 #'
 #' @examples
 #' user_defined_variables("X13-ARIMA")
