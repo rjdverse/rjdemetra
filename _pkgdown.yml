@@ -31,12 +31,16 @@ navbar:
     rpackages:
       text: Around JDemetra+ and R
       menu:
+      - text: rjwsacruncher
+        href: https://github.com/AQLT/rjwsacruncher
       - text: ggdemetra
         href: https://github.com/AQLT/ggdemetra
       - text: rjdqa
         href: https://github.com/AQLT/rjdqa
-      - text: rjwsacruncher
-        href: https://github.com/AQLT/rjwsacruncher
+      - text: rjdmarkdown
+        href: https://github.com/AQLT/rjdmarkdown
+      - text: rjdworkspace
+        href: https://github.com/InseeFrLab/rjdworkspace
     github:
       icon: fa-github fa-lg
       href: https://github.com/jdemetra/rjdemetra
