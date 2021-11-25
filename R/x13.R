@@ -131,7 +131,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   if (is.null(s_estimate(spec))) {
 
     # For the X11 specification
-    jrspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
+    jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
 
   } else {
     jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")

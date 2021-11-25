@@ -1,3 +1,7 @@
+# RJDemetra 0.2.0
+
+- bug with x11 introduced in RJDemetra 0.1.9 (issue #99)
+
 # RJDemetra 0.1.9
 
 - easter specification was not working.
