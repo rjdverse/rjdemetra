@@ -1,4 +1,4 @@
-# Functions to manipualte the "regarima_spec" object
+# Functions to manipulate the "regarima_spec" object
 
 spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=NA_integer_,
                     exclFirst=NA_integer_,exclLast=NA_integer_, var=NA_character_){
