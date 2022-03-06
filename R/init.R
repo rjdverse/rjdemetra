@@ -221,5 +221,5 @@ check_valid_java_version <- function(){
   jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.version")
   if(jv < "1.8.0")
     return (FALSE)
-  substr(jv, 1L, 3L) == "1.8" || jv <="15"
+  substr(jv, 1L, 3L) == "1.8" || jv <="15."
 }
