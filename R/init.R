@@ -219,8 +219,5 @@ rjdemetra_java$clobject <- NULL
 check_valid_java_version <- function(){
   # Check Java version
   jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.version")
-  if(jv < "1.8.0")
-    return (FALSE)
-  jv_stub <- substr(jv, 1L, 3L) 
-  jv_stub == "1.8" || jv_stub <="15."
+  jv >= "1.8.0" && substr(jv, 1L, 3L) <= "15."
 }
