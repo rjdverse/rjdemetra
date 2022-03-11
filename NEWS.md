@@ -2,13 +2,15 @@
 
 - bug with x11 introduced in RJDemetra 0.1.9 (issue #99)
 
+- `easter.enabled` not working since RJDemetra 0.1.9
+
 # RJDemetra 0.1.9
 
 - easter specification was not working.
 
-- some typo in the documentation
+- some typo in the documentation.
 
-- SystemRequirement update: only Java JRE is needed
+- SystemRequirement update: only Java JRE is needed.
 
 # RJDemetra 0.1.8
 
