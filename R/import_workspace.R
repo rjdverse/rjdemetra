@@ -165,8 +165,8 @@ get_name.multiprocessing <- function(x){
 }
 #' @export
 get_name.sa_item <- function(x){
-  jt <- .jcall(x, "Ldemetra/datatypes/sa/SaItemType;", "getSaDefinition")
-  jts <- .jcall(jt, "Ldemetra/datatypes/Ts;", "getTs")
+  jt <- .jcall(x, "Ljd2/datatypes/sa/SaItemType;", "getSaDefinition")
+  jts <- .jcall(jt, "Ljd2/datatypes/Ts;", "getTs")
   name <- .jcall(jts, "S", "getName")
   # Remove the name of the file link to the saitem
   name <- gsub("^.*\\n", "", name)
@@ -259,8 +259,8 @@ get_ts.multiprocessing <- function(x){
 }
 #' @export
 get_ts.sa_item <- function(x){
-  jt <- .jcall(x, "Ldemetra/datatypes/sa/SaItemType;", "getSaDefinition")
-  jts <- .jcall(jt, "Ldemetra/datatypes/Ts;", "getTs")
+  jt <- .jcall(x, "Ljd2/datatypes/sa/SaItemType;", "getSaDefinition")
+  jts <- .jcall(jt, "Ljd2/datatypes/Ts;", "getTs")
   j_ts_series <- .jcall(jts, "Lec/tstoolkit/timeseries/simplets/TsData;", "getData")
   return(ts_jd2r(j_ts_series))
 }
@@ -458,7 +458,7 @@ get_model.sa_item <- function(x, workspace,
 
 # To retrieve the results of an sa_item
 sa_results <- function(jsa) {
-  jresult <- .jcall(jsa, "Ldemetra/algorithm/IProcResults;", "getResults")
+  jresult <- .jcall(jsa, "Ljd2/algorithm/IProcResults;", "getResults")
   if (is.null(jresult))
     warning("The result of the object is NULL: have you computed the workspace after importing it?\n",
             "See ?compute for more information.")
@@ -467,7 +467,7 @@ sa_results <- function(jsa) {
 
 # To retrieve the specifications of a sa_item (possible values for type: Domain, Estimation, Point)
 sa_spec <- function(jsa, type = "Domain") {
-  jt <- .jcall(jsa, "Ldemetra/datatypes/sa/SaItemType;", "getSaDefinition")
+  jt <- .jcall(jsa, "Ljd2/datatypes/sa/SaItemType;", "getSaDefinition")
   if (type == "Domain") {
     return(.jcall(jt, "Lec/satoolkit/ISaSpecification;", "getDomainSpec"))
   }
