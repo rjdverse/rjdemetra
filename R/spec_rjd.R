@@ -8,7 +8,6 @@ jd_span <- function(type,d0,d1,n0,n1){
   else if (type=="First") {paste("All but first",n0,"periods", sep=" ")}
   else if (type=="Last") {paste("All but last",n1,"periods", sep=" ")}
   else if (type=="Excluding") {paste("All but first",n0,"periods and last",n1,"periods", sep=" ")}
-
   return(x)
 }
 
@@ -29,6 +28,15 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
   estimate.n0 <- .jcall(jest.span,"I","getN0")
   estimate.n1 <- .jcall(jest.span,"I","getN1")
   estimate.span <- jd_span(type= estimate.type,d0=estimate.d0,d1=estimate.d1,n0=estimate.n0,n1=estimate.n1)
+
+  if (estimate.type %in% c("All", "First", "Last", "Excluding")) {
+    estimate.d0 <- estimate.d1 <- NA
+  } else if (estimate.type=="From") {
+    estimate.d0 <- NA
+  } else if (estimate.type=="To") {
+    estimate.d1 <- NA
+  }
+
   estimate.tol <-.jcall(jestimate ,"D","getTol")
 
   #Transform
@@ -72,6 +80,14 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
   outlier.span <- jd_span(type = outlier.type,
                           d0 = outlier.d0, d1 = outlier.d1,
                           n0 = outlier.n0, n1 = outlier.n1)
+  if (outlier.type %in% c("All", "First", "Last", "Excluding")) {
+    outlier.d0 <- outlier.d1 <- NA
+  } else if (outlier.type=="From") {
+    outlier.d0 <- NA
+  } else if (outlier.type=="To") {
+    outlier.d1 <- NA
+  }
+
   outlier.ao <- .jcall(joutlier, "Z", "isAO")
   outlier.tc <- .jcall(joutlier, "Z", "isTC")
   outlier.ls <- .jcall(joutlier, "Z", "isLS")
@@ -376,6 +392,15 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
   estimate.n0 <- .jcall(jest.span,"I","getN0")
   estimate.n1 <- .jcall(jest.span,"I","getN1")
   estimate.span <- jd_span(type= estimate.type,d0=estimate.d0,d1=estimate.d1,n0=estimate.n0,n1=estimate.n1)
+
+  if (estimate.type %in% c("All", "First", "Last", "Excluding")) {
+    estimate.d0 <- estimate.d1 <- NA
+  } else if (estimate.type=="From") {
+    estimate.d0 <- NA
+  } else if (estimate.type=="To") {
+    estimate.d1 <- NA
+  }
+
   estimate.tol <-.jcall(jestimate ,"D","getTol")
   estimate.eml <-.jcall(jestimate ,"Z","isEml")
   estimate.urfinal <-.jcall(jestimate ,"D","getUbp")
@@ -419,6 +444,14 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
   outlier.n0 <- .jcall(joutlier.span,"I","getN0")
   outlier.n1 <- .jcall(joutlier.span,"I","getN1")
   outlier.span <- jd_span(type= outlier.type,d0=outlier.d0,d1=outlier.d1,n0=outlier.n0,n1=outlier.n1)
+  if (outlier.type %in% c("All", "First", "Last", "Excluding")) {
+    outlier.d0 <- outlier.d1 <- NA
+  } else if (outlier.type=="From") {
+    outlier.d0 <- NA
+  } else if (outlier.type=="To") {
+    outlier.d1 <- NA
+  }
+
   outlier.ao <-.jcall(joutlier,"Z","isAO")
   outlier.tc <-.jcall(joutlier,"Z","isTC")
   outlier.ls <-.jcall(joutlier,"Z","isLS")
