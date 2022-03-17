@@ -6,6 +6,8 @@
 
 - Change of javanamespace to avoid name clashes with jd+ 3.0
 
+- `easter.enabled` not working since RJDemetra 0.1.9
+
 # RJDemetra 0.1.9
 
 - easter specification was not working.
