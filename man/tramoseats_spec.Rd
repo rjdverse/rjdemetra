@@ -89,7 +89,7 @@ The default is \code{"RSAfull"}.}
 \item{preliminary.check}{a \code{logical} to check the quality of the input series and exclude highly problematic series
 e.g. the series with a number of identical observations and/or missing values above pre-specified threshold values.
 
-The time span of the series to be used for the estimation of the RegArima model coefficients (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
+The time span of the series to be used for the estimation of the RegArima model coefficients is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.}
 
 \item{estimate.from}{\code{character} in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.}
 
@@ -194,7 +194,7 @@ The Easter effect is considered as significant if the modulus of t-statistic is 
 
 \item{outlier.enabled}{\code{logical}. If \code{TRUE}, the automatic detection of outliers is enabled in the defined time span.
 
-The time span of the series to be searched for outliers (default from 1900-01-01 to 2020-12-31) is controlled by the following six variables:
+The time span of the series to be searched for outliers is controlled by the following six variables:
 \code{outlier.from, outlier.to, outlier.first, outlier.last, outlier.exclFirst} and \code{outlier.exclLast};
 where \code{outlier.from} and \code{outlier.to} have priority over the remaining span control variables,
 \code{outlier.last} and \code{outlier.first} have priority over \code{outlier.exclFirst} and \code{outlier.exclLast},
