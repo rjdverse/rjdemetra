@@ -25,7 +25,7 @@ Imports:
     methods,
     stats,
     utils
-SystemRequirements: Java JRE between 8 and 15.
+SystemRequirements: Java JRE 8 or higher.
 License: EUPL
 URL: https://github.com/jdemetra/rjdemetra
 LazyData: TRUE

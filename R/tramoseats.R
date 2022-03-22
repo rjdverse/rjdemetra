@@ -149,11 +149,17 @@ tramoseats.SA_spec <- function(series, spec,
   }else{
 
     # Error during the preliminary check
-    if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+    res = jrslt$getResults()$getProcessingInformation()
+
+    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
       proc_info <- jrslt$getResults()$getProcessingInformation()
-      error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
-      if(!error_msg$isEmpty())
+
+      error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+      warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+      if(!.jcall(error_msg,"Z","isEmpty"))
         stop(error_msg$toString())
+      if(!.jcall(warning_msg,"Z","isEmpty"))
+        warning(warning_msg$toString())
     }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
@@ -191,11 +197,16 @@ tramoseatsJavaResults <- function(jrslt, spec,
     return(NaN)
 
   # Error in preliminary check
-  if(is.null(jrslt$getDiagnostics()) & !jrslt$getResults()$getProcessingInformation()$isEmpty()){
+  res = jrslt$getResults()$getProcessingInformation()
+
+  if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
     proc_info <- jrslt$getResults()$getProcessingInformation()
-    error_msg <- proc_info$get(0L)$getErrorMessages(proc_info)
-    if(!error_msg$isEmpty())
+    error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+    warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+    if(!.jcall(error_msg,"Z","isEmpty"))
       stop(error_msg$toString())
+    if(!.jcall(warning_msg,"Z","isEmpty"))
+      warning(warning_msg$toString())
   }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,

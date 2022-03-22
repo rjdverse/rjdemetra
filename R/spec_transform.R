@@ -49,13 +49,13 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
       z.span  <- paste("From",as.character(x.from), sep=" ")
       z.type <- "From"
       z.d0 <- as.character(x.from)
-      z.d1 <- "2100-12-31"
+      z.d1 <- NA
       z.n0 <- 0
       z.n1 <- 0
     }else{
       z.span  <- paste("Until",as.character(x.to), sep=" ")
       z.type <- "To"
-      z.d0 <- "1900-01-01"
+      z.d0 <- NA
       z.d1 <- as.character(x.to)
       z.n0 <- 0
       z.n1 <- 0
@@ -70,8 +70,8 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
   } else if (!is.na(x.last) & x.last> 0) {
     z.span  <- paste("Last",as.character(x.last),"periods", sep=" ")
     z.type <- "Last"
-    z.d0 <- "1900-01-01"
-    z.d1 <- "2100-12-31"
+    z.d0 <- NA
+    z.d1 <- NA
     z.n0 <- 0
     z.n1 <- x.last
     if (sum(!is.na(x.first),!is.na(x.exclFirst),!is.na(x.exclLast))!=0) {
@@ -84,8 +84,8 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
   } else if (!is.na(x.first) & x.first> 0) {
     z.span  <- paste("First",as.character(x.first),"periods", sep=" ")
     z.type <- "First"
-    z.d0 <- "1900-01-01"
-    z.d1 <- "2100-12-31"
+    z.d0 <- NA
+    z.d1 <- NA
     z.n0 <- x.first
     z.n1 <- 0
     if (sum(!is.na(x.exclFirst),!is.na(x.exclLast))!=0) {
@@ -100,14 +100,14 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
     if (sum(x.exclFirst,x.exclLast)==0){
       z.span <- "All"
       z.type <- "All"
-      z.d0 <- "1900-01-01"
-      z.d1 <- "2100-12-31"
+      z.d0 <- NA
+      z.d1 <- NA
       z.n0 <- 0
       z.n1 <- 0
     }else{
       z.type <- "Excluding"
-      z.d0 <- "1900-01-01"
-      z.d1 <- "2100-12-31"
+      z.d0 <- NA
+      z.d1 <- NA
       z.n0 <- x.exclFirst
       z.n1 <- x.exclLast
 
@@ -126,8 +126,8 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
   }else if ((is.na(x.exclFirst)& x.exclLast==0)| (is.na(x.exclLast)& x.exclFirst==0)){
     z.span <- "All"
     z.type <- "All"
-    z.d0 <- "1900-01-01"
-    z.d1 <- "2100-12-31"
+    z.d0 <- NA
+    z.d1 <- NA
     z.n0 <- 0
     z.n1 <- 0
 
@@ -137,8 +137,8 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
   } else if (!is.na(x.exclFirst)) {
     z.span <- paste("All but first",as.character(x.exclFirst),"periods", sep=" ")
     z.type <- "Excluding"
-    z.d0 <- "1900-01-01"
-    z.d1 <- "2100-12-31"
+    z.d0 <- NA
+    z.d1 <- NA
     z.n0 <- x.exclFirst
     z.n1 <- 0
 
@@ -148,8 +148,8 @@ spec_span<-function(from=NA_character_,to=NA_character_,first=NA_integer_,last=N
   } else if (!is.na(x.exclLast)) {
     z.span <- paste("All but last",as.character(x.exclLast),"periods", sep=" ")
     z.type <- "Excluding"
-    z.d0 <- "1900-01-01"
-    z.d1 <- "2100-12-31"
+    z.d0 <- NA
+    z.d1 <- NA
     z.n0 <- 0
     z.n1 <- x.exclLast
 

@@ -84,7 +84,7 @@ proc_parameters<-function(rslt, name, clobj){
 }
 
 proc_dictionary<-function(name){
-  jmapping<-.jcall(name, "Ldemetra/information/InformationMapping;", "getMapping")
+  jmapping<-.jcall(name, "Ljd2/information/InformationMapping;", "getMapping")
   jmap<-.jnew("java/util/LinkedHashMap")
   .jcall(jmapping, "V", "fillDictionary", .jnull("java/lang/String"), .jcast(jmap, "java/util/Map"), TRUE )
   jkeys<-.jcall(jmap, "Ljava/util/Set;", "keySet")
@@ -219,5 +219,7 @@ rjdemetra_java$clobject <- NULL
 check_valid_java_version <- function(){
   # Check Java version >= 8 and <= 15
   jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.version")
-  jv >= "1.8.0" && substr(jv, 1L, 3L) <= "15."
+  if(jv < "1.8.0")
+    return (FALSE)
+  TRUE
 }
