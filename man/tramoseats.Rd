@@ -81,7 +81,7 @@ shall be free of seasonal and calendar-related movements.
 
 In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs
 an ARIMA-based decomposition of an observed time series into unobserved components.
-More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es}).
+More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es/bde/es/}).
 
 The available predefined 'JDemetra+' TRAMO-SEATS model specifications are described in the table below:
 \tabular{rrrrrrrr}{
