@@ -24,8 +24,9 @@ jobs:
           - {os: windows-latest, r: 'devel', java: 12, os-name: windows}
           - {os: windows-latest, r: 'oldrel', java: 12, os-name: windows}
           - {os: macOS-latest, r: 'release', java: 12, os-name: macos}
-          - {os: macOS-latest, r: 'devel', java: 12, os-name: macos}
+          - {os: macOS-10.15, r: 'devel', java: 12, os-name: macos}
           - {os: macOS-latest, r: 'oldrel', java: 12, os-name: macos}
+          - {os: windows-latest, r: 'devel', java: 17, os-name: windows}
           #- {os: ubuntu-20.04, r: 'release', java: 12,os-name: ubuntu}
           #- {os: ubuntu-20.04, r: 'devel', java: 12,os-name: ubuntu}
           #- {os: ubuntu-20.04, r: 'release', java: 16,os-name: ubuntu}
