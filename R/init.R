@@ -217,7 +217,7 @@ rjdemetra_java <- new.env(parent = emptyenv())
 rjdemetra_java$clobject <- NULL
 
 check_valid_java_version <- function(){
-  # Check Java version
+  # Check Java version >= 8 and <= 15
   jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.version")
   if(jv < "1.8.0")
     return (FALSE)
