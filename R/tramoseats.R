@@ -28,7 +28,7 @@ setClass(
 #'
 #' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs
 #' an ARIMA-based decomposition of an observed time series into unobserved components.
-#' More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es}).
+#' More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es/bde/es/}).
 #'
 #' The available predefined 'JDemetra+' TRAMO-SEATS model specifications are described in the table below:
 
@@ -85,7 +85,7 @@ setClass(
 #'
 #' @references
 #' Info on 'JDemetra+', usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en}
+#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
 #'
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'
