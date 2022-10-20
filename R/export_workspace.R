@@ -159,7 +159,7 @@ complete_dictionary <- function(workspace, sa_obj){
 complete_dictionary.SA <- function(workspace, sa_obj){
   userdef <- sa_obj$regarima$specification$regression$userdef
   ud_var <- userdef$variables
-  if (is.null(ud_var) || !userdef$specification["variables"] || is.na(ud_var$series))
+  if (is.null(ud_var) || !userdef$specification["variables"] || all(is.na(ud_var$series)))
     return(sa_obj)
 
   context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
