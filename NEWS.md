@@ -2,7 +2,6 @@
 
 - Fix `complete_dictionary.SA()` to avoid warning.
 
-
 # RJDemetra 0.2.0
 
 - Bug with x11 introduced in RJDemetra 0.1.9 (issue #99).
