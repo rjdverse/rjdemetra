@@ -12,9 +12,9 @@
 \method{plot}{regarima}(
   x,
   which = 1:6,
-  caption = list("Residuals", "Histogram of residuals", "Normal Q-Q",
-    "ACF of residuals", "PACF of residuals", "Decomposition", list("Y linearised",
-    "Calendar effects", "Outliers effects"))[sort(which)],
+  caption = list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
+    "PACF of residuals", "Decomposition", list("Y linearised", "Calendar effects",
+    "Outliers effects"))[sort(which)],
   ask = prod(par("mfcol")) < length(which) && dev.interactive(),
   ...
 )
