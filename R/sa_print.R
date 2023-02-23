@@ -65,7 +65,7 @@ print_formula <- function(x, var){
   polynome_degre <- paste0("B^", non_0)
   polynome_degre[non_0 == 1] <- "B"
 
-  polynome_coef <- sprintf("%+f", x[non_0], polynome_degre)
+  polynome_coef <- sprintf("%+f", x[non_0])
   polynome_coef <- gsub("-","- ", polynome_coef)
   polynome_coef <- gsub("\\+","+ ", polynome_coef)
   polynome_coef[x[non_0] == -1] <- "-"
