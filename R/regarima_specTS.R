@@ -12,8 +12,14 @@
 #' @param preliminary.check a \code{logical} to check the quality of the input series and exclude highly problematic series
 #' e.g. the series with a number of identical observations and/or missing values above pre-specified threshold values.
 #'
-#' The time span of the series to be used for the estimation of the RegArima model coefficients is controlled by the following six variables: \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast}; where \code{estimate.from} and \code{estimate.to} have priority over remaining span control variables, \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast}, and \code{estimate.last} has priority over \code{estimate.first}.
-#' @param estimate.from \code{character} in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01"). Can be combined with \code{estimate.to}.
+#' The time span of the series, which is the (sub)period used to estimate the regarima model, is controlled by the following six variables:
+#' \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast};
+#' where \code{estimate.from} and \code{estimate.to} have priority over the remaining span control variables,
+#' \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast},
+#' and \code{estimate.last} has priority over \code{estimate.first}. Default= "All".
+#'
+#' @param estimate.from a character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01").
+#' It can be combined with the parameter \code{estimate.to}.
 #'
 #' @param estimate.to a \code{character} in format "YYYY-MM-DD" indicating the end of the time span (e.g. "2020-12-31").
 #' It can be combined with the parameter \code{estimate.from}.
@@ -165,8 +171,8 @@
 #' of the automatic model identification. If the Ljung-Box Q statistics for the residuals is acceptable, the default model is accepted
 #' and no further attempt will be made to identify another model.
 #'
-#' @param automdl.cancel \code{numeric}, the cancelation limit. If the difference in moduli of an AR and an MA roots (when estimating ARIMA(1,0,1)(1,0,1) models
-#' in the second step of the automatic identification of the differencing orders) is smaller than the cancelation limit, the two roots are assumed equal and cancel out.
+#' @param automdl.cancel \code{numeric}, the cancellation limit. If the difference in moduli of an AR and an MA roots (when estimating ARIMA(1,0,1)(1,0,1) models
+#' in the second step of the automatic identification of the differencing orders) is smaller than the cancellation limit, the two roots are assumed equal and cancelled out.
 #'
 #' @param automdl.ub1 \code{numeric}, the first unit root limit. It is the threshold value for the initial unit root test in the automatic differencing procedure.
 #' When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model, performed in the first step of the automatic model identification procedure,
@@ -215,7 +221,7 @@
 #'
 #' @param arima.coefEnabled \code{logical}. If \code{TRUE}, the program uses the user-defined ARMA coefficients.
 #'
-#' @param arima.coef a vector providing the coefficients for the regular and seasonal AR and MA polynominals.
+#' @param arima.coef a vector providing the coefficients for the regular and seasonal AR and MA polynomials.
 #' The length of the vector must be equal to the sum of the regular and seasonal AR and MA orders. The coefficients shall be provided in the following order:
 #' regular AR (\emph{Phi} - \code{p} elements), regular MA  (\emph{Theta} - \code{q} elements), seasonal AR (\emph{BPhi} - \code{bp} elements)
 #' and seasonal MA (\emph{BTheta} - \code{bq} elements).
@@ -260,7 +266,7 @@
 #' The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list
 #' with the \code{Predefined} (base model specification) and \code{Final} values.
 #'\itemize{
-#' \item{estimate}{a data frame containing Variables referring to: \code{span} - time span for the model estimation,
+#' \item{estimate}{a data frame containing Variables referring to: \code{span} - time span to be used for the estimation,
 #' \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml}, \code{urfinal} - argument \code{esimate.urfinal}.
 #' The final values can be also accessed with the function \code{\link{s_estimate}}.}
 #'
@@ -300,9 +306,9 @@
 #' \code{eml} - argument \code{outlier.eml},
 #' \code{tcrate} - argument \code{outlier.tcrate}. The final values can be also accessed with the function \code{\link{s_out}}.}
 #'
-#' \item{arima}{a list containing a data frame with the ARIMA settings (\code{specification}) and matrixes giving information
+#' \item{arima}{a list containing a data frame with the ARIMA settings (\code{specification}) and matrices giving information
 #' on the pre-specified ARMA coefficients (\code{coefficients}). The matrix \code{Predefined} refers to the pre-defined model specification
-#' and matrix \code{Final}, to the final specification. Both matrixes contain the values of the ARMA coefficients and the procedure
+#' and matrix \code{Final}, to the final specification. Both matrices contain the values of the ARMA coefficients and the procedure
 #' for its estimation.
 #' In the data frame \code{specification}, the variable \code{enabled} refers to the argument \code{automdl.enabled}
 #' and all remaining variables (\code{automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.armalimit,
@@ -319,8 +325,8 @@
 #' The matrix can be also accessed with the function \code{\link{s_span}}.}
 #'}
 #' @references
-#' Info on 'JDemetra+', usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #'
 #' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]

@@ -9,14 +9,14 @@
 #' (see \emph{Details}), an object of class \code{c("regarima_spec","X13")} or an object of class \code{c("regarima", "X13")}.
 #' The default value is \code{"RG5c"}.
 #'
-#' @param preliminary.check a boolean to check the quality of the input series and exclude highly problematic ones
+#' @param preliminary.check a Boolean to check the quality of the input series and exclude highly problematic ones
 #' (e.g. the series with a number of identical observations and/or missing values above pre-specified threshold values).
 #'
-#' The time span of the series to be used for the estimation of the RegARIMA model coefficients is controlled by the following six variables:
+#' The time span of the series, which is the (sub)period used to estimate the regarima model, is controlled by the following six variables:
 #' \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast};
 #' where \code{estimate.from} and \code{estimate.to} have priority over the remaining span control variables,
 #' \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast},
-#' and \code{estimate.last} has priority over \code{estimate.first}.
+#' and \code{estimate.last} has priority over \code{estimate.first}. Default= "All".
 #'
 #' @param estimate.from a character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01").
 #' It can be combined with the parameter \code{estimate.to}.
@@ -48,16 +48,16 @@
 #' transformation selection is chosen (considered only when \code{transform.function} is set to \code{"Auto"}).
 #'
 #' Control variables for the pre-specified outliers. The pre-specified outliers are used in the model only when enabled
-#' (\code{usrdef.outliersEnabled=TRUE}) and the outliers' type (\code{usrdef.outliersType}) and date
+#' (\code{usrdef.outliersEnabled=TRUE}) and the outlier type (\code{usrdef.outliersType}) and date
 #' (\code{usrdef.outliersDate}) are provided.
 #'
 #' @param usrdef.outliersEnabled logical. If \code{TRUE}, the program uses the pre-specified outliers.
 #'
-#' @param usrdef.outliersType a vector defining the outliers' type. Possible types are: \code{("AO")} = additive,
+#' @param usrdef.outliersType a vector defining the outlier type. Possible types are: \code{("AO")} = additive,
 #' \code{("LS")} = level shift, \code{("TC")} = transitory change, \code{("SO")} = seasonal outlier.
 #' E.g.: \code{usrdef.outliersType = c("AO","AO","LS")}.
 #'
-#' @param usrdef.outliersDate a vector defining the outliers' dates. The dates should be characters in format "YYYY-MM-DD".
+#' @param usrdef.outliersDate a vector defining the outlier dates. The dates should be characters in format "YYYY-MM-DD".
 #' E.g.: \code{usrdef.outliersDate= c("2009-10-01","2005-02-01","2003-04-01")}.
 #'
 #' @param usrdef.outliersCoef a vector providing fixed coefficients for the outliers. The coefficients can't be fixed if
@@ -176,9 +176,9 @@
 #' in the first step of the automatic model identification. If the Ljung-Box Q statistics for the residuals is acceptable,
 #' the default model is accepted and no further attempt will be made to identify another model.
 #'
-#' @param automdl.cancel the cancelation limit (\code{numeric}). If the difference in moduli of an AR and an MA roots
+#' @param automdl.cancel the cancellation limit (\code{numeric}). If the difference in moduli of an AR and an MA roots
 #' (when estimating ARIMA(1,0,1)(1,0,1) models in the second step of the automatic identification of the differencing orders)
-#' is smaller than the cancelation limit, the two roots are assumed equal and cancel out.
+#' is smaller than the cancellation limit, the two roots are assumed equal and cancel out.
 #'
 #' @param automdl.ub1 the first unit root limit (\code{numeric}). It is the threshold value for the initial unit root test
 #' in the automatic differencing procedure. When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model,
@@ -276,7 +276,7 @@
 #' }
 #'
 #' @return
-#' A list of class \code{c("regarima_spec","X13")} with the following components, each refering to a different part
+#' A list of class \code{c("regarima_spec","X13")} with the following components, each referring to a different part
 #' of the RegARIMA model specification, mirroring the arguments of the function (for details, see the arguments description).
 #' Each lowest-level component (except span, pre-specified outliers, user-defined variables and pre-specified ARMA coefficients)
 #' is structured within a data frame with columns denoting different variables of the model specification and rows referring to:
@@ -296,18 +296,18 @@
 #' with the information if pre-specified outliers (\code{outlier}) and user-defined variables (\code{variables})
 #' are included in the model and if fixed coefficients are used (\code{outlier.coef} and \code{variables.coef}).
 #' The final values can also be accessed with the function \code{\link{s_usrdef}};
-#' \code{outliers} - matrixes with the outliers (\code{Predefined} and \code{Final}).
+#' \code{outliers} - matrices with the outliers (\code{Predefined} and \code{Final}).
 #' The final outliers can also be accessed with the function \code{\link{s_preOut}}; and \code{variables}
 #' - a list with the \code{Predefined} and \code{Final} user-defined variables (\code{series}) and its description
 #' (\code{description}) including the information on the variable type and the values of fixed coefficients.
 #' The final user-defined variables can also be accessed with the function \code{\link{s_preVar}}.
 #' Within the data frame \code{trading.days}, the variables refer to: \code{option} - argument \code{tradingdays.option, autoadjust} - argument \code{tradingdays.autoadjust, leapyear} - argument \code{tradingdays.leapyear, stocktd} - argument \code{tradingdays.stocktd, test} - argument \code{tradingdays.test}. The final \code{trading.days} values can be also accessed with the function \code{\link{s_td}}. Within the data frame \code{easter} variables refer to: \code{enabled} - argument \code{easter.enabled, julian} - argument \code{easter.julian, duration} - argument \code{easter.duration, test} - argument \code{easter.test}. The final \code{easter} values can be also accessed with the function \code{\link{s_easter}}.}
 #'
-#' \item{outliers}{a data frame. Variables referring to: \code{enabled} - argument \code{outlier.enabled}, \code{span} - time span for the outliers' detection, \code{ao} - argument \code{outlier.ao, tc} - argument \code{outlier.tc, ls} - argument \code{outlier.ls, so} - argument \code{outlier.so, usedefcv} - argument \code{outlier.usedefcv, cv} - argument \code{outlier.cv, method} - argument \code{outlier.method, tcrate} - argument \code{outlier.tcrate}. The final values can also be accessed with the function \code{\link{s_out}}.}
+#' \item{outliers}{a data frame. Variables referring to: \code{enabled} - argument \code{outlier.enabled}, \code{span} - time span for the outlier detection, \code{ao} - argument \code{outlier.ao, tc} - argument \code{outlier.tc, ls} - argument \code{outlier.ls, so} - argument \code{outlier.so, usedefcv} - argument \code{outlier.usedefcv, cv} - argument \code{outlier.cv, method} - argument \code{outlier.method, tcrate} - argument \code{outlier.tcrate}. The final values can also be accessed with the function \code{\link{s_out}}.}
 #'
-#' \item{arima}{a list of a data frame with the ARIMA settings (\code{specification}) and matrixes with the information
+#' \item{arima}{a list of a data frame with the ARIMA settings (\code{specification}) and matrices with the information
 #' on the pre-specified ARMA coefficients (\code{coefficients}). The matrix \code{Predefined} refers to the pre-defined
-#' model specification, and the matrix \code{Final} to the final specification. Both matrixes contain the value of the ARMA
+#' model specification, and the matrix \code{Final} to the final specification. Both matrices contain the value of the ARMA
 #' coefficients and the procedure for its estimation.
 #' In the data frame \code{specification}, the variable \code{enabled} refers to the argument \code{automdl.enabled}
 #' and all remaining variables (\code{automdl.acceptdefault, automdl.cancel, automdl.ub1, automdl.ub2, automdl.mixed,
@@ -319,13 +319,13 @@
 #' \item{forecast}{a data frame with the forecast horizon (argument \code{fcst.horizon}).
 #' The final value can also be accessed with the function \code{\link{s_fcst}}.}
 #'
-#' \item{span}{a matrix containing the final time span for the model estimation and outliers' detection.
+#' \item{span}{a matrix containing the final time span for the model estimation and outlier detection.
 #' It contains the same information as the variable span in the data frames estimate and outliers.
 #' The matrix can be also accessed with the function \code{\link{s_span}}.}
 #'
 #' @references
-#' Info on 'JDemetra+', usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #'
 #' @examples\donttest{
 #' myseries <- ipi_c_eu[, "FR"]

@@ -17,7 +17,7 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 \item{userdefined}{a vector containing the names of additional output variables.
 (see \code{\link{x13}} or \code{\link{tramoseats}}).}
 
-\item{progress_bar}{boolean: if \code{TRUE}, a progress bar is printed.}
+\item{progress_bar}{Boolean: if \code{TRUE}, a progress bar is printed.}
 }
 \value{
 \code{get_model()} returns a seasonally adjusted object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or a list of seasonally adjusted objects:

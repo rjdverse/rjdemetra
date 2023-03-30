@@ -6,29 +6,30 @@ setClass(
 #' Seasonal Adjustment with TRAMO-SEATS
 #'
 #' @description
-#' Function to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
-#' This is achieved by decomposing the time series (y) into the: trend-cycle (t), seasonal component (s) and irregular component (i).
-#' The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+#' Functions to estimate the seasonally adjusted series (sa) with the TRAMO-SEATS method.
+#' This is achieved by decomposing the time series (y) into the trend-cycle (t), the seasonal component (s) and the irregular component (i).
+#' Calendar-related movements can be corrected in the pre-treatment (TRAMO) step.
+
 #' \code{tramoseats} returns a preformatted result while \code{jtramoseats} returns the Java objects of the seasonal adjustment.
 #'
-#' @param series a univariate time series
+#' @param series an univariate time series
 #' @param spec a TRAMO-SEATS model specification. It can be the name (\code{character}) of a pre-defined
 #' TRAMO-SEATS 'JDemetra+' model specification (see \emph{Details}), or an object of class
 #' \code{c("SA_spec","TRAMO_SEATS")}. The default value is \code{"RSAfull"}.
 #' @param userdefined a \code{character} vector containing the additional output variables (see \code{\link{user_defined_variables}}).
 #'
 #' @details
-
-#' The first step of a seasonal adjustment consist in pre-adjusting the time series. This is done by removing
-#' its deterministic effects, using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-#' In the second part, the pre-adjusted series is decomposed into the following components:
+#'
+#' The first step of a seasonal adjustment consists in pre-adjusting the time series with TRAMO. This is done by removing
+#' its deterministic effects (calendar and outliers), using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+#' In the second part, the pre-adjusted series is decomposed by the SEATS algorithm into the following components:
 #' trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be:
-#' additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa)
-#' shall be free of seasonal and calendar-related movements.
+#' additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}, in the latter case pre-adjustment and decomposition are performed
+#' on (\eqn{log(y) = log(t) + log(s) + log(i)}).
 #'
 #' In the TRAMO-SEATS method, the second step - SEATS ("Signal Extraction in ARIMA Time Series") - performs
 #' an ARIMA-based decomposition of an observed time series into unobserved components.
-#' More information on the method can be found on the Bank of Spain website (\url{https://www.bde.es/bde/es/}).
+#' More information on this method at \url{https://jdemetra-new-documentation.netlify.app/m-seats-decomposition}.
 #'
 #' The available predefined 'JDemetra+' TRAMO-SEATS model specifications are described in the table below:
 
@@ -77,15 +78,15 @@ setClass(
 #' portion of the variance in the original series, after the removal of the long term trend;
 #' \item \code{residuals_test} a data.frame with the tests results of the presence of seasonality in the residuals
 #' (including the statistic test values, the corresponding p-values and the parameters description);
-#' \item \code{combined_test} the combined tests for stable seasonality in the entire series. The format is a two elements list with:
+#' \item \code{combined_test} the combined tests for stable seasonality in the entire series. The format is a two-element list with:
 #' \code{tests_for_stable_seasonality}, a data.frame containing the tests results (including the statistic test value, its p-value and the parameters
 #' description), and \code{combined_seasonality_test}, the summary.
 #' }}
 #' \item{user_defined}{an object of class \code{"user_defined"}: a list containing the additional userdefined variables.}
 #'
 #' @references
-#' Info on 'JDemetra+', usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #'
 #' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 #'

@@ -97,7 +97,7 @@ save_workspace <- function(workspace, file) {
 #' @param workspace the workspace to add the seasonally adjusted series to.
 #' @param multiprocessing the name or index of the multiprocessing to add the seasonally adjusted series to.
 #' @param sa_obj the seasonally adjusted object to add
-#' @param name the name of the seasonally adjustd series in the multiprocessing.
+#' @param name the name of the seasonally adjusted series in the multiprocessing.
 #' By default the name of the \code{sa_obj} is used.
 #'
 #' @seealso \code{\link{load_workspace}}, \code{\link{save_workspace}}

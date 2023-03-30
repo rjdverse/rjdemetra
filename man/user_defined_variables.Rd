@@ -2,7 +2,7 @@
 % Please edit documentation in R/user_defined.R
 \name{user_defined_variables}
 \alias{user_defined_variables}
-\title{Retrieve the user-defined variable names}
+\title{Display a list of all the available output objects (series, parameters, diagnostics)}
 \usage{
 user_defined_variables(sa_object = c("X13-ARIMA", "TRAMO-SEATS"))
 }
@@ -10,11 +10,29 @@ user_defined_variables(sa_object = c("X13-ARIMA", "TRAMO-SEATS"))
 \item{sa_object}{a character: \code{"X13-ARIMA"} to retrieve the additional output variables available for the X13-ARIMA method
 and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.}
 }
+\value{
+a vector containing the names of all the available output objects (series, diagnostics, parameters)
+}
 \description{
-Function to retrieve the names of the additional output variables that can be defined in
-\code{\link{x13}} and \code{\link{tramoseats}} with the parameter \code{userdefined}.
+Function generating a comprehensive list of available output variables (series, parameters, diagnostics) from the estimation process
+with \code{\link{x13}} and \code{\link{tramoseats}}.
+Some items are available in the default estimation output but the remainder can be added
+using the \code{userdefined} parameter.
 }
 \examples{
+y<- ipi_c_eu[, "FR"]
 user_defined_variables("X13-ARIMA")
+m <- x13(y,"RSA5c", userdefined=c("b20","ycal","residuals.kurtosis" ))
+m$user_defined$b20
+m$user_defined$ycal
+m$user_defined$residuals.kurtosis
 user_defined_variables("TRAMO-SEATS")
+m <- tramoseats(y,"RSAfull", userdefined=c("ycal","variancedecomposition.seasonality"))
+m$user_defined$ycal
+m$user_defined$variancedecomposition.seasonality
+
+}
+\references{
+More information and examples related to 'JDemetra+' features in the online documentation:
+\url{https://jdemetra-new-documentation.netlify.app/}
 }

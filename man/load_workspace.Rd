@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_workspace.R
 \name{load_workspace}
 \alias{load_workspace}
-\title{Load a 'JDemetra+' workpace}
+\title{Load a 'JDemetra+' workspace}
 \usage{
 load_workspace(file)
 }

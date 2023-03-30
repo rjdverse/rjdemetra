@@ -32,6 +32,6 @@ LazyData: TRUE
 Suggests:
     knitr,
     rmarkdown
-RoxygenNote: 7.2.1
 BugReports: https://github.com/jdemetra/rjdemetra/issues
 Encoding: UTF-8
+RoxygenNote: 7.2.3

@@ -9,18 +9,33 @@ user_defined <- function(namedvector, jrobct){
   class(result) <- c("user_defined")
   result
 }
-
-#' Retrieve the user-defined variable names
+#' Display a list of all the available output objects (series, parameters, diagnostics)
 #'
-#' Function to retrieve the names of the additional output variables that can be defined in
-#' \code{\link{x13}} and \code{\link{tramoseats}} with the parameter \code{userdefined}.
+#'@description
+#' Function generating a comprehensive list of available output variables (series, parameters, diagnostics) from the estimation process
+#' with \code{\link{x13}} and \code{\link{tramoseats}}.
+#' Some items are available in the default estimation output but the remainder can be added
+#' using the \code{userdefined} parameter.
 #'
 #' @param sa_object a character: \code{"X13-ARIMA"} to retrieve the additional output variables available for the X13-ARIMA method
 #' and \code{"TRAMO-SEATS"} for the TRAMO-SEATS method.
 #'
 #' @examples
+#' y<- ipi_c_eu[, "FR"]
 #' user_defined_variables("X13-ARIMA")
+#' m <- x13(y,"RSA5c", userdefined=c("b20","ycal","residuals.kurtosis" ))
+#' m$user_defined$b20
+#' m$user_defined$ycal
+#' m$user_defined$residuals.kurtosis
 #' user_defined_variables("TRAMO-SEATS")
+#' m <- tramoseats(y,"RSAfull", userdefined=c("ycal","variancedecomposition.seasonality"))
+#' m$user_defined$ycal
+#' m$user_defined$variancedecomposition.seasonality
+#'
+#' @return  a vector containing the names of all the available output objects (series, diagnostics, parameters)
+#' @references
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #' @export
 user_defined_variables <- function(sa_object = c("X13-ARIMA", "TRAMO-SEATS")){
   sa_object <- match.arg(sa_object)

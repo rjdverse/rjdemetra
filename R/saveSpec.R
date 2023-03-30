@@ -20,8 +20,8 @@
 #' \code{load_spec} returns an object of class \code{"SA_spec"} or \code{"regarima_spec"}.
 
 #' @references
-#' Info on JDemetra+, usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #'
 #' @examples
 #' \donttest{
