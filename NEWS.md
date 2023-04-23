@@ -1,3 +1,11 @@
+# RJDemetra 0.2.2
+
+- update documentation
+
+- removes extra argument print tramo
+
+- SystemRequirements update for CRAN policies
+
 # RJDemetra 0.2.1
 
 - Fix `complete_dictionary.SA()` to avoid warning.
