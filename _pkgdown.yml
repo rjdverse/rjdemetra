@@ -1,3 +1,7 @@
+url: ~
+template:
+  bootstrap: 5
+
 navbar:
   structure:
     left:
@@ -27,7 +31,7 @@ navbar:
       - text: Download JDemetra+
         href: https://github.com/jdemetra/jdemetra-app/releases
       - text: JDemetra+ documentation
-        href: https://jdemetradocumentation.github.io/JDemetra-documentation/
+        href: https://jdemetra-new-documentation.netlify.app/
     rpackages:
       text: Around JDemetra+ and R
       menu:
