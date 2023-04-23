@@ -10,10 +10,10 @@ compute(workspace, i)
 \item{workspace}{the workspace to compute.}
 
 \item{i}{a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute.
-By default, all multi-processings are computed.}
+By default, all multiprocessings are computed.}
 }
 \description{
-Function to compute all the multi-processings or only a given one from a workspace.
+Function to compute all the multiprocessings or only a given one from a workspace.
 By default, the workspace only contains definitions: computation is needed to recalculate and access the adjusted model
 (with \code{\link{get_model}}).
 }

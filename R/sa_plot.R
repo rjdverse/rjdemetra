@@ -10,8 +10,8 @@
 #' @param first_date the plot starting date. If missing, the plot starts at the beginning of the time-series.
 #' @param last_date the end date of the plot. If missing, the plot ends at the end of the time-series (eventually, including forecast).
 #' @param type_chart a string indicating which type of chart to plot
-#' @param forecast a boolean indicating if forecasts should be included in the plot. If \code{TRUE}, the forecast is plotted.
-#' @param ask a boolean. If \code{TRUE}, the user will be prompted before a new graphical page is started.
+#' @param forecast a Boolean indicating if forecasts should be included in the plot. If \code{TRUE}, the forecast is plotted.
+#' @param ask a Boolean. If \code{TRUE}, the user will be prompted before a new graphical page is started.
 #' @param ... other parameters
 #' @param which a numeric vector specifying which graphs should be plotted:
 #' (1) "Residuals", (2) "Histogram of residuals", (3) "Normal Q-Q", (4) "ACF of residuals",

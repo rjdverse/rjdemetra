@@ -28,7 +28,7 @@ regarima_tramoseats(
 regarima_x13(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c"))
 }
 \arguments{
-\item{series}{a univariate time series}
+\item{series}{an univariate time series}
 
 \item{spec}{the model specification. For the function:
 \itemize{
@@ -65,7 +65,7 @@ the associated standard errors and t-statistics values. The estimated coefficien
 with the function \code{\link[stats]{coef}} (whose output also includes the regression coefficients).}
 
 \item{regression.coefficients}{a matrix containing the estimated regression variables (i.e.: mean, calendar effect, outliers
-and user-defined regressors) coefficients, as welm as the associated standard errors and t-statistics values.
+and user-defined regressors) coefficients, as well as the associated standard errors and t-statistics values.
 The estimated coefficients can be also extracted with the function \code{\link[stats]{coef}} (whose output also includes
 the arima coefficients).}
 
@@ -91,9 +91,8 @@ and the results of normality, independence and linearity of the residuals (\code
 \item{forecast}{a ts matrix containing the forecast of the original series (\code{fcst}) and its standard error (\code{fcsterr}).}
 }
 \description{
-The \code{regarima/regarima_x13/regarima_tramoseats} functions decompose the input time series in a linear deterministic component
-and in a stochastic component. The deterministic part of the series can contain outliers, calendar effects and regression effects.
-The stochastic part is defined by a seasonal multiplicative ARIMA model, as discussed by BOX, G.E.P., and JENKINS, G.M. (1970).
+The \code{regarima/regarima_x13/regarima_tramoseats} functions remove deterministic effects from the input series (e.g.calendar effects, outliers)
+using a multivariate regression model with arima errors.
 The \code{jregarima/jregarima_x13/jregarima_tramoseats} functions do the same computation but return the Java objects instead of
 a formatted output.
 }
@@ -230,8 +229,8 @@ myreg3
 }
 }
 \references{
-Info on 'JDemetra+', usage and functions:
-\url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+More information and examples related to 'JDemetra+' features in the online documentation:
+\url{https://jdemetra-new-documentation.netlify.app/}
 
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 

@@ -12,7 +12,7 @@ is.workspace <- function(x){
     inherits(x, "workspace")
 }
 
-#' Load a 'JDemetra+' workpace
+#' Load a 'JDemetra+' workspace
 #'
 #' Function to load a 'JDemetra+' workspace.
 #'
@@ -46,16 +46,16 @@ load_workspace <- function(file){
 
 #' Get objects inside a workspace or multiprocessing
 #'
-#' Generic functions to retreive all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-#' from a \code{workspace} (respectively \code{multiprocessing}) or to retreive a single one (\code{get_object()}) .
+#' Generic functions to retrieve all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+#' from a \code{workspace} (respectively \code{multiprocessing}) or to retrieve a single one (\code{get_object()}) .
 #'
-#' @param x the object to store the extracted \code{multiprocessing} or \code{sa_item}.
+#' @param x the object in which to store the extracted \code{multiprocessing} or \code{sa_item}.
 #' @param pos the index of the object to extract.
 #'
 #' @return An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_object()}) or a list
 #' of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 #'
-#' @seealso Other functions to retrieve informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+#' @seealso Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 #'
 #' @examples\donttest{
 #'
@@ -285,13 +285,13 @@ get_ts.regarima <- function(x){
 
 #' Compute a workspace multi-processing(s)
 #'
-#' Function to compute all the multi-processings or only a given one from a workspace.
+#' Function to compute all the multiprocessings or only a given one from a workspace.
 #' By default, the workspace only contains definitions: computation is needed to recalculate and access the adjusted model
 #' (with \code{\link{get_model}}).
 #'
 #' @param workspace the workspace to compute.
 #' @param i a \code{character} or \code{numeric} indicating the name or the index of the multiprocessing to compute.
-#' By default, all multi-processings are computed.
+#' By default, all multiprocessings are computed.
 #'
 #' @seealso \code{\link{get_model}}
 #'
@@ -346,7 +346,7 @@ compute <- function(workspace, i) {
 #' @param workspace the workspace object where models are stored. If \code{x} is a \code{workspace} object, this parameter is not used.
 #' @param userdefined a vector containing the names of additional output variables.
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
-#' @param progress_bar boolean: if \code{TRUE}, a progress bar is printed.
+#' @param progress_bar Boolean: if \code{TRUE}, a progress bar is printed.
 #'
 #' @return \code{get_model()} returns a seasonally adjusted object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or a list of seasonally adjusted objects:
 #' \itemize{

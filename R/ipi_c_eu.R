@@ -1,4 +1,4 @@
-#' Industrial Production Indices in manufacturing in the European Union
+#' Industrial Production Indices in manufacturing industry in the European Union
 #'
 #' A dataset containing on monthly industrial production indices in manufacturing in the European Union (from sts_inpr_m dataset of Eurostat). Data are based 100 in 2015 and are unadjusted, i.e. neither seasonally adjusted nor calendar adjusted.
 #'
@@ -6,7 +6,7 @@
 #' \tabular{cl}{
 #' BE        \tab Belgium                                         \cr
 #' BG        \tab Bulgaria                                        \cr
-#' CZ        \tab Czechia                                         \cr
+#' CZ        \tab Czech Republic                                  \cr
 #' DK        \tab Denmark                                         \cr
 #' DE        \tab Germany (until 1990 former territory of the FRG)\cr
 #' EE        \tab Estonia                                         \cr
@@ -41,7 +41,7 @@
 #' BA        \tab Bosnia and Herzegovina
 #' }
 #' @docType data
-#' @format A monthly \code{ts} object from january 1990 to december 2020 with 34 variables.
+#' @format A monthly \code{ts} object from January 1990 to December 2020 with 34 variables.
 #' @source \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 "ipi_c_eu"
 

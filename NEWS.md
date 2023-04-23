@@ -18,7 +18,7 @@
 
 - Easter specification was not working.
 
-- Some typo in the documentation.
+- Some typos in the documentation.
 
 - SystemRequirement update: only Java JRE is needed.
 
@@ -112,7 +112,7 @@ Data updated until December 2020.
 - Error message returned when the seasonal adjustment fails due to the preliminary.check.  
 - Possibility to use user-defined calendar regressors. To do it use `tradingdays.option = "UserDefined` and add new regressors variables (`usrdef.varEnabled = TRUE` to enable user-defined regressors and `usrdef.var` to define the regressors) using `usrdef.varType = "Calendar"`.  
 - `usrdef.varType` argument is recycled with the number of variables defined in the `usrdef.var` parameter.  
-- News functions to only get the Java object from a seasonal adjustment or a pre-ajustment method: `jx13`, `jtramoseats`, `jregarima`, `jregarima_x13`, `jregarima_tramoseats` and `get_jmodel`. Therefore, there is no formatting and the computation is faster than the non 'j' functions (`x13`, `tramoseats`, `regarima`, `regarima_x13`, `regarima_tramoseats` and `get_model`). To manipulate these objects, there are three functions: `get_dictionary` to get the indicators that can be extracted, `get_indicators` to extract these indicators and `jSA2R` to get the formatted R model.
+- News functions to only get the Java object from a seasonal adjustment or a pre-adjustment method: `jx13`, `jtramoseats`, `jregarima`, `jregarima_x13`, `jregarima_tramoseats` and `get_jmodel`. Therefore, there is no formatting and the computation is faster than the non 'j' functions (`x13`, `tramoseats`, `regarima`, `regarima_x13`, `regarima_tramoseats` and `get_model`). To manipulate these objects, there are three functions: `get_dictionary` to get the indicators that can be extracted, `get_indicators` to extract these indicators and `jSA2R` to get the formatted R model.
 
 
 

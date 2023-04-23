@@ -10,7 +10,7 @@ get_object(x, pos = 1)
 get_all_objects(x)
 }
 \arguments{
-\item{x}{the object to store the extracted \code{multiprocessing} or \code{sa_item}.}
+\item{x}{the object in which to store the extracted \code{multiprocessing} or \code{sa_item}.}
 
 \item{pos}{the index of the object to extract.}
 }
@@ -19,8 +19,8 @@ An object of class \code{multiprocessing} or \code{sa_item} (for \code{get_objec
 of objects of class \code{multiprocessing} or \code{sa_item} (for \code{get_all_objects()}).
 }
 \description{
-Generic functions to retreive all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
-from a \code{workspace} (respectively \code{multiprocessing}) or to retreive a single one (\code{get_object()}) .
+Generic functions to retrieve all (\code{get_all_objects()}) \code{multiprocessing} (respectively \code{sa_item})
+from a \code{workspace} (respectively \code{multiprocessing}) or to retrieve a single one (\code{get_object()}) .
 }
 \examples{
 \donttest{
@@ -38,5 +38,5 @@ sa_item <- get_object(mp, 1)
 }
 }
 \seealso{
-Other functions to retrieve informations from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
+Other functions to retrieve information from a workspace, multiprocessing or sa_item: \code{\link{count}}, \code{\link{get_model}}, \code{\link{get_name}}, \code{\link{get_ts}}.
 }

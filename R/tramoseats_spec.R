@@ -1,4 +1,4 @@
-#' TRAMO-SEATS model specification, SA/TRAMO-SEATS
+#' TRAMO-SEATS model specification
 #'
 #' @description
 #'
@@ -11,21 +11,21 @@
 #' The default is \code{"RSAfull"}.
 #'
 #' @inheritParams  regarima_spec_tramoseats
-#' @param seats.predictionLength integer: the number of forecasts used in the decomposition. Negative values correspond to numbers of years.
+#' @param seats.predictionLength integer: the number of forecasts used in the decomposition. Negative values correspond to number of years. Default=-1.
 #'
-#' @param seats.approx character: the approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.
+#' @param seats.approx character: the approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO. Default="Legacy".
 #' @param seats.trendBoundary numeric: the trend boundary. The boundary beyond which an AR root is integrated in the trend component.
 #' If the modulus of the inverse real root is greater than the trend boundary, the AR root is integrated in the trend component.
-#' Below this value, the root is integrated in the transitory component.
-#' @param seats.seasdBoundary numeric: the seasonal boundary. The boundary beyond which a negative AR root is integrated in the seasonal component.
+#' Below this value, the root is integrated in the transitory component. Possible values [0,1]. Default=0.5.
+#' @param seats.seasdBoundary numeric: the seasonal boundary. The boundary beyond which a negative AR root is integrated in the seasonal component.  If the modulus of the inverse negative real root is greater (or equal) than Seasonal boundary, the AR root is integrated into the seasonal component. Otherwise the root is integrated into the trend or transitory component. Possible values [0,1]. Default=0.8.
 #' @param seats.seasdBoundary1 numeric: the seasonal boundary (unique). The boundary beyond which a negative AR root is integrated
-#' in the seasonal component, when the root is the unique seasonal root.
+#' in the seasonal component, when the root is the unique seasonal root. If the modulus of the inverse negative real root is greater (or equal) than Seasonal boundary, the AR root is integrated into the seasonal component. Otherwise the root is integrated into the trend or transitory component. Possible values [0,1]. Default=0.8.
 #' @param seats.seasTol numeric: the seasonal tolerance. The tolerance (measured in degrees) to allocate the AR non-real roots
 #' to the seasonal component (if the modulus of the inverse complex AR root is greater than the trend boundary
 #' and the frequency of this root differs from one of the seasonal frequencies by less than Seasonal tolerance)
-#' or the transitory component (otherwise).
+#' or the transitory component (otherwise). Possible values in [0,10]. Default value 2.
 #' @param seats.maBoundary numeric: the MA unit root boundary. When the modulus of an estimated MA root falls in the range (xl, 1),
-#' it is set to xl.
+#' it is set to xl. Possible values [0.9,1]. Default=0.95.
 #' @param seats.method character: the estimation method for the unobserved components. The choice can be made from:
 #' \itemize{
 #' \item \code{"Burman"}: the default value. May result in a significant underestimation of the components' standard deviation,
@@ -50,7 +50,7 @@
 #' }
 #' @return
 #'
-#' A two-elements list of class \code{c("SA_spec", "TRAMO_SEATS")}, containing:
+#' A two-element list of class \code{c("SA_spec", "TRAMO_SEATS")}, containing:
 #' (1) an object of class \code{c("regarima_spec", "TRAMO_SEATS")} with the RegARIMA model specification,
 #' (2) an object of class \code{c("seats_spec", "data.frame")} with the SEATS algorithm specification.
 #' Each component refers to a different part of the SA model specification, mirroring the arguments of the function
@@ -69,14 +69,12 @@
 #' \item{regarima}{an object of class \code{c("regarima_spec", "TRAMO_SEATS")}. See \emph{Value} of the function \code{\link{regarima_spec_tramoseats}}.}
 #'
 #' \item{seats}{a data.frame of class \code{c("seats_spec", "data.frame")}, containing the \emph{seats} variables in line with
-#' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_seats}}.}
+#' the names of the arguments variables. The final values can also be accessed with the function \code{\link{s_seats}}.}
 #'}
 #' @references
-#' Info on 'JDemetra+', usage and functions:
-#' \url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
-#' BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
+#' More information and examples related to 'JDemetra+' features in the online documentation:
+#' \url{https://jdemetra-new-documentation.netlify.app/}
 #'
-#' BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
 #'
 #' @seealso \code{\link{tramoseats}}
 #'
@@ -524,7 +522,7 @@ seats_spec<- function(spec,
   }
   if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
 
-  # modifed values
+  # modified values
   seats <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
   seats.spec <- s_seats(spec)
   seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))

@@ -90,14 +90,14 @@ x13_spec(
 \item{spec}{an x13 model specification. It can be the 'JDemetra+' name (\code{character}) of a predefined X13 'JDemetra+' model specification
 (see \emph{Details}), an object of class \code{c("SA_spec","X13")} or an object of class \code{c("SA", "X13")}. The default is \code{"RSA5c"}.}
 
-\item{preliminary.check}{a boolean to check the quality of the input series and exclude highly problematic ones
+\item{preliminary.check}{a Boolean to check the quality of the input series and exclude highly problematic ones
 (e.g. the series with a number of identical observations and/or missing values above pre-specified threshold values).
 
-The time span of the series to be used for the estimation of the RegARIMA model coefficients is controlled by the following six variables:
+The time span of the series, which is the (sub)period used to estimate the regarima model, is controlled by the following six variables:
 \code{estimate.from, estimate.to, estimate.first, estimate.last, estimate.exclFirst} and \code{estimate.exclLast};
 where \code{estimate.from} and \code{estimate.to} have priority over the remaining span control variables,
 \code{estimate.last} and \code{estimate.first} have priority over \code{estimate.exclFirst} and \code{estimate.exclLast},
-and \code{estimate.last} has priority over \code{estimate.first}.}
+and \code{estimate.last} has priority over \code{estimate.first}. Default= "All".}
 
 \item{estimate.from}{a character in format "YYYY-MM-DD" indicating the start of the time span (e.g. "1900-01-01").
 It can be combined with the parameter \code{estimate.to}.}
@@ -129,16 +129,16 @@ Modifications of this variable are taken into account only when \code{transform.
 transformation selection is chosen (considered only when \code{transform.function} is set to \code{"Auto"}).
 
 Control variables for the pre-specified outliers. The pre-specified outliers are used in the model only when enabled
-(\code{usrdef.outliersEnabled=TRUE}) and the outliers' type (\code{usrdef.outliersType}) and date
+(\code{usrdef.outliersEnabled=TRUE}) and the outlier type (\code{usrdef.outliersType}) and date
 (\code{usrdef.outliersDate}) are provided.}
 
 \item{usrdef.outliersEnabled}{logical. If \code{TRUE}, the program uses the pre-specified outliers.}
 
-\item{usrdef.outliersType}{a vector defining the outliers' type. Possible types are: \code{("AO")} = additive,
+\item{usrdef.outliersType}{a vector defining the outlier type. Possible types are: \code{("AO")} = additive,
 \code{("LS")} = level shift, \code{("TC")} = transitory change, \code{("SO")} = seasonal outlier.
 E.g.: \code{usrdef.outliersType = c("AO","AO","LS")}.}
 
-\item{usrdef.outliersDate}{a vector defining the outliers' dates. The dates should be characters in format "YYYY-MM-DD".
+\item{usrdef.outliersDate}{a vector defining the outlier dates. The dates should be characters in format "YYYY-MM-DD".
 E.g.: \code{usrdef.outliersDate= c("2009-10-01","2005-02-01","2003-04-01")}.}
 
 \item{usrdef.outliersCoef}{a vector providing fixed coefficients for the outliers. The coefficients can't be fixed if
@@ -257,9 +257,9 @@ Control variables for the automatic modelling of the ARIMA model (when \code{aut
 in the first step of the automatic model identification. If the Ljung-Box Q statistics for the residuals is acceptable,
 the default model is accepted and no further attempt will be made to identify another model.}
 
-\item{automdl.cancel}{the cancelation limit (\code{numeric}). If the difference in moduli of an AR and an MA roots
+\item{automdl.cancel}{the cancellation limit (\code{numeric}). If the difference in moduli of an AR and an MA roots
 (when estimating ARIMA(1,0,1)(1,0,1) models in the second step of the automatic identification of the differencing orders)
-is smaller than the cancelation limit, the two roots are assumed equal and cancel out.}
+is smaller than the cancellation limit, the two roots are assumed equal and cancel out.}
 
 \item{automdl.ub1}{the first unit root limit (\code{numeric}). It is the threshold value for the initial unit root test
 in the automatic differencing procedure. When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model,
@@ -353,9 +353,9 @@ in periods (positive values) or years (negative values). By default, the program
 \item{x11.seasonalComp}{logical: if \code{TRUE}, the program computes a seasonal component. Otherwise, the seasonal component
 is not estimated and its values are all set to 0 (additive decomposition) or 1 (multiplicative decomposition).}
 
-\item{x11.lsigma}{numeric: the lower sigma boundary for the detection of extreme values.}
+\item{x11.lsigma}{numeric: the lower sigma boundary for the detection of extreme values, > 0.5, default=1.5.}
 
-\item{x11.usigma}{numeric: the upper sigma boundary for the detection of extreme values.}
+\item{x11.usigma}{numeric: the upper sigma boundary for the detection of extreme values, > lsigma, default=2.5.}
 
 \item{x11.trendAuto}{logical: automatic Henderson filter. If \code{TRUE}, an automatic selection of the Henderson filter's length
 for the trend estimation is enabled.}
@@ -366,14 +366,14 @@ Should be an odd number in the range (1, 101].}
 
 \item{x11.seasonalma}{a vector of character(s) specifying which seasonal moving average (i.e. seasonal filter)
 will be used to estimate the seasonal factors for the entire series. The vector can be of length:
-1 - same seasonal filters for all periods (e.g.: \code{seasonalma=c("Msr")});
-or the period length - a seasonal filer is defined for each period (e.g. for quarterly series: \code{seasonalma=c("S3X3","Msr","S3X3","Msr")}).
-Possible filters are: \code{"Msr", "Stable", "X11Default", "S3X1", "S3X3", "S3X5", "S3X9", "S3X15"}.
-\code{"Msr"} - the program chooses the final seasonal filter automatically.}
+1 - the same seasonal filter is used for all periods (e.g.: `seasonal.filter = "Msr"` or `seasonal.filter = "S3X3"` );
+or have a different value for each quarter (length 4) or each month (length 12) - (e.g. for quarterly series: `seasonal.filter = c("S3X3", "Msr", "S3X3", "Msr")`).
+Possible filters are: `"Msr"`, `"Stable"`, `"X11Default"`, `"S3X1"`, `"S3X3"`, `"S3X5"`, `"S3X9"`, `"S3X15"`.
+`"Msr"` - the program chooses the final seasonal filter automatically.}
 
-\item{x11.fcasts}{numeric: the number of forecasts generated by the RegARIMA model in periods (positive values) or years (negative values).}
+\item{x11.fcasts}{numeric: the number of forecasts generated by the RegARIMA model in periods (positive values) or years (negative values).Default value: fcasts=-1.}
 
-\item{x11.bcasts}{numeric: the number of backcasts used in X11. Negative figures are translated in years of backcasts.}
+\item{x11.bcasts}{numeric: the number of backcasts used in X11. Negative figures are translated in years of backcasts. Default value: bcasts=0.}
 
 \item{x11.calendarSigma}{character to specify if the standard errors used for extreme values detection and adjustment are computed:
 from 5 year spans of irregulars (\code{"None"}, the default);
@@ -386,10 +386,10 @@ see parameter \code{x11.sigmaVector}).}
 \item{x11.sigmaVector}{a vector to specify one of the two groups of periods for whose standard errors used for extreme values
 detection and adjustment will be computed. Only used if \code{x11.calendarSigma = "Select"}. Possible values are: "Group1" and "Group2".}
 
-\item{x11.excludeFcasts}{logical: to exclude forecats and backcasts. If \code{TRUE}, the RegARIMA model forecasts and backcasts are not used during the detection of extreme values in the seasonal adjustment routines.}
+\item{x11.excludeFcasts}{logical: to exclude forecasts and backcasts. If \code{TRUE}, the RegARIMA model forecasts and backcasts are not used during the detection of extreme values in the seasonal adjustment routines.}
 }
 \value{
-A two-elements list of class \code{c("SA_spec", "X13")}, containing:
+A two-element list of class \code{c("SA_spec", "X13")}, containing:
 (1) an object of class \code{c("regarima_spec", "X13")} with the RegARIMA model specification;
 (2) an object of class \code{c("X11_spec", "data.frame")} with the X11 algorithm specification.
 Each component refers to different parts of the SA model specification, mirroring the arguments of the function (for details,
@@ -494,8 +494,8 @@ myreg2 <- x13(myseries, spec = myspec2)
 }
 }
 \references{
-Info on 'JDemetra+', usage and functions:
-\url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
+More information and examples related to 'JDemetra+' features in the online documentation:
+\url{https://jdemetra-new-documentation.netlify.app/}
 BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
 
 BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.

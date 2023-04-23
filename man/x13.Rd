@@ -18,7 +18,7 @@ x13(
 )
 }
 \arguments{
-\item{series}{a univariate time series}
+\item{series}{an univariate time series}
 
 \item{spec}{the x13 model specification. It can be the name (\code{character}) of a pre-defined X13 'JDemetra+' model specification
 (see \emph{Details}) or of a specification created with the \code{\link{x13_spec}} function. The default value is \code{"RSA5c"}.}
@@ -65,19 +65,16 @@ description), and \code{combined_seasonality_test}, the summary.
 \description{
 Functions to estimate the seasonally adjusted series (sa) with the X13-ARIMA method.
 This is achieved by decomposing the time series (y) into the trend-cycle (t), the seasonal component (s) and the irregular component (i).
-The final seasonally adjusted series shall be free of seasonal and calendar-related movements.
+Calendar-related movements can be corrected in the pre-treatment (regarima) step.
 \code{x13} returns a preformatted result while \code{jx13} returns the Java objects resulting from the seasonal adjustment.
 }
 \details{
-The first step of a seasonal adjustment consist in pre-adjusting the time series. This is done by removing
-its deterministic effects, using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
-In the second part, the pre-adjusted series is decomposed into the following components:
+The first step of a seasonal adjustment consists in pre-adjusting the time series. This is done by removing
+its deterministic effects (calendar and outliers), using a regression model with ARIMA noise (RegARIMA, see: \code{\link{regarima}}).
+In the second part, the pre-adjusted series is decomposed by the X11 algorithm into the following components:
 trend-cycle (t), seasonal component (s) and irregular component (i). The decomposition can be:
-additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}). The final seasonally adjusted series (sa)
-shall be free of seasonal and calendar-related movements.
-
-In the X13 method, the X11 algorithm (second step) decomposes the time series by means of linear filters.
-More information on the method can be found on the U.S. Census Bureau website.
+additive  (\eqn{y = t + s + i}) or multiplicative (\eqn{y = t * s * i}).
+More information on the X11 algorithm at \url{https://jdemetra-new-documentation.netlify.app/m-x11-decomposition}.
 
 The available pre-defined 'JDemetra+' X13 model specifications are described in the table below:
 \tabular{rrrrrrr}{
@@ -121,12 +118,8 @@ plot(mysa2$decomposition)
 }
 }
 \references{
-Info on 'JDemetra+', usage and functions:
-\url{https://ec.europa.eu/eurostat/cros/content/documentation_en/}
-
-BOX G.E.P. and JENKINS G.M. (1970), "Time Series Analysis: Forecasting and Control", Holden-Day, San Francisco.
-
-BOX G.E.P., JENKINS G.M., REINSEL G.C. and LJUNG G.M. (2015), "Time Series Analysis: Forecasting and Control", John Wiley & Sons, Hoboken, N. J., 5th edition.
+More information and examples related to 'JDemetra+' features in the online documentation:
+\url{https://jdemetra-new-documentation.netlify.app/}
 }
 \seealso{
 \code{\link{x13_spec}}, \code{\link{tramoseats}}

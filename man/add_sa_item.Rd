@@ -13,7 +13,7 @@ add_sa_item(workspace, multiprocessing, sa_obj, name)
 
 \item{sa_obj}{the seasonally adjusted object to add}
 
-\item{name}{the name of the seasonally adjustd series in the multiprocessing.
+\item{name}{the name of the seasonally adjusted series in the multiprocessing.
 By default the name of the \code{sa_obj} is used.}
 }
 \description{
