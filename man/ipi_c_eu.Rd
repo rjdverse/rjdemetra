@@ -8,7 +8,7 @@
 A monthly \code{ts} object from January 1990 to December 2020 with 34 variables.
 }
 \source{
-\url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
+Eurostat, 'sts_inpr_m' database.
 }
 \usage{
 ipi_c_eu
