@@ -74,7 +74,6 @@ setClass(
 #' }}
 #' \item{user_defined}{an object of class \code{"user_defined"}: a list containing the additional userdefined  variables.}
 #'
-#' @seealso
 #'
 #' @references
 #' More information and examples related to 'JDemetra+' features in the online documentation:
