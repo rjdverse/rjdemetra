@@ -1,7 +1,7 @@
 Package: RJDemetra
 Type: Package
 Title: Interface to 'JDemetra+' Seasonal Adjustment Software
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
   person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
                  email = "alain.quartier@yahoo.fr",
@@ -25,7 +25,7 @@ Imports:
     methods,
     stats,
     utils
-SystemRequirements: Java JRE 8 or higher.
+SystemRequirements: Java (>= 8)
 License: EUPL
 URL: https://github.com/jdemetra/rjdemetra
 LazyData: TRUE

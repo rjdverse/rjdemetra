@@ -4,7 +4,7 @@
 # RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![R-CMD-check](https://github.com/jdemetra/rjdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/jdemetra/rjdemetra/actions)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last
 release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN monthly
@@ -14,14 +14,7 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgre
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](https://github.com/SNStatComp/awesome-official-statistics-software)
 
-RJDemetra is an R interface to JDemetra+, the seasonal adjustment
-software [officially
-recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf)
-to the members of the European Statistical System (ESS) and the European
-System of Central Banks. JDemetra+ implements the two leading seasonal
-adjustment methods
-[TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and
-[X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
+RJDemetra is an R interface to JDemetra+, the seasonal adjustment software [officially recommended](<https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf>)` to the members of the European Statistical System (ESS) and the European System of Central Banks. JDemetra+ implements the two leading seasonal adjustment methods [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
 
 Besides seasonal adjustment, JDemetra+ bundles other time series models
 that are useful in the production or analysis of economic statistics,
@@ -36,8 +29,8 @@ RJDemetra offers full access to all options and outputs of JDemetra+.
 ## Installation
 
 RJDemetra relies on the
-[rJava](https://CRAN.R-project.org/package=rJava) package and Java SE 8
-or later version is required.
+[rJava](https://CRAN.R-project.org/package=rJava) package and Java SE
+version between 8 and 15 is required.
 
 ``` r
 # Install release version from CRAN
