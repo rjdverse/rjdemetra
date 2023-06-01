@@ -33,11 +33,11 @@ regarima_rslts <- function(jrobj, fcsth){
     if (arma[1]!=0){
       arma.description <- c(arma.description,paste0("Phi(",1:arma[1],")"))
     }
-    if (arma[3]!=0){
-      arma.description <- c(arma.description, paste0("Theta(",1:arma[3],")"))
-    }
     if (arma[4]!=0){
       arma.description <- c(arma.description, paste0("BPhi(",1:arma[4],")"))
+    }
+    if (arma[3]!=0){
+      arma.description <- c(arma.description, paste0("Theta(",1:arma[3],")"))
     }
     if (arma[6]!=0){
       arma.description <- c(arma.description, paste0("BTheta(",1:arma[6],")"))
