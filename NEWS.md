@@ -1,3 +1,7 @@
+# RJDemetra 0.2.3
+
+- Typo in printed arima coefficients : BPhi and Theta were inverted.
+
 # RJDemetra 0.2.2
 
 - update documentation
