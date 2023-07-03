@@ -152,7 +152,7 @@ load_spec <- function (file = "spec.RData") {
   easter <- rbind(s.easter,rep(NA,length(s.easter)),s.easter)
   outliers <- rbind(s.outliers,rep(NA,length(s.outliers)),s.outliers)
   arima.dsc <- rbind(s.arima.dsc,rep(NA,length(s.arima.dsc)),s.arima.dsc)
-  forecast <- rbind(s.forecast,rep(NA,length(s.estimate)),s.forecast)
+  forecast <- rbind(s.forecast,rep(NA,length(s.forecast)),s.forecast)
 
   rownames(estimate)=c("Loaded","User_modif","Final")
   rownames(transform)=c("Loaded","User_modif","Final")
