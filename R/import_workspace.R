@@ -175,7 +175,7 @@ get_name.sa_item <- function(x){
 
 #' @export
 get_all_name <- function(x){
-  UseMethod("get_name", x)
+  UseMethod("get_all_name", x)
 }
 #' @export
 get_all_name.workspace <- function(x){
@@ -188,6 +188,39 @@ get_all_name.multiprocessing <- function(x){
   sa_items <- get_all_objects(x)
   names_sa_items <- names(sa_items)
   return(names_sa_items)
+}
+
+#' @export
+get_position <- function(x, name){
+  UseMethod("get_position", x)
+}
+#' @export
+get_all_name.workspace <- function(x, name){
+  all_names <- get_all_names(x)
+  position <- which(all_names == names)
+  if (length(position) == 1L && position == 0L) {
+    warning("No SA-Processing have this name.")
+    return(0L)
+  } else if (length(position) > 1L) {
+    warning("Several SA-Processings have this name.")
+    return(position)
+  } else {
+    return(position)
+  }
+}
+#' @export
+get_all_name.multiprocessing <- function(x, name){
+  all_names <- get_all_names(x)
+  position <- which(all_names == names)
+  if (length(position) == 1L && position == 0L) {
+    warning("No SA-Item have this name.")
+    return(0L)
+  } else if (length(position) > 1L) {
+    warning("Several SA-Items have this name.")
+    return(position)
+  } else {
+    return(position)
+  }
 }
 
 #' Count the number of objects inside a workspace or multiprocessing
