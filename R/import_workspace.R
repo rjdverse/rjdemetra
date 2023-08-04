@@ -173,6 +173,23 @@ get_name.sa_item <- function(x){
   return(name)
 }
 
+#' @export
+get_all_name <- function(x){
+  UseMethod("get_name", x)
+}
+#' @export
+get_all_name.workspace <- function(x){
+  saps <- get_all_objects(x)
+  names_saps <- names(saps)
+  return(names_saps)
+}
+#' @export
+get_all_name.multiprocessing <- function(x){
+  sa_items <- get_all_objects(x)
+  names_sa_items <- names(sa_items)
+  return(names_sa_items)
+}
+
 #' Count the number of objects inside a workspace or multiprocessing
 #'
 #' Generic functions to count the number of \code{multiprocessing} (respectively \code{sa_item})
