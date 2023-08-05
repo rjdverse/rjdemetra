@@ -195,7 +195,7 @@ get_position <- function(x, name){
   UseMethod("get_position", x)
 }
 #' @export
-get_all_name.workspace <- function(x, name){
+get_position.workspace <- function(x, name){
   all_names <- get_all_names(x)
   position <- which(all_names == names)
   if (length(position) == 1L && position == 0L) {
@@ -209,7 +209,7 @@ get_all_name.workspace <- function(x, name){
   }
 }
 #' @export
-get_all_name.multiprocessing <- function(x, name){
+get_position.multiprocessing <- function(x, name){
   all_names <- get_all_names(x)
   position <- which(all_names == names)
   if (length(position) == 1L && position == 0L) {
