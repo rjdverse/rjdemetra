@@ -41,9 +41,9 @@ spec_ts <- tramoseats_spec(spec = "RSA5")
 sa_ts <- tramoseats(ipi_c_eu[, "FR"], spec = spec_ts)
 
 wk <- new_workspace()
-mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(wk, "sa1", sa_x13, "X13")
-add_sa_item(wk, "sa1", sa_ts, "TramoSeats")
+mp <- new_multiprocessing(wk, "sap1")
+add_sa_item(wk, "sap1", sa_x13, "X13")
+add_sa_item(wk, "sap1", sa_ts, "TramoSeats")
 
 compute(wk) # It's important to compute the workspace before retrieving the SA model
 sa_item1 <- get_object(mp, 1)

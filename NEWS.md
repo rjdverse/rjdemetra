@@ -1,6 +1,12 @@
+# RJDemetra development version
+
+- New function `get_all_names()` and `get_position()`
+
+
 # RJDemetra 0.2.3
 
 - Typo in printed arima coefficients : BPhi and Theta were inverted.
+
 
 # RJDemetra 0.2.2
 
@@ -10,9 +16,11 @@
 
 - SystemRequirements update for CRAN policies
 
+
 # RJDemetra 0.2.1
 
 - Fix `complete_dictionary.SA()` to avoid warning.
+
 
 # RJDemetra 0.2.0
 
@@ -26,6 +34,7 @@
 
 - Default parameters of the span specification `d0` and `d1` as NA for clarity (issue #102).
 
+
 # RJDemetra 0.1.9
 
 - Easter specification was not working.
@@ -34,11 +43,13 @@
 
 - SystemRequirement update: only Java JRE is needed.
 
+
 # RJDemetra 0.1.8
 
 - Java version restriction: JDemetra+ and RJDemetra are not compatible with Java 16 and higher. The compatibility with those versions of Java will be possible from next release of JDemetra+.
 
 - `java_ncore` option added to limit the number of cores used in Java to two to be sure to respect CRAN policies (to remove the option, use `options(java_ncore = NULL)`). However, it should not be necessary since RJDemetra shouldn't use multithread (issue #89).
+
 
 # RJDemetra 0.1.7
 
@@ -50,6 +61,7 @@ Data updated until December 2020.
 
 - there was a bug in `add_sa_item` (more precisely in `complete_dictionary.SA`) when a userdefined variable was already in the workspace but with a different suffix.
 
+
 # RJDemetra 0.1.6
 
 ## Bug fixed
@@ -59,6 +71,7 @@ Data updated until December 2020.
 - `ipi_c_eu` updated: the previous data were calendar adjusted data, they are now unadjusted (neither seasonally adjusted nor calendar adjusted data).
 
 - the print result of the combined test was incorrect.
+
 
 # RJDemetra 0.1.5
 
@@ -70,6 +83,7 @@ Data updated until December 2020.
 ## New functionalities
 
 - Function `get_jspec`, to get the Java object that contains the specification, is now exported.
+
 
 # RJDemetra 0.1.4
 
@@ -125,7 +139,6 @@ Data updated until December 2020.
 - Possibility to use user-defined calendar regressors. To do it use `tradingdays.option = "UserDefined` and add new regressors variables (`usrdef.varEnabled = TRUE` to enable user-defined regressors and `usrdef.var` to define the regressors) using `usrdef.varType = "Calendar"`.  
 - `usrdef.varType` argument is recycled with the number of variables defined in the `usrdef.var` parameter.  
 - News functions to only get the Java object from a seasonal adjustment or a pre-adjustment method: `jx13`, `jtramoseats`, `jregarima`, `jregarima_x13`, `jregarima_tramoseats` and `get_jmodel`. Therefore, there is no formatting and the computation is faster than the non 'j' functions (`x13`, `tramoseats`, `regarima`, `regarima_x13`, `regarima_tramoseats` and `get_model`). To manipulate these objects, there are three functions: `get_dictionary` to get the indicators that can be extracted, `get_indicators` to extract these indicators and `jSA2R` to get the formatted R model.
-
 
 
 ## Bug fixed
