@@ -28,8 +28,8 @@ Generic functions to retrieve the input raw time series of a \code{workspace}, \
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
-mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(wk, "sa1", sa_x13, "X13")
+mp <- new_multiprocessing(wk, "sap1")
+add_sa_item(wk, "sap1", sa_x13, "X13")
 sa_item <- get_object(mp, 1)
 
   # Extracting the raw time series from an adjusted series:
@@ -44,7 +44,7 @@ get_ts(mp)
 
 
   # Extracting all raw time series from a workspace:
-# Returns a list of length 1 named "sa1" containing a list
+# Returns a list of length 1 named "sap1" containing a list
 # of length 1 named "X13", containing the ts object ipi_c_eu[, "FR"]
 get_ts(wk)
 }

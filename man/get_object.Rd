@@ -28,8 +28,8 @@ from a \code{workspace} (respectively \code{multiprocessing}) or to retrieve a s
 sa_x13 <- x13(ipi_c_eu[, "FR"], spec = "RSA5c")
 
 wk <- new_workspace()
-mp <- new_multiprocessing(wk, "sa1")
-add_sa_item(wk, "sa1", sa_x13, "X13")
+mp <- new_multiprocessing(wk, "sap1")
+add_sa_item(wk, "sap1", sa_x13, "X13")
 
 # A way to retrieve the multiprocessing:
 mp <- get_object(wk, 1)
