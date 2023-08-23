@@ -1,10 +1,10 @@
-jSA <- function(result = NULL, spec = NULL, dictionary = NULL){
-  jsa_object <- list(result = result, spec = spec, dictionary = dictionary)
-  class(jsa_object) <- "jSA"
-  jsa_object
+jSA <- function(result = NULL, spec = NULL, dictionary = NULL) {
+    jsa_object <- list(result = result, spec = spec, dictionary = dictionary)
+    class(jsa_object) <- "jSA"
+    jsa_object
 }
-is.jSA <- function(x){
-  inherits(x, "jSA")
+is.jSA <- function(x) {
+    inherits(x, "jSA")
 }
 
 #' Functions around 'jSA' objects
@@ -52,89 +52,88 @@ is.jSA <- function(x){
 #' @rdname jSA
 #' @name jSA
 #' @export
-get_dictionary <- function(x){
-  if(!is.jSA(x))
-    stop("x must be a jSA object!")
-  jresult <- x[["result"]]
-  if(is.null(jresult))
-    return(NULL)
-  dictionary(jresult)
+get_dictionary <- function(x) {
+    if(!is.jSA(x))
+        stop("x must be a jSA object!")
+    jresult <- x[["result"]]
+    if(is.null(jresult))
+        return(NULL)
+    dictionary(jresult)
 }
 #' @rdname jSA
 #' @name jSA
 #' @export
-get_indicators <- function(x, ...){
-  if(!is.jSA(x))
-    stop("x must be a jSA object!")
-  jresult <- x[["result"]]
-  if(is.null(jresult))
-    return(NULL)
-  list_indicators <- c(...)
-  if(!is.character(list_indicators))
-    stop("The indicators must be a vector of characters!")
-  indicators <- lapply(list_indicators, function(id){
-    result(jresult, id)
-  })
-  names(indicators) <- list_indicators
-  indicators
+get_indicators <- function(x, ...) {
+    if(!is.jSA(x))
+        stop("x must be a jSA object!")
+    jresult <- x[["result"]]
+    if(is.null(jresult))
+        return(NULL)
+    list_indicators <- c(...)
+    if(!is.character(list_indicators))
+        stop("The indicators must be a vector of characters!")
+    indicators <- lapply(list_indicators, function(id) {
+        result(jresult, id)
+    })
+    names(indicators) <- list_indicators
+    indicators
 }
 #' @rdname jSA
 #' @name jSA
 #' @export
-jSA2R <- function(x, userdefined = NULL){
-  if(!is.jSA(x))
-    stop("x must be a jSA object!")
+jSA2R <- function(x, userdefined = NULL) {
+    if(!is.jSA(x))
+        stop("x must be a jSA object!")
 
-  jresult <- x[["result"]]@internal
-  jspec <- x[["spec"]]
-  dictionary <- x[["dictionary"]]
-  context_dictionary <- dictionary$toContext()
-  if(is.null(jresult))
-    return(NULL)
+    jresult <- x[["result"]]@internal
+    jspec <- x[["spec"]]
+    dictionary <- x[["dictionary"]]
+    context_dictionary <- dictionary$toContext()
+    if(is.null(jresult))
+        return(NULL)
 
-  if(.jinstanceof(jspec,"jdr/spec/x13/RegArimaSpec")){
-    # X13-RegARIMA object
-    model <- regarima_defX13(jrobj = x[["result"]], spec = jspec,
+    if(.jinstanceof(jspec,"jdr/spec/x13/RegArimaSpec")) {
+        # X13-RegARIMA object
+        model <- regarima_defX13(jrobj = x[["result"]], spec = jspec,
+                                 context_dictionary = context_dictionary,
+                                 extra_info = TRUE, freq = frequency(y_ts))
+    } else {
+        if(.jinstanceof(jspec, "jdr/spec/tramoseats/TramoSpec")) {
+            # TRAMOSEATS-RegARIMA object
+            model <- regarima_defTS(jrobj = x[["result"]], spec = jspec,
+                                    context_dictionary = context_dictionary,
+                                    extra_info = TRUE, freq = frequency(y_ts))
+        } else {
+            y_ts <- result(x[["result"]], "y")
+            # SA object
+            model <- sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
                              context_dictionary = context_dictionary,
                              extra_info = TRUE, freq = frequency(y_ts))
-  }else{
-    if(.jinstanceof(jspec, "jdr/spec/tramoseats/TramoSpec")){
-      # TRAMOSEATS-RegARIMA object
-      model <- regarima_defTS(jrobj = x[["result"]], spec = jspec,
-                              context_dictionary = context_dictionary,
-                              extra_info = TRUE, freq = frequency(y_ts))
-    }else{
-      y_ts <- result(x[["result"]], "y")
-      # SA object
-      model <- sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
-                       context_dictionary = context_dictionary,
-                       extra_info = TRUE, freq = frequency(y_ts))
+        }
     }
-  }
-  model
+    model
 }
-
 
 
 sa_jd2r <- function(jrslt, spec,
                     userdefined = NULL,
                     context_dictionary = NULL,
-                    extra_info = FALSE, freq = NA){
-  if (is.null(jrslt))
-    return(NULL)
+                    extra_info = FALSE, freq = NA) {
+    if (is.null(jrslt))
+        return(NULL)
 
-  if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
-    tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                          context_dictionary = context_dictionary,
-                          extra_info = extra_info, freq = freq)
-  }else{
-    if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
-      x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
-                     context_dictionary = context_dictionary,
-                     extra_info = extra_info, freq = freq)
-    }else{
-      stop("Wrong spec argument")
+    if (.jinstanceof(spec, "jdr/spec/tramoseats/TramoSeatsSpec")) {
+        tramoseatsJavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                              context_dictionary = context_dictionary,
+                              extra_info = extra_info, freq = freq)
+    } else {
+        if (.jinstanceof(spec, "jdr/spec/x13/X13Spec")) {
+            x13JavaResults(jrslt = jrslt, spec = spec, userdefined = userdefined,
+                           context_dictionary = context_dictionary,
+                           extra_info = extra_info, freq = freq)
+        } else {
+            stop("Wrong spec argument")
+        }
+
     }
-
-  }
 }

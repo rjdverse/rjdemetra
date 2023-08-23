@@ -42,7 +42,7 @@ sapply(get_all_objects(mp), get_name)
 sapply(get_all_objects(wk), get_name)
 
 # To retrieve the name of every sa_item in a given workspace:
-lapply(get_all_objects(wk),function(mp){
+lapply(get_all_objects(wk),function(mp) {
   sapply(get_all_objects(mp), get_name)
 })
 }

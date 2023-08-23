@@ -22,20 +22,20 @@
 #' @rdname new_workspace
 #' @export
 new_workspace <- function() {
-  dictionary = .jnull("jdr/spec/ts/Utility$Dictionary")
-  wk <- .jcall("ec/tstoolkit/jdr/ws/Workspace",
-               "Lec/tstoolkit/jdr/ws/Workspace;",
-               "create", dictionary)
-  wk <- new("workspace", wk)
-  return(wk)
+    dictionary = .jnull("jdr/spec/ts/Utility$Dictionary")
+    wk <- .jcall("ec/tstoolkit/jdr/ws/Workspace",
+                 "Lec/tstoolkit/jdr/ws/Workspace;",
+                 "create", dictionary)
+    wk <- new("workspace", wk)
+    return(wk)
 }
 #' @name new_workspace
 #' @rdname new_workspace
 #' @export
 new_multiprocessing <- function(workspace, name) {
-  mp <- .jcall(workspace, "Lec/tstoolkit/jdr/ws/MultiProcessing;", "newMultiProcessing", name)
-  mp <- new("multiprocessing", mp)
-  return(invisible(mp))
+    mp <- .jcall(workspace, "Lec/tstoolkit/jdr/ws/MultiProcessing;", "newMultiProcessing", name)
+    mp <- new("multiprocessing", mp)
+    return(invisible(mp))
 }
 
 
@@ -61,32 +61,32 @@ new_multiprocessing <- function(workspace, name) {
 #' @return A boolean indicating whether the export is successful.
 #' @export
 save_workspace <- function(workspace, file) {
-  if (missing(file) || is.null(file)) {
-    if (Sys.info()[['sysname']] == "Windows") {
-      file <- utils::choose.files(default = "demetra_m.xml",
-                                  caption = "Select a workspace for the output",
-                                  filters = c("JDemetra+ workspace (.xml)", "*.xml"))
-    }else{
-      file <- NULL # base::file.choose()
+    if (missing(file) || is.null(file)) {
+        if (Sys.info()[['sysname']] == "Windows") {
+            file <- utils::choose.files(default = "demetra_m.xml",
+                                        caption = "Select a workspace for the output",
+                                        filters = c("JDemetra+ workspace (.xml)", "*.xml"))
+        } else {
+            file <- NULL # base::file.choose()
+        }
+        if (length(file) == 0)
+            stop("You must choose a file !")
     }
-    if (length(file) == 0)
-      stop("You must choose a file !")
-  }
-  if (length(grep("\\.xml$",file)) == 0)
-    stop("The file must be a .xml !")
+    if (length(grep("\\.xml$",file)) == 0)
+        stop("The file must be a .xml !")
 
-  full_file_name <- normalizePath(file, winslash = "/", mustWork = FALSE)
-  folder_wk_name <- sub(".xml$","", full_file_name)
-  workspace_name <- basename(folder_wk_name)
+    full_file_name <- normalizePath(file, winslash = "/", mustWork = FALSE)
+    folder_wk_name <- sub(".xml$","", full_file_name)
+    workspace_name <- basename(folder_wk_name)
 
 
-  result <- .jcall(workspace, "Z", "save", full_file_name)
-  # To change the name of the workspace
-  wk_txt <- readLines(full_file_name)
-  wk_txt <- sub(folder_wk_name, workspace_name, wk_txt)
-  writeLines(wk_txt, full_file_name)
+    result <- .jcall(workspace, "Z", "save", full_file_name)
+    # To change the name of the workspace
+    wk_txt <- readLines(full_file_name)
+    wk_txt <- sub(folder_wk_name, workspace_name, wk_txt)
+    writeLines(wk_txt, full_file_name)
 
-  invisible(result)
+    invisible(result)
 }
 
 
@@ -123,230 +123,230 @@ save_workspace <- function(workspace, file) {
 #' }
 #'
 #' @export
-add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
-  if (is.character(multiprocessing)) {
-    nb_mp_objects <- count(workspace)
-    mp_objects <- lapply(seq_len(nb_mp_objects),
-                         function(i) {
-                           get_object(workspace, i)
-                         })
-    mp_names <- sapply(mp_objects, get_name)
-    multiprocessing <- match(multiprocessing, mp_names)
-    if (is.na(multiprocessing))
-      stop("The multiprocessing ",multiprocessing," doesn't exist !")
-  }
-  if (!is.numeric(multiprocessing))
-    stop("The parameter for the multiprocessing must be a character or a numeric")
+add_sa_item <- function(workspace, multiprocessing, sa_obj, name) {
+    if (is.character(multiprocessing)) {
+        nb_mp_objects <- count(workspace)
+        mp_objects <- lapply(seq_len(nb_mp_objects),
+                             function(i) {
+                                 get_object(workspace, i)
+                             })
+        mp_names <- sapply(mp_objects, get_name)
+        multiprocessing <- match(multiprocessing, mp_names)
+        if (is.na(multiprocessing))
+            stop("The multiprocessing ",multiprocessing," doesn't exist !")
+    }
+    if (!is.numeric(multiprocessing))
+        stop("The parameter for the multiprocessing must be a character or a numeric")
 
-  if (missing(name))
-    name <- deparse(substitute(sa_obj))
+    if (missing(name))
+        name <- deparse(substitute(sa_obj))
 
-  sa_obj <- complete_dictionary(workspace, sa_obj)
-  jspec <- get_jspec(sa_obj)
-  y <- get_ts(sa_obj)
+    sa_obj <- complete_dictionary(workspace, sa_obj)
+    jspec <- get_jspec(sa_obj)
+    y <- get_ts(sa_obj)
 
-  if (!is.character(name) || length(name) != 1)
-    stop("The name of the SA element to add is mispecified")
+    if (!is.character(name) || length(name) != 1)
+        stop("The name of the SA element to add is mispecified")
 
-  mp_obj <- get_object(workspace, multiprocessing)
-  .jcall(mp_obj, "V", "add", name, ts_r2jd(y), jspec)
+    mp_obj <- get_object(workspace, multiprocessing)
+    .jcall(mp_obj, "V", "add", name, ts_r2jd(y), jspec)
 }
 
-complete_dictionary <- function(workspace, sa_obj){
-  UseMethod("complete_dictionary", sa_obj)
+complete_dictionary <- function(workspace, sa_obj) {
+    UseMethod("complete_dictionary", sa_obj)
 }
 
-complete_dictionary.SA <- function(workspace, sa_obj){
-  userdef <- sa_obj$regarima$specification$regression$userdef
-  ud_var <- userdef$variables
-  if (is.null(ud_var) || !userdef$specification["variables"] || all(is.na(ud_var$series)))
-    return(sa_obj)
+complete_dictionary.SA <- function(workspace, sa_obj) {
+    userdef <- sa_obj$regarima$specification$regression$userdef
+    ud_var <- userdef$variables
+    if (is.null(ud_var) || !userdef$specification["variables"] || all(is.na(ud_var$series)))
+        return(sa_obj)
 
-  context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
-  ts_variable_managers <- context_dictionary$getTsVariableManagers()
-  ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
-  jd_r_variables <- ts_variable_managers$get("r")
-  if (is.null(jd_r_variables)) {
-    ts_variable_managers$set("r",
-                             .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
+    context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
+    ts_variable_managers <- context_dictionary$getTsVariableManagers()
+    ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
     jd_r_variables <- ts_variable_managers$get("r")
-  }
-  jd_var_names <- jd_r_variables$getNames()
+    if (is.null(jd_r_variables)) {
+        ts_variable_managers$set("r",
+                                 .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
+        jd_r_variables <- ts_variable_managers$get("r")
+    }
+    jd_var_names <- jd_r_variables$getNames()
 
-  model_var_names <- rownames(ud_var$description)
+    model_var_names <- rownames(ud_var$description)
 
-  if (is.mts(ud_var$series)) {
-    for (i in seq_along(model_var_names)) {
-      name <- model_var_names[i]
-      dictionary_var <- jd_r_variables$get(name)
-      tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
-                     name, ts_r2jd(ud_var$series[, i]))
-      if (is.null(dictionary_var)) {
-        jd_r_variables$set(name, tsvar)
-      } else {
-        if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
-          same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
-          same_data <- sapply(same_prefix, function(x) {
-            jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
-          })
-          if (any(same_data)) {
-            # a name fix the same prefix  has the same data
-            model_new_var_names <- same_prefix[which(same_data)]
-          } else {
-            model_new_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                    name),
-                                                  sep = "_")
-          }
-          model_var_names[i] <- name <- tail(model_new_var_names, 1)
-          if (!any(same_data)){
-            # If we didn't find any TsVariable with the same prefix with the same data,
-            # we create a new one
+    if (is.mts(ud_var$series)) {
+        for (i in seq_along(model_var_names)) {
+            name <- model_var_names[i]
+            dictionary_var <- jd_r_variables$get(name)
             tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
                            name, ts_r2jd(ud_var$series[, i]))
+            if (is.null(dictionary_var)) {
+                jd_r_variables$set(name, tsvar)
+            } else {
+                if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
+                    same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+                    same_data <- sapply(same_prefix, function(x) {
+                        jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
+                    })
+                    if (any(same_data)) {
+                        # a name fix the same prefix  has the same data
+                        model_new_var_names <- same_prefix[which(same_data)]
+                    } else {
+                        model_new_var_names <- base::make.unique(c(jd_r_variables$getNames(),
+                                                                   name),
+                                                                 sep = "_")
+                    }
+                    model_var_names[i] <- name <- tail(model_new_var_names, 1)
+                    if (!any(same_data)) {
+                        # If we didn't find any TsVariable with the same prefix with the same data,
+                        # we create a new one
+                        tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
+                                       name, ts_r2jd(ud_var$series[, i]))
+                        jd_r_variables$set(name, tsvar)
+                    }
+                }
+            }
+        }
+    } else {
+        name <- model_var_names
+        dictionary_var <- jd_r_variables$get(name)
+        tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
+                       name, ts_r2jd(ud_var$series))
+        if (is.null(dictionary_var)) {
             jd_r_variables$set(name, tsvar)
-          }
-        }
-      }
-    }
-  }else{
-    name <- model_var_names
-    dictionary_var <- jd_r_variables$get(name)
-    tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
-                   name, ts_r2jd(ud_var$series))
-    if (is.null(dictionary_var)) {
-      jd_r_variables$set(name, tsvar)
-    } else {
-      if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
-        same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
-        same_data <- sapply(same_prefix, function(x) {
-          jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
-        })
-        if (any(same_data)) {
-          # a name fix the same prefix  has the same data
-          model_new_var_names <- same_prefix[which(same_data)]
         } else {
-          model_new_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                  name),
-                                                sep = "_")
-        }
+            if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
+                same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+                same_data <- sapply(same_prefix, function(x) {
+                    jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
+                })
+                if (any(same_data)) {
+                    # a name fix the same prefix  has the same data
+                    model_new_var_names <- same_prefix[which(same_data)]
+                } else {
+                    model_new_var_names <- base::make.unique(c(jd_r_variables$getNames(),
+                                                               name),
+                                                             sep = "_")
+                }
 
-        model_var_names <- name <- tail(model_new_var_names, 1)
-        if (!any(same_data)){
-          # If we didn't find any TsVariable with the same prefix with the same data,
-          # we create a new one
-          tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
-                         name, ts_r2jd(ud_var$series))
-          jd_r_variables$set(name, tsvar)
+                model_var_names <- name <- tail(model_new_var_names, 1)
+                if (!any(same_data)) {
+                    # If we didn't find any TsVariable with the same prefix with the same data,
+                    # we create a new one
+                    tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
+                                   name, ts_r2jd(ud_var$series))
+                    jd_r_variables$set(name, tsvar)
+                }
+            }
         }
-      }
     }
-  }
-  rownames(sa_obj$regarima$specification$regression$userdef$variables$description) <-
-    model_var_names
+    rownames(sa_obj$regarima$specification$regression$userdef$variables$description) <-
+        model_var_names
 
-  return(sa_obj)
-}
-complete_dictionary.jSA <- function(workspace, sa_obj){
-  model_dictionary <- sa_obj$dictionary
-  context <- model_dictionary$toContext()
-  current_variables <- context$getTsVariableManagers()$get("r")
-  if (is.null(current_variables) || current_variables$getCount() == 0)
     return(sa_obj)
+}
+complete_dictionary.jSA <- function(workspace, sa_obj) {
+    model_dictionary <- sa_obj$dictionary
+    context <- model_dictionary$toContext()
+    current_variables <- context$getTsVariableManagers()$get("r")
+    if (is.null(current_variables) || current_variables$getCount() == 0)
+        return(sa_obj)
 
-  context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
-  ts_variable_managers <- context_dictionary$getTsVariableManagers()
-  jd_r_variables <- ts_variable_managers$get("r")
-  if (is.null(jd_r_variables)) {
-    ts_variable_managers$set("r",
-                             .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
+    context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
+    ts_variable_managers <- context_dictionary$getTsVariableManagers()
     jd_r_variables <- ts_variable_managers$get("r")
-  }
-  variables_names <- data.frame(current_names = current_variables$getNames(),
-             new_names = current_variables$getNames(),
-             stringsAsFactors = FALSE,
-             row.names = current_variables$getNames())
+    if (is.null(jd_r_variables)) {
+        ts_variable_managers$set("r",
+                                 .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
+        jd_r_variables <- ts_variable_managers$get("r")
+    }
+    variables_names <- data.frame(current_names = current_variables$getNames(),
+                                  new_names = current_variables$getNames(),
+                                  stringsAsFactors = FALSE,
+                                  row.names = current_variables$getNames())
 
-  for (i in seq_len(nrow(variables_names))) {
-    name <- variables_names[i,1]
-    var <- current_variables$get(name)
-    dictionary_var <- jd_r_variables$get(name)
-    if (is.null(dictionary_var)) {
-      jd_r_variables$set(name, var)
-    } else {
-      if (!dictionary_var$getTsData()$equals(var$getTsData())) {
-        same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
-        same_data <- sapply(same_prefix, function(x) {
-          jd_r_variables$get(x)$getTsData()$equals(var$getTsData())
-        })
-        if (any(same_data)) {
-          # a name fix the same prefix  has the same data
-          model_var_names <- same_prefix[which(same_data)]
+    for (i in seq_len(nrow(variables_names))) {
+        name <- variables_names[i,1]
+        var <- current_variables$get(name)
+        dictionary_var <- jd_r_variables$get(name)
+        if (is.null(dictionary_var)) {
+            jd_r_variables$set(name, var)
         } else {
-          model_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                  name),
-                                                sep = "_")
+            if (!dictionary_var$getTsData()$equals(var$getTsData())) {
+                same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+                same_data <- sapply(same_prefix, function(x) {
+                    jd_r_variables$get(x)$getTsData()$equals(var$getTsData())
+                })
+                if (any(same_data)) {
+                    # a name fix the same prefix  has the same data
+                    model_var_names <- same_prefix[which(same_data)]
+                } else {
+                    model_var_names <- base::make.unique(c(jd_r_variables$getNames(),
+                                                           name),
+                                                         sep = "_")
+                }
+                current_variables$remove(name)
+                name <- tail(model_var_names, 1)
+                var$setName(name)
+                current_variables$set(name, var)
+                if (!any(same_data))
+                    jd_r_variables$set(name, var)
+
+                variables_names[i,2] <- name
+            }
         }
-        current_variables$remove(name)
-        name <- tail(model_var_names, 1)
-        var$setName(name)
-        current_variables$set(name, var)
-        if (!any(same_data))
-          jd_r_variables$set(name, var)
-
-        variables_names[i,2] <- name
-      }
     }
-  }
 
-  if (identical(variables_names[,1], variables_names[,2]))
-    return(sa_obj) # no name has been change
+    if (identical(variables_names[,1], variables_names[,2]))
+        return(sa_obj) # no name has been change
 
 
-  core <- sa_obj$spec$getCore()$clone()
+    core <- sa_obj$spec$getCore()$clone()
 
-  if (.jinstanceof(core, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
-    core <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
-    spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",core)
-  }else{
-    if (.jinstanceof(core, "ec/satoolkit/x13/X13Specification")) {
-      core <- .jcast(core, "ec/satoolkit/x13/X13Specification")
-      spec <- .jnew("jdr/spec/x13/X13Spec", core)
-    } else{
-      spec = sa_obj$spec
+    if (.jinstanceof(core, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
+        core <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
+        spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",core)
+    } else {
+        if (.jinstanceof(core, "ec/satoolkit/x13/X13Specification")) {
+            core <- .jcast(core, "ec/satoolkit/x13/X13Specification")
+            spec <- .jnew("jdr/spec/x13/X13Spec", core)
+        } else {
+            spec = sa_obj$spec
+        }
     }
-  }
-  jregression <- spec$getRegression()
-  jtd <- jregression$getCalendar()$getTradingDays()
-  user_td <- jtd$getUserVariables()
-  n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
+    jregression <- spec$getRegression()
+    jtd <- jregression$getCalendar()$getTradingDays()
+    user_td <- jtd$getUserVariables()
+    n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
 
-  if (n_userdefined_var > 0) {
-    ud_vars <- lapply(seq_len(n_userdefined_var), function(i){
-      .jcall(jregression,
-             "Ljdr/spec/ts/Utility$UserDefinedVariable;",
-             "getUserDefinedVariable",
-             as.integer(i - 1))
-    })
-    type <- sapply(ud_vars, function(x) x$getComponent())
-    coeff <- sapply(ud_vars, function(x) x$getCoefficient())
-    var_names <- sapply(ud_vars, function(x) gsub("^r\\.","", x$getName()))
-    new_names <- variables_names[var_names, 2]
-    jregression$clearUserDefinedVariables()
-    for (i in seq_len(seq_len(n_userdefined_var))) {
-      .jcall(jregression,"V","addUserDefinedVariable",
-             new_names[i], type[i], coeff[i])
+    if (n_userdefined_var > 0) {
+        ud_vars <- lapply(seq_len(n_userdefined_var), function(i) {
+            .jcall(jregression,
+                   "Ljdr/spec/ts/Utility$UserDefinedVariable;",
+                   "getUserDefinedVariable",
+                   as.integer(i - 1))
+        })
+        type <- sapply(ud_vars, function(x) x$getComponent())
+        coeff <- sapply(ud_vars, function(x) x$getCoefficient())
+        var_names <- sapply(ud_vars, function(x) gsub("^r\\.","", x$getName()))
+        new_names <- variables_names[var_names, 2]
+        jregression$clearUserDefinedVariables()
+        for (i in seq_len(seq_len(n_userdefined_var))) {
+            .jcall(jregression,"V","addUserDefinedVariable",
+                   new_names[i], type[i], coeff[i])
 
+        }
     }
-  }
 
-  if (length(user_td) > 0) {
-    var_names <- gsub("^r\\.","", user_td)
-    new_names <- variables_names[var_names, 2]
-    .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",new_names)))
-  }
+    if (length(user_td) > 0) {
+        var_names <- gsub("^r\\.","", user_td)
+        new_names <- variables_names[var_names, 2]
+        .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",new_names)))
+    }
 
-  sa_obj$dictionary <- model_dictionary$fromContext(context)
-  sa_obj$spec <- spec
+    sa_obj$dictionary <- model_dictionary$fromContext(context)
+    sa_obj$spec <- spec
 
-  return(sa_obj)
+    return(sa_obj)
 }

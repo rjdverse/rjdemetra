@@ -39,11 +39,11 @@ myspec2 <- regarima_spec_x13(myreg1, estimate.from = "2005-10-01", outlier.from 
 myreg2 <- regarima(myseries, myspec2)
 
 myreg3 <- regarima_tramoseats(myseries, spec = "TRfull")
-myspec4 <-regarima_spec_tramoseats(myreg3, tradingdays.mauto = "Unused",
+myspec4 <- regarima_spec_tramoseats(myreg3, tradingdays.mauto = "Unused",
                                   tradingdays.option ="WorkingDays",
                                   easter.type = "Standard",
                                   automdl.enabled = FALSE, arima.mu = TRUE)
-myreg4 <-regarima(myseries, myspec4)
+myreg4 <- regarima(myseries, myspec4)
 
 myspec6 <- x13_spec("RSA5c")
 mysa6 <- x13(myseries, myspec6)

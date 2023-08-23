@@ -1,6 +1,6 @@
 setClass(
-  Class="TramoSeats_java",
-  contains = "ProcResults"
+    Class = "TramoSeats_java",
+    contains = "ProcResults"
 )
 
 #' Seasonal Adjustment with TRAMO-SEATS
@@ -125,45 +125,96 @@ setClass(
 #' }
 #' @export
 tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
-                       userdefined = NULL){
-  if (!is.ts(series)) {
-    stop("The series must be a time series!")
-  }
-  UseMethod("tramoseats", spec)
+                       userdefined = NULL) {
+    if (!is.ts(series)) {
+        stop("The series must be a time series!")
+    }
+    UseMethod("tramoseats", spec)
 }
 #' @export
 tramoseats.SA_spec <- function(series, spec,
-                      userdefined = NULL){
-  jsa_obj <- jtramoseats.SA_spec(series, spec)
-  jrslt <- jsa_obj[["result"]]@internal
-  jrspec <- jsa_obj[["spec"]]
+                               userdefined = NULL) {
+    jsa_obj <- jtramoseats.SA_spec(series, spec)
+    jrslt <- jsa_obj[["result"]]@internal
+    jrspec <- jsa_obj[["spec"]]
 
-  # Or, using the fonction x13JavaResults:
-  # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+    # Or, using the fonction x13JavaResults:
+    # return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new (Class = "TRAMO_java",internal = jrarima)
-  jrobct <- new (Class = "TramoSeats_java", internal = jrslt)
+    jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    jrobct_arima <- new (Class = "TRAMO_java",internal = jrarima)
+    jrobct <- new (Class = "TramoSeats_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)){
-    return (NaN)
-  }else{
+    if (is.null(jrobct@internal)) {
+        return (NaN)
+    } else {
 
-    # Error during the preliminary check
+        # Error during the preliminary check
+        res = jrslt$getResults()$getProcessingInformation()
+
+        if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")) {
+            proc_info <- jrslt$getResults()$getProcessingInformation()
+
+            error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+            warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+            if(!.jcall(error_msg,"Z","isEmpty"))
+                stop(error_msg$toString())
+            if(!.jcall(warning_msg,"Z","isEmpty"))
+                warning(warning_msg$toString())
+        }
+        reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
+        deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
+        fin <- final(jrobj = jrobct)
+        diagn <- diagnostics(jrobj = jrobct)
+
+        z <- list(regarima = reg, decomposition = deco, final = fin,
+                  diagnostics = diagn,
+                  user_defined = user_defined(userdefined, jrobct))
+
+        class(z) <- c("SA","TRAMO_SEATS")
+        return(z)
+    }
+}
+#' @export
+tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                                 userdefined = NULL) {
+    jsa_obj <- jtramoseats.character(series, spec)
+    jrslt <- jsa_obj[["result"]]@internal
+    jrspec <- jsa_obj[["spec"]]
+
+    return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+}
+
+tramoseatsJavaResults <- function(jrslt, spec,
+                                  userdefined = NULL,
+                                  context_dictionary = NULL,
+                                  extra_info = FALSE,
+                                  freq = NA) {
+    jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    jrobct_arima <- new(Class = "TRAMO_java",internal = jrarima)
+    jrobct <- new(Class = "TramoSeats_java", internal = jrslt)
+
+    if (is.null(jrobct@internal))
+        return(NaN)
+
+    # Error in preliminary check
     res = jrslt$getResults()$getProcessingInformation()
 
-    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-      proc_info <- jrslt$getResults()$getProcessingInformation()
-
-      error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
-      warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
-      if(!.jcall(error_msg,"Z","isEmpty"))
-        stop(error_msg$toString())
-      if(!.jcall(warning_msg,"Z","isEmpty"))
-        warning(warning_msg$toString())
+    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")) {
+        proc_info <- jrslt$getResults()$getProcessingInformation()
+        error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+        warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+        if(!.jcall(error_msg,"Z","isEmpty"))
+            stop(error_msg$toString())
+        if(!.jcall(warning_msg,"Z","isEmpty"))
+            warning(warning_msg$toString())
     }
-    reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
-    deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
+
+    reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
+                          context_dictionary = context_dictionary,
+                          extra_info = extra_info,
+                          freq = freq)
+    deco <- decomp_defTS(jrobj = jrobct, spec = spec)
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
@@ -173,56 +224,4 @@ tramoseats.SA_spec <- function(series, spec,
 
     class(z) <- c("SA","TRAMO_SEATS")
     return(z)
-  }
-}
-#' @export
-tramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
-                           userdefined = NULL){
-  jsa_obj <- jtramoseats.character(series, spec)
-  jrslt <- jsa_obj[["result"]]@internal
-  jrspec <- jsa_obj[["spec"]]
-
-  return(tramoseatsJavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
-}
-
-tramoseatsJavaResults <- function(jrslt, spec,
-                                  userdefined = NULL,
-                                  context_dictionary = NULL,
-                                  extra_info = FALSE,
-                                  freq = NA){
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "TRAMO_java",internal = jrarima)
-  jrobct <- new(Class = "TramoSeats_java", internal = jrslt)
-
-  if (is.null(jrobct@internal))
-    return(NaN)
-
-  # Error in preliminary check
-  res = jrslt$getResults()$getProcessingInformation()
-
-  if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-    proc_info <- jrslt$getResults()$getProcessingInformation()
-    error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
-    warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
-    if(!.jcall(error_msg,"Z","isEmpty"))
-      stop(error_msg$toString())
-    if(!.jcall(warning_msg,"Z","isEmpty"))
-      warning(warning_msg$toString())
-  }
-
-  reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,
-                        context_dictionary = context_dictionary,
-                        extra_info = extra_info,
-                        freq = freq)
-  deco <- decomp_defTS(jrobj = jrobct, spec = spec)
-  fin <- final(jrobj = jrobct)
-  diagn <- diagnostics(jrobj = jrobct)
-
-  z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn,
-            user_defined = user_defined(userdefined, jrobct))
-
-  class(z) <- c("SA","TRAMO_SEATS")
-  return(z)
-
 }

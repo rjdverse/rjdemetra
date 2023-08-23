@@ -1,11 +1,11 @@
 # To define a S4 java object
 setClass(
-  Class = "RegArima_java",
-  contains = "ProcResults"
+    Class = "RegArima_java",
+    contains = "ProcResults"
 )
 setClass(
-  Class = "TRAMO_java",
-  contains = "ProcResults"
+    Class = "TRAMO_java",
+    contains = "ProcResults"
 )
 #' RegARIMA model, pre-adjustment in X13 and TRAMO-SEATS
 #' @description
@@ -218,305 +218,301 @@ setClass(
 #' }
 #' @export
 # Generic function to create a "regarima" S3 class object from a user-defined specification (for X13 or TRAMO-SEATS method)
-regarima <- function(series, spec = NA){
-  UseMethod("regarima", spec)
+regarima <- function(series, spec = NA) {
+    UseMethod("regarima", spec)
 }
 # Method: "X13"
 #' @export
-regarima.X13 <- function(series, spec = NA){
-  jsa_obj <- jregarima.X13(series, spec)
-  jrobct <- jsa_obj[["result"]]
+regarima.X13 <- function(series, spec = NA) {
+    jsa_obj <- jregarima.X13(series, spec)
+    jrobct <- jsa_obj[["result"]]
 
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }else{
-    z <- regarima_X13(jrobj = jrobct, spec = spec)
-    return(z)
-  }
+    if (is.null(jrobct@internal)) {
+        return(NaN)
+    } else {
+        z <- regarima_X13(jrobj = jrobct, spec = spec)
+        return(z)
+    }
 }
 
 # Method: "TRAMO_SEATS"
 #' @export
-regarima.TRAMO_SEATS <- function(series, spec = NA){
-  jsa_obj <- jregarima.TRAMO_SEATS(series, spec)
-  jrobct <- jsa_obj[["result"]]
+regarima.TRAMO_SEATS <- function(series, spec = NA) {
+    jsa_obj <- jregarima.TRAMO_SEATS(series, spec)
+    jrobct <- jsa_obj[["result"]]
 
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }else{
-    z <- regarima_TS(jrobj = jrobct, spec = spec)
-    return(z)
-  }
+    if (is.null(jrobct@internal)) {
+        return(NaN)
+    } else {
+        z <- regarima_TS(jrobj = jrobct, spec = spec)
+        return(z)
+    }
 }
 
 # The function creates a "regarima" S3 class object from a JD+ defined specification for TRAMO-SEATS method
 #' @rdname regarima
 #' @name regarima
 #' @export
-regarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")){
-  jsa_obj <- jregarima_tramoseats(series, spec)
-  jrobct <- jsa_obj[["result"]]
-  jrspec <- jsa_obj[["spec"]]
+regarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2", "TR3", "TR4", "TR5")) {
+    jsa_obj <- jregarima_tramoseats(series, spec)
+    jrobct <- jsa_obj[["result"]]
+    jrspec <- jsa_obj[["spec"]]
 
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }else{
-    z <- regarima_defTS(jrobj = jrobct, spec = jrspec)
-    return(z)
-  }
+    if (is.null(jrobct@internal)) {
+        return(NaN)
+    } else {
+        z <- regarima_defTS(jrobj = jrobct, spec = jrspec)
+        return(z)
+    }
 }
 
 # The function creates a "regarima" S3 class object from a JD+ defined specification for X13 method
 #' @rdname regarima
 #' @name regarima
 #' @export
-regarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
-  jsa_obj <- jregarima_x13(series, spec)
-  jrobct <- jsa_obj[["result"]]
-  jrspec <- jsa_obj[["spec"]]
+regarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")) {
+    jsa_obj <- jregarima_x13(series, spec)
+    jrobct <- jsa_obj[["result"]]
+    jrspec <- jsa_obj[["spec"]]
 
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }else{
-    z <- regarima_defX13(jrobj = jrobct, spec = jrspec)
-    return(z)
-  }
+    if (is.null(jrobct@internal)) {
+        return(NaN)
+    } else {
+        z <- regarima_defX13(jrobj = jrobct, spec = jrspec)
+        return(z)
+    }
 }
 
 regarima_defX13 <- function(jrobj, spec, context_dictionary = NULL,
                             extra_info = FALSE,
-                            freq = NA){
-  horizon <- -2
-  # To extract model specification from the Java object
-  rspec <- spec_regarima_X13_jd2r(spec = spec, context_dictionary = context_dictionary,
-                        extra_info = extra_info, freq = freq)
+                            freq = NA) {
+    horizon <- -2
+    # To extract model specification from the Java object
+    rspec <- spec_regarima_X13_jd2r(spec = spec, context_dictionary = context_dictionary,
+                                    extra_info = extra_info, freq = freq)
 
-  estimate <- with(rspec,
-                   data.frame(preliminary.check = preliminary.check,
-                              span = estimate.span, tolerance = estimate.tol,
+    estimate <- with(rspec,
+                     data.frame(preliminary.check = preliminary.check,
+                                span = estimate.span, tolerance = estimate.tol,
+                                row.names = "", stringsAsFactors = FALSE)
+    )
+    transform <- with(rspec,
+                      data.frame(tfunction = transform.function,
+                                 adjust = transform.adjust,
+                                 aicdiff = transform.aicdiff,
+                                 row.names = "", stringsAsFactors = FALSE)
+    )
+    trading.days <- with(rspec,
+                         data.frame(option = tradingdays.option,
+                                    autoadjust = tradingdays.autoadjust,
+                                    leapyear = tradingdays.leapyear,
+                                    stocktd = tradingdays.stocktd,
+                                    test = tradingdays.test, row.names = "", stringsAsFactors = FALSE)
+    )
+    easter <- with(rspec,
+                   data.frame(enabled = easter.enabled, julian = easter.julian,
+                              duration = easter.duration, test = easter.test,
                               row.names = "", stringsAsFactors = FALSE)
-  )
-  transform <- with(rspec,
-                    data.frame(tfunction = transform.function,
-                               adjust = transform.adjust,
-                               aicdiff = transform.aicdiff,
-                               row.names = "", stringsAsFactors = FALSE)
-  )
-  trading.days <- with(rspec,
-                       data.frame(option = tradingdays.option,
-                                  autoadjust = tradingdays.autoadjust,
-                                  leapyear = tradingdays.leapyear,
-                                  stocktd = tradingdays.stocktd,
-                                  test = tradingdays.test, row.names = "", stringsAsFactors = FALSE)
-  )
-  easter <- with(rspec,
-                 data.frame(enabled = easter.enabled, julian = easter.julian,
-                            duration = easter.duration, test = easter.test,
-                            row.names = "", stringsAsFactors = FALSE)
-  )
-  regression <- with(rspec,
-                     list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
-  )
-  outliers <- with(rspec,
-                   data.frame(enabled = outlier.enabled, span = outlier.span,
-                              ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
-                              so = outlier.so, usedefcv = outlier.usedefcv,
-                              cv = outlier.cv, method = outlier.method,
-                              tcrate = outlier.tcrate,
-                              row.names = "", stringsAsFactors = FALSE)
-  )
-  arima.dsc <- with(rspec,
-                    data.frame(enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                               automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                               automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
-                               automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
-                               automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                               automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu,
-                               arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
-                               arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq,
-                               arima.coef = arima.coef, row.names = "", stringsAsFactors = FALSE)
-  )
-  arima <- with(rspec,
-                list(specification = arima.dsc, coefficients = arima.coef.spec)
-  )
-  forecast <- data.frame(horizon = horizon, row.names = "", stringsAsFactors = FALSE)
-  span <- rspec$span
+    )
+    regression <- with(rspec,
+                       list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
+    )
+    outliers <- with(rspec,
+                     data.frame(enabled = outlier.enabled, span = outlier.span,
+                                ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
+                                so = outlier.so, usedefcv = outlier.usedefcv,
+                                cv = outlier.cv, method = outlier.method,
+                                tcrate = outlier.tcrate,
+                                row.names = "", stringsAsFactors = FALSE)
+    )
+    arima.dsc <- with(rspec,
+                      data.frame(enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                                 automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                                 automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
+                                 automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
+                                 automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                                 automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu,
+                                 arima.p = arima.p, arima.d = arima.d, arima.q = arima.q,
+                                 arima.bp = arima.bp, arima.bd = arima.bd, arima.bq = arima.bq,
+                                 arima.coef = arima.coef, row.names = "", stringsAsFactors = FALSE)
+    )
+    arima <- with(rspec,
+                  list(specification = arima.dsc, coefficients = arima.coef.spec)
+    )
+    forecast <- data.frame(horizon = horizon, row.names = "", stringsAsFactors = FALSE)
+    span <- rspec$span
 
-  # specification
-  specification <- list(estimate = estimate, transform = transform,
-                        regression = regression, outliers = outliers,
-                        arima = arima, forecast = forecast, span = span)
-  # results
-  jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
+    # specification
+    specification <- list(estimate = estimate, transform = transform,
+                          regression = regression, outliers = outliers,
+                          arima = arima, forecast = forecast, span = span)
+    # results
+    jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
 
-  # new S3 class "regarima"
-  z <- list(specification = specification,
-            arma = jd_results$arma,
-            arima.coefficients = jd_results$arima.coefficients,
-            regression.coefficients = jd_results$regression.coefficients,
-            loglik = jd_results$loglik,
-            model = jd_results$model,
-            residuals = jd_results$residuals,
-            residuals.stat = jd_results$residuals.stat,
-            forecast = jd_results$forecast)
+    # new S3 class "regarima"
+    z <- list(specification = specification,
+              arma = jd_results$arma,
+              arima.coefficients = jd_results$arima.coefficients,
+              regression.coefficients = jd_results$regression.coefficients,
+              loglik = jd_results$loglik,
+              model = jd_results$model,
+              residuals = jd_results$residuals,
+              residuals.stat = jd_results$residuals.stat,
+              forecast = jd_results$forecast)
 
-  class(z) <- c("regarima","X13")
-  return(z)
+    class(z) <- c("regarima","X13")
+    return(z)
 }
 
 regarima_defTS <- function(jrobj, spec, context_dictionary = NULL,
-                           extra_info = FALSE, freq = NA){
-  # To extract model specification from the Java object
+                           extra_info = FALSE, freq = NA) {
+    # To extract model specification from the Java object
 
-  horizon <- -2
-  rspec <- spec_TRAMO_jd2r(spec = spec, context_dictionary = context_dictionary,
-                        extra_info = extra_info, freq = freq)
+    horizon <- -2
+    rspec <- spec_TRAMO_jd2r(spec = spec, context_dictionary = context_dictionary,
+                             extra_info = extra_info, freq = freq)
 
-  estimate <- with(rspec,
-                   data.frame(preliminary.check = preliminary.check,
-                              span = estimate.span, tolerance = estimate.tol,
-                         exact_ml = estimate.eml, urfinal = estimate.urfinal,
-                         row.names = "", stringsAsFactors = FALSE)
-  )
-  transform <- with(rspec,
-                    data.frame(tfunction = transform.function,fct = transform.fct,
-                          row.names = "", stringsAsFactors = FALSE)
-  )
-  trading.days <- with(rspec,
-                       data.frame(automatic = tradingdays.mauto, pftd = tradingdays.pftd,
-                             option = tradingdays.option, leapyear = tradingdays.leapyear,
-                             stocktd = tradingdays.stocktd, test = tradingdays.test,
-                             row.names = "", stringsAsFactors = FALSE)
-  )
-  easter <- with(rspec,
-                 data.frame(type = easter.type,julian = easter.julian,
-                       duration = easter.duration,test = easter.test,
-                       row.names = "", stringsAsFactors = FALSE)
-  )
-  regression <- with(rspec,
-                     list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
-  )
-  outliers <- with(rspec,
-                   data.frame(enabled = outlier.enabled,span = outlier.span,
-                         ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
-                         so = outlier.so,usedefcv = outlier.usedefcv,cv = outlier.cv,eml = outlier.eml,
-                         tcrate = outlier.tcrate, row.names = "", stringsAsFactors = FALSE)
-  )
-  arima.dsc <- with(rspec,
-                    data.frame(enabled = automdl.enabled,automdl.acceptdefault = automdl.acceptdefault,
-                          automdl.cancel = automdl.cancel,
-                          automdl.ub1 = automdl.ub1,automdl.ub2 = automdl.ub2,
-                          automdl.armalimit = automdl.armalimit,
-                          automdl.reducecv = automdl.reducecv,
-                          automdl.ljungboxlimit = automdl.ljungboxlimit, compare = automdl.compare,
-                          arima.mu = arima.mu,arima.p = arima.p,arima.d = arima.d,arima.q = arima.q,
-                          arima.bp = arima.bp,arima.bd = arima.bd,arima.bq = arima.bq, arima.coef = arima.coef,
-                          row.names = "", stringsAsFactors = FALSE)
-  )
-  arima <- with(rspec,
-                list(specification = arima.dsc, coefficients = arima.coef.spec)
-  )
-  forecast <- with(rspec,
-                   data.frame(horizon = horizon,row.names = "", stringsAsFactors = FALSE)
-  )
-  span <- rspec$span
+    estimate <- with(rspec,
+                     data.frame(preliminary.check = preliminary.check,
+                                span = estimate.span, tolerance = estimate.tol,
+                                exact_ml = estimate.eml, urfinal = estimate.urfinal,
+                                row.names = "", stringsAsFactors = FALSE)
+    )
+    transform <- with(rspec,
+                      data.frame(tfunction = transform.function,fct = transform.fct,
+                                 row.names = "", stringsAsFactors = FALSE)
+    )
+    trading.days <- with(rspec,
+                         data.frame(automatic = tradingdays.mauto, pftd = tradingdays.pftd,
+                                    option = tradingdays.option, leapyear = tradingdays.leapyear,
+                                    stocktd = tradingdays.stocktd, test = tradingdays.test,
+                                    row.names = "", stringsAsFactors = FALSE)
+    )
+    easter <- with(rspec,
+                   data.frame(type = easter.type,julian = easter.julian,
+                              duration = easter.duration,test = easter.test,
+                              row.names = "", stringsAsFactors = FALSE)
+    )
+    regression <- with(rspec,
+                       list(userdef = userdef_spec, trading.days = trading.days, easter = easter)
+    )
+    outliers <- with(rspec,
+                     data.frame(enabled = outlier.enabled,span = outlier.span,
+                                ao = outlier.ao, tc = outlier.tc, ls = outlier.ls,
+                                so = outlier.so,usedefcv = outlier.usedefcv,cv = outlier.cv,eml = outlier.eml,
+                                tcrate = outlier.tcrate, row.names = "", stringsAsFactors = FALSE)
+    )
+    arima.dsc <- with(rspec,
+                      data.frame(enabled = automdl.enabled,automdl.acceptdefault = automdl.acceptdefault,
+                                 automdl.cancel = automdl.cancel,
+                                 automdl.ub1 = automdl.ub1,automdl.ub2 = automdl.ub2,
+                                 automdl.armalimit = automdl.armalimit,
+                                 automdl.reducecv = automdl.reducecv,
+                                 automdl.ljungboxlimit = automdl.ljungboxlimit, compare = automdl.compare,
+                                 arima.mu = arima.mu,arima.p = arima.p,arima.d = arima.d,arima.q = arima.q,
+                                 arima.bp = arima.bp,arima.bd = arima.bd,arima.bq = arima.bq, arima.coef = arima.coef,
+                                 row.names = "", stringsAsFactors = FALSE)
+    )
+    arima <- with(rspec,
+                  list(specification = arima.dsc, coefficients = arima.coef.spec)
+    )
+    forecast <- with(rspec,
+                     data.frame(horizon = horizon,row.names = "", stringsAsFactors = FALSE)
+    )
+    span <- rspec$span
 
-  # specification
-  specification <- list(estimate = estimate, transform = transform, regression = regression, outliers = outliers, arima = arima,
-                        forecast = forecast, span = span)
+    # specification
+    specification <- list(estimate = estimate, transform = transform, regression = regression, outliers = outliers, arima = arima,
+                          forecast = forecast, span = span)
 
-  # results
-  jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
+    # results
+    jd_results <- regarima_rslts(jrobj,as.numeric(forecast))
 
-  # new S3 class "regarima"
-  z <- list(specification = specification,
-            arma = jd_results$arma,
-            arima.coefficients = jd_results$arima.coefficients,
-            regression.coefficients = jd_results$regression.coefficients,
-            loglik = jd_results$loglik,
-            model = jd_results$model,
-            residuals = jd_results$residuals,
-            residuals.stat = jd_results$residuals.stat,
-            forecast = jd_results$forecast)
+    # new S3 class "regarima"
+    z <- list(specification = specification,
+              arma = jd_results$arma,
+              arima.coefficients = jd_results$arima.coefficients,
+              regression.coefficients = jd_results$regression.coefficients,
+              loglik = jd_results$loglik,
+              model = jd_results$model,
+              residuals = jd_results$residuals,
+              residuals.stat = jd_results$residuals.stat,
+              forecast = jd_results$forecast)
 
-  class(z) <- c("regarima","TRAMO_SEATS")
-  return(z)
+    class(z) <- c("regarima","TRAMO_SEATS")
+    return(z)
 }
 
-regarima_X13 <- function(jrobj, spec){
-  # results
-  jd_results <- regarima_rslts(jrobj, as.numeric(s_fcst(spec)))
-  # To import the model specification
-  estimate <- s_estimate(spec)
-  transform <- s_transform(spec)
-  usrdef <- s_usrdef(spec)
-  predef.outliers <- s_preOut(spec)
-  predef.variables <- s_preVar(spec)
-  trading.days <- s_td(spec)
-  easter <- s_easter(spec)
-  outliers <- s_out(spec)
-  arima.dsc <- s_arima(spec)
-  predef.coef <- s_arimaCoef(spec)
-  span <- s_span(spec)
-  userdef <- list(specification = usrdef, outliers = predef.outliers, variables = predef.variables)
-  regression <- list(userdef = userdef, trading.days = trading.days, easter = easter)
-  arima <- list(specification = arima.dsc, coefficients = predef.coef)
-  forecast <- s_fcst(spec)
-  # specification
-  specification <- list(estimate = estimate, transform = transform, regression = regression,
-                        outliers = outliers, arima = arima, forecast = forecast, span = span)
-  # the new S3 class "regarima"
-  z <- list(specification = specification,
-            arma = jd_results$arma,
-            arima.coefficients = jd_results$arima.coefficients,
-            regression.coefficients = jd_results$regression.coefficients,
-            loglik = jd_results$loglik,
-            model = jd_results$model,
-            residuals = jd_results$residuals,
-            residuals.stat = jd_results$residuals.stat,
-            forecast = jd_results$forecast)
+regarima_X13 <- function(jrobj, spec) {
+    # results
+    jd_results <- regarima_rslts(jrobj, as.numeric(s_fcst(spec)))
+    # To import the model specification
+    estimate <- s_estimate(spec)
+    transform <- s_transform(spec)
+    usrdef <- s_usrdef(spec)
+    predef.outliers <- s_preOut(spec)
+    predef.variables <- s_preVar(spec)
+    trading.days <- s_td(spec)
+    easter <- s_easter(spec)
+    outliers <- s_out(spec)
+    arima.dsc <- s_arima(spec)
+    predef.coef <- s_arimaCoef(spec)
+    span <- s_span(spec)
+    userdef <- list(specification = usrdef, outliers = predef.outliers, variables = predef.variables)
+    regression <- list(userdef = userdef, trading.days = trading.days, easter = easter)
+    arima <- list(specification = arima.dsc, coefficients = predef.coef)
+    forecast <- s_fcst(spec)
+    # specification
+    specification <- list(estimate = estimate, transform = transform, regression = regression,
+                          outliers = outliers, arima = arima, forecast = forecast, span = span)
+    # the new S3 class "regarima"
+    z <- list(specification = specification,
+              arma = jd_results$arma,
+              arima.coefficients = jd_results$arima.coefficients,
+              regression.coefficients = jd_results$regression.coefficients,
+              loglik = jd_results$loglik,
+              model = jd_results$model,
+              residuals = jd_results$residuals,
+              residuals.stat = jd_results$residuals.stat,
+              forecast = jd_results$forecast)
 
-  class(z) = c("regarima","X13")
-  return(z)
+    class(z) = c("regarima","X13")
+    return(z)
 }
 
-regarima_TS <- function(jrobj, spec){
-  # results
-  jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
-  # To import the model specification
-  estimate <- s_estimate(spec)
-  transform <- s_transform(spec)
-  usrdef <- s_usrdef(spec)
-  predef.outliers <- s_preOut(spec)
-  predef.variables <- s_preVar(spec)
-  trading.days <- s_td(spec)
-  easter <- s_easter(spec)
-  outliers <- s_out(spec)
-  arima.dsc <- s_arima(spec)
-  predef.coef <- s_arimaCoef(spec)
-  span <- s_span(spec)
-  userdef <- list(specification = usrdef, outliers = predef.outliers, variables = predef.variables)
-  regression <- list(userdef = userdef, trading.days = trading.days, easter = easter)
-  arima <- list(specification = arima.dsc, coefficients = predef.coef)
-  forecast <- s_fcst(spec)
-  # specification
-  specification <- list(estimate = estimate, transform = transform, regression = regression,
-                        outliers = outliers, arima = arima, forecast = forecast, span = span)
-  # The new S3 class "regarima"
-  z <- list(specification = specification,
-            arma = jd_results$arma,
-            arima.coefficients = jd_results$arima.coefficients,
-            regression.coefficients = jd_results$regression.coefficients,
-            loglik = jd_results$loglik,
-            model = jd_results$model,
-            residuals = jd_results$residuals,
-            residuals.stat = jd_results$residuals.stat,
-            forecast = jd_results$forecast)
+regarima_TS <- function(jrobj, spec) {
+    # results
+    jd_results <- regarima_rslts(jrobj,as.numeric(s_fcst(spec)))
+    # To import the model specification
+    estimate <- s_estimate(spec)
+    transform <- s_transform(spec)
+    usrdef <- s_usrdef(spec)
+    predef.outliers <- s_preOut(spec)
+    predef.variables <- s_preVar(spec)
+    trading.days <- s_td(spec)
+    easter <- s_easter(spec)
+    outliers <- s_out(spec)
+    arima.dsc <- s_arima(spec)
+    predef.coef <- s_arimaCoef(spec)
+    span <- s_span(spec)
+    userdef <- list(specification = usrdef, outliers = predef.outliers, variables = predef.variables)
+    regression <- list(userdef = userdef, trading.days = trading.days, easter = easter)
+    arima <- list(specification = arima.dsc, coefficients = predef.coef)
+    forecast <- s_fcst(spec)
+    # specification
+    specification <- list(estimate = estimate, transform = transform, regression = regression,
+                          outliers = outliers, arima = arima, forecast = forecast, span = span)
+    # The new S3 class "regarima"
+    z <- list(specification = specification,
+              arma = jd_results$arma,
+              arima.coefficients = jd_results$arima.coefficients,
+              regression.coefficients = jd_results$regression.coefficients,
+              loglik = jd_results$loglik,
+              model = jd_results$model,
+              residuals = jd_results$residuals,
+              residuals.stat = jd_results$residuals.stat,
+              forecast = jd_results$forecast)
 
-  class(z) = c("regarima","TRAMO_SEATS")
-  return(z)
+    class(z) = c("regarima","TRAMO_SEATS")
+    return(z)
 }
-
-
-
-

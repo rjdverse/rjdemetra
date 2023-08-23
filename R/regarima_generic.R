@@ -1,23 +1,23 @@
 # USER:
 # Method "regarima" for the function coef
 #' @export
-coef.regarima <- function(object, component = c("regression", "arima", "both"), ...){
-  if (is.null(object))
-    return(NULL)
+coef.regarima <- function(object, component = c("regression", "arima", "both"), ...) {
+    if (is.null(object))
+        return(NULL)
 
-  component <- match.arg(component)
-  if (component == "regression") {
-    object$regression.coefficients[, "Estimate"]
-  } else if (component == "arima") {
-    object$arima.coefficients[, "Estimate"]
-  } else{
-    c(object$arima.coefficients[, "Estimate"],
-      object$regression.coefficients[, "Estimate"])
-  }
+    component <- match.arg(component)
+    if (component == "regression") {
+        object$regression.coefficients[, "Estimate"]
+    } else if (component == "arima") {
+        object$arima.coefficients[, "Estimate"]
+    } else {
+        c(object$arima.coefficients[, "Estimate"],
+          object$regression.coefficients[, "Estimate"])
+    }
 }
 #' @export
-coef.SA <- function(object, component = c("regression", "arima", "both"), ...){
-  coef.regarima(object$regarima, component, ...)
+coef.SA <- function(object, component = c("regression", "arima", "both"), ...) {
+    coef.regarima(object$regarima, component, ...)
 }
 # USER:
 # Method "regarima" for the function logLik
@@ -25,71 +25,71 @@ coef.SA <- function(object, component = c("regression", "arima", "both"), ...){
 #' @export
 logLik.regarima <- function(object, ...) {
 
-  if (is.null(object) || is.null(object$loglik["logvalue", ])) {
-    res <- NA
-  }else{
-    res <- structure(object$loglik["logvalue", ],
-                     df = object$loglik["np",],
-                     nobs = object$loglik["neffectiveobs", ])
-  }
-  class(res) <- "logLik"
-  res
+    if (is.null(object) || is.null(object$loglik["logvalue", ])) {
+        res <- NA
+    } else {
+        res <- structure(object$loglik["logvalue", ],
+                         df = object$loglik["np",],
+                         nobs = object$loglik["neffectiveobs", ])
+    }
+    class(res) <- "logLik"
+    res
 }
 #' @export
 logLik.SA <- function(object, ...) {
-  logLik.regarima(object$regarima, ...)
+    logLik.regarima(object$regarima, ...)
 }
 #' @export
-vcov.regarima <- function(object, ...){
-  if (is.null(object))
-    return(NULL)
-  y <- get_ts(object)
-  jmod <- jregarima(y, object)
-  result <- get_indicators(jmod, "model.covar")[[1]]
-  rownames(result) <- colnames(result) <-
-    get_indicators(jmod, "model.description")[[1]]
-  result
+vcov.regarima <- function(object, ...) {
+    if (is.null(object))
+        return(NULL)
+    y <- get_ts(object)
+    jmod <- jregarima(y, object)
+    result <- get_indicators(jmod, "model.covar")[[1]]
+    rownames(result) <- colnames(result) <-
+        get_indicators(jmod, "model.description")[[1]]
+    result
 }
 #' @export
-vcov.SA <- function(object, ...){
-  if ("preprocessing.model.covar" %in% names(object$user_defined)) {
-    result <- object$user_defined$preprocessing.model.covar
-    rownames(result) <- colnames(result) <- rownames(object$regarima$regression.coefficients)
-  }else{
-    result <- vcov.regarima(object$regarima, ...)
-  }
-  result
+vcov.SA <- function(object, ...) {
+    if ("preprocessing.model.covar" %in% names(object$user_defined)) {
+        result <- object$user_defined$preprocessing.model.covar
+        rownames(result) <- colnames(result) <- rownames(object$regarima$regression.coefficients)
+    } else {
+        result <- vcov.regarima(object$regarima, ...)
+    }
+    result
 }
 #' @export
-df.residual.regarima <- function(object, ...){
-  if (is.null(object))
-    return(NULL)
+df.residual.regarima <- function(object, ...) {
+    if (is.null(object))
+        return(NULL)
 
-  object$loglik["neffectiveobs",] - object$loglik["np",]
+    object$loglik["neffectiveobs",] - object$loglik["np",]
 }
 #' @export
-df.residual.SA <- function(object, ...){
-  df.residual.regarima(object$regarima, ...)
+df.residual.SA <- function(object, ...) {
+    df.residual.regarima(object$regarima, ...)
 }
 #' @export
-nobs.regarima <- function(object, ...){
-  if (is.null(object))
-    return(NULL)
+nobs.regarima <- function(object, ...) {
+    if (is.null(object))
+        return(NULL)
 
- object$loglik["neffectiveobs",]
+    object$loglik["neffectiveobs",]
 }
 #' @export
-nobs.SA <- function(object, ...){
-  nobs.regarima(object$regarima, ...)
+nobs.SA <- function(object, ...) {
+    nobs.regarima(object$regarima, ...)
 }
 #' @export
-residuals.regarima <- function(object, ...){
-  if (is.null(object))
-    return(NULL)
+residuals.regarima <- function(object, ...) {
+    if (is.null(object))
+        return(NULL)
 
-  object$residuals
+    object$residuals
 }
 #' @export
-residuals.SA <- function(object, ...){
-  residuals.regarima(object$regarima, ...)
+residuals.SA <- function(object, ...) {
+    residuals.regarima(object$regarima, ...)
 }

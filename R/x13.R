@@ -1,6 +1,6 @@
 setClass(
-  Class = "X13_java",
-  contains = "ProcResults"
+    Class = "X13_java",
+    contains = "ProcResults"
 )
 #' Seasonal Adjustment with  X13-ARIMA
 #'
@@ -109,113 +109,113 @@ setClass(
 #' }
 #' @export
 x13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
-                       userdefined = NULL){
-  if (!is.ts(series)) {
-    stop("The series must be a time series!")
-  }
-  UseMethod("x13", spec)
+                userdefined = NULL) {
+    if (!is.ts(series)) {
+        stop("The series must be a time series!")
+    }
+    UseMethod("x13", spec)
 }
 #' @export
-x13.SA_spec <- function(series, spec, userdefined = NULL){
-  # jsa_obj <- jx13.SA_spec(series, spec)
-  # jrslt <- jsa_obj[["result"]]@internal
-  # jrspec <- jsa_obj[["spec"]]
-  if (is.null(s_estimate(spec))) {
+x13.SA_spec <- function(series, spec, userdefined = NULL) {
+    # jsa_obj <- jx13.SA_spec(series, spec)
+    # jrslt <- jsa_obj[["result"]]@internal
+    # jrspec <- jsa_obj[["spec"]]
+    if (is.null(s_estimate(spec))) {
 
-    # For the X11 specification
-    jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
+        # For the X11 specification
+        jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "X11")
 
-  } else {
-    jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
-  }
-  jdictionary <- spec_regarima_X13_r2jd(spec, jdspec)
-  seasma <- specX11_r2jd(spec,jdspec, freq = frequency(series))
-  jspec <- .jcall(jdspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
-  jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
-
-  # Or, using the function x13JavaResults:
-  # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
-
-
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
-  jrobct <- new(Class = "X13_java", internal = jrslt)
-
-  if (is.null(jrobct@internal)) {
-    return(NaN)
-  }else{
-    # Error with the preliminary check
-    res = jrslt$getResults()$getProcessingInformation()
-
-    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-      proc_info <- jrslt$getResults()$getProcessingInformation()
-      error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
-      warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
-      if(!.jcall(error_msg,"Z","isEmpty"))
-        stop(error_msg$toString())
-      if(!.jcall(warning_msg,"Z","isEmpty"))
-        warning(warning_msg$toString())
+    } else {
+        jdspec <- .jcall("jdr/spec/x13/X13Spec", "Ljdr/spec/x13/X13Spec;", "of", "RSA0")
     }
-    reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
-    deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
-    fin <- final(jrobj = jrobct)
-    diagn <- diagnostics(jrobj = jrobct)
+    jdictionary <- spec_regarima_X13_r2jd(spec, jdspec)
+    seasma <- specX11_r2jd(spec,jdspec, freq = frequency(series))
+    jspec <- .jcall(jdspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
+    jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
-    z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
-              user_defined = user_defined(userdefined, jrobct))
+    # Or, using the function x13JavaResults:
+    # return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 
-    class(z) <- c("SA", "X13")
-    return(z)
-  }
+
+    jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
+    jrobct <- new(Class = "X13_java", internal = jrslt)
+
+    if (is.null(jrobct@internal)) {
+        return(NaN)
+    } else {
+        # Error with the preliminary check
+        res = jrslt$getResults()$getProcessingInformation()
+
+        if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")) {
+            proc_info <- jrslt$getResults()$getProcessingInformation()
+            error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+            warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+            if(!.jcall(error_msg,"Z","isEmpty"))
+                stop(error_msg$toString())
+            if(!.jcall(warning_msg,"Z","isEmpty"))
+                warning(warning_msg$toString())
+        }
+        reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
+        deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
+        fin <- final(jrobj = jrobct)
+        diagn <- diagnostics(jrobj = jrobct)
+
+        z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
+                  user_defined = user_defined(userdefined, jrobct))
+
+        class(z) <- c("SA", "X13")
+        return(z)
+    }
 }
 #' @export
 x13.character <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c", "X11"),
-                    userdefined = NULL){
-  jsa_obj <- jx13.character(series, spec)
-  jrslt <- jsa_obj[["result"]]@internal
-  jrspec <- jsa_obj[["spec"]]
+                          userdefined = NULL) {
+    jsa_obj <- jx13.character(series, spec)
+    jrslt <- jsa_obj[["result"]]@internal
+    jrspec <- jsa_obj[["spec"]]
 
-  return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
+    return(x13JavaResults(jrslt = jrslt, spec = jrspec, userdefined = userdefined))
 }
 
 # To extract the results of the SA of a X13 object
 x13JavaResults <- function(jrslt, spec, userdefined = NULL,
                            context_dictionary = NULL,
-                           extra_info = FALSE, freq = NA){
+                           extra_info = FALSE, freq = NA) {
 
-  jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
-  jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
-  jrobct <- new(Class = "X13_java", internal = jrslt)
+    jrarima <- .jcall(jrslt, "Lec/tstoolkit/jdr/regarima/Processor$Results;", "regarima")
+    jrobct_arima <- new(Class = "RegArima_java",internal = jrarima)
+    jrobct <- new(Class = "X13_java", internal = jrslt)
 
-  if (is.null(jrobct@internal)) {
-    return(NULL)
-  }
+    if (is.null(jrobct@internal)) {
+        return(NULL)
+    }
 
-  # Error during the preliminary check
-  res = jrslt$getResults()$getProcessingInformation()
-  if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-    proc_info <- jrslt$getResults()$getProcessingInformation()
-    error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
-    warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
-    if(!.jcall(error_msg,"Z","isEmpty"))
-      stop(error_msg$toString())
-    if(!.jcall(warning_msg,"Z","isEmpty"))
-      warning(warning_msg$toString())
-  }
+    # Error during the preliminary check
+    res = jrslt$getResults()$getProcessingInformation()
+    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")) {
+        proc_info <- jrslt$getResults()$getProcessingInformation()
+        error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
+        warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
+        if(!.jcall(error_msg,"Z","isEmpty"))
+            stop(error_msg$toString())
+        if(!.jcall(warning_msg,"Z","isEmpty"))
+            warning(warning_msg$toString())
+    }
 
-  reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
-                         context_dictionary = context_dictionary,
-                         extra_info = extra_info, freq = freq)
-  deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
-  fin <- final(jrobj = jrobct)
-  diagn <- diagnostics(jrobj = jrobct)
+    reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
+                           context_dictionary = context_dictionary,
+                           extra_info = extra_info, freq = freq)
+    deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
+    fin <- final(jrobj = jrobct)
+    diagn <- diagnostics(jrobj = jrobct)
 
-  z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn,
-            user_defined = user_defined(userdefined, jrobct))
+    z <- list(regarima = reg, decomposition = deco, final = fin,
+              diagnostics = diagn,
+              user_defined = user_defined(userdefined, jrobct))
 
-  class(z) <- c("SA","X13")
-  return(z)
+    class(z) <- c("SA","X13")
+    return(z)
 }
 
 

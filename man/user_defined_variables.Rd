@@ -20,7 +20,7 @@ Some items are available in the default estimation output but the remainder can 
 using the \code{userdefined} parameter.
 }
 \examples{
-y<- ipi_c_eu[, "FR"]
+y <- ipi_c_eu[, "FR"]
 user_defined_variables("X13-ARIMA")
 m <- x13(y,"RSA5c", userdefined=c("b20","ycal","residuals.kurtosis" ))
 m$user_defined$b20

@@ -116,7 +116,7 @@
 #' # User-defined calendar regressors
 #' var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 #' var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
-#' var<- ts.union(var1, var2)
+#' var <- ts.union(var1, var2)
 #'
 #' myspec6 <- tramoseats_spec(spec = "RSAfull", tradingdays.option = "UserDefined",
 #'                            usrdef.varEnabled = TRUE, usrdef.var = var,
@@ -143,242 +143,6 @@
 #' }
 #' @export
 tramoseats_spec <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
-                            preliminary.check = NA,
-                     estimate.from = NA_character_,
-                     estimate.to = NA_character_,
-                     estimate.first = NA_integer_,
-                     estimate.last = NA_integer_,
-                     estimate.exclFirst = NA_integer_,
-                     estimate.exclLast = NA_integer_,
-                     estimate.tol = NA_integer_,
-                     estimate.eml = NA,
-                     estimate.urfinal = NA_integer_,
-                     transform.function = c(NA, "Auto", "None", "Log"),
-                     transform.fct = NA_integer_,
-                     usrdef.outliersEnabled = NA,
-                     usrdef.outliersType = NA,
-                     usrdef.outliersDate = NA,
-                     usrdef.outliersCoef = NA,
-                     usrdef.varEnabled = NA,
-                     usrdef.var = NA,
-                     usrdef.varType = NA,
-                     usrdef.varCoef = NA,
-                     tradingdays.mauto = c(NA, "Unused", "FTest", "WaldTest"),
-                     tradingdays.pftd = NA_integer_,
-                     tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
-                     tradingdays.leapyear = NA,
-                     tradingdays.stocktd = NA_integer_,
-                     tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
-                     easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
-                     easter.julian = NA,
-                     easter.duration = NA_integer_,
-                     easter.test = NA,
-                     outlier.enabled = NA,
-                     outlier.from = NA_character_,
-                     outlier.to = NA_character_,
-                     outlier.first = NA_integer_,
-                     outlier.last = NA_integer_,
-                     outlier.exclFirst = NA_integer_,
-                     outlier.exclLast = NA_integer_,
-                     outlier.ao = NA,
-                     outlier.tc = NA,
-                     outlier.ls = NA,
-                     outlier.so = NA,
-                     outlier.usedefcv = NA,
-                     outlier.cv = NA_integer_,
-                     outlier.eml = NA,
-                     outlier.tcrate = NA_integer_,
-                     automdl.enabled = NA,
-                     automdl.acceptdefault = NA,
-                     automdl.cancel = NA_integer_,
-                     automdl.ub1 = NA_integer_,
-                     automdl.ub2 = NA_integer_,
-                     automdl.armalimit = NA_integer_,
-                     automdl.reducecv = NA_integer_,
-                     automdl.ljungboxlimit = NA_integer_,
-                     automdl.compare = NA,
-                     arima.mu = NA,
-                     arima.p = NA_integer_,
-                     arima.d = NA_integer_,
-                     arima.q = NA_integer_,
-                     arima.bp = NA_integer_,
-                     arima.bd = NA_integer_,
-                     arima.bq = NA_integer_,
-                     arima.coefEnabled = NA,
-                     arima.coef= NA,
-                     arima.coefType = NA,
-                     fcst.horizon = NA_integer_,
-                     seats.predictionLength = NA_integer_,
-                     seats.approx = c(NA, "None", "Legacy", "Noisy"),
-                     seats.trendBoundary = NA_integer_,
-                     seats.seasdBoundary = NA_integer_,
-                     seats.seasdBoundary1 = NA_integer_,
-                     seats.seasTol = NA_integer_,
-                     seats.maBoundary = NA_integer_,
-                     seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix")
-                     ){
-  UseMethod("tramoseats_spec", spec)
-}
-#' @export
-tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
-                                      preliminary.check = NA,
-                                estimate.from = NA_character_,
-                                estimate.to = NA_character_,
-                                estimate.first = NA_integer_,
-                                estimate.last = NA_integer_,
-                                estimate.exclFirst = NA_integer_,
-                                estimate.exclLast = NA_integer_,
-                                estimate.tol = NA_integer_,
-                                estimate.eml = NA,
-                                estimate.urfinal = NA_integer_,
-                                transform.function = c(NA, "Auto", "None", "Log"),
-                                transform.fct = NA_integer_,
-                                usrdef.outliersEnabled = NA,
-                                usrdef.outliersType = NA,
-                                usrdef.outliersDate = NA,
-                                usrdef.outliersCoef = NA,
-                                usrdef.varEnabled = NA,
-                                usrdef.var = NA,
-                                usrdef.varType = NA,
-                                usrdef.varCoef = NA,
-                                tradingdays.mauto = c(NA, "Unused", "FTest", "WaldTest"),
-                                tradingdays.pftd = NA_integer_,
-                                tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
-                                tradingdays.leapyear = NA,
-                                tradingdays.stocktd = NA_integer_,
-                                tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
-                                easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
-                                easter.julian = NA,
-                                easter.duration = NA_integer_,
-                                easter.test = NA,
-                                outlier.enabled = NA,
-                                outlier.from = NA_character_,
-                                outlier.to = NA_character_,
-                                outlier.first = NA_integer_,
-                                outlier.last = NA_integer_,
-                                outlier.exclFirst = NA_integer_,
-                                outlier.exclLast = NA_integer_,
-                                outlier.ao = NA,
-                                outlier.tc = NA,
-                                outlier.ls = NA,
-                                outlier.so = NA,
-                                outlier.usedefcv = NA,
-                                outlier.cv = NA_integer_,
-                                outlier.eml = NA,
-                                outlier.tcrate = NA_integer_,
-                                automdl.enabled = NA,
-                                automdl.acceptdefault = NA,
-                                automdl.cancel = NA_integer_,
-                                automdl.ub1 = NA_integer_,
-                                automdl.ub2 = NA_integer_,
-                                automdl.armalimit = NA_integer_,
-                                automdl.reducecv = NA_integer_,
-                                automdl.ljungboxlimit = NA_integer_,
-                                automdl.compare = NA,
-                                arima.mu = NA,
-                                arima.p = NA_integer_,
-                                arima.d = NA_integer_,
-                                arima.q = NA_integer_,
-                                arima.bp = NA_integer_,
-                                arima.bd = NA_integer_,
-                                arima.bq = NA_integer_,
-                                arima.coefEnabled = NA,
-                                arima.coef= NA,
-                                arima.coefType = NA,
-                                fcst.horizon = NA_integer_,
-                                seats.predictionLength = NA_integer_,
-                                seats.approx = c(NA, "None", "Legacy", "Noisy"),
-                                seats.trendBoundary = NA_integer_,
-                                seats.seasdBoundary = NA_integer_,
-                                seats.seasdBoundary1 = NA_integer_,
-                                seats.seasTol = NA_integer_,
-                                seats.maBoundary = NA_integer_,
-                                seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
-{
-  spec <- match.arg(spec)
-  reg_spec <- gsub("RSA", "TR", spec)
-  regarima <-  regarima_spec_tramoseats(spec = reg_spec, preliminary.check = preliminary.check,
-                                        estimate.from = estimate.from, estimate.to = estimate.to,
-                                        estimate.first = estimate.first, estimate.last = estimate.last,
-                                        estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
-                                        estimate.tol = estimate.tol, estimate.eml = estimate.eml,
-                                        estimate.urfinal = estimate.urfinal, transform.function = transform.function,
-                                        transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
-                                        usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
-                                        usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
-                                        usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
-                                        usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
-                                        tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
-                                        tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
-                                        tradingdays.test = tradingdays.test, easter.type = easter.type,
-                                        easter.julian = easter.julian, easter.duration = easter.duration,
-                                        easter.test = easter.test, outlier.enabled = outlier.enabled,
-                                        outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
-                                        outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
-                                        outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
-                                        outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
-                                        outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
-                                        outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
-                                        automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                                        automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                                        automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
-                                        automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                                        automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
-                                        arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
-                                        arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
-                                        arima.coef = arima.coef, arima.coefType = arima.coefType,
-                                        fcst.horizon = fcst.horizon)
-
-  seats <- seats_spec_def(spec = spec, seats.predictionLength = seats.predictionLength,
-                          seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
-                          seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
-                          seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
-                          seats.method = seats.method)
-
-  z <- list(regarima = regarima, seats = seats)
-  class(z) <- c("SA_spec","TRAMO_SEATS")
-  return(z)
-}
-
-seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
-                           seats.predictionLength = NA_integer_,
-                          seats.approx = c(NA_character_,"None","Legacy","Noisy"),
-                          seats.trendBoundary = NA_integer_,
-                          seats.seasdBoundary = NA_integer_,
-                          seats.seasdBoundary1 = NA_integer_,
-                          seats.seasTol = NA_integer_,
-                          seats.maBoundary = NA_integer_,
-                          seats.method = c(NA_character_,"Burman","KalmanSmoother","McElroyMatrix"))
-{
-  spec <- match.arg(spec)
-  seats.approx <- match.arg(seats.approx)
-  seats.method <- match.arg(seats.method)
-
-  list.numeric <- list("seats.predictionLength", "seats.trendBoundary",
-                       "seats.seasdBoundary", "seats.seasdBoundary1",
-                       "seats.seasTol", "seats.maBoundary")
-
-  var.list<-list()
-  for (i in 1:length(list.numeric)) {
-    eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
-  }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
-
-  # modifed values
-  seats <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
-  # create the java object
-  jrspec<-.jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
-  rspec <- specSeats_jd2r(spec = jrspec)
-  seats.spec <- do.call(data.frame, rspec)
-  names(seats.spec) <- paste0("seats.",names(seats.spec))
-  seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
-  z <- spec_seats(seats.mod)
-
-  class(z) <- c("seats_spec","data.frame")
-  return(z)
-}
-#' @export
-tramoseats_spec.TRAMO_SEATS <- function(spec,
                             preliminary.check = NA,
                             estimate.from = NA_character_,
                             estimate.to = NA_character_,
@@ -451,84 +215,319 @@ tramoseats_spec.TRAMO_SEATS <- function(spec,
                             seats.seasdBoundary1 = NA_integer_,
                             seats.seasTol = NA_integer_,
                             seats.maBoundary = NA_integer_,
-                            seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
+                            seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix")
+) {
+    UseMethod("tramoseats_spec", spec)
+}
+#' @export
+tramoseats_spec.character <- function(spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                                      preliminary.check = NA,
+                                      estimate.from = NA_character_,
+                                      estimate.to = NA_character_,
+                                      estimate.first = NA_integer_,
+                                      estimate.last = NA_integer_,
+                                      estimate.exclFirst = NA_integer_,
+                                      estimate.exclLast = NA_integer_,
+                                      estimate.tol = NA_integer_,
+                                      estimate.eml = NA,
+                                      estimate.urfinal = NA_integer_,
+                                      transform.function = c(NA, "Auto", "None", "Log"),
+                                      transform.fct = NA_integer_,
+                                      usrdef.outliersEnabled = NA,
+                                      usrdef.outliersType = NA,
+                                      usrdef.outliersDate = NA,
+                                      usrdef.outliersCoef = NA,
+                                      usrdef.varEnabled = NA,
+                                      usrdef.var = NA,
+                                      usrdef.varType = NA,
+                                      usrdef.varCoef = NA,
+                                      tradingdays.mauto = c(NA, "Unused", "FTest", "WaldTest"),
+                                      tradingdays.pftd = NA_integer_,
+                                      tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                      tradingdays.leapyear = NA,
+                                      tradingdays.stocktd = NA_integer_,
+                                      tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
+                                      easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
+                                      easter.julian = NA,
+                                      easter.duration = NA_integer_,
+                                      easter.test = NA,
+                                      outlier.enabled = NA,
+                                      outlier.from = NA_character_,
+                                      outlier.to = NA_character_,
+                                      outlier.first = NA_integer_,
+                                      outlier.last = NA_integer_,
+                                      outlier.exclFirst = NA_integer_,
+                                      outlier.exclLast = NA_integer_,
+                                      outlier.ao = NA,
+                                      outlier.tc = NA,
+                                      outlier.ls = NA,
+                                      outlier.so = NA,
+                                      outlier.usedefcv = NA,
+                                      outlier.cv = NA_integer_,
+                                      outlier.eml = NA,
+                                      outlier.tcrate = NA_integer_,
+                                      automdl.enabled = NA,
+                                      automdl.acceptdefault = NA,
+                                      automdl.cancel = NA_integer_,
+                                      automdl.ub1 = NA_integer_,
+                                      automdl.ub2 = NA_integer_,
+                                      automdl.armalimit = NA_integer_,
+                                      automdl.reducecv = NA_integer_,
+                                      automdl.ljungboxlimit = NA_integer_,
+                                      automdl.compare = NA,
+                                      arima.mu = NA,
+                                      arima.p = NA_integer_,
+                                      arima.d = NA_integer_,
+                                      arima.q = NA_integer_,
+                                      arima.bp = NA_integer_,
+                                      arima.bd = NA_integer_,
+                                      arima.bq = NA_integer_,
+                                      arima.coefEnabled = NA,
+                                      arima.coef= NA,
+                                      arima.coefType = NA,
+                                      fcst.horizon = NA_integer_,
+                                      seats.predictionLength = NA_integer_,
+                                      seats.approx = c(NA, "None", "Legacy", "Noisy"),
+                                      seats.trendBoundary = NA_integer_,
+                                      seats.seasdBoundary = NA_integer_,
+                                      seats.seasdBoundary1 = NA_integer_,
+                                      seats.seasTol = NA_integer_,
+                                      seats.maBoundary = NA_integer_,
+                                      seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
 {
-  if ( !inherits(spec, c("SA","SA_spec")))
-    stop("The function must only be used with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
+    spec <- match.arg(spec)
+    reg_spec <- gsub("RSA", "TR", spec)
+    regarima <- regarima_spec_tramoseats(spec = reg_spec, preliminary.check = preliminary.check,
+                                         estimate.from = estimate.from, estimate.to = estimate.to,
+                                         estimate.first = estimate.first, estimate.last = estimate.last,
+                                         estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+                                         estimate.tol = estimate.tol, estimate.eml = estimate.eml,
+                                         estimate.urfinal = estimate.urfinal, transform.function = transform.function,
+                                         transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
+                                         usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
+                                         usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
+                                         usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
+                                         usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
+                                         tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
+                                         tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+                                         tradingdays.test = tradingdays.test, easter.type = easter.type,
+                                         easter.julian = easter.julian, easter.duration = easter.duration,
+                                         easter.test = easter.test, outlier.enabled = outlier.enabled,
+                                         outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+                                         outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+                                         outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+                                         outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+                                         outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+                                         outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
+                                         automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                                         automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                                         automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
+                                         automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                                         automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
+                                         arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+                                         arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+                                         arima.coef = arima.coef, arima.coefType = arima.coefType,
+                                         fcst.horizon = fcst.horizon)
 
-  regarima <- regarima_spec_tramoseats(spec = spec, preliminary.check = preliminary.check,
-                                       estimate.from = estimate.from, estimate.to = estimate.to,
-                                       estimate.first = estimate.first, estimate.last = estimate.last,
-                                       estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
-                                       estimate.tol = estimate.tol, estimate.eml = estimate.eml,
-                                       estimate.urfinal = estimate.urfinal, transform.function = transform.function,
-                                       transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
-                                       usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
-                                       usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
-                                       usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
-                                       usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
-                                       tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
-                                       tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
-                                       tradingdays.test = tradingdays.test, easter.type = easter.type,
-                                       easter.julian = easter.julian, easter.duration = easter.duration,
-                                       easter.test = easter.test, outlier.enabled = outlier.enabled,
-                                       outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
-                                       outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
-                                       outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
-                                       outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
-                                       outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
-                                       outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
-                                       automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                                       automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                                       automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
-                                       automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                                       automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
-                                       arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
-                                       arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
-                                       arima.coef = arima.coef, arima.coefType = arima.coefType,
-                                       fcst.horizon = fcst.horizon)
+    seats <- seats_spec_def(spec = spec, seats.predictionLength = seats.predictionLength,
+                            seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
+                            seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
+                            seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
+                            seats.method = seats.method)
 
-  seats <- seats_spec(spec = spec, seats.predictionLength = seats.predictionLength,
-                      seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
-                      seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
-                      seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
-                      seats.method = seats.method)
-
-  z <- list(regarima = regarima, seats = seats)
-  class(z) <- c("SA_spec","TRAMO_SEATS")
-  return(z)
+    z <- list(regarima = regarima, seats = seats)
+    class(z) <- c("SA_spec","TRAMO_SEATS")
+    return(z)
 }
 
-seats_spec<- function(spec,
-                      seats.predictionLength = NA_integer_,
-                      seats.approx = c(NA_character_,"None","Legacy","Noisy"),
-                      seats.trendBoundary = NA_integer_,
-                      seats.seasdBoundary = NA_integer_,
-                      seats.seasdBoundary1 = NA_integer_,
-                      seats.seasTol = NA_integer_,
-                      seats.maBoundary = NA_integer_,
-                      seats.method = c(NA_character_,"Burman","KalmanSmoother","McElroyMatrix"))
+seats_spec_def <- function(spec=c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3", "RSA4", "RSA5"),
+                           seats.predictionLength = NA_integer_,
+                           seats.approx = c(NA_character_,"None","Legacy","Noisy"),
+                           seats.trendBoundary = NA_integer_,
+                           seats.seasdBoundary = NA_integer_,
+                           seats.seasdBoundary1 = NA_integer_,
+                           seats.seasTol = NA_integer_,
+                           seats.maBoundary = NA_integer_,
+                           seats.method = c(NA_character_,"Burman","KalmanSmoother","McElroyMatrix"))
 {
-  seats.approx <- match.arg(seats.approx)
-  seats.method <- match.arg(seats.method)
+    spec <- match.arg(spec)
+    seats.approx <- match.arg(seats.approx)
+    seats.method <- match.arg(seats.method)
 
-  list.numeric <- list("seats.predictionLength","seats.trendBoundary",
-                       "seats.seasdBoundary", "seats.seasdBoundary1",
-                       "seats.seasTol", "seats.maBoundary")
+    list.numeric <- list("seats.predictionLength", "seats.trendBoundary",
+                         "seats.seasdBoundary", "seats.seasdBoundary1",
+                         "seats.seasTol", "seats.maBoundary")
 
-  var.list<-list()
-  for (i in 1:length(list.numeric)) {
-    eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
-  }
-  if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
+    var.list <- list()
+    for (i in 1:length(list.numeric)) {
+        eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
+    }
+    if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
 
-  # modified values
-  seats <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
-  seats.spec <- s_seats(spec)
-  seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
-  z <- spec_seats(seats.mod)
+    # modifed values
+    seats <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
+    # create the java object
+    jrspec <- .jcall("jdr/spec/tramoseats/TramoSeatsSpec", "Ljdr/spec/tramoseats/TramoSeatsSpec;", "of", spec)
+    rspec <- specSeats_jd2r(spec = jrspec)
+    seats.spec <- do.call(data.frame, rspec)
+    names(seats.spec) <- paste0("seats.",names(seats.spec))
+    seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
+    z <- spec_seats(seats.mod)
 
-  class(z) <- c("seats_spec","data.frame")
-  return(z)
+    class(z) <- c("seats_spec","data.frame")
+    return(z)
+}
+#' @export
+tramoseats_spec.TRAMO_SEATS <- function(spec,
+                                        preliminary.check = NA,
+                                        estimate.from = NA_character_,
+                                        estimate.to = NA_character_,
+                                        estimate.first = NA_integer_,
+                                        estimate.last = NA_integer_,
+                                        estimate.exclFirst = NA_integer_,
+                                        estimate.exclLast = NA_integer_,
+                                        estimate.tol = NA_integer_,
+                                        estimate.eml = NA,
+                                        estimate.urfinal = NA_integer_,
+                                        transform.function = c(NA, "Auto", "None", "Log"),
+                                        transform.fct = NA_integer_,
+                                        usrdef.outliersEnabled = NA,
+                                        usrdef.outliersType = NA,
+                                        usrdef.outliersDate = NA,
+                                        usrdef.outliersCoef = NA,
+                                        usrdef.varEnabled = NA,
+                                        usrdef.var = NA,
+                                        usrdef.varType = NA,
+                                        usrdef.varCoef = NA,
+                                        tradingdays.mauto = c(NA, "Unused", "FTest", "WaldTest"),
+                                        tradingdays.pftd = NA_integer_,
+                                        tradingdays.option = c(NA, "TradingDays", "WorkingDays", "UserDefined", "None"),
+                                        tradingdays.leapyear = NA,
+                                        tradingdays.stocktd = NA_integer_,
+                                        tradingdays.test = c(NA, "Separate_T", "Joint_F", "None"),
+                                        easter.type = c(NA, "Unused", "Standard", "IncludeEaster", "IncludeEasterMonday"),
+                                        easter.julian = NA,
+                                        easter.duration = NA_integer_,
+                                        easter.test = NA,
+                                        outlier.enabled = NA,
+                                        outlier.from = NA_character_,
+                                        outlier.to = NA_character_,
+                                        outlier.first = NA_integer_,
+                                        outlier.last = NA_integer_,
+                                        outlier.exclFirst = NA_integer_,
+                                        outlier.exclLast = NA_integer_,
+                                        outlier.ao = NA,
+                                        outlier.tc = NA,
+                                        outlier.ls = NA,
+                                        outlier.so = NA,
+                                        outlier.usedefcv = NA,
+                                        outlier.cv = NA_integer_,
+                                        outlier.eml = NA,
+                                        outlier.tcrate = NA_integer_,
+                                        automdl.enabled = NA,
+                                        automdl.acceptdefault = NA,
+                                        automdl.cancel = NA_integer_,
+                                        automdl.ub1 = NA_integer_,
+                                        automdl.ub2 = NA_integer_,
+                                        automdl.armalimit = NA_integer_,
+                                        automdl.reducecv = NA_integer_,
+                                        automdl.ljungboxlimit = NA_integer_,
+                                        automdl.compare = NA,
+                                        arima.mu = NA,
+                                        arima.p = NA_integer_,
+                                        arima.d = NA_integer_,
+                                        arima.q = NA_integer_,
+                                        arima.bp = NA_integer_,
+                                        arima.bd = NA_integer_,
+                                        arima.bq = NA_integer_,
+                                        arima.coefEnabled = NA,
+                                        arima.coef= NA,
+                                        arima.coefType = NA,
+                                        fcst.horizon = NA_integer_,
+                                        seats.predictionLength = NA_integer_,
+                                        seats.approx = c(NA, "None", "Legacy", "Noisy"),
+                                        seats.trendBoundary = NA_integer_,
+                                        seats.seasdBoundary = NA_integer_,
+                                        seats.seasdBoundary1 = NA_integer_,
+                                        seats.seasTol = NA_integer_,
+                                        seats.maBoundary = NA_integer_,
+                                        seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"))
+{
+    if ( !inherits(spec, c("SA","SA_spec")))
+        stop("The function must only be used with c(\"SA\",\"TRAMO_SEATS\") and c(\"SA_spec\",\"TRAMO_SEATS\") objects", call. = FALSE)
+
+    regarima <- regarima_spec_tramoseats(spec = spec, preliminary.check = preliminary.check,
+                                         estimate.from = estimate.from, estimate.to = estimate.to,
+                                         estimate.first = estimate.first, estimate.last = estimate.last,
+                                         estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+                                         estimate.tol = estimate.tol, estimate.eml = estimate.eml,
+                                         estimate.urfinal = estimate.urfinal, transform.function = transform.function,
+                                         transform.fct = transform.fct, usrdef.outliersEnabled = usrdef.outliersEnabled,
+                                         usrdef.outliersType = usrdef.outliersType, usrdef.outliersDate = usrdef.outliersDate,
+                                         usrdef.outliersCoef = usrdef.outliersCoef, usrdef.varEnabled = usrdef.varEnabled,
+                                         usrdef.var = usrdef.var, usrdef.varType = usrdef.varType,
+                                         usrdef.varCoef = usrdef.varCoef, tradingdays.mauto = tradingdays.mauto,
+                                         tradingdays.pftd = tradingdays.pftd, tradingdays.option = tradingdays.option,
+                                         tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+                                         tradingdays.test = tradingdays.test, easter.type = easter.type,
+                                         easter.julian = easter.julian, easter.duration = easter.duration,
+                                         easter.test = easter.test, outlier.enabled = outlier.enabled,
+                                         outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+                                         outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+                                         outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+                                         outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+                                         outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+                                         outlier.eml = outlier.eml, outlier.tcrate = outlier.tcrate,
+                                         automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+                                         automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+                                         automdl.ub2 = automdl.ub2, automdl.armalimit = automdl.armalimit,
+                                         automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+                                         automdl.compare = automdl.compare, arima.mu = arima.mu, arima.p = arima.p,
+                                         arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+                                         arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+                                         arima.coef = arima.coef, arima.coefType = arima.coefType,
+                                         fcst.horizon = fcst.horizon)
+
+    seats <- seats_spec(spec = spec, seats.predictionLength = seats.predictionLength,
+                        seats.approx = seats.approx, seats.trendBoundary = seats.trendBoundary,
+                        seats.seasdBoundary = seats.seasdBoundary, seats.seasdBoundary1 = seats.seasdBoundary1,
+                        seats.seasTol = seats.seasTol, seats.maBoundary = seats.maBoundary,
+                        seats.method = seats.method)
+
+    z <- list(regarima = regarima, seats = seats)
+    class(z) <- c("SA_spec","TRAMO_SEATS")
+    return(z)
 }
 
+seats_spec <- function(spec,
+                       seats.predictionLength = NA_integer_,
+                       seats.approx = c(NA_character_,"None","Legacy","Noisy"),
+                       seats.trendBoundary = NA_integer_,
+                       seats.seasdBoundary = NA_integer_,
+                       seats.seasdBoundary1 = NA_integer_,
+                       seats.seasTol = NA_integer_,
+                       seats.maBoundary = NA_integer_,
+                       seats.method = c(NA_character_,"Burman","KalmanSmoother","McElroyMatrix"))
+{
+    seats.approx <- match.arg(seats.approx)
+    seats.method <- match.arg(seats.method)
+
+    list.numeric <- list("seats.predictionLength","seats.trendBoundary",
+                         "seats.seasdBoundary", "seats.seasdBoundary1",
+                         "seats.seasTol", "seats.maBoundary")
+
+    var.list <- list()
+    for (i in 1:length(list.numeric)) {
+        eval(parse(text=paste("if( !is.numeric(",list.numeric[i],")) {",list.numeric[i]," = NA; var.list=append(var.list,'",list.numeric[i],"')}",sep="")))
+    }
+    if (length(var.list)>0) {warning(paste("Variable(s)",deparse(as.character(var.list))," should be numeric. They are ignored."), call. = FALSE)}
+
+    # modified values
+    seats <- do.call(data.frame, as.list(match.call()[c(-1,-2)]))
+    seats.spec <- s_seats(spec)
+    seats.mod <- rbind(seats.spec,seats,rep(NA,length(seats.spec)))
+    z <- spec_seats(seats.mod)
+
+    class(z) <- c("seats_spec","data.frame")
+    return(z)
+}

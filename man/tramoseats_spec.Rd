@@ -425,7 +425,7 @@ s_preOut(mysa5)
 # User-defined calendar regressors
 var1 <- ts(rnorm(length(myseries))*10, start = start(myseries), frequency = 12)
 var2 <- ts(rnorm(length(myseries))*100, start = start(myseries), frequency = 12)
-var<- ts.union(var1, var2)
+var <- ts.union(var1, var2)
 
 myspec6 <- tramoseats_spec(spec = "RSAfull", tradingdays.option = "UserDefined",
                            usrdef.varEnabled = TRUE, usrdef.var = var,

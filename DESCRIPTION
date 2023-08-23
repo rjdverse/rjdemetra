@@ -24,7 +24,8 @@ Imports:
     grDevices,
     methods,
     stats,
-    utils
+    utils, 
+    checkmate
 SystemRequirements: Java (>= 8)
 License: EUPL
 URL: https://github.com/jdemetra/rjdemetra
