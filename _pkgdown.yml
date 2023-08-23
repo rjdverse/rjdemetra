@@ -82,7 +82,9 @@ reference:
   - '`compute`'
   - '`count`'
   - '`get_name`'
+  - '`get_all_names`'
   - '`get_object`'
+  - '`get_position`'
   - '`get_ts`'
 - title: Database
   desc: ~
