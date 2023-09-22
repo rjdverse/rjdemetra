@@ -75,18 +75,18 @@ save_workspace <- function(workspace, file) {
   if (length(grep("\\.xml$",file)) == 0)
     stop("The file must be a .xml !")
 
-  full_file_name <- normalizePath(file, winslash = "/", mustWork = FALSE)
-  folder_wk_name <- sub(".xml$","", full_file_name)
-  workspace_name <- basename(folder_wk_name)
-
+  full_file_name <- full_path(file)
 
   result <- .jcall(workspace, "Z", "save", full_file_name)
-  # To change the name of the workspace
-  wk_txt <- readLines(full_file_name)
-  wk_txt <- sub(folder_wk_name, workspace_name, wk_txt)
-  writeLines(wk_txt, full_file_name)
 
   invisible(result)
+}
+
+full_path <- function(path) {
+  base::file.path(
+    base::normalizePath(dirname(path), mustWork = TRUE, winslash = "/"),
+    base::basename(path),
+    fsep = "/")
 }
 
 

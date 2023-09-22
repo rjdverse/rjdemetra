@@ -2,6 +2,7 @@
 
 - New function `get_all_names()` and `get_position()`
 
+- correction of `save_workspace()` when using relative path.
 
 # RJDemetra 0.2.3
 
