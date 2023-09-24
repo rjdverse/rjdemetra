@@ -38,7 +38,9 @@ load_workspace <- function(file){
   if (!file.exists(file) | length(grep("\\.xml$",file)) == 0)
     stop("The file doesn't exist or isn't a .xml file !")
 
-  workspace <- .jcall("ec/tstoolkit/jdr/ws/Workspace", "Lec/tstoolkit/jdr/ws/Workspace;", "open", file)
+  full_file_name <- full_path(file)
+  workspace <- .jcall("ec/tstoolkit/jdr/ws/Workspace", "Lec/tstoolkit/jdr/ws/Workspace;", "open",
+                      full_file_name)
   workspace <- new("workspace", workspace)
   return(workspace)
 }
