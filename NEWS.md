@@ -1,7 +1,8 @@
-# RJDemetra development version
+# RJDemetra 0.2.4
 
-- New function `get_all_names()` and `get_position()`
+- New function `get_all_names()` and `get_position()`.
 
+- correction of `save_workspace()` and  `load_workspace()` when using relative path.
 
 # RJDemetra 0.2.3
 
@@ -10,11 +11,11 @@
 
 # RJDemetra 0.2.2
 
-- update documentation
+- update documentation.
 
-- removes extra argument print tramo
+- removes extra argument print tramo.
 
-- SystemRequirements update for CRAN policies
+- SystemRequirements update for CRAN policies.
 
 
 # RJDemetra 0.2.1
