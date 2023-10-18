@@ -265,7 +265,7 @@
 #' The final specification (third row) shall include user modifications (row two) unless they were wrongly specified.
 #' The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list
 #' with the \code{Predefined} (base model specification) and \code{Final} values.
-#'\itemize{
+#'
 #' \item{estimate}{a data frame containing Variables referring to: \code{span} - time span to be used for the estimation,
 #' \code{tolerance} - argument \code{estimate.tol}, \code{exact_ml} - argument \code{estimate.eml}, \code{urfinal} - argument \code{esimate.urfinal}.
 #' The final values can be also accessed with the function \code{\link{s_estimate}}.}
@@ -323,7 +323,7 @@
 #' \item{span}{a matrix containing the final time span for the model estimation and outliers' detection.
 #' It contains the same information as the variable span in the data frames estimate and outliers.
 #' The matrix can be also accessed with the function \code{\link{s_span}}.}
-#'}
+#'
 #' @references
 #' More information and examples related to 'JDemetra+' features in the online documentation:
 #' \url{https://jdemetra-new-documentation.netlify.app/}
