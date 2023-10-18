@@ -172,7 +172,7 @@
 #' and no further attempt will be made to identify another model.
 #'
 #' @param automdl.cancel \code{numeric}, the cancellation limit. If the difference in moduli of an AR and an MA roots (when estimating ARIMA(1,0,1)(1,0,1) models
-#' in the second step of the automatic identification of the differencing orders) is smaller than the cancellation limit, the two roots are assumed equal and cancelled out.
+#' in the second step of the automatic identification of the differencing orders) is smaller than the cancellation limit, the two roots are assumed equal and canceled out.
 #'
 #' @param automdl.ub1 \code{numeric}, the first unit root limit. It is the threshold value for the initial unit root test in the automatic differencing procedure.
 #' When one of the roots in the estimation of the ARIMA(2,0,0)(1,0,0) plus mean model, performed in the first step of the automatic model identification procedure,
@@ -180,7 +180,7 @@
 #'
 #' @param automdl.ub2 \code{numeric}, the second unit root limit. When one of the roots in the estimation of the ARIMA(1,0,1)(1,0,1) plus mean model,
 #' which is performed in the second step of the automatic model identification procedure, is larger than second unit root limit in modulus,
-#' it is checked if there is a common factor in the corresponding AR and MA polynomials of the ARMA model that can be cancelled (see \code{automdl.cancel}).
+#' it is checked if there is a common factor in the corresponding AR and MA polynomials of the ARMA model that can be canceled (see \code{automdl.cancel}).
 #' If there is no cancellation, the AR root is set equal to unity (i.e. the differencing order changes).
 #'
 #' @param automdl.armalimit \code{numeric}, the arma limit. It is the threshold value for t-statistics of ARMA coefficients and the constant term used
@@ -196,7 +196,7 @@
 #' If the LjungBox Q statistics for the residuals of a final model is greater than Ljung Box limit, then the model is rejected, the outlier critical value is reduced,
 #' and model and outlier identification (if specified) is redone with a reduced value.
 #'
-#' @param automdl.compare \code{logical}. If {TRUE}, the program compares the model identified by the automatic procedure to the default model (ARIMA(0,1,1)(0,1,1))
+#' @param automdl.compare \code{logical}. If \code{TRUE}, the program compares the model identified by the automatic procedure to the default model (ARIMA(0,1,1)(0,1,1))
 #' and the model with the best fit is selected. Criteria considered are residual diagnostics, the model structure and the number of outliers.
 #'
 #' Control variables for the non-automatic modelling of the ARIMA model (\code{automdl.enabled} is set to \code{FALSE}):

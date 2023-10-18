@@ -210,7 +210,7 @@ it can be combined with the parameter \code{outlier.from}.}
 It can be combined with the parameter \code{outlier.exclLast}.}
 
 \item{outlier.exclLast}{a numeric specifying the number of periods excluded at the end of the series.
-It can be combined with the paramter \code{outlier.exclFirst}.}
+It can be combined with the parameter \code{outlier.exclFirst}.}
 
 \item{outlier.ao}{a logical. If \code{TRUE}, the automatic detection of additive outliers is enabled
 (\code{outlier.enabled} must be also set to \code{TRUE}).}
@@ -257,7 +257,7 @@ it is set equal to unity.}
 \item{automdl.ub2}{the second unit root limit (\code{numeric}). When one of the roots in the estimation of
 the ARIMA(1,0,1)(1,0,1) plus mean model, which is performed in the second step of the automatic model identification
 procedure, is larger than second unit root limit in modulus, it is checked if there is a common factor
-in the corresponding AR and MA polynomials of the ARMA model that can be cancelled (see \code{automdl.cancel}).
+in the corresponding AR and MA polynomials of the ARMA model that can be canceled (see \code{automdl.cancel}).
 If there is no cancellation, the AR root is set equal to unity (i.e. the differencing order changes).}
 
 \item{automdl.mixed}{a logical. This variable controls whether ARIMA models with non-seasonal AR and MA terms
@@ -312,7 +312,7 @@ matches the sum of (regular and seasonal) AR and MA orders (\code{p,q,bp,bq}).}
 
 \item{arima.coefEnabled}{logical. If \code{TRUE}, the program uses the user-defined ARMA coefficients.}
 
-\item{arima.coef}{a vector providing the coefficients for the regular and seasonal AR and MA polynominals.
+\item{arima.coef}{a vector providing the coefficients for the regular and seasonal AR and MA polynomials.
 The vector length must be equal to the sum of the regular and seasonal AR and MA orders.
 The coefficients shall be provided in the following order: regular AR (\emph{Phi}; \code{p} elements),
 regular MA  (\emph{Theta}; \code{q} elements), seasonal AR (\emph{BPhi}; \code{bp} elements)
