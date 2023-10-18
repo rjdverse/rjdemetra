@@ -14,3 +14,4 @@ TO_DO
 ^revdep$
 ^\.github$
 .DS_Store
+^reconf\.sh$

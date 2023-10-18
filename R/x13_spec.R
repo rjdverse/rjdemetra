@@ -75,10 +75,10 @@
 #' The pre-specified outliers, user-defined variables and pre-specified ARMA coefficients consist of a list of
 #' \code{Predefined} (base model specification) and \code{Final} values.
 #'
-#' \item{regarima}{an object of class \code{c("regarima_spec", "x13")}. See \emph{Value} of the function \code{\link{regarima_spec_x13}}.}
+#' \item \code{regarima}: an object of class \code{c("regarima_spec", "x13")}. See \emph{Value} of the function \code{\link{regarima_spec_x13}}.
 #'
-#' \item{x11}{a data.frame of class \code{c("X11_spec", "data.frame")}, containing the \emph{x11} variables in line with
-#' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.}
+#' \item \code{x11}: a data.frame of class \code{c("X11_spec", "data.frame")}, containing the \emph{x11} variables in line with
+#' the names of the arguments variables. The final values can be also accessed with the function \code{\link{s_x11}}.
 #'}
 #' @references
 #' More information and examples related to 'JDemetra+' features in the online documentation:
