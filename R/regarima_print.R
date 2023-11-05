@@ -229,8 +229,14 @@ print.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), ...){
 }
 # Method: "regarima_rtest" for the print
 #' @export
-print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L), ...){
-
+print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
+                                enable_print_style = getOption("enable_print_style"), ...){
+  if(enable_print_style){
+    bold_pre_code <- "\033[1m"
+    bold_post_code <- "\033[22m"
+  }else{
+    bold_pre_code <-  bold_post_code <- ""
+  }
   doublestar<-paste0("\u002A","\u002A")
   triplestar<-paste0("\u002A","\u002A","\u002A")
 
@@ -248,7 +254,9 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L), .
   tabstat[,2]=format(round(tabstat[,2],max(4,digits)))
 
   cat("\n")
-  cat("\033[1mNormality\033[22m")
+  cat(bold_pre_code,
+      "Normality",
+      bold_post_code)
   cat("\n")
   print (tabstat[1:3,])
   cat("\n")
@@ -257,7 +265,9 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L), .
   cat(usestring)
 
   cat("\n")
-  cat("\033[1mIndependence\033[22m")
+  cat(bold_pre_code,
+      "Independence",
+      bold_post_code)
   cat("\n")
   print(tabstat[c(4,5),])
   cat("\n")
@@ -265,7 +275,9 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L), .
   cat(usestring)
 
   cat("\n")
-  cat("\033[1mLinearity\033[22m")
+  cat(bold_pre_code,
+      "Linearity",
+      bold_post_code)
   cat("\n")
   print(tabstat[6,])
   cat("\n")
