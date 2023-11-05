@@ -256,7 +256,7 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
   cat("\n")
   cat(bold_pre_code,
       "Normality",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   print (tabstat[1:3,])
   cat("\n")
@@ -267,7 +267,7 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
   cat("\n")
   cat(bold_pre_code,
       "Independence",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   print(tabstat[c(4,5),])
   cat("\n")
@@ -277,7 +277,7 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
   cat("\n")
   cat(bold_pre_code,
       "Linearity",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   print(tabstat[6,])
   cat("\n")
