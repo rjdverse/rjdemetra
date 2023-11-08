@@ -16,7 +16,7 @@ utils::globalVariables(c("arima.bd.tab", "arima.bp.tab", "arima.bq.tab", "arima.
 ## jd2_rslts.R
 proc_data<-function(rslt, name){
   if(is.null(rjdemetra_java$clobject)){
-      rjdemetra_java$clobject <- .jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
+    rjdemetra_java$clobject <- .jcall("java/lang/Class", "Ljava/lang/Class;", "forName", "java.lang.Object")
   }
   s<-.jcall(rslt, "Ljava/lang/Object;", "getData", name, rjdemetra_java$clobject)
   if (is.null(s))
@@ -159,15 +159,15 @@ period_jd2r<-function(jd_p){
   c(frequency, year, position+1)
 }
 
-reg_item_jd2r <- function(jregitem) {
+reg_item_jd2r <- function(s) {
   desc <- .jfield(s, "S", "description")
   val<-.jfield(s, "D", "coefficient")
   stderr<-.jfield(s, "D", "stdError")
   pval<-.jfield(s, "D", "pValue")
-  list(description = desc,
-       coefficient = val,
-       stderr = stderr,
-       pvalue = pval)
+  res <- matrix(c(val, stderr, val/stderr, pval), nrow = 1)
+  colnames(res) <- c("Estimate", "Std. Error", "T-stat", "Pr(>|t|)")
+  rownames(res) <- desc
+  res
 }
 
 parameters_r2jd<-function(params, fixed=NULL){
