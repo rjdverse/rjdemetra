@@ -48,6 +48,8 @@ proc_data<-function(rslt, name){
     return (.jevalArray(s, silent=TRUE))
   else if (.jinstanceof(s, "java/lang/Number"))
     return (.jcall(s, "D", "doubleValue"))
+  else if (.jinstanceof(s, "ec/tstoolkit/information.RegressionItem"))
+    return (reg_item_jd2r(s))
   else
     return (.jcall(s, "S", "toString"))
 }
@@ -157,6 +159,16 @@ period_jd2r<-function(jd_p){
   c(frequency, year, position+1)
 }
 
+reg_item_jd2r <- function(jregitem) {
+  desc <- .jfield(s, "S", "description")
+  val<-.jfield(s, "D", "coefficient")
+  stderr<-.jfield(s, "D", "stdError")
+  pval<-.jfield(s, "D", "pValue")
+  list(description = desc,
+       coefficient = val,
+       stderr = stderr,
+       pvalue = pval)
+}
 
 parameters_r2jd<-function(params, fixed=NULL){
   if (is.null(fixed))

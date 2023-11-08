@@ -1,3 +1,7 @@
+# RJDemetra 0.2.5
+
+- `proc_data()` update to export more data from Java object.
+
 # RJDemetra 0.2.4
 
 - New function `get_all_names()` and `get_position()`.
