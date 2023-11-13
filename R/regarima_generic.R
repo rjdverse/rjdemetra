@@ -40,23 +40,34 @@ logLik.SA <- function(object, ...) {
   logLik.regarima(object$regarima, ...)
 }
 #' @export
-vcov.regarima <- function(object, ...){
+vcov.regarima <- function(object, component = c("regression", "arima"), ...){
   if (is.null(object))
     return(NULL)
+  component <- match.arg(component)
   y <- get_ts(object)
   jmod <- jregarima(y, object)
-  result <- get_indicators(jmod, "model.covar")[[1]]
-  rownames(result) <- colnames(result) <-
-    get_indicators(jmod, "model.description")[[1]]
+  if (component == "regression") {
+    result <- get_indicators(jmod, "model.covar")[[1]]
+    if (!is.null(result))
+      rownames(result) <- colnames(result) <-
+        get_indicators(jmod, "model.description")[[1]]
+  } else if (component == "arima") {
+    result <- get_indicators(jmod, "model.pcovar")[[1]]
+  }
+
   result
 }
 #' @export
-vcov.SA <- function(object, ...){
-  if ("preprocessing.model.covar" %in% names(object$user_defined)) {
+vcov.SA <- function(object, component = c("regression", "arima"), ...){
+  component <- match.arg(component)
+  if (component == "regression" & "preprocessing.model.covar" %in% names(object$user_defined)) {
     result <- object$user_defined$preprocessing.model.covar
-    rownames(result) <- colnames(result) <- rownames(object$regarima$regression.coefficients)
-  }else{
+    if(!is.null(result))
+      rownames(result) <- colnames(result) <- rownames(object$regarima$regression.coefficients)
+  } else if (component == "arima" & "preprocessing.model.pcovar" %in% names(object$user_defined)){
     result <- vcov.regarima(object$regarima, ...)
+  } else {
+    result <- vcov.regarima(object$regarima, component = component, ...)
   }
   result
 }

@@ -2,6 +2,8 @@
 
 - `proc_data()` update to export more data from Java object.
 
+- `vcov()` correction when matrix NULL and new parameter `component`.
+
 # RJDemetra 0.2.4
 
 - New function `get_all_names()` and `get_position()`.
