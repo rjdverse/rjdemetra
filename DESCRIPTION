@@ -27,7 +27,7 @@ Imports:
     utils
 SystemRequirements: Java (>= 8)
 License: EUPL
-URL: https://github.com/jdemetra/rjdemetra
+URL: https://jdemetra.github.io/rjdemetra/, https://github.com/jdemetra/rjdemetra
 LazyData: TRUE
 Suggests:
     knitr,
