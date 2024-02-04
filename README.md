@@ -15,9 +15,11 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgre
 Statistics](https://awesome.re/mentioned-badge.svg)](https://github.com/SNStatComp/awesome-official-statistics-software)
 
 RJDemetra is an R interface to JDemetra+, the seasonal adjustment
-software officially recommended to the members of the European
-Statistical System (ESS) and the European System of Central Banks.
-JDemetra+ implements the two leading seasonal adjustment methods
+software [officially
+recommended](https://wayback.archive-it.org/12090/20240102173448/https://cros-legacy.ec.europa.eu/system/files/Jdemetra_%20release.pdf)
+to the members of the European Statistical System (ESS) and the European
+System of Central Banks. JDemetra+ implements the two leading seasonal
+adjustment methods
 [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and
 [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
 
