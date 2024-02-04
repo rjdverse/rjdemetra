@@ -2,6 +2,8 @@
 
 - `proc_data()` update to export more data from Java object.
 
+- seasonality Kurskal-Wallis test corrected  (issue #128).
+
 - `vcov()` correction when matrix NULL and new parameter `component`.
 
 - some corrections in `print()` methods.
