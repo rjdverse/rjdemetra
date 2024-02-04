@@ -13,7 +13,7 @@ print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
   if (!is.null(m)){
     cat(bold_pre_code,
         "Monitoring and Quality Assessment Statistics:",
-        bold_post_code,"\n")
+        bold_post_code,"\n", sep = "")
     printCoefmat(m, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   cat("\n")
@@ -119,7 +119,7 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
       "Relative contribution of the components to the stationary\n",
       "portion of the variance in the original series,\n",
       "after the removal of the long term trend",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   cat(" Trend computed by Hodrick-Prescott filter (cycle length = 8.0 years)")
   cat("\n")
@@ -132,7 +132,7 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
 
   cat(bold_pre_code,
       "Combined test in the entire series",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   cat(paste0(" ",
              capture.output(print.combined_test(combined_test, digits = digits,
@@ -143,7 +143,7 @@ print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
 
   cat(bold_pre_code,
       "Residual seasonality tests",
-      bold_post_code)
+      bold_post_code, sep = "")
   cat("\n")
   cat(paste0(" ",
              capture.output(
