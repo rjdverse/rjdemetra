@@ -27,11 +27,11 @@ Imports:
     utils
 SystemRequirements: Java (>= 8)
 License: EUPL
-URL: https://github.com/jdemetra/rjdemetra
+URL: https://jdemetra.github.io/rjdemetra/, https://github.com/jdemetra/rjdemetra
 LazyData: TRUE
 Suggests:
     knitr,
     rmarkdown
 BugReports: https://github.com/jdemetra/rjdemetra/issues
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

@@ -152,10 +152,11 @@ add_sa_item <- function(workspace, multiprocessing, sa_obj, name){
   .jcall(mp_obj, "V", "add", name, ts_r2jd(y), jspec)
 }
 
+#' @exportS3Method NULL
 complete_dictionary <- function(workspace, sa_obj){
   UseMethod("complete_dictionary", sa_obj)
 }
-
+#' @exportS3Method NULL
 complete_dictionary.SA <- function(workspace, sa_obj){
   userdef <- sa_obj$regarima$specification$regression$userdef
   ud_var <- userdef$variables
@@ -246,6 +247,7 @@ complete_dictionary.SA <- function(workspace, sa_obj){
 
   return(sa_obj)
 }
+#' @exportS3Method NULL
 complete_dictionary.jSA <- function(workspace, sa_obj){
   model_dictionary <- sa_obj$dictionary
   context <- model_dictionary$toContext()
