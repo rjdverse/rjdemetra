@@ -1,12 +1,12 @@
 Version: 1.0
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+RestoreWorkspace: No
+SaveWorkspace: No
+AlwaysSaveHistory: No
 
 EnableCodeIndexing: Yes
 UseSpacesForTab: Yes
-NumSpacesForTab: 2
+NumSpacesForTab: 4
 Encoding: UTF-8
 
 RnwWeave: knitr
@@ -21,3 +21,5 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 PackageBuildBinaryArgs: --no-multiarch
 PackageCheckArgs: --as-cran --run-donttest --no-multiarch
 PackageRoxygenize: rd,collate,namespace
+
+UseNativePipeOperator: Yes
