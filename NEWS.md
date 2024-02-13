@@ -1,3 +1,10 @@
+# RJDemetra 0.2.6
+
+- possibility to export last msr for monthly data (issue #122).
+
+- possibility to export X-11 some components: `y_cmp`, `y_cmp_f`, `t_cmp`, `t_cmp_f`, `sa_cmp`, `s_cmp`, `s_cmp_f`, and `i_cmp`.
+
+
 # RJDemetra 0.2.5
 
 - `proc_data()` update to export more data from Java object.
