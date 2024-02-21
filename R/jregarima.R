@@ -91,4 +91,3 @@ jregarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", 
 
   jSA(result = jrobct, spec = jrspec, dictionary = jdictionary)
 }
-

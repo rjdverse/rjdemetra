@@ -488,6 +488,3 @@ s_seats <- function(object = NA){
     return(obj)
   }
 }
-
-
-

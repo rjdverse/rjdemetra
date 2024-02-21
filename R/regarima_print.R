@@ -291,7 +291,3 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
   cat(usestring)
   invisible(x)
 }
-
-
-
-

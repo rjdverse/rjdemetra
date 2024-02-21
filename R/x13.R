@@ -217,5 +217,3 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   class(z) <- c("SA","X13")
   return(z)
 }
-
-

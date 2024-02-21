@@ -516,7 +516,3 @@ regarima_TS <- function(jrobj, spec){
   class(z) = c("regarima","TRAMO_SEATS")
   return(z)
 }
-
-
-
-

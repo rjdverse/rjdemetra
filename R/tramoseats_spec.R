@@ -531,4 +531,3 @@ seats_spec<- function(spec,
   class(z) <- c("seats_spec","data.frame")
   return(z)
 }
-

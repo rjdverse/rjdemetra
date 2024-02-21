@@ -20,4 +20,3 @@
     stop("You need Java JRE >= 8 to use 'RJDemetra'")
 
 }
-

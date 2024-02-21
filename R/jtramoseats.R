@@ -36,4 +36,3 @@ jtramoseats.character <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "R
   jrslt <- new (Class = "TramoSeats_java", internal = jrslt)
   jSA(result = jrslt, spec = jrspec, dictionary = jdictionary)
 }
-

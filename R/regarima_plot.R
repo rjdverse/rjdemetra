@@ -48,8 +48,8 @@ plot.regarima = function(x, which = 1:6,
     decomp<-cbind(y_lin,cal.effect,out.effect,y_lin_cal,y_lin_out,y)
     colnames(decomp)<-c("y_linearized","calendar","outliers","y_linearized_cal","y_linearized_out","y")
   }
-  
-  
+
+
   one.fig <- prod(par("mfcol")) == 1
   if (ask) {
     current_setting <- devAskNewPage()
@@ -97,24 +97,24 @@ plot.regarima = function(x, which = 1:6,
   if (show[5L]) {
     plot(res_pcf,xaxt="n", main="")
     axis(1,lablags,labels=lablags)
-    
+
     if (one.fig)
       title(sub = sub.caption, ...)
     mtext(getCaption(5, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
   if (show[6L]) {
-    
+
     plot.ts(decomp[,c(1,6)],type="l",pch=1, col=c(1:2), ylab="",plot.type = "single")
     legend("topleft", legend = c("y linearised","y (= y lin. + cal. + out.)"), col=1:2, bty="n",lty = 1)
-    
-    
+
+
     if (one.fig)
       title(sub = sub.caption, ...)
     mtext(getCaption(6, all_caption), 3, 0.25, cex = cex.caption)
     dev.flush()
   }
-  
+
   if (show[7L]) {
     layout((1:3))
     on.exit(par(mfcol=op$mfcol))
@@ -125,7 +125,7 @@ plot.regarima = function(x, which = 1:6,
     plot.ts(decomp[,3], type="l", ylab="", col=c(3),main="")
     mtext(getCaption(3, all_caption[[7]]), 3, 0.25, cex = cex.caption)
     rcoef <- x$regression.coefficients
-    
+
     desc_i<-grep("(",rownames(rcoef), fixed=TRUE)
     if (length(desc_i)>0 & length(desc_i)<10 ){
       desc<-c()
@@ -135,8 +135,8 @@ plot.regarima = function(x, which = 1:6,
     }
     dev.flush()
   }
-  
-  
+
+
   if (!one.fig && par("oma")[3L] >= 1)
     mtext(sub.caption, outer = TRUE, cex = cex.oma.main)
   par(ask = op$ask)

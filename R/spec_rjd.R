@@ -1297,4 +1297,3 @@ specSeats_r2jd <- function(rspec = NA, jdspec = NA){
   .jcall(jseats,"V","setMethod", as.character(seats[["seats.method"]]))
 
 }
-

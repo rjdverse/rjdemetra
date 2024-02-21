@@ -207,4 +207,3 @@ decomp_rsltsTS <- function(jrobj){
   z <- list(mode = mode, lin = lin, cmp = cmp, model = model)
   return(z)
 }
-

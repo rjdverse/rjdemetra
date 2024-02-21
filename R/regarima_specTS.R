@@ -878,4 +878,3 @@ regarima_spec_tramoseats.TRAMO_SEATS <- function(spec,
   return(z)
 
 }
-

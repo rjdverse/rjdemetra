@@ -887,4 +887,3 @@ spec_seats <- function(seatspc){
   rownames(seats) <- c("Predefined","User_modif","Final")
   return(seats)
 }
-

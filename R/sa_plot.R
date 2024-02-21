@@ -257,4 +257,3 @@ plot.SA <- function(x, ...){
   plot(x$final, ...)
   invisible()
 }
-

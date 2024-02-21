@@ -488,4 +488,3 @@ x13_spec.X13 <- function(spec,
   class(z) <- c("SA_spec", "X13")
   return(z)
 }
-
