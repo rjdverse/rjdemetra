@@ -208,4 +208,3 @@ print.SA <- function(x, enable_print_style = getOption("enable_print_style"),  .
   cat("\n\n", style_pre_code, "Additional output variables", style_post_code,"\n",sep="")
   print(x$user_defined)
 }
-

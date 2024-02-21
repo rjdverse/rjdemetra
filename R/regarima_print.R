@@ -161,8 +161,14 @@ print.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), ...){
 
   cat("y = regression model + arima ",gsub("c","",deparse(as.numeric(arma))),sep="")
   cat("\n")
+
+  cat("Model span: ")
+  cat(x$specification$estimate$span)
+  cat("\n")
+
   cat("Log-transformation:",if(rslt_spec[1,"Log transformation"]) {"yes"} else {"no"},sep=" ")
   cat("\n")
+
   cat("Coefficients:")
   if (!is.null(arima_coef)){
     if (!is.matrix(arima_coef[,-3])){
