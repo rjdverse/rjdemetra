@@ -847,9 +847,9 @@ preOut_r2jd <- function(jsobjct = NA, coefEna = NA, out = NA, outDate = NA, outC
 preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
                         prevar_spec = list(series = NA, description = data.frame(NA,NA)),
                         jtd = NA) {
-  series = prevar_spec$series
-  varType = prevar_spec$description[,1]
-  varCoef = prevar_spec$description[,2]
+  series <- prevar_spec$series
+  varType <- prevar_spec$description[,1]
+  varCoef <- prevar_spec$description[,2]
   varNames <- rownames(prevar_spec$description)
 
   nvar <- if (is.mts(series)) {dim(series)[2]} else if (is.ts(series)) {1} else {0}
@@ -861,7 +861,7 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
 
   calendar_def <- grep("Calendar",type)
   n_calendar_def <- length(calendar_def)
-  jcoreg = jsobjct$getCore()$getRegression()
+  jcoreg <- jsobjct$getCore()$getRegression()
 
   if (nvar == 1){
     if(n_calendar_def == 1){

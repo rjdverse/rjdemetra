@@ -575,7 +575,7 @@ regarima_spec_tramoseats.character <- function(spec = c("TRfull", "TR0", "TR1", 
 
   # To check the mode of the remaining variables
   list.logical.usrdef <-list("usrdef.outliersEnabled","usrdef.varEnabled","arima.coefEnabled")
-  list.logical = list("preliminary.check", "estimate.eml","tradingdays.leapyear","easter.julian","easter.test","outlier.enabled","outlier.ao",
+  list.logical <- list("preliminary.check", "estimate.eml","tradingdays.leapyear","easter.julian","easter.test","outlier.enabled","outlier.ao",
                       "outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","outlier.eml","automdl.enabled",
                       "automdl.acceptdefault","automdl.compare","arima.mu")
   list.logical.check <- append(list.logical.usrdef,list.logical)
@@ -583,7 +583,7 @@ regarima_spec_tramoseats.character <- function(spec = c("TRfull", "TR0", "TR1", 
   list.numeric.span <- list("estimate.first","estimate.last","estimate.exclFirst","estimate.exclLast",
                             "outlier.first","outlier.last","outlier.exclFirst","outlier.exclLast","fcst.horizon")
 
-  list.numeric = list("estimate.tol","estimate.urfinal","transform.fct","tradingdays.pftd",
+  list.numeric <- list("estimate.tol","estimate.urfinal","transform.fct","tradingdays.pftd",
                       "tradingdays.stocktd","easter.duration","outlier.cv","outlier.tcrate",
                       "automdl.cancel","automdl.ub1","automdl.ub2","automdl.armalimit","automdl.reducecv",
                       "automdl.ljungboxlimit","arima.p","arima.d","arima.q","arima.bp","arima.bd","arima.bq")
@@ -667,7 +667,7 @@ regarima_spec_tramoseats.character <- function(spec = c("TRfull", "TR0", "TR1", 
             arima=arima,
             forecast = forecast,
             span=span)
-  class(z) = c("regarima_spec","TRAMO_SEATS")
+  class(z) <- c("regarima_spec","TRAMO_SEATS")
   return(z)
 }
 # The function creates a ("regarima_spec","TRAMO_SEATS") class object from a regarima_Spec or a regarima object
@@ -780,12 +780,12 @@ regarima_spec_tramoseats.TRAMO_SEATS <- function(spec,
 
 
   # To check the mode of the remaining variables
-  list.logical = list("preliminary.check","usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
+  list.logical <- list("preliminary.check","usrdef.outliersEnabled","usrdef.varEnabled","estimate.eml","tradingdays.leapyear",
                       "easter.julian","easter.test","outlier.enabled","outlier.ao",
                       "outlier.tc","outlier.ls","outlier.so","outlier.usedefcv","outlier.eml","automdl.enabled",
                       "automdl.acceptdefault","automdl.compare","arima.mu","arima.coefEnabled")
 
-  list.numeric = list("estimate.first","estimate.last","estimate.exclFirst","estimate.exclLast",
+  list.numeric <- list("estimate.first","estimate.last","estimate.exclFirst","estimate.exclLast",
                       "outlier.first","outlier.last","outlier.exclFirst","outlier.exclLast",
                       "estimate.tol","estimate.urfinal","transform.fct","tradingdays.pftd",
                       "tradingdays.stocktd","easter.duration","outlier.cv","outlier.tcrate",
@@ -874,7 +874,7 @@ regarima_spec_tramoseats.TRAMO_SEATS <- function(spec,
             arima=arima,
             forecast = forecast,
             span=span)
-  class(z) = c("regarima_spec","TRAMO_SEATS")
+  class(z) <- c("regarima_spec","TRAMO_SEATS")
   return(z)
 
 }

@@ -665,7 +665,7 @@ new_regarima_spec_x13 <- function(estimate = NULL,
             arima = arima,
             forecast = forecast,
             span = span)
-  class(z) = c("regarima_spec","X13")
+  class(z) <- c("regarima_spec","X13")
   z
 }
 reformat_spec_def <- function(x, parameter){

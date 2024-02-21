@@ -94,7 +94,7 @@ proc_dictionary<-function(name){
   keys<-array(dim=size)
   jiter<-.jcall(jkeys, "Ljava/util/Iterator;", "iterator")
   for (i in 1:size){
-    keys[i]=.jcall(.jcall(jiter, "Ljava/lang/Object;", "next"), "Ljava/lang/String;", "toString")
+    keys[i] <- .jcall(.jcall(jiter, "Ljava/lang/Object;", "next"), "Ljava/lang/String;", "toString")
   }
   return (keys)
 }

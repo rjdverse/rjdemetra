@@ -2,7 +2,7 @@
 #' @name plot
 #' @rdname plot
 #' @export
-plot.regarima = function(x, which = 1:6,
+plot.regarima <- function(x, which = 1:6,
      caption = list("Residuals", "Histogram of residuals", "Normal Q-Q", "ACF of residuals",
                  "PACF of residuals", "Decomposition",
                  list("Y linearised", "Calendar effects", "Outliers effects"))[sort(which)],
@@ -22,9 +22,9 @@ plot.regarima = function(x, which = 1:6,
                       "PACF of residuals", "Decomposition",
                       list("Y linearised", "Calendar effects", "Outliers effects"))
   all_caption[which] <- caption
-  sub.caption = NULL
-  cex.caption = 1
-  cex.oma.main = 1.25
+  sub.caption <- NULL
+  cex.caption <- 1
+  cex.oma.main <- 1.25
   # Define additional variables for selected graphs:
   if (any(show[2L:3L])) {
       sres <- x$residuals / x$residuals.stat$st.error

@@ -145,7 +145,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
     return(NaN)
   }else{
     # Error with the preliminary check
-    res = jrslt$getResults()$getProcessingInformation()
+    res <- jrslt$getResults()$getProcessingInformation()
 
     if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
       proc_info <- jrslt$getResults()$getProcessingInformation()
@@ -192,7 +192,7 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   }
 
   # Error during the preliminary check
-  res = jrslt$getResults()$getProcessingInformation()
+  res <- jrslt$getResults()$getProcessingInformation()
   if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
     proc_info <- jrslt$getResults()$getProcessingInformation()
     error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)

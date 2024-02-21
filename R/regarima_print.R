@@ -26,13 +26,13 @@ summary.regarima <- function(object, ...){
   fvar <- fout <- NULL
 
   if (!is.null(arima_coef)){
-    a_tvalues=matrix(2*(1 - pt(abs(arima_coef[,3]), loglik[3])),ncol=1)
-    colnames(a_tvalues)=c("Pr(>|t|)")
+    a_tvalues <- matrix(2*(1 - pt(abs(arima_coef[,3]), loglik[3])),ncol=1)
+    colnames(a_tvalues) <- c("Pr(>|t|)")
     arima_coef <- cbind(arima_coef,a_tvalues)
   }
   if (!is.null(reg_coef)){
-    r_tvalues=matrix(2*(1 - pt(abs(reg_coef[,3]), loglik[3])),ncol=1)
-    colnames(r_tvalues)=c("Pr(>|t|)")
+    r_tvalues <- matrix(2*(1 - pt(abs(reg_coef[,3]), loglik[3])),ncol=1)
+    colnames(r_tvalues) <- c("Pr(>|t|)")
     reg_coef <- cbind(reg_coef, r_tvalues)
   }
   if (usr_spec[1] & usr_spec[2]){
@@ -172,20 +172,20 @@ print.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), ...){
   cat("Coefficients:")
   if (!is.null(arima_coef)){
     if (!is.matrix(arima_coef[,-3])){
-      tab.arima=t(as.matrix(arima_coef[,-3]))
-      rownames(tab.arima)=rownames(arima_coef)
+      tab.arima <- t(as.matrix(arima_coef[,-3]))
+      rownames(tab.arima) <- rownames(arima_coef)
     }else{
-      tab.arima=arima_coef[,-3]
+      tab.arima <- arima_coef[,-3]
     }
     cat("\n")
     printCoefmat(tab.arima, digits = digits, P.values= FALSE, na.print = "NA", ...)
   }
   if (!is.null(reg_coef)){
     if (!is.matrix(reg_coef[,-3])){
-      tab.reg=t(as.matrix(reg_coef[,-3]))
-      rownames(tab.reg)=rownames(reg_coef)
+      tab.reg <- t(as.matrix(reg_coef[,-3]))
+      rownames(tab.reg) <- rownames(reg_coef)
     }else{
-      tab.reg=reg_coef[,-3]
+      tab.reg <- reg_coef[,-3]
     }
     cat("\n")
     printCoefmat(tab.reg, digits = digits, P.values= FALSE, na.print = "NA", ...)
@@ -235,7 +235,7 @@ print.regarima <- function (x, digits = max(3L, getOption("digits") - 3L), ...){
 }
 # Method: "regarima_rtest" for the print
 #' @export
-print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
+print.regarima_rtests <- function (x, digits = max(3L, getOption("digits") - 3L),
                                 enable_print_style = getOption("enable_print_style"), ...){
   if(enable_print_style){
     bold_pre_code <- "\033[1m"
@@ -249,15 +249,15 @@ print.regarima_rtests=function (x, digits = max(3L, getOption("digits") - 3L),
   stat <- x[,1]
   pval <- x[,2]
 
-  sigcode=vector(mode = "character", length = 6)
-  sigcode[pval >=0.1] = triplestar
-  sigcode[pval < 0.1  & pval >= 0.05] = doublestar
-  sigcode[pval < 0.05] = " "
-  tabstat=data.frame(stat,pval,sigcode)
-  rownames(tabstat)=rownames(x)
-  colnames(tabstat)=c("Statistic","P.value","")
-  tabstat[,1]=format(tabstat[,1], digits = digits)
-  tabstat[,2]=format(round(tabstat[,2],max(4,digits)))
+  sigcode <- vector(mode = "character", length = 6)
+  sigcode[pval >=0.1] <- triplestar
+  sigcode[pval < 0.1  & pval >= 0.05] <-  doublestar
+  sigcode[pval < 0.05]  <-  " "
+  tabstat <- data.frame(stat,pval,sigcode)
+  rownames(tabstat) <- rownames(x)
+  colnames(tabstat) <- c("Statistic","P.value","")
+  tabstat[,1] <- format(tabstat[,1], digits = digits)
+  tabstat[,2] <- format(round(tabstat[,2],max(4,digits)))
 
   cat("\n")
   cat(bold_pre_code,

@@ -22,7 +22,7 @@
 #' @rdname new_workspace
 #' @export
 new_workspace <- function() {
-  dictionary = .jnull("jdr/spec/ts/Utility$Dictionary")
+  dictionary <- .jnull("jdr/spec/ts/Utility$Dictionary")
   wk <- .jcall("ec/tstoolkit/jdr/ws/Workspace",
                "Lec/tstoolkit/jdr/ws/Workspace;",
                "create", dictionary)
@@ -314,7 +314,7 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
       core <- .jcast(core, "ec/satoolkit/x13/X13Specification")
       spec <- .jnew("jdr/spec/x13/X13Spec", core)
     } else{
-      spec = sa_obj$spec
+      spec <- sa_obj$spec
     }
   }
   jregression <- spec$getRegression()

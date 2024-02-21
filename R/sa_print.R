@@ -1,5 +1,5 @@
 #' @export
-print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
+print.decomposition_X11 <- function (x, digits = max(3L, getOption("digits") - 3L),
                                   enable_print_style = getOption("enable_print_style"), ...){
   if(enable_print_style){
     bold_pre_code <- "\033[1m"
@@ -24,7 +24,7 @@ print.decomposition_X11=function (x, digits = max(3L, getOption("digits") - 3L),
   cat("\n")
 }
 #' @export
-print.decomposition_SEATS=function (x, digits = max(3L, getOption("digits") - 3L),
+print.decomposition_SEATS <- function (x, digits = max(3L, getOption("digits") - 3L),
                                     enable_print_style = getOption("enable_print_style"),...){
   if(enable_print_style){
     bold_pre_code <- "\033[1m"
@@ -101,7 +101,7 @@ print.combined_test <- function(x, digits = max(3L, getOption("digits") - 3L),
 }
 
 #' @export
-print.diagnostics = function (x, digits = max(3L, getOption("digits") - 3L),
+print.diagnostics <- function (x, digits = max(3L, getOption("digits") - 3L),
                               enable_print_style = getOption("enable_print_style"),
                                 ...){
 

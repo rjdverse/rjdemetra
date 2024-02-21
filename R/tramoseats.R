@@ -150,7 +150,7 @@ tramoseats.SA_spec <- function(series, spec,
   }else{
 
     # Error during the preliminary check
-    res = jrslt$getResults()$getProcessingInformation()
+    res <- jrslt$getResults()$getProcessingInformation()
 
     if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
       proc_info <- jrslt$getResults()$getProcessingInformation()
@@ -198,7 +198,7 @@ tramoseatsJavaResults <- function(jrslt, spec,
     return(NaN)
 
   # Error in preliminary check
-  res = jrslt$getResults()$getProcessingInformation()
+  res <- jrslt$getResults()$getProcessingInformation()
 
   if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
     proc_info <- jrslt$getResults()$getProcessingInformation()

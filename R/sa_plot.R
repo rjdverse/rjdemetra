@@ -42,7 +42,7 @@
 #' @name plot
 #' @rdname plot
 #' @export
-plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio", ylim, ...){
+plot.decomposition_X11 <- function(x, first_date, last_date, caption = "S-I ratio", ylim, ...){
   if (!inherits(x, "decomposition_X11"))
     stop("This function must only be used with a \"decomposition_X11\" object")
 
@@ -74,9 +74,9 @@ plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio
   }else if (freq==2) {
     leg<-c("H1","H2")
   } else {
-    leg=c("")
+    leg <- c("")
   }
-  yaxt="s"
+  yaxt <- "s"
   for (i in 1:freq){
     mm <- cycle(d10)==i
     xd10 <- d10[mm]
@@ -85,9 +85,9 @@ plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio
     points(xd8, col="red", pch="*", xlab="")
     lines(rep(mean(xd10),length(xd10)), col="black", type="l", lty=1)
     legend(x = "bottom", legend=leg[i],inset = 0, bty="n")
-    yaxt = "n"
+    yaxt <- "n"
     par(cex = 0.7, mai = c(0.1,0,0.4,0))
-    ylab = ""
+    ylab <- ""
   }
   mtext(caption[1], side = 3, col = "blue", outer = TRUE, line = -2)
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)
@@ -96,7 +96,7 @@ plot.decomposition_X11 = function(x, first_date, last_date, caption = "S-I ratio
 #' @name plot
 #' @rdname plot
 #' @export
-plot.decomposition_SEATS = function(x, first_date, last_date, caption = "S-I ratio", ylim, ...){
+plot.decomposition_SEATS <- function(x, first_date, last_date, caption = "S-I ratio", ylim, ...){
   if (!inherits(x, "decomposition_SEATS"))
     stop("This function must only be used with a \"decomposition_SEATS\" object")
 
@@ -132,9 +132,9 @@ plot.decomposition_SEATS = function(x, first_date, last_date, caption = "S-I rat
   }else if (freq==2) {
     leg<-c("H1","H2")
   } else {
-    leg=c("")
+    leg <- c("")
   }
-  yaxt="s"
+  yaxt <- "s"
   for (i in 1:freq){
     mm <- cycle(z)==i
     zm <- z[mm]
@@ -142,9 +142,9 @@ plot.decomposition_SEATS = function(x, first_date, last_date, caption = "S-I rat
     lines(rep(mean(zm),length(zm)), col="black", type="l", lty=1)
     points(zm, col="red", pch="*", xlab="")
     legend(x = "bottom", legend=leg[i],inset = 0, bty="n")
-    yaxt = "n"
+    yaxt <- "n"
     par(cex=0.7, mai=c(0.1,0,0.4,0))
-    ylab=""
+    ylab <- ""
   }
   mtext(caption[1], side = 3, col = "blue", outer = TRUE, line = -2)
   par(cex = op$cex, mai = op$mai, mfcol = op$mfcol, mfrow = op$mfrow)

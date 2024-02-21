@@ -476,7 +476,7 @@ regarima_X13 <- function(jrobj, spec){
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
 
-  class(z) = c("regarima","X13")
+  class(z) <- c("regarima","X13")
   return(z)
 }
 
@@ -513,6 +513,6 @@ regarima_TS <- function(jrobj, spec){
             residuals.stat = jd_results$residuals.stat,
             forecast = jd_results$forecast)
 
-  class(z) = c("regarima","TRAMO_SEATS")
+  class(z) <- c("regarima","TRAMO_SEATS")
   return(z)
 }

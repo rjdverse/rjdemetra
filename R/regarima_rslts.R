@@ -45,7 +45,7 @@ regarima_rslts <- function(jrobj, fcsth){
     rownames(arima.coefficients) <- arma.description
     colnames(arima.coefficients) <- c("Estimate","Std. Error","T-stat")
   }else{
-    arima.coefficients = NULL
+    arima.coefficients <- NULL
   }
 
   # Regression coefficients
@@ -82,8 +82,8 @@ regarima_rslts <- function(jrobj, fcsth){
   transformed <- as.logical(result(jrobj,"model.log"))
   mean <- "Mean" %in% rownames(regression.coefficients)
   ntd <- result(jrobj,"model.ntd")
-  if (is.null(result(jrobj,"model.lp"))){leap.year=FALSE} else {leap.year=TRUE}
-  if (is.null(result(jrobj,"model.easter"))){easter=FALSE} else {easter=TRUE}
+  if (is.null(result(jrobj,"model.lp"))){leap.year <- FALSE} else {leap.year <- TRUE}
+  if (is.null(result(jrobj,"model.easter"))){easter <- FALSE} else {easter <- TRUE}
   nout <- result(jrobj,"model.nout")
 
   spec_rslt <- data.frame(model, t.span, transformed, mean, ntd, leap.year, easter, nout,

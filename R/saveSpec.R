@@ -84,7 +84,7 @@
 #' @rdname save_spec
 #' @name save_spec
 #' @export
-save_spec = function (object, file = file.path(tempdir(), "spec.RData")) {
+save_spec <- function (object, file = file.path(tempdir(), "spec.RData")) {
   if (inherits(object, c("regarima","regarima_spec","SA","SA_spec"))==FALSE)
     stop("The function must only be used with \"regarima\", \"regarima_spec\", \"SA\" and \"SA_spec\" objects", call. = FALSE)
 
@@ -154,14 +154,14 @@ load_spec <- function (file = "spec.RData") {
   arima.dsc <- rbind(s.arima.dsc,rep(NA,length(s.arima.dsc)),s.arima.dsc)
   forecast <- rbind(s.forecast,rep(NA,length(s.forecast)),s.forecast)
 
-  rownames(estimate)=c("Loaded","User_modif","Final")
-  rownames(transform)=c("Loaded","User_modif","Final")
-  rownames(usrdef)=c("Loaded","User_modif","Final")
-  rownames(trading.days)=c("Loaded","User_modif","Final")
-  rownames(easter)=c("Loaded","User_modif","Final")
-  rownames(outliers)=c("Loaded","User_modif","Final")
-  rownames(arima.dsc)=c("Loaded","User_modif","Final")
-  rownames(forecast)=c("Loaded","User_modif","Final")
+  rownames(estimate) <- c("Loaded","User_modif","Final")
+  rownames(transform) <- c("Loaded","User_modif","Final")
+  rownames(usrdef) <- c("Loaded","User_modif","Final")
+  rownames(trading.days) <- c("Loaded","User_modif","Final")
+  rownames(easter) <- c("Loaded","User_modif","Final")
+  rownames(outliers) <- c("Loaded","User_modif","Final")
+  rownames(arima.dsc) <- c("Loaded","User_modif","Final")
+  rownames(forecast) <- c("Loaded","User_modif","Final")
 
   userdef <-list(specification = usrdef, outliers = list(Predefined = s.predef.outliers, Final = s.predef.outliers),
                  variables = list(Predefined = s.predef.variables, Final = s.predef.variables))
@@ -180,7 +180,7 @@ load_spec <- function (file = "spec.RData") {
   } else if (inherits(object,"SA_saveX13")){
     class(regarima) <- c("regarima_spec","X13")
     x11 <- rbind(s.decomp,rep(NA,length(s.decomp )),s.decomp)
-    rownames(x11)=c("Loaded","User_modif","Final")
+    rownames(x11) <- c("Loaded","User_modif","Final")
     class(x11) <- c("X11_spec","data.frame")
     z <- list(regarima = regarima, x11 = x11)
     class(z) <- c("SA_spec","X13")
@@ -188,7 +188,7 @@ load_spec <- function (file = "spec.RData") {
   } else {
     class(regarima) <- c("regarima_spec","TRAMO_SEATS")
     seats <- rbind(s.decomp,rep(NA,length(s.decomp )),s.decomp)
-    rownames(seats)=c("Loaded","User_modif","Final")
+    rownames(seats) <- c("Loaded","User_modif","Final")
     class(seats) <- c("seats_spec","data.frame")
     z <- list(regarima = regarima, seats = seats)
     class(z) <- c("SA_spec","TRAMO_SEATS")
