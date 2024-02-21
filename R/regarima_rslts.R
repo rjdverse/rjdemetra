@@ -118,7 +118,7 @@ regarima_rslts <- function(jrobj, fcsth){
                       attr(res, "description")
                     )
                   })
-  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=T),
+  tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=TRUE),
                       stringsAsFactors=FALSE)
   tests[,1] <- as.numeric(tests[,1])
   tests[,2] <- as.numeric(tests[,2])
@@ -149,8 +149,3 @@ regarima_rslts <- function(jrobj, fcsth){
        residuals.stat = residuals.stat,
        forecast = forecast)
 }
-
-
-
-
-
