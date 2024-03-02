@@ -4,6 +4,8 @@
 
 - possibility to export X-11 some components: `y_cmp`, `y_cmp_f`, `t_cmp`, `t_cmp_f`, `sa_cmp`, `s_cmp`, `s_cmp_f`, and `i_cmp`.
 
+- correction when importing models containing ramp regressors when the frequency is not 12 (monthly).
+
 
 # RJDemetra 0.2.5
 
