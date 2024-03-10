@@ -6,12 +6,14 @@
 
 - correction when importing models containing ramp regressors when the frequency is not 12 (monthly).
 
+- correction of `get_jmodel()` with empty multiprocessings.
+
 
 # RJDemetra 0.2.5
 
 - `proc_data()` update to export more data from Java object.
 
-- seasonality Kurskal-Wallis test corrected  (issue #128).
+- seasonality Kurskal-Wallis test corrected (issue #128).
 
 - `vcov()` correction when matrix NULL and new parameter `component`.
 

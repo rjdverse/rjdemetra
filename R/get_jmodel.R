@@ -13,7 +13,7 @@ get_jmodel.workspace <- function(x, workspace,
   multiprocessings <- get_all_objects(x)
   nb_mp <- length(multiprocessings)
 
-  result <- lapply(1:nb_mp, function(i){
+  result <- lapply(seq_len(nb_mp), function(i){
     if (progress_bar)
       cat(sprintf("Multiprocessing %i on %i:\n", i, nb_mp))
     get_jmodel(multiprocessings[[i]],
@@ -34,7 +34,7 @@ get_jmodel.multiprocessing <- function(x, workspace,
   if (progress_bar)
     pb <- txtProgressBar(min = 0, max = nb_sa_objs, style = 3)
 
-  result <- lapply(1:nb_sa_objs, function(i){
+  result <- lapply(seq_len(nb_sa_objs), function(i){
     res <- get_jmodel(all_sa_objects[[i]],
                      workspace = workspace, userdefined = userdefined)
     if (progress_bar)
