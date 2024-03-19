@@ -1,3 +1,6 @@
+# RJDemetra 0.2.7
+
+
 # RJDemetra 0.2.6
 
 - possibility to export last msr for monthly data (issue #122).
