@@ -8,10 +8,18 @@ identical_na <- function(x){
 }
 
 
-ramp <- function(start = 1990, end = 2020,
+ramp <- function(start = 1900, end = 2100,
                  start_ramp, end_ramp, frequency = 12){
   start <- format_ts_date(start, frequency)
   end <- format_ts_date(end, frequency)
+  # start_ramp and end_ramp are defined in month and not in the frequency of the model
+  new_period <-  rep(seq.int(from = 1, to = frequency), each = 12 / frequency)
+  if (length(start_ramp) == 2) {
+    start_ramp[2] <- new_period[start_ramp[2]]
+  }
+  if (length(end_ramp) == 2) {
+    end_ramp[2] <- new_period[end_ramp[2]]
+  }
   start_ramp <- format_ts_date(start_ramp, frequency)
   end_ramp <- format_ts_date(end_ramp, frequency)
 
@@ -20,7 +28,7 @@ ramp <- function(start = 1990, end = 2020,
   if (missing(start) || missing(end)) {
     # if start and end not specified by hand
     start <- min(start_ramp - 1, start)
-    end <- min(end_ramp + 1, end)
+    end <- max(end_ramp + 1, end)
   }
 
   x <- ts(-1, start = start, end = end,
