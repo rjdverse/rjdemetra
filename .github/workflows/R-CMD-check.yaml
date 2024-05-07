@@ -36,6 +36,7 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
+          distribution: 'zulu'
           java-version: ${{ matrix.config.java }}
 
       - uses: r-lib/actions/setup-r@v2
