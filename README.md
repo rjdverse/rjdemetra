@@ -37,7 +37,7 @@ RJDemetra offers full access to all options and outputs of JDemetra+.
 
 RJDemetra relies on the
 [rJava](https://CRAN.R-project.org/package=rJava) package and Java SE
-version higher than 8 is required.
+version 8 or higher is required.
 
 ``` r
 # Install release version from CRAN
