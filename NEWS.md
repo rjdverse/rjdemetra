@@ -1,5 +1,8 @@
 # RJDemetra 0.2.7
 
+- results of `user_defined_variables()` were updated.
+
+- README correction.
 
 # RJDemetra 0.2.6
 
