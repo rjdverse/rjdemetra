@@ -31,7 +31,7 @@ LazyData: TRUE
 Suggests:
     knitr,
     rmarkdown
-URL: https://jdemetra.github.io/rjdemetra/, https://github.com/jdemetra/rjdemetra
-BugReports: https://github.com/jdemetra/rjdemetra/issues
+URL: https://rjdverse.github.io/rjdemetra/, https://github.com/rjdverse/rjdemetra
+BugReports: https://github.com/rjdverse/rjdemetra/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.1

@@ -1,5 +1,7 @@
 # RJDemetra 0.2.7
 
+- URL to github repository updated (github.com/jdemetra replaced by github.com/rjdverse).
+
 - results of `user_defined_variables()` were updated.
 
 - README correction.
