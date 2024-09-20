@@ -6,6 +6,8 @@
 
 - README correction.
 
+- benchmarking option added to `x13_spec()` and `tramoseats_spec()`.
+
 # RJDemetra 0.2.6
 
 - possibility to export last msr for monthly data (issue #122).

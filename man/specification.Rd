@@ -15,6 +15,7 @@
 \alias{s_fcst}
 \alias{s_span}
 \alias{s_x11}
+\alias{s_benchmarking}
 \alias{s_seats}
 \title{Access a model specification, a SA or a pre-adjustment model in X13 and TRAMO-SEATS}
 \usage{
@@ -43,6 +44,8 @@ s_fcst(object = NA)
 s_span(object = NA)
 
 s_x11(object = NA)
+
+s_benchmarking(object = NA)
 
 s_seats(object = NA)
 }

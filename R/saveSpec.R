@@ -103,22 +103,24 @@ save_spec = function (object, file = file.path(tempdir(), "spec.RData")) {
 
   if (inherits(object,c("SA","SA_spec")) & inherits(object,"X13")){
     decomp <- s_x11(object)
+    benchmarking <- s_benchmarking(object)
     cspec <- "SA_saveX13"
   } else if (inherits(object,c("SA","SA_spec")) & inherits(object,"TRAMO_SEATS")){
     decomp <- s_seats(object)
+    benchmarking <- s_benchmarking(object)
     cspec <- "SA_saveTS"
   } else if (inherits(object,"X13")) {
-    decomp <- NA
+    decomp <- benchmarking <- NA
     cspec <- "regarima_saveX13"
   } else {
-    decomp <- NA
+    decomp <- benchmarking <- NA
     cspec <- "regarima_saveTS"
   }
 
   spec <- list(estimate=estimate, transform=transform, usrdef = usrdef,predef.outliers=predef.outliers,
                predef.variables=predef.variables, trading.days=trading.days,easter= easter,
                outliers=outliers, arima.dsc=arima.dsc, predef.coef=predef.coef,
-               forecast = forecast,span=span, decomp=decomp)
+               forecast = forecast,span=span, decomp=decomp, benchmarking = benchmarking)
   class(spec) <- cspec
   save(spec, file = file)
 }
@@ -144,6 +146,7 @@ load_spec <- function (file = "spec.RData") {
   s.forecast <- object$forecast
   span <- object$span
   s.decomp <- object$decomp
+  s.benchmarking <- object$benchmarking
 
   estimate<- rbind(s.estimate,rep(NA,length(s.estimate)),s.estimate)
   transform <- rbind(s.transform,rep(NA,length(s.transform)),s.transform)
@@ -153,15 +156,20 @@ load_spec <- function (file = "spec.RData") {
   outliers <- rbind(s.outliers,rep(NA,length(s.outliers)),s.outliers)
   arima.dsc <- rbind(s.arima.dsc,rep(NA,length(s.arima.dsc)),s.arima.dsc)
   forecast <- rbind(s.forecast,rep(NA,length(s.forecast)),s.forecast)
-
-  rownames(estimate)=c("Loaded","User_modif","Final")
-  rownames(transform)=c("Loaded","User_modif","Final")
-  rownames(usrdef)=c("Loaded","User_modif","Final")
-  rownames(trading.days)=c("Loaded","User_modif","Final")
-  rownames(easter)=c("Loaded","User_modif","Final")
-  rownames(outliers)=c("Loaded","User_modif","Final")
-  rownames(arima.dsc)=c("Loaded","User_modif","Final")
-  rownames(forecast)=c("Loaded","User_modif","Final")
+  benchmarking <- rbind(s.benchmarking,NA,s.benchmarking)
+  class(benchmarking) <- c("benchmarking_spec", "data.frame")
+  decomp <- rbind(s.decomp,rep(NA,length(s.decomp )),s.decomp)
+  rownames(estimate) <-
+    rownames(transform) <-
+    rownames(usrdef) <-
+    rownames(trading.days) <-
+    rownames(easter) <-
+    rownames(outliers) <-
+    rownames(arima.dsc) <-
+    rownames(forecast) <-
+    rownames(benchmarking) <-
+    rownames(decomp) <-
+    c("Loaded","User_modif","Final")
 
   userdef <-list(specification = usrdef, outliers = list(Predefined = s.predef.outliers, Final = s.predef.outliers),
                  variables = list(Predefined = s.predef.variables, Final = s.predef.variables))
@@ -179,18 +187,16 @@ load_spec <- function (file = "spec.RData") {
     return(regarima)
   } else if (inherits(object,"SA_saveX13")){
     class(regarima) <- c("regarima_spec","X13")
-    x11 <- rbind(s.decomp,rep(NA,length(s.decomp )),s.decomp)
-    rownames(x11)=c("Loaded","User_modif","Final")
+    x11 <- decomp
     class(x11) <- c("X11_spec","data.frame")
-    z <- list(regarima = regarima, x11 = x11)
+    z <- list(regarima = regarima, x11 = x11, benchmarking = benchmarking)
     class(z) <- c("SA_spec","X13")
     return(z)
   } else {
     class(regarima) <- c("regarima_spec","TRAMO_SEATS")
-    seats <- rbind(s.decomp,rep(NA,length(s.decomp )),s.decomp)
-    rownames(seats)=c("Loaded","User_modif","Final")
+    seats <- decomp
     class(seats) <- c("seats_spec","data.frame")
-    z <- list(regarima = regarima, seats = seats)
+    z <- list(regarima = regarima, seats = seats, benchmarking = benchmarking)
     class(z) <- c("SA_spec","TRAMO_SEATS")
     return(z)
   }
