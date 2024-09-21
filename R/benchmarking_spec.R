@@ -6,8 +6,18 @@ benchmarking_spec_def <- function(spec,
                                   benchmarking.lambda = NA_real_)
 
 {
+  default_spec <- data.frame(benchmarking.enabled = FALSE, benchmarking.target = "CalendarAdjusted",
+                             benchmarking.useforecast = FALSE, benchmarking.rho = 1, benchmarking.lambda = 1)
+  if(identical(spec, "X11")) {
+    benchmarking.mod <- rbind(
+      default_spec,
+      default_spec,
+      NA)
+    return(spec_benchmarking(benchmarking.mod))
+  }
+
   benchmarking.target <- match.arg(benchmarking.target)
-  # TODO : if X11 return NULL ?
+
 
   list.logical <- list("benchmarking.enabled", "benchmarking.useforecast")
   list.numeric <- list("benchmarking.rho", "benchmarking.lambda")
@@ -51,8 +61,7 @@ benchmarking_spec_def <- function(spec,
     benchmarking.useforecast = benchmarking.useforecast, benchmarking.rho = benchmarking.rho,
     benchmarking.lambda = benchmarking.lambda)
   benchmarking.mod <- rbind(
-    data.frame(benchmarking.enabled = FALSE, benchmarking.target = "CalendarAdjusted",
-               benchmarking.useforecast = FALSE, benchmarking.rho = 1, benchmarking.lambda = 1),
+    default_spec,
     benchmarking,
     NA)
   return(spec_benchmarking(benchmarking.mod))
@@ -163,25 +172,33 @@ spec_benchmarking_jd2r <- function(jrobj){
 }
 
 benchmarking <- function(jrobj,spec){
-
-  # specification
   specification <- spec[3,]
   rownames(specification) <- ""
-  # TODO: add benchmarking results if spec is enabled
-  # jd_results <- decomp_rsltsX13(jrobj)
-  z <- list(specification = specification)
+  if(specification[["benchmarking.enabled"]]) {
+    original <- result(jrobj, "benchmarking.original")
+    result <- result(jrobj, "benchmarking.result")
+    Differences <- original - result
+    bench_res <- ts.union(original, result, Differences)
+  } else {
+    bench_res <- NULL
+  }
+  z <- list(specification = specification, benchmarking = bench_res)
   class(z) <- c("benchmarking")
   return(z)
 }
 
 benchmarking_def <- function(jrobj,jspec){
-
-  # specification
   specification <- spec_benchmarking_jd2r(jspec)
   rownames(specification) <- ""
-  # TODO: add benchmarking results if spec is enabled
-  # jd_results <- decomp_rsltsX13(jrobj)
-  z <- list(specification = specification)
+  if(specification[["benchmarking.enabled"]]) {
+    original <- result(jrobj, "benchmarking.original")
+    result <- result(jrobj, "benchmarking.result")
+    Differences <- original - result
+    bench_res <- ts.union(original, result, Differences)
+  } else {
+    bench_res <- NULL
+  }
+  z <- list(specification = specification, benchmarking = bench_res)
   class(z) <- c("benchmarking")
   return(z)
 }
