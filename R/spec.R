@@ -476,6 +476,21 @@ s_x11 <- function(object = NA){
 #' @rdname specification
 #' @name specification
 #' @export
+s_benchmarking <- function(object = NA){
+  if (inherits(object, c("SA","SA_spec"))==FALSE)
+    stop("This function must only be used with \"SA\" and \"SA_spec\" objects", call. = FALSE)
+
+  if (inherits(object, "SA")){
+    return(object$benchmarking$specification)
+  } else {
+    obj <- object$benchmarking[3,]
+    rownames(obj) <- ""
+    return(obj)
+  }
+}
+#' @rdname specification
+#' @name specification
+#' @export
 s_seats <- function(object = NA){
   if (inherits(object, c("SA","SA_spec"))==FALSE)
     stop("This function must only be used with \"SA\" and \"SA_spec\" objects", call. = FALSE)

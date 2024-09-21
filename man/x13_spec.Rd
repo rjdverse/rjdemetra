@@ -83,7 +83,12 @@ x13_spec(
   x11.bcasts = NA_integer_,
   x11.calendarSigma = NA,
   x11.sigmaVector = NA,
-  x11.excludeFcasts = NA
+  x11.excludeFcasts = NA,
+  benchmarking.enabled = NA,
+  benchmarking.target = c(NA, "Original", "CalendarAdjusted"),
+  benchmarking.useforecast = NA,
+  benchmarking.rho = NA_real_,
+  benchmarking.lambda = NA_real_
 )
 }
 \arguments{
@@ -387,6 +392,16 @@ see parameter \code{x11.sigmaVector}).}
 detection and adjustment will be computed. Only used if \code{x11.calendarSigma = "Select"}. Possible values are: "Group1" and "Group2".}
 
 \item{x11.excludeFcasts}{logical: to exclude forecasts and backcasts. If \code{TRUE}, the RegARIMA model forecasts and backcasts are not used during the detection of extreme values in the seasonal adjustment routines.}
+
+\item{benchmarking.enabled}{logical: to enable benchmarking. If \code{TRUE}, the benchmarking is enabled.}
+
+\item{benchmarking.target}{character: the target of the benchmarking procedure, which can be the raw series (\code{"Original"}) or the series the adjusted for calendar effects (\code{"CalendarAdjusted"}).}
+
+\item{benchmarking.useforecast}{logical: If \code{TRUE}, the forecasts of the seasonally adjusted variable and of the target variable are used in the benchmarking computation so the benchmarking constrains is also applied to the forecasting period.}
+
+\item{benchmarking.rho}{numeric: the value of the AR(1) parameter (set between 0 and 1) in the function used for benchmarking.}
+
+\item{benchmarking.lambda}{numeric: a parameter used for benchmarking that relatesto to the weights in the regression equation. It is typically equal to 0, 1/2 or 1.}
 }
 \value{
 A two-element list of class \code{c("SA_spec", "X13")}, containing:

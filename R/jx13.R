@@ -22,6 +22,7 @@ jx13.SA_spec <- function(series, spec, userdefined = NULL){
   }
   jdictionary <- spec_regarima_X13_r2jd(spec, jrspec)
   seasma <- specX11_r2jd(spec, jrspec, freq = frequency(series))
+  spec_benchmarking_r2jd(rspec = spec, jdspec = jrspec)
   jspec <- .jcall(jrspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
   jrslt <- new(Class = "X13_java", internal = jrslt)

@@ -164,11 +164,12 @@ tramoseats.SA_spec <- function(series, spec,
     }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
+    bench <- benchmarking(jrobj = jrobct, spec = spec$benchmarking)
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin,
-              diagnostics = diagn,
+              diagnostics = diagn, benchmarking = bench,
               user_defined = user_defined(userdefined, jrobct))
 
     class(z) <- c("SA","TRAMO_SEATS")
@@ -215,11 +216,12 @@ tramoseatsJavaResults <- function(jrslt, spec,
                         extra_info = extra_info,
                         freq = freq)
   deco <- decomp_defTS(jrobj = jrobct, spec = spec)
+  bench <- benchmarking_def(jrobj = jrobct, spec)
   fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
 
   z <- list(regarima = reg, decomposition = deco, final = fin,
-            diagnostics = diagn,
+            diagnostics = diagn, benchmarking = bench,
             user_defined = user_defined(userdefined, jrobct))
 
   class(z) <- c("SA","TRAMO_SEATS")

@@ -78,7 +78,12 @@ tramoseats_spec(
   seats.seasdBoundary1 = NA_integer_,
   seats.seasTol = NA_integer_,
   seats.maBoundary = NA_integer_,
-  seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix")
+  seats.method = c(NA, "Burman", "KalmanSmoother", "McElroyMatrix"),
+  benchmarking.enabled = NA,
+  benchmarking.target = c(NA, "Original", "CalendarAdjusted"),
+  benchmarking.useforecast = NA,
+  benchmarking.rho = NA_real_,
+  benchmarking.lambda = NA_real_
 )
 }
 \arguments{
@@ -343,6 +348,16 @@ as it may become numerically unstable when some roots of the MA polynomial are n
 \item \code{"KalmanSmoother"}: it is not disturbed by the (quasi-) unit roots in MA;
 \item \code{"McElroyMatrix"}: it has the same stability issues as the Burman's algorithm.
 }}
+
+\item{benchmarking.enabled}{logical: to enable benchmarking. If \code{TRUE}, the benchmarking is enabled.}
+
+\item{benchmarking.target}{character: the target of the benchmarking procedure, which can be the raw series (\code{"Original"}) or the series the adjusted for calendar effects (\code{"CalendarAdjusted"}).}
+
+\item{benchmarking.useforecast}{logical: If \code{TRUE}, the forecasts of the seasonally adjusted variable and of the target variable are used in the benchmarking computation so the benchmarking constrains is also applied to the forecasting period.}
+
+\item{benchmarking.rho}{numeric: the value of the AR(1) parameter (set between 0 and 1) in the function used for benchmarking.}
+
+\item{benchmarking.lambda}{numeric: a parameter used for benchmarking that relatesto to the weights in the regression equation. It is typically equal to 0, 1/2 or 1.}
 }
 \value{
 A two-element list of class \code{c("SA_spec", "TRAMO_SEATS")}, containing:
