@@ -4,6 +4,8 @@
 # RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![R-CMD-check](https://github.com/rjdverse/rjdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/rjdverse/rjdemetra/actions)
+[![R universe
+version](https://rjdverse.r-universe.dev/badges/RJDemetra)](https://rjdverse.r-universe.dev/RJDemetra)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last
 release](https://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
@@ -42,10 +44,21 @@ version 8 or higher is required.
 ``` r
 # Install release version from CRAN
 install.packages("RJDemetra")
+```
 
-# Install development version from GitHub
-# install.packages("devtools")
-devtools::install_github("rjdverse/rjdemetra")
+To install the developpment version:
+
+- From [r-universe](https://rjdverse.r-universe.dev/RJDemetra):
+
+``` r
+install.packages("RJDemetra", repos = c("https://rjdverse.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+- From GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("rjdverse/rjdemetra")
 ```
 
 If you have troubles with the installation, check the [installation
