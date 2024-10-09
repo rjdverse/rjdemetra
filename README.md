@@ -3,14 +3,16 @@
 
 # RJDemetra <img src="man/figures/logo.png" align="right" alt="" />
 
-[![R-CMD-check](https://github.com/jdemetra/rjdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/jdemetra/rjdemetra/actions)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+[![R-CMD-check](https://github.com/rjdverse/rjdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/rjdverse/rjdemetra/actions)
+[![R universe
+version](https://rjdverse.r-universe.dev/badges/RJDemetra)](https://rjdverse.r-universe.dev/RJDemetra)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN last
-release](http://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
+release](https://www.r-pkg.org/badges/last-release/RJDemetra)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN monthly
-downloads](http://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
+downloads](https://cranlogs.r-pkg.org/badges/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
 [![CRAN
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/RJDemetra?color=lightgrey)](https://cran.r-project.org/package=RJDemetra)
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](https://github.com/SNStatComp/awesome-official-statistics-software)
 
@@ -37,19 +39,30 @@ RJDemetra offers full access to all options and outputs of JDemetra+.
 
 RJDemetra relies on the
 [rJava](https://CRAN.R-project.org/package=rJava) package and Java SE
-version between 8 and 15 is required.
+version 8 or higher is required.
 
 ``` r
 # Install release version from CRAN
 install.packages("RJDemetra")
+```
 
-# Install development version from GitHub
-# install.packages("devtools")
-devtools::install_github("jdemetra/rjdemetra")
+To install the developpment version:
+
+- From [r-universe](https://rjdverse.r-universe.dev/RJDemetra):
+
+``` r
+install.packages("RJDemetra", repos = c("https://rjdverse.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+- From GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("rjdverse/rjdemetra")
 ```
 
 If you have troubles with the installation, check the [installation
-manual](https://github.com/jdemetra/rjdemetra/wiki/Installation-manual).
+manual](https://github.com/rjdverse/rjdemetra/wiki/Installation-manual).
 
 ## Basic example
 

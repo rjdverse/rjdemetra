@@ -1,3 +1,15 @@
+# RJDemetra 0.2.7
+
+- URL to github repository updated (github.com/jdemetra replaced by github.com/rjdverse).
+
+- results of `user_defined_variables()` updated.
+
+- README correction.
+
+- benchmarking option added to `x13_spec()` and `tramoseats_spec()` and in output of `x13()` and `tramoseats()`.
+
+- .jars updated.
+
 # RJDemetra 0.2.6
 
 - possibility to export last msr for monthly data (issue #122).

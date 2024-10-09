@@ -47,7 +47,7 @@ navbar:
         href: https://github.com/InseeFrLab/rjdworkspace
     github:
       icon: fa-github fa-lg
-      href: https://github.com/jdemetra/rjdemetra
+      href: https://github.com/rjdverse/rjdemetra
 
 reference:
 - title: Seasonal adjustment functions

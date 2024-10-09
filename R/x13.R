@@ -130,6 +130,7 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
   }
   jdictionary <- spec_regarima_X13_r2jd(spec, jdspec)
   seasma <- specX11_r2jd(spec,jdspec, freq = frequency(series))
+  spec_benchmarking_r2jd(rspec = spec, jdspec = jdspec)
   jspec <- .jcall(jdspec, "Lec/satoolkit/x13/X13Specification;", "getCore")
   jrslt <- .jcall("ec/tstoolkit/jdr/sa/Processor", "Lec/tstoolkit/jdr/sa/X13Results;", "x13", ts_r2jd(series), jspec, jdictionary)
 
@@ -158,10 +159,12 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
     }
     reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
+    bench <- benchmarking(jrobj = jrobct, spec = spec$benchmarking)
     fin <- final(jrobj = jrobct)
     diagn <- diagnostics(jrobj = jrobct)
 
     z <- list(regarima = reg, decomposition = deco, final = fin, diagnostics = diagn,
+              benchmarking = bench,
               user_defined = user_defined(userdefined, jrobct))
 
     class(z) <- c("SA", "X13")
@@ -207,11 +210,13 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
                          context_dictionary = context_dictionary,
                          extra_info = extra_info, freq = freq)
   deco <- decomp_defX13(jrobj = jrobct, spec = spec, freq = freq)
+  bench <- benchmarking_def(jrobj = jrobct, spec)
   fin <- final(jrobj = jrobct)
   diagn <- diagnostics(jrobj = jrobct)
 
   z <- list(regarima = reg, decomposition = deco, final = fin,
             diagnostics = diagn,
+            benchmarking = bench,
             user_defined = user_defined(userdefined, jrobct))
 
   class(z) <- c("SA","X13")

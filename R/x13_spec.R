@@ -44,6 +44,11 @@
 #' detection and adjustment will be computed. Only used if \code{x11.calendarSigma = "Select"}. Possible values are: "Group1" and "Group2".
 #' @param x11.excludeFcasts logical: to exclude forecasts and backcasts. If \code{TRUE}, the RegARIMA model forecasts and backcasts are not used during the detection of extreme values in the seasonal adjustment routines.
 #'
+#' @param benchmarking.enabled logical: to enable benchmarking. If \code{TRUE}, the benchmarking is enabled.
+#' @param benchmarking.target character: the target of the benchmarking procedure, which can be the raw series (\code{"Original"}) or the series the adjusted for calendar effects (\code{"CalendarAdjusted"}).
+#' @param benchmarking.useforecast logical: If \code{TRUE}, the forecasts of the seasonally adjusted variable and of the target variable are used in the benchmarking computation so the benchmarking constrains is also applied to the forecasting period.
+#' @param benchmarking.rho numeric: the value of the AR(1) parameter (set between 0 and 1) in the function used for benchmarking.
+#' @param benchmarking.lambda numeric: a parameter used for benchmarking that relatesto to the weights in the regression equation. It is typically equal to 0, 1/2 or 1.
 #' @details
 #'
 #' The available predefined 'JDemetra+' model specifications are described in the table below:
@@ -229,7 +234,13 @@ x13_spec <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4c",
                      x11.bcasts = NA_integer_,
                      x11.calendarSigma = NA,
                      x11.sigmaVector = NA,
-                     x11.excludeFcasts = NA){
+                     x11.excludeFcasts = NA,
+                     benchmarking.enabled = NA,
+                     benchmarking.target = c(NA, "Original", "CalendarAdjusted"),
+                     benchmarking.useforecast = NA,
+                     benchmarking.rho = NA_real_,
+                     benchmarking.lambda = NA_real_
+                     ){
   UseMethod("x13_spec", spec)
 }
 #' @export
@@ -310,7 +321,12 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
                          x11.bcasts = NA_integer_,
                          x11.calendarSigma = NA,
                          x11.sigmaVector = NA,
-                         x11.excludeFcasts = NA)
+                         x11.excludeFcasts = NA,
+                         benchmarking.enabled = NA,
+                         benchmarking.target = c(NA, "Original", "CalendarAdjusted"),
+                         benchmarking.useforecast = NA,
+                         benchmarking.rho = NA_real_,
+                         benchmarking.lambda = NA_real_)
 {
   spec <- match.arg(spec)
   reg_spec <- gsub("RSA", "RG", spec)
@@ -318,47 +334,56 @@ x13_spec.character <- function(spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3"
     regarima <- new_regarima_spec_x13()
   } else{
     regarima <-
-      regarima_spec_x13(spec = reg_spec, preliminary.check = preliminary.check,
-                        estimate.from = estimate.from, estimate.to = estimate.to,
-                        estimate.first = estimate.first, estimate.last = estimate.last,
-                        estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
-                        estimate.tol = estimate.tol, transform.function = transform.function,
-                        transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
-                        usrdef.outliersEnabled = usrdef.outliersEnabled, usrdef.outliersType = usrdef.outliersType,
-                        usrdef.outliersDate = usrdef.outliersDate, usrdef.outliersCoef = usrdef.outliersCoef,
-                        usrdef.varEnabled = usrdef.varEnabled, usrdef.var = usrdef.var,
-                        usrdef.varType = usrdef.varType, usrdef.varCoef = usrdef.varCoef,
-                        tradingdays.option = tradingdays.option, tradingdays.autoadjust = tradingdays.autoadjust,
-                        tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
-                        tradingdays.test = tradingdays.test, easter.enabled = easter.enabled,
-                        easter.julian = easter.julian, easter.duration = easter.duration,
-                        easter.test = easter.test, outlier.enabled = outlier.enabled,
-                        outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
-                        outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
-                        outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
-                        outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
-                        outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
-                        outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
-                        automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                        automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                        automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
-                        automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
-                        automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                        automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p,
-                        arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
-                        arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
-                        arima.coef = arima.coef, arima.coefType = arima.coefType,
-                        fcst.horizon = fcst.horizon)
+      regarima_spec_x13(
+        spec = reg_spec, preliminary.check = preliminary.check,
+        estimate.from = estimate.from, estimate.to = estimate.to,
+        estimate.first = estimate.first, estimate.last = estimate.last,
+        estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+        estimate.tol = estimate.tol, transform.function = transform.function,
+        transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
+        usrdef.outliersEnabled = usrdef.outliersEnabled, usrdef.outliersType = usrdef.outliersType,
+        usrdef.outliersDate = usrdef.outliersDate, usrdef.outliersCoef = usrdef.outliersCoef,
+        usrdef.varEnabled = usrdef.varEnabled, usrdef.var = usrdef.var,
+        usrdef.varType = usrdef.varType, usrdef.varCoef = usrdef.varCoef,
+        tradingdays.option = tradingdays.option, tradingdays.autoadjust = tradingdays.autoadjust,
+        tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+        tradingdays.test = tradingdays.test, easter.enabled = easter.enabled,
+        easter.julian = easter.julian, easter.duration = easter.duration,
+        easter.test = easter.test, outlier.enabled = outlier.enabled,
+        outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+        outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+        outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+        outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+        outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+        outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
+        automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+        automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+        automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
+        automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
+        automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+        automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p,
+        arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+        arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+        arima.coef = arima.coef, arima.coefType = arima.coefType,
+        fcst.horizon = fcst.horizon)
   }
 
-  x11 <- x11_spec_def(spec = spec, x11.mode = x11.mode,
-                      x11.seasonalComp = x11.seasonalComp, x11.lsigma = x11.lsigma,
-                      x11.usigma = x11.usigma, x11.trendAuto = x11.trendAuto,
-                      x11.trendma = x11.trendma, x11.seasonalma = x11.seasonalma,
-                      x11.fcasts = x11.fcasts, x11.bcasts = x11.bcasts,
-                      x11.calendarSigma = x11.calendarSigma, x11.sigmaVector = x11.sigmaVector,
-                      x11.excludeFcasts = x11.excludeFcasts)
-  z <- list(regarima = regarima, x11 = x11)
+  x11 <- x11_spec_def(
+    spec = spec, x11.mode = x11.mode,
+    x11.seasonalComp = x11.seasonalComp, x11.lsigma = x11.lsigma,
+    x11.usigma = x11.usigma, x11.trendAuto = x11.trendAuto,
+    x11.trendma = x11.trendma, x11.seasonalma = x11.seasonalma,
+    x11.fcasts = x11.fcasts, x11.bcasts = x11.bcasts,
+    x11.calendarSigma = x11.calendarSigma, x11.sigmaVector = x11.sigmaVector,
+    x11.excludeFcasts = x11.excludeFcasts)
+  benchmarking <- benchmarking_spec_def(
+    spec = spec,
+    benchmarking.enabled = benchmarking.enabled,
+    benchmarking.target = benchmarking.target,
+    benchmarking.useforecast = benchmarking.useforecast,
+    benchmarking.rho = benchmarking.rho,
+    benchmarking.lambda = benchmarking.lambda)
+  z <- list(regarima = regarima, x11 = x11, benchmarking = benchmarking)
   class(z) <- c("SA_spec", "X13")
   return(z)
 }
@@ -440,51 +465,65 @@ x13_spec.X13 <- function(spec,
                     x11.bcasts = NA_integer_,
                     x11.calendarSigma = NA,
                     x11.sigmaVector = NA,
-                    x11.excludeFcasts = NA)
+                    x11.excludeFcasts = NA,
+                    benchmarking.enabled = NA,
+                    benchmarking.target = c(NA, "Original", "CalendarAdjusted"),
+                    benchmarking.useforecast = NA,
+                    benchmarking.rho = NA_real_,
+                    benchmarking.lambda = NA_real_)
 {
   if (!inherits(spec, c("SA","SA_spec")))
     stop("This function must only be used with c(\"SA\",\"X13\") and c(\"SA_spec\",\"X13\") objects", call. = FALSE)
 
-  regarima <- regarima_spec_x13(spec = spec, preliminary.check = preliminary.check,
-                                estimate.from = estimate.from, estimate.to = estimate.to,
-                                estimate.first = estimate.first, estimate.last = estimate.last,
-                                estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
-                                estimate.tol = estimate.tol, transform.function = transform.function,
-                                transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
-                                usrdef.outliersEnabled = usrdef.outliersEnabled, usrdef.outliersType = usrdef.outliersType,
-                                usrdef.outliersDate = usrdef.outliersDate, usrdef.outliersCoef = usrdef.outliersCoef,
-                                usrdef.varEnabled = usrdef.varEnabled, usrdef.var = usrdef.var,
-                                usrdef.varType = usrdef.varType, usrdef.varCoef = usrdef.varCoef,
-                                tradingdays.option = tradingdays.option, tradingdays.autoadjust = tradingdays.autoadjust,
-                                tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
-                                tradingdays.test = tradingdays.test, easter.enabled = easter.enabled,
-                                easter.julian = easter.julian, easter.duration = easter.duration,
-                                easter.test = easter.test, outlier.enabled = outlier.enabled,
-                                outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
-                                outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
-                                outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
-                                outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
-                                outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
-                                outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
-                                automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
-                                automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
-                                automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
-                                automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
-                                automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
-                                automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p,
-                                arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
-                                arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
-                                arima.coef = arima.coef, arima.coefType = arima.coefType,
-                                fcst.horizon = fcst.horizon)
+  regarima <- regarima_spec_x13(
+    spec = spec, preliminary.check = preliminary.check,
+    estimate.from = estimate.from, estimate.to = estimate.to,
+    estimate.first = estimate.first, estimate.last = estimate.last,
+    estimate.exclFirst = estimate.exclFirst, estimate.exclLast = estimate.exclLast,
+    estimate.tol = estimate.tol, transform.function = transform.function,
+    transform.adjust = transform.adjust, transform.aicdiff = transform.aicdiff,
+    usrdef.outliersEnabled = usrdef.outliersEnabled, usrdef.outliersType = usrdef.outliersType,
+    usrdef.outliersDate = usrdef.outliersDate, usrdef.outliersCoef = usrdef.outliersCoef,
+    usrdef.varEnabled = usrdef.varEnabled, usrdef.var = usrdef.var,
+    usrdef.varType = usrdef.varType, usrdef.varCoef = usrdef.varCoef,
+    tradingdays.option = tradingdays.option, tradingdays.autoadjust = tradingdays.autoadjust,
+    tradingdays.leapyear = tradingdays.leapyear, tradingdays.stocktd = tradingdays.stocktd,
+    tradingdays.test = tradingdays.test, easter.enabled = easter.enabled,
+    easter.julian = easter.julian, easter.duration = easter.duration,
+    easter.test = easter.test, outlier.enabled = outlier.enabled,
+    outlier.from = outlier.from, outlier.to = outlier.to, outlier.first = outlier.first,
+    outlier.last = outlier.last, outlier.exclFirst = outlier.exclFirst,
+    outlier.exclLast = outlier.exclLast, outlier.ao = outlier.ao,
+    outlier.tc = outlier.tc, outlier.ls = outlier.ls, outlier.so = outlier.so,
+    outlier.usedefcv = outlier.usedefcv, outlier.cv = outlier.cv,
+    outlier.method = outlier.method, outlier.tcrate = outlier.tcrate,
+    automdl.enabled = automdl.enabled, automdl.acceptdefault = automdl.acceptdefault,
+    automdl.cancel = automdl.cancel, automdl.ub1 = automdl.ub1,
+    automdl.ub2 = automdl.ub2, automdl.mixed = automdl.mixed,
+    automdl.balanced = automdl.balanced, automdl.armalimit = automdl.armalimit,
+    automdl.reducecv = automdl.reducecv, automdl.ljungboxlimit = automdl.ljungboxlimit,
+    automdl.ubfinal = automdl.ubfinal, arima.mu = arima.mu, arima.p = arima.p,
+    arima.d = arima.d, arima.q = arima.q, arima.bp = arima.bp,
+    arima.bd = arima.bd, arima.bq = arima.bq, arima.coefEnabled = arima.coefEnabled,
+    arima.coef = arima.coef, arima.coefType = arima.coefType,
+    fcst.horizon = fcst.horizon)
 
-  x11 <- x11_spec(spec = spec, x11.mode = x11.mode,
-                  x11.seasonalComp = x11.seasonalComp, x11.lsigma = x11.lsigma,
-                  x11.usigma = x11.usigma, x11.trendAuto = x11.trendAuto,
-                  x11.trendma = x11.trendma, x11.seasonalma = x11.seasonalma,
-                  x11.fcasts = x11.fcasts, x11.bcasts = x11.bcasts,
-                  x11.calendarSigma = x11.calendarSigma, x11.sigmaVector = x11.sigmaVector,
-                  x11.excludeFcasts = x11.excludeFcasts)
-  z <- list(regarima = regarima, x11 = x11)
+  x11 <- x11_spec(
+    spec = spec, x11.mode = x11.mode,
+    x11.seasonalComp = x11.seasonalComp, x11.lsigma = x11.lsigma,
+    x11.usigma = x11.usigma, x11.trendAuto = x11.trendAuto,
+    x11.trendma = x11.trendma, x11.seasonalma = x11.seasonalma,
+    x11.fcasts = x11.fcasts, x11.bcasts = x11.bcasts,
+    x11.calendarSigma = x11.calendarSigma, x11.sigmaVector = x11.sigmaVector,
+    x11.excludeFcasts = x11.excludeFcasts)
+  benchmarking <- benchmarking_spec(
+    spec = spec,
+    benchmarking.enabled = benchmarking.enabled,
+    benchmarking.target = benchmarking.target,
+    benchmarking.useforecast = benchmarking.useforecast,
+    benchmarking.rho = benchmarking.rho,
+    benchmarking.lambda = benchmarking.lambda)
+  z <- list(regarima = regarima, x11 = x11, benchmarking = benchmarking)
   class(z) <- c("SA_spec", "X13")
   return(z)
 }
