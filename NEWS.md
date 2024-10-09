@@ -1,3 +1,6 @@
+# RJDemetra 0.2.8
+
+
 # RJDemetra 0.2.7
 
 - URL to github repository updated (github.com/jdemetra replaced by github.com/rjdverse).
