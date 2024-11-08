@@ -571,14 +571,20 @@ get_model.sa_item <- function(x, workspace,
 # To retrieve the results of an sa_item
 sa_results <- function(jsa) {
   jresult <- .jcall(jsa, "Ljd2/algorithm/IProcResults;", "getResults")
-  if (is.null(jresult))
-    warning("The result of the object is NULL: have you computed the workspace after importing it?\n",
-            "See ?compute for more information.")
+  if (is.null(jresult)) {
+    if (is.null(get_ts(jsa))) {
+      warning("No Data: the result of the object is NULL.")
+    } else {
+      warning("The result of the object is NULL: have you computed the workspace after importing it?\n",
+              "See ?compute for more information.")
+    }
+  }
   return(jresult)
 }
 
 # To retrieve the specifications of a sa_item (possible values for type: Domain, Estimation, Point)
 sa_spec <- function(jsa, type = "Domain") {
+  type <- match.arg(tolower(type), c("domain", "estimation", "point"))
   jt <- .jcall(jsa, "Ljd2/datatypes/sa/SaItemType;", "getSaDefinition")
   if (type == "Domain") {
     return(.jcall(jt, "Lec/satoolkit/ISaSpecification;", "getDomainSpec"))
