@@ -3,13 +3,13 @@ setClass("sa_item", contains = "jobjRef")
 setClass("workspace", contains = "jobjRef")
 
 is.multiprocessing <- function(x){
-    inherits(x, "multiprocessing")
+  inherits(x, "multiprocessing")
 }
 is.sa_item <- function(x){
-    inherits(x, "sa_item")
+  inherits(x, "sa_item")
 }
 is.workspace <- function(x){
-    inherits(x, "workspace")
+  inherits(x, "workspace")
 }
 
 #' Load a 'JDemetra+' workspace
@@ -459,6 +459,7 @@ compute <- function(workspace, i) {
 #' @param userdefined a vector containing the names of additional output variables.
 #' (see \code{\link{x13}} or \code{\link{tramoseats}}).
 #' @param progress_bar Boolean: if \code{TRUE}, a progress bar is printed.
+#' @param type a \code{character} indicating the type of model to retrieve: `"Domain"` (initial specification), `"Estimation"` (specification used for the current estimation) or "Point" (specification corresponding to the results of the current estimation: fully identified model).
 #'
 #' @return \code{get_model()} returns a seasonally adjusted object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or a list of seasonally adjusted objects:
 #' \itemize{
@@ -495,15 +496,19 @@ compute <- function(workspace, i) {
 #' }
 #'
 #' @export
-get_model <- function(x, workspace,
-                      userdefined = NULL,
-                      progress_bar = TRUE){
+get_model <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   UseMethod("get_model", x)
 }
 #' @export
-get_model.workspace <- function(x, workspace,
-                                userdefined = NULL,
-                                progress_bar = TRUE){
+get_model.workspace <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   multiprocessings <- get_all_objects(x)
   nb_mp <- length(multiprocessings)
 
@@ -511,17 +516,20 @@ get_model.workspace <- function(x, workspace,
     if (progress_bar)
       cat(sprintf("Multiprocessing %i on %i:\n", i, nb_mp))
     get_model(multiprocessings[[i]],
-                     workspace = x, userdefined = userdefined,
-                     progress_bar = progress_bar)
+              workspace = x, userdefined = userdefined,
+              progress_bar = progress_bar,
+              type = type)
   })
   names(result) <- names(multiprocessings)
   result
 
 }
 #' @export
-get_model.multiprocessing <- function(x, workspace,
-                                      userdefined = NULL,
-                                      progress_bar = TRUE){
+get_model.multiprocessing <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   all_sa_objects <- get_all_objects(x)
   nb_sa_objs <- length(all_sa_objects)
 
@@ -530,7 +538,8 @@ get_model.multiprocessing <- function(x, workspace,
 
   result <- lapply(seq_len(nb_sa_objs), function(i){
     res <- get_model(all_sa_objects[[i]],
-              workspace = workspace, userdefined = userdefined)
+                     workspace = workspace, userdefined = userdefined,
+                     type = type)
     if (progress_bar)
       setTxtProgressBar(pb, i)
     res
@@ -541,10 +550,12 @@ get_model.multiprocessing <- function(x, workspace,
   result
 }
 #' @export
-get_model.sa_item <- function(x, workspace,
-                              userdefined = NULL,
-                              progress_bar = TRUE){
-  jsa_result <- get_jmodel.sa_item(x, workspace)
+get_model.sa_item <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
+  jsa_result <- get_jmodel.sa_item(x, workspace, type = type)
   if(is.null(jsa_result))
     return(NULL)
   jspec <- jsa_result[["spec"]]
@@ -552,8 +563,8 @@ get_model.sa_item <- function(x, workspace,
   y_ts <- get_ts(x)
 
   context_dictionary <- .jcall(workspace,
-                                "Lec/tstoolkit/algorithm/ProcessingContext;",
-                                "getContext")
+                               "Lec/tstoolkit/algorithm/ProcessingContext;",
+                               "getContext")
 
   result <- tryCatch({
     sa_jd2r(jrslt = jresult, spec = jspec, userdefined = userdefined,
@@ -583,16 +594,16 @@ sa_results <- function(jsa) {
 }
 
 # To retrieve the specifications of a sa_item (possible values for type: Domain, Estimation, Point)
-sa_spec <- function(jsa, type = "Domain") {
+sa_spec <- function(jsa, type = c("Domain", "Estimation", "Point")) {
   type <- match.arg(tolower(type), c("domain", "estimation", "point"))
   jt <- .jcall(jsa, "Ljd2/datatypes/sa/SaItemType;", "getSaDefinition")
-  if (type == "Domain") {
+  if (type == "domain") {
     return(.jcall(jt, "Lec/satoolkit/ISaSpecification;", "getDomainSpec"))
   }
-  if (type == "Estimation") {
+  if (type == "estimation") {
     return(.jcall(jt, "Lec/satoolkit/ISaSpecification;", "getEstimationSpec"))
   }
-  if (type == "Point") {
+  if (type == "point") {
     return(.jcall(jt, "Lec/satoolkit/ISaSpecification;", "getPointSpec"))
   }
   return(NULL)
