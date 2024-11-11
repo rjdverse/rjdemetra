@@ -5,9 +5,21 @@
 \alias{get_jmodel}
 \title{Get the seasonally adjusted model from a workspace}
 \usage{
-get_jmodel(x, workspace, userdefined = NULL, progress_bar = TRUE)
+get_jmodel(
+  x,
+  workspace,
+  userdefined = NULL,
+  progress_bar = TRUE,
+  type = c("Domain", "Estimation", "Point")
+)
 
-get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
+get_model(
+  x,
+  workspace,
+  userdefined = NULL,
+  progress_bar = TRUE,
+  type = c("Domain", "Estimation", "Point")
+)
 }
 \arguments{
 \item{x}{the object from which to retrieve the seasonally adjusted model.}
@@ -18,6 +30,8 @@ get_model(x, workspace, userdefined = NULL, progress_bar = TRUE)
 (see \code{\link{x13}} or \code{\link{tramoseats}}).}
 
 \item{progress_bar}{Boolean: if \code{TRUE}, a progress bar is printed.}
+
+\item{type}{a \code{character} indicating the type of model to retrieve: `"Domain"` (initial specification), `"Estimation"` (specification used for the current estimation) or "Point" (specification corresponding to the results of the current estimation: fully identified model).}
 }
 \value{
 \code{get_model()} returns a seasonally adjusted object (class \code{c("SA", "X13")} or \code{c("SA", "TRAMO_SEATS"}) or a list of seasonally adjusted objects:
