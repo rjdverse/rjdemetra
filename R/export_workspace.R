@@ -344,7 +344,7 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
   core <- get_jspec(sa_obj)$clone()
 
   if (.jinstanceof(core, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
-    core <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
+    core <- .jcast(core, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
     spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec", core)
   }else{
     if (.jinstanceof(core, "ec/satoolkit/x13/X13Specification")) {
