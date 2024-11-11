@@ -146,10 +146,14 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
     return(NaN)
   }else{
     # Error with the preliminary check
-    res = jrslt$getResults()$getProcessingInformation()
+    proc_info <- .jcall(
+      .jcall(jrslt,
+             "Lec/tstoolkit/algorithm/CompositeResults;", "getResults"
+      ),
+      "Ljava/util/List;", "getProcessingInformation"
+    )
 
-    if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-      proc_info <- jrslt$getResults()$getProcessingInformation()
+    if(is.null(.jcall(jrslt,"Lec/tstoolkit/jdr/sa/SaDiagnostics;", "getDiagnostics")) & !.jcall(proc_info,"Z","isEmpty")){
       error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
       warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
       if(!.jcall(error_msg,"Z","isEmpty"))
@@ -195,9 +199,13 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
   }
 
   # Error during the preliminary check
-  res = jrslt$getResults()$getProcessingInformation()
-  if(is.null(jrslt$getDiagnostics()) & !.jcall(res,"Z","isEmpty")){
-    proc_info <- jrslt$getResults()$getProcessingInformation()
+  proc_info <- .jcall(
+    .jcall(jrslt,
+           "Lec/tstoolkit/algorithm/CompositeResults;", "getResults"
+    ),
+    "Ljava/util/List;", "getProcessingInformation"
+  )
+  if(is.null(.jcall(jrslt,"Lec/tstoolkit/jdr/sa/SaDiagnostics;", "getDiagnostics")) & !.jcall(proc_info,"Z","isEmpty")){
     error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
     warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
     if(!.jcall(error_msg,"Z","isEmpty"))

@@ -96,7 +96,7 @@ full_path <- function(path) {
 #'
 #' @param workspace the workspace to add the seasonally adjusted series to.
 #' @param multiprocessing the name or index of the multiprocessing to add the seasonally adjusted series to.
-#' @param sa_obj the seasonally adjusted object to add
+#' @param sa_obj the seasonally adjusted object to add.
 #' @param name the name of the seasonally adjusted series in the multiprocessing.
 #' By default the name of the \code{sa_obj} is used.
 #'
@@ -164,39 +164,51 @@ complete_dictionary.SA <- function(workspace, sa_obj){
     return(sa_obj)
 
   context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
-  ts_variable_managers <- context_dictionary$getTsVariableManagers()
+  ts_variable_managers <- .jcall(context_dictionary,"Lec/tstoolkit/utilities/NameManager;", "getTsVariableManagers")
   ts_variables <- .jnew("ec/tstoolkit/timeseries/regression/TsVariables")
-  jd_r_variables <- ts_variable_managers$get("r")
+  jd_r_variables <- .jcall(ts_variable_managers, "Ljava/lang/Object;", "get", "r")
   if (is.null(jd_r_variables)) {
-    ts_variable_managers$set("r",
-                             .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
-    jd_r_variables <- ts_variable_managers$get("r")
+    .jcall(ts_variable_managers, "V", "set", "r",
+           .jcast(.jnew("ec/tstoolkit/timeseries/regression/TsVariables")))
+    jd_r_variables <- .jcall(ts_variable_managers, "Ljava/lang/Object;", "get", "r")
   }
-  jd_var_names <- jd_r_variables$getNames()
-
+  jd_var_names <- .jcall(jd_r_variables, "[S", "getNames")
   model_var_names <- rownames(ud_var$description)
 
   if (is.mts(ud_var$series)) {
     for (i in seq_along(model_var_names)) {
       name <- model_var_names[i]
-      dictionary_var <- jd_r_variables$get(name)
+      dictionary_var <- .jcall(jd_r_variables, "Ljava/lang/Object;", "get", name)
       tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
                      name, ts_r2jd(ud_var$series[, i]))
       if (is.null(dictionary_var)) {
-        jd_r_variables$set(name, tsvar)
+        .jcall(jd_r_variables, "V", "set", name, .jcast(tsvar, "java/lang/Object"))
       } else {
-        if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
-          same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+        tsvar_ts_data <- .jcall(tsvar, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData")
+        if (!.jcall(
+          .jcall(
+            dictionary_var,
+            "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+          ), "Z", "equals", tsvar_ts_data
+        )) {
+          same_prefix <- grep(paste0("^", name),
+                              .jcall(jd_r_variables, "[S", "getNames"), value = TRUE)
           same_data <- sapply(same_prefix, function(x) {
-            jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
+            .jcall(
+              .jcall(
+              .jcall(jd_r_variables, "Ljava/lang/Object;", "get", x),
+              "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+            ), "Z", "equals", tsvar_ts_data
+            )
           })
           if (any(same_data)) {
             # a name fix the same prefix  has the same data
             model_new_var_names <- same_prefix[which(same_data)]
           } else {
-            model_new_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                    name),
-                                                  sep = "_")
+            model_new_var_names <-  base::make.unique(c(
+              .jcall(jd_r_variables, "[S", "getNames"),
+              name),
+              sep = "_")
           }
           model_var_names[i] <- name <- tail(model_new_var_names, 1)
           if (!any(same_data)){
@@ -204,31 +216,45 @@ complete_dictionary.SA <- function(workspace, sa_obj){
             # we create a new one
             tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
                            name, ts_r2jd(ud_var$series[, i]))
-            jd_r_variables$set(name, tsvar)
+            .jcall(jd_r_variables, "V", "set", name, .jcast(tsvar, "java/lang/Object"))
           }
         }
       }
     }
   }else{
     name <- model_var_names
-    dictionary_var <- jd_r_variables$get(name)
+    dictionary_var <- .jcall(jd_r_variables, "Ljava/lang/Object;", "get", name)
     tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
                    name, ts_r2jd(ud_var$series))
     if (is.null(dictionary_var)) {
-      jd_r_variables$set(name, tsvar)
+      .jcall(jd_r_variables, "V", "set", name, .jcast(tsvar, "java/lang/Object"))
     } else {
-      if (!dictionary_var$getTsData()$equals(tsvar$getTsData())) {
-        same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+      tsvar_ts_data <- .jcall(tsvar, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData")
+      if (!.jcall(
+        .jcall(
+          dictionary_var,
+          "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+        ), "Z", "equals", tsvar_ts_data
+      )) {
+        same_prefix <- grep(paste0("^", name),
+                            .jcall(jd_r_variables, "[S", "getNames"),
+                            value = TRUE)
         same_data <- sapply(same_prefix, function(x) {
-          jd_r_variables$get(x)$getTsData()$equals(tsvar$getTsData())
+          .jcall(
+            .jcall(
+              .jcall(jd_r_variables, "Ljava/lang/Object;", "get", x),
+              "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+            ), "Z", "equals", tsvar_ts_data
+          )
         })
         if (any(same_data)) {
           # a name fix the same prefix  has the same data
           model_new_var_names <- same_prefix[which(same_data)]
         } else {
-          model_new_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                  name),
-                                                sep = "_")
+          model_new_var_names <-  base::make.unique(c(
+            .jcall(jd_r_variables, "[S", "getNames"),
+            name),
+            sep = "_")
         }
 
         model_var_names <- name <- tail(model_new_var_names, 1)
@@ -237,7 +263,7 @@ complete_dictionary.SA <- function(workspace, sa_obj){
           # we create a new one
           tsvar <- .jnew("ec/tstoolkit/timeseries/regression/TsVariable",
                          name, ts_r2jd(ud_var$series))
-          jd_r_variables$set(name, tsvar)
+          .jcall(jd_r_variables, "V", "set", name, .jcast(tsvar, "java/lang/Object"))
         }
       }
     }
@@ -251,49 +277,60 @@ complete_dictionary.SA <- function(workspace, sa_obj){
 complete_dictionary.jSA <- function(workspace, sa_obj){
   model_dictionary <- sa_obj$dictionary
   context <- model_dictionary$toContext()
-  current_variables <- context$getTsVariableManagers()$get("r")
+  current_variables <- .jcall(
+    .jcall(context,"Lec/tstoolkit/utilities/NameManager;", "getTsVariableManagers"),
+    "Ljava/lang/Object;", "get", "r"
+  )
   if (is.null(current_variables) || current_variables$getCount() == 0)
     return(sa_obj)
 
   context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
-  ts_variable_managers <- context_dictionary$getTsVariableManagers()
-  jd_r_variables <- ts_variable_managers$get("r")
+  ts_variable_managers <- .jcall(context_dictionary,"Lec/tstoolkit/utilities/NameManager;", "getTsVariableManagers")
+  jd_r_variables <- .jcall(ts_variable_managers, "Ljava/lang/Object;", "get", "r")
+
   if (is.null(jd_r_variables)) {
-    ts_variable_managers$set("r",
-                             .jnew("ec/tstoolkit/timeseries/regression/TsVariables"))
-    jd_r_variables <- ts_variable_managers$get("r")
+    .jcall(ts_variable_managers, "V", "set", "r",
+           .jcast(.jnew("ec/tstoolkit/timeseries/regression/TsVariables")))
+    jd_r_variables <- .jcall(ts_variable_managers, "Ljava/lang/Object;", "get", "r")
   }
-  variables_names <- data.frame(current_names = current_variables$getNames(),
-             new_names = current_variables$getNames(),
-             stringsAsFactors = FALSE,
-             row.names = current_variables$getNames())
+  variables_names <- data.frame(
+    current_names = .jcall(current_variables, "[S", "getNames"),
+    new_names = .jcall(current_variables, "[S", "getNames"),
+    stringsAsFactors = FALSE,
+    row.names = .jcall(current_variables, "[S", "getNames"))
 
   for (i in seq_len(nrow(variables_names))) {
     name <- variables_names[i,1]
     var <- current_variables$get(name)
-    dictionary_var <- jd_r_variables$get(name)
+    dictionary_var <- .jcall(jd_r_variables, "Ljava/lang/Object;", "get", name)
     if (is.null(dictionary_var)) {
-      jd_r_variables$set(name, var)
+      .jcall(jd_r_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
     } else {
       if (!dictionary_var$getTsData()$equals(var$getTsData())) {
-        same_prefix <- grep(paste0("^", name), jd_r_variables$getNames(), value = TRUE)
+        same_prefix <- grep(paste0("^", name), .jcall(jd_r_variables, "[S", "getNames"), value = TRUE)
         same_data <- sapply(same_prefix, function(x) {
-          jd_r_variables$get(x)$getTsData()$equals(var$getTsData())
+          .jcall(
+            .jcall(
+              .jcall(jd_r_variables, "Ljava/lang/Object;", "get", x),
+              "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+            ), "Z", "equals", var$getTsData()
+          )
         })
         if (any(same_data)) {
           # a name fix the same prefix  has the same data
           model_var_names <- same_prefix[which(same_data)]
         } else {
-          model_var_names <-  base::make.unique(c(jd_r_variables$getNames(),
-                                                  name),
-                                                sep = "_")
+          model_var_names <-  base::make.unique(c(
+            .jcall(jd_r_variables, "[S", "getNames"),
+            name),
+            sep = "_")
         }
         current_variables$remove(name)
         name <- tail(model_var_names, 1)
         var$setName(name)
-        current_variables$set(name, var)
+        .jcall(current_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
         if (!any(same_data))
-          jd_r_variables$set(name, var)
+          .jcall(jd_r_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
 
         variables_names[i,2] <- name
       }
@@ -304,11 +341,11 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
     return(sa_obj) # no name has been change
 
 
-  core <- sa_obj$spec$getCore()$clone()
+  core <- get_jspec(sa_obj)$clone()
 
   if (.jinstanceof(core, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
     core <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
-    spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",core)
+    spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec", core)
   }else{
     if (.jinstanceof(core, "ec/satoolkit/x13/X13Specification")) {
       core <- .jcast(core, "ec/satoolkit/x13/X13Specification")
