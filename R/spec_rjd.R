@@ -17,7 +17,7 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
                          freq = NA){
 
   #Estimate
-  preliminary.check <- spec$getBasic()$isPreliminaryCheck()
+  preliminary.check <- .jcall(.jcall(spec, "Ljdr/spec/x13/BasicSpec;" ,"getBasic"), "Z", "isPreliminaryCheck")
 
   jestimate <-.jcall(spec,"Ljdr/spec/x13/EstimateSpec;","getEstimate")
   jest.span <-.jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
@@ -173,9 +173,9 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
              "getPrespecifiedOutlier",
              as.integer(i-1))
     })
-    type <- sapply(outliers, function(x) x$getCode())
-    date <- sapply(outliers, function(x) x$getPosition())
-    coeff <- sapply(outliers, function(x) x$getCoefficient())
+    type <- sapply(outliers, .jcall, "S", "getCode")
+    date <- sapply(outliers, .jcall, "S", "getPosition")
+    coeff <- sapply(outliers, .jcall, "D", "getCoefficient")
     if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
       result$userdef_spec$specification$outlier.coef <- FALSE
       coeff <- coeff * NA
@@ -200,9 +200,9 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
              as.integer(i-1))
     })
 
-    type <- sapply(ud_vars, function(x) x$getComponent())
-    coeff <- sapply(ud_vars, function(x) x$getCoefficient())
-    var_names <- sapply(ud_vars, function(x) x$getName())
+    type <- sapply(ud_vars, .jcall, "S", "getComponent")
+    coeff <- sapply(ud_vars, .jcall, "D", "getCoefficient")
+    var_names <- sapply(ud_vars, .jcall, "S", "getName")
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
     var_names <- base::make.names(var_names, unique = TRUE)
@@ -226,9 +226,12 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionary$getTsVariable(names[1],
-                                                         names[2])
-        ts_jd2r(ts_variable$getTsData())
+        ts_variable <- .jcall(context_dictionary,
+                              "Lec/tstoolkit/timeseries/regression/ITsVariable;",
+                              "getTsVariable",
+                              names[1],
+                              names[2])
+        ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
@@ -242,7 +245,7 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
   }
 
   #Calendar
-  user_td <- jtd$getUserVariables()
+  user_td <- .jcall(jtd, "[S", "getUserVariables")
   if(length(user_td) > 0 ){
     var_names_split <- strsplit(user_td,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
@@ -264,9 +267,12 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionary$getTsVariable(names[1],
-                                                         names[2])
-        ts_jd2r(ts_variable$getTsData())
+        ts_variable <- .jcall(context_dictionary,
+                              "Lec/tstoolkit/timeseries/regression/ITsVariable;",
+                              "getTsVariable",
+                              names[1],
+                              names[2])
+        ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
@@ -359,10 +365,10 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     }
   }
 
-  Phi <- jarima$getPhi()
-  BPhi <- jarima$getBPhi()
-  Theta <- jarima$getTheta()
-  BTheta <- jarima$getBTheta()
+  Phi <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getPhi")
+  BPhi <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getBPhi")
+  Theta <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getTheta")
+  BTheta <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getBTheta")
   arima_coefficients_spec <-
     rbind(arimaCoef_jd2r(Phi),
           arimaCoef_jd2r(BPhi),
@@ -382,7 +388,7 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
                        extra_info = FALSE, freq = NA){
 
   #Estimate
-  preliminary.check <- spec$getBasic()$isPreliminaryCheck()
+  preliminary.check <- .jcall(.jcall(spec, "Ljdr/spec/tramoseats/BasicSpec;" ,"getBasic"), "Z", "isPreliminaryCheck")
   jestimate <- .jcall(spec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
   jest.span <- .jcall(jestimate,"Ljdr/spec/ts/SpanSelector;","getSpan")
 
@@ -534,9 +540,9 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
              "getPrespecifiedOutlier",
              as.integer(i-1))
     })
-    type <- sapply(outliers, function(x) x$getCode())
-    date <- sapply(outliers, function(x) x$getPosition())
-    coeff <- sapply(outliers, function(x) x$getCoefficient())
+    type <- sapply(outliers, .jcall, "S", "getCode")
+    date <- sapply(outliers, .jcall, "S", "getPosition")
+    coeff <- sapply(outliers, .jcall, "D", "getCoefficient")
 
     if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
       result$userdef_spec$specification$outlier.coef <- FALSE
@@ -564,9 +570,9 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
              as.integer(i-1))
     })
 
-    type <- sapply(ud_vars, function(x) x$getComponent())
-    coeff <- sapply(ud_vars, function(x) x$getCoefficient())
-    var_names <- sapply(ud_vars, function(x) x$getName())
+    type <- sapply(ud_vars, .jcall, "S", "getComponent")
+    coeff <- sapply(ud_vars, .jcall, "D", "getCoefficient")
+    var_names <- sapply(ud_vars, .jcall, "S", "getName")
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
 
@@ -588,9 +594,12 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionary$getTsVariable(names[1],
-                                                         names[2])
-        ts_jd2r(ts_variable$getTsData())
+        ts_variable <- .jcall(context_dictionary,
+                              "Lec/tstoolkit/timeseries/regression/ITsVariable;",
+                              "getTsVariable",
+                              names[1],
+                              names[2])
+        ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
@@ -604,7 +613,7 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
   }
 
   #Calendar
-  user_td <- jtd$getUserVariables()
+  user_td <- .jcall(jtd, "[S", "getUserVariables")
   if(length(user_td) > 0 ){
     var_names_split <- strsplit(user_td,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
@@ -638,9 +647,12 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     if(!is.null(context_dictionary)){
 
       var_series <- lapply(var_names_split,function(names){
-        ts_variable <- context_dictionary$getTsVariable(names[1],
-                                                         names[2])
-        ts_jd2r(ts_variable$getTsData())
+        ts_variable <- .jcall(context_dictionary,
+                              "Lec/tstoolkit/timeseries/regression/ITsVariable;",
+                              "getTsVariable",
+                              names[1],
+                              names[2])
+        ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
       var_series <- ts(simplify2array(var_series),
                        start = start(var_series[[1]]), frequency = frequency(var_series[[1]]))
@@ -664,7 +676,7 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     result$userdef_spec$specification$variables <-
       TRUE
     coeff <- NA
-    if (core_regression$hasFixedCoefficients()) {
+    if (.jcall(core_regression, "Z", "hasFixedCoefficients")) {
       coeff <- sapply(seq_len(nb_ramps), function(i){
         jramp <- jramps[[i]]
         ramp_name <- jramp$getName()
@@ -733,10 +745,10 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
   }
 
   #Arima
-  Phi <- jarima$getPhi()
-  BPhi <- jarima$getBPhi()
-  Theta <- jarima$getTheta()
-  BTheta <- jarima$getBTheta()
+  Phi <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getPhi")
+  BPhi <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getBPhi")
+  Theta <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getTheta")
+  BTheta <- .jcall(jarima,"[Lec/tstoolkit/Parameter;","getBTheta")
   arima_coefficients_spec <-
     rbind(arimaCoef_jd2r(Phi),
           arimaCoef_jd2r(BPhi),
@@ -776,7 +788,9 @@ specX11_jd2r <- function(spec = NA, freq = NA){
   fcasts <- .jcall(jx11,"I","getForecastHorizon")
   bcasts <- .jcall(jx11,"I","getBackcastHorizon")
   excludeFcasts <- .jcall(jx11,"Z","isExcludefcst")
-  calendarSigma <- jx11$getCalendarSigma()$toString()
+  calendarSigma <- .jcall(
+    .jcall(jx11, "Lec/satoolkit/x11/CalendarSigma;", "getCalendarSigma"),
+    "S", "toString")
   sigmaVector <- .jcall(jx11,returnSig = "[S", "getSigmavec") #TODO
   if (length(sigmaVector) == 0) {
     sigmaVector <- NA
@@ -960,8 +974,8 @@ arimaCoef_jd2r <- function(jparams){
   if (len==0)
     return (NULL)
   param_name <- deparse(substitute(jparams))
-  Type <- sapply(param, function(x) x$getType()$toString())
-  Value <- sapply(param, function(x) x$getValue())
+  Type <- sapply(param, function(x) .jcall(.jcall(x, "Lec/tstoolkit/ParameterType;" , "getType"), "S", "toString"))
+  Value <- sapply(param, .jcall, "D", "getValue")
   data_param <- data.frame(Type = Type, Value = Value)
   rownames(data_param) <- sprintf("%s(%i)",
                                   param_name,
@@ -991,7 +1005,7 @@ spec_regarima_X13_r2jd <- function(spec = NA, jdspec = NA){
             n0 = as.integer(span[1,4]), n1=as.integer(span[1,5]))
   .jcall(jestimate ,"V","setTol", as.numeric(est["tolerance"]))
 
-  jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
+  .jcall(.jcall(jdspec, "Ljdr/spec/x13/BasicSpec;" ,"getBasic"), "V", "setPreliminaryCheck", est[1, "preliminary.check"])
 
   #Transform
   jtransform <-.jcall(jdspec,"Ljdr/spec/x13/TransformSpec;","getTransform")
@@ -1110,7 +1124,7 @@ spec_TRAMO_r2jd <- function(spec = NA, jdspec =NA){
   span <- s_span(spec)
 
   #Estimate
-  jdspec$getBasic()$setPreliminaryCheck(est[1, "preliminary.check"])
+  .jcall(.jcall(jdspec, "Ljdr/spec/tramoseats/BasicSpec;" ,"getBasic"), "V", "setPreliminaryCheck", est[1, "preliminary.check"])
 
   jestimate <-.jcall(jdspec,"Ljdr/spec/tramoseats/EstimateSpec;","getEstimate")
 

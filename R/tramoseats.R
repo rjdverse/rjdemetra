@@ -161,9 +161,9 @@ tramoseats.SA_spec <- function(series, spec,
       error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
       warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
       if(!.jcall(error_msg,"Z","isEmpty"))
-        stop(error_msg$toString())
+        stop(.jcall(error_msg, "S", "toString"))
       if(!.jcall(warning_msg,"Z","isEmpty"))
-        warning(warning_msg$toString())
+        warning(.jcall(warning_msg, "S", "toString"))
     }
     reg <- regarima_TS(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_TS(jrobj = jrobct, spec = spec$seats)
@@ -213,9 +213,9 @@ tramoseatsJavaResults <- function(jrslt, spec,
     error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
     warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
     if(!.jcall(error_msg,"Z","isEmpty"))
-      stop(error_msg$toString())
+      stop(.jcall(error_msg, "S", "toString"))
     if(!.jcall(warning_msg,"Z","isEmpty"))
-      warning(warning_msg$toString())
+      warning(.jcall(warning_msg, "S", "toString"))
   }
 
   reg <- regarima_defTS(jrobj = jrobct_arima, spec = spec,

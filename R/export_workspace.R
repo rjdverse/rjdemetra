@@ -276,12 +276,12 @@ complete_dictionary.SA <- function(workspace, sa_obj){
 #' @exportS3Method NULL
 complete_dictionary.jSA <- function(workspace, sa_obj){
   model_dictionary <- sa_obj$dictionary
-  context <- model_dictionary$toContext()
+  context <- .jcall(model_dictionary, "Lec/tstoolkit/algorithm/ProcessingContext;", "toContext")
   current_variables <- .jcall(
     .jcall(context,"Lec/tstoolkit/utilities/NameManager;", "getTsVariableManagers"),
     "Ljava/lang/Object;", "get", "r"
   )
-  if (is.null(current_variables) || current_variables$getCount() == 0)
+  if (is.null(current_variables) || .jcall(current_variables, "I", "getCount") == 0)
     return(sa_obj)
 
   context_dictionary <- .jcall(workspace,"Lec/tstoolkit/algorithm/ProcessingContext;", "getContext")
@@ -301,19 +301,25 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
 
   for (i in seq_len(nrow(variables_names))) {
     name <- variables_names[i,1]
-    var <- current_variables$get(name)
+    var <- .jcall(current_variables, "Ljava/lang/Object;", "get", name)
     dictionary_var <- .jcall(jd_r_variables, "Ljava/lang/Object;", "get", name)
     if (is.null(dictionary_var)) {
       .jcall(jd_r_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
     } else {
-      if (!dictionary_var$getTsData()$equals(var$getTsData())) {
+      tsvar_ts_data <- .jcall(var, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData")
+      if (!.jcall(
+        .jcall(
+          dictionary_var,
+          "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
+        ), "Z", "equals", tsvar_ts_data
+      )) {
         same_prefix <- grep(paste0("^", name), .jcall(jd_r_variables, "[S", "getNames"), value = TRUE)
         same_data <- sapply(same_prefix, function(x) {
           .jcall(
             .jcall(
               .jcall(jd_r_variables, "Ljava/lang/Object;", "get", x),
               "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"
-            ), "Z", "equals", var$getTsData()
+            ), "Z", "equals", tsvar_ts_data
           )
         })
         if (any(same_data)) {
@@ -325,9 +331,9 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
             name),
             sep = "_")
         }
-        current_variables$remove(name)
+        .jcall(current_variables, "V", "remove", name)
         name <- tail(model_var_names, 1)
-        var$setName(name)
+        .jcall(var, "V", "setName", name)
         .jcall(current_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
         if (!any(same_data))
           .jcall(jd_r_variables, "V", "set", name, .jcast(var, "java/lang/Object"))
@@ -356,7 +362,7 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
   }
   jregression <- spec$getRegression()
   jtd <- jregression$getCalendar()$getTradingDays()
-  user_td <- jtd$getUserVariables()
+  user_td <- .jcall(jtd, "[S", "getUserVariables")
   n_userdefined_var <- .jcall(jregression,"I","getUserDefinedVariablesCount")
 
   if (n_userdefined_var > 0) {
@@ -366,11 +372,11 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
              "getUserDefinedVariable",
              as.integer(i - 1))
     })
-    type <- sapply(ud_vars, function(x) x$getComponent())
-    coeff <- sapply(ud_vars, function(x) x$getCoefficient())
-    var_names <- sapply(ud_vars, function(x) gsub("^r\\.","", x$getName()))
+    type <- sapply(ud_vars, .jcall, "S", "getComponent")
+    coeff <- sapply(ud_vars, .jcall, "D", "getCoefficient")
+    var_names <- gsub("^r\\.","", sapply(ud_vars, .jcall, "S", "getName"))
     new_names <- variables_names[var_names, 2]
-    jregression$clearUserDefinedVariables()
+    .jcall(jregression,"V","clearUserDefinedVariables")
     for (i in seq_len(seq_len(n_userdefined_var))) {
       .jcall(jregression,"V","addUserDefinedVariable",
              new_names[i], type[i], coeff[i])
@@ -384,7 +390,7 @@ complete_dictionary.jSA <- function(workspace, sa_obj){
     .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",new_names)))
   }
 
-  sa_obj$dictionary <- model_dictionary$fromContext(context)
+  sa_obj$dictionary <- .jcall(model_dictionary, "Ljdr/spec/ts/Utility$Dictionary;", "fromContext", context)
   sa_obj$spec <- spec
 
   return(sa_obj)

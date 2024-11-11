@@ -157,9 +157,9 @@ x13.SA_spec <- function(series, spec, userdefined = NULL){
       error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
       warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
       if(!.jcall(error_msg,"Z","isEmpty"))
-        stop(error_msg$toString())
+        stop(.jcall(error_msg, "S", "toString"))
       if(!.jcall(warning_msg,"Z","isEmpty"))
-        warning(warning_msg$toString())
+        warning(.jcall(warning_msg, "S", "toString"))
     }
     reg <- regarima_X13(jrobj = jrobct_arima, spec = spec$regarima)
     deco <- decomp_X13(jrobj = jrobct, spec = spec$x11, seasma = seasma)
@@ -209,9 +209,9 @@ x13JavaResults <- function(jrslt, spec, userdefined = NULL,
     error_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getErrorMessages(proc_info)
     warning_msg <- .jcall(proc_info, "Ljava/lang/Object;", "get", 0L)$getWarningMessages(proc_info)
     if(!.jcall(error_msg,"Z","isEmpty"))
-      stop(error_msg$toString())
+      stop(.jcall(error_msg, "S", "toString"))
     if(!.jcall(warning_msg,"Z","isEmpty"))
-      warning(warning_msg$toString())
+      warning(.jcall(warning_msg, "S", "toString"))
   }
 
   reg <- regarima_defX13(jrobj = jrobct_arima, spec = spec,
