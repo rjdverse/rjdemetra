@@ -288,20 +288,20 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
 
   ## Ramp effects
   core_regression <- jregression$getCore()$getRegression()
-  jramps <- core_regression$getRamps()
-  nb_ramps <- core_regression$getRampsCount()
+  jramps <- .jcall(core_regression, "[Lec/tstoolkit/timeseries/regression/Ramp;", "getRamps")
+  nb_ramps <- .jcall(core_regression, "I", "getRampsCount")
   if (nb_ramps > 0) {
-    var_names <- sapply(seq_len(nb_ramps), function(x) jramps[[x]]$getDescription())
+    var_names <- sapply(jramps, .jcall, "S", "getDescription")
 
     result$userdef_spec$specification$variables <-
       TRUE
 
     coeff <- NA
-    if (core_regression$hasFixedCoefficients()) {
+    if (.jcall(core_regression, "Z", "hasFixedCoefficients")) {
       coeff <- sapply(seq_len(nb_ramps), function(i){
         jramp <- jramps[[i]]
-        ramp_name <- jramp$getName()
-        fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+        ramp_name <- .jcall(jramp, "S", "getName")
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", ramp_name)
         if (is.null(fixed_coeff)) {
           NA
         }else{
@@ -331,11 +331,13 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
         end_ts <- end(result$userdef_spec$variables$series)
         ramp_series <- lapply(seq_len(nb_ramps), function(i){
           jramp <- jramps[[i]]
-          jstart <- jramp$getStart()
-          jend <- jramp$getEnd()
+          jstart <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getStart")
+          jend <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getEnd")
 
-          start_ramp <- c(jstart$getYear(), jstart$getMonth())
-          end_ramp <- c(jend$getYear(), jend$getMonth())
+          start_ramp <- c(.jcall(jstart, "I", "getYear"),
+                          .jcall(jstart, "I", "getMonth"))
+          end_ramp <- c(.jcall(jend, "I", "getYear"),
+                        .jcall(jend, "I", "getMonth"))
           ramp(start = start_ts, end = end_ts,
                start_ramp = start_ramp, end_ramp = end_ramp,
                frequency = freq)
@@ -343,11 +345,13 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
       } else {
         ramp_series <- lapply(seq_len(nb_ramps), function(i){
           jramp <- jramps[[i]]
-          jstart <- jramp$getStart()
-          jend <- jramp$getEnd()
+          jstart <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getStart")
+          jend <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getEnd")
 
-          start_ramp <- c(jstart$getYear(), jstart$getMonth())
-          end_ramp <- c(jend$getYear(), jend$getMonth())
+          start_ramp <- c(.jcall(jstart, "I", "getYear"),
+                          .jcall(jstart, "I", "getMonth"))
+          end_ramp <- c(.jcall(jend, "I", "getYear"),
+                        .jcall(jend, "I", "getMonth"))
           ramp(start_ramp = start_ramp, end_ramp = end_ramp,
                frequency = freq)
         })
@@ -356,7 +360,13 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
                         start = start(ramp_series[[1]]),
                         frequency = frequency(ramp_series[[1]]))
       if (!identical_na(result$userdef_spec$variables$series)) {
-        ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+        if (frequency (result$userdef_spec$variables$series) != frequency(ramp_series)){
+          # here we assume that the seris in result$userdef_spec$variables$series are wrong and are then deleted
+          # e.g calendar regressors defined in spec monthly while the input ts is quarterly
+          ramp_series <- ramp_series
+        } else {
+          ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+        }
       }
       if (is.mts(ramp_series))
         colnames(ramp_series) <- rownames(result$userdef_spec$variables$description)
@@ -624,8 +634,8 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     # if (core_regression$hasFixedCoefficients()) {
     #   # coeff <- sapply(seq_len(nb_ramps), function(i){
     #   #   jramp <- jramps[[i]]
-    #   #   ramp_name <- jramp$getName()
-    #   #   fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+    #   #   ramp_name <- .jcall(jramp, "S", "getName")
+    #   #   fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", ramp_name)
     #   #   if (is.null(fixed_coeff)) {
     #   #     NA
     #   #   }else{
@@ -668,10 +678,10 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
 
   ## Ramp effects
   core_regression <- jregression$getCore()$getRegression()
-  jramps <- core_regression$getRamps()
-  nb_ramps <- core_regression$getRampsCount()
+  jramps <- .jcall(core_regression, "[Lec/tstoolkit/timeseries/regression/Ramp;", "getRamps")
+  nb_ramps <- .jcall(core_regression, "I", "getRampsCount")
   if (nb_ramps > 0) {
-    var_names <- sapply(seq_len(nb_ramps), function(x) jramps[[x]]$getDescription())
+    var_names <- sapply(jramps, .jcall, "S", "getDescription")
 
     result$userdef_spec$specification$variables <-
       TRUE
@@ -679,8 +689,8 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     if (.jcall(core_regression, "Z", "hasFixedCoefficients")) {
       coeff <- sapply(seq_len(nb_ramps), function(i){
         jramp <- jramps[[i]]
-        ramp_name <- jramp$getName()
-        fixed_coeff <- core_regression$getFixedCoefficients(ramp_name)
+        ramp_name <- .jcall(jramp, "S", "getName")
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", ramp_name)
         if (is.null(fixed_coeff)) {
           NA
         }else{
@@ -710,11 +720,13 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
         end_ts <- end(result$userdef_spec$variables$series)
         ramp_series <- lapply(seq_len(nb_ramps), function(i){
           jramp <- jramps[[i]]
-          jstart <- jramp$getStart()
-          jend <- jramp$getEnd()
+          jstart <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getStart")
+          jend <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getEnd")
 
-          start_ramp <- c(jstart$getYear(), jstart$getMonth())
-          end_ramp <- c(jend$getYear(), jend$getMonth())
+          start_ramp <- c(.jcall(jstart, "I", "getYear"),
+                          .jcall(jstart, "I", "getMonth"))
+          end_ramp <- c(.jcall(jend, "I", "getYear"),
+                        .jcall(jend, "I", "getMonth"))
           ramp(start = start_ts, end = end_ts,
                start_ramp = start_ramp, end_ramp = end_ramp,
                frequency = freq)
@@ -722,11 +734,13 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
       } else {
         ramp_series <- lapply(seq_len(nb_ramps), function(i){
           jramp <- jramps[[i]]
-          jstart <- jramp$getStart()
-          jend <- jramp$getEnd()
+          jstart <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getStart")
+          jend <- .jcall(jramp, "Lec/tstoolkit/timeseries/Day;", "getEnd")
 
-          start_ramp <- c(jstart$getYear(), jstart$getMonth())
-          end_ramp <- c(jend$getYear(), jend$getMonth())
+          start_ramp <- c(.jcall(jstart, "I", "getYear"),
+                          .jcall(jstart, "I", "getMonth"))
+          end_ramp <- c(.jcall(jend, "I", "getYear"),
+                        .jcall(jend, "I", "getMonth"))
           ramp(start_ramp = start_ramp, end_ramp = end_ramp,
                frequency = freq)
         })
@@ -735,7 +749,13 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
                        start = start(ramp_series[[1]]),
                        frequency = frequency(ramp_series[[1]]))
       if (!identical_na(result$userdef_spec$variables$series)) {
-        ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+        if (frequency (result$userdef_spec$variables$series) != frequency(ramp_series)){
+          # here we assume that the seris in result$userdef_spec$variables$series are wrong and are then deleted
+          # e.g calendar regressors defined in spec monthly while the input ts is quarterly
+          ramp_series <- ramp_series
+        } else {
+          ramp_series <- ts.union(result$userdef_spec$variables$series, ramp_series)
+        }
       }
       if (is.mts(ramp_series))
         colnames(ramp_series) <- rownames(result$userdef_spec$variables$description)
@@ -881,8 +901,9 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
     if(n_calendar_def == 1){
       .jcall(jsdict,"V","add",varNames,ts_r2jd(series))
       if(coef!=0){
-        jcoreg$setFixedCoefficients(paste0("td|r@",varNames),
-                                    .jarray(coef))
+        .jcall(jcoreg, "V", "setFixedCoefficients",
+               paste0("td|r@",varNames),
+               .jarray(coef))
       }
       .jcall(jtd,"V","setUserVariables", .jarray(paste0("r.",varNames)))
 
@@ -898,8 +919,9 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
         for (i in 1:nvar){
           .jcall(jsdict,"V","add",varNames[i],ts_r2jd(series[,i]))
           if(coef[i]!=0){
-            jcoreg$setFixedCoefficients(paste0("td|r@",varNames[i]),
-                                        .jarray(coef[i]))
+            .jcall(jcoreg, "V", "setFixedCoefficients",
+                   paste0("td|r@",varNames[i]),
+                   .jarray(coef[i]))
           }
         }
         .jcall(jtd,"V","setUserVariables",
@@ -925,8 +947,9 @@ preVar_r2jd <- function(jsobjct = NA, jsdict = NA, coefEna = NA,
         .jcall(jsdict,"V","add",varNames[i],
                ts_r2jd(series[, i]))
         if(coef[i]!=0){
-          jcoreg$setFixedCoefficients(paste0("td|r@",varNames[i]),
-                                      .jarray(coef[i]))
+          .jcall(jcoreg, "V", "setFixedCoefficients",
+                 paste0("td|r@",varNames[i]),
+                 .jarray(coef[i]))
         }
       }
       .jcall(jtd,"V","setUserVariables",
