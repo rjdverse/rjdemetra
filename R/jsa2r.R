@@ -88,7 +88,7 @@ jSA2R <- function(x, userdefined = NULL){
   jresult <- x[["result"]]@internal
   jspec <- x[["spec"]]
   dictionary <- x[["dictionary"]]
-  context_dictionary <- dictionary$toContext()
+  context_dictionary <- .jcall(dictionary, "Lec/tstoolkit/algorithm/ProcessingContext;", "toContext")
   if(is.null(jresult))
     return(NULL)
 

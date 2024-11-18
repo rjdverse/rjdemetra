@@ -1,5 +1,11 @@
 # RJDemetra 0.2.8
 
+- Improvement of warning message importing the model when no data in a SaItem (#61).
+
+- `get_model`, `get_jmodel` and `get_jspec.sa_item` have now an argument `type` to define which specification to import (domain, estimation or point).
+By default the domain specification is extracted (has before).
+
+- Correction of bug of `add_sa_item()` of models created by `jtramoseats()` with external variables.
 
 # RJDemetra 0.2.7
 

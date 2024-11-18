@@ -32,8 +32,8 @@ get_jspec.TRAMO_SEATS <- function(x, ...){
   jspec
 }
 #' @export
-get_jspec.sa_item <- function(x, ...){
-  spec <- sa_spec(x)
+get_jspec.sa_item <- function(x, type = c("Domain", "Estimation", "Point"), ...){
+  spec <- sa_spec(x, type = type)
   if (.jinstanceof(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")) {
     spec <- .jcast(spec, "ec/satoolkit/tramoseats/TramoSeatsSpecification")
     spec <- .jnew("jdr/spec/tramoseats/TramoSeatsSpec",spec)
