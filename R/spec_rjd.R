@@ -203,7 +203,23 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
     type <- sapply(ud_vars, .jcall, "S", "getComponent")
     coeff <- sapply(ud_vars, .jcall, "D", "getCoefficient")
     var_names <- sapply(ud_vars, .jcall, "S", "getName")
+
+
     var_names_split <- strsplit(var_names,"[.]")
+    core_regression <- jregression$getCore()$getRegression()
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_along(var_names_split), function(i){
+        td_name <- paste0(var_names_split[[i]], collapse = "@")
+        print(td_name)
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", td_name)
+        if (is.null(fixed_coeff)) {
+          0
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
     var_names <- sapply(var_names_split, function(x) x[2])
     var_names <- base::make.names(var_names, unique = TRUE)
     var_names <- gsub(".","_", var_names, fixed = TRUE)
@@ -254,9 +270,23 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
 
     result$userdef_spec$specification$variables <-
       TRUE
+    coeff <- NA
+    core_regression <- jregression$getCore()$getRegression()
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_along(var_names_split), function(i){
+        td_name <- paste0(var_names_split[[i]], collapse = "@")
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", td_name)
+        if (is.null(fixed_coeff)) {
+          NA
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
-                                     coeff = NA, row.names = var_names)
+                                     coeff = coeff, row.names = var_names)
     if(identical_na(result$userdef_spec$variables$description)){
       result$userdef_spec$variables$description <- td_var_description
     }else{
@@ -270,7 +300,7 @@ spec_regarima_X13_jd2r <- function(spec = NA, context_dictionary = NULL,
         ts_variable <- .jcall(context_dictionary,
                               "Lec/tstoolkit/timeseries/regression/ITsVariable;",
                               "getTsVariable",
-                              names[1],
+                              gsub("^td\\|", "", names[1]),
                               names[2])
         ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
@@ -586,6 +616,19 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     var_names_split <- strsplit(var_names,"[.]")
     var_names <- sapply(var_names_split, function(x) x[2])
 
+    core_regression <- jregression$getCore()$getRegression()
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_along(var_names_split), function(i){
+        td_name <- paste0(var_names_split[[i]], collapse = "@")
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", td_name)
+        if (is.null(fixed_coeff)) {
+          0
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
     if(all(coeff == 0)){ #All coefficients are equal to 0: they are not fixed
       result$userdef_spec$specification$variables.coef <- FALSE
       coeff <- coeff * NA
@@ -631,19 +674,19 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
     result$userdef_spec$specification$variables <-
       TRUE
     coeff <- NA
-    # if (core_regression$hasFixedCoefficients()) {
-    #   # coeff <- sapply(seq_len(nb_ramps), function(i){
-    #   #   jramp <- jramps[[i]]
-    #   #   ramp_name <- .jcall(jramp, "S", "getName")
-    #   #   fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", ramp_name)
-    #   #   if (is.null(fixed_coeff)) {
-    #   #     NA
-    #   #   }else{
-    #   #     fixed_coeff
-    #   #   }
-    #   # })
-    #   # result$userdef_spec$specification$variables.coef <- TRUE
-    # }
+    core_regression <- jregression$getCore()$getRegression()
+    if (core_regression$hasFixedCoefficients()) {
+      coeff <- sapply(seq_along(var_names_split), function(i){
+        td_name <- paste0(var_names_split[[i]], collapse = "@")
+        fixed_coeff <- .jcall(core_regression, "[D", "getFixedCoefficients", td_name)
+        if (is.null(fixed_coeff)) {
+          NA
+        }else{
+          fixed_coeff
+        }
+      })
+      result$userdef_spec$specification$variables.coef <- TRUE
+    }
 
     td_var_description <- data.frame(type = rep("Calendar",length(var_names)),
                                      coeff = coeff, row.names = var_names)
@@ -660,7 +703,7 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
         ts_variable <- .jcall(context_dictionary,
                               "Lec/tstoolkit/timeseries/regression/ITsVariable;",
                               "getTsVariable",
-                              names[1],
+                              gsub("^td\\|", "", names[1]),
                               names[2])
         ts_jd2r(.jcall(ts_variable, "Lec/tstoolkit/timeseries/simplets/TsData;", "getTsData"))
       })
@@ -750,7 +793,7 @@ spec_TRAMO_jd2r <- function(spec = NA, context_dictionary = NULL,
                        frequency = frequency(ramp_series[[1]]))
       if (!identical_na(result$userdef_spec$variables$series)) {
         if (frequency (result$userdef_spec$variables$series) != frequency(ramp_series)){
-          # here we assume that the seris in result$userdef_spec$variables$series are wrong and are then deleted
+          # here we assume that the series in result$userdef_spec$variables$series are wrong and are then deleted
           # e.g calendar regressors defined in spec monthly while the input ts is quarterly
           ramp_series <- ramp_series
         } else {
