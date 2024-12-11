@@ -13,8 +13,8 @@ regarima_rslts <- function(jrobj, fcsth){
   # ARIMA model
   arma_names <- paste0("arima.",c("p","d","q","bp","bd","bq"))
   arma <- sapply(arma_names,
-                function(diag) {
-                result(jrobj, diag)})
+                 function(diag) {
+                   result(jrobj, diag)})
   names(arma) <- gsub("arima.","",arma_names)
 
   arima.est <- result(jrobj,"arima.parameters")
@@ -63,7 +63,7 @@ regarima_rslts <- function(jrobj, fcsth){
                                          "aic","aicc","bic","bicc"))
   loglik <- lapply(loglik_names,
                    function(diag)
-                    result(jrobj,diag))
+                     result(jrobj,diag))
   loglik <- matrix(unlist(loglik),ncol = 1)
   rownames(loglik) <- gsub("likelihood.","",loglik_names)
   colnames(loglik) <- ""
@@ -93,7 +93,7 @@ regarima_rslts <- function(jrobj, fcsth){
 
   decomp_names <- c("y_lin","tde","ee","omhe","out_t","out_s","out_i")
   decomp <- lapply(paste0("model.", decomp_names),
-                        function(series) result(jrobj, series))
+                   function(series) result(jrobj, series))
   decomp <- ts(simplify2array(decomp),
                start = start(decomp[[1]]), frequency = frequency(decomp[[1]]))
   if (transformed){
@@ -111,13 +111,17 @@ regarima_rslts <- function(jrobj, fcsth){
   st.error<-result(jrobj,"likelihood.ser-ml")
 
   tests_names <- paste0("residuals.",c("mean","skewness","kurtosis","lb","seaslb","lb2"))
-  tests <- lapply(tests_names,
-                  function(diag) {
-                    res <- result(jrobj, diag)
-                    c(res[1], res[2],
-                      attr(res, "description")
-                    )
-                  })
+  tests <- lapply(
+    tests_names,
+    function(diag) {
+      res <- result(jrobj, diag)
+      if(is.null(res)) {
+        c(NA, NA, NA)
+      } else {
+        c(res[1], res[2],
+          attr(res, "description"))
+      }
+    })
   tests <- data.frame(matrix(unlist(tests), ncol = 3, byrow=T),
                       stringsAsFactors=FALSE)
   tests[,1] <- as.numeric(tests[,1])
@@ -125,7 +129,7 @@ regarima_rslts <- function(jrobj, fcsth){
 
   colnames(tests) <- c("Statistic","P.value","Description")
   rownames(tests)<-c("mean","skewness","kurtosis","ljung box",
-    "ljung box (residuals at seasonal lags)","ljung box (squared residuals)")
+                     "ljung box (residuals at seasonal lags)","ljung box (squared residuals)")
   class(tests) <- c("regarima_rtests","data.frame")
 
   residuals.stat<-list(st.error=st.error, tests=tests)

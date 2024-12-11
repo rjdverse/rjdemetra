@@ -9,6 +9,8 @@ By default the domain specification is extracted (as before).
 
 - Correction of bug of `get_jmodel()` when model contains user-defined regressors (calendar or regressors) with fixed coefficients (#157).
 
+- Correction of bug for annual data for `regarima()` functions. 
+
 # RJDemetra 0.2.7
 
 - URL to github repository updated (github.com/jdemetra replaced by github.com/rjdverse).
