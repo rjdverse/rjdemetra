@@ -1,15 +1,19 @@
 #' @rdname get_model
 #' @name get_model
 #' @export
-get_jmodel <- function(x, workspace,
-                      userdefined = NULL,
-                      progress_bar = TRUE){
+get_jmodel <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   UseMethod("get_jmodel", x)
 }
 #' @export
-get_jmodel.workspace <- function(x, workspace,
-                                userdefined = NULL,
-                                progress_bar = TRUE){
+get_jmodel.workspace <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   multiprocessings <- get_all_objects(x)
   nb_mp <- length(multiprocessings)
 
@@ -17,17 +21,20 @@ get_jmodel.workspace <- function(x, workspace,
     if (progress_bar)
       cat(sprintf("Multiprocessing %i on %i:\n", i, nb_mp))
     get_jmodel(multiprocessings[[i]],
-              workspace = x, userdefined = userdefined,
-              progress_bar = progress_bar)
+               workspace = x, userdefined = userdefined,
+               progress_bar = progress_bar,
+               type = type)
   })
   names(result) <- names(multiprocessings)
   result
 
 }
 #' @export
-get_jmodel.multiprocessing <- function(x, workspace,
-                                      userdefined = NULL,
-                                      progress_bar = TRUE){
+get_jmodel.multiprocessing <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
   all_sa_objects <- get_all_objects(x)
   nb_sa_objs <- length(all_sa_objects)
 
@@ -36,7 +43,8 @@ get_jmodel.multiprocessing <- function(x, workspace,
 
   result <- lapply(seq_len(nb_sa_objs), function(i){
     res <- get_jmodel(all_sa_objects[[i]],
-                     workspace = workspace, userdefined = userdefined)
+                      workspace = workspace, userdefined = userdefined,
+                      type = type)
     if (progress_bar)
       setTxtProgressBar(pb, i)
     res
@@ -47,11 +55,13 @@ get_jmodel.multiprocessing <- function(x, workspace,
   result
 }
 #' @export
-get_jmodel.sa_item <- function(x, workspace,
-                              userdefined = NULL,
-                              progress_bar = TRUE){
+get_jmodel.sa_item <- function(
+    x, workspace,
+    userdefined = NULL,
+    progress_bar = TRUE,
+    type = c("Domain", "Estimation", "Point")){
 
-  jspec <- get_jspec(x)
+  jspec <- get_jspec(x, type = type)
   jresult <- sa_results(x)
   if(is.null(jresult))
     return(NULL)

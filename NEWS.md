@@ -1,3 +1,16 @@
+# RJDemetra 0.2.8
+
+- Improvement of warning message importing the model when no data in a SaItem (#61).
+
+- `get_model`, `get_jmodel` and `get_jspec.sa_item` have now an argument `type` to define which specification to import (domain, estimation or point).
+By default the domain specification is extracted (as before).
+
+- Correction of bug of `add_sa_item()` of models created by `jtramoseats()` with external variables.
+
+- Correction of bug of `get_jmodel()` when model contains user-defined regressors (calendar or regressors) with fixed coefficients (#157).
+
+- Correction of bug for annual data for `regarima()` functions. 
+
 # RJDemetra 0.2.7
 
 - URL to github repository updated (github.com/jdemetra replaced by github.com/rjdverse).
