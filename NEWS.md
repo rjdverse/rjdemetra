@@ -1,3 +1,6 @@
+# RJDemetra 0.2.9
+
+
 # RJDemetra 0.2.8
 
 - Improvement of warning message importing the model when no data in a SaItem (#61).
