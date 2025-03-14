@@ -80,7 +80,9 @@ jobs:
 
       - name: Install system dependencies
         if: runner.os == 'macOS'
-        run: brew install gettext
+        run: |
+          brew unlink gettext && brew link --force gettext
+          find /usr -name libintl* -print 2>/dev/null
 
      - uses: r-lib/actions/setup-r-dependencies@v2
        with:
