@@ -113,6 +113,9 @@ x13 <- function(series, spec = c("RSA5c", "RSA0", "RSA1", "RSA2c", "RSA3", "RSA4
   if (!is.ts(series)) {
     stop("The series must be a time series!")
   }
+  if (! frequency(series) %in% c(2, 4, 12)) {
+    stop("The frequency of the series must be 2, 4 or 12")
+  }
   UseMethod("x13", spec)
 }
 #' @export

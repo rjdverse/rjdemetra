@@ -129,6 +129,9 @@ tramoseats <- function(series, spec = c("RSAfull", "RSA0", "RSA1", "RSA2", "RSA3
   if (!is.ts(series)) {
     stop("The series must be a time series!")
   }
+  if (! frequency(series) %in% c(2, 3, 4, 6, 12)) {
+    stop("The frequency of the series must be 2, 3, 4, 6 or 12")
+  }
   UseMethod("tramoseats", spec)
 }
 #' @export

@@ -8,6 +8,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- Add test on the frequency of the input time series to avoid misleading error (#165).
 
 ## [0.2.8] - 2024-12-12
 
