@@ -27,7 +27,9 @@ jregarima.X13 <- function(series, spec = NA){
 jregarima.TRAMO_SEATS <- function(series, spec = NA){
   if (!is.ts(series))
     stop("The series must be a time series")
-
+  if (! frequency(series) %in% c(1, 2, 3, 4, 6, 12)) {
+    stop("The frequency of the series must be 1, 2, 3, 4, 6 or 12")
+  }
   spec <- regarima_spec_tramoseats(spec)
 
   # create the java objects
@@ -75,6 +77,9 @@ jregarima_tramoseats <- function(series, spec = c("TRfull", "TR0", "TR1", "TR2",
 jregarima_x13 <- function(series, spec = c("RG5c", "RG0", "RG1", "RG2c", "RG3", "RG4c")){
   if (!is.ts(series)) {
     stop("The series must be a time series")
+  }
+  if (! frequency(series) %in% c(1, 2, 3, 4, 6, 12)) {
+    stop("The frequency of the series must be 1, 2, 3, 4, 6 or 12")
   }
   spec <- match.arg(spec)
 
