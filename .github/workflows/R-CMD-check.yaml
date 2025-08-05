@@ -84,10 +84,10 @@ jobs:
           brew unlink gettext && brew link --force gettext
           find /usr -name libintl* -print 2>/dev/null
 
-     - uses: r-lib/actions/setup-r-dependencies@v2
-       with:
-         extra-packages: any::rcmdcheck
-         needs: check
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
 
       - name: Check
         env:
