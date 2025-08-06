@@ -14,7 +14,6 @@ linters: lintr::all_linters(
         cyclocomp_linter = NULL,
         object_name_linter = NULL,
         commented_code_linter = NULL,
-        extraction_operator_linter = NULL,
         implicit_integer_linter = NULL,
         nonportable_path_linter = NULL,
         undesirable_function_linter = NULL,
