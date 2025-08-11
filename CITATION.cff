@@ -1,0 +1,183 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+
+cff-version: 1.2.0
+message: 'To cite package "RJDemetra" in publications use:'
+type: software
+license: EUPL-1.0
+title: 'RJDemetra: Interface to ''JDemetra+'' Seasonal Adjustment Software'
+version: 0.2.8
+doi: 10.32614/CRAN.package.RJDemetra
+abstract: Interface around 'JDemetra+' (<https://github.com/jdemetra/jdemetra-app>),
+  the seasonal adjustment software officially recommended to the members of the European
+  Statistical System (ESS) and the European System of Central Banks. It offers full
+  access to all options and outputs of 'JDemetra+', including the two leading seasonal
+  adjustment methods TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS.
+authors:
+- family-names: Quartier-la-Tente
+  given-names: Alain
+  email: alain.quartier@yahoo.fr
+  orcid: https://orcid.org/0000-0001-7890-3857
+- family-names: Michalek
+  given-names: Anna
+  email: anna.michalek@ecb.int
+- family-names: Palate
+  given-names: Jean
+  email: jean.palate@nbb.be
+- family-names: Baeyens
+  given-names: Raf
+  email: raf.baeyens@nbb.be
+repository: https://CRAN.R-project.org/package=RJDemetra
+repository-code: https://github.com/rjdverse/rjdemetra
+url: https://rjdverse.github.io/rjdemetra/
+contact:
+- family-names: Quartier-la-Tente
+  given-names: Alain
+  email: alain.quartier@yahoo.fr
+  orcid: https://orcid.org/0000-0001-7890-3857
+keywords:
+- java
+- jdemetra
+- r
+- r-package
+- rpackage
+- rstats
+- seasonal-adjustment
+- seasonality
+- time-series
+- timeseries
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+  version: '>= 3.1.1'
+- type: software
+  title: rJava
+  abstract: 'rJava: Low-Level R to Java Interface'
+  notes: Imports
+  url: http://www.rforge.net/rJava/
+  repository: https://CRAN.R-project.org/package=rJava
+  authors:
+  - family-names: Urbanek
+    given-names: Simon
+    email: simon.urbanek@r-project.org
+  year: '2025'
+  doi: 10.32614/CRAN.package.rJava
+  version: '>= 0.9-8'
+- type: software
+  title: graphics
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: grDevices
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: methods
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2025'
+  doi: 10.32614/CRAN.package.knitr
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2025'
+  doi: 10.32614/CRAN.package.rmarkdown
+
